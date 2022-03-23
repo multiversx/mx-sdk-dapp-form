@@ -1,5 +1,5 @@
 import React from 'react';
-import { faExclamationTriangle } from '@fortawesome/pro-regular-svg-icons/faExclamationTriangle';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const To = ({

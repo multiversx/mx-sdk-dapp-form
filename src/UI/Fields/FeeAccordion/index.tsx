@@ -1,14 +1,16 @@
 import React from 'react';
 import { DappUI } from '@elrondnetwork/dapp-core';
-import { faAngleDown } from '@fortawesome/pro-regular-svg-icons/faAngleDown';
-import { faAngleRight } from '@fortawesome/pro-regular-svg-icons/faAngleRight';
-import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons/faSpinnerThird';
+import {
+  faAngleDown,
+  faAngleRight,
+  faSpinner
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Accordion, Card } from 'react-bootstrap';
 import { useSendFormContext } from 'contexts';
-import FeeInFiat from 'UI/Fields/FeeAccordion/FeeInFiat';
-import GasLimit from 'UI/Fields/GasLimit';
-import GasPrice from 'UI/Fields/GasPrice';
+import GasLimit from '../GasLimit';
+import GasPrice from '../GasPrice';
+import FeeInFiat from './FeeInFiat';
 
 export const FeeAccordion = () => {
   const { gasInfo, tokensInfo } = useSendFormContext();
@@ -48,10 +50,7 @@ export const FeeAccordion = () => {
               <DappUI.Denominate value={feeLimit} showLastNonZeroDecimal />
             </span>
             {gasCostLoading && (
-              <FontAwesomeIcon
-                icon={faSpinnerThird}
-                className='fa-spin fast-spin'
-              />
+              <FontAwesomeIcon icon={faSpinner} className='fa-spin fast-spin' />
             )}
           </span>
           <FeeInFiat egldPriceInUsd={egldPriceInUsd} feeLimit={feeLimit} />

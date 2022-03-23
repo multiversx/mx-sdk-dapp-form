@@ -1,16 +1,20 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import { useFormikContext } from 'formik';
 import { useSendFormContext } from 'contexts';
 
-import { TxTypeEnum } from 'logic';
-import Confirm from 'UI/Confirm';
-import { To, Amount, FeeAccordion, SelectToken, Data } from 'UI/Fields';
+import { ExtendedValuesType, TxTypeEnum } from 'types';
+import { To, Amount, FeeAccordion, SelectToken, Data } from 'UI';
+import Confirm from '../Confirm';
 
 const Form = () => {
   const { formInfo, receiverInfo } = useSendFormContext();
+  const {
+    values: { txType }
+  } = useFormikContext<ExtendedValuesType>();
 
-  const { txType, renderKey, onValidateForm, readonly } = formInfo;
+  const { renderKey, onValidateForm, readonly } = formInfo;
 
   const { scamError } = receiverInfo;
 

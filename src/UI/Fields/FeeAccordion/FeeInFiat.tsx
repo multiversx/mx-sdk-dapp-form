@@ -1,5 +1,5 @@
 import React from 'react';
-import { calculateFeeInFiat } from 'logic/operations';
+import { calculateFeeInFiat } from 'operations';
 
 interface FeeInFiatType {
   feeLimit: string;

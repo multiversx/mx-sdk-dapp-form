@@ -1,9 +1,9 @@
 import React from 'react';
-import { faUndo } from '@fortawesome/pro-regular-svg-icons/faUndo';
+import { faUndo } from '@fortawesome/free-solid-svg-icons/faUndo';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import { useSendFormContext } from 'contexts';
-import { denominatedConfigGasPrice } from 'logic/operations';
+import { denominatedConfigGasPrice } from 'operations';
 
 const GasPrice = () => {
   const { gasInfo, formInfo } = useSendFormContext();

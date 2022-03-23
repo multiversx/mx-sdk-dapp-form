@@ -1,7 +1,8 @@
 import React from 'react';
-import { InfoDust, UsdValue } from 'components';
 import { useSendFormContext } from 'contexts';
-import SharedAmount from 'UI/Fields/Amount/SharedAmount';
+import InfoDust from 'UI/InfoDust';
+import UsdValue from 'UI/UsdValue';
+import SharedAmount from './SharedAmount';
 
 export const EgldAmount = () => {
   const { tokensInfo, amount } = useSendFormContext();
@@ -27,7 +28,7 @@ export const EgldAmount = () => {
           data-testid={`available${egldLabel}`}
           data-value={`${maxAmountAvailable} ${egldLabel}`}
         >
-          {`Available ${maxAmountAvailable}}`}
+          Available {maxAmountAvailable}
         </small>
       );
     }

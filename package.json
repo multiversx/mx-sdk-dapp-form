@@ -74,6 +74,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.0",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@types/react-bootstrap-typeahead": "^5.1.8",
     "axios": "0.24.0",
     "bignumber.js": "9.x",
     "bootstrap": "4.6.0",
@@ -81,8 +82,10 @@
     "formik": "^2.2.9",
     "lodash": "4.17.21",
     "react-bootstrap": "2.0.3",
+    "react-bootstrap-typeahead": "5.1.2",
     "react-i18next": "^11.16.1",
     "react-router-dom": "^6.2.2",
+    "react-select": "^5.2.2",
     "yup": "^0.32.11"
   }
 }

@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { gasLimit as configGasLimit, gasPerDataByte } from 'config';
+import { gasLimit as configGasLimit, gasPerDataByte } from 'constants/index';
 
 interface CalculateGasLimitType {
   data: string;

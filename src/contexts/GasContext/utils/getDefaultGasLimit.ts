@@ -1,5 +1,5 @@
-import { gasLimit as configGasLimit, tokenGasLimit } from 'config';
-import { calculateNftGasLimit } from '../../../logic/operations';
+import { gasLimit as configGasLimit, tokenGasLimit } from 'constants/index';
+import { calculateNftGasLimit } from 'operations';
 
 export function getDefaultGasLimit({
   isNftTransaction,

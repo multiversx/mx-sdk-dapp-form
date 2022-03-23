@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import { isContract } from '@elrondnetwork/dapp-core';
-import {
-  fetchGasLimit,
-  FetchGasLimitType
-} from 'hooks/useFetchGasLimit/fetchGasLimit';
-import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
+import { fetchGasLimit, FetchGasLimitType } from './fetchGasLimit';
+import useDebounce from './useDebounce';
 
 interface UseFetchGasLimitProps extends FetchGasLimitType {
   receiver: string;

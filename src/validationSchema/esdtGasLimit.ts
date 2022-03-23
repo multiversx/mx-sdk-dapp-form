@@ -1,56 +1,51 @@
 import BigNumber from 'bignumber.js';
-import { tokenGasLimit } from 'config';
 import { string } from 'yup';
-import { ValidationSchemaType } from 'logic/types';
-import { validateGasLimitAmount } from 'logic/validation';
-import { sharedGaslimit } from 'logic/validationSchema/sharedGaslimit';
+import { tokenGasLimit } from 'constants/index';
+import { ExtendedValuesType } from 'types';
+import { validateGasLimitAmount } from '../validation';
+import { sharedGaslimit } from './sharedGaslimit';
 
-export const esdtGasLimit = ({
-  ignoreTokenBalance,
-  chainId,
-  balance
-}: ValidationSchemaType) => {
-  const required = string().required('Required');
+const required = string().required('Required');
 
-  const minValue = string().test(
-    'minValue',
-    `Gas limit must be greater or equal to ${tokenGasLimit}`,
-    function minGasValue(value: any) {
-      const bNgasLimit = new BigNumber(value);
-      const bNcalculatedGasLimit = new BigNumber(tokenGasLimit);
-      const isValid =
-        value && bNgasLimit.isGreaterThanOrEqualTo(bNcalculatedGasLimit);
+const minValue = string().test(
+  'minValue',
+  `Gas limit must be greater or equal to ${tokenGasLimit}`,
+  function minGasValue(value: any) {
+    const bNgasLimit = new BigNumber(value);
+    const bNcalculatedGasLimit = new BigNumber(tokenGasLimit);
+    const isValid =
+      value && bNgasLimit.isGreaterThanOrEqualTo(bNcalculatedGasLimit);
 
-      return isValid;
+    return isValid;
+  }
+);
+
+const funds = string().test(
+  'funds',
+  'Insufficient funds',
+  function fundsCheck(value) {
+    const { data, gasPrice, ignoreTokenBalance, balance, chainId } = this
+      .parent as ExtendedValuesType;
+    if (value && !ignoreTokenBalance) {
+      const valid = validateGasLimitAmount({
+        amount: '0',
+        balance,
+        gasLimit: value,
+        gasPrice,
+        data,
+        chainId
+      });
+      return valid;
     }
-  );
+    return true;
+  }
+);
 
-  const funds = string().test(
-    'funds',
-    'Insufficient funds',
-    function funds(value) {
-      const { data, gasPrice } = this.parent;
-      if (value && !ignoreTokenBalance) {
-        const valid = validateGasLimitAmount({
-          amount: '0',
-          balance,
-          gasLimit: value,
-          gasPrice,
-          data,
-          chainId
-        });
-        return valid;
-      }
-      return true;
-    }
-  );
+const validations = [...sharedGaslimit(), required, minValue, funds];
 
-  const validations = [...sharedGaslimit(), required, minValue, funds];
-
-  return validations.reduce(
-    (previousValue, currentValue) => previousValue.concat(currentValue),
-    string()
-  );
-};
+export const esdtGasLimit = validations.reduce(
+  (previousValue, currentValue) => previousValue.concat(currentValue),
+  string()
+);
 
 export default esdtGasLimit;

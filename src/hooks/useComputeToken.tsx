@@ -1,34 +1,29 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { useGetAccountInfo } from '@elrondnetwork/dapp-core';
-import { getAccountToken } from 'apiRequests';
-import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { getAccountToken } from 'apiCalls';
 
-import {
-  cachedTokensSelector,
-  egldLabelSelector,
-  formSelector,
-  tokensSelector,
-  useAccountSelector
-} from 'redux/selectors';
-import getIdentifierType from 'logic/validation/getIdentifierType';
 import { TokenType } from 'types';
+import getIdentifierType from '../validation/getIdentifierType';
 
-export function useComputeToken() {
-  const egldLabel = useSelector(egldLabelSelector);
+interface UseComputeTokenType {
+  formTokenId?: string;
+  prefilledForm: boolean;
+  egldLabel: string;
+}
 
-  const { tokenId: formTokenId, active: prefilledForm } =
-    useSelector(formSelector);
-  const tokens = useAccountSelector(cachedTokensSelector); // TODO: change naming and make all data available
-  const { status: tokensStatus } = useSelector(tokensSelector);
+export function useComputeToken({
+  formTokenId,
+  prefilledForm,
+  egldLabel
+}: UseComputeTokenType) {
   const { address } = useGetAccountInfo();
-  const tokensFetched = tokensStatus === 'idle';
 
-  const [computedTokenId, setComputedTokenId] = React.useState<string>(
+  const [computedTokenId, setComputedTokenId] = useState<string>(
     formTokenId || egldLabel
   );
-  const [tokenFound, setTokenFound] = React.useState<boolean>();
-  const [computedTokens, setComputedTokens] = React.useState<TokenType[]>();
+  const [tokenFound, setTokenFound] = useState<boolean>();
+  const [computedTokens, setComputedTokens] = useState<TokenType[]>();
 
   const { search } = useLocation();
   const urlSearchParams = new URLSearchParams(search);
@@ -52,16 +47,13 @@ export function useComputeToken() {
   const getSingleToken = (tokenId: string) => {
     getAccountToken({ address, token: tokenId })
       .then(({ data: tokenData }) => {
-        const filteredTokens = tokenData
-          ? tokens.filter((t) => t.identifier !== tokenData.identifier)
-          : tokens;
         returnValues({
           tokenId,
-          tokenData: [...filteredTokens, tokenData],
+          tokenData: [tokenData],
           tokenExtracted: Boolean(tokenData)
         });
       })
-      .catch((err) => {
+      .catch(() => {
         returnValues({
           tokenId,
           tokenData: [],
@@ -77,7 +69,7 @@ export function useComputeToken() {
     if (!isEsdt) {
       return returnValues({
         tokenId: isNft ? identifier : egldLabel,
-        tokenData: tokens,
+        tokenData: [],
         tokenExtracted: true
       });
     }
@@ -89,7 +81,7 @@ export function useComputeToken() {
     }
   };
 
-  React.useEffect(computeToken, [tokensFetched, search]);
+  useEffect(computeToken, [search]);
 
   return {
     computedTokenId,

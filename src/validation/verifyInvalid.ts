@@ -1,5 +1,5 @@
 import { FormikErrors, FormikTouched } from 'formik';
-import { ValuesType } from 'logic/index';
+import { ExtendedValuesType } from 'types';
 
 export const verifyInvalid =
   ({
@@ -8,10 +8,10 @@ export const verifyInvalid =
     touched
   }: {
     shouldValidateForm: boolean;
-    errors: FormikErrors<ValuesType>;
-    touched: FormikTouched<ValuesType>;
+    errors: FormikErrors<ExtendedValuesType>;
+    touched: FormikTouched<ExtendedValuesType>;
   }) =>
-  (key: keyof ValuesType) =>
+  (key: keyof ExtendedValuesType) =>
     Boolean(errors[key] && (touched[key] || shouldValidateForm));
 
 export default verifyInvalid;

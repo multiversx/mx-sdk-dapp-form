@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { DappUI } from '@elrondnetwork/dapp-core';
-import { faSpinnerThird } from '@fortawesome/pro-regular-svg-icons/faSpinnerThird';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons/faSpinner';
 import { Trans, useTranslation } from 'react-i18next';
 
 export const Loader = () => {
@@ -8,7 +8,7 @@ export const Loader = () => {
   return (
     <DappUI.PageState
       title={<Trans t={c}>Loading...</Trans>}
-      icon={faSpinnerThird}
+      icon={faSpinner}
       iconClass='text-primary fa-spin fast-spin'
       iconSize='5x'
       dataTestId='loader'

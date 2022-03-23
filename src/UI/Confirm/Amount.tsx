@@ -1,11 +1,11 @@
 import React from 'react';
 import { DappUI, nominate } from '@elrondnetwork/dapp-core';
-import { UsdValue } from 'UI';
 import { denomination, decimals } from 'constants/index';
 import { NftEnumType, NftType } from 'types';
-import Token from 'UI/Confirm/Token';
+import { UsdValue } from 'UI';
+import Token from './Token';
 
-interface AmountType {
+export interface AmountPropsType {
   amount: string;
   tokenId: string;
   label?: string;
@@ -18,7 +18,7 @@ interface AmountType {
   nft?: NftType;
 }
 
-const Amount = (props: AmountType) => {
+const Amount = (props: AmountPropsType) => {
   const [view, setView] = React.useState({
     Amount: () => <></>
   });

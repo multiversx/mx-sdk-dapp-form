@@ -11,8 +11,7 @@ import {
   Address
 } from '@elrondnetwork/erdjs';
 import BigNumber from 'bignumber.js';
-import { NetworkType } from 'config';
-import { version } from 'config';
+import { version } from 'constants/index';
 
 interface PrepareTransactionType {
   balance: string;
@@ -22,7 +21,7 @@ interface PrepareTransactionType {
   gasPrice: string;
   gasLimit: string;
   nonce: number;
-  chainId: NetworkType['chainId'];
+  chainId: string;
 }
 export function prepareTransaction({
   amount,

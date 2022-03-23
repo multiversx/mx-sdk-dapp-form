@@ -1,10 +1,10 @@
 import { nominate } from '@elrondnetwork/dapp-core';
 import BigNumber from 'bignumber.js';
-import { gasLimitDelta } from 'config';
-import { ValuesType } from 'logic';
-import { calculateGasLimit } from 'logic/operations';
-import { prepareTransaction } from 'hooks/useFetchGasLimit/prepareTransaction';
-import { getTransactionCost } from 'hooks/useFetchGasLimit/transactionCost';
+import { gasLimitDelta } from 'constants/index';
+import { calculateGasLimit } from 'operations';
+import { ValuesType } from 'types';
+import { prepareTransaction } from './prepareTransaction';
+import { getTransactionCost } from './transactionCost';
 
 export interface FetchGasLimitType {
   balance: string;

@@ -1,7 +1,7 @@
 import { nominate } from '@elrondnetwork/dapp-core';
 import { operations } from '@elrondnetwork/dapp-utils';
 import BigNumber from 'bignumber.js';
-import { gasPerDataByte, gasPriceModifier } from 'config';
+import { gasPerDataByte, gasPriceModifier } from 'constants/index';
 
 interface ValidateGasLimitAmountType {
   amount: string;

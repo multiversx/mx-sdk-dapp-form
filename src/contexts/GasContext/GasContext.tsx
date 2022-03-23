@@ -1,15 +1,14 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { isContract, nominate } from '@elrondnetwork/dapp-core';
 import { useFormikContext } from 'formik';
-import { tokenGasLimit } from 'config';
-import { calculateFeeLimit } from '../../../../../helpers';
-import { TxTypeEnum, ExtendedValuesType } from '../../logic';
-import { useFetchGasLimit } from '../../logic/hooks';
+import { useFetchGasLimit } from 'hooks';
 import {
+  calculateFeeLimit,
   calculateGasLimit,
   calculateNftGasLimit,
   denominatedConfigGasPrice
-} from '../../logic/operations';
+} from 'operations';
+import { ExtendedValuesType, TxTypeEnum } from 'types';
 import { useAccountContext } from '../AccountContext';
 import { useFormContext } from '../FormContext';
 import { getDefaultGasLimit } from './utils';
@@ -63,8 +62,7 @@ export function GasContextProvider({
     setFieldValue,
     setFieldTouched
   } = useFormikContext<ExtendedValuesType>();
-  const { gasPrice, gasLimit, data, tokenId, destinationAddress, txType } =
-    values;
+  const { gasPrice, gasLimit, data, tokenId, receiver, txType } = values;
 
   const {
     checkInvalid,
@@ -81,12 +79,12 @@ export function GasContextProvider({
     nonce,
     values,
     chainId,
-    destinationAddress,
+    receiver,
     gasLimitTouched: Boolean(touched.gasLimit),
     amountError: Boolean(amountError),
     gasLimitError: Boolean(gasLimitError),
     prefilledForm,
-    receiverIsContract: isContract(destinationAddress),
+    receiverIsContract: isContract(receiver),
     gasLimitCostError: initGasLimitError
   });
 
@@ -165,7 +163,7 @@ export function GasContextProvider({
     if (!prefilledForm) {
       switch (txType) {
         case TxTypeEnum.ESDT:
-          handleUpdateGasLimit(tokenGasLimit);
+          handleUpdateGasLimit(gasLimit);
           break;
         case TxTypeEnum.EGLD:
           handleUpdateGasLimit(

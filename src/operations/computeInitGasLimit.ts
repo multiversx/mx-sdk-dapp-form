@@ -1,14 +1,14 @@
 import { isContract } from '@elrondnetwork/dapp-core';
 import BigNumber from 'bignumber.js';
-import calculateGasLimit from 'logic/operations/calculateGasLimit';
-import { calculateNftGasLimit } from 'logic/operations/calculateNftGasLimit';
-import getIdentifierType from 'logic/validation/getIdentifierType';
 import {
   delegationContractData,
   gasLimit as configGasLimit,
   tokenGasLimit
 } from 'constants/index';
-import fetchGasLimit from 'hooks/useFetchGasLimit/fetchGasLimit';
+import fetchGasLimit from '../hooks/useFetchGasLimit/fetchGasLimit';
+import getIdentifierType from '../validation/getIdentifierType';
+import calculateGasLimit from './calculateGasLimit';
+import { calculateNftGasLimit } from './calculateNftGasLimit';
 
 interface ComputeInitGasLimitType {
   computedTokenId: string;

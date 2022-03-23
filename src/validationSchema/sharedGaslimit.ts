@@ -1,7 +1,7 @@
 import { validation } from '@elrondnetwork/dapp-utils';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
-import { maxGasLimit } from 'config';
+import { maxGasLimit } from 'constants/index';
 
 const { stringIsInteger } = validation;
 

@@ -9,6 +9,23 @@ export interface ValuesType {
   amount: string;
   gasLimit: string;
 }
+export interface ExtendedValuesType extends ValuesType {
+  // validationSchema
+  txType: TxTypeEnum;
+  address: string;
+  egldLabel: string;
+  balance: string;
+  chainId: string;
+  ignoreTokenBalance?: boolean;
+  readonly?: boolean;
+  nft?: NftType;
+  tokens?: TokenType[];
+  ledger?: {
+    ledgerDataActive: boolean;
+    ledgerHashSignMinimumVersion: number;
+    ledgerWithHashSign: boolean;
+  };
+}
 
 export interface ValidationSchemaType {
   txType: TxTypeEnum;
@@ -26,4 +43,19 @@ export interface ValidationSchemaType {
     ledgerHashSignMinimumVersion: number;
     ledgerWithHashSign: boolean;
   };
+}
+
+export interface FormConfigType {
+  active?: boolean;
+  receiver: string;
+  amount: string;
+  tokenId?: string;
+  gasLimit: string;
+  gasPrice: string;
+  data: string;
+  readonly?: boolean;
+  successTitle?: string;
+  successDescription?: string;
+  redirectRoute?: string;
+  skipToConfirm?: boolean;
 }

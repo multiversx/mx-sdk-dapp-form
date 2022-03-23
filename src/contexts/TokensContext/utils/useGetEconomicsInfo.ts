@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { apiCalls } from '@elrondnetwork/dapp-core';
-import { getEconomicsInfo } from 'apiRequests';
-import { decimals as configDecimals } from 'config';
+import { getEconomicsInfo } from 'apiCalls';
+import { decimals as configDecimals } from 'constants/index';
 import { useAccountContext } from '../../AccountContext';
 
 interface EconomicsInfoType {

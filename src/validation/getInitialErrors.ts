@@ -1,14 +1,12 @@
-import { ValidationSchemaType, ValuesType } from 'logic/types';
-import validationSchema from 'logic/validationSchema';
+import { ValuesType } from 'types';
+import validationSchema from '../validationSchema';
 
 interface GetInitialErrorsType {
-  validationSchemaProps: ValidationSchemaType;
   prefilledForm: boolean;
   initialValues: ValuesType;
 }
 
 export const getInitialErrors = ({
-  validationSchemaProps,
   prefilledForm,
   initialValues
 }: GetInitialErrorsType) => {
@@ -17,7 +15,7 @@ export const getInitialErrors = ({
   }
 
   try {
-    validationSchema(validationSchemaProps).validateSync(initialValues);
+    validationSchema.validateSync(initialValues);
     return {};
   } catch ({ path, message }) {
     return {

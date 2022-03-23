@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { timeout } from 'config';
-import { getBaseURL } from '../../../../../../apiRequests/helpers';
+import { getApiConfig } from 'apiCalls';
 
 export async function getTransactionCost(transaction: { [key: string]: any }) {
   try {
@@ -10,10 +9,7 @@ export async function getTransactionCost(transaction: { [key: string]: any }) {
         returnMessage: string;
       };
       code: string;
-    }>('/transaction/cost', transaction, {
-      baseURL: getBaseURL(),
-      timeout
-    });
+    }>('/transaction/cost', transaction, getApiConfig());
 
     return {
       data,

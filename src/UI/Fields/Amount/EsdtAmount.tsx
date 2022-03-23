@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSendFormContext } from 'contexts';
-import SharedAmount from 'UI/Fields/Amount/SharedAmount';
+import SharedAmount from './SharedAmount';
 
 export const EsdtAmount = () => {
   const { amount, tokensInfo } = useSendFormContext();
@@ -15,7 +15,7 @@ export const EsdtAmount = () => {
           data-testid={`available${tokenId}`}
           data-value={`${maxAmountAvailable} ${tokenId}`}
         >
-          {`Available ${maxAmountAvailable}`}
+          Available {maxAmountAvailable}
         </small>
       );
     }

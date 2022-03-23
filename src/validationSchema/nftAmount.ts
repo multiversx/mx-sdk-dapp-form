@@ -2,73 +2,80 @@ import { nominate } from '@elrondnetwork/dapp-core';
 import { validation } from '@elrondnetwork/dapp-utils';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
-import { NftValidationSchemaType } from 'logic/types';
-import { maxDecimals } from 'logic/validation';
 import { NftEnumType } from 'types';
+import { TxTypeEnum, ExtendedValuesType } from 'types';
+import { maxDecimals } from 'validation';
 const { stringIsFloat, stringIsInteger } = validation;
 
-export const nftAmount = ({ nft }: NftValidationSchemaType) => {
-  const isMeta = nft.type === NftEnumType.MetaESDT;
-  const isSFT = nft.type === NftEnumType.SemiFungibleESDT;
+const required = string().required('Required');
 
-  const required = string().required('Required');
+const metaDenomination = string().test({
+  name: 'denomination',
+  test: function hashSignCheck(value) {
+    const { nft, txType } = this.parent as ExtendedValuesType;
 
-  const sftBalance = string().test(
-    'sftBalance',
-    'Insufficient funds',
-    function balance(amount) {
-      if (amount !== undefined) {
-        const bnAmount = new BigNumber(amount);
-        const bnTokenBalance = new BigNumber(nft?.balance || '0');
-        return bnTokenBalance.isGreaterThanOrEqualTo(bnAmount);
-      }
+    if (txType !== TxTypeEnum.MetaESDT) {
       return true;
     }
-  );
 
-  const metaDenomination = string().test(
-    'denomination',
-    `Maximum ${nft?.decimals} decimals allowed`,
-    (value) => {
-      return maxDecimals(String(value), nft?.decimals);
+    const valid = maxDecimals(String(value), nft?.decimals);
+
+    if (!valid) {
+      return this.createError({
+        message: `Maximum ${nft?.decimals} decimals allowed`,
+        path: 'amount'
+      });
     }
-  );
-  const metaBalance = string().test(
-    'metaBalance',
-    'Insufficient funds',
-    function balance(metaAmount: any) {
-      if (metaAmount !== undefined) {
-        const nominatedAmount = nominate(metaAmount, nft?.decimals);
-        const bnAmount = new BigNumber(nominatedAmount);
-        const bnTokenBalance = new BigNumber(nft?.balance || '0');
-        return bnTokenBalance.isGreaterThanOrEqualTo(bnAmount);
-      }
+
+    return true;
+  }
+});
+
+const balance = string().test(
+  'balance',
+  'Insufficient funds',
+  function balanceCheck(amount: any) {
+    const { txType, nft } = this.parent as ExtendedValuesType;
+
+    if (!amount) {
       return true;
     }
-  );
 
-  const isValidNumber = string().test(
-    'isValidNumber',
-    'Invalid number',
-    (value) => {
-      if (isMeta) {
-        return Boolean(value && stringIsFloat(value));
-      }
-      return Boolean(value && stringIsInteger(value));
+    if (txType === TxTypeEnum.MetaESDT) {
+      const nominatedAmount = nominate(amount, nft?.decimals);
+      const bnAmount = new BigNumber(nominatedAmount);
+      const bnTokenBalance = new BigNumber(nft?.balance || '0');
+      return bnTokenBalance.isGreaterThanOrEqualTo(bnAmount);
     }
-  );
 
-  const validations = [
-    required,
-    isValidNumber,
-    ...(isMeta ? [metaBalance, metaDenomination] : []),
-    ...(isSFT ? [sftBalance] : [])
-  ];
+    if (txType === TxTypeEnum.SemiFungibleESDT) {
+      const bnAmount = new BigNumber(amount);
+      const bnTokenBalance = new BigNumber(nft?.balance || '0');
+      return bnTokenBalance.isGreaterThanOrEqualTo(bnAmount);
+    }
 
-  return validations.reduce(
-    (previousValue, currentValue) => previousValue.concat(currentValue),
-    string()
-  );
-};
+    return true;
+  }
+);
+
+const isValidNumber = string().test(
+  'isValidNumber',
+  'Invalid number',
+  function isValidNumberCheck(value) {
+    const { nft } = this.parent as ExtendedValuesType;
+    const isMeta = nft?.type === NftEnumType.MetaESDT;
+    if (isMeta) {
+      return Boolean(value && stringIsFloat(value));
+    }
+    return Boolean(value && stringIsInteger(value));
+  }
+);
+
+const validations = [required, isValidNumber, balance, metaDenomination];
+
+export const nftAmount = validations.reduce(
+  (previousValue, currentValue) => previousValue.concat(currentValue),
+  string()
+);
 
 export default nftAmount;

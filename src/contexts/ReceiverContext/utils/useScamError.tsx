@@ -2,20 +2,20 @@ import { useEffect } from 'react';
 import { useAccountContext } from '../../AccountContext';
 import useVerifyScamAddress from './useVerifyScamAddress';
 
-export function useScamError(destinationAddress: string) {
+export function useScamError(receiver: string) {
   const { address } = useAccountContext();
 
   const { verifiedAddresses, verifyScamAddress } = useVerifyScamAddress();
-  const scamError = verifiedAddresses[destinationAddress]?.info;
+  const scamError = verifiedAddresses[receiver]?.info;
 
   useEffect(() => {
-    if (destinationAddress) {
+    if (receiver) {
       verifyScamAddress({
         address,
-        addressToVerify: destinationAddress
+        addressToVerify: receiver
       });
     }
-  }, [destinationAddress]);
+  }, [receiver]);
 
   return scamError;
 }

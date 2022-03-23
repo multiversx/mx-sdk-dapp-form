@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { addressIsValid } from '@elrondnetwork/dapp-core';
-import { faExclamationTriangle } from '@fortawesome/pro-regular-svg-icons/faExclamationTriangle';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { Form } from 'react-bootstrap';

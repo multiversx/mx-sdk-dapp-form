@@ -1,9 +1,9 @@
 import React from 'react';
-import Amount from 'UI/Confirm/Amount';
-import Data from 'UI/Confirm/Data';
-import Fee from 'UI/Confirm/Fee';
-import To from 'UI/Confirm/To';
-import Token from 'UI/Confirm/Token';
+import Amount from './Amount';
+import Data from './Data';
+import Fee from './Fee';
+import To from './To';
+import Token from './Token';
 
 export class Confirm extends React.Component {
   static To = To;

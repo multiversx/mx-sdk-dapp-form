@@ -1,6 +1,6 @@
-import { TxTypeEnum } from 'logic/types';
-import getIdentifierType from 'logic/validation/getIdentifierType';
 import { NftEnumType, NftType } from 'types';
+import { TxTypeEnum } from 'types';
+import getIdentifierType from '../validation/getIdentifierType';
 
 export function getTxType({
   nft,
@@ -9,8 +9,11 @@ export function getTxType({
   nft?: NftType;
   tokenId: string;
 }): TxTypeEnum {
-  const { isEsdt, isNft } = getIdentifierType(tokenId);
+  const { isEsdt, isNft, isEgld } = getIdentifierType(tokenId);
 
+  if (isEgld) {
+    return TxTypeEnum.EGLD;
+  }
   if (nft?.type === NftEnumType.NonFungibleESDT) {
     return TxTypeEnum.NonFungibleESDT;
   }

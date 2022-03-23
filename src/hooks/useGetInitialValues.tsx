@@ -1,27 +1,40 @@
 import { useEffect, useMemo } from 'react';
 import { denominate } from '@elrondnetwork/dapp-core';
-import { decimals, gasPrice as configGasPrice, denomination } from 'config';
-import { useComputeNft, useComputeToken } from 'logic/hooks';
-import { computeNftDataField } from 'logic/operations';
-import { useSelector } from 'react-redux';
-import { formSelector } from 'redux/selectors';
-import useComputeInitGasLimit from 'hooks/useComputeInitGasLimit';
-import { NftEnumType } from 'types';
+import {
+  decimals,
+  defaultGasPrice as configGasPrice,
+  denomination
+} from 'constants/index';
+import { computeNftDataField } from 'operations';
+import { FormConfigType, NftEnumType } from 'types';
+import { useComputeNft, useComputeToken } from './';
+import useComputeInitGasLimit from './useComputeInitGasLimit';
 
 const nftDefaultAmount = '1';
 
-export function useGetInitialValues() {
-  // TODO: return maiar standard transaction string
+interface UseGetInitialValuesType {
+  configValues: FormConfigType;
+  egldLabel: string;
+  address: string;
+}
 
-  const { receiver, amount, gasPrice, data, tokenId } =
-    useSelector(formSelector);
+export function useGetInitialValues(props: UseGetInitialValuesType) {
+  const {
+    configValues: { receiver, amount, gasPrice, data, tokenId, active },
+    address,
+    egldLabel
+  } = props;
 
   const { searchNft, computedNft, getSearchParamNft, searchNftByIdentifier } =
-    useComputeNft();
+    useComputeNft(address);
 
   const { nft } = computedNft;
 
-  const { computedTokenId, computedTokens, tokenFound } = useComputeToken();
+  const { computedTokenId, computedTokens, tokenFound } = useComputeToken({
+    formTokenId: tokenId,
+    prefilledForm: Boolean(active),
+    egldLabel
+  });
 
   const { computeGasLimit, initGasLimit, initGasLimitError } =
     useComputeInitGasLimit();
@@ -69,7 +82,7 @@ export function useGetInitialValues() {
     gasPrice !== '0'
       ? gasPrice
       : denominate({
-          input: configGasPrice,
+          input: String(configGasPrice),
           denomination,
           showLastNonZeroDecimal: true,
           decimals

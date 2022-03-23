@@ -1,9 +1,14 @@
 import { nominate } from '@elrondnetwork/dapp-core';
 import BigNumber from 'bignumber.js';
 import { bech32 } from 'helpers';
-import getTokenDetails from 'logic/operations/getTokenDetails';
-import { TxTypeEnum, ValuesType } from 'logic/types';
-import { NftEnumType, NftType, TokenType } from 'types';
+import {
+  NftEnumType,
+  NftType,
+  TokenType,
+  TxTypeEnum,
+  ExtendedValuesType
+} from 'types';
+import getTokenDetails from './getTokenDetails';
 
 const evenLengthValue = (value: string) =>
   value.length % 2 === 0 ? value : `0${value}`;
@@ -64,7 +69,7 @@ export const getEsdtNftDataField = ({
 }: {
   txType: TxTypeEnum;
   tokens?: TokenType[];
-  values: ValuesType;
+  values: ExtendedValuesType;
   nft?: NftType;
   amountError?: boolean;
   receiverError?: string;

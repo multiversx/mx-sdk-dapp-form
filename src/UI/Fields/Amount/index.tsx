@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSendFormContext } from 'contexts';
-import { EgldAmount } from 'UI/Fields/Amount/EgldAmount';
-import { EsdtAmount } from 'UI/Fields/Amount/EsdtAmount';
-import { NftAmount } from 'UI/Fields/Amount/NftAmount';
+import { EgldAmount } from './EgldAmount';
+import { EsdtAmount } from './EsdtAmount';
+import { NftAmount } from './NftAmount';
 
 export function Amount() {
   const { formInfo } = useSendFormContext();

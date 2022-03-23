@@ -2,7 +2,7 @@ import React from 'react';
 import BigNumber from 'bignumber.js';
 import { useSendFormContext } from 'contexts';
 import { NftEnumType } from 'types';
-import SharedAmount from 'UI/Fields/Amount/SharedAmount';
+import SharedAmount from './SharedAmount';
 
 export const NftAmount = () => {
   const { amount, tokensInfo } = useSendFormContext();
@@ -19,7 +19,7 @@ export const NftAmount = () => {
         data-testid={`available-${nft?.identifier}`}
         data-value={`${maxAmountAvailable} ${nft?.identifier}`}
       >
-        {`Available ${maxAmountAvailable}}`}
+        Available {maxAmountAvailable}
       </small>
     ) : null;
   }

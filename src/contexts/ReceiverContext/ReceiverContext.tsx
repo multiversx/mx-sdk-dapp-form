@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { useFormikContext } from 'formik';
-import { ExtendedValuesType } from '../../logic';
+import { ExtendedValuesType } from 'types';
 import { useFormContext } from '../FormContext';
 import { useFetchKnownAddresses, useScamError } from './utils';
 
@@ -22,14 +22,14 @@ export const ReceiverContext = React.createContext(
   {} as ReceiverContextPropsType
 );
 
-const receiverField = 'destinationAddress';
+const receiverField = 'receiver';
 
 export function ReceiverContextProvider({
   children
 }: ReceiverContextProviderPropsType) {
   const {
-    values: { destinationAddress: receiver },
-    errors: { destinationAddress: receiverError },
+    values: { receiver: receiver },
+    errors: { receiver: receiverError },
     setFieldValue,
     setFieldTouched
   } = useFormikContext<ExtendedValuesType>();

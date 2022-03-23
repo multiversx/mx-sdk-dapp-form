@@ -1,11 +1,11 @@
 import React from 'react';
 import classnames from 'classnames';
-import { denomination } from 'config';
-import { selectCustomStyles } from 'helpers';
 import Select, { components } from 'react-select';
+import { denomination } from 'constants/index';
 import { useSendFormContext } from 'contexts';
+import { selectCustomStyles } from 'helpers';
 import { TokenType } from 'types';
-import TokenElement from 'UI/Fields/SelectToken/TokenElement';
+import TokenElement from './TokenElement';
 
 const ListOption = (props: any) => {
   return (

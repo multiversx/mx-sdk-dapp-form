@@ -1,4 +1,4 @@
-import { denomination } from 'config';
+import { denomination } from 'constants/index';
 import { TokenType } from 'types';
 
 export interface GetTokenDetailsReturnType {

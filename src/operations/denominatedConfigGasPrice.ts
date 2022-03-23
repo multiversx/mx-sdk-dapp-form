@@ -1,5 +1,9 @@
 import { denominate } from '@elrondnetwork/dapp-core';
-import { gasPrice as configGasPrice, denomination, decimals } from 'config';
+import {
+  defaultGasPrice as configGasPrice,
+  denomination,
+  decimals
+} from 'constants/index';
 
 export const denominatedConfigGasPrice = denominate({
   input: configGasPrice,

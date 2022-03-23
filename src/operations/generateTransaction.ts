@@ -1,7 +1,7 @@
 import { getAccount, getLatestNonce, nominate } from '@elrondnetwork/dapp-core';
-import { TxTypeEnum, ValuesType } from 'logic/types';
 import { prepareTransaction } from 'hooks/useFetchGasLimit/prepareTransaction';
 import { NftType } from 'types';
+import { TxTypeEnum, ExtendedValuesType } from 'types';
 
 interface GenerateTransactionPropsType {
   nft?: NftType;
@@ -9,7 +9,7 @@ interface GenerateTransactionPropsType {
   balance: string;
   chainId: string;
   txType: TxTypeEnum;
-  values: ValuesType;
+  values: ExtendedValuesType;
 }
 
 export async function generateTransaction(props: GenerateTransactionPropsType) {

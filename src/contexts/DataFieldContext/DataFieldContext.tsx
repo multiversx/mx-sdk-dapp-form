@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { useFormikContext } from 'formik';
-import { ExtendedValuesType } from '../../logic';
-import { getEsdtNftDataField } from '../../logic/operations';
+import { getEsdtNftDataField } from 'operations';
+import { ExtendedValuesType } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';
 
@@ -29,7 +29,7 @@ export function DataContextProvider({
     useFormikContext<ExtendedValuesType>();
   const { checkInvalid, prefilledForm, isEgldTransaction } = useFormContext();
   const { tokens, nft } = useTokensContext();
-  const { destinationAddress, txType, amount, tokenId } = values;
+  const { receiver, txType, amount, tokenId } = values;
 
   const isDataInvalid = checkInvalid(dataField);
 
@@ -55,11 +55,11 @@ export function DataContextProvider({
         values,
         nft,
         amountError: Boolean(errors.amount),
-        destinationAddressError: errors.destinationAddress
+        receiverError: errors.receiver
       });
       handleUpdateData(newDataField);
     }
-  }, [amount, destinationAddress, prefilledForm, nft, errors, txType]);
+  }, [amount, receiver, prefilledForm, nft, errors, txType]);
 
   useEffect(() => {
     const resetDataFieldOnEgldSelect = !prefilledForm && isEgldTransaction;
