@@ -1,0 +1,34 @@
+import React from 'react';
+import BigNumber from 'bignumber.js';
+import { useSendFormContext } from 'contexts';
+import { NftEnumType } from 'types';
+import SharedAmount from 'UI/Fields/Amount/SharedAmount';
+
+export const NftAmount = () => {
+  const { amount, tokensInfo } = useSendFormContext();
+  const { nft } = tokensInfo;
+  const { maxAmountAvailable, isMaxClicked } = amount;
+
+  function AvailableAmountElement() {
+    const hasPositiveBalance = new BigNumber(nft?.balance || 0).isGreaterThan(
+      0
+    );
+    return hasPositiveBalance && !isMaxClicked ? (
+      <small
+        className='form-text text-secondary mt-1'
+        data-testid={`available-${nft?.identifier}`}
+        data-value={`${maxAmountAvailable} ${nft?.identifier}`}
+      >
+        {`Available ${maxAmountAvailable}}`}
+      </small>
+    ) : null;
+  }
+
+  if (nft?.type === NftEnumType.NonFungibleESDT) {
+    return null;
+  }
+
+  return <SharedAmount AvailableAmountElement={AvailableAmountElement} />;
+};
+
+export default NftAmount;
