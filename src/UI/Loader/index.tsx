@@ -1,0 +1,18 @@
+import * as React from 'react';
+import { DappUI } from '@elrondnetwork/dapp-core';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons/faSpinner';
+
+export const Loader = () => {
+  return (
+    <DappUI.PageState
+      title='Loading...'
+      icon={faSpinner}
+      iconClass='text-primary fa-spin fast-spin'
+      iconSize='5x'
+      dataTestId='loader'
+      className='m-auto pt-spacer'
+    />
+  );
+};
+
+export default Loader;

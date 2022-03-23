@@ -1,0 +1,33 @@
+import { denominate } from '@elrondnetwork/dapp-core';
+import { decimals } from 'constants/index';
+import { NftEnumType } from 'types';
+import { ComputedNftType } from './types';
+
+const nftDefaultAmount = '1';
+
+export function getInitialAmount(props: {
+  computedNft: ComputedNftType | null;
+  amount: string;
+}) {
+  const { computedNft, amount } = props;
+  if (computedNft?.nft?.type === NftEnumType.NonFungibleESDT) {
+    return nftDefaultAmount;
+  }
+
+  const isMetaESDT = computedNft?.nft?.type === NftEnumType.MetaESDT;
+
+  const amountValue = computedNft?.quantity || amount;
+
+  if (isMetaESDT && amountValue) {
+    return denominate({
+      input: amountValue,
+      denomination: computedNft?.nft?.decimals,
+      showLastNonZeroDecimal: true,
+      addCommas: false,
+      decimals
+    });
+  }
+  return amountValue;
+}
+
+export default getInitialAmount;
