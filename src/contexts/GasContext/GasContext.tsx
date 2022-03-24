@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { isContract, nominate } from '@elrondnetwork/dapp-core';
 import { useFormikContext } from 'formik';
+import { useApiContext } from 'contexts/ApiContext';
 import { useFetchGasLimit } from 'hooks';
 import {
   calculateFeeLimit,
@@ -72,6 +73,7 @@ export function GasContextProvider({
     prefilledForm
   } = useFormContext();
   const { chainId, balance, address, nonce } = useAccountContext();
+  const apiProps = useApiContext();
 
   const { gasCostLoading, gasCostError, gasCostLimit } = useFetchGasLimit({
     balance,
@@ -85,7 +87,8 @@ export function GasContextProvider({
     gasLimitError: Boolean(gasLimitError),
     prefilledForm,
     receiverIsContract: isContract(receiver),
-    gasLimitCostError: initGasLimitError
+    gasLimitCostError: initGasLimitError,
+    apiProps
   });
 
   const defaultGasLimit = getDefaultGasLimit({

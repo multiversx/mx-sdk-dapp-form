@@ -5,10 +5,11 @@ import {
   defaultGasPrice as configGasPrice,
   denomination
 } from 'constants/index';
-import { computeNftDataField } from 'operations';
+import { computeNftDataField } from 'operations/computeDataField';
 import { FormConfigType, NftEnumType } from 'types';
-import { useComputeNft, useComputeToken } from './';
 import useComputeInitGasLimit from './useComputeInitGasLimit';
+import useComputeNft from './useComputeNft';
+import useComputeToken from './useComputeToken';
 
 const nftDefaultAmount = '1';
 

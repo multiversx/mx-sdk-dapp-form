@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import { useFormikContext } from 'formik';
-import { fetchAllMetaEsdts, fetchAllTokens } from 'apiCalls';
+import { useApiCalls } from 'apiCalls';
+import { useAccountContext } from 'contexts/AccountContext';
 import {
   getTokenDetails,
   GetTokenDetailsReturnType,
@@ -8,7 +9,6 @@ import {
 } from 'operations';
 import { ExtendedValuesType, NftType, TokenType, TxTypeEnum } from 'types';
 
-import { useAccountContext } from '../AccountContext';
 import { useFormContext } from '../FormContext';
 import { useGetEconomicsInfo } from './utils';
 
@@ -54,6 +54,7 @@ export function TokensContextProvider({
   const { address } = useAccountContext();
   const { checkInvalid } = useFormContext();
   const { egldLabel, egldPriceInUsd, decimals } = useGetEconomicsInfo();
+  const { fetchAllTokens, fetchAllMetaEsdts } = useApiCalls();
 
   const handleGetTokens = useCallback(async () => {
     const newTokens = await fetchAllTokens(address);

@@ -2,7 +2,7 @@ import React from 'react';
 import { DappUI, nominate } from '@elrondnetwork/dapp-core';
 import { denomination, decimals } from 'constants/index';
 import { NftEnumType, NftType } from 'types';
-import { UsdValue } from 'UI';
+import { UsdValue } from 'UI/UsdValue';
 import Token from './Token';
 
 export interface AmountPropsType {

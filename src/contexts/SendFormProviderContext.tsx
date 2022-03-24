@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import { AccountContextPropsType, useAccountContext } from './AccountContext';
-import { AmountContextPropsType, useAmountContext } from './AmountContext';
+import {
+  AmountContextPropsType,
+  useAmountContext
+} from './AmountContext/AmountContext';
 import { DataContextPropsType, useDataContext } from './DataFieldContext';
 
 import { FormContextPropsType, useFormContext } from './FormContext';

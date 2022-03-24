@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 import { useSendFormContext } from 'contexts';
 import { ExtendedValuesType, TxTypeEnum } from 'types';
-import { To, Amount, FeeAccordion, SelectToken, Data } from 'UI';
-import Confirm from '../Confirm';
+import Confirm from 'UI/Confirm';
+import { Amount, Data, FeeAccordion, SelectToken, To } from 'UI/Fields';
 
 const Form = () => {
   const { formInfo, receiverInfo } = useSendFormContext();

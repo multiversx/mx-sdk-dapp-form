@@ -2,8 +2,8 @@ import { validation } from '@elrondnetwork/dapp-utils';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { denomination } from 'constants/index';
-import { denominatedConfigGasPrice } from 'operations';
-import { maxDecimals } from 'validation';
+import denominatedConfigGasPrice from 'operations/denominatedConfigGasPrice';
+import maxDecimals from 'validation/maxDecimals';
 const { stringIsFloat } = validation;
 
 const required = string().required('Required');

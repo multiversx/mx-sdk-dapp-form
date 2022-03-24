@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { NftEnumType } from 'types';
 import { TxTypeEnum, ExtendedValuesType } from 'types';
-import { maxDecimals } from 'validation';
+import maxDecimals from 'validation/maxDecimals';
 const { stringIsFloat, stringIsInteger } = validation;
 
 const required = string().required('Required');

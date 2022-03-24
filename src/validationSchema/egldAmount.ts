@@ -2,7 +2,8 @@ import { validation } from '@elrondnetwork/dapp-utils';
 import { string } from 'yup';
 import { denomination } from 'constants/index';
 import { ExtendedValuesType } from 'types';
-import { maxDecimals, validateGasLimitAmount } from '../validation';
+import maxDecimals from 'validation/maxDecimals';
+import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 
 const { stringIsFloat } = validation;
 

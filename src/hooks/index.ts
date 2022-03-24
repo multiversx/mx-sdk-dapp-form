@@ -1,4 +1,3 @@
-export * from './useCheckReceiverAllowed';
 export * from './useComputeGasLimit';
 export * from './useGetInitialValues';
 export * from 'hooks/useComputeNft';
