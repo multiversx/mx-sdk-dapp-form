@@ -6,18 +6,21 @@ interface ApiConfigType {
   timeout: number;
 }
 
-let apiConfig: ApiConfigType | null = null;
+const apiConfig: { value: ApiConfigType | null } = {
+  value: null
+};
 
 export function setApiConfig(networkConfiguration: NetworkType) {
-  apiConfig = {
+  apiConfig.value = {
     baseURL: networkConfiguration.apiAddress,
     timeout: Number(networkConfiguration.apiTimeout)
   };
+  return apiConfig.value;
 }
 
 export async function getApiConfig(chainId?: string) {
   if (apiConfig != null) {
-    return apiConfig;
+    return apiConfig.value;
   }
   console.error(
     'Cannot get API config before initialization, make sure to call setApiConfig first'
@@ -25,15 +28,14 @@ export async function getApiConfig(chainId?: string) {
   if (chainId != null) {
     //try and get the network config if chainId is passed
     const config = await getNetworkConfigForChainId(chainId);
-    apiConfig = config;
-    return config;
+    return setApiConfig(config);
   }
   return new Promise((resolve, reject) => {
     //keep the async call to try and pool the apiConfig when it's initialized
     const interval = setInterval(() => {
-      if (apiConfig != null) {
+      if (apiConfig!.value != null) {
         //resolve if apiConfig is initialized
-        resolve(apiConfig);
+        resolve(apiConfig!.value);
       }
     }, 200);
 
