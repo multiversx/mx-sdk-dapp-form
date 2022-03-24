@@ -5,7 +5,7 @@ import { computeInitGasLimit } from 'operations';
 
 export function useComputeGasLimit() {
   const { chainId, balance, address, nonce } = useAccountContext();
-  const { networkConfig } = useNetworkConfigContext();
+  const { networkConfig, delegationContractData } = useNetworkConfigContext();
   const {
     receiverInfo: { receiver },
     amount: { value: amount },
@@ -25,7 +25,7 @@ export function useComputeGasLimit() {
     data,
     gasLimit,
     gasPrice,
-    delegationContract: 'Where do I get this?',
+    delegationContract: delegationContractData.delegationContract,
     chainId,
     egldLabel: networkConfig.egldLabel
   };

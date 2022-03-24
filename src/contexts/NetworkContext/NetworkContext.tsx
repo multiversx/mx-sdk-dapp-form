@@ -3,11 +3,17 @@ import {
   fallbackNetworkConfigurations,
   NetworkType
 } from '@elrondnetwork/dapp-core';
+import {
+  delegationContractDataByEnvironment,
+  getDelegationDataForChainId
+} from 'apiCalls';
 import { getApiConfig, setApiConfig } from 'apiCalls/apiConfig';
 import { getNetworkConfigForChainId } from 'apiCalls/network/getNetworkConfigForChainId';
+import { DelegationContractDataType } from 'types';
 
 export interface NetworkContextPropsType {
   networkConfig: NetworkType;
+  delegationContractData: DelegationContractDataType;
 }
 
 interface NetworkContextProviderPropsType {
@@ -26,6 +32,9 @@ export function NetworkContextProvider({
   const [networkConfig, setNetwork] = useState(
     fallbackNetworkConfigurations.devnet
   );
+  const [delegationContractData, setDelegationContractData] = useState(
+    delegationContractDataByEnvironment.devnet
+  );
 
   useEffect(() => {
     fetchNetworkConfiguration();
@@ -34,12 +43,14 @@ export function NetworkContextProvider({
   async function fetchNetworkConfiguration() {
     getApiConfig(chainId);
     const newNetworkConfig = await getNetworkConfigForChainId(chainId);
+    const delegationData = await getDelegationDataForChainId(chainId);
     setNetwork(newNetworkConfig);
     setApiConfig(newNetworkConfig);
+    setDelegationContractData(delegationData);
   }
 
   return (
-    <NetworkContext.Provider value={{ networkConfig }}>
+    <NetworkContext.Provider value={{ networkConfig, delegationContractData }}>
       {children}
     </NetworkContext.Provider>
   );
