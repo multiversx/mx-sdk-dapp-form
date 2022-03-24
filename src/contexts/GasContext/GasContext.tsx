@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { isContract, nominate } from '@elrondnetwork/dapp-core';
 import { useFormikContext } from 'formik';
 import { useApiContext } from 'contexts/ApiContext';
-import { useFetchGasLimit } from 'hooks';
+import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
   calculateFeeLimit,
   calculateGasLimit,

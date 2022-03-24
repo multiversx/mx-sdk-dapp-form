@@ -7,7 +7,7 @@ import {
 import { DataContextPropsType, useDataContext } from './DataFieldContext';
 
 import { FormContextPropsType, useFormContext } from './FormContext';
-import { GasContextPropsType, useGasContext } from './GasContext';
+import { GasContextPropsType, useGasContext } from './GasContext/GasContext';
 import {
   ReceiverContextPropsType,
   useReceiverContext
