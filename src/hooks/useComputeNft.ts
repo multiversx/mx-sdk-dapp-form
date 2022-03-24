@@ -1,7 +1,6 @@
 import React from 'react';
 import { Address } from '@elrondnetwork/erdjs';
 import BigNumber from 'bignumber.js';
-import { useLocation } from 'react-router-dom';
 import {
   getGlobalNftByIdentifier,
   getNftByAddressAndIdentifier
@@ -25,7 +24,7 @@ interface ExistingNftType {
 }
 
 export function useComputeNft(address: string) {
-  const { search } = useLocation();
+  const search = window?.location?.search;
 
   const [computedNft, setComputedNft] = React.useState<ComputedNftType>({});
 

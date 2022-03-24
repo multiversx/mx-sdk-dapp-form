@@ -1,6 +1,6 @@
 import React from 'react';
-import classnames from 'classnames';
 import { useSendFormContext } from 'contexts';
+import classnames from 'optionalPackages/classnames';
 
 interface SharedAmountType {
   AvailableAmountElement: () => JSX.Element | null;

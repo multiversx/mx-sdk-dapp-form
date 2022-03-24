@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { addressIsValid } from '@elrondnetwork/dapp-core';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import { Form } from 'react-bootstrap';
 import {
   Typeahead,
@@ -13,6 +10,9 @@ import {
   TypeaheadMenuProps
 } from 'react-bootstrap-typeahead';
 import { useSendFormContext } from 'contexts';
+import classnames from 'optionalPackages/classnames';
+import { faExclamationTriangle } from 'optionalPackages/fortawesome-free-solid-svg-icons';
+import { FontAwesomeIcon } from 'optionalPackages/react-fontawesome';
 
 function filterBy(option: any, props: any) {
   if (props.text.length > 2) {
@@ -83,7 +83,7 @@ export const To = () => {
     id: 'receiver',
     name: 'receiver',
     autoCapitalize: 'none',
-    className: classNames('', {
+    className: classnames('', {
       scam: Boolean(scamError),
       'is-invalid': isReceiverInvalid
     })
@@ -112,7 +112,7 @@ export const To = () => {
   return (
     <div className='form-group' key={key}>
       <div
-        className={classNames('notranslate typeahead', {
+        className={classnames('notranslate typeahead', {
           'is-invalid': isReceiverInvalid
         })}
       >

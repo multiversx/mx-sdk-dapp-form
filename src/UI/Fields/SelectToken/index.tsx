@@ -1,9 +1,9 @@
 import React from 'react';
-import classnames from 'classnames';
 import Select, { components } from 'react-select';
 import { denomination } from 'constants/index';
 import { useSendFormContext } from 'contexts';
 import { selectCustomStyles } from 'helpers';
+import classnames from 'optionalPackages/classnames';
 import { TokenType } from 'types';
 import TokenElement from './TokenElement';
 

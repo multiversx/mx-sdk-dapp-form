@@ -1,13 +1,13 @@
 import React from 'react';
 import { DappUI } from '@elrondnetwork/dapp-core';
+import { Accordion, Card } from 'react-bootstrap';
+import { useSendFormContext } from 'contexts';
 import {
   faAngleDown,
   faAngleRight,
   faSpinner
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Accordion, Card } from 'react-bootstrap';
-import { useSendFormContext } from 'contexts';
+} from 'optionalPackages/fortawesome-free-solid-svg-icons';
+import { FontAwesomeIcon } from 'optionalPackages/react-fontawesome';
 import GasLimit from '../GasLimit';
 import GasPrice from '../GasPrice';
 import FeeInFiat from './FeeInFiat';
@@ -33,7 +33,7 @@ export const FeeAccordion = () => {
 
   return (
     <Accordion className='mb-3' {...accordionProps}>
-      <Accordion.Toggle
+      <Accordion
         as={Card.Text}
         eventKey='0'
         onClick={toggle}
@@ -55,7 +55,7 @@ export const FeeAccordion = () => {
           </span>
           <FeeInFiat egldPriceInUsd={egldPriceInUsd} feeLimit={feeLimit} />
         </span>
-      </Accordion.Toggle>
+      </Accordion>
       <Accordion.Collapse eventKey='0'>
         <div className='mt-2 py-3 bg-light rounded border container'>
           <GasPrice />

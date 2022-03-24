@@ -1,13 +1,13 @@
 import React from 'react';
 import { DappUI } from '@elrondnetwork/dapp-core';
-import { faSpinnerThird } from '@fortawesome/pro-solid-svg-icons/faSpinnerThird';
+import { faSpinner } from 'optionalPackages/fortawesome-free-solid-svg-icons';
 
 const SendLoader = ({ title = 'Loading...' }: { title?: string }) => {
   return (
     <DappUI.PageState
       title={title}
       iconClass='fa-5x text-primary fa-spin fast-spin'
-      icon={faSpinnerThird}
+      icon={faSpinner}
       className='m-auto empty pt-spacer'
     />
   );

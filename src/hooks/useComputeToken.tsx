@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useGetAccountInfo } from '@elrondnetwork/dapp-core';
-import { useLocation } from 'react-router-dom';
 import { getAccountToken } from 'apiCalls';
 
 import { TokenType } from 'types';
@@ -24,8 +23,8 @@ export function useComputeToken({
   );
   const [tokenFound, setTokenFound] = useState<boolean>();
   const [computedTokens, setComputedTokens] = useState<TokenType[]>();
+  const search = window?.location?.search;
 
-  const { search } = useLocation();
   const urlSearchParams = new URLSearchParams(search);
   const searchParams = Object.fromEntries(urlSearchParams);
   const searchParamToken = searchParams.token;

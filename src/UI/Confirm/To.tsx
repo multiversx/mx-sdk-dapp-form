@@ -1,6 +1,6 @@
 import React from 'react';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons/faExclamationTriangle';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from 'optionalPackages/fortawesome-free-solid-svg-icons';
+import { FontAwesomeIcon } from 'optionalPackages/react-fontawesome';
 
 const To = ({
   label = 'To',
