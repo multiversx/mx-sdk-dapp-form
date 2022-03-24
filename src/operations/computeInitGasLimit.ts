@@ -1,10 +1,7 @@
 import { isContract } from '@elrondnetwork/dapp-core';
 import BigNumber from 'bignumber.js';
-import {
-  delegationContractData,
-  gasLimit as configGasLimit,
-  tokenGasLimit
-} from 'constants/index';
+import { gasLimit as configGasLimit, tokenGasLimit } from 'constants/index';
+import { DelegationContractDataType } from 'types';
 import fetchGasLimit from '../hooks/useFetchGasLimit/fetchGasLimit';
 import getIdentifierType from '../validation/getIdentifierType';
 import calculateGasLimit from './calculateGasLimit';
@@ -22,7 +19,7 @@ interface ComputeInitGasLimitType {
   gasLimit: string;
   gasPrice: string;
   chainId: string;
-  delegationContract?: string;
+  delegationContractData: DelegationContractDataType;
   egldLabel: string;
 }
 
@@ -40,7 +37,7 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
   data,
   gasLimit,
   gasPrice,
-  delegationContract,
+  delegationContractData: { delegationContractData, delegationContract },
   chainId
 }) => {
   const initGasLimitError = null;

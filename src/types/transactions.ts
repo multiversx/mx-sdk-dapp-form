@@ -70,3 +70,10 @@ export interface SmartContractResult {
   miniBlockHash: string;
   returnMessage: string;
 }
+
+export interface DelegationContractDataType {
+  delegationContract: string;
+  delegationContractData: {
+    minGasLimit: string;
+  };
+}
