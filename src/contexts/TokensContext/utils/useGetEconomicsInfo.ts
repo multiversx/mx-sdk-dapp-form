@@ -1,20 +1,13 @@
 import { useEffect, useState } from 'react';
-import { apiCalls } from '@elrondnetwork/dapp-core';
-import { useApiCalls } from 'apiCalls';
+import { useGetNetworkConfig } from '@elrondnetwork/dapp-core';
+import { getEconomicsInfo } from 'apiCalls';
 import { decimals as configDecimals } from 'constants/index';
-import { useAccountContext } from '../../AccountContext';
 
 interface EconomicsInfoType {
   egldLabel: string;
   egldPriceInUsd: number;
   decimals: number;
 }
-
-const chainIDToEnvironment: Record<string, string> = {
-  D: 'devnet',
-  T: 'testnet',
-  '1': 'mainnet'
-};
 
 const initialState = {
   egldLabel: 'eGLD',
@@ -25,20 +18,16 @@ const initialState = {
 export function useGetEconomicsInfo(): EconomicsInfoType {
   const [economicsInfo, setEconomicsInfo] =
     useState<EconomicsInfoType>(initialState);
-  const { chainId } = useAccountContext();
-  const { getEconomicsInfo } = useApiCalls();
+  const { networkConfig } = useGetNetworkConfig();
 
   async function fetchEconomicsInfo() {
     const economicsResponse = await getEconomicsInfo();
 
     const egldPriceInUsd =
       economicsResponse?.price || initialState.egldPriceInUsd;
-    const environment = chainIDToEnvironment[chainId];
-    const config = await apiCalls.getServerConfigurationForEnvironment(
-      environment
-    );
-    const egldLabel = config?.egldLabel || initialState.egldLabel;
-    const decimals = config?.decimals || initialState.decimals;
+
+    const egldLabel = networkConfig?.egldLabel || initialState.egldLabel;
+    const decimals = networkConfig?.decimals || initialState.decimals;
     setEconomicsInfo({ egldLabel, egldPriceInUsd, decimals });
   }
 

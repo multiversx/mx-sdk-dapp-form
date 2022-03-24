@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useGetAccountInfo } from '@elrondnetwork/dapp-core';
 
-import { useApiCalls } from 'apiCalls';
+import { getAccountToken } from 'apiCalls';
 import { TokenType } from 'types';
 import getIdentifierType from '../validation/getIdentifierType';
 
@@ -17,7 +17,6 @@ export function useComputeToken({
   egldLabel
 }: UseComputeTokenType) {
   const { address } = useGetAccountInfo();
-  const { getAccountToken } = useApiCalls();
 
   const [computedTokenId, setComputedTokenId] = useState<string>(
     formTokenId || egldLabel
