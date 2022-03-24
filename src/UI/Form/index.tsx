@@ -1,9 +1,8 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 import { useSendFormContext } from 'contexts';
-import classnames from 'optionalPackages/classnames';
-
 import { ExtendedValuesType, TxTypeEnum } from 'types';
 import { To, Amount, FeeAccordion, SelectToken, Data } from 'UI';
 import Confirm from '../Confirm';

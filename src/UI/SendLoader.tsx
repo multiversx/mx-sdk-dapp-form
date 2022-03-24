@@ -1,6 +1,6 @@
 import React from 'react';
 import { DappUI } from '@elrondnetwork/dapp-core';
-import { faSpinner } from 'optionalPackages/fortawesome-free-solid-svg-icons';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 const SendLoader = ({ title = 'Loading...' }: { title?: string }) => {
   return (

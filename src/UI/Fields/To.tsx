@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { addressIsValid } from '@elrondnetwork/dapp-core';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classnames from 'classnames';
 import { Form } from 'react-bootstrap';
 import {
   Typeahead,
@@ -10,9 +13,6 @@ import {
   TypeaheadMenuProps
 } from 'react-bootstrap-typeahead';
 import { useSendFormContext } from 'contexts';
-import classnames from 'optionalPackages/classnames';
-import { faExclamationTriangle } from 'optionalPackages/fortawesome-free-solid-svg-icons';
-import { FontAwesomeIcon } from 'optionalPackages/react-fontawesome';
 
 function filterBy(option: any, props: any) {
   if (props.text.length > 2) {

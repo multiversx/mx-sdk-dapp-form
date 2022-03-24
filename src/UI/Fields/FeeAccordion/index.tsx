@@ -1,13 +1,13 @@
 import React from 'react';
 import { DappUI } from '@elrondnetwork/dapp-core';
-import { Accordion, Card } from 'react-bootstrap';
-import { useSendFormContext } from 'contexts';
 import {
   faAngleDown,
   faAngleRight,
   faSpinner
-} from 'optionalPackages/fortawesome-free-solid-svg-icons';
-import { FontAwesomeIcon } from 'optionalPackages/react-fontawesome';
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Accordion, Card } from 'react-bootstrap';
+import { useSendFormContext } from 'contexts';
 import GasLimit from '../GasLimit';
 import GasPrice from '../GasPrice';
 import FeeInFiat from './FeeInFiat';

@@ -1,13 +1,13 @@
 import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import { useFormikContext } from 'formik';
-import { fetchAllMetaEsdts, fetchAllTokens } from 'apiRequests';
-import { NftType, TokenType } from 'types';
-import { TxTypeEnum, ExtendedValuesType } from '../../logic';
+import { fetchAllMetaEsdts, fetchAllTokens } from 'apiCalls';
 import {
   getTokenDetails,
   GetTokenDetailsReturnType,
   getTxType
-} from '../../logic/operations';
+} from 'operations';
+import { ExtendedValuesType, NftType, TokenType, TxTypeEnum } from 'types';
+
 import { useAccountContext } from '../AccountContext';
 import { useFormContext } from '../FormContext';
 import { useGetEconomicsInfo } from './utils';

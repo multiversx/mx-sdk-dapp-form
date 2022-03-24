@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { DappUI } from '@elrondnetwork/dapp-core';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { minDust } from 'constants/index';
-import { faInfoCircle } from 'optionalPackages/fortawesome-free-solid-svg-icons';
-import { FontAwesomeIcon } from 'optionalPackages/react-fontawesome';
 
 export const InfoDust = () => {
   return (

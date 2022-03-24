@@ -1,8 +1,7 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { useFormikContext } from 'formik';
-import { TxTypeEnum, ExtendedValuesType } from '../../logic';
-import { verifyInvalid } from '../../logic/validation';
-import getIdentifierType from '../../logic/validation/getIdentifierType';
+import { ExtendedValuesType, TxTypeEnum } from 'types';
+import { getIdentifierType, verifyInvalid } from 'validation';
 
 export interface FormContextBasePropsType {
   prefilledForm: boolean;
