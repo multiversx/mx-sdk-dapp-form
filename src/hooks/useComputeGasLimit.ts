@@ -1,20 +1,11 @@
+import { useNetworkConfigContext } from 'contexts';
 import { useAccountContext } from 'contexts/AccountContext';
-import { useApiContext } from 'contexts/ApiContext';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { computeInitGasLimit } from 'operations';
 
 export function useComputeGasLimit() {
-  // TODO @stan
-  const activeNetwork = {
-    id: 'TODO',
-    delegationContract: 'TODO',
-    egldLabel: 'TODO'
-  };
-
-  const { id: activeNetworkId, delegationContract, egldLabel } = activeNetwork;
-
   const { chainId, balance, address, nonce } = useAccountContext();
-  const apiProps = useApiContext();
+  const { networkConfig } = useNetworkConfigContext();
   const {
     receiverInfo: { receiver },
     amount: { value: amount },
@@ -22,7 +13,7 @@ export function useComputeGasLimit() {
     dataFieldInfo: { data }
   } = useSendFormContext();
 
-  const isInternal = ['mainnet', 'testnet'].includes(activeNetworkId); // TODO: selector
+  const isInternal = ['mainnet', 'testnet'].includes(networkConfig.id); // TODO: selector
 
   const props = {
     receiver,
@@ -34,21 +25,18 @@ export function useComputeGasLimit() {
     data,
     gasLimit,
     gasPrice,
-    delegationContract,
+    delegationContract: 'Where do I get this?',
     chainId,
-    egldLabel
+    egldLabel: networkConfig.egldLabel
   };
 
-  const computeGasLimit = async (computedTokenId: string) => {
+  return async function computeGasLimit(computedTokenId: string) {
     const { initGasLimit, initGasLimitError } = await computeInitGasLimit({
       ...props,
-      computedTokenId,
-      apiProps
+      computedTokenId
     });
     return { initGasLimit, initGasLimitError };
   };
-
-  return computeGasLimit;
 }
 
 export default useComputeGasLimit;

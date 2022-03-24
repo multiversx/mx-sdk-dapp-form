@@ -1,27 +1,27 @@
 import axios from 'axios';
-import { ApiPropsType } from 'apiCalls/types';
+import { getApiConfig } from 'apiCalls/apiConfig';
 
-export const getTransactionCost =
-  (props: ApiPropsType) => async (transaction: { [key: string]: any }) => {
-    try {
-      const { data } = await axios.post<{
-        data?: {
-          txGasUnits: number;
-          returnMessage: string;
-        };
-        code: string;
-      }>('/transaction/cost', transaction, props);
+export async function getTransactionCost(transaction: { [key: string]: any }) {
+  try {
+    const apiConfig = await getApiConfig();
+    const { data } = await axios.post<{
+      data?: {
+        txGasUnits: number;
+        returnMessage: string;
+      };
+      code: string;
+    }>('/transaction/cost', transaction, apiConfig);
 
-      return {
-        data,
-        success: true
-      };
-    } catch (err) {
-      console.error(err);
-      return {
-        success: false
-      };
-    }
-  };
+    return {
+      data,
+      success: true
+    };
+  } catch (err) {
+    console.error(err);
+    return {
+      success: false
+    };
+  }
+}
 
 export default getTransactionCost;
