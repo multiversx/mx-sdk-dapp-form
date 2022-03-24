@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import uniq from 'lodash/uniq';
-import { useApiCalls } from 'apiCalls';
+import { getTransactions } from 'apiCalls';
 import { useAccountContext } from '../../AccountContext';
 
 export function useFetchKnownAddresses() {
   const { address } = useAccountContext();
-  const { getTransactions } = useApiCalls();
 
   const [knownAddresses, setKnownAddresses] = useState<string[]>([]);
 
