@@ -25,7 +25,7 @@ export function useComputeGasLimit() {
     data,
     gasLimit,
     gasPrice,
-    delegationContract: delegationContractData.delegationContract,
+    delegationContractData,
     chainId,
     egldLabel: networkConfig.egldLabel
   };

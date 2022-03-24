@@ -15,5 +15,6 @@ export async function checkScamAddress(addressToVerify: string) {
     `/accounts/${addressToVerify}`,
     apiConfig
   );
+
   return data;
 }

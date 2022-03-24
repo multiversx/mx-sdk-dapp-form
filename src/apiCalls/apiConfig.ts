@@ -18,8 +18,8 @@ export function setApiConfig(networkConfiguration: NetworkType) {
   return apiConfig.value;
 }
 
-export async function getApiConfig(chainId?: string) {
-  if (apiConfig != null) {
+export async function getApiConfig(chainId?: string): Promise<ApiConfigType> {
+  if (apiConfig.value != null) {
     return apiConfig.value;
   }
   console.error(
@@ -33,9 +33,9 @@ export async function getApiConfig(chainId?: string) {
   return new Promise((resolve, reject) => {
     //keep the async call to try and pool the apiConfig when it's initialized
     const interval = setInterval(() => {
-      if (apiConfig!.value != null) {
+      if (apiConfig.value != null) {
         //resolve if apiConfig is initialized
-        resolve(apiConfig!.value);
+        resolve(apiConfig.value);
       }
     }, 200);
 
