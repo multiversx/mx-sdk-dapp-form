@@ -12,7 +12,7 @@
     "node": ">=10"
   },
   "scripts": {
-    "build": "microbundle-crl --no-compress --format modern,cjs --css-modules false ",
+    "build": "microbundle-crl --no-compress --format modern,cjs --css-modules false",
     "start": "microbundle-crl watch --no-compress --format modern,cjs --css-modules false",
     "prepare": "run-s build",
     "test": "run-s test:unit test:build",
@@ -80,6 +80,7 @@
     "bignumber.js": "9.x",
     "formik": "2.2.9",
     "lodash": "4.17.21",
+    "react-dom": "17.0.2",
     "yup": "^0.32.11"
   }
 }
