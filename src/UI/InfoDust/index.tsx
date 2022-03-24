@@ -3,11 +3,9 @@ import { DappUI } from '@elrondnetwork/dapp-core';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { Trans, useTranslation } from 'react-i18next';
 import { minDust } from 'constants/index';
 
 export const InfoDust = () => {
-  const { t } = useTranslation(['send']);
   return (
     <div className='info-dust'>
       <OverlayTrigger
@@ -15,12 +13,10 @@ export const InfoDust = () => {
         delay={{ show: 250, hide: 400 }}
         overlay={(props) => (
           <Tooltip id='info-dust-tooltip' {...props}>
-            <Trans t={t}>
-              A minimal amount of{' '}
-              <DappUI.Denominate value={minDust} decimals={3} /> has been left
-              in the account in order to allow you to make future smart contract
-              requests.
-            </Trans>
+            A minimal amount of{' '}
+            <DappUI.Denominate value={minDust} decimals={3} /> has been left in
+            the account in order to allow you to make future smart contract
+            requests.
           </Tooltip>
         )}
       >

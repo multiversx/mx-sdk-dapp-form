@@ -2,7 +2,7 @@ import React from 'react';
 import { DappUI, nominate } from '@elrondnetwork/dapp-core';
 import { denomination, decimals } from 'constants/index';
 import { NftEnumType, NftType } from 'types';
-import { UsdValue } from 'UI';
+import { UsdValue } from 'UI/UsdValue';
 import Token from './Token';
 
 export interface AmountPropsType {
@@ -20,7 +20,7 @@ export interface AmountPropsType {
 
 const Amount = (props: AmountPropsType) => {
   const [view, setView] = React.useState({
-    Amount: () => <></>
+    Amount: () => <React.Fragment></React.Fragment>
   });
 
   const {
@@ -43,22 +43,20 @@ const Amount = (props: AmountPropsType) => {
       }
 
       const NewAmount = () => (
-        <>
-          <DappUI.Denominate
-            value={value}
-            denomination={nftDenomination}
-            decimals={nft?.type === NftEnumType.MetaESDT ? decimals : 0}
-            showLastNonZeroDecimal
-            showLabel={false}
-            data-testid='confirmAmount'
-          />
-        </>
+        <DappUI.Denominate
+          value={value}
+          denomination={nftDenomination}
+          decimals={nft?.type === NftEnumType.MetaESDT ? decimals : 0}
+          showLastNonZeroDecimal
+          showLabel={false}
+          data-testid='confirmAmount'
+        />
       );
 
       setView({ Amount: NewAmount });
     } else {
       const NewAmount = () => (
-        <>
+        <React.Fragment>
           <DappUI.Denominate
             value={nominate(
               amount,
@@ -77,7 +75,7 @@ const Amount = (props: AmountPropsType) => {
               data-testid='confirmUsdValue'
             />
           )}
-        </>
+        </React.Fragment>
       );
 
       setView({ Amount: NewAmount });

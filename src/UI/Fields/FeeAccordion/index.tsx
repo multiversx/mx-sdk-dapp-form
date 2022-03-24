@@ -33,7 +33,7 @@ export const FeeAccordion = () => {
 
   return (
     <Accordion className='mb-3' {...accordionProps}>
-      <Accordion.Toggle
+      <Accordion
         as={Card.Text}
         eventKey='0'
         onClick={toggle}
@@ -55,7 +55,7 @@ export const FeeAccordion = () => {
           </span>
           <FeeInFiat egldPriceInUsd={egldPriceInUsd} feeLimit={feeLimit} />
         </span>
-      </Accordion.Toggle>
+      </Accordion>
       <Accordion.Collapse eventKey='0'>
         <div className='mt-2 py-3 bg-light rounded border container'>
           <GasPrice />

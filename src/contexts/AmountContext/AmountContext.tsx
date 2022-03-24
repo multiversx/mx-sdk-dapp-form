@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { useFormikContext } from 'formik';
-import { ExtendedValuesType } from '../../logic';
+import { ExtendedValuesType } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';
 import { useGetMaxAmountAvailable } from './hooks';

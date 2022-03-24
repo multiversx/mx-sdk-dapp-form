@@ -1,5 +1,5 @@
 import React from 'react';
-import { faUndo } from '@fortawesome/free-solid-svg-icons/faUndo';
+import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import { useSendFormContext } from 'contexts';

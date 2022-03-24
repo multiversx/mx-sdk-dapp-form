@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { addressIsValid } from '@elrondnetwork/dapp-core';
-import { checkScamAddress } from '../../../logic/apiCalls';
+import { useApiCalls } from 'apiCalls';
 
 interface VerifiedAddressesType {
   [address: string]: { type: string; info: string };
@@ -10,6 +10,7 @@ export function useVerifyScamAddress() {
   const [verifiedAddresses, setVerifiedAddresses] =
     React.useState<VerifiedAddressesType>({});
   const [fetching, setFetching] = React.useState(false);
+  const { checkScamAddress } = useApiCalls();
 
   const verifyScamAddress = async ({
     address,

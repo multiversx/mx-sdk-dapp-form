@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
-import { calculateGasLimit } from 'operations';
+import calculateGasLimit from 'operations/calculateGasLimit';
 import { ExtendedValuesType } from 'types';
-import { validateGasLimitAmount } from 'validation';
+import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 import { sharedGaslimit } from './sharedGaslimit';
 
 const required = string().required('Required');

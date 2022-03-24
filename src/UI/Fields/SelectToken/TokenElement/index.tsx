@@ -2,10 +2,10 @@ import React from 'react';
 import { switchTrue, DappUI } from '@elrondnetwork/dapp-core';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ElrondSymbol from 'assets/img/symbol.svg';
 import { decimals } from 'constants/index';
 import { scamFlag } from 'helpers';
 import { NftEnumType, NftType, TokenType } from 'types';
+import ElrondSymbol from '../../../../assets/img/symbol.svg';
 
 export default function TokenElement({
   inDropdown = false,

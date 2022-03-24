@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { tokenGasLimit } from 'constants/index';
 import { ExtendedValuesType } from 'types';
-import { validateGasLimitAmount } from '../validation';
+import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 import { sharedGaslimit } from './sharedGaslimit';
 
 const required = string().required('Required');

@@ -1,35 +1,35 @@
 import axios from 'axios';
-import { getApiConfig } from 'apiCalls/helpers';
+import { ApiPropsType } from 'apiCalls/types';
 import { NftType } from 'types';
 
-interface GetNftByAddressAndIdentifierArgsType {
+export interface GetNftByAddressAndIdentifierArgsType {
   address: string;
   identifier: string;
 }
 
-export async function getNftByAddressAndIdentifier({
-  address,
-  identifier
-}: GetNftByAddressAndIdentifierArgsType) {
-  try {
-    const { data }: { data: NftType } = await axios.get(
-      `/accounts/${address}/nfts/${identifier}`,
-      getApiConfig()
-    );
-    return data ? data : null;
-  } catch (err) {
-    return null;
-  }
-}
+export const getNftByAddressAndIdentifier =
+  (props: ApiPropsType) =>
+  async ({ address, identifier }: GetNftByAddressAndIdentifierArgsType) => {
+    try {
+      const { data }: { data: NftType } = await axios.get(
+        `/accounts/${address}/nfts/${identifier}`,
+        props
+      );
+      return data ? data : null;
+    } catch (err) {
+      return null;
+    }
+  };
 
-export async function getGlobalNftByIdentifier(identifier: string) {
-  try {
-    const { data }: { data: NftType } = await axios.get(
-      `/nfts/${identifier}`,
-      getApiConfig()
-    );
-    return data ? data : null;
-  } catch (err) {
-    return null;
-  }
-}
+export const getGlobalNftByIdentifier =
+  (props: ApiPropsType) => async (identifier: string) => {
+    try {
+      const { data }: { data: NftType } = await axios.get(
+        `/nfts/${identifier}`,
+        props
+      );
+      return data ? data : null;
+    } catch (err) {
+      return null;
+    }
+  };

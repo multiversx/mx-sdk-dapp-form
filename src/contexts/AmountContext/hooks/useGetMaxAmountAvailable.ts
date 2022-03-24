@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { nominate } from '@elrondnetwork/dapp-core';
 import { useFormikContext } from 'formik';
 import { decimals, denomination } from 'constants/index';
+import { useAccountContext } from 'contexts/AccountContext';
 import {
   getEntireBalance,
   getEntireTokenBalance,
   getTokenDetails
 } from 'operations';
 import { ExtendedValuesType, NftEnumType } from 'types';
-import { useAccountContext } from '../../AccountContext';
 import { useFormContext } from '../../FormContext';
 import { useGasContext } from '../../GasContext';
 import { useTokensContext } from '../../TokensContext';

@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import { AccountContextPropsType, useAccountContext } from './AccountContext';
-import { AmountContextPropsType, useAmountContext } from './AmountContext';
+import {
+  AmountContextPropsType,
+  useAmountContext
+} from './AmountContext/AmountContext';
 import { DataContextPropsType, useDataContext } from './DataFieldContext';
 
 import { FormContextPropsType, useFormContext } from './FormContext';
-import { GasContextPropsType, useGasContext } from './GasContext';
+import { GasContextPropsType, useGasContext } from './GasContext/GasContext';
 import {
   ReceiverContextPropsType,
   useReceiverContext

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { apiCalls } from '@elrondnetwork/dapp-core';
-import { getEconomicsInfo } from 'apiCalls';
+import { useApiCalls } from 'apiCalls';
 import { decimals as configDecimals } from 'constants/index';
 import { useAccountContext } from '../../AccountContext';
 
@@ -26,6 +26,7 @@ export function useGetEconomicsInfo(): EconomicsInfoType {
   const [economicsInfo, setEconomicsInfo] =
     useState<EconomicsInfoType>(initialState);
   const { chainId } = useAccountContext();
+  const { getEconomicsInfo } = useApiCalls();
 
   async function fetchEconomicsInfo() {
     const economicsResponse = await getEconomicsInfo();

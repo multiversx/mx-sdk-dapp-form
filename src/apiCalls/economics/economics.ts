@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getApiConfig } from '../helpers';
+import { ApiPropsType } from 'apiCalls/types';
 
 export interface EconomicsInfoType {
   totalSupply: number;
@@ -12,12 +12,12 @@ export interface EconomicsInfoType {
   baseApr: number;
 }
 
-export async function getEconomicsInfo(): Promise<EconomicsInfoType | null> {
+export const getEconomicsInfo = (props: ApiPropsType) => async () => {
   try {
-    const response = await axios.get('economics', getApiConfig());
-    return response.data;
+    const { data } = await axios.get<EconomicsInfoType>('economics', props);
+    return data;
   } catch (err) {
     console.error('err fetching economics info', err);
     return null;
   }
-}
+};

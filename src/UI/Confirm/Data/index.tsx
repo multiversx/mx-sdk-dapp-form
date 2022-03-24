@@ -19,7 +19,7 @@ const Data = ({
   highlight?: string;
   isScCall?: boolean;
 }) => {
-  let output = <>{data}</>;
+  let output = <React.Fragment>{data}</React.Fragment>;
 
   const [encodedScCall, ...remainingDataFields] =
     highlight && isScCall ? highlight.split('@') : [];
@@ -29,20 +29,20 @@ const Data = ({
       case data.startsWith(highlight): {
         const [, rest] = data.split(highlight);
         output = (
-          <>
+          <React.Fragment>
             {highlight}
             <span className='text-muted'>{rest}</span>
-          </>
+          </React.Fragment>
         );
         break;
       }
       case data.endsWith(highlight): {
         const [rest] = data.split(highlight);
         output = (
-          <>
+          <React.Fragment>
             <span className='text-muted'>{rest}</span>
             {highlight}
-          </>
+          </React.Fragment>
         );
         break;
       }
@@ -51,11 +51,11 @@ const Data = ({
         const [start, end] = data.split(highlight);
 
         output = (
-          <>
+          <React.Fragment>
             <span className='text-muted'>{start}</span>
             {highlight}
             <span className='text-muted'>{end}</span>
-          </>
+          </React.Fragment>
         );
         break;
       }
@@ -63,7 +63,7 @@ const Data = ({
   }
 
   return (
-    <>
+    <React.Fragment>
       {encodedScCall && (
         <div className='form-group mb-0 data-field mw-100'>
           <span className='form-label text-secondary d-block'>
@@ -88,7 +88,7 @@ const Data = ({
           {data ? output : 'N/A'}
         </div>
       </div>
-    </>
+    </React.Fragment>
   );
 };
 

@@ -1,10 +1,11 @@
 import { nominate } from '@elrondnetwork/dapp-core';
 import BigNumber from 'bignumber.js';
+import { getTransactionCost } from 'apiCalls/transactions';
+import { ApiPropsType } from 'apiCalls/types';
 import { gasLimitDelta } from 'constants/index';
-import { calculateGasLimit } from 'operations';
+import calculateGasLimit from 'operations/calculateGasLimit';
 import { ValuesType } from 'types';
 import { prepareTransaction } from './prepareTransaction';
-import { getTransactionCost } from './transactionCost';
 
 export interface FetchGasLimitType {
   balance: string;
@@ -12,6 +13,7 @@ export interface FetchGasLimitType {
   nonce: number;
   values: Omit<ValuesType, 'tokenId'>;
   chainId: string;
+  apiProps: ApiPropsType;
 }
 
 export const fetchGasLimit = async ({
@@ -19,7 +21,8 @@ export const fetchGasLimit = async ({
   address,
   nonce,
   values,
-  chainId
+  chainId,
+  apiProps
 }: FetchGasLimitType): Promise<{
   gasLimit: string;
   gasLimitCostError?: string;
@@ -38,7 +41,8 @@ export const fetchGasLimit = async ({
   });
   const plainTransaction = transaction.toPlainObject();
 
-  const { data: responseData, success } = await getTransactionCost({
+  const getData = getTransactionCost(apiProps);
+  const { data: responseData, success } = await getData({
     ...plainTransaction,
     sender: address
   });

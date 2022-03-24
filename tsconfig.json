@@ -3,7 +3,7 @@
     "downlevelIteration": true,
     "outDir": "build",
     "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "lib": ["dom", "esnext", "dom.iterable",],
     "moduleResolution": "node",
     "jsx": "react",
     "sourceMap": true,

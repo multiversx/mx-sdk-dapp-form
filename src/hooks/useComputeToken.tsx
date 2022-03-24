@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useGetAccountInfo } from '@elrondnetwork/dapp-core';
-import { useLocation } from 'react-router-dom';
-import { getAccountToken } from 'apiCalls';
 
+import { useApiCalls } from 'apiCalls';
 import { TokenType } from 'types';
 import getIdentifierType from '../validation/getIdentifierType';
 
@@ -18,14 +17,15 @@ export function useComputeToken({
   egldLabel
 }: UseComputeTokenType) {
   const { address } = useGetAccountInfo();
+  const { getAccountToken } = useApiCalls();
 
   const [computedTokenId, setComputedTokenId] = useState<string>(
     formTokenId || egldLabel
   );
   const [tokenFound, setTokenFound] = useState<boolean>();
   const [computedTokens, setComputedTokens] = useState<TokenType[]>();
+  const search = window?.location?.search;
 
-  const { search } = useLocation();
   const urlSearchParams = new URLSearchParams(search);
   const searchParams = Object.fromEntries(urlSearchParams);
   const searchParamToken = searchParams.token;
