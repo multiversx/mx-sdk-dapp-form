@@ -41,7 +41,6 @@ export function useComputeToken({
     setComputedTokens(tokenData);
     setTokenFound(tokenExtracted);
   };
-  // test
   const getSingleToken = (tokenId: string) => {
     getAccountToken({ address, token: tokenId })
       .then(({ data: tokenData }) => {
