@@ -54,7 +54,6 @@ export function TokensContextProvider({
   const { address } = useAccountContext();
   const { checkInvalid } = useFormContext();
   const { egldPriceInUsd, decimals, egldLabel } = useGetEconomicsInfo();
-  console.log(112);
 
   const handleGetTokens = useCallback(async () => {
     const newTokens = await fetchAllTokens(address);

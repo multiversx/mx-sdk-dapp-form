@@ -1,5 +1,8 @@
-import React, { useContext, useMemo, useState } from 'react';
-import { NetworkType } from '@elrondnetwork/dapp-core';
+import React, { useContext, useEffect, useState } from 'react';
+import {
+  fallbackNetworkConfigurations,
+  NetworkType
+} from '@elrondnetwork/dapp-core';
 import {
   delegationContractDataByEnvironment,
   getDelegationDataForChainId
@@ -26,12 +29,14 @@ export function NetworkContextProvider({
   children,
   value: { chainId }
 }: NetworkContextProviderPropsType) {
-  const [networkConfig, setNetwork] = useState<NetworkType>();
+  const [networkConfig, setNetwork] = useState<NetworkType>(
+    fallbackNetworkConfigurations.devnet
+  );
   const [delegationContractData, setDelegationContractData] = useState(
     delegationContractDataByEnvironment.devnet
   );
 
-  useMemo(() => {
+  useEffect(() => {
     fetchNetworkConfiguration();
   }, [chainId]);
 
@@ -44,11 +49,11 @@ export function NetworkContextProvider({
     setDelegationContractData(delegationData);
   }
 
-  return networkConfig ? (
+  return (
     <NetworkContext.Provider value={{ networkConfig, delegationContractData }}>
       {children}
     </NetworkContext.Provider>
-  ) : null;
+  );
 }
 
 export function useNetworkConfigContext() {
