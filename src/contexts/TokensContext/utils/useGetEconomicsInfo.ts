@@ -1,20 +1,24 @@
 import { useEffect, useState } from 'react';
 import { getEconomicsInfo } from 'apiCalls';
 import { decimals } from 'constants/index';
+import { useNetworkConfigContext } from 'contexts/NetworkContext';
 
 interface EconomicsInfoType {
   egldPriceInUsd: number;
   decimals: number;
+  egldLabel: string;
 }
 
 const initialState = {
   egldPriceInUsd: 0,
-  decimals
+  decimals,
+  egldLabel: 'EGLD'
 };
 
 export function useGetEconomicsInfo(): EconomicsInfoType {
   const [economicsInfo, setEconomicsInfo] =
     useState<EconomicsInfoType>(initialState);
+  const { networkConfig } = useNetworkConfigContext();
 
   async function fetchEconomicsInfo() {
     const economicsResponse = await getEconomicsInfo();
@@ -22,7 +26,11 @@ export function useGetEconomicsInfo(): EconomicsInfoType {
     const egldPriceInUsd =
       economicsResponse?.price || initialState.egldPriceInUsd;
 
-    setEconomicsInfo({ egldPriceInUsd, decimals });
+    setEconomicsInfo({
+      egldPriceInUsd,
+      decimals,
+      egldLabel: networkConfig.egldLabel
+    });
   }
 
   useEffect(() => {

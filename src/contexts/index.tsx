@@ -29,9 +29,9 @@ export function AppInfoContextProvider({
   children,
   initGasLimitError
 }: AppInfoContextProviderPropsType) {
-  const { chainId, egldLabel } = account;
+  const { chainId } = account;
   return (
-    <NetworkContextProvider value={{ chainId, egldLabel }}>
+    <NetworkContextProvider value={{ chainId }}>
       <AccountContextProvider value={account}>
         <FormContextProvider value={formInfo}>
           <TokensContextProvider value={tokensInfo}>
