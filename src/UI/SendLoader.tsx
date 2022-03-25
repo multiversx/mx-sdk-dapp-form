@@ -2,7 +2,7 @@ import React from 'react';
 import { DappUI } from '@elrondnetwork/dapp-core';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-const SendLoader = ({ title = 'Loading...' }: { title?: string }) => {
+export const SendLoader = ({ title = 'Loading...' }: { title?: string }) => {
   return (
     <DappUI.PageState
       title={title}

@@ -4,8 +4,12 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { minDust } from 'constants/index';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 export const InfoDust = () => {
+  const {
+    account: { egldLabel }
+  } = useSendFormContext();
   return (
     <div className='info-dust'>
       <OverlayTrigger
@@ -14,9 +18,13 @@ export const InfoDust = () => {
         overlay={(props) => (
           <Tooltip id='info-dust-tooltip' {...props}>
             A minimal amount of{' '}
-            <DappUI.Denominate value={minDust} decimals={3} /> has been left in
-            the account in order to allow you to make future smart contract
-            requests.
+            <DappUI.Denominate
+              egldLabel={egldLabel}
+              value={minDust}
+              decimals={3}
+            />{' '}
+            has been left in the account in order to allow you to make future
+            smart contract requests.
           </Tooltip>
         )}
       >

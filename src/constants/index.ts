@@ -10,23 +10,3 @@ export const tokenGasLimit = '500000';
 export const decimals = 4;
 export const minDust = '5000000000000000'; // 0.05 EGLD
 export const version = 1;
-
-export const delegationContractData = {
-  minGasLimit: '75000000',
-  claim: {
-    gasLimit: (20_000_000).toString(),
-    data: 'claimRewards'
-  },
-  delegate: {
-    gasLimit: (75_000_000).toString(),
-    data: 'stake'
-  },
-  initializeWithdrawal: {
-    gasLimit: (20_000_000).toString(),
-    data: 'unStake@' // unStake@hex.encode(valueToBeUnStaked),
-  },
-  unBond: {
-    gasLimit: (75_000_000).toString(),
-    data: 'unBond'
-  }
-};

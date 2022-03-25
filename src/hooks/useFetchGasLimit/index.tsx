@@ -47,7 +47,7 @@ export function useFetchGasLimit(props: UseFetchGasLimitProps) {
       fetchGasLimit(props)
         .then(({ gasLimit: resultedGasLimit, gasLimitCostError: error }) => {
           setGasCostLoading(false);
-          setGasCostError(error ?? null);
+          setGasCostError(error || null);
           setGasCostLimit(resultedGasLimit);
         })
         .catch((err) => {

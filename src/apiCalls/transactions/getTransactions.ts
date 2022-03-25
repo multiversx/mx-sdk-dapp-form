@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ApiPropsType } from 'apiCalls/types';
+import { getApiConfig } from 'apiCalls/apiConfig';
 import { TransactionType } from 'types';
 
 export interface GetTransactionsType {
@@ -10,26 +10,24 @@ export interface GetTransactionsType {
   before?: number;
 }
 
-export const getTransactions =
-  ({ baseURL, timeout }: ApiPropsType) =>
-  ({
-    address,
-    page = 1,
-    transactionSize = 15,
-    after,
-    before
-  }: GetTransactionsType) => {
-    return axios.get<TransactionType[]>('/transactions', {
-      baseURL,
-      params: {
-        sender: address,
-        receiver: address,
-        condition: 'should',
-        after,
-        before,
-        from: (page - 1) * transactionSize,
-        ...(transactionSize > 0 ? { size: transactionSize } : {})
-      },
-      timeout
-    });
-  };
+export async function getTransactions({
+  address,
+  page = 1,
+  transactionSize = 15,
+  after,
+  before
+}: GetTransactionsType) {
+  const apiConfig = await getApiConfig();
+  return axios.get<TransactionType[]>('/transactions', {
+    params: {
+      sender: address,
+      receiver: address,
+      condition: 'should',
+      after,
+      before,
+      from: (page - 1) * transactionSize,
+      ...(transactionSize > 0 ? { size: transactionSize } : {})
+    },
+    ...apiConfig
+  });
+}

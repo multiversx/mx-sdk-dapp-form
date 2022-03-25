@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ApiPropsType } from 'apiCalls/types';
+import { getApiConfig } from 'apiCalls/apiConfig';
 
 export type ScamInfoType = {
   scamInfo?: {
@@ -9,11 +9,12 @@ export type ScamInfoType = {
   code: string;
 };
 
-export const checkScamAddress =
-  (props: ApiPropsType) => async (addressToVerify: string) => {
-    const { data } = await axios.get<ScamInfoType>(
-      `/accounts/${addressToVerify}`,
-      props
-    );
-    return data;
-  };
+export async function checkScamAddress(addressToVerify: string) {
+  const apiConfig = await getApiConfig();
+  const { data } = await axios.get<ScamInfoType>(
+    `/accounts/${addressToVerify}`,
+    apiConfig
+  );
+
+  return data;
+}

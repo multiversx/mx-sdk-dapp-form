@@ -4,10 +4,10 @@ import {
   AccountContextProvider
 } from './AccountContext';
 import { AmountContextProvider } from './AmountContext';
-import { ApiContextPropsType, ApiContextProvider } from './ApiContext';
 import { DataContextProvider } from './DataFieldContext';
 import { FormContextBasePropsType, FormContextProvider } from './FormContext';
 import { GasContextProvider } from './GasContext';
+import { NetworkContextProvider } from './NetworkContext';
 import { ReceiverContextProvider } from './ReceiverContext';
 import { SendFormContextProvider } from './SendFormProviderContext';
 import {
@@ -18,7 +18,6 @@ import {
 interface AppInfoContextProviderPropsType {
   account: AccountContextPropsType;
   formInfo: FormContextBasePropsType;
-  apiInfo: ApiContextPropsType;
   tokensInfo: TokensContextInitializationPropsType;
   children: React.ReactNode;
   initGasLimitError: string | null;
@@ -27,16 +26,16 @@ export function AppInfoContextProvider({
   account,
   formInfo,
   tokensInfo,
-  apiInfo,
   children,
   initGasLimitError
 }: AppInfoContextProviderPropsType) {
+  const { chainId, egldLabel } = account;
   return (
-    <ApiContextProvider value={apiInfo}>
+    <NetworkContextProvider value={{ chainId, egldLabel }}>
       <AccountContextProvider value={account}>
         <FormContextProvider value={formInfo}>
           <TokensContextProvider value={tokensInfo}>
-            {/*This order is intentional, because each context consumes the data of the context above him*/}
+            {/*This order is intentional, because each context consumes the data of the context above*/}
             <DataContextProvider>
               <ReceiverContextProvider>
                 <GasContextProvider initGasLimitError={initGasLimitError}>
@@ -51,12 +50,12 @@ export function AppInfoContextProvider({
           </TokensContextProvider>
         </FormContextProvider>
       </AccountContextProvider>
-    </ApiContextProvider>
+    </NetworkContextProvider>
   );
 }
 
 export * from './FormContext';
 export * from './AccountContext';
 export * from './TokensContext';
-export * from './ApiContext';
+export * from './NetworkContext';
 export * from './SendFormProviderContext';

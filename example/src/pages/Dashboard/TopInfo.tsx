@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useGetAccountInfo, DappUI } from '@elrondnetwork/dapp-core';
 import { contractAddress } from 'config';
 

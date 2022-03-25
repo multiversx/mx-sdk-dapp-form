@@ -44,6 +44,7 @@ const Amount = (props: AmountPropsType) => {
 
       const NewAmount = () => (
         <DappUI.Denominate
+          egldLabel={props.egldLabel}
           value={value}
           denomination={nftDenomination}
           decimals={nft?.type === NftEnumType.MetaESDT ? decimals : 0}
@@ -58,6 +59,7 @@ const Amount = (props: AmountPropsType) => {
       const NewAmount = () => (
         <React.Fragment>
           <DappUI.Denominate
+            egldLabel={props.egldLabel}
             value={nominate(
               amount,
               isEsdtTransaction ? tokenDenomination : denomination

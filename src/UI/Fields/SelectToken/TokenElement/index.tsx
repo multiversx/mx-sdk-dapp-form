@@ -1,5 +1,5 @@
-import React from 'react';
-import { switchTrue, DappUI } from '@elrondnetwork/dapp-core';
+import React, { useEffect, useState } from 'react';
+import { DappUI } from '@elrondnetwork/dapp-core';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { decimals } from 'constants/index';
@@ -24,9 +24,9 @@ export default function TokenElement({
   const avatar = token.assets?.svgUrl || token.assets?.pngUrl || '';
   const avatarDropdownClass = avatar ? 'mr-1' : '';
   const avatarDropdownSize = avatar ? 28 : 20;
-  const [title, setTitle] = React.useState(name);
+  const [title, setTitle] = useState(name);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const isScam = nftTokenDetails?.uris?.some((uri) => {
       const link = Buffer.from(String(uri), 'base64').toString();
       const { found } = scamFlag(link, nftTokenDetails?.scamInfo);
@@ -37,20 +37,21 @@ export default function TokenElement({
     }
   }, [name]);
 
-  // TODO redo
-  const symbol = switchTrue({
-    [`${nftType === NftEnumType.NonFungibleESDT}`]: (
+  let symbol = <FontAwesomeIcon icon={faDiamond} />;
+  if (nftType === NftEnumType.NonFungibleESDT) {
+    symbol = (
       <div className='nft-type' data-testid={`${identifier}-type-nft`}>
         NFT
       </div>
-    ),
-    [`${nftType === NftEnumType.SemiFungibleESDT}`]: (
+    );
+  }
+  if (nftType === NftEnumType.SemiFungibleESDT) {
+    symbol = (
       <div className='nft-type' data-testid={`${identifier}-type-sft`}>
         SFT
       </div>
-    ),
-    default: <FontAwesomeIcon icon={faDiamond} />
-  });
+    );
+  }
 
   return (
     <div className='d-flex align-items-center token-element h-100'>
@@ -93,6 +94,7 @@ export default function TokenElement({
 
         {!inDropdown && nftType !== NftEnumType.NonFungibleESDT && (
           <DappUI.Denominate
+            egldLabel={identifier}
             value={balance || '0'}
             decimals={nftType === NftEnumType.SemiFungibleESDT ? 0 : decimals}
             token={identifier}
