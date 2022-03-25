@@ -1,8 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import {
-  fallbackNetworkConfigurations,
-  NetworkType
-} from '@elrondnetwork/dapp-core';
+import React, { useContext, useMemo, useState } from 'react';
+import { NetworkType } from '@elrondnetwork/dapp-core';
 import {
   delegationContractDataByEnvironment,
   getDelegationDataForChainId
@@ -13,13 +10,12 @@ import { DelegationContractDataType } from 'types';
 
 export interface NetworkContextPropsType {
   networkConfig: NetworkType;
-  egldLabel: string;
   delegationContractData: DelegationContractDataType;
 }
 
 interface NetworkContextProviderPropsType {
   children: React.ReactNode;
-  value: { chainId: string; egldLabel: string };
+  value: { chainId: string };
 }
 
 export const NetworkContext = React.createContext(
@@ -28,21 +24,19 @@ export const NetworkContext = React.createContext(
 
 export function NetworkContextProvider({
   children,
-  value: { chainId, egldLabel }
+  value: { chainId }
 }: NetworkContextProviderPropsType) {
-  const [networkConfig, setNetwork] = useState(
-    fallbackNetworkConfigurations.devnet
-  );
+  const [networkConfig, setNetwork] = useState<NetworkType>();
   const [delegationContractData, setDelegationContractData] = useState(
     delegationContractDataByEnvironment.devnet
   );
 
-  useEffect(() => {
+  useMemo(() => {
     fetchNetworkConfiguration();
   }, [chainId]);
 
   async function fetchNetworkConfiguration() {
-    getApiConfig(chainId);
+    getApiConfig(chainId); // TODO: return value
     const newNetworkConfig = await getNetworkConfigForChainId(chainId);
     const delegationData = await getDelegationDataForChainId(chainId);
     setNetwork(newNetworkConfig);
@@ -50,13 +44,11 @@ export function NetworkContextProvider({
     setDelegationContractData(delegationData);
   }
 
-  return (
-    <NetworkContext.Provider
-      value={{ networkConfig, delegationContractData, egldLabel }}
-    >
+  return networkConfig ? (
+    <NetworkContext.Provider value={{ networkConfig, delegationContractData }}>
       {children}
     </NetworkContext.Provider>
-  );
+  ) : null;
 }
 
 export function useNetworkConfigContext() {

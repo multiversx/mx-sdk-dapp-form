@@ -13,7 +13,6 @@ export interface ExtendedValuesType extends ValuesType {
   // validationSchema
   txType: TxTypeEnum;
   address: string;
-  egldLabel: string;
   balance: string;
   chainId: string;
   ignoreTokenBalance?: boolean;

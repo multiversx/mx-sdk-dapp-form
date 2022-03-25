@@ -15,6 +15,7 @@ export function setApiConfig(networkConfiguration: NetworkType) {
     baseURL: networkConfiguration.apiAddress,
     timeout: Number(networkConfiguration.apiTimeout)
   };
+
   return apiConfig.value;
 }
 
