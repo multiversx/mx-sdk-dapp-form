@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useGetAccountInfo } from '@elrondnetwork/dapp-core';
 
 import { getAccountToken } from 'apiCalls';
 import { TokenType } from 'types';
@@ -9,15 +8,15 @@ interface UseComputeTokenType {
   formTokenId?: string;
   prefilledForm: boolean;
   egldLabel: string;
+  address: string;
 }
 
 export function useComputeToken({
   formTokenId,
   prefilledForm,
-  egldLabel
+  egldLabel,
+  address
 }: UseComputeTokenType) {
-  const { address } = useGetAccountInfo();
-
   const [computedTokenId, setComputedTokenId] = useState<string>(
     formTokenId || egldLabel
   );
@@ -42,7 +41,6 @@ export function useComputeToken({
     setComputedTokens(tokenData);
     setTokenFound(tokenExtracted);
   };
-
   const getSingleToken = (tokenId: string) => {
     getAccountToken({ address, token: tokenId })
       .then(({ data: tokenData }) => {

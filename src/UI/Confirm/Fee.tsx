@@ -5,15 +5,18 @@ import { calculateFeeInFiat } from 'operations';
 const Fee = ({
   egldPriceInUsd,
   label = 'Fee',
-  feeLimit
+  feeLimit,
+  egldLabel
 }: {
   label?: string;
   egldPriceInUsd: number;
   feeLimit: string;
+  egldLabel: string;
 }) => (
   <div className='form-group'>
     <span className='form-label text-secondary d-block'>{label}</span>
     <DappUI.Denominate
+      egldLabel={egldLabel}
       value={feeLimit}
       showLastNonZeroDecimal
       data-testid='confirmFee'

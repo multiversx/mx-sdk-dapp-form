@@ -1,13 +1,14 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { denominate } from '@elrondnetwork/dapp-core';
+import { getDelegationDataForChainId } from 'apiCalls';
 import {
   decimals,
   defaultGasPrice as configGasPrice,
   denomination
 } from 'constants/index';
+import { computeInitGasLimit } from 'operations';
 import { computeNftDataField } from 'operations/computeDataField';
 import { FormConfigType, NftEnumType } from 'types';
-import useComputeInitGasLimit from './useComputeInitGasLimit';
 import useComputeNft from './useComputeNft';
 import useComputeToken from './useComputeToken';
 
@@ -15,15 +16,29 @@ const nftDefaultAmount = '1';
 
 interface UseGetInitialValuesType {
   configValues: FormConfigType;
-  egldLabel: string;
   address: string;
+  balance: string;
+  egldLabel: string;
+  nonce: number;
+  chainId: string;
 }
 
 export function useGetInitialValues(props: UseGetInitialValuesType) {
   const {
-    configValues: { receiver, amount, gasPrice, data, tokenId, active },
     address,
-    egldLabel
+    chainId,
+    balance,
+    egldLabel,
+    nonce,
+    configValues: {
+      receiver,
+      amount,
+      gasPrice,
+      gasLimit,
+      data,
+      tokenId,
+      active
+    }
   } = props;
 
   const { searchNft, computedNft, getSearchParamNft, searchNftByIdentifier } =
@@ -31,14 +46,17 @@ export function useGetInitialValues(props: UseGetInitialValuesType) {
 
   const { nft } = computedNft;
 
+  const [initGasLimit, setInitGasLimit] = useState('');
+  const [initGasLimitError, setInitGasLimitError] = useState<string | null>(
+    null
+  );
+
   const { computedTokenId, computedTokens, tokenFound } = useComputeToken({
     formTokenId: tokenId,
     prefilledForm: Boolean(active),
+    address,
     egldLabel
   });
-
-  const { computeGasLimit, initGasLimit, initGasLimitError } =
-    useComputeInitGasLimit();
 
   useEffect(() => {
     if (data) {
@@ -52,6 +70,31 @@ export function useGetInitialValues(props: UseGetInitialValuesType) {
     }
     getSearchParamNft();
   }, []);
+
+  async function computeGasLimit(computedTokenId: string) {
+    const delegationContractData = await getDelegationDataForChainId(chainId);
+
+    const computeGasLimitProps = {
+      receiver,
+      isInternal: ['1', 'T'].includes(chainId),
+      balance,
+      address,
+      nonce,
+      amount,
+      data,
+      gasLimit,
+      gasPrice,
+      delegationContractData,
+      chainId,
+      egldLabel,
+      computedTokenId
+    };
+    const { initGasLimit, initGasLimitError } = await computeInitGasLimit(
+      computeGasLimitProps
+    );
+    setInitGasLimit(initGasLimit);
+    setInitGasLimitError(initGasLimitError);
+  }
 
   useEffect(() => {
     computeGasLimit(computedTokenId);

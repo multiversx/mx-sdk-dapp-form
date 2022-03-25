@@ -66,7 +66,7 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
 
     return {
       initGasLimit,
-      initGasLimitError: gasLimitCostError ?? null
+      initGasLimitError: gasLimitCostError || null
     };
   }
 

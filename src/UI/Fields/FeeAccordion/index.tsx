@@ -13,7 +13,11 @@ import GasPrice from '../GasPrice';
 import FeeInFiat from './FeeInFiat';
 
 export const FeeAccordion = () => {
-  const { gasInfo, tokensInfo } = useSendFormContext();
+  const {
+    gasInfo,
+    tokensInfo,
+    account: { egldLabel }
+  } = useSendFormContext();
   const { feeLimit, hasErrors, gasCostLoading } = gasInfo;
   const { egldPriceInUsd } = tokensInfo;
 
@@ -47,7 +51,11 @@ export const FeeAccordion = () => {
             />{' '}
             <label className='mb-0 mr-2'>Fee</label>
             <span className='mr-2' data-testid='feeLimit'>
-              <DappUI.Denominate value={feeLimit} showLastNonZeroDecimal />
+              <DappUI.Denominate
+                value={feeLimit}
+                showLastNonZeroDecimal
+                egldLabel={egldLabel}
+              />
             </span>
             {gasCostLoading && (
               <FontAwesomeIcon icon={faSpinner} className='fa-spin fast-spin' />

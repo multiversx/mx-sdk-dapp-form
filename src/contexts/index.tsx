@@ -29,12 +29,13 @@ export function AppInfoContextProvider({
   children,
   initGasLimitError
 }: AppInfoContextProviderPropsType) {
+  const { chainId, egldLabel } = account;
   return (
-    <NetworkContextProvider value={{ chainId: account.chainId }}>
+    <NetworkContextProvider value={{ chainId, egldLabel }}>
       <AccountContextProvider value={account}>
         <FormContextProvider value={formInfo}>
           <TokensContextProvider value={tokensInfo}>
-            {/*This order is intentional, because each context consumes the data of the context above him*/}
+            {/*This order is intentional, because each context consumes the data of the context above*/}
             <DataContextProvider>
               <ReceiverContextProvider>
                 <GasContextProvider initGasLimitError={initGasLimitError}>

@@ -7,7 +7,7 @@ import { ExtendedValuesType, TxTypeEnum } from 'types';
 import Confirm from 'UI/Confirm';
 import { Amount, Data, FeeAccordion, SelectToken, To } from 'UI/Fields';
 
-const Form = () => {
+export const Form = () => {
   const { formInfo, receiverInfo } = useSendFormContext();
   const {
     values: { txType }

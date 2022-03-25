@@ -5,11 +5,12 @@ export interface AccountContextPropsType {
   nonce: number;
   balance: string;
   chainId: string;
+  egldLabel: string;
   providerType: string;
 }
 
 interface AccountContextProviderPropsType {
-  children: any;
+  children: React.ReactNode;
   value: AccountContextPropsType;
 }
 

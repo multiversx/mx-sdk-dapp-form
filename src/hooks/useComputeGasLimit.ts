@@ -6,12 +6,13 @@ import { computeInitGasLimit } from 'operations';
 export function useComputeGasLimit() {
   const { chainId, balance, address, nonce } = useAccountContext();
   const { networkConfig, delegationContractData } = useNetworkConfigContext();
+  const sendFormContext = useSendFormContext();
   const {
     receiverInfo: { receiver },
     amount: { value: amount },
     gasInfo: { gasLimit, gasPrice },
     dataFieldInfo: { data }
-  } = useSendFormContext();
+  } = sendFormContext;
 
   const isInternal = ['mainnet', 'testnet'].includes(networkConfig.id); // TODO: selector
 
