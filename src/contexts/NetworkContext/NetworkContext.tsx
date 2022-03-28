@@ -16,9 +16,14 @@ export interface NetworkContextPropsType {
   delegationContractData: DelegationContractDataType;
 }
 
+interface NetworkContextProviderValueType {
+  chainId: string;
+  customNetworkConfig?: CustomNetworkConfigType;
+}
+
 interface NetworkContextProviderPropsType {
   children: React.ReactNode;
-  value: { chainId: string; customNetworkConfig?: CustomNetworkConfigType };
+  value: NetworkContextProviderValueType;
 }
 
 export const NetworkContext = React.createContext(
