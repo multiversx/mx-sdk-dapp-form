@@ -47,18 +47,23 @@ export function AppInfoContextProvider({
   async function fetchNetworkConfiguration() {
     const fetchFromServer = !formNetworkConfig.skipFetchFromServer;
     const { chainId } = formNetworkConfig;
+    const environment = getEnvironmentForChainId(chainId);
+    const fallbackConfig = fallbackNetworkConfigurations[environment];
 
     if (fetchFromServer) {
       const newNetworkConfig = await getNetworkConfigForChainId(chainId);
       if (newNetworkConfig) {
-        setApiConfig(newNetworkConfig);
-        setNetworkConfig(newNetworkConfig);
+        const newConfig = {
+          ...fallbackConfig,
+          ...newNetworkConfig,
+          ...formNetworkConfig
+        };
+        setApiConfig(newConfig);
+        setNetworkConfig(newConfig);
         return;
       }
     }
 
-    const environment = getEnvironmentForChainId(chainId);
-    const fallbackConfig = fallbackNetworkConfigurations[environment];
     const localConfig: NetworkType = {
       ...fallbackConfig,
       ...formNetworkConfig
