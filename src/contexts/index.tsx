@@ -48,7 +48,7 @@ export function AppInfoContextProvider({
     const fetchFromServer = !formNetworkConfig.skipFetchFromServer;
     const { chainId } = formNetworkConfig;
     const environment = getEnvironmentForChainId(chainId);
-    const fallbackConfig = fallbackNetworkConfigurations[environment];
+    const fallbackConfig = fallbackNetworkConfigurations[environment] || {};
 
     if (fetchFromServer) {
       const newNetworkConfig = await getNetworkConfigForChainId(chainId);
