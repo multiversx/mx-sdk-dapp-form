@@ -7,18 +7,23 @@ import {
   delegationContractDataByEnvironment,
   getDelegationDataForChainId
 } from 'apiCalls';
-import { getApiConfig, setApiConfig } from 'apiCalls/apiConfig';
+import { setApiConfig } from 'apiCalls/apiConfig';
 import { getNetworkConfigForChainId } from 'apiCalls/network/getNetworkConfigForChainId';
-import { DelegationContractDataType } from 'types';
+import { CustomNetworkConfigType, DelegationContractDataType } from 'types';
 
 export interface NetworkContextPropsType {
   networkConfig: NetworkType;
   delegationContractData: DelegationContractDataType;
 }
 
+interface NetworkContextProviderValueType {
+  chainId: string;
+  customNetworkConfig?: CustomNetworkConfigType;
+}
+
 interface NetworkContextProviderPropsType {
   children: React.ReactNode;
-  value: { chainId: string };
+  value: NetworkContextProviderValueType;
 }
 
 export const NetworkContext = React.createContext(
@@ -27,7 +32,7 @@ export const NetworkContext = React.createContext(
 
 export function NetworkContextProvider({
   children,
-  value: { chainId }
+  value: { chainId, customNetworkConfig }
 }: NetworkContextProviderPropsType) {
   const [networkConfig, setNetwork] = useState<NetworkType>(
     fallbackNetworkConfigurations.devnet
@@ -38,11 +43,13 @@ export function NetworkContextProvider({
 
   useEffect(() => {
     fetchNetworkConfiguration();
-  }, [chainId]);
+  }, [chainId, customNetworkConfig]);
 
   async function fetchNetworkConfiguration() {
-    getApiConfig(chainId); // TODO: return value
-    const newNetworkConfig = await getNetworkConfigForChainId(chainId);
+    const newNetworkConfig = await getNetworkConfigForChainId(
+      chainId,
+      customNetworkConfig
+    );
     const delegationData = await getDelegationDataForChainId(chainId);
     setNetwork(newNetworkConfig);
     setApiConfig(newNetworkConfig);

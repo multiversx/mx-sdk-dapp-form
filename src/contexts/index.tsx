@@ -1,4 +1,5 @@
 import React from 'react';
+import { CustomNetworkType } from '@elrondnetwork/dapp-core';
 import {
   AccountContextPropsType,
   AccountContextProvider
@@ -19,6 +20,7 @@ interface AppInfoContextProviderPropsType {
   account: AccountContextPropsType;
   formInfo: FormContextBasePropsType;
   tokensInfo: TokensContextInitializationPropsType;
+  customNetworkConfig?: CustomNetworkType;
   children: React.ReactNode;
   initGasLimitError: string | null;
 }
@@ -26,12 +28,13 @@ export function AppInfoContextProvider({
   account,
   formInfo,
   tokensInfo,
+  customNetworkConfig,
   children,
   initGasLimitError
 }: AppInfoContextProviderPropsType) {
   const { chainId } = account;
   return (
-    <NetworkContextProvider value={{ chainId }}>
+    <NetworkContextProvider value={{ chainId, customNetworkConfig }}>
       <AccountContextProvider value={account}>
         <FormContextProvider value={formInfo}>
           <TokensContextProvider value={tokensInfo}>

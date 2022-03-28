@@ -1,20 +1,25 @@
 import { getAccount, getLatestNonce, nominate } from '@elrondnetwork/dapp-core';
 import { prepareTransaction } from 'hooks/useFetchGasLimit/prepareTransaction';
-import { NftType } from 'types';
 import { TxTypeEnum, ExtendedValuesType } from 'types';
 
 interface GenerateTransactionPropsType {
-  nft?: NftType;
   address: string;
   balance: string;
   chainId: string;
-  txType: TxTypeEnum;
   values: ExtendedValuesType;
 }
 
 export async function generateTransaction(props: GenerateTransactionPropsType) {
-  const { nft, address, balance, chainId, txType, values } = props;
-  const { amount: amountValue, receiver, data, gasLimit, gasPrice } = values;
+  const { address, balance, chainId, values } = props;
+  const {
+    amount: amountValue,
+    receiver,
+    data,
+    gasLimit,
+    gasPrice,
+    nft,
+    txType
+  } = values;
   const account = await getAccount(address);
   const latestNonce = getLatestNonce(account);
   const amount = txType === TxTypeEnum.EGLD ? amountValue : '0';
