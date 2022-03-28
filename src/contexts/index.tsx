@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { NetworkType } from '@elrondnetwork/dapp-core';
-import { getNetworkConfigForChainId, setApiConfig } from 'apiCalls';
+import {
+  fallbackNetworkConfigurations,
+  NetworkType
+} from '@elrondnetwork/dapp-core';
+import {
+  getEnvironmentForChainId,
+  getNetworkConfigForChainId,
+  setApiConfig
+} from 'apiCalls';
 import { FormNetworkConfigType } from 'types';
 import { SendLoader } from 'UI';
 import {
@@ -38,20 +45,26 @@ export function AppInfoContextProvider({
   const [networkConfig, setNetworkConfig] = useState<NetworkType>();
 
   async function fetchNetworkConfiguration() {
-    if (!formNetworkConfig.apiAddress) {
-      const newNetworkConfig = await getNetworkConfigForChainId(
-        formNetworkConfig.chainId
-      );
-      setApiConfig(newNetworkConfig);
-      setNetworkConfig(newNetworkConfig);
-    } else {
-      const localConfig: NetworkType = {
-        ...formNetworkConfig,
-        id: formNetworkConfig.chainId
-      } as any;
-      setApiConfig(localConfig);
-      setNetworkConfig(localConfig);
+    const fetchFromServer = !formNetworkConfig.skipFetchFromServer;
+    const { chainId } = formNetworkConfig;
+
+    if (fetchFromServer) {
+      const newNetworkConfig = await getNetworkConfigForChainId(chainId);
+      if (newNetworkConfig) {
+        setApiConfig(newNetworkConfig);
+        setNetworkConfig(newNetworkConfig);
+        return;
+      }
     }
+
+    const environment = getEnvironmentForChainId(chainId);
+    const fallbackConfig = fallbackNetworkConfigurations[environment];
+    const localConfig: NetworkType = {
+      ...fallbackConfig,
+      ...formNetworkConfig
+    };
+    setApiConfig(localConfig);
+    setNetworkConfig(localConfig);
   }
 
   useEffect(() => {
