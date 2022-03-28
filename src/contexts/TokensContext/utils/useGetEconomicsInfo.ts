@@ -35,7 +35,7 @@ export function useGetEconomicsInfo(): EconomicsInfoType {
 
   useEffect(() => {
     fetchEconomicsInfo();
-  }, []);
+  }, [networkConfig?.id]);
 
   return economicsInfo;
 }
