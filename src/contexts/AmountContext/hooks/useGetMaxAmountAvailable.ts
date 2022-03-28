@@ -3,6 +3,7 @@ import { nominate } from '@elrondnetwork/dapp-core';
 import { useFormikContext } from 'formik';
 import { decimals, denomination } from 'constants/index';
 import { useAccountContext } from 'contexts/AccountContext';
+import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import {
   getEntireBalance,
   getEntireTokenBalance,
@@ -20,7 +21,10 @@ interface UseGetMaxAmountAvailableReturnType {
 
 export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
   const { values } = useFormikContext<ExtendedValuesType>();
-  const { balance, chainId } = useAccountContext();
+  const { balance } = useAccountContext();
+  const {
+    networkConfig: { id: chainId }
+  } = useNetworkConfigContext();
 
   const [tokenBalance, setTokenBalance] = useState<string | null>(null);
   const [nftBalance, setNftBalance] = useState<string | null>(null);

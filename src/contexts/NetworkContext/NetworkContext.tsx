@@ -4,7 +4,7 @@ import {
   delegationContractDataByEnvironment,
   getDelegationDataForChainId
 } from 'apiCalls';
-import { CustomNetworkConfigType, DelegationContractDataType } from 'types';
+import { DelegationContractDataType } from 'types';
 
 export interface NetworkContextPropsType {
   networkConfig: NetworkType;
@@ -12,9 +12,7 @@ export interface NetworkContextPropsType {
 }
 
 interface NetworkContextProviderValueType {
-  chainId: string;
   networkConfig: NetworkType;
-  customNetworkConfig?: CustomNetworkConfigType;
 }
 
 interface NetworkContextProviderPropsType {
@@ -28,18 +26,18 @@ export const NetworkContext = React.createContext(
 
 export function NetworkContextProvider({
   children,
-  value: { chainId, customNetworkConfig, networkConfig }
+  value: { networkConfig }
 }: NetworkContextProviderPropsType) {
   const [delegationContractData, setDelegationContractData] = useState(
     delegationContractDataByEnvironment.devnet
   );
 
   useEffect(() => {
-    fetchNetworkConfiguration();
-  }, [chainId, customNetworkConfig]);
+    fetchDelegationData();
+  }, [networkConfig]);
 
-  async function fetchNetworkConfiguration() {
-    const delegationData = await getDelegationDataForChainId(chainId);
+  async function fetchDelegationData() {
+    const delegationData = await getDelegationDataForChainId(networkConfig.id);
     setDelegationContractData(delegationData);
   }
 

@@ -3,7 +3,7 @@ import {
   LoginMethodsEnum,
   useGetAccountProvider
 } from '@elrondnetwork/dapp-core';
-import { useSendFormContext } from 'contexts';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { TxTypeEnum } from 'types';
 import Confirm from './Confirm';
 

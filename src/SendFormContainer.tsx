@@ -9,7 +9,7 @@ import {
 } from 'contexts';
 import { generateTransaction } from 'operations';
 import { ExtendedValuesType, ValuesType } from 'types';
-import { CustomNetworkConfigType } from 'types/network';
+import { FormNetworkConfigType } from 'types/network';
 import { getInitialErrors } from 'validation';
 import validationSchema from 'validationSchema';
 
@@ -21,7 +21,7 @@ export interface SendFormContainerPropsType {
   account: AccountContextPropsType;
   formInfo: Omit<FormContextBasePropsType, 'txType' | 'setTxType'>;
   tokensInfo: TokensContextInitializationPropsType;
-  customNetworkConfig?: CustomNetworkConfigType;
+  formNetworkConfig: FormNetworkConfigType;
   children: React.ReactNode;
 }
 
@@ -32,9 +32,10 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     formInfo,
     children,
     account,
-    customNetworkConfig
+    formNetworkConfig
   } = props;
-  const { address, balance, chainId } = account;
+  const { address, balance } = account;
+  const { chainId } = formNetworkConfig;
 
   //this is updated from within the main context with updated values
 
@@ -65,7 +66,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
         initGasLimitError={props.initGasLimitError}
         account={props.account}
         formInfo={props.formInfo}
-        customNetworkConfig={customNetworkConfig}
+        formNetworkConfig={formNetworkConfig}
         tokensInfo={props.tokensInfo}
       >
         {children}

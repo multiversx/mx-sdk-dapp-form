@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Accordion, Card } from 'react-bootstrap';
-import { useSendFormContext } from 'contexts';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import GasLimit from '../GasLimit';
 import GasPrice from '../GasPrice';
 import FeeInFiat from './FeeInFiat';

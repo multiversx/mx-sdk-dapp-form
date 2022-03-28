@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSendFormContext } from 'contexts';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import SharedAmount from './SharedAmount';
 
 export const EsdtAmount = () => {

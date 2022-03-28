@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { CustomNetworkType, NetworkType } from '@elrondnetwork/dapp-core';
+import { NetworkType } from '@elrondnetwork/dapp-core';
 import { getNetworkConfigForChainId, setApiConfig } from 'apiCalls';
+import { FormNetworkConfigType } from 'types';
 import { SendLoader } from 'UI';
 import {
   AccountContextPropsType,
@@ -22,7 +23,7 @@ interface AppInfoContextProviderPropsType {
   account: AccountContextPropsType;
   formInfo: FormContextBasePropsType;
   tokensInfo: TokensContextInitializationPropsType;
-  customNetworkConfig?: CustomNetworkType;
+  formNetworkConfig: FormNetworkConfigType;
   children: React.ReactNode;
   initGasLimitError: string | null;
 }
@@ -30,35 +31,39 @@ export function AppInfoContextProvider({
   account,
   formInfo,
   tokensInfo,
-  customNetworkConfig,
+  formNetworkConfig,
   children,
   initGasLimitError
 }: AppInfoContextProviderPropsType) {
-  const { chainId } = account;
-
-  const [networkConfig, setNetwork] = useState<NetworkType>();
+  const [networkConfig, setNetworkConfig] = useState<NetworkType>();
 
   async function fetchNetworkConfiguration() {
-    const newNetworkConfig = await getNetworkConfigForChainId(
-      chainId,
-      customNetworkConfig
-    );
-    setApiConfig(newNetworkConfig);
-    setNetwork(newNetworkConfig);
+    if (!formNetworkConfig.apiAddress) {
+      const newNetworkConfig = await getNetworkConfigForChainId(
+        formNetworkConfig.chainId
+      );
+      setApiConfig(newNetworkConfig);
+      setNetworkConfig(newNetworkConfig);
+    } else {
+      const localConfig: NetworkType = {
+        ...formNetworkConfig,
+        id: formNetworkConfig.chainId
+      } as any;
+      setApiConfig(localConfig);
+      setNetworkConfig(localConfig);
+    }
   }
 
   useEffect(() => {
     fetchNetworkConfiguration();
-  }, [chainId, customNetworkConfig]);
+  }, [formNetworkConfig]);
 
   if (!networkConfig) {
     return <SendLoader />;
   }
 
   return (
-    <NetworkContextProvider
-      value={{ networkConfig, chainId, customNetworkConfig }}
-    >
+    <NetworkContextProvider value={{ networkConfig }}>
       <AccountContextProvider value={account}>
         <FormContextProvider value={formInfo}>
           <TokensContextProvider value={tokensInfo}>

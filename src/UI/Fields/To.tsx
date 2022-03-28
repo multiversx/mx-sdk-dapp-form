@@ -12,7 +12,7 @@ import {
   TypeaheadResult,
   TypeaheadMenuProps
 } from 'react-bootstrap-typeahead';
-import { useSendFormContext } from 'contexts';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 function filterBy(option: any, props: any) {
   if (props.text.length > 2) {

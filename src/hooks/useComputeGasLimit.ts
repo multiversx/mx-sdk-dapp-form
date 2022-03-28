@@ -4,7 +4,7 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { computeInitGasLimit } from 'operations';
 
 export function useComputeGasLimit() {
-  const { chainId, balance, address, nonce } = useAccountContext();
+  const { balance, address, nonce } = useAccountContext();
   const { networkConfig, delegationContractData } = useNetworkConfigContext();
   const sendFormContext = useSendFormContext();
   const {
@@ -27,7 +27,7 @@ export function useComputeGasLimit() {
     gasLimit,
     gasPrice,
     delegationContractData,
-    chainId,
+    chainId: networkConfig.id,
     egldLabel: networkConfig.egldLabel
   };
 

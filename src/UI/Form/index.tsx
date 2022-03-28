@@ -2,9 +2,9 @@ import React from 'react';
 
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
-import { useSendFormContext } from 'contexts';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { ExtendedValuesType, TxTypeEnum } from 'types';
-import Confirm from 'UI/Confirm';
+import Token from 'UI/Confirm/Token';
 import { Amount, Data, FeeAccordion, SelectToken, To } from 'UI/Fields';
 
 export const Form = () => {
@@ -37,7 +37,7 @@ export const Form = () => {
               ) ? (
                 <SelectToken />
               ) : (
-                <Confirm.Token />
+                <Token />
               )}
             </div>
           </div>

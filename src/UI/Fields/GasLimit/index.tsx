@@ -2,7 +2,7 @@ import React from 'react';
 import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { useSendFormContext } from 'contexts';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 export const GasLimit = () => {
   const { formInfo, gasInfo } = useSendFormContext();

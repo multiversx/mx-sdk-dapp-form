@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSendFormContext } from 'contexts';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { EgldAmount } from './EgldAmount';
 import { EsdtAmount } from './EsdtAmount';
 import { NftAmount } from './NftAmount';
