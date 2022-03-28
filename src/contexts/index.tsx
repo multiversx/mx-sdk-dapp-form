@@ -1,5 +1,7 @@
-import React from 'react';
-import { CustomNetworkType } from '@elrondnetwork/dapp-core';
+import React, { useEffect, useState } from 'react';
+import { CustomNetworkType, NetworkType } from '@elrondnetwork/dapp-core';
+import { getNetworkConfigForChainId, setApiConfig } from 'apiCalls';
+import { SendLoader } from 'UI';
 import {
   AccountContextPropsType,
   AccountContextProvider
@@ -33,8 +35,30 @@ export function AppInfoContextProvider({
   initGasLimitError
 }: AppInfoContextProviderPropsType) {
   const { chainId } = account;
+
+  const [networkConfig, setNetwork] = useState<NetworkType>();
+
+  async function fetchNetworkConfiguration() {
+    const newNetworkConfig = await getNetworkConfigForChainId(
+      chainId,
+      customNetworkConfig
+    );
+    setApiConfig(newNetworkConfig);
+    setNetwork(newNetworkConfig);
+  }
+
+  useEffect(() => {
+    fetchNetworkConfiguration();
+  }, [chainId, customNetworkConfig]);
+
+  if (!networkConfig) {
+    return <SendLoader />;
+  }
+
   return (
-    <NetworkContextProvider value={{ chainId, customNetworkConfig }}>
+    <NetworkContextProvider
+      value={{ networkConfig, chainId, customNetworkConfig }}
+    >
       <AccountContextProvider value={account}>
         <FormContextProvider value={formInfo}>
           <TokensContextProvider value={tokensInfo}>

@@ -1,14 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import {
-  fallbackNetworkConfigurations,
-  NetworkType
-} from '@elrondnetwork/dapp-core';
+import { NetworkType } from '@elrondnetwork/dapp-core';
 import {
   delegationContractDataByEnvironment,
   getDelegationDataForChainId
 } from 'apiCalls';
-import { setApiConfig } from 'apiCalls/apiConfig';
-import { getNetworkConfigForChainId } from 'apiCalls/network/getNetworkConfigForChainId';
 import { CustomNetworkConfigType, DelegationContractDataType } from 'types';
 
 export interface NetworkContextPropsType {
@@ -18,6 +13,7 @@ export interface NetworkContextPropsType {
 
 interface NetworkContextProviderValueType {
   chainId: string;
+  networkConfig: NetworkType;
   customNetworkConfig?: CustomNetworkConfigType;
 }
 
@@ -32,11 +28,8 @@ export const NetworkContext = React.createContext(
 
 export function NetworkContextProvider({
   children,
-  value: { chainId, customNetworkConfig }
+  value: { chainId, customNetworkConfig, networkConfig }
 }: NetworkContextProviderPropsType) {
-  const [networkConfig, setNetwork] = useState<NetworkType>(
-    fallbackNetworkConfigurations.devnet
-  );
   const [delegationContractData, setDelegationContractData] = useState(
     delegationContractDataByEnvironment.devnet
   );
@@ -46,13 +39,7 @@ export function NetworkContextProvider({
   }, [chainId, customNetworkConfig]);
 
   async function fetchNetworkConfiguration() {
-    const newNetworkConfig = await getNetworkConfigForChainId(
-      chainId,
-      customNetworkConfig
-    );
     const delegationData = await getDelegationDataForChainId(chainId);
-    setNetwork(newNetworkConfig);
-    setApiConfig(newNetworkConfig);
     setDelegationContractData(delegationData);
   }
 
