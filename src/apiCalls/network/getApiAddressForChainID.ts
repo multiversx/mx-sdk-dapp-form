@@ -5,7 +5,7 @@ export function getApiAddressForChainID(chainId: string) {
   const environment = getEnvironmentForChainId(chainId);
   const apiAddress = fallbackNetworkConfigurations[environment].apiAddress;
   if (!apiAddress) {
-    throw 'Could not extract api address for environment, please check if you have a valid chainID';
+    throw 'Could not extract api address for environment, check if you have a valid chainID';
   }
   return apiAddress;
 }
