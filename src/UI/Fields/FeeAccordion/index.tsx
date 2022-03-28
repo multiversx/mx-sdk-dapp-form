@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { DappUI } from '@elrondnetwork/dapp-core';
 import {
   faAngleDown,
@@ -6,8 +6,12 @@ import {
   faSpinner
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Accordion, Card } from 'react-bootstrap';
-import { useSendFormContext } from 'contexts';
+import {
+  Accordion,
+  AccordionContext,
+  useAccordionButton
+} from 'react-bootstrap';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import GasLimit from '../GasLimit';
 import GasPrice from '../GasPrice';
 import FeeInFiat from './FeeInFiat';
@@ -21,12 +25,6 @@ export const FeeAccordion = () => {
   const { feeLimit, hasErrors, gasCostLoading } = gasInfo;
   const { egldPriceInUsd } = tokensInfo;
 
-  const [isOpen, setIsOpen] = React.useState(hasErrors);
-
-  const toggle = () => {
-    setIsOpen((open) => !open);
-  };
-
   const accordionProps = {
     ...(hasErrors
       ? {
@@ -35,35 +33,43 @@ export const FeeAccordion = () => {
       : {})
   };
 
+  function ContextAwareToggle({ eventKey, callback }: any) {
+    const { activeEventKey } = useContext(AccordionContext);
+
+    const decoratedOnClick = useAccordionButton(
+      eventKey,
+      () => callback && callback(eventKey)
+    );
+
+    const isOpen = activeEventKey === eventKey;
+
+    return (
+      <span className='d-flex flex-column' onClick={decoratedOnClick}>
+        <span>
+          <FontAwesomeIcon
+            style={{ marginLeft: '-0.28rem' }}
+            icon={isOpen ? faAngleDown : faAngleRight}
+          />{' '}
+          <label className='mb-0 mr-2'>Fee</label>
+          <span className='mr-2' data-testid='feeLimit'>
+            <DappUI.Denominate
+              value={feeLimit}
+              showLastNonZeroDecimal
+              egldLabel={egldLabel}
+            />
+          </span>
+          {gasCostLoading && (
+            <FontAwesomeIcon icon={faSpinner} className='fa-spin fast-spin' />
+          )}
+        </span>
+        <FeeInFiat egldPriceInUsd={egldPriceInUsd} feeLimit={feeLimit} />
+      </span>
+    );
+  }
+
   return (
     <Accordion className='mb-3' {...accordionProps}>
-      <Accordion
-        as={Card.Text}
-        eventKey='0'
-        onClick={toggle}
-        className='mb-0 d-inline-block'
-      >
-        <span className='d-flex flex-column'>
-          <span>
-            <FontAwesomeIcon
-              style={{ marginLeft: '-0.28rem' }}
-              icon={isOpen ? faAngleDown : faAngleRight}
-            />{' '}
-            <label className='mb-0 mr-2'>Fee</label>
-            <span className='mr-2' data-testid='feeLimit'>
-              <DappUI.Denominate
-                value={feeLimit}
-                showLastNonZeroDecimal
-                egldLabel={egldLabel}
-              />
-            </span>
-            {gasCostLoading && (
-              <FontAwesomeIcon icon={faSpinner} className='fa-spin fast-spin' />
-            )}
-          </span>
-          <FeeInFiat egldPriceInUsd={egldPriceInUsd} feeLimit={feeLimit} />
-        </span>
-      </Accordion>
+      <ContextAwareToggle eventKey='0' />
       <Accordion.Collapse eventKey='0'>
         <div className='mt-2 py-3 bg-light rounded border container'>
           <GasPrice />

@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { CustomNetworkType, NetworkType } from '@elrondnetwork/dapp-core';
-import { getNetworkConfigForChainId, setApiConfig } from 'apiCalls';
+import {
+  fallbackNetworkConfigurations,
+  NetworkType
+} from '@elrondnetwork/dapp-core';
+import {
+  getEnvironmentForChainId,
+  getNetworkConfigForChainId,
+  setApiConfig
+} from 'apiCalls';
+import { FormNetworkConfigType } from 'types';
 import { SendLoader } from 'UI';
 import {
   AccountContextPropsType,
@@ -22,7 +30,7 @@ interface AppInfoContextProviderPropsType {
   account: AccountContextPropsType;
   formInfo: FormContextBasePropsType;
   tokensInfo: TokensContextInitializationPropsType;
-  customNetworkConfig?: CustomNetworkType;
+  networkConfig: FormNetworkConfigType;
   children: React.ReactNode;
   initGasLimitError: string | null;
 }
@@ -30,35 +38,50 @@ export function AppInfoContextProvider({
   account,
   formInfo,
   tokensInfo,
-  customNetworkConfig,
+  networkConfig: formNetworkConfig,
   children,
   initGasLimitError
 }: AppInfoContextProviderPropsType) {
-  const { chainId } = account;
-
-  const [networkConfig, setNetwork] = useState<NetworkType>();
+  const [networkConfig, setNetworkConfig] = useState<NetworkType>();
 
   async function fetchNetworkConfiguration() {
-    const newNetworkConfig = await getNetworkConfigForChainId(
-      chainId,
-      customNetworkConfig
-    );
-    setApiConfig(newNetworkConfig);
-    setNetwork(newNetworkConfig);
+    const fetchFromServer = !formNetworkConfig.skipFetchFromServer;
+    const { chainId } = formNetworkConfig;
+    const environment = getEnvironmentForChainId(chainId);
+    const fallbackConfig = fallbackNetworkConfigurations[environment] || {};
+
+    if (fetchFromServer) {
+      const newNetworkConfig = await getNetworkConfigForChainId(chainId);
+      if (newNetworkConfig) {
+        const newConfig = {
+          ...fallbackConfig,
+          ...newNetworkConfig,
+          ...formNetworkConfig
+        };
+        setApiConfig(newConfig);
+        setNetworkConfig(newConfig);
+        return;
+      }
+    }
+
+    const localConfig: NetworkType = {
+      ...fallbackConfig,
+      ...formNetworkConfig
+    };
+    setApiConfig(localConfig);
+    setNetworkConfig(localConfig);
   }
 
   useEffect(() => {
     fetchNetworkConfiguration();
-  }, [chainId, customNetworkConfig]);
+  }, [formNetworkConfig]);
 
   if (!networkConfig) {
     return <SendLoader />;
   }
 
   return (
-    <NetworkContextProvider
-      value={{ networkConfig, chainId, customNetworkConfig }}
-    >
+    <NetworkContextProvider value={{ networkConfig }}>
       <AccountContextProvider value={account}>
         <FormContextProvider value={formInfo}>
           <TokensContextProvider value={tokensInfo}>

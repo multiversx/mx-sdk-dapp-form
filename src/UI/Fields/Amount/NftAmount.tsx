@@ -1,6 +1,6 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
-import { useSendFormContext } from 'contexts';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { NftEnumType } from 'types';
 import SharedAmount from './SharedAmount';
 

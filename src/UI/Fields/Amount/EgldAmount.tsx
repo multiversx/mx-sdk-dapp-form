@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSendFormContext } from 'contexts';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import InfoDust from 'UI/InfoDust';
 import UsdValue from 'UI/UsdValue';
 import SharedAmount from './SharedAmount';

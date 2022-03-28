@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { isContract, nominate } from '@elrondnetwork/dapp-core';
 import { useFormikContext } from 'formik';
+import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
   calculateFeeLimit,
@@ -71,7 +72,10 @@ export function GasContextProvider({
     isEgldTransaction,
     prefilledForm
   } = useFormContext();
-  const { chainId, balance, address, nonce } = useAccountContext();
+  const { balance, address, nonce } = useAccountContext();
+  const {
+    networkConfig: { id: chainId }
+  } = useNetworkConfigContext();
 
   const { gasCostLoading, gasCostError, gasCostLimit } = useFetchGasLimit({
     balance,

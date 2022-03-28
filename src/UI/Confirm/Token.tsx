@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useSendFormContext } from 'contexts';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { NftEnumType } from 'types';
 import TokenElement from 'UI/Fields/SelectToken/TokenElement';
 
