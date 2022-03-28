@@ -23,7 +23,7 @@ interface AppInfoContextProviderPropsType {
   account: AccountContextPropsType;
   formInfo: FormContextBasePropsType;
   tokensInfo: TokensContextInitializationPropsType;
-  formNetworkConfig: FormNetworkConfigType;
+  networkConfig: FormNetworkConfigType;
   children: React.ReactNode;
   initGasLimitError: string | null;
 }
@@ -31,7 +31,7 @@ export function AppInfoContextProvider({
   account,
   formInfo,
   tokensInfo,
-  formNetworkConfig,
+  networkConfig: formNetworkConfig,
   children,
   initGasLimitError
 }: AppInfoContextProviderPropsType) {

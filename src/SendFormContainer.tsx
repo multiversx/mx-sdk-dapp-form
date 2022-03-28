@@ -21,7 +21,7 @@ export interface SendFormContainerPropsType {
   account: AccountContextPropsType;
   formInfo: Omit<FormContextBasePropsType, 'txType' | 'setTxType'>;
   tokensInfo: TokensContextInitializationPropsType;
-  formNetworkConfig: FormNetworkConfigType;
+  networkConfig: FormNetworkConfigType;
   children: React.ReactNode;
 }
 
@@ -32,10 +32,10 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     formInfo,
     children,
     account,
-    formNetworkConfig
+    networkConfig
   } = props;
   const { address, balance } = account;
-  const { chainId } = formNetworkConfig;
+  const { chainId } = networkConfig;
 
   //this is updated from within the main context with updated values
 
@@ -66,7 +66,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
         initGasLimitError={props.initGasLimitError}
         account={props.account}
         formInfo={props.formInfo}
-        formNetworkConfig={formNetworkConfig}
+        networkConfig={networkConfig}
         tokensInfo={props.tokensInfo}
       >
         {children}
