@@ -38,6 +38,13 @@ const Amount = (props: AmountPropsType) => {
   const value = isMetaEsdt ? nominate(amount, nft?.decimals) : amount;
   const showNftAmount = Boolean(nft && amount);
   const tokenLabel = tokenId.split('-')[0];
+  const tokenProps = {
+    nft,
+    isEsdtTransaction,
+    tokenId,
+    egldLabel,
+    tokenIdError
+  };
 
   return (
     <div className='row'>
@@ -84,15 +91,7 @@ const Amount = (props: AmountPropsType) => {
         </div>
       )}
       <div className='col-6'>
-        <Token
-          {...{
-            nft,
-            isEsdtTransaction,
-            tokenId,
-            egldLabel,
-            tokenIdError
-          }}
-        />
+        <Token {...tokenProps} />
       </div>
     </div>
   );
