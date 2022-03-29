@@ -5,7 +5,6 @@ import { getIdentifierType, verifyInvalid } from 'validation';
 
 export interface FormContextBasePropsType {
   prefilledForm: boolean;
-  isConfirmCloseBtnVisible?: boolean;
   skipToConfirm?: boolean;
   readonly?: boolean;
   onCloseForm: () => void;

@@ -15,43 +15,34 @@ export function useComputeToken({
   egldLabel,
   address
 }: UseComputeTokenType) {
-  const [computedTokenId, setComputedTokenId] = useState<string>(
-    formTokenId || egldLabel
-  );
-  const [tokenFound, setTokenFound] = useState<boolean>();
-  const [computedTokens, setComputedTokens] = useState<TokenType[]>();
+  const [state, setState] = useState<{
+    tokenId: string;
+    computedTokens: TokenType[];
+    tokenExtracted?: boolean;
+  }>({
+    tokenId: formTokenId || egldLabel,
+    computedTokens: []
+  });
+
   const search = window?.location?.search;
 
   const urlSearchParams = new URLSearchParams(search);
   const searchParams = Object.fromEntries(urlSearchParams);
   const searchParamToken = searchParams.token;
 
-  const returnValues = ({
-    tokenId,
-    tokenData,
-    tokenExtracted
-  }: {
-    tokenId: string;
-    tokenData: TokenType[];
-    tokenExtracted: boolean;
-  }) => {
-    setComputedTokenId(tokenId);
-    setComputedTokens(tokenData);
-    setTokenFound(tokenExtracted);
-  };
   const getSingleToken = (tokenId: string) => {
     getAccountToken({ address, token: tokenId })
       .then(({ data: tokenData }) => {
-        returnValues({
+        setState({
           tokenId,
-          tokenData: [tokenData],
+          computedTokens: [tokenData],
           tokenExtracted: Boolean(tokenData)
         });
       })
       .catch(() => {
-        returnValues({
+        setState({
           tokenId,
-          tokenData: [],
+          computedTokens: [],
           tokenExtracted: false
         });
       });
@@ -65,9 +56,9 @@ export function useComputeToken({
       return getSingleToken(identifier);
     }
 
-    return returnValues({
+    setState({
       tokenId: isNft ? identifier : egldLabel,
-      tokenData: [],
+      computedTokens: [],
       tokenExtracted: true
     });
   };
@@ -75,9 +66,9 @@ export function useComputeToken({
   useEffect(computeToken, [search]);
 
   return {
-    computedTokenId,
-    computedTokens,
-    tokenFound
+    computedTokenId: state.tokenId,
+    computedTokens: state.computedTokens,
+    tokenFound: state.tokenExtracted
   };
 }
 

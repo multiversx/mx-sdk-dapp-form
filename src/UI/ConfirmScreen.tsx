@@ -7,7 +7,13 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { TxTypeEnum } from 'types';
 import Confirm from './Confirm';
 
-export const ConfirmScreen = () => {
+interface ConfirmScreenType {
+  isConfirmCloseBtnVisible?: boolean;
+}
+
+export const ConfirmScreen = ({
+  isConfirmCloseBtnVisible = true
+}: ConfirmScreenType) => {
   const { providerType } = useGetAccountProvider();
   const {
     tokensInfo,
@@ -18,14 +24,8 @@ export const ConfirmScreen = () => {
     gasInfo
   } = useSendFormContext();
   const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
-  const {
-    readonly,
-    onCloseForm,
-    onInvalidateForm,
-    onSubmitForm,
-    txType,
-    isConfirmCloseBtnVisible
-  } = formInfo;
+  const { readonly, onCloseForm, onInvalidateForm, onSubmitForm, txType } =
+    formInfo;
   const { data } = dataFieldInfo;
   const { receiver, scamError } = receiverInfo;
   const { feeLimit, gasCostError } = gasInfo;
@@ -91,7 +91,7 @@ export const ConfirmScreen = () => {
         >
           {confirmText}
         </button>
-        {isConfirmCloseBtnVisible !== false && (
+        {isConfirmCloseBtnVisible && (
           <a
             href='/#'
             className='mt-3'
