@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { isContract, nominate } from '@elrondnetwork/dapp-core';
 import { useFormikContext } from 'formik';
+import { tokenGasLimit } from 'constants/index';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
@@ -167,7 +168,7 @@ export function GasContextProvider({
     if (!prefilledForm) {
       switch (txType) {
         case TxTypeEnum.ESDT:
-          handleUpdateGasLimit(gasLimit);
+          handleUpdateGasLimit(tokenGasLimit);
           break;
         case TxTypeEnum.EGLD:
           handleUpdateGasLimit(

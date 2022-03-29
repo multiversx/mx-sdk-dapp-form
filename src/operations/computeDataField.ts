@@ -1,13 +1,7 @@
 import { nominate } from '@elrondnetwork/dapp-core';
 import BigNumber from 'bignumber.js';
 import { bech32 } from 'helpers';
-import {
-  NftEnumType,
-  NftType,
-  TokenType,
-  TxTypeEnum,
-  ExtendedValuesType
-} from 'types';
+import { NftEnumType, NftType, TxTypeEnum, ExtendedValuesType } from 'types';
 import getTokenDetails from './getTokenDetails';
 
 const evenLengthValue = (value: string) =>
@@ -61,27 +55,27 @@ export const computeNftDataField = ({
 
 export const getEsdtNftDataField = ({
   txType,
-  tokens,
   values,
   nft,
   amountError,
   receiverError
 }: {
   txType: TxTypeEnum;
-  tokens?: TokenType[];
   values: ExtendedValuesType;
   nft?: NftType;
   amountError?: boolean;
   receiverError?: string;
 }) => {
+  const { tokens, tokenId, amount, receiver } = values;
   if (tokens && txType === TxTypeEnum.ESDT && !amountError) {
     const { tokenDenomination } = getTokenDetails({
       tokens,
-      tokenId: values.tokenId
+      tokenId
     });
+
     return computeTokenDataField({
-      amount: values.amount,
-      tokenId: values.tokenId,
+      amount,
+      tokenId,
       tokenDenomination
     });
   }
@@ -89,8 +83,8 @@ export const getEsdtNftDataField = ({
   if (txType !== TxTypeEnum.EGLD) {
     return computeNftDataField({
       nft,
-      amount: values.amount,
-      receiver: values.receiver,
+      amount,
+      receiver,
       errors: Boolean(amountError || receiverError)
     });
   }
