@@ -60,7 +60,7 @@ export function AmountContextProvider({
   }
 
   const onChange = useCallback(
-    (newValue: string | React.ChangeEvent<any>, shouldValidate = false) => {
+    (newValue: string | React.ChangeEvent<any>, shouldValidate = true) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
       return setFieldValue(amountField, value, shouldValidate);

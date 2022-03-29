@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { useFormikContext } from 'formik';
 import { getEsdtNftDataField } from 'operations';
-import { ExtendedValuesType } from 'types';
+import { ExtendedValuesType, TxTypeEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';
 
@@ -28,7 +28,7 @@ export function DataContextProvider({
   const { values, errors, setFieldValue, handleBlur, setFieldTouched } =
     useFormikContext<ExtendedValuesType>();
   const { checkInvalid, prefilledForm, isEgldTransaction } = useFormContext();
-  const { tokens, nft } = useTokensContext();
+  const { nft } = useTokensContext();
   const { receiver, txType, amount, tokenId } = values;
 
   const isDataInvalid = checkInvalid(dataField);
@@ -49,13 +49,13 @@ export function DataContextProvider({
 
   useEffect(() => {
     if (!prefilledForm) {
+      const receiverError = txType !== TxTypeEnum.ESDT ? errors.receiver : '';
       const newDataField = getEsdtNftDataField({
         txType,
-        tokens,
         values,
         nft,
         amountError: Boolean(errors.amount),
-        receiverError: errors.receiver
+        receiverError
       });
       handleUpdateData(newDataField);
     }
