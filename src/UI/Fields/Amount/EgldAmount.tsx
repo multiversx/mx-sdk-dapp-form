@@ -12,11 +12,11 @@ export const EgldAmount = () => {
     amount;
 
   function AvailableAmountElement() {
-    if (!isInvalid && amount.value) {
+    if (!isInvalid && amount.amount) {
       return (
         <div className='d-flex align-items-center'>
-          <UsdValue amount={amount.value} egldPriceInUsd={egldPriceInUsd} />
-          {amount.value === maxAmountMinusDust && isMaxClicked && <InfoDust />}
+          <UsdValue amount={amount.amount} egldPriceInUsd={egldPriceInUsd} />
+          {amount.amount === maxAmountMinusDust && isMaxClicked && <InfoDust />}
         </div>
       );
     }

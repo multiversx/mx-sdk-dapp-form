@@ -9,7 +9,7 @@ export function useComputeGasLimit() {
   const sendFormContext = useSendFormContext();
   const {
     receiverInfo: { receiver },
-    amount: { value: amount },
+    amount: { amount: amount },
     gasInfo: { gasLimit, gasPrice },
     dataFieldInfo: { data }
   } = sendFormContext;

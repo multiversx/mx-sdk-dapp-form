@@ -7,7 +7,7 @@ import { useGetMaxAmountAvailable } from './hooks';
 import { getIsMaxButtonVisible } from './utils';
 
 export interface AmountContextPropsType {
-  value: string;
+  amount: string;
   error?: string;
   isInvalid: boolean;
   maxAmountAvailable: string;
@@ -81,7 +81,7 @@ export function AmountContextProvider({
   }, [maxAmountAvailable]);
 
   const value = {
-    value: values.amount,
+    amount: values.amount,
     error: errors.amount,
     isInvalid: checkInvalid(amountField),
     maxAmountAvailable,
