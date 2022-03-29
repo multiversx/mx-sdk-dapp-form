@@ -67,7 +67,6 @@ export const getEsdtNftDataField = ({
   receiverError?: string;
 }) => {
   const { tokens, tokenId, amount, receiver } = values;
-  debugger;
   if (tokens && txType === TxTypeEnum.ESDT && !amountError) {
     const { tokenDenomination } = getTokenDetails({
       tokens,
