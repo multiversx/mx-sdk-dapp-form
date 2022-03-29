@@ -14,7 +14,7 @@ export const SharedAmount = (props: SharedAmountType) => {
     amount
   } = useSendFormContext();
   const {
-    value,
+    amount: value,
     error,
     isMaxButtonVisible,
     onMaxClicked,

@@ -27,7 +27,7 @@ import {
 } from './TokensContext';
 
 interface AppInfoContextProviderPropsType {
-  account: AccountContextPropsType;
+  accountInfo: AccountContextPropsType;
   formInfo: FormContextBasePropsType;
   tokensInfo: TokensContextInitializationPropsType;
   networkConfig: FormNetworkConfigType;
@@ -35,7 +35,7 @@ interface AppInfoContextProviderPropsType {
   initGasLimitError: string | null;
 }
 export function AppInfoContextProvider({
-  account,
+  accountInfo,
   formInfo,
   tokensInfo,
   networkConfig: formNetworkConfig,
@@ -82,7 +82,7 @@ export function AppInfoContextProvider({
 
   return (
     <NetworkContextProvider value={{ networkConfig }}>
-      <AccountContextProvider value={account}>
+      <AccountContextProvider value={accountInfo}>
         <FormContextProvider value={formInfo}>
           <TokensContextProvider value={tokensInfo}>
             {/*This order is intentional, because each context consumes the data of the context above*/}

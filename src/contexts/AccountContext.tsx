@@ -4,7 +4,6 @@ export interface AccountContextPropsType {
   address: string;
   nonce: number;
   balance: string;
-  egldLabel: string;
   providerType: string;
 }
 

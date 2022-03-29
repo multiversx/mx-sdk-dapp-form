@@ -18,7 +18,7 @@ export interface SendFormContainerPropsType {
   enableReinitialize?: boolean;
   initGasLimitError: string | null;
   onFormSubmit: (values: ValuesType, transaction: Transaction) => void;
-  account: AccountContextPropsType;
+  accountInfo: AccountContextPropsType;
   formInfo: Omit<FormContextBasePropsType, 'txType' | 'setTxType'>;
   tokensInfo: TokensContextInitializationPropsType;
   networkConfig: FormNetworkConfigType;
@@ -31,10 +31,12 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     onFormSubmit,
     formInfo,
     children,
-    account,
+    accountInfo,
+    tokensInfo,
+    initGasLimitError,
     networkConfig
   } = props;
-  const { address, balance } = account;
+  const { address, balance } = accountInfo;
   const { chainId } = networkConfig;
 
   //this is updated from within the main context with updated values
@@ -63,11 +65,11 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
       validationSchema={validationSchema}
     >
       <AppInfoContextProvider
-        initGasLimitError={props.initGasLimitError}
-        account={props.account}
-        formInfo={props.formInfo}
+        initGasLimitError={initGasLimitError}
+        accountInfo={accountInfo}
+        formInfo={formInfo}
         networkConfig={networkConfig}
-        tokensInfo={props.tokensInfo}
+        tokensInfo={tokensInfo}
       >
         {children}
       </AppInfoContextProvider>

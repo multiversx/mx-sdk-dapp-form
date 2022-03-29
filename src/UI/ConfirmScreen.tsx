@@ -53,7 +53,7 @@ export const ConfirmScreen = () => {
 
       <Confirm.Amount
         {...{
-          amount: String(amount.value),
+          amount: String(amount.amount),
           isEsdtTransaction: txType !== TxTypeEnum.EGLD,
           tokenDenomination: tokenDetails.tokenDenomination,
           tokenId,
