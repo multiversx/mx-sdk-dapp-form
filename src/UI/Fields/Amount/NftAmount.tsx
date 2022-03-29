@@ -5,9 +5,9 @@ import { NftEnumType } from 'types';
 import SharedAmount from './SharedAmount';
 
 export const NftAmount = () => {
-  const { amount, tokensInfo } = useSendFormContext();
+  const { amountInfo, tokensInfo } = useSendFormContext();
   const { nft } = tokensInfo;
-  const { maxAmountAvailable, isMaxClicked } = amount;
+  const { maxAmountAvailable, isMaxClicked } = amountInfo;
 
   function AvailableAmountElement() {
     const hasPositiveBalance = new BigNumber(nft?.balance || 0).isGreaterThan(

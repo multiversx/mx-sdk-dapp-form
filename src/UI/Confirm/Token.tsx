@@ -1,52 +1,28 @@
-import React, { useMemo } from 'react';
-import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { NftEnumType } from 'types';
+import React from 'react';
+import classNames from 'classnames';
+import { NftEnumType, NftType } from 'types';
 import TokenElement from 'UI/Fields/SelectToken/TokenElement';
 
-const Token = () => {
-  const { formInfo, tokensInfo } = useSendFormContext();
-  const { isEsdtTransaction } = formInfo;
-  const { tokenId, nft, tokenIdError, egldLabel } = tokensInfo;
+export interface TokenPropsType {
+  tokenId: string;
+  egldLabel: string;
+  tokenAvatar?: string;
+  isEsdtTransaction: boolean;
+  tokenIdError?: string;
+  nft?: NftType;
+}
 
+const Token = ({
+  nft,
+  isEsdtTransaction,
+  tokenId,
+  egldLabel,
+  tokenAvatar,
+  tokenIdError
+}: TokenPropsType) => {
   const tokenLabel = nft?.name || '';
-  const tokenAvatar = nft?.assets?.svgUrl || '';
 
-  const tokenView = useMemo(() => {
-    if (nft) {
-      return (
-        <TokenElement
-          inDropdown
-          token={{
-            name: nft?.identifier,
-            identifier: nft?.identifier,
-            decimals: 0,
-            balance: '0',
-            ticker: '',
-            assets: {
-              svgUrl: nft?.assets?.svgUrl,
-              pngUrl: nft?.assets?.pngUrl
-            }
-          }}
-        />
-      );
-    }
-    return (
-      <TokenElement
-        inDropdown
-        token={{
-          name: isEsdtTransaction ? tokenLabel : 'Elrond eGold',
-          identifier: isEsdtTransaction ? tokenId : egldLabel,
-          decimals: 0,
-          balance: '0',
-          ticker: '',
-          assets: {
-            svgUrl: tokenAvatar
-          }
-        }}
-        isEgld={tokenId === egldLabel}
-      />
-    );
-  }, [nft, tokenLabel, tokenId, tokenAvatar, egldLabel, isEsdtTransaction]);
+  const isNft = nft?.type === NftEnumType.NonFungibleESDT;
 
   return (
     <div className='form-group token-confirm'>
@@ -54,12 +30,37 @@ const Token = () => {
         {nft ? <span>{nft?.name} </span> : ''}
         Token
       </span>
-      <div
-        className={
-          nft?.type === NftEnumType.NonFungibleESDT ? '' : 'token-container'
-        }
-      >
-        {tokenView}
+      <div className={classNames('', { 'token-container': isNft })}>
+        {nft ? (
+          <TokenElement
+            inDropdown
+            token={{
+              name: nft?.identifier,
+              identifier: nft?.identifier,
+              decimals: 0,
+              balance: '0',
+              ticker: '',
+              assets: {
+                svgUrl: nft?.assets?.svgUrl || ''
+              }
+            }}
+          />
+        ) : (
+          <TokenElement
+            inDropdown
+            token={{
+              name: isEsdtTransaction ? tokenLabel : 'Elrond eGold',
+              identifier: isEsdtTransaction ? tokenId : egldLabel,
+              decimals: 0,
+              balance: '0',
+              ticker: '',
+              assets: {
+                svgUrl: tokenAvatar || ''
+              }
+            }}
+            isEgld={tokenId === egldLabel}
+          />
+        )}
       </div>
       {tokenIdError && <div className='text-danger'>{tokenIdError}</div>}
     </div>

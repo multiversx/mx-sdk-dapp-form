@@ -4,7 +4,6 @@ import {
   useGetAccountProvider
 } from '@elrondnetwork/dapp-core';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { TxTypeEnum } from 'types';
 import Confirm from './Confirm';
 
 interface ConfirmScreenType {
@@ -60,7 +59,7 @@ export const ConfirmScreen = ({
       <Confirm.Amount
         {...{
           amount: String(amountInfo.amount),
-          isEsdtTransaction: txType !== TxTypeEnum.EGLD,
+          txType,
           tokenDenomination: tokenDetails.tokenDenomination,
           tokenId,
           egldLabel,
