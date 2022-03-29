@@ -19,10 +19,10 @@ const ListOption = (props: any) => {
 };
 
 export function SelectToken() {
-  const { formInfo, account, tokensInfo } = useSendFormContext();
+  const { formInfo, accountInfo, tokensInfo } = useSendFormContext();
 
   const { readonly } = formInfo;
-  const { balance } = account;
+  const { balance } = accountInfo;
   const {
     getTokens,
     tokens,

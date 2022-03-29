@@ -6,54 +6,43 @@ import getIdentifierType from '../validation/getIdentifierType';
 
 interface UseComputeTokenType {
   formTokenId?: string;
-  prefilledForm: boolean;
   egldLabel: string;
   address: string;
 }
 
 export function useComputeToken({
   formTokenId,
-  prefilledForm,
   egldLabel,
   address
 }: UseComputeTokenType) {
-  const [computedTokenId, setComputedTokenId] = useState<string>(
-    formTokenId || egldLabel
-  );
-  const [tokenFound, setTokenFound] = useState<boolean>();
-  const [computedTokens, setComputedTokens] = useState<TokenType[]>();
+  const [state, setState] = useState<{
+    tokenId: string;
+    computedTokens: TokenType[];
+    tokenExtracted?: boolean;
+  }>({
+    tokenId: formTokenId || egldLabel,
+    computedTokens: []
+  });
+
   const search = window?.location?.search;
 
   const urlSearchParams = new URLSearchParams(search);
   const searchParams = Object.fromEntries(urlSearchParams);
   const searchParamToken = searchParams.token;
 
-  const returnValues = ({
-    tokenId,
-    tokenData,
-    tokenExtracted
-  }: {
-    tokenId: string;
-    tokenData: TokenType[];
-    tokenExtracted: boolean;
-  }) => {
-    setComputedTokenId(tokenId);
-    setComputedTokens(tokenData);
-    setTokenFound(tokenExtracted);
-  };
   const getSingleToken = (tokenId: string) => {
     getAccountToken({ address, token: tokenId })
       .then(({ data: tokenData }) => {
-        returnValues({
+        setState({
           tokenId,
-          tokenData: [tokenData],
+          computedTokens: [tokenData],
           tokenExtracted: Boolean(tokenData)
         });
       })
       .catch(() => {
-        returnValues({
+        setState({
           tokenId,
-          tokenData: [],
+          computedTokens: [],
           tokenExtracted: false
         });
       });
@@ -63,27 +52,23 @@ export function useComputeToken({
     const identifier = formTokenId || searchParamToken;
     const { isEsdt, isNft } = getIdentifierType(identifier);
 
-    if (!isEsdt) {
-      return returnValues({
-        tokenId: isNft ? identifier : egldLabel,
-        tokenData: [],
-        tokenExtracted: true
-      });
-    }
-    if (prefilledForm) {
+    if (isEsdt && identifier) {
       return getSingleToken(identifier);
     }
-    if (searchParamToken != null) {
-      return getSingleToken(identifier);
-    }
+
+    setState({
+      tokenId: isNft ? identifier : egldLabel,
+      computedTokens: [],
+      tokenExtracted: true
+    });
   };
 
   useEffect(computeToken, [search]);
 
   return {
-    computedTokenId,
-    computedTokens,
-    tokenFound
+    computedTokenId: state.tokenId,
+    computedTokens: state.computedTokens,
+    tokenFound: state.tokenExtracted
   };
 }
 

@@ -11,17 +11,17 @@ export const SharedAmount = (props: SharedAmountType) => {
 
   const {
     formInfo: { checkInvalid },
-    amount
+    amountInfo
   } = useSendFormContext();
   const {
-    amount: value,
+    amount,
     error,
     isMaxButtonVisible,
     onMaxClicked,
     onFocus,
     onBlur,
     onChange
-  } = amount;
+  } = amountInfo;
 
   const isInvalid = checkInvalid('amount');
   const invalidClassname = classnames({ 'is-invalid': isInvalid });
@@ -39,7 +39,7 @@ export const SharedAmount = (props: SharedAmountType) => {
           name='amount'
           data-testid='amount'
           required={true}
-          value={value}
+          value={amount}
           onFocus={onFocus}
           onBlur={onBlur}
           onChange={onChange}

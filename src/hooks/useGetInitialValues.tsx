@@ -30,15 +30,7 @@ export function useGetInitialValues(props: UseGetInitialValuesType) {
     balance,
     egldLabel,
     nonce,
-    configValues: {
-      receiver,
-      amount,
-      gasPrice,
-      gasLimit,
-      data,
-      tokenId,
-      active
-    }
+    configValues: { receiver, amount, gasPrice, gasLimit, data, tokenId }
   } = props;
 
   const { searchNft, computedNft, getSearchParamNft, searchNftByIdentifier } =
@@ -53,7 +45,6 @@ export function useGetInitialValues(props: UseGetInitialValuesType) {
 
   const { computedTokenId, computedTokens, tokenFound } = useComputeToken({
     formTokenId: tokenId,
-    prefilledForm: Boolean(active),
     address,
     egldLabel
   });

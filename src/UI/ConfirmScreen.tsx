@@ -7,19 +7,25 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { TxTypeEnum } from 'types';
 import Confirm from './Confirm';
 
-export const ConfirmScreen = () => {
+interface ConfirmScreenType {
+  isConfirmCloseBtnVisible?: boolean;
+}
+
+export const ConfirmScreen = ({
+  isConfirmCloseBtnVisible = true
+}: ConfirmScreenType) => {
   const { providerType } = useGetAccountProvider();
-  const { tokensInfo, receiverInfo, amount, dataFieldInfo, formInfo, gasInfo } =
-    useSendFormContext();
-  const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
   const {
-    readonly,
-    onCloseForm,
-    onInvalidateForm,
-    onSubmitForm,
-    txType,
-    hook
-  } = formInfo;
+    tokensInfo,
+    receiverInfo,
+    amountInfo,
+    dataFieldInfo,
+    formInfo,
+    gasInfo
+  } = useSendFormContext();
+  const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
+  const { readonly, onCloseForm, onInvalidateForm, onSubmitForm, txType } =
+    formInfo;
   const { data } = dataFieldInfo;
   const { receiver, scamError } = receiverInfo;
   const { feeLimit, gasCostError } = gasInfo;
@@ -53,7 +59,7 @@ export const ConfirmScreen = () => {
 
       <Confirm.Amount
         {...{
-          amount: String(amount.amount),
+          amount: String(amountInfo.amount),
           isEsdtTransaction: txType !== TxTypeEnum.EGLD,
           tokenDenomination: tokenDetails.tokenDenomination,
           tokenId,
@@ -85,7 +91,7 @@ export const ConfirmScreen = () => {
         >
           {confirmText}
         </button>
-        {!hook && (
+        {isConfirmCloseBtnVisible && (
           <a
             href='/#'
             className='mt-3'

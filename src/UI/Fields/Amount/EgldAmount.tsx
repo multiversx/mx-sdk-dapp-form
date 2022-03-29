@@ -5,18 +5,23 @@ import UsdValue from 'UI/UsdValue';
 import SharedAmount from './SharedAmount';
 
 export const EgldAmount = () => {
-  const { tokensInfo, amount } = useSendFormContext();
+  const { tokensInfo, amountInfo } = useSendFormContext();
 
   const { egldLabel, egldPriceInUsd } = tokensInfo;
   const { isMaxClicked, isInvalid, maxAmountAvailable, maxAmountMinusDust } =
-    amount;
+    amountInfo;
 
   function AvailableAmountElement() {
-    if (!isInvalid && amount.amount) {
+    if (!isInvalid && amountInfo.amount) {
       return (
         <div className='d-flex align-items-center'>
-          <UsdValue amount={amount.amount} egldPriceInUsd={egldPriceInUsd} />
-          {amount.amount === maxAmountMinusDust && isMaxClicked && <InfoDust />}
+          <UsdValue
+            amount={amountInfo.amount}
+            egldPriceInUsd={egldPriceInUsd}
+          />
+          {amountInfo.amount === maxAmountMinusDust && isMaxClicked && (
+            <InfoDust />
+          )}
         </div>
       );
     }

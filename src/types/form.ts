@@ -45,7 +45,6 @@ export interface ValidationSchemaType {
 }
 
 export interface FormConfigType {
-  active?: boolean;
   receiver: string;
   amount: string;
   tokenId?: string;

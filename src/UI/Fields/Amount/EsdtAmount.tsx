@@ -3,8 +3,8 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import SharedAmount from './SharedAmount';
 
 export const EsdtAmount = () => {
-  const { amount, tokensInfo } = useSendFormContext();
-  const { maxAmountAvailable } = amount;
+  const { amountInfo, tokensInfo } = useSendFormContext();
+  const { maxAmountAvailable } = amountInfo;
   const { tokenId } = tokensInfo;
 
   function AvailableAmountElement() {
