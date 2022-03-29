@@ -6,14 +6,12 @@ import getIdentifierType from '../validation/getIdentifierType';
 
 interface UseComputeTokenType {
   formTokenId?: string;
-  prefilledForm: boolean;
   egldLabel: string;
   address: string;
 }
 
 export function useComputeToken({
   formTokenId,
-  prefilledForm,
   egldLabel,
   address
 }: UseComputeTokenType) {
@@ -63,19 +61,15 @@ export function useComputeToken({
     const identifier = formTokenId || searchParamToken;
     const { isEsdt, isNft } = getIdentifierType(identifier);
 
-    if (!isEsdt) {
-      return returnValues({
-        tokenId: isNft ? identifier : egldLabel,
-        tokenData: [],
-        tokenExtracted: true
-      });
-    }
-    if (prefilledForm) {
+    if (isEsdt && identifier) {
       return getSingleToken(identifier);
     }
-    if (searchParamToken != null) {
-      return getSingleToken(identifier);
-    }
+
+    return returnValues({
+      tokenId: isNft ? identifier : egldLabel,
+      tokenData: [],
+      tokenExtracted: true
+    });
   };
 
   useEffect(computeToken, [search]);

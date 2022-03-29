@@ -17,13 +17,9 @@ import GasPrice from '../GasPrice';
 import FeeInFiat from './FeeInFiat';
 
 export const FeeAccordion = () => {
-  const {
-    gasInfo,
-    tokensInfo,
-    account: { egldLabel }
-  } = useSendFormContext();
+  const { gasInfo, tokensInfo } = useSendFormContext();
   const { feeLimit, hasErrors, gasCostLoading } = gasInfo;
-  const { egldPriceInUsd } = tokensInfo;
+  const { egldPriceInUsd, egldLabel } = tokensInfo;
 
   const accordionProps = {
     ...(hasErrors

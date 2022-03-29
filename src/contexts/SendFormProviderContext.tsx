@@ -15,8 +15,8 @@ import {
 import { TokensContextPropsType, useTokensContext } from './TokensContext';
 
 export interface SendFormContextPropsType {
-  amount: AmountContextPropsType;
-  account: AccountContextPropsType;
+  amountInfo: AmountContextPropsType;
+  accountInfo: AccountContextPropsType;
   formInfo: FormContextPropsType;
   tokensInfo: TokensContextPropsType;
   gasInfo: GasContextPropsType;
@@ -35,10 +35,10 @@ export const SendFormContext = React.createContext(
 export function SendFormContextProvider({
   children
 }: SendFormContextProviderPropsType) {
-  const account = useAccountContext();
+  const accountInfo = useAccountContext();
   const formInfo = useFormContext();
   const tokensInfo = useTokensContext();
-  const amount = useAmountContext();
+  const amountInfo = useAmountContext();
   const gasInfo = useGasContext();
   const dataFieldInfo = useDataContext();
   const receiverInfo = useReceiverContext();
@@ -46,13 +46,13 @@ export function SendFormContextProvider({
   return (
     <SendFormContext.Provider
       value={{
-        account,
+        accountInfo,
         formInfo,
         tokensInfo,
         gasInfo,
         dataFieldInfo,
         receiverInfo,
-        amount
+        amountInfo
       }}
     >
       {children}

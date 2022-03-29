@@ -8,7 +8,7 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 export const InfoDust = () => {
   const {
-    account: { egldLabel }
+    tokensInfo: { egldLabel }
   } = useSendFormContext();
   return (
     <div className='info-dust'>

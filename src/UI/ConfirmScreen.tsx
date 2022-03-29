@@ -9,8 +9,14 @@ import Confirm from './Confirm';
 
 export const ConfirmScreen = () => {
   const { providerType } = useGetAccountProvider();
-  const { tokensInfo, receiverInfo, amount, dataFieldInfo, formInfo, gasInfo } =
-    useSendFormContext();
+  const {
+    tokensInfo,
+    receiverInfo,
+    amountInfo,
+    dataFieldInfo,
+    formInfo,
+    gasInfo
+  } = useSendFormContext();
   const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
   const {
     readonly,
@@ -18,7 +24,7 @@ export const ConfirmScreen = () => {
     onInvalidateForm,
     onSubmitForm,
     txType,
-    hook
+    isConfirmCloseBtnVisible
   } = formInfo;
   const { data } = dataFieldInfo;
   const { receiver, scamError } = receiverInfo;
@@ -53,7 +59,7 @@ export const ConfirmScreen = () => {
 
       <Confirm.Amount
         {...{
-          amount: String(amount.amount),
+          amount: String(amountInfo.amount),
           isEsdtTransaction: txType !== TxTypeEnum.EGLD,
           tokenDenomination: tokenDetails.tokenDenomination,
           tokenId,
@@ -85,7 +91,7 @@ export const ConfirmScreen = () => {
         >
           {confirmText}
         </button>
-        {!hook && (
+        {isConfirmCloseBtnVisible !== false && (
           <a
             href='/#'
             className='mt-3'
