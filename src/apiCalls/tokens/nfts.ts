@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getApiConfig } from 'apiCalls/apiConfig';
+import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
 import { NftType } from 'types';
 
 export interface GetNftByAddressAndIdentifierArgsType {
@@ -7,15 +7,15 @@ export interface GetNftByAddressAndIdentifierArgsType {
   identifier: string;
 }
 
-export async function getNftByAddressAndIdentifier({
-  address,
-  identifier
-}: GetNftByAddressAndIdentifierArgsType) {
+export async function getNftByAddressAndIdentifier(
+  { address, identifier }: GetNftByAddressAndIdentifierArgsType,
+  apiConfig?: ApiConfigType
+) {
   try {
-    const apiConfig = await getApiConfig();
+    const config = apiConfig || (await getApiConfig());
     const { data }: { data: NftType } = await axios.get(
       `/accounts/${address}/nfts/${identifier}`,
-      apiConfig
+      config
     );
     return data ? data : null;
   } catch (err) {
@@ -23,12 +23,15 @@ export async function getNftByAddressAndIdentifier({
   }
 }
 
-export async function getGlobalNftByIdentifier(identifier: string) {
+export async function getGlobalNftByIdentifier(
+  identifier: string,
+  apiConfig?: ApiConfigType
+) {
   try {
-    const apiConfig = await getApiConfig();
+    const config = apiConfig || (await getApiConfig());
     const { data }: { data: NftType } = await axios.get(
       `/nfts/${identifier}`,
-      apiConfig
+      config
     );
     return data ? data : null;
   } catch (err) {

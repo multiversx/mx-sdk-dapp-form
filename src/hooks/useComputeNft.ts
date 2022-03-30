@@ -2,6 +2,7 @@ import React from 'react';
 import { Address } from '@elrondnetwork/erdjs';
 import BigNumber from 'bignumber.js';
 import {
+  ApiConfigType,
   getGlobalNftByIdentifier,
   getNftByAddressAndIdentifier
 } from 'apiCalls';
@@ -23,19 +24,22 @@ interface ExistingNftType {
   receiver: string;
 }
 
-export function useComputeNft(address: string) {
+export function useComputeNft(address: string, apiConfig?: ApiConfigType) {
   const search = window?.location?.search;
 
   const [computedNft, setComputedNft] = React.useState<ComputedNftType>({});
 
   async function searchdNftById(identifier: string) {
     try {
-      return await getNftByAddressAndIdentifier({
-        address,
-        identifier
-      });
+      return await getNftByAddressAndIdentifier(
+        {
+          address,
+          identifier
+        },
+        apiConfig
+      );
     } catch {
-      return await getGlobalNftByIdentifier(identifier);
+      return await getGlobalNftByIdentifier(identifier, apiConfig);
     }
   }
 
@@ -75,10 +79,13 @@ export function useComputeNft(address: string) {
       return;
     }
     try {
-      const data = await getNftByAddressAndIdentifier({
-        address,
-        identifier
-      });
+      const data = await getNftByAddressAndIdentifier(
+        {
+          address,
+          identifier
+        },
+        apiConfig
+      );
       if (data) {
         setComputedNft({
           nft: data,

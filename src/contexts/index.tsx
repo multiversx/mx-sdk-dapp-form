@@ -107,5 +107,6 @@ export function AppInfoContextProvider({
 export * from './FormContext';
 export * from './AccountContext';
 export * from './TokensContext';
+export * from './ReceiverContext';
 export * from './NetworkContext';
 export * from './SendFormProviderContext';
