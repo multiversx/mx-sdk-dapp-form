@@ -59,9 +59,9 @@ const balance = string().test(
 const greaterThanZero = string().test(
   'greaterThanZero',
   'Cannot be zero',
-  function tokenBalanceZero(tokenAmount: any) {
-    const { tokens } = this.parent as ExtendedValuesType;
-    if (tokenAmount !== undefined && tokens) {
+  function tokenBalanceZero(tokenAmount?: string) {
+    const { tokens, ignoreTokenBalance } = this.parent as ExtendedValuesType;
+    if (!ignoreTokenBalance && tokenAmount != null && tokens) {
       const { tokenDenomination } = getTokenDetails({
         tokens,
         tokenId: this.parent.tokenId
@@ -71,6 +71,7 @@ const greaterThanZero = string().test(
         tokenDenomination
       );
       const bnAmount = new BigNumber(nominatedAmount);
+      debugger;
       return bnAmount.isGreaterThan(0);
     }
     return true;
