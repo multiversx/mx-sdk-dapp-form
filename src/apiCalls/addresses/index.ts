@@ -1,1 +1,1 @@
-export * from './checkScamAddress';
+export * from './getScamAddressData';

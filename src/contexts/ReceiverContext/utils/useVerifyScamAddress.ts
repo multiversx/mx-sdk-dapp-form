@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { addressIsValid } from '@elrondnetwork/dapp-core';
-import { ApiConfigType, checkScamAddress } from 'apiCalls';
+import { ApiConfigType, getScamAddressData } from 'apiCalls';
 
 interface VerifiedAddressesType {
   [address: string]: { type: string; info: string };
@@ -28,7 +28,7 @@ export function useVerifyScamAddress(apiConfig?: ApiConfigType) {
     ) {
       setFetching(true);
       try {
-        const data = await checkScamAddress(addressToVerify, apiConfig);
+        const data = await getScamAddressData(addressToVerify, apiConfig);
         setVerifiedAddresses((existing) => ({
           ...existing,
           ...(data.scamInfo ? { [addressToVerify]: data.scamInfo } : {})

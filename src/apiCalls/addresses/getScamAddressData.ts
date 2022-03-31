@@ -9,7 +9,7 @@ export type ScamInfoType = {
   code: string;
 };
 
-export async function checkScamAddress(
+export async function getScamAddressData(
   addressToVerify: string,
   apiConfig?: ApiConfigType
 ) {
