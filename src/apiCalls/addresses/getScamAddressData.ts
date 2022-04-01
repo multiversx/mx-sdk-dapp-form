@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { getApiConfig } from 'apiCalls/apiConfig';
+import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
 
 export type ScamInfoType = {
   scamInfo?: {
@@ -9,11 +9,14 @@ export type ScamInfoType = {
   code: string;
 };
 
-export async function checkScamAddress(addressToVerify: string) {
-  const apiConfig = await getApiConfig();
+export async function getScamAddressData(
+  addressToVerify: string,
+  apiConfig?: ApiConfigType
+) {
+  const config = apiConfig || (await getApiConfig());
   const { data } = await axios.get<ScamInfoType>(
     `/accounts/${addressToVerify}`,
-    apiConfig
+    config
   );
 
   return data;

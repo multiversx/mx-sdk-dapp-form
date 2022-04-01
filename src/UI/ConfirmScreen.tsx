@@ -3,6 +3,7 @@ import {
   LoginMethodsEnum,
   useGetAccountProvider
 } from '@elrondnetwork/dapp-core';
+import classNames from 'classnames';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import Confirm from './Confirm';
 
@@ -82,9 +83,10 @@ export const ConfirmScreen = ({
 
         <button
           onClick={onSubmitForm}
-          className={`btn ${
-            Boolean(scamError) ? 'btn-warning' : 'btn-primary'
-          } px-spacer`}
+          className={classNames('btn px-spacer', {
+            'btn-warning': Boolean(scamError),
+            'btn-primary': !Boolean(scamError)
+          })}
           id='sendTrxBtn'
           data-testid='sendTrxBtn'
         >

@@ -1,7 +1,7 @@
 import { NetworkType } from '@elrondnetwork/dapp-core';
 import { getNetworkConfigForChainId } from 'apiCalls/network';
 
-interface ApiConfigType {
+export interface ApiConfigType {
   baseURL: string;
   timeout: number;
 }

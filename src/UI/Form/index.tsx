@@ -19,13 +19,13 @@ export const Form = () => {
     values: { txType }
   } = useFormikContext<ExtendedValuesType>();
 
-  const { renderKey, onValidateForm, readonly } = formInfo;
+  const { renderKey, onValidateForm, readonly, onCloseForm } = formInfo;
 
   const { scamError } = receiverInfo;
 
   function handleCloseClick(e: any) {
     e.preventDefault();
-    close();
+    onCloseForm();
   }
 
   return (
@@ -63,14 +63,15 @@ export const Form = () => {
           >
             Send
           </button>
-          <button
+          <a
+            href='/#'
             id='closeButton'
             data-testid='returnToWalletBtn'
             onClick={handleCloseClick}
             className='mt-3'
           >
             Cancel
-          </button>
+          </a>
         </div>
       </div>
     </form>
