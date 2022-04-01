@@ -7,7 +7,7 @@ import getIdentifierType from '../validation/getIdentifierType';
 import calculateGasLimit from './calculateGasLimit';
 import { calculateNftGasLimit } from './calculateNftGasLimit';
 
-interface ComputeInitGasLimitType {
+export interface ComputeInitGasLimitType {
   computedTokenId: string;
   receiver: string;
   isInternal: boolean;

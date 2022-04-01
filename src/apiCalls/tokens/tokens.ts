@@ -1,6 +1,6 @@
 import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
-import { getApiConfig } from 'apiCalls/apiConfig';
+import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
 import { TokenType } from 'types';
 
 export interface GetTokensType {
@@ -46,17 +46,17 @@ export async function getTokensCount({ address, search }: GetTokensType) {
   );
 }
 
-export async function getAccountToken(props: {
-  address: string;
-  token: string;
-}) {
+export async function getAccountToken(
+  props: {
+    address: string;
+    token: string;
+  },
+  apiConfig?: ApiConfigType
+) {
   const { address, token } = props;
 
-  const apiConfig = await getApiConfig();
-  return axios.get<TokenType>(
-    `/accounts/${address}/tokens/${token}`,
-    apiConfig
-  );
+  const config = apiConfig || (await getApiConfig());
+  return axios.get<TokenType>(`/accounts/${address}/tokens/${token}`, config);
 }
 
 export async function getToken(token: string) {
