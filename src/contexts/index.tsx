@@ -29,10 +29,10 @@ import {
 interface AppInfoContextProviderPropsType {
   accountInfo: AccountContextPropsType;
   formInfo: FormContextBasePropsType;
-  tokensInfo: TokensContextInitializationPropsType;
+  tokensInfo?: TokensContextInitializationPropsType;
   networkConfig: FormNetworkConfigType;
   children: React.ReactNode;
-  initGasLimitError: string | null;
+  initGasLimitError?: string | null;
 }
 export function AppInfoContextProvider({
   accountInfo,

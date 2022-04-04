@@ -8,19 +8,19 @@ import {
   TokensContextInitializationPropsType
 } from 'contexts';
 import { generateTransaction } from 'operations';
-import { ExtendedValuesType, ValuesType } from 'types';
+import { ExtendedValuesType, TxTypeEnum, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
 import { getInitialErrors } from 'validation';
 import validationSchema from 'validationSchema';
 
 export interface SendFormContainerPropsType {
-  initialValues: ExtendedValuesType;
+  initialValues?: ExtendedValuesType;
   enableReinitialize?: boolean;
-  initGasLimitError: string | null;
+  initGasLimitError?: string | null;
   onFormSubmit: (values: ValuesType, transaction: Transaction) => void;
   accountInfo: AccountContextPropsType;
   formInfo: Omit<FormContextBasePropsType, 'txType' | 'setTxType'>;
-  tokensInfo: TokensContextInitializationPropsType;
+  tokensInfo?: TokensContextInitializationPropsType;
   networkConfig: FormNetworkConfigType;
   children: React.ReactNode;
 }
@@ -55,10 +55,22 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     });
     return onFormSubmit(values, transaction);
   }
+  const formikInitialValues = {
+    receiver: initialValues?.receiver || '',
+    gasPrice: initialValues?.gasPrice || '',
+    data: initialValues?.data || '',
+    tokenId: initialValues?.tokenId || '',
+    amount: initialValues?.amount || '',
+    gasLimit: initialValues?.gasLimit || '',
+    txType: initialValues?.txType || TxTypeEnum.EGLD,
+    address: initialValues?.address || address,
+    balance: initialValues?.balance || balance,
+    chainId: initialValues?.chainId || networkConfig.chainId
+  };
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={formikInitialValues}
       enableReinitialize
       onSubmit={handleOnSubmit}
       initialErrors={initialErrors}
