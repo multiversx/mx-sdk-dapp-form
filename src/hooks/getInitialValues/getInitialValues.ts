@@ -14,16 +14,18 @@ export async function getInitialValues(props: GetInitialValuesType) {
     configValues: { receiver, amount, gasPrice, data, tokenId }
   } = props;
 
-  const computedNft = await getNft({ data, address, tokenId });
+  const computedTokenId = tokenId || egldLabel;
 
-  const esdtToken = await getToken({ identifier: tokenId, address });
+  const [computedNft, esdtToken, gasData] = await Promise.all([
+    getNft({ data, address, tokenId }),
+    getToken({ identifier: tokenId, address }),
+    getInitialGasLimit({
+      ...props,
+      computedTokenId
+    })
+  ]);
 
-  const computedTokenId = esdtToken?.identifier || egldLabel;
-
-  const { initGasLimit, initGasLimitError } = await getInitialGasLimit({
-    ...props,
-    computedTokenId
-  });
+  const { initGasLimit, initGasLimitError } = gasData;
 
   const initialValues = {
     receiver,
