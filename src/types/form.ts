@@ -10,7 +10,6 @@ export interface ValuesType {
   gasLimit: string;
 }
 export interface ExtendedValuesType extends ValuesType {
-  // validationSchema
   txType: TxTypeEnum;
   address: string;
   balance: string;
@@ -21,8 +20,7 @@ export interface ExtendedValuesType extends ValuesType {
   tokens?: TokenType[];
   ledger?: {
     ledgerDataActive: boolean;
-    ledgerHashSignMinimumVersion: number;
-    ledgerWithHashSign: boolean;
+    version: string;
   };
 }
 
@@ -39,8 +37,7 @@ export interface ValidationSchemaType {
   tokens?: TokenType[];
   ledger?: {
     ledgerDataActive: boolean;
-    ledgerHashSignMinimumVersion: number;
-    ledgerWithHashSign: boolean;
+    version: string;
   };
 }
 
