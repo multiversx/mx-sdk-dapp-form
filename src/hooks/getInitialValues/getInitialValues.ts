@@ -44,7 +44,7 @@ export async function getInitialValues(props: GetInitialValuesType) {
     gasLimitCostError: initGasLimitError,
     computedTokens: esdtToken ? [esdtToken] : [],
     computedTokenId,
-    tokenFound: isEsdt && !esdtToken
+    tokenFound: isEsdt ? Boolean(esdtToken) : true
   };
 
   return returnValues;
