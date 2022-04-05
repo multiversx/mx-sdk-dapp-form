@@ -10,7 +10,7 @@ interface UseFetchGasLimitProps extends FetchGasLimitType {
   gasLimitError: boolean;
   prefilledForm: boolean;
   receiverIsContract: boolean;
-  gasLimitCostError: string | null;
+  gasLimitCostError?: string | null;
 }
 
 const ms500 = process.env.NODE_ENV !== 'test' ? 500 : 10;
