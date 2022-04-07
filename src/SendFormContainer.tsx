@@ -21,12 +21,13 @@ export interface SendFormContainerPropsType {
   initialValues?: ExtendedValuesType;
   enableReinitialize?: boolean;
   initGasLimitError?: string | null;
-  onFormSubmit: (values: ValuesType, transaction: Transaction) => void;
+  onFormSubmit: (values: ValuesType, transaction: Transaction | null) => void;
   accountInfo: AccountContextPropsType;
   formInfo: Omit<FormContextBasePropsType, 'txType' | 'setTxType'>;
   tokensInfo?: TokensContextInitializationPropsType;
   networkConfig: FormNetworkConfigType;
   Loader?: JSXElementConstructor<any> | null;
+  shouldGenerateTransactionOnSubmit?: boolean;
   children: React.ReactNode;
 }
 
@@ -40,7 +41,8 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     tokensInfo,
     initGasLimitError,
     networkConfig,
-    Loader = SendLoader
+    Loader = SendLoader,
+    shouldGenerateTransactionOnSubmit = true
   } = props;
 
   const { address, balance } = accountInfo;
@@ -53,12 +55,15 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     prefilledForm: formInfo.prefilledForm
   });
   async function handleOnSubmit(values: ExtendedValuesType) {
-    const transaction = await generateTransaction({
-      address,
-      balance,
-      chainId,
-      values
-    });
+    const transaction = shouldGenerateTransactionOnSubmit
+      ? await generateTransaction({
+          address,
+          balance,
+          chainId,
+          nonce: accountInfo.nonce,
+          values
+        })
+      : null;
     return onFormSubmit(values, transaction);
   }
 
