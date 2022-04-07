@@ -1,12 +1,9 @@
-import { nominate } from '@elrondnetwork/dapp-core';
-import { validation } from '@elrondnetwork/dapp-utils';
+import { nominate, stringIsFloat } from '@elrondnetwork/dapp-core';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import getTokenDetails from 'operations/getTokenDetails';
 import { ExtendedValuesType } from 'types';
 import maxDecimals from 'validation/maxDecimals';
-
-const { stringIsFloat } = validation;
 
 const required = string().required('Required');
 

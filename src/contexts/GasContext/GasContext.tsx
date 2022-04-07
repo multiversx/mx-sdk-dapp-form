@@ -147,7 +147,7 @@ export function GasContextProvider({
         })
       : '0';
     setFeeLimit(newFeeLimit);
-  }, [gasLimit, hasErrors]);
+  }, [gasLimit, data, chainId, gasPrice, hasErrors]);
 
   useEffect(() => {
     if (!prefilledForm && isNftTransaction && !touched.gasLimit) {
