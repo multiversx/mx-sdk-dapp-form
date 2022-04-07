@@ -1,5 +1,4 @@
-import { nominate } from '@elrondnetwork/dapp-core';
-import { operations } from '@elrondnetwork/dapp-utils';
+import { nominate, calculateFeeLimit } from '@elrondnetwork/dapp-core';
 import BigNumber from 'bignumber.js';
 import { gasPerDataByte, gasPriceModifier } from 'constants/index';
 
@@ -27,7 +26,7 @@ export function validateGasLimitAmount({
   const bnBalance = new BigNumber(balance);
   const fee = new BigNumber(
     // TODO: maybe keep here
-    operations.calculateFeeLimit({
+    calculateFeeLimit({
       gasPrice: nominate(gasPrice),
       gasLimit,
       data,

@@ -15,7 +15,8 @@ import { FormNetworkConfigType } from 'types/network';
 import { SendLoader } from 'UI';
 import { getInitialErrors } from 'validation';
 import validationSchema from 'validationSchema';
-import { defaultGasLimit, defaultGasPrice } from './constants';
+import { defaultGasLimit } from './constants';
+import denominatedConfigGasPrice from './operations/denominatedConfigGasPrice';
 
 export interface SendFormContainerPropsType {
   initialValues?: ExtendedValuesType;
@@ -69,7 +70,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
 
   const formikInitialValues = {
     receiver: initialValues?.receiver || '',
-    gasPrice: initialValues?.gasPrice || defaultGasPrice,
+    gasPrice: initialValues?.gasPrice || denominatedConfigGasPrice,
     data: initialValues?.data || '',
     tokenId:
       initialValues?.tokenId ||

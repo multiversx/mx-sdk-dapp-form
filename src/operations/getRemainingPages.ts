@@ -1,4 +1,4 @@
-import { validation } from '@elrondnetwork/dapp-utils';
+import { stringIsInteger } from '@elrondnetwork/dapp-core';
 
 export const getRemainingPages = ({
   count,
@@ -7,7 +7,7 @@ export const getRemainingPages = ({
   count: number | undefined;
   maxCount: number;
 }) => {
-  if (count !== undefined && validation.stringIsInteger(count.toString())) {
+  if (count !== undefined && stringIsInteger(count.toString())) {
     const remainingCall = maxCount % count > 0 ? 1 : 0;
     const numberOfCalls = Array.from(
       Array(Math.floor(count / maxCount) + remainingCall).keys()
