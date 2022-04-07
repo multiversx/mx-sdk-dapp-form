@@ -25,7 +25,6 @@ export function validateGasLimitAmount({
   const bnAmount = new BigNumber(nominatedAmount);
   const bnBalance = new BigNumber(balance);
   const fee = new BigNumber(
-    // TODO: maybe keep here
     calculateFeeLimit({
       gasPrice: nominate(gasPrice),
       gasLimit,
