@@ -1,4 +1,4 @@
-import { getAccount, getLatestNonce, nominate } from '@elrondnetwork/dapp-core';
+import { nominate } from '@elrondnetwork/dapp-core';
 import { prepareTransaction } from 'hooks/useFetchGasLimit/prepareTransaction';
 import { TxTypeEnum, ExtendedValuesType } from 'types';
 
@@ -6,11 +6,12 @@ interface GenerateTransactionPropsType {
   address: string;
   balance: string;
   chainId: string;
+  nonce: number;
   values: ExtendedValuesType;
 }
 
 export async function generateTransaction(props: GenerateTransactionPropsType) {
-  const { address, balance, chainId, values } = props;
+  const { address, balance, chainId, nonce, values } = props;
   const {
     amount: amountValue,
     receiver,
@@ -20,11 +21,7 @@ export async function generateTransaction(props: GenerateTransactionPropsType) {
     nft,
     txType
   } = values;
-  const account = await getAccount(address);
-  const latestNonce = getLatestNonce(account);
   const amount = txType === TxTypeEnum.EGLD ? amountValue : '0';
-  // const tokenAmount =
-  //   isEsdtTransaction || computedNft.found ? amountValue : '0';
   const transactionReceiver = Boolean(nft) ? address : receiver;
 
   try {
@@ -35,7 +32,7 @@ export async function generateTransaction(props: GenerateTransactionPropsType) {
       gasPrice: nominate(gasPrice),
       data: data.trim(),
       receiver: transactionReceiver,
-      nonce: latestNonce,
+      nonce,
       chainId
     });
 

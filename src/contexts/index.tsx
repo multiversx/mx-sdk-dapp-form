@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { JSXElementConstructor, useEffect, useState } from 'react';
 import {
   fallbackNetworkConfigurations,
   NetworkType
@@ -9,7 +9,6 @@ import {
   setApiConfig
 } from 'apiCalls';
 import { FormNetworkConfigType } from 'types';
-import { SendLoader } from 'UI';
 import {
   AccountContextPropsType,
   AccountContextProvider
@@ -32,6 +31,7 @@ interface AppInfoContextProviderPropsType {
   tokensInfo?: TokensContextInitializationPropsType;
   networkConfig: FormNetworkConfigType;
   children: React.ReactNode;
+  Loader: JSXElementConstructor<any> | null;
   initGasLimitError?: string | null;
 }
 export function AppInfoContextProvider({
@@ -40,6 +40,7 @@ export function AppInfoContextProvider({
   tokensInfo,
   networkConfig: formNetworkConfig,
   children,
+  Loader,
   initGasLimitError
 }: AppInfoContextProviderPropsType) {
   const [networkConfig, setNetworkConfig] = useState<NetworkType>();
@@ -77,7 +78,7 @@ export function AppInfoContextProvider({
   }, [formNetworkConfig]);
 
   if (!networkConfig) {
-    return <SendLoader />;
+    return Loader != null ? <Loader /> : null;
   }
 
   return (
