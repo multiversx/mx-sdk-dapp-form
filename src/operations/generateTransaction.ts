@@ -32,11 +32,7 @@ export async function generateTransaction(props: GenerateTransactionPropsType) {
       gasPrice: nominate(gasPrice),
       data: data.trim(),
       receiver: transactionReceiver,
-<<<<<<< HEAD
-      nonce: latestNonce,
-=======
       nonce,
->>>>>>> master
       chainId
     });
 
