@@ -59,7 +59,7 @@ export function DataContextProvider({
       });
       handleUpdateData(newDataField);
     }
-  }, [amount, receiver, prefilledForm, nft, errors, txType]);
+  }, [amount, receiver, prefilledForm, nft, errors.receiver, txType]);
 
   useEffect(() => {
     const resetDataFieldOnEgldSelect = !prefilledForm && isEgldTransaction;
