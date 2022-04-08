@@ -178,7 +178,7 @@ export function GasContextProvider({
           break;
       }
     }
-  }, [tokenId, data, txType]);
+  }, [tokenId, txType]);
 
   const value: GasContextPropsType = {
     gasPrice,
