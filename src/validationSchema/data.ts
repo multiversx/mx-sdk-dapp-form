@@ -1,4 +1,6 @@
 import { string } from 'yup';
+import { ledgerHashSignMinimumVersion } from 'constants/index';
+import { getLedgerVersionOptions } from 'operations';
 import { ExtendedValuesType } from 'types';
 
 const ledgerDataActive = string().test(
@@ -15,16 +17,16 @@ const ledgerDataActive = string().test(
   }
 );
 
-// TODO: check ledger
 const hashSign = string().test({
   name: 'hashSign',
   test: function hashSignCheck(value) {
     const { ledger } = this.parent as ExtendedValuesType;
 
     if (ledger) {
-      if (value && value.length > 300 && !ledger.ledgerWithHashSign) {
+      const { ledgerWithHashSign } = getLedgerVersionOptions(ledger.version);
+      if (value && value.length > 300 && !ledgerWithHashSign) {
         return this.createError({
-          message: `Data too long. You need at least Elrond app version ${ledger?.ledgerHashSignMinimumVersion}. Update Elrond app to continue`,
+          message: `Data too long. You need at least Elrond app version ${ledgerHashSignMinimumVersion}. Update Elrond app to continue`,
           path: 'data'
         });
       }
