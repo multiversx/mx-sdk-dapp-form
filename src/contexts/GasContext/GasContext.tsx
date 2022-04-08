@@ -73,13 +73,8 @@ export function GasContextProvider({
   } = useFormikContext<ExtendedValuesType>();
   const { gasPrice, gasLimit, data, tokenId, receiver, txType } = values;
 
-  const {
-    checkInvalid,
-    isNftTransaction,
-    isEsdtTransaction,
-    isEgldTransaction,
-    prefilledForm
-  } = useFormContext();
+  const { checkInvalid, isNftTransaction, isEsdtTransaction, prefilledForm } =
+    useFormContext();
   const { balance, address, nonce } = useAccountContext();
   const {
     networkConfig: { id: chainId }
@@ -143,6 +138,7 @@ export function GasContextProvider({
   }, []);
 
   const hasErrors = Boolean(gasPriceError) || Boolean(gasLimitError);
+  console.log(hasErrors, gasLimitError, gasLimit);
   useEffect(() => {
     const newFeeLimit = !hasErrors
       ? calculateFeeLimit({
@@ -162,15 +158,6 @@ export function GasContextProvider({
       handleUpdateGasLimit(calculateNftGasLimit());
     }
   }, [isNftTransaction, touched]);
-
-  useEffect(() => {
-    if (!prefilledForm && !touched.gasLimit && isEgldTransaction) {
-      const newGasLimit = calculateGasLimit({
-        data
-      });
-      handleUpdateGasLimit(newGasLimit);
-    }
-  }, [data, isEgldTransaction]);
 
   useEffect(() => {
     if (!prefilledForm) {
