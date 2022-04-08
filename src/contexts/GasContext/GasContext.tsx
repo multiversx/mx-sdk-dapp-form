@@ -1,11 +1,18 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { isContract, nominate } from '@elrondnetwork/dapp-core';
+import {
+  isContract,
+  nominate,
+  calculateFeeLimit
+} from '@elrondnetwork/dapp-core';
 import { useFormikContext } from 'formik';
-import { tokenGasLimit } from 'constants/index';
+import {
+  gasPerDataByte,
+  gasPriceModifier,
+  tokenGasLimit
+} from 'constants/index';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
-  calculateFeeLimit,
   calculateGasLimit,
   calculateNftGasLimit,
   denominatedConfigGasPrice
@@ -20,7 +27,7 @@ export interface GasContextPropsType {
   gasLimit: string;
   gasCostLimit: string;
   gasCostLoading: boolean;
-  gasCostError: string | null;
+  gasCostError?: string | null;
   hasErrors: boolean;
   isGasLimitInvalid: boolean;
   isGasPriceInvalid: boolean;
@@ -39,7 +46,7 @@ export interface GasContextPropsType {
 
 interface GasContextProviderPropsType {
   children: React.ReactNode;
-  initGasLimitError: string | null;
+  initGasLimitError?: string | null;
 }
 
 export const GasContext = React.createContext({} as GasContextPropsType);
@@ -66,13 +73,8 @@ export function GasContextProvider({
   } = useFormikContext<ExtendedValuesType>();
   const { gasPrice, gasLimit, data, tokenId, receiver, txType } = values;
 
-  const {
-    checkInvalid,
-    isNftTransaction,
-    isEsdtTransaction,
-    isEgldTransaction,
-    prefilledForm
-  } = useFormContext();
+  const { checkInvalid, isNftTransaction, isEsdtTransaction, prefilledForm } =
+    useFormContext();
   const { balance, address, nonce } = useAccountContext();
   const {
     networkConfig: { id: chainId }
@@ -136,33 +138,26 @@ export function GasContextProvider({
   }, []);
 
   const hasErrors = Boolean(gasPriceError) || Boolean(gasLimitError);
-
+  console.log(hasErrors, gasLimitError, gasLimit);
   useEffect(() => {
     const newFeeLimit = !hasErrors
       ? calculateFeeLimit({
           gasLimit,
           gasPrice: nominate(gasPrice),
           data: data.trim(),
-          chainId
+          chainId,
+          gasPerDataByte: String(gasPerDataByte),
+          gasPriceModifier: String(gasPriceModifier)
         })
       : '0';
     setFeeLimit(newFeeLimit);
-  }, [gasLimit, hasErrors]);
+  }, [gasLimit, data, chainId, gasPrice, hasErrors]);
 
   useEffect(() => {
     if (!prefilledForm && isNftTransaction && !touched.gasLimit) {
       handleUpdateGasLimit(calculateNftGasLimit());
     }
   }, [isNftTransaction, touched]);
-
-  useEffect(() => {
-    if (!prefilledForm && !touched.gasLimit && isEgldTransaction) {
-      const newGasLimit = calculateGasLimit({
-        data
-      });
-      handleUpdateGasLimit(newGasLimit);
-    }
-  }, [data, isEgldTransaction]);
 
   useEffect(() => {
     if (!prefilledForm) {

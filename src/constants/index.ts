@@ -10,7 +10,6 @@ export const tokenGasLimit = '500000';
 export const decimals = 4;
 export const minDust = '5000000000000000'; // 0.05 EGLD
 export const version = 1;
-
 export const ledgerMultiAccountMinimumVersion = '1.0.8';
 export const ledgerHashSignMinimumVersion = '1.0.11';
 export const ledgerSignAuthTokenMinimumVersion = '1.0.15';

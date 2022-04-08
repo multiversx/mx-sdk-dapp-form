@@ -1,8 +1,9 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { useFormikContext } from 'formik';
-import { getEsdtNftDataField } from 'operations';
+import { calculateGasLimit, getEsdtNftDataField } from 'operations';
 import { ExtendedValuesType, TxTypeEnum } from 'types';
 import { useFormContext } from '../FormContext';
+import { useGasContext } from '../GasContext';
 import { useTokensContext } from '../TokensContext';
 
 export interface DataContextPropsType {
@@ -28,15 +29,15 @@ export function DataContextProvider({
   const {
     values,
     errors,
+    touched,
     setFieldValue,
     handleBlur,
-    setFieldTouched,
-    touched: { data: dataFieldTouched }
+    setFieldTouched
   } = useFormikContext<ExtendedValuesType>();
   const { checkInvalid, prefilledForm, isEgldTransaction } = useFormContext();
   const { nft } = useTokensContext();
   const { receiver, txType, amount, tokenId } = values;
-  const { amount: amountError, receiver: receiverError } = errors;
+  const { onChangeGasLimit } = useGasContext();
 
   const isDataInvalid = checkInvalid(dataField);
 
@@ -44,6 +45,12 @@ export function DataContextProvider({
     const value =
       typeof newValue === 'string' ? newValue : newValue?.target?.value;
     setFieldValue(dataField, value, false);
+    if (!prefilledForm && !touched.gasLimit && isEgldTransaction) {
+      const newGasLimit = calculateGasLimit({
+        data: value
+      });
+      onChangeGasLimit(newGasLimit);
+    }
   };
 
   const handleBlurData = useCallback(() => {
@@ -55,28 +62,18 @@ export function DataContextProvider({
   }, []);
 
   useEffect(() => {
-    const dataTouched = txType === TxTypeEnum.EGLD && dataFieldTouched;
-    if (!prefilledForm && !dataTouched) {
+    if (!prefilledForm) {
+      const receiverError = txType !== TxTypeEnum.ESDT ? errors.receiver : '';
       const newDataField = getEsdtNftDataField({
         txType,
         values,
         nft,
-        amountError: Boolean(amountError),
-        receiverError: txType !== TxTypeEnum.ESDT ? receiverError : ''
+        amountError: Boolean(errors.amount),
+        receiverError
       });
-
       handleUpdateData(newDataField);
     }
-  }, [
-    amount,
-    receiver,
-    prefilledForm,
-    nft,
-    amountError,
-    receiverError,
-    dataFieldTouched,
-    txType
-  ]);
+  }, [amount, receiver, prefilledForm, nft, errors.receiver, txType]);
 
   useEffect(() => {
     const resetDataFieldOnEgldSelect = !prefilledForm && isEgldTransaction;

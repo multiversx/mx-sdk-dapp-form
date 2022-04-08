@@ -1,7 +1,6 @@
-import { denominate } from '@elrondnetwork/dapp-core';
+import { denominate, calculateFeeLimit } from '@elrondnetwork/dapp-core';
 import BigNumber from 'bignumber.js';
-import { minDust } from 'constants/index';
-import calculateFeeLimit from './calculateFeeLimit';
+import { gasPerDataByte, gasPriceModifier, minDust } from 'constants/index';
 
 interface EntireBalanceType {
   balance?: string;
@@ -30,7 +29,9 @@ export function getEntireBalance({
       gasPrice,
       gasLimit,
       data,
-      chainId
+      chainId,
+      gasPerDataByte: String(gasPerDataByte),
+      gasPriceModifier: String(gasPriceModifier)
     })
   );
 

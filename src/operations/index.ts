@@ -8,6 +8,5 @@ export * from './getTxType';
 export * from './computeDataField';
 export * from './computeInitGasLimit';
 export * from './denominatedConfigGasPrice';
-export * from './calculateFeeLimit';
 export * from './getEntireBalance';
 export * from './ledger';
