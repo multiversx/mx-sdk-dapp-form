@@ -87,17 +87,17 @@ export function AppInfoContextProvider({
         <FormContextProvider value={formInfo}>
           <TokensContextProvider value={tokensInfo}>
             {/*This order is intentional, because each context consumes the data of the context above*/}
-            <DataContextProvider>
-              <ReceiverContextProvider>
-                <GasContextProvider initGasLimitError={initGasLimitError}>
+            <ReceiverContextProvider>
+              <GasContextProvider initGasLimitError={initGasLimitError}>
+                <DataContextProvider>
                   <AmountContextProvider>
                     <SendFormContextProvider>
                       {children}
                     </SendFormContextProvider>
                   </AmountContextProvider>
-                </GasContextProvider>
-              </ReceiverContextProvider>
-            </DataContextProvider>
+                </DataContextProvider>
+              </GasContextProvider>
+            </ReceiverContextProvider>
           </TokensContextProvider>
         </FormContextProvider>
       </AccountContextProvider>
