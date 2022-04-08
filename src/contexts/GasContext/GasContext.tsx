@@ -20,7 +20,7 @@ export interface GasContextPropsType {
   gasLimit: string;
   gasCostLimit: string;
   gasCostLoading: boolean;
-  gasCostError: string | null;
+  gasCostError?: string | null;
   hasErrors: boolean;
   isGasLimitInvalid: boolean;
   isGasPriceInvalid: boolean;
@@ -39,7 +39,7 @@ export interface GasContextPropsType {
 
 interface GasContextProviderPropsType {
   children: React.ReactNode;
-  initGasLimitError: string | null;
+  initGasLimitError?: string | null;
 }
 
 export const GasContext = React.createContext({} as GasContextPropsType);
@@ -147,7 +147,7 @@ export function GasContextProvider({
         })
       : '0';
     setFeeLimit(newFeeLimit);
-  }, [gasLimit, hasErrors]);
+  }, [gasLimit, data, chainId, gasPrice, hasErrors]);
 
   useEffect(() => {
     if (!prefilledForm && isNftTransaction && !touched.gasLimit) {

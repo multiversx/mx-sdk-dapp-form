@@ -10,6 +10,7 @@ export interface ValuesType {
   gasLimit: string;
 }
 export interface ExtendedValuesType extends ValuesType {
+  // validationSchema
   txType: TxTypeEnum;
   address: string;
   balance: string;

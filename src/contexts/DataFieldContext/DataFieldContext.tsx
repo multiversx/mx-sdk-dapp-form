@@ -25,18 +25,11 @@ const dataField = 'data';
 export function DataContextProvider({
   children
 }: DataContextProviderPropsType) {
-  const {
-    values,
-    errors,
-    setFieldValue,
-    handleBlur,
-    setFieldTouched,
-    touched: { data: dataFieldTouched }
-  } = useFormikContext<ExtendedValuesType>();
+  const { values, errors, setFieldValue, handleBlur, setFieldTouched } =
+    useFormikContext<ExtendedValuesType>();
   const { checkInvalid, prefilledForm, isEgldTransaction } = useFormContext();
   const { nft } = useTokensContext();
   const { receiver, txType, amount, tokenId } = values;
-  const { amount: amountError, receiver: receiverError } = errors;
 
   const isDataInvalid = checkInvalid(dataField);
 
@@ -55,28 +48,18 @@ export function DataContextProvider({
   }, []);
 
   useEffect(() => {
-    const dataTouched = txType === TxTypeEnum.EGLD && dataFieldTouched;
-    if (!prefilledForm && !dataTouched) {
+    if (!prefilledForm) {
+      const receiverError = txType !== TxTypeEnum.ESDT ? errors.receiver : '';
       const newDataField = getEsdtNftDataField({
         txType,
         values,
         nft,
-        amountError: Boolean(amountError),
-        receiverError: txType !== TxTypeEnum.ESDT ? receiverError : ''
+        amountError: Boolean(errors.amount),
+        receiverError
       });
-
       handleUpdateData(newDataField);
     }
-  }, [
-    amount,
-    receiver,
-    prefilledForm,
-    nft,
-    amountError,
-    receiverError,
-    dataFieldTouched,
-    txType
-  ]);
+  }, [amount, receiver, prefilledForm, nft, errors, txType]);
 
   useEffect(() => {
     const resetDataFieldOnEgldSelect = !prefilledForm && isEgldTransaction;

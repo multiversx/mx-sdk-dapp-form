@@ -32,7 +32,7 @@ export interface TokensContextPropsType {
 }
 interface TokensContextProviderPropsType {
   children: any;
-  value: TokensContextInitializationPropsType;
+  value?: TokensContextInitializationPropsType;
 }
 
 export const TokensContext = React.createContext({} as TokensContextPropsType);
@@ -92,8 +92,8 @@ export function TokensContextProvider({
   return (
     <TokensContext.Provider
       value={{
-        nft: nft || value.initialNft,
-        tokens: tokens || value.initialTokens || [],
+        nft: nft || value?.initialNft,
+        tokens: tokens || value?.initialTokens || [],
         tokenIdError,
         tokenId,
         tokenDetails,
