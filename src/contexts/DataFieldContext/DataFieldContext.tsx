@@ -10,7 +10,10 @@ export interface DataContextPropsType {
   data: string;
   dataError?: string;
   isDataInvalid: boolean;
-  onChange: (newValue: string | React.ChangeEvent<any>) => void;
+  onChange: (
+    newValue: string | React.ChangeEvent<any>,
+    shouldValidate?: boolean
+  ) => void;
   onBlur: () => void;
   onReset: () => void;
 }
@@ -41,10 +44,13 @@ export function DataContextProvider({
 
   const isDataInvalid = checkInvalid(dataField);
 
-  const handleUpdateData = (newValue: React.ChangeEvent<any> | string) => {
+  const handleUpdateData = (
+    newValue: React.ChangeEvent<any> | string,
+    shouldValidate = false
+  ) => {
     const value =
       typeof newValue === 'string' ? newValue : newValue?.target?.value;
-    setFieldValue(dataField, value, false);
+    setFieldValue(dataField, value, shouldValidate);
     if (!prefilledForm && !touched.gasLimit && isEgldTransaction) {
       const newGasLimit = calculateGasLimit({
         data: value
