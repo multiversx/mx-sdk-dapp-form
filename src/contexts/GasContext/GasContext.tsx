@@ -138,7 +138,6 @@ export function GasContextProvider({
   }, []);
 
   const hasErrors = Boolean(gasPriceError) || Boolean(gasLimitError);
-  console.log(hasErrors, gasLimitError, gasLimit);
   useEffect(() => {
     const newFeeLimit = !hasErrors
       ? calculateFeeLimit({
