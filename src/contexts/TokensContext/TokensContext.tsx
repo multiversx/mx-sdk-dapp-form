@@ -1,4 +1,10 @@
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState
+} from 'react';
 import { useFormikContext } from 'formik';
 import { fetchAllMetaEsdts, fetchAllTokens } from 'apiCalls';
 import { useAccountContext } from 'contexts/AccountContext';
@@ -25,6 +31,7 @@ export interface TokensContextPropsType {
   egldLabel: string;
   egldPriceInUsd: number;
   tokenIdError?: string;
+  areTokensLoading: boolean;
   tokenDetails: GetTokenDetailsReturnType;
   tokens: TokenType[];
   allAvailableTokens: TokenType[];
@@ -48,6 +55,7 @@ export function TokensContextProvider({
   children,
   value
 }: TokensContextProviderPropsType) {
+  const [areTokensLoading, setAreTokensLoading] = useState(true);
   const {
     values: { tokenId, tokens, nft },
     errors: { tokenId: tokenIdError },
@@ -61,9 +69,11 @@ export function TokensContextProvider({
   const { egldPriceInUsd, decimals, egldLabel } = useGetEconomicsInfo();
 
   const handleGetTokens = useCallback(async () => {
+    setAreTokensLoading(true);
     const newTokens = await fetchAllTokens(address);
     const newMetaEsdts = await fetchAllMetaEsdts(address);
     setFieldValue(tokensField, [...newTokens, ...newMetaEsdts]);
+    setAreTokensLoading(false);
   }, [address]);
 
   const handleChangeTokenId = useCallback((newValue: string) => {
@@ -113,6 +123,7 @@ export function TokensContextProvider({
         nft: nft || value?.initialNft,
         tokens: tokens || value?.initialTokens || [],
         allAvailableTokens,
+        areTokensLoading,
         tokenIdError,
         tokenId,
         tokenDetails,
