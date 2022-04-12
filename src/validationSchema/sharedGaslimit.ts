@@ -1,9 +1,7 @@
-import { validation } from '@elrondnetwork/dapp-utils';
+import { stringIsInteger } from '@elrondnetwork/dapp-core';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { maxGasLimit } from 'constants/index';
-
-const { stringIsInteger } = validation;
 
 export const sharedGaslimit = () => {
   const required = string().required('Required');

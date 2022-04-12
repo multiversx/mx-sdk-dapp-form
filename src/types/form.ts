@@ -21,8 +21,7 @@ export interface ExtendedValuesType extends ValuesType {
   tokens?: TokenType[];
   ledger?: {
     ledgerDataActive: boolean;
-    ledgerHashSignMinimumVersion: number;
-    ledgerWithHashSign: boolean;
+    version: string;
   };
 }
 
@@ -39,8 +38,7 @@ export interface ValidationSchemaType {
   tokens?: TokenType[];
   ledger?: {
     ledgerDataActive: boolean;
-    ledgerHashSignMinimumVersion: number;
-    ledgerWithHashSign: boolean;
+    version: string;
   };
 }
 

@@ -16,7 +16,10 @@ export interface AmountContextPropsType {
   isMaxClicked: boolean;
   onFocus: () => void;
   onBlur: () => void;
-  onChange: (newValue: string | React.ChangeEvent<any>) => void;
+  onChange: (
+    newValue: string | React.ChangeEvent<any>,
+    shouldValidate?: boolean
+  ) => void;
   onMaxClicked: () => void;
 }
 

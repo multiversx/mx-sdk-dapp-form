@@ -7,6 +7,7 @@ export interface GetTokenDetailsReturnType {
   tokenLabel: string;
   tokenTicker: string;
   tokenAvatar: string;
+  tokenTicker?: string;
 }
 
 export function getTokenDetails({
