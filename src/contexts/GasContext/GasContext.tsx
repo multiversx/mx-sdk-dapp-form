@@ -36,8 +36,14 @@ export interface GasContextPropsType {
   defaultGasLimit: string;
   feeLimit: string;
   onChangeFeeLimit: (newValue: string) => void;
-  onChangeGasPrice: (newValue: string | React.ChangeEvent<any>) => void;
-  onChangeGasLimit: (newValue: string | React.ChangeEvent<any>) => void;
+  onChangeGasPrice: (
+    newValue: string | React.ChangeEvent<any>,
+    shouldValidate?: boolean
+  ) => void;
+  onChangeGasLimit: (
+    newValue: string | React.ChangeEvent<any>,
+    shouldValidate?: boolean
+  ) => void;
   onBlurGasPrice: () => void;
   onBlurGasLimit: () => void;
   onResetGasPrice: () => void;
@@ -107,6 +113,9 @@ export function GasContextProvider({
     (newValue: string | React.ChangeEvent<any>, shouldValidate = false) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
+      if (isNaN(Number(value))) {
+        return;
+      }
       setFieldValue(gasPriceField, value, shouldValidate);
     },
     []
@@ -116,6 +125,9 @@ export function GasContextProvider({
     (newValue: string | React.ChangeEvent<any>, shouldValidate = false) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
+      if (isNaN(Number(value))) {
+        return;
+      }
       setFieldValue(gasLimitField, value, shouldValidate);
     },
     []
@@ -138,7 +150,6 @@ export function GasContextProvider({
   }, []);
 
   const hasErrors = Boolean(gasPriceError) || Boolean(gasLimitError);
-  console.log(hasErrors, gasLimitError, gasLimit);
   useEffect(() => {
     const newFeeLimit = !hasErrors
       ? calculateFeeLimit({
@@ -178,7 +189,7 @@ export function GasContextProvider({
           break;
       }
     }
-  }, [tokenId, data, txType]);
+  }, [tokenId, txType]);
 
   const value: GasContextPropsType = {
     gasPrice,
