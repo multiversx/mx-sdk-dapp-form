@@ -10,6 +10,7 @@ import {
 import { ExtendedValuesType, NftType, TokenType, TxTypeEnum } from 'types';
 
 import { useFormContext } from '../FormContext';
+import { useNetworkConfigContext } from '../NetworkContext';
 import { useGetEconomicsInfo } from './utils';
 
 export interface TokensContextInitializationPropsType {
@@ -26,6 +27,7 @@ export interface TokensContextPropsType {
   tokenIdError?: string;
   tokenDetails: GetTokenDetailsReturnType;
   tokens: TokenType[];
+  allAvailableTokens: TokenType[];
   nft?: NftType;
   getTokens: () => void;
   onChangeTokenId: (value: string) => void;
@@ -51,8 +53,11 @@ export function TokensContextProvider({
     errors: { tokenId: tokenIdError },
     setFieldValue
   } = useFormikContext<ExtendedValuesType>();
-  const { address } = useAccountContext();
+  const { address, balance } = useAccountContext();
   const { checkInvalid } = useFormContext();
+  const {
+    networkConfig: { egldDenomination }
+  } = useNetworkConfigContext();
   const { egldPriceInUsd, decimals, egldLabel } = useGetEconomicsInfo();
 
   const handleGetTokens = useCallback(async () => {
@@ -82,9 +87,22 @@ export function TokensContextProvider({
 
   const isTokenIdInvalid = checkInvalid(tokenIdField);
 
+  const allAvailableTokens: TokenType[] = [
+    {
+      name: 'Elrond eGold',
+      identifier: egldLabel,
+      balance: balance,
+      decimals: Number(egldDenomination),
+      ticker: egldLabel
+    }
+  ];
+  if (tokens != null) {
+    allAvailableTokens.push(...tokens);
+  }
+
   const tokenDetails = useMemo(() => {
     return getTokenDetails({
-      tokens: tokens || [],
+      tokens: allAvailableTokens || [],
       tokenId
     });
   }, [tokenId, tokens]);
@@ -94,6 +112,7 @@ export function TokensContextProvider({
       value={{
         nft: nft || value?.initialNft,
         tokens: tokens || value?.initialTokens || [],
+        allAvailableTokens,
         tokenIdError,
         tokenId,
         tokenDetails,
