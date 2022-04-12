@@ -71,7 +71,6 @@ const greaterThanZero = string().test(
         tokenDenomination
       );
       const bnAmount = new BigNumber(nominatedAmount);
-      debugger;
       return bnAmount.isGreaterThan(0);
     }
     return true;

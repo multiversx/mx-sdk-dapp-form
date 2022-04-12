@@ -2,20 +2,42 @@ import React from 'react';
 import classnames from 'classnames';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
-export const Data = () => {
+export type DefaultFormDataClassesType = {
+  container: string;
+  label: string;
+  textarea: string;
+  invalidTextarea: string;
+  errorMsg: string;
+};
+export const defaultFormDataClasses = {
+  container: 'form-group mb-0',
+  label: 'pb-1',
+  textarea: 'form-control',
+  invalidTextarea: 'is-invalid',
+  errorMsg: 'invalid-feedback'
+};
+
+export const Data = ({
+  label,
+  customClasses
+}: {
+  label?: string;
+  customClasses?: DefaultFormDataClassesType;
+}) => {
+  const classes = customClasses || defaultFormDataClasses;
   const {
     formInfo: { isEgldTransaction },
     dataFieldInfo: { data, dataError, isDataInvalid, onChange, onBlur }
   } = useSendFormContext();
 
   return (
-    <div className='form-group mb-0'>
-      <label htmlFor='data' className='pb-1'>
-        Data
+    <div className={classes.container}>
+      <label htmlFor='data' className={classes.label}>
+        {label}
       </label>
       <textarea
-        className={`form-control ${classnames({
-          'is-invalid': isDataInvalid
+        className={`${classes.textarea} ${classnames({
+          [classes.invalidTextarea]: isDataInvalid
         })}`}
         id='data'
         name='data'
@@ -27,7 +49,7 @@ export const Data = () => {
       />
 
       {isDataInvalid && (
-        <div className='invalid-feedback' data-testid='dataError'>
+        <div className={classes.errorMsg} data-testid='dataError'>
           {dataError}
         </div>
       )}

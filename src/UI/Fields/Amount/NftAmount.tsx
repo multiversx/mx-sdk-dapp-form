@@ -2,9 +2,18 @@ import React from 'react';
 import BigNumber from 'bignumber.js';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { NftEnumType } from 'types';
+import { DefaultFormAmountClassesType } from '../Amount';
 import SharedAmount from './SharedAmount';
 
-export const NftAmount = () => {
+export const NftAmount = ({
+  customClasses,
+  label,
+  TokenSelector
+}: {
+  customClasses: DefaultFormAmountClassesType;
+  label: string;
+  TokenSelector?: React.ReactNode;
+}) => {
   const { amountInfo, tokensInfo } = useSendFormContext();
   const { nft } = tokensInfo;
   const { maxAmountAvailable, isMaxClicked } = amountInfo;
@@ -28,7 +37,14 @@ export const NftAmount = () => {
     return null;
   }
 
-  return <SharedAmount AvailableAmountElement={AvailableAmountElement} />;
+  return (
+    <SharedAmount
+      customClasses={customClasses}
+      label={label}
+      TokenSelector={TokenSelector}
+      AvailableAmountElement={AvailableAmountElement}
+    />
+  );
 };
 
 export default NftAmount;

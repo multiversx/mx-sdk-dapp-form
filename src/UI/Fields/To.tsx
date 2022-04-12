@@ -14,6 +14,25 @@ import {
 } from 'react-bootstrap-typeahead';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
+export type DefaultFormToClassesType = {
+  container: string;
+  label: string;
+  inputContainer: string;
+  inputContainerError: string;
+  invalidReceiverErrorMsg: string;
+  scamErrorMsg: string;
+  scamErrorIcon: string;
+};
+export const defaultFormToClasses = {
+  container: 'form-group',
+  label: 'mb-2',
+  inputContainer: 'notranslate typeahead',
+  inputContainerError: 'is-invalid',
+  invalidReceiverErrorMsg: 'invalid-feedback',
+  scamErrorMsg: 'text-warning',
+  scamErrorIcon: 'text-warning mr-1'
+};
+
 function filterBy(option: any, props: any) {
   if (props.text.length > 2) {
     return option.toLowerCase().indexOf(props.text.toLowerCase()) !== -1;
@@ -62,7 +81,14 @@ const renderInput = ({ inputRef, referenceElementRef, ...inputProps }: any) => (
   </Hint>
 );
 
-export const To = () => {
+export const To = ({
+  label,
+  customClasses
+}: {
+  label?: string;
+  customClasses?: DefaultFormToClassesType;
+}) => {
+  const classes = customClasses || defaultFormToClasses;
   const { receiverInfo } = useSendFormContext();
 
   const {
@@ -110,10 +136,11 @@ export const To = () => {
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
   return (
-    <div className='form-group' key={key}>
+    <div className={classes.container} key={key}>
+      {label && <div className={classes.label}>{label}</div>}
       <div
-        className={classnames('notranslate typeahead', {
-          'is-invalid': isReceiverInvalid
+        className={classnames(classes.inputContainer, {
+          [classes.inputContainerError]: isReceiverInvalid
         })}
       >
         <Typeahead
@@ -135,16 +162,19 @@ export const To = () => {
         />
       </div>
       {isReceiverInvalid && (
-        <div className='invalid-feedback' data-testid='receiverError'>
+        <div
+          className={classes.invalidReceiverErrorMsg}
+          data-testid='receiverError'
+        >
           {receiverError}
         </div>
       )}
       {scamError && (
-        <div className='text-warning' data-testid='receiverScam'>
+        <div className={classes.scamErrorMsg} data-testid='receiverScam'>
           <span>
             <FontAwesomeIcon
               icon={faExclamationTriangle}
-              className='text-warning mr-1'
+              className={classes.scamErrorIcon}
             />
             <small>{scamError}</small>
           </span>

@@ -1,8 +1,17 @@
 import React from 'react';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { DefaultFormAmountClassesType } from '../Amount';
 import SharedAmount from './SharedAmount';
 
-export const EsdtAmount = () => {
+export const EsdtAmount = ({
+  customClasses,
+  label,
+  TokenSelector
+}: {
+  customClasses: DefaultFormAmountClassesType;
+  label: string;
+  TokenSelector?: React.ReactNode;
+}) => {
   const { amountInfo, tokensInfo } = useSendFormContext();
   const { maxAmountAvailable } = amountInfo;
   const { tokenId } = tokensInfo;
@@ -23,7 +32,14 @@ export const EsdtAmount = () => {
     return null;
   }
 
-  return <SharedAmount AvailableAmountElement={AvailableAmountElement} />;
+  return (
+    <SharedAmount
+      customClasses={customClasses}
+      label={label}
+      TokenSelector={TokenSelector}
+      AvailableAmountElement={AvailableAmountElement}
+    />
+  );
 };
 
 export default EsdtAmount;

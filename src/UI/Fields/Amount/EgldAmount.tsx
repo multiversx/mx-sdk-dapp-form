@@ -2,9 +2,18 @@ import React from 'react';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import InfoDust from 'UI/InfoDust';
 import UsdValue from 'UI/UsdValue';
+import { DefaultFormAmountClassesType } from '../Amount';
 import SharedAmount from './SharedAmount';
 
-export const EgldAmount = () => {
+export const EgldAmount = ({
+  customClasses,
+  label,
+  TokenSelector
+}: {
+  customClasses: DefaultFormAmountClassesType;
+  label: string;
+  TokenSelector?: React.ReactNode;
+}) => {
   const { tokensInfo, amountInfo } = useSendFormContext();
 
   const { egldLabel, egldPriceInUsd } = tokensInfo;
@@ -41,7 +50,14 @@ export const EgldAmount = () => {
     return null;
   }
 
-  return <SharedAmount AvailableAmountElement={AvailableAmountElement} />;
+  return (
+    <SharedAmount
+      customClasses={customClasses}
+      label={label}
+      TokenSelector={TokenSelector}
+      AvailableAmountElement={AvailableAmountElement}
+    />
+  );
 };
 
 export default EgldAmount;

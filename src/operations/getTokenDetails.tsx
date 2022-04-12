@@ -5,6 +5,7 @@ export interface GetTokenDetailsReturnType {
   tokenDenomination: number;
   tokenBalance: string;
   tokenLabel: string;
+  tokenTicker: string;
   tokenAvatar: string;
 }
 
@@ -21,11 +22,18 @@ export function getTokenDetails({
     : denomination;
   const tokenBalance = selectedToken ? selectedToken.balance : '0';
   const tokenLabel = selectedToken ? selectedToken.name : '';
+  const tokenTicker = selectedToken ? selectedToken.ticker : '';
   const tokenAvatar = selectedToken
     ? selectedToken.assets?.svgUrl || selectedToken.assets?.pngUrl || ''
     : '';
 
-  return { tokenDenomination, tokenBalance, tokenLabel, tokenAvatar };
+  return {
+    tokenTicker,
+    tokenDenomination,
+    tokenBalance,
+    tokenLabel,
+    tokenAvatar
+  };
 }
 
 export default getTokenDetails;
