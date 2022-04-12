@@ -58,16 +58,13 @@ export const SharedAmount = ({
 
         {isMaxButtonVisible && (
           <div className={customClasses.maxBtnContainer}>
-            <a
-              href='/'
+            <button
               data-testid='maxBtn'
-              onClick={(event) => {
-                event.preventDefault();
-                onMaxClicked();
-              }}
+              className={customClasses.maxBtn}
+              onClick={onMaxClicked}
             >
               Max
-            </a>
+            </button>
           </div>
         )}
 

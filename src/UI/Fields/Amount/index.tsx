@@ -10,6 +10,7 @@ export type DefaultFormAmountClassesType = {
   inputContainer: string;
   input: string;
   maxBtnContainer: string;
+  maxBtn: string;
   errorMsg: string;
 };
 export const defaultFormAmountClasses = {
@@ -17,8 +18,8 @@ export const defaultFormAmountClasses = {
   invalidInput: 'is-invalid',
   inputContainer: 'amount-holder',
   input: 'form-control amount-input',
-  maxBtnContainer:
-    'badge-holder d-flex align-content-center justify-content-end',
+  maxBtnContainer: 'd-flex align-content-center justify-content-end',
+  maxBtn: 'btn btn-link',
   errorMsg: 'invalid-feedback'
 };
 
