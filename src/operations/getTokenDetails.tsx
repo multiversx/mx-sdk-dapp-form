@@ -1,11 +1,13 @@
-import { denomination } from 'constants/index';
+import { decimals, denomination } from 'constants/index';
 import { TokenType } from 'types';
 
 export interface GetTokenDetailsReturnType {
   tokenDenomination: number;
+  tokenDecimals: number;
   tokenBalance: string;
   tokenLabel: string;
   tokenAvatar: string;
+  tokenIdentifier?: string;
   tokenTicker?: string;
 }
 
@@ -20,17 +22,19 @@ export function getTokenDetails({
   const tokenDenomination = selectedToken
     ? selectedToken.decimals
     : denomination;
-  const tokenBalance = selectedToken ? selectedToken.balance : '0';
-  const tokenLabel = selectedToken ? selectedToken.name : '';
-  const tokenAvatar = selectedToken
-    ? selectedToken.assets?.svgUrl || selectedToken.assets?.pngUrl || ''
-    : '';
+  const tokenDecimals = selectedToken?.decimals || decimals;
+  const tokenBalance = selectedToken?.balance || '0';
+  const tokenLabel = selectedToken?.name || '';
+  const tokenAvatar =
+    selectedToken?.assets?.svgUrl || selectedToken?.assets?.pngUrl || '';
 
   return {
     tokenDenomination,
+    tokenDecimals,
     tokenBalance,
     tokenLabel,
     tokenAvatar,
+    tokenIdentifier: selectedToken?.identifier,
     tokenTicker: selectedToken?.ticker
   };
 }
