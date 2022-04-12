@@ -1,11 +1,10 @@
-import { validation } from '@elrondnetwork/dapp-utils';
+import { stringIsFloat } from '@elrondnetwork/dapp-core';
+
 import { string } from 'yup';
 import { denomination } from 'constants/index';
 import { ExtendedValuesType } from 'types';
 import maxDecimals from 'validation/maxDecimals';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
-
-const { stringIsFloat } = validation;
 
 const required = string().required('Required');
 

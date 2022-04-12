@@ -3,14 +3,14 @@ import validationSchema from '../validationSchema';
 
 interface GetInitialErrorsType {
   prefilledForm: boolean;
-  initialValues: ValuesType;
+  initialValues?: ValuesType;
 }
 
 export const getInitialErrors = ({
   prefilledForm,
   initialValues
 }: GetInitialErrorsType) => {
-  if (!prefilledForm) {
+  if (!prefilledForm || !initialValues) {
     return {};
   }
 

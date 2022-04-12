@@ -42,7 +42,6 @@ export function SendFormContextProvider({
   const gasInfo = useGasContext();
   const dataFieldInfo = useDataContext();
   const receiverInfo = useReceiverContext();
-
   return (
     <SendFormContext.Provider
       value={{

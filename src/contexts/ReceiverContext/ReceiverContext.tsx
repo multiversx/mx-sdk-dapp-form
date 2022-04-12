@@ -10,7 +10,7 @@ export interface ReceiverContextPropsType {
   isReceiverInvalid: boolean;
   knownAddresses: string[];
   scamError?: string;
-  onChangeReceiver: (newReceiver: string) => void;
+  onChangeReceiver: (newReceiver: string, shouldValidate?: boolean) => void;
   onBlurReceiver: (e: Event) => void;
 }
 
@@ -38,9 +38,12 @@ export function ReceiverContextProvider({
   const scamError = useScamError(receiver);
   const knownAddresses = useFetchKnownAddresses();
 
-  const handleChangeReceiver = useCallback((newReceiver: string) => {
-    setFieldValue(receiverField, newReceiver);
-  }, []);
+  const handleChangeReceiver = useCallback(
+    (newReceiver: string, shouldValidate = false) => {
+      setFieldValue(receiverField, newReceiver, shouldValidate);
+    },
+    []
+  );
 
   const handleBlurReceiver = useCallback(() => {
     setFieldTouched(receiverField, true);

@@ -1,15 +1,19 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { useFormikContext } from 'formik';
-import { getEsdtNftDataField } from 'operations';
+import { calculateGasLimit, getEsdtNftDataField } from 'operations';
 import { ExtendedValuesType, TxTypeEnum } from 'types';
 import { useFormContext } from '../FormContext';
+import { useGasContext } from '../GasContext';
 import { useTokensContext } from '../TokensContext';
 
 export interface DataContextPropsType {
   data: string;
   dataError?: string;
   isDataInvalid: boolean;
-  onChange: (newValue: string | React.ChangeEvent<any>) => void;
+  onChange: (
+    newValue: string | React.ChangeEvent<any>,
+    shouldValidate?: boolean
+  ) => void;
   onBlur: () => void;
   onReset: () => void;
 }
@@ -25,18 +29,34 @@ const dataField = 'data';
 export function DataContextProvider({
   children
 }: DataContextProviderPropsType) {
-  const { values, errors, setFieldValue, handleBlur, setFieldTouched } =
-    useFormikContext<ExtendedValuesType>();
+  const {
+    values,
+    errors,
+    touched,
+    setFieldValue,
+    handleBlur,
+    setFieldTouched
+  } = useFormikContext<ExtendedValuesType>();
   const { checkInvalid, prefilledForm, isEgldTransaction } = useFormContext();
   const { nft } = useTokensContext();
   const { receiver, txType, amount, tokenId } = values;
+  const { onChangeGasLimit } = useGasContext();
 
   const isDataInvalid = checkInvalid(dataField);
 
-  const handleUpdateData = (newValue: React.ChangeEvent<any> | string) => {
+  const handleUpdateData = (
+    newValue: React.ChangeEvent<any> | string,
+    shouldValidate = false
+  ) => {
     const value =
       typeof newValue === 'string' ? newValue : newValue?.target?.value;
-    setFieldValue(dataField, value, false);
+    setFieldValue(dataField, value, shouldValidate);
+    if (!prefilledForm && !touched.gasLimit && isEgldTransaction) {
+      const newGasLimit = calculateGasLimit({
+        data: value
+      });
+      onChangeGasLimit(newGasLimit);
+    }
   };
 
   const handleBlurData = useCallback(() => {
@@ -59,7 +79,7 @@ export function DataContextProvider({
       });
       handleUpdateData(newDataField);
     }
-  }, [amount, receiver, prefilledForm, nft, errors, txType]);
+  }, [amount, receiver, prefilledForm, nft, errors.receiver, txType]);
 
   useEffect(() => {
     const resetDataFieldOnEgldSelect = !prefilledForm && isEgldTransaction;
