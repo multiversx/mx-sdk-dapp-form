@@ -6,6 +6,7 @@ export interface GetTokenDetailsReturnType {
   tokenBalance: string;
   tokenLabel: string;
   tokenAvatar: string;
+  tokenTicker?: string;
 }
 
 export function getTokenDetails({
@@ -25,7 +26,13 @@ export function getTokenDetails({
     ? selectedToken.assets?.svgUrl || selectedToken.assets?.pngUrl || ''
     : '';
 
-  return { tokenDenomination, tokenBalance, tokenLabel, tokenAvatar };
+  return {
+    tokenDenomination,
+    tokenBalance,
+    tokenLabel,
+    tokenAvatar,
+    tokenTicker: selectedToken?.ticker
+  };
 }
 
 export default getTokenDetails;
