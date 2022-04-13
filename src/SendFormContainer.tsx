@@ -9,8 +9,8 @@ import {
   TokensContextInitializationPropsType
 } from 'contexts';
 
-import { generateTransaction } from 'operations';
-import { ExtendedValuesType, TxTypeEnum, ValuesType } from 'types';
+import { generateTransaction, getTxType } from 'operations';
+import { ExtendedValuesType, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
 import { SendLoader } from 'UI';
 import { getInitialErrors } from 'validation';
@@ -68,20 +68,25 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     return onFormSubmit(values, transaction);
   }
 
+  const tokenId =
+    initialValues?.tokenId ||
+    networkConfig?.egldLabel ||
+    fallbackNetworkConfigurations.mainnet.egldLabel;
+
   const formikInitialValues = {
+    tokenId,
     receiver: initialValues?.receiver || '',
     gasPrice: initialValues?.gasPrice || denominatedConfigGasPrice,
     data: initialValues?.data || '',
-    tokenId:
-      initialValues?.tokenId ||
-      networkConfig?.egldLabel ||
-      fallbackNetworkConfigurations.mainnet.egldLabel,
     amount: initialValues?.amount || '0',
     gasLimit: initialValues?.gasLimit || String(defaultGasLimit),
-    txType: initialValues?.txType || TxTypeEnum.EGLD,
+    txType:
+      initialValues?.txType ||
+      getTxType({ nft: tokensInfo?.initialNft, tokenId }),
     address: initialValues?.address || address,
     balance: initialValues?.balance || balance,
-    chainId: initialValues?.chainId || networkConfig.chainId
+    chainId: initialValues?.chainId || networkConfig.chainId,
+    tokens: tokensInfo?.initialTokens
   };
 
   return (
