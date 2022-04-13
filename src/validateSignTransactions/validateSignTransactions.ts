@@ -5,7 +5,7 @@ import {
   parseMultiEsdtTransferData,
   TxsDataTokensType
 } from '@elrondnetwork/dapp-core';
-import { isNftOrMultiEsdtTx } from './helpers';
+import { isNftOrMultiEsdtTx } from 'validation';
 import newTransaction from './newTransaction';
 import {
   ValidateSignTransactionsType,
