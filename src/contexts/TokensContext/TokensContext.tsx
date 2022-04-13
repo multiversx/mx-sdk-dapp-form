@@ -51,6 +51,8 @@ const nftField = 'nft';
 const tokensField = 'tokens';
 const txTypeField = 'txType';
 
+let previouslyFetchedTokens: TokenType[] = [];
+
 export function TokensContextProvider({
   children,
   value
@@ -68,11 +70,15 @@ export function TokensContextProvider({
   } = useNetworkConfigContext();
   const { egldPriceInUsd, decimals, egldLabel } = useGetEconomicsInfo();
 
+  const esdtTokens = tokens || previouslyFetchedTokens;
+
   const handleGetTokens = useCallback(async () => {
     setAreTokensLoading(true);
     const newTokens = await fetchAllTokens(address);
     const newMetaEsdts = await fetchAllMetaEsdts(address);
-    setFieldValue(tokensField, [...newTokens, ...newMetaEsdts]);
+    const tokensFromServer = [...newTokens, ...newMetaEsdts];
+    setFieldValue(tokensField, tokensFromServer);
+    previouslyFetchedTokens = tokensFromServer;
     setAreTokensLoading(false);
   }, [address]);
 
@@ -104,11 +110,9 @@ export function TokensContextProvider({
       balance: balance,
       decimals: Number(egldDenomination),
       ticker: egldLabel
-    }
+    },
+    ...esdtTokens
   ];
-  if (tokens != null) {
-    allAvailableTokens.push(...tokens);
-  }
 
   const tokenDetails = useMemo(() => {
     return getTokenDetails({
@@ -121,9 +125,11 @@ export function TokensContextProvider({
     <TokensContext.Provider
       value={{
         nft: nft || value?.initialNft,
-        tokens: tokens || value?.initialTokens || [],
+        tokens: esdtTokens,
         allAvailableTokens,
-        areTokensLoading,
+        //this will be true on first run,
+        //but false when the tokens will be revalidated in the background
+        areTokensLoading: areTokensLoading && esdtTokens.length === 0,
         tokenIdError,
         tokenId,
         tokenDetails,
