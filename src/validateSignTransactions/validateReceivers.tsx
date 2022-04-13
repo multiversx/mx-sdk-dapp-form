@@ -19,13 +19,11 @@ export function validateReceivers({
   if (isMainnet) {
     try {
       const allTxReceiversWhitelisted =
-        transactions.length > 0
-          ? transactions.every(({ receiver }) => {
-              const isWhitelisted =
-                receiver === address || isContract(receiver);
-              return isWhitelisted;
-            })
-          : true;
+        transactions.length === 0 ||
+        transactions.every(({ receiver }) => {
+          const isWhitelisted = receiver === address || isContract(receiver);
+          return isWhitelisted;
+        });
 
       const dataFieldReceivers = txsDataTokens
         ? Object.values(txsDataTokens)
@@ -36,9 +34,11 @@ export function validateReceivers({
       const receiversWhitelisted =
         dataFieldReceivers.length > 0
           ? dataFieldReceivers.every((receiver) => {
-              const result = receiver
-                ? Boolean(receiver === address || isContract(receiver))
-                : true;
+              const result =
+                receiver == null ||
+                receiver === address ||
+                isContract(receiver);
+
               return result;
             })
           : true;

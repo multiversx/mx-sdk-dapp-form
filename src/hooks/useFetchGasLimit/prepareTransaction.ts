@@ -1,4 +1,4 @@
-import { nominate } from '@elrondnetwork/dapp-core';
+import { nominate, constants } from '@elrondnetwork/dapp-core';
 import {
   Transaction,
   Nonce,
@@ -11,7 +11,6 @@ import {
   Address
 } from '@elrondnetwork/erdjs';
 import BigNumber from 'bignumber.js';
-import { version } from 'constants/index';
 
 interface PrepareTransactionType {
   balance: string;
@@ -44,7 +43,7 @@ export function prepareTransaction({
     gasLimit: new GasLimit(parseInt(gasLimit)),
     data: new TransactionPayload(data),
     chainID: new ChainID(chainId),
-    version: new TransactionVersion(version)
+    version: new TransactionVersion(constants.version)
   });
 
   return transaction;

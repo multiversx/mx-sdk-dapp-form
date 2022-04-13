@@ -3,14 +3,16 @@ import {
   getTokenFromData,
   MultiSignTxType,
   parseMultiEsdtTransferData,
-  TxsDataTokensType
+  TxsDataTokensType,
+  models
 } from '@elrondnetwork/dapp-core';
 import { isNftOrMultiEsdtTx } from 'validation';
-import newTransaction from './newTransaction';
 import {
   ValidateSignTransactionsType,
   validateTransaction
 } from './validateTransaction';
+
+const { newTransaction } = models;
 
 export async function validateSignTransactions(
   props: ValidateSignTransactionsType
@@ -21,19 +23,13 @@ export async function validateSignTransactions(
   let allErrors: { [key: string]: string } = {};
   const allTransactions: MultiSignTxType[] = [];
 
-  const transactions = extractedTxs.map((tx) => {
-    return {
-      ...tx,
-      receiver:
+  if (extractedTxs && extractedTxs.length > 0) {
+    extractedTxs.forEach((tx, i) => {
+      const receiver =
         isNftOrMultiEsdtTx(tx.data) && !addressIsValid(String(tx.receiver))
           ? address
-          : String(tx.receiver)
-    };
-  });
-
-  if (transactions && transactions.length > 0) {
-    transactions.forEach((tx, i) => {
-      const transaction = { ...tx, receiver: tx.receiver || address };
+          : String(tx.receiver);
+      const transaction = { ...tx, receiver };
       const multiTxs = parseMultiEsdtTransferData(transaction.data);
 
       if (multiTxs.length > 0) {
@@ -48,10 +44,10 @@ export async function validateSignTransactions(
           txsDataTokens = {
             ...txsDataTokens,
             [trx.data]: {
-              tokenId: trx.token ? trx.token : '',
-              amount: trx.amount ? trx.amount : '',
+              tokenId: trx.token || '',
+              amount: trx.amount || '',
               type: trx.type,
-              nonce: trx.nonce ? trx.nonce : '',
+              nonce: trx.nonce || '',
               multiTxData: trx.data,
               receiver: trx.receiver
             }

@@ -2,14 +2,11 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import {
   isContract,
   nominate,
-  calculateFeeLimit
+  calculateFeeLimit,
+  constants
 } from '@elrondnetwork/dapp-core';
 import { useFormikContext } from 'formik';
-import {
-  gasPerDataByte,
-  gasPriceModifier,
-  tokenGasLimit
-} from 'constants/index';
+import { tokenGasLimit } from 'constants/index';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
@@ -157,8 +154,8 @@ export function GasContextProvider({
           gasPrice: nominate(gasPrice),
           data: data.trim(),
           chainId,
-          gasPerDataByte: String(gasPerDataByte),
-          gasPriceModifier: String(gasPriceModifier)
+          gasPerDataByte: String(constants.gasPerDataByte),
+          gasPriceModifier: String(constants.gasPriceModifier)
         })
       : '0';
     setFeeLimit(newFeeLimit);
@@ -196,7 +193,7 @@ export function GasContextProvider({
     gasLimit,
     gasCostLoading,
     feeLimit,
-    defaultGasLimit,
+    defaultGasLimit: String(constants.defaultGasLimit),
     gasPriceError,
     gasLimitError,
     gasCostError,
