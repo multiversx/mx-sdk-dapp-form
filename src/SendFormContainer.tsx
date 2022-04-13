@@ -10,7 +10,7 @@ import {
 } from 'contexts';
 
 import { generateTransaction, getTxType } from 'operations';
-import { ExtendedValuesType, ValuesType } from 'types';
+import { ExtendedValuesType, TxTypeEnum, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
 import { SendLoader } from 'UI';
 import { getInitialErrors } from 'validation';
@@ -56,16 +56,21 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     prefilledForm: formInfo.prefilledForm
   });
   async function handleOnSubmit(values: ExtendedValuesType) {
+    const actualTransactionAmount =
+      values.txType === TxTypeEnum.EGLD ? values.amount : '0';
+    const parsedValues = { ...values, amount: actualTransactionAmount };
+
     const transaction = shouldGenerateTransactionOnSubmit
       ? await generateTransaction({
           address,
           balance,
           chainId,
           nonce: accountInfo.nonce,
-          values
+          values: parsedValues
         })
       : null;
-    return onFormSubmit(values, transaction);
+
+    return onFormSubmit(parsedValues, transaction);
   }
 
   const tokenId =
