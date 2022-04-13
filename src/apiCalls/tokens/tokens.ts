@@ -59,9 +59,9 @@ export async function getAccountToken(
   return axios.get<TokenType>(`/accounts/${address}/tokens/${token}`, config);
 }
 
-export async function getToken(token: string) {
-  const apiConfig = await getApiConfig();
-  return axios.get<TokenType>(`/tokens/${token}`, apiConfig);
+export async function getToken(token: string, apiConfig?: ApiConfigType) {
+  const config = apiConfig || (await getApiConfig());
+  return axios.get<TokenType>(`/tokens/${token}`, config);
 }
 
 export interface FetchTokensArgumentsType {

@@ -25,6 +25,7 @@ export function SelectToken({ label }: { label?: string }) {
   const { balance } = accountInfo;
   const {
     getTokens,
+    areTokensLoading,
     tokens,
     tokenId,
     egldLabel,
@@ -32,7 +33,6 @@ export function SelectToken({ label }: { label?: string }) {
     onChangeTokenId,
     isTokenIdInvalid
   } = tokensInfo;
-  const [isLoading, setIsLoading] = React.useState(false);
 
   const FormatOptionLabel = ({ token }: { token: TokenType }) => {
     return (
@@ -65,9 +65,7 @@ export function SelectToken({ label }: { label?: string }) {
   }));
 
   async function onMenuOpen() {
-    setIsLoading(true);
     await getTokens();
-    setIsLoading(false);
   }
 
   const onChange = (props: any) => {
@@ -102,7 +100,7 @@ export function SelectToken({ label }: { label?: string }) {
           name='tokenId'
           openMenuOnFocus
           isDisabled={readonly}
-          isLoading={isLoading}
+          isLoading={areTokensLoading}
           styles={selectStyle}
           value={options.find(({ value }: any) => value === tokenId)}
           options={options}
