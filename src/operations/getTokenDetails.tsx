@@ -9,14 +9,14 @@ export function getTokenDetails({
   tokenId: string;
 }): TokenType {
   const selectedToken = tokens.find(({ identifier }) => identifier === tokenId);
-  const tokenDenomination = selectedToken
+  const tokenDecimals = selectedToken
     ? selectedToken.decimals
     : constants.denomination;
   const tokenBalance = selectedToken?.balance || '0';
 
   return {
     ...selectedToken,
-    decimals: tokenDenomination,
+    decimals: tokenDecimals,
     identifier: selectedToken?.identifier || '',
     name: selectedToken?.name || '',
     ticker: selectedToken?.ticker || '',
