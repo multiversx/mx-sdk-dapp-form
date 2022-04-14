@@ -50,7 +50,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
   useEffect(() => {
     if (isEsdtTransaction) {
-      const { tokenDenomination, tokenBalance: newTokenBalance } =
+      const { decimals: tokenDenomination, balance: newTokenBalance } =
         getTokenDetails({
           tokens,
           tokenId
