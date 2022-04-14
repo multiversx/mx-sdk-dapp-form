@@ -12,7 +12,7 @@ import {
   TokensContextInitializationPropsType
 } from 'contexts';
 
-import { generateTransaction } from 'operations';
+import { generateTransaction, getTxType } from 'operations';
 import { ExtendedValuesType, TxTypeEnum, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
 import { SendLoader } from 'UI';
@@ -58,32 +58,42 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     prefilledForm: formInfo.prefilledForm
   });
   async function handleOnSubmit(values: ExtendedValuesType) {
+    const actualTransactionAmount =
+      values.txType === TxTypeEnum.EGLD ? values.amount : '0';
+    const parsedValues = { ...values, amount: actualTransactionAmount };
+
     const transaction = shouldGenerateTransactionOnSubmit
       ? await generateTransaction({
           address,
           balance,
           chainId,
           nonce: accountInfo.nonce,
-          values
+          values: parsedValues
         })
       : null;
-    return onFormSubmit(values, transaction);
+
+    return onFormSubmit(parsedValues, transaction);
   }
 
+  const tokenId =
+    initialValues?.tokenId ||
+    networkConfig?.egldLabel ||
+    fallbackNetworkConfigurations.mainnet.egldLabel;
+
   const formikInitialValues = {
+    tokenId,
     receiver: initialValues?.receiver || '',
     gasPrice: initialValues?.gasPrice || denominatedConfigGasPrice,
     data: initialValues?.data || '',
-    tokenId:
-      initialValues?.tokenId ||
-      networkConfig?.egldLabel ||
-      fallbackNetworkConfigurations.mainnet.egldLabel,
     amount: initialValues?.amount || '0',
     gasLimit: initialValues?.gasLimit || String(constants.gasLimit),
-    txType: initialValues?.txType || TxTypeEnum.EGLD,
+    txType:
+      initialValues?.txType ||
+      getTxType({ nft: tokensInfo?.initialNft, tokenId }),
     address: initialValues?.address || address,
     balance: initialValues?.balance || balance,
-    chainId: initialValues?.chainId || networkConfig.chainId
+    chainId: initialValues?.chainId || networkConfig.chainId,
+    tokens: tokensInfo?.initialTokens
   };
 
   return (

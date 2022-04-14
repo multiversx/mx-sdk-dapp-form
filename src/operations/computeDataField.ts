@@ -9,16 +9,16 @@ const evenLengthValue = (value: string) =>
 
 export const computeTokenDataField = ({
   amount,
-  tokenDenomination,
+  decimals,
   tokenId
 }: {
   amount: string;
   tokenId: string;
-  tokenDenomination: number;
+  decimals: number;
 }) => {
   const hexEncodedId = evenLengthValue(Buffer.from(tokenId).toString('hex'));
   const hexEncodedValue = evenLengthValue(
-    new BigNumber(nominate(amount, tokenDenomination)).toString(16)
+    new BigNumber(nominate(amount, decimals)).toString(16)
   );
   const data = `ESDTTransfer@${hexEncodedId}@${hexEncodedValue}`;
   return data;
@@ -68,7 +68,7 @@ export const getEsdtNftDataField = ({
 }) => {
   const { tokens, tokenId, amount, receiver } = values;
   if (tokens && txType === TxTypeEnum.ESDT && !amountError) {
-    const { tokenDenomination } = getTokenDetails({
+    const { decimals } = getTokenDetails({
       tokens,
       tokenId
     });
@@ -76,7 +76,7 @@ export const getEsdtNftDataField = ({
     return computeTokenDataField({
       amount,
       tokenId,
-      tokenDenomination
+      decimals
     });
   }
   // NFT SFT MetaESDT

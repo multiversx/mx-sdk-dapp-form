@@ -1,6 +1,6 @@
 import { nominate } from '@elrondnetwork/dapp-core';
 import { prepareTransaction } from 'hooks/useFetchGasLimit/prepareTransaction';
-import { TxTypeEnum, ExtendedValuesType } from 'types';
+import { ExtendedValuesType } from 'types';
 
 interface GenerateTransactionPropsType {
   address: string;
@@ -12,22 +12,13 @@ interface GenerateTransactionPropsType {
 
 export async function generateTransaction(props: GenerateTransactionPropsType) {
   const { address, balance, chainId, nonce, values } = props;
-  const {
-    amount: amountValue,
-    receiver,
-    data,
-    gasLimit,
-    gasPrice,
-    nft,
-    txType
-  } = values;
-  const amount = txType === TxTypeEnum.EGLD ? amountValue : '0';
+  const { amount, receiver, data, gasLimit, gasPrice, nft } = values;
   const transactionReceiver = Boolean(nft) ? address : receiver;
 
   try {
     const transaction = prepareTransaction({
       balance,
-      amount: String(amount), // TODO: check
+      amount: String(amount),
       gasLimit: String(gasLimit),
       gasPrice: nominate(gasPrice),
       data: data.trim(),

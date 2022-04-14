@@ -19,7 +19,7 @@ export default function TokenElement({
   nftType?: NftEnumType;
   nftTokenDetails?: NftType;
 }) {
-  const { name, identifier, balance, decimals: denomination } = token;
+  const { name, identifier, balance, decimals } = token;
   const avatar = token.assets?.svgUrl || token.assets?.pngUrl || '';
   const avatarDropdownClass = avatar ? 'mr-1' : '';
   const avatarDropdownSize = avatar ? 28 : 20;
@@ -100,7 +100,7 @@ export default function TokenElement({
             }
             token={identifier}
             showLabel={false}
-            denomination={denomination}
+            denomination={decimals}
             data-testid={`${identifier}-balance`}
           />
         )}

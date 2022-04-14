@@ -12,15 +12,15 @@ const decimals = string().test({
   test: function (value) {
     const { tokenId, tokens } = this.parent as ExtendedValuesType;
     if (tokens) {
-      const { tokenDenomination } = getTokenDetails({
+      const { decimals } = getTokenDetails({
         tokens,
         tokenId
       });
-      const valid = maxDecimals(String(value), tokenDenomination);
+      const valid = maxDecimals(String(value), decimals);
 
       if (!valid) {
         return this.createError({
-          message: `Maximum ${tokenDenomination} decimals allowed`,
+          message: `Maximum ${decimals} decimals allowed`,
           path: 'amount'
         });
       }
@@ -37,14 +37,11 @@ const balance = string().test(
   function tokenFunds(tokenAmount?: string) {
     const { ignoreTokenBalance, tokens } = this.parent as ExtendedValuesType;
     if (tokenAmount !== undefined && !ignoreTokenBalance && tokens) {
-      const { tokenDenomination, tokenBalance } = getTokenDetails({
+      const { decimals, balance: tokenBalance } = getTokenDetails({
         tokens,
         tokenId: this.parent.tokenId
       });
-      const nominatedAmount = nominate(
-        tokenAmount.toString(),
-        tokenDenomination
-      );
+      const nominatedAmount = nominate(tokenAmount.toString(), decimals);
       const bnAmount = new BigNumber(nominatedAmount);
       const bnTokenBalance = new BigNumber(tokenBalance);
       return bnTokenBalance.comparedTo(bnAmount) >= 0;
@@ -59,14 +56,11 @@ const greaterThanZero = string().test(
   function tokenBalanceZero(tokenAmount?: string) {
     const { tokens, ignoreTokenBalance } = this.parent as ExtendedValuesType;
     if (!ignoreTokenBalance && tokenAmount != null && tokens) {
-      const { tokenDenomination } = getTokenDetails({
+      const { decimals } = getTokenDetails({
         tokens,
         tokenId: this.parent.tokenId
       });
-      const nominatedAmount = nominate(
-        tokenAmount.toString(),
-        tokenDenomination
-      );
+      const nominatedAmount = nominate(tokenAmount.toString(), decimals);
       const bnAmount = new BigNumber(nominatedAmount);
       return bnAmount.isGreaterThan(0);
     }

@@ -1,41 +1,26 @@
 import { constants } from '@elrondnetwork/dapp-core';
 import { TokenType } from 'types';
 
-export interface GetTokenDetailsReturnType {
-  tokenDenomination: number;
-  tokenDecimals: number;
-  tokenBalance: string;
-  tokenLabel: string;
-  tokenAvatar: string;
-  tokenIdentifier?: string;
-  tokenTicker?: string;
-}
-
 export function getTokenDetails({
   tokens,
   tokenId
 }: {
   tokens: TokenType[];
   tokenId: string;
-}): GetTokenDetailsReturnType {
+}): TokenType {
   const selectedToken = tokens.find(({ identifier }) => identifier === tokenId);
   const tokenDenomination = selectedToken
     ? selectedToken.decimals
     : constants.denomination;
-  const tokenDecimals = selectedToken?.decimals || constants.decimals;
   const tokenBalance = selectedToken?.balance || '0';
-  const tokenLabel = selectedToken?.name || '';
-  const tokenAvatar =
-    selectedToken?.assets?.svgUrl || selectedToken?.assets?.pngUrl || '';
 
   return {
-    tokenDenomination,
-    tokenDecimals,
-    tokenBalance,
-    tokenLabel,
-    tokenAvatar,
-    tokenIdentifier: selectedToken?.identifier,
-    tokenTicker: selectedToken?.ticker
+    ...selectedToken,
+    decimals: tokenDenomination,
+    identifier: selectedToken?.identifier || '',
+    name: selectedToken?.name || '',
+    ticker: selectedToken?.ticker || '',
+    balance: tokenBalance
   };
 }
 
