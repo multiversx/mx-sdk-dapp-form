@@ -1,5 +1,4 @@
 import {
-  addressIsValid,
   getTokenFromData,
   MultiSignTxType,
   parseMultiEsdtTransferData,
@@ -8,7 +7,7 @@ import {
   MultiEsdtTxType,
   TxDataTokenType
 } from '@elrondnetwork/dapp-core';
-import { isNftOrMultiEsdtTx } from 'validation';
+import getTxWithReceiver from './getTxWithReceiver';
 import {
   SignTxType,
   ValidateSignTransactionsType,
@@ -51,11 +50,7 @@ function extractAllTransactions(props: ValidateSignTransactionsType) {
   const allTransactions: MultiSignTxType[] = [];
 
   extractedTxs.forEach((tx, transactionIndex) => {
-    const receiver =
-      isNftOrMultiEsdtTx(tx.data) && !addressIsValid(String(tx.receiver))
-        ? address
-        : String(tx.receiver);
-    const transaction = { ...tx, receiver };
+    const transaction = getTxWithReceiver({ address, tx });
     const multiTxs = parseMultiEsdtTransferData(transaction.data);
 
     if (multiTxs.length > 0) {

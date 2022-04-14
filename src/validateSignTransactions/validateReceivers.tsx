@@ -1,23 +1,25 @@
 import { isContract, TxsDataTokensType } from '@elrondnetwork/dapp-core';
 import { Address } from '@elrondnetwork/erdjs';
+import getTxWithReceiver from './getTxWithReceiver';
 import { SignTxType } from './validateTransaction';
 
-type WhitelsitTxType = SignTxType & { receiver: string };
 interface ValidateReceiversType {
-  transactions: WhitelsitTxType[];
+  transactions: SignTxType[];
   txsDataTokens?: TxsDataTokensType;
   isMainnet: boolean;
   address: string;
 }
 
 export function validateReceivers({
-  transactions,
+  transactions: txs,
   txsDataTokens,
   isMainnet,
   address
 }: ValidateReceiversType): boolean {
   if (isMainnet) {
     try {
+      const transactions = txs.map((tx) => getTxWithReceiver({ address, tx }));
+
       const allTxReceiversWhitelisted =
         transactions.length === 0 ||
         transactions.every(({ receiver }) => {
