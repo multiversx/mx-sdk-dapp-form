@@ -13,7 +13,7 @@ export interface AmountPropsType {
   tokenLabel: string;
   tokenAvatar: string;
   egldPriceInUsd: number;
-  tokenDenomination: number;
+  tokenDecimals: number;
   txType: TxTypeEnum;
   nft?: NftType;
 }
@@ -23,7 +23,7 @@ const Amount = (props: AmountPropsType) => {
     label = 'Amount',
     amount,
     txType,
-    tokenDenomination,
+    tokenDecimals,
     tokenId,
     tokenIdError,
     egldLabel,
@@ -69,14 +69,10 @@ const Amount = (props: AmountPropsType) => {
                   egldLabel={props.egldLabel}
                   value={nominate(
                     amount,
-                    isEsdtTransaction
-                      ? tokenDenomination
-                      : constants.denomination
+                    isEsdtTransaction ? tokenDecimals : constants.denomination
                   )}
                   denomination={
-                    isEsdtTransaction
-                      ? tokenDenomination
-                      : constants.denomination
+                    isEsdtTransaction ? tokenDecimals : constants.denomination
                   }
                   showLastNonZeroDecimal
                   showLabel={false}

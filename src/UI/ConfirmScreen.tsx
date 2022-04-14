@@ -61,11 +61,11 @@ export const ConfirmScreen = ({
         {...{
           amount: String(amountInfo.amount),
           txType,
-          tokenDenomination: tokenDetails.tokenDenomination,
+          tokenDecimals: tokenDetails.decimals,
           tokenId,
           egldLabel,
-          tokenLabel: tokenDetails.tokenLabel,
-          tokenAvatar: tokenDetails.tokenAvatar || '',
+          tokenLabel: tokenDetails.name,
+          tokenAvatar: tokenDetails.assets?.svgUrl || '',
           egldPriceInUsd,
           nft
         }}
