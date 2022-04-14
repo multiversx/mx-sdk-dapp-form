@@ -8,11 +8,7 @@ import React, {
 import { useFormikContext } from 'formik';
 import { fetchAllMetaEsdts, fetchAllTokens } from 'apiCalls';
 import { useAccountContext } from 'contexts/AccountContext';
-import {
-  getTokenDetails,
-  GetTokenDetailsReturnType,
-  getTxType
-} from 'operations';
+import { getTokenDetails, getTxType } from 'operations';
 import { ExtendedValuesType, NftType, TokenType, TxTypeEnum } from 'types';
 
 import { useFormContext } from '../FormContext';
@@ -32,13 +28,14 @@ export interface TokensContextPropsType {
   egldPriceInUsd: number;
   tokenIdError?: string;
   areTokensLoading: boolean;
-  tokenDetails: GetTokenDetailsReturnType;
+  tokenDetails: TokenType;
   tokens: TokenType[];
   allAvailableTokens: TokenType[];
   nft?: NftType;
   getTokens: () => void;
   onChangeTokenId: (value: string) => void;
 }
+
 interface TokensContextProviderPropsType {
   children: any;
   value?: TokensContextInitializationPropsType;

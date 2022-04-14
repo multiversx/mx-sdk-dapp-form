@@ -3,7 +3,7 @@ import { DappUI } from '@elrondnetwork/dapp-core';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ElrondSymbol from 'symbol.svg';
-import { decimals } from 'constants/index';
+import { decimals as configDecimals } from 'constants/index';
 import { scamFlag } from 'helpers';
 import { NftEnumType, NftType, TokenType } from 'types';
 
@@ -20,7 +20,7 @@ export default function TokenElement({
   nftType?: NftEnumType;
   nftTokenDetails?: NftType;
 }) {
-  const { name, identifier, balance, decimals: denomination } = token;
+  const { name, identifier, balance, decimals } = token;
   const avatar = token.assets?.svgUrl || token.assets?.pngUrl || '';
   const avatarDropdownClass = avatar ? 'mr-1' : '';
   const avatarDropdownSize = avatar ? 28 : 20;
@@ -96,10 +96,12 @@ export default function TokenElement({
           <DappUI.Denominate
             egldLabel={identifier}
             value={balance || '0'}
-            decimals={nftType === NftEnumType.SemiFungibleESDT ? 0 : decimals}
+            decimals={
+              nftType === NftEnumType.SemiFungibleESDT ? 0 : configDecimals
+            }
             token={identifier}
             showLabel={false}
-            denomination={denomination}
+            denomination={decimals}
             data-testid={`${identifier}-balance`}
           />
         )}
