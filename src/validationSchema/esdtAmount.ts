@@ -37,13 +37,13 @@ const balance = string().test(
   function tokenFunds(tokenAmount?: string) {
     const { ignoreTokenBalance, tokens } = this.parent as ExtendedValuesType;
     if (tokenAmount !== undefined && !ignoreTokenBalance && tokens) {
-      const { decimals, balance } = getTokenDetails({
+      const { decimals, balance: tokenBalance } = getTokenDetails({
         tokens,
         tokenId: this.parent.tokenId
       });
       const nominatedAmount = nominate(tokenAmount.toString(), decimals);
       const bnAmount = new BigNumber(nominatedAmount);
-      const bnTokenBalance = new BigNumber(balance);
+      const bnTokenBalance = new BigNumber(tokenBalance);
       return bnTokenBalance.comparedTo(bnAmount) >= 0;
     }
     return true;
