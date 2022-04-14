@@ -1,5 +1,8 @@
 import React, { JSXElementConstructor } from 'react';
-import { fallbackNetworkConfigurations } from '@elrondnetwork/dapp-core';
+import {
+  fallbackNetworkConfigurations,
+  constants
+} from '@elrondnetwork/dapp-core';
 import { Transaction } from '@elrondnetwork/erdjs/out';
 import { Formik } from 'formik';
 import {
@@ -15,7 +18,6 @@ import { FormNetworkConfigType } from 'types/network';
 import { SendLoader } from 'UI';
 import { getInitialErrors } from 'validation';
 import validationSchema from 'validationSchema';
-import { defaultGasLimit } from './constants';
 import denominatedConfigGasPrice from './operations/denominatedConfigGasPrice';
 
 export interface SendFormContainerPropsType {
@@ -84,7 +86,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     gasPrice: initialValues?.gasPrice || denominatedConfigGasPrice,
     data: initialValues?.data || '',
     amount: initialValues?.amount || '0',
-    gasLimit: initialValues?.gasLimit || String(defaultGasLimit),
+    gasLimit: initialValues?.gasLimit || String(constants.gasLimit),
     txType:
       initialValues?.txType ||
       getTxType({ nft: tokensInfo?.initialNft, tokenId }),

@@ -1,6 +1,5 @@
 import React from 'react';
-import { DappUI, nominate } from '@elrondnetwork/dapp-core';
-import { denomination, decimals } from 'constants/index';
+import { DappUI, nominate, constants } from '@elrondnetwork/dapp-core';
 import { NftType, TxTypeEnum } from 'types';
 import { UsdValue } from 'UI/UsdValue';
 import Token from './Token';
@@ -57,7 +56,9 @@ const Amount = (props: AmountPropsType) => {
                 egldLabel={props.egldLabel}
                 value={value}
                 denomination={nftDenomination}
-                decimals={txType === TxTypeEnum.MetaESDT ? decimals : 0}
+                decimals={
+                  txType === TxTypeEnum.MetaESDT ? constants.decimals : 0
+                }
                 showLastNonZeroDecimal
                 showLabel={false}
                 data-testid='confirmAmount'
@@ -68,10 +69,14 @@ const Amount = (props: AmountPropsType) => {
                   egldLabel={props.egldLabel}
                   value={nominate(
                     amount,
-                    isEsdtTransaction ? tokenDenomination : denomination
+                    isEsdtTransaction
+                      ? tokenDenomination
+                      : constants.denomination
                   )}
                   denomination={
-                    isEsdtTransaction ? tokenDenomination : denomination
+                    isEsdtTransaction
+                      ? tokenDenomination
+                      : constants.denomination
                   }
                   showLastNonZeroDecimal
                   showLabel={false}

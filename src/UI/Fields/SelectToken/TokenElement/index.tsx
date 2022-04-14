@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { DappUI } from '@elrondnetwork/dapp-core';
+import { DappUI, constants } from '@elrondnetwork/dapp-core';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ElrondSymbol from 'symbol.svg';
-import { decimals as configDecimals } from 'constants/index';
 import { scamFlag } from 'helpers';
 import { NftEnumType, NftType, TokenType } from 'types';
 
@@ -97,7 +96,7 @@ export default function TokenElement({
             egldLabel={identifier}
             value={balance || '0'}
             decimals={
-              nftType === NftEnumType.SemiFungibleESDT ? 0 : configDecimals
+              nftType === NftEnumType.SemiFungibleESDT ? 0 : constants.decimals
             }
             token={identifier}
             showLabel={false}

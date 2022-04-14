@@ -1,6 +1,6 @@
-import { isContract } from '@elrondnetwork/dapp-core';
+import { isContract, constants } from '@elrondnetwork/dapp-core';
 import BigNumber from 'bignumber.js';
-import { gasLimit as configGasLimit, tokenGasLimit } from 'constants/index';
+import { tokenGasLimit } from 'constants/index';
 import { DelegationContractDataType } from 'types';
 import fetchGasLimit from '../hooks/useFetchGasLimit/fetchGasLimit';
 import getIdentifierType from '../validation/getIdentifierType';
@@ -90,5 +90,5 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
   if (isNft) {
     return { initGasLimit: calculateNftGasLimit(), initGasLimitError };
   }
-  return { initGasLimit: configGasLimit, initGasLimitError };
+  return { initGasLimit: constants.gasLimit, initGasLimitError };
 };

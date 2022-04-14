@@ -11,3 +11,10 @@ export enum TxTypeEnum {
   NonFungibleESDT = 'NonFungibleESDT',
   SemiFungibleESDT = 'SemiFungibleESDT'
 }
+
+export enum TransferDataEnum {
+  ESDTNFTTransfer = 'ESDTNFTTransfer',
+  ESDTNFTCreate = 'ESDTNFTCreate',
+  ESDTTransfer = 'ESDTTransfer',
+  MultiESDTNFTTransfer = 'MultiESDTNFTTransfer'
+}

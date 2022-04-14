@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { constants } from '@elrondnetwork/dapp-core';
 import { getEconomicsInfo } from 'apiCalls';
-import { decimals } from 'constants/index';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 
 interface EconomicsInfoType {
@@ -11,7 +11,7 @@ interface EconomicsInfoType {
 
 const initialState = {
   egldPriceInUsd: 0,
-  decimals,
+  decimals: constants.decimals,
   egldLabel: 'EGLD'
 };
 
@@ -28,7 +28,7 @@ export function useGetEconomicsInfo(): EconomicsInfoType {
 
     setEconomicsInfo({
       egldPriceInUsd,
-      decimals,
+      decimals: constants.decimals,
       egldLabel: networkConfig.egldLabel
     });
   }
