@@ -37,7 +37,7 @@ export function getValues(props: {
     tokenId: tokenFound ? tokenId : egldLabel,
     gasLimit: transaction.gasLimit || gasLimit,
     gasPrice: denominate({
-      input: transaction.gasPrice || constants.defaultGasPrice,
+      input: transaction.gasPrice || constants.gasPrice,
       denomination: constants.denomination,
       decimals: constants.decimals,
       showLastNonZeroDecimal: true,

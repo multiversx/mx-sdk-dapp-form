@@ -17,7 +17,7 @@ export function getDefaultGasLimit({
   if (isEsdtTransaction) {
     return tokenGasLimit;
   }
-  return constants.defaultGasLimit;
+  return constants.gasLimit;
 }
 
 export default getDefaultGasLimit;

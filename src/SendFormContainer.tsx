@@ -79,7 +79,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
       networkConfig?.egldLabel ||
       fallbackNetworkConfigurations.mainnet.egldLabel,
     amount: initialValues?.amount || '0',
-    gasLimit: initialValues?.gasLimit || String(constants.defaultGasLimit),
+    gasLimit: initialValues?.gasLimit || String(constants.gasLimit),
     txType: initialValues?.txType || TxTypeEnum.EGLD,
     address: initialValues?.address || address,
     balance: initialValues?.balance || balance,

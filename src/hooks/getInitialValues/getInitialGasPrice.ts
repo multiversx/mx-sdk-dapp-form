@@ -5,7 +5,7 @@ export function getInitialGasPrice(gasPrice: string) {
     gasPrice !== '0'
       ? gasPrice
       : denominate({
-          input: String(constants.defaultGasPrice),
+          input: String(constants.gasPrice),
           denomination: constants.denomination,
           showLastNonZeroDecimal: true,
           decimals: constants.decimals
