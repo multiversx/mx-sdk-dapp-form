@@ -9,33 +9,25 @@ interface EconomicsInfoType {
   egldLabel: string;
 }
 
-const initialState = {
-  egldPriceInUsd: 0,
-  decimals: constants.decimals,
-  egldLabel: 'EGLD'
-};
-
 export function useGetEconomicsInfo(): EconomicsInfoType {
-  const [economicsInfo, setEconomicsInfo] =
-    useState<EconomicsInfoType>(initialState);
   const { networkConfig } = useNetworkConfigContext();
+  const [egldPriceInUsd, setEgldPriceInUsd] = useState<number>(0);
 
   async function fetchEconomicsInfo() {
     const economicsResponse = await getEconomicsInfo();
 
-    const egldPriceInUsd =
-      economicsResponse?.price || initialState.egldPriceInUsd;
+    const newPrice = economicsResponse?.price || 0;
 
-    setEconomicsInfo({
-      egldPriceInUsd,
-      decimals: constants.decimals,
-      egldLabel: networkConfig.egldLabel
-    });
+    setEgldPriceInUsd(newPrice);
   }
 
   useEffect(() => {
     fetchEconomicsInfo();
   }, [networkConfig?.id]);
 
-  return economicsInfo;
+  return {
+    egldLabel: networkConfig.egldLabel,
+    egldPriceInUsd,
+    decimals: constants.decimals
+  };
 }
