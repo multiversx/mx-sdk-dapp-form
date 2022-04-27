@@ -8,11 +8,7 @@ import React, {
 import { useFormikContext } from 'formik';
 import { fetchAllMetaEsdts, fetchAllTokens } from 'apiCalls';
 import { useAccountContext } from 'contexts/AccountContext';
-import {
-  getTokenDetails,
-  GetTokenDetailsReturnType,
-  getTxType
-} from 'operations';
+import { getTokenDetails, getTxType } from 'operations';
 import { ExtendedValuesType, NftType, TokenType, TxTypeEnum } from 'types';
 
 import { useFormContext } from '../FormContext';
@@ -32,13 +28,14 @@ export interface TokensContextPropsType {
   egldPriceInUsd: number;
   tokenIdError?: string;
   areTokensLoading: boolean;
-  tokenDetails: GetTokenDetailsReturnType;
+  tokenDetails: TokenType;
   tokens: TokenType[];
   allAvailableTokens: TokenType[];
   nft?: NftType;
   getTokens: () => void;
   onChangeTokenId: (value: string) => void;
 }
+
 interface TokensContextProviderPropsType {
   children: any;
   value?: TokensContextInitializationPropsType;
@@ -50,6 +47,8 @@ const tokenIdField = 'tokenId';
 const nftField = 'nft';
 const tokensField = 'tokens';
 const txTypeField = 'txType';
+
+let previouslyFetchedTokens: TokenType[] = [];
 
 export function TokensContextProvider({
   children,
@@ -68,11 +67,15 @@ export function TokensContextProvider({
   } = useNetworkConfigContext();
   const { egldPriceInUsd, decimals, egldLabel } = useGetEconomicsInfo();
 
+  const esdtTokens = tokens || previouslyFetchedTokens;
+
   const handleGetTokens = useCallback(async () => {
     setAreTokensLoading(true);
     const newTokens = await fetchAllTokens(address);
     const newMetaEsdts = await fetchAllMetaEsdts(address);
-    setFieldValue(tokensField, [...newTokens, ...newMetaEsdts]);
+    const tokensFromServer = [...newTokens, ...newMetaEsdts];
+    setFieldValue(tokensField, tokensFromServer);
+    previouslyFetchedTokens = tokensFromServer;
     setAreTokensLoading(false);
   }, [address]);
 
@@ -104,11 +107,9 @@ export function TokensContextProvider({
       balance: balance,
       decimals: Number(egldDenomination),
       ticker: egldLabel
-    }
+    },
+    ...esdtTokens
   ];
-  if (tokens != null) {
-    allAvailableTokens.push(...tokens);
-  }
 
   const tokenDetails = useMemo(() => {
     return getTokenDetails({
@@ -121,9 +122,11 @@ export function TokensContextProvider({
     <TokensContext.Provider
       value={{
         nft: nft || value?.initialNft,
-        tokens: tokens || value?.initialTokens || [],
+        tokens: esdtTokens,
         allAvailableTokens,
-        areTokensLoading,
+        //this will be true on first run,
+        //but false when the tokens will be revalidated in the background
+        areTokensLoading: areTokensLoading && esdtTokens.length === 0,
         tokenIdError,
         tokenId,
         tokenDetails,

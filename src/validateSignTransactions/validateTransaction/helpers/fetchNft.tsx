@@ -4,18 +4,17 @@ import { TransferDataEnum } from 'types';
 
 const nftTransaction = 'nftTransaction';
 
-export async function fetchNft(
-  props: {
-    type: string;
-    nonce: string;
-    tokenId: string;
-    amount: string;
-    address: string;
-    data: string;
-    receiver: string;
-  },
-  apiConfig: ApiConfigType
-) {
+interface FetchNftType {
+  type: string;
+  nonce: string;
+  tokenId: string;
+  amount: string;
+  address: string;
+  data: string;
+  receiver: string;
+}
+
+export async function fetchNft(props: FetchNftType, apiConfig: ApiConfigType) {
   const { type, nonce, amount, receiver, tokenId, data, address } = props;
 
   if (type === nftTransaction) {
@@ -31,7 +30,8 @@ export async function fetchNft(
     );
 
     return computedNft;
+  } else {
+    const computedNft = await searchNft({ data, address }, apiConfig);
+    return computedNft;
   }
-  const computedNft = await searchNft({ data, address }, apiConfig);
-  return computedNft;
 }

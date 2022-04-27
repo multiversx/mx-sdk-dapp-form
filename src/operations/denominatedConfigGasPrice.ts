@@ -1,15 +1,10 @@
-import { denominate } from '@elrondnetwork/dapp-core';
-import {
-  defaultGasPrice as configGasPrice,
-  denomination,
-  decimals
-} from 'constants/index';
+import { denominate, constants } from '@elrondnetwork/dapp-core';
 
 export const denominatedConfigGasPrice = denominate({
-  input: configGasPrice,
-  denomination,
+  input: String(constants.gasPrice),
+  denomination: constants.denomination,
   showLastNonZeroDecimal: true,
-  decimals
+  decimals: constants.decimals
 });
 
 export default denominatedConfigGasPrice;

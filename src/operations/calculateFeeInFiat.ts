@@ -1,5 +1,4 @@
-import { denominate } from '@elrondnetwork/dapp-core';
-import { denomination, decimals } from 'constants/index';
+import { denominate, constants } from '@elrondnetwork/dapp-core';
 import usdValue from 'helpers/misc/usdValue';
 
 export function calculateFeeInFiat({
@@ -11,12 +10,16 @@ export function calculateFeeInFiat({
 }) {
   const amount = denominate({
     input: feeLimit,
-    denomination,
-    decimals,
+    denomination: constants.denomination,
+    decimals: constants.decimals,
     showLastNonZeroDecimal: true
   });
 
-  return `≈ $${usdValue({ amount, egldPriceInUsd, decimals })}`;
+  return `≈ $${usdValue({
+    amount,
+    egldPriceInUsd,
+    decimals: constants.decimals
+  })}`;
 }
 
 export default calculateFeeInFiat;

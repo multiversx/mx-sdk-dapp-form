@@ -1,7 +1,6 @@
-import { stringIsFloat } from '@elrondnetwork/dapp-core';
+import { stringIsFloat, constants } from '@elrondnetwork/dapp-core';
 
 import { string } from 'yup';
-import { denomination } from 'constants/index';
 import { ExtendedValuesType } from 'types';
 import maxDecimals from 'validation/maxDecimals';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
@@ -10,7 +9,7 @@ const required = string().required('Required');
 
 const decimals = string().test(
   'denomination',
-  `Maximum ${denomination} decimals allowed`,
+  `Maximum ${constants.denomination} decimals allowed`,
   (value) => maxDecimals(String(value))
 );
 

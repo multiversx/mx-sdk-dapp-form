@@ -1,14 +1,10 @@
 import {
   isTokenTransfer,
   denominate,
-  MultiSignTxType
+  MultiSignTxType,
+  constants
 } from '@elrondnetwork/dapp-core';
-import {
-  tokenGasLimit,
-  denomination,
-  decimals,
-  defaultGasPrice as configGasPrice
-} from 'constants/index';
+import { tokenGasLimit } from 'constants/index';
 import { TxSignValuesType } from '../types';
 
 export function getValues(props: {
@@ -33,17 +29,17 @@ export function getValues(props: {
       ? tokenAmount
       : denominate({
           input: transaction.value ? transaction.value : '0',
-          denomination,
-          decimals,
+          denomination: constants.denomination,
+          decimals: constants.decimals,
           showLastNonZeroDecimal: true,
           addCommas: false
         }),
     tokenId: tokenFound ? tokenId : egldLabel,
     gasLimit: transaction.gasLimit || gasLimit,
     gasPrice: denominate({
-      input: transaction.gasPrice || configGasPrice,
-      denomination,
-      decimals,
+      input: transaction.gasPrice || constants.gasPrice,
+      denomination: constants.denomination,
+      decimals: constants.decimals,
       showLastNonZeroDecimal: true,
       addCommas: false
     }),

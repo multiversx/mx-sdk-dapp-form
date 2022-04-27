@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { nominate } from '@elrondnetwork/dapp-core';
+import { nominate, constants } from '@elrondnetwork/dapp-core';
 import { useFormikContext } from 'formik';
-import { decimals, denomination } from 'constants/index';
 import { useAccountContext } from 'contexts/AccountContext';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import {
@@ -42,7 +41,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
       const computedNftBalance = getEntireTokenBalance({
         balance: nft.balance,
         denomination: nft.type === NftEnumType.MetaESDT ? nft.decimals : 0,
-        decimals
+        decimals: constants.decimals
       });
       setNftBalance(computedNftBalance);
     }
@@ -50,16 +49,15 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
   useEffect(() => {
     if (isEsdtTransaction) {
-      const { tokenDenomination, tokenBalance: newTokenBalance } =
-        getTokenDetails({
-          tokens,
-          tokenId
-        });
+      const { decimals, balance: newTokenBalance } = getTokenDetails({
+        tokens,
+        tokenId
+      });
 
       const tokenAmount = getEntireTokenBalance({
         balance: newTokenBalance,
-        denomination: tokenDenomination,
-        decimals
+        denomination: decimals,
+        decimals: constants.decimals
       });
       setTokenBalance(tokenAmount);
     }
@@ -72,8 +70,8 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
           balance,
           gasPrice: nominate(gasPrice),
           gasLimit: gasLimit,
-          denomination,
-          decimals,
+          denomination: constants.denomination,
+          decimals: constants.decimals,
           chainId
         });
       setDenominatedEgldBalance(denominatedBalance);

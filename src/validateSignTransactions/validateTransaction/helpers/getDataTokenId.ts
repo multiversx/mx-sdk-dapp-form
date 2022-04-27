@@ -8,10 +8,8 @@ export function getDataTokenId(props: {
   nftFound?: boolean;
 }) {
   const { type, egldLabel, tokenId, nftFound } = props;
-  const plainEsdtTransaction = type == null;
 
-  const esdtTx =
-    plainEsdtTransaction || type === esdtTransaction || type === scCall;
+  const esdtTx = !type || [scCall, esdtTransaction].includes(type);
 
   const dataTokenId =
     esdtTx && tokenId !== egldLabel && nftFound === false ? tokenId : '';

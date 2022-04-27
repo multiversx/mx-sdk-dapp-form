@@ -1,15 +1,5 @@
-import { decimals, denomination } from 'constants/index';
+import { constants } from '@elrondnetwork/dapp-core';
 import { TokenType } from 'types';
-
-export interface GetTokenDetailsReturnType {
-  tokenDenomination: number;
-  tokenDecimals: number;
-  tokenBalance: string;
-  tokenLabel: string;
-  tokenAvatar: string;
-  tokenIdentifier?: string;
-  tokenTicker?: string;
-}
 
 export function getTokenDetails({
   tokens,
@@ -17,25 +7,20 @@ export function getTokenDetails({
 }: {
   tokens: TokenType[];
   tokenId: string;
-}): GetTokenDetailsReturnType {
+}): TokenType {
   const selectedToken = tokens.find(({ identifier }) => identifier === tokenId);
-  const tokenDenomination = selectedToken
+  const tokenDecimals = selectedToken
     ? selectedToken.decimals
-    : denomination;
-  const tokenDecimals = selectedToken?.decimals || decimals;
+    : constants.denomination;
   const tokenBalance = selectedToken?.balance || '0';
-  const tokenLabel = selectedToken?.name || '';
-  const tokenAvatar =
-    selectedToken?.assets?.svgUrl || selectedToken?.assets?.pngUrl || '';
 
   return {
-    tokenDenomination,
-    tokenDecimals,
-    tokenBalance,
-    tokenLabel,
-    tokenAvatar,
-    tokenIdentifier: selectedToken?.identifier,
-    tokenTicker: selectedToken?.ticker
+    ...selectedToken,
+    decimals: tokenDecimals,
+    identifier: selectedToken?.identifier || '',
+    name: selectedToken?.name || '',
+    ticker: selectedToken?.ticker || '',
+    balance: tokenBalance
   };
 }
 

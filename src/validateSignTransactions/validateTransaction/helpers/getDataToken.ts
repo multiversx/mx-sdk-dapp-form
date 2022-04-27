@@ -13,7 +13,7 @@ export async function getDataToken(
 ) {
   try {
     const { data } = await getToken(tokenId, apiConfig);
-    const amount = denominate({
+    const denominatedAmount = denominate({
       input: nominatedTokenAmount,
       denomination: data.decimals,
       decimals: data.decimals,
@@ -23,15 +23,15 @@ export async function getDataToken(
 
     return {
       tokenData: data,
-      tokenAmount: amount,
+      tokenAmount: denominatedAmount,
       tokenFound: true
     };
-  } catch (e) {}
-
-  return {
-    tokenData: null,
-    tokenAmount: '0',
-    tokenFound: false
-  };
+  } catch (e) {
+    return {
+      tokenData: null,
+      tokenAmount: '0',
+      tokenFound: false
+    };
+  }
 }
 export default getDataToken;

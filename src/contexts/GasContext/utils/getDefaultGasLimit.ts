@@ -1,4 +1,5 @@
-import { gasLimit as configGasLimit, tokenGasLimit } from 'constants/index';
+import { constants } from '@elrondnetwork/dapp-core';
+import { tokenGasLimit } from 'constants/index';
 import { calculateNftGasLimit } from 'operations';
 
 export function getDefaultGasLimit({
@@ -16,7 +17,7 @@ export function getDefaultGasLimit({
   if (isEsdtTransaction) {
     return tokenGasLimit;
   }
-  return configGasLimit;
+  return constants.gasLimit;
 }
 
 export default getDefaultGasLimit;

@@ -18,7 +18,7 @@ export interface ExtendedValuesType extends ValuesType {
   ignoreTokenBalance?: boolean;
   readonly?: boolean;
   nft?: NftType;
-  tokens?: TokenType[];
+  tokens?: TokenType[] | null;
   ledger?: {
     ledgerDataActive: boolean;
     version: string;
