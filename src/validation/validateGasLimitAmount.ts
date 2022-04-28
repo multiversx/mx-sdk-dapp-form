@@ -12,7 +12,6 @@ interface ValidateGasLimitAmountType {
   gasLimit: string;
   data: string;
   chainId: string;
-  gasLimitContext?: boolean;
 }
 
 export function validateGasLimitAmount({
@@ -21,8 +20,7 @@ export function validateGasLimitAmount({
   gasPrice,
   gasLimit,
   data,
-  chainId,
-  gasLimitContext = false
+  chainId
 }: ValidateGasLimitAmountType) {
   const nominatedAmount = nominate(amount.toString());
   const bnAmount = new BigNumber(nominatedAmount);
@@ -40,10 +38,6 @@ export function validateGasLimitAmount({
 
   const valid = bnBalance.isGreaterThanOrEqualTo(bnAmount.plus(fee));
 
-  const gasLimitValidation = gasLimitContext
-    ? !bnAmount.isZero()
-    : bnAmount.isZero();
-  const result = valid ? valid : gasLimitValidation;
-  return result;
+  return valid;
 }
 export default validateGasLimitAmount;
