@@ -90,8 +90,18 @@ export function TokensContextProvider({
   useEffect(() => {
     const newTxType = getTxType({ nft, tokenId });
     setFieldValue(txTypeField, newTxType);
+
+    if (
+      newTxType === TxTypeEnum.SemiFungibleESDT ||
+      newTxType === TxTypeEnum.NonFungibleESDT
+    ) {
+      return;
+    }
+
     if (newTxType === TxTypeEnum.MetaESDT) {
-      const selectedNft = tokens?.find((token) => token.identifier === tokenId);
+      const selectedNft = allAvailableTokens?.find(
+        (token) => token.identifier === tokenId
+      );
       setFieldValue(nftField, selectedNft as NftType);
     } else {
       setFieldValue(nftField, undefined);
