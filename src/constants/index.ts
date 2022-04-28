@@ -1,5 +1,5 @@
 export const maxGasLimit = '600000000';
-export const gasLimitDelta = 10; //as
+export const gasLimitDelta = 10;
 export const tokenGasLimit = '500000';
 export const minDust = '5000000000000000'; // 0.05 EGLD
 export const ledgerMultiAccountMinimumVersion = '1.0.8';
