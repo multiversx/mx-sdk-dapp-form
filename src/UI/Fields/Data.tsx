@@ -1,30 +1,10 @@
 import React from 'react';
 import classnames from 'classnames';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { useUICustomizationContext } from 'contexts/UICustomization';
 
-export type DefaultFormDataClassesType = {
-  container: string;
-  label: string;
-  textarea: string;
-  invalidTextarea: string;
-  errorMsg: string;
-};
-export const defaultFormDataClasses = {
-  container: 'form-group mb-0',
-  label: 'pb-1',
-  textarea: 'form-control',
-  invalidTextarea: 'is-invalid',
-  errorMsg: 'invalid-feedback'
-};
-
-export const Data = ({
-  label,
-  customClasses
-}: {
-  label?: string;
-  customClasses?: DefaultFormDataClassesType;
-}) => {
-  const classes = customClasses || defaultFormDataClasses;
+export const Data = ({ label }: { label?: string }) => {
+  const { formDataField: classes } = useUICustomizationContext();
   const {
     formInfo: { isEgldTransaction },
     dataFieldInfo: { data, dataError, isDataInvalid, onChange, onBlur }
@@ -37,7 +17,7 @@ export const Data = ({
       </label>
       <textarea
         className={`${classes.textarea} ${classnames({
-          [classes.invalidTextarea]: isDataInvalid
+          [classes.invalidTextarea as string]: isDataInvalid
         })}`}
         id='data'
         name='data'

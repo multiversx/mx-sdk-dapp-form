@@ -13,25 +13,7 @@ import {
   TypeaheadMenuProps
 } from 'react-bootstrap-typeahead';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-
-export type DefaultFormToClassesType = {
-  container: string;
-  label: string;
-  inputContainer: string;
-  inputContainerError: string;
-  invalidReceiverErrorMsg: string;
-  scamErrorMsg: string;
-  scamErrorIcon: string;
-};
-export const defaultFormToClasses = {
-  container: 'form-group',
-  label: 'mb-2',
-  inputContainer: 'notranslate typeahead',
-  inputContainerError: 'is-invalid',
-  invalidReceiverErrorMsg: 'invalid-feedback',
-  scamErrorMsg: 'text-warning',
-  scamErrorIcon: 'text-warning mr-1'
-};
+import { useUICustomizationContext } from 'contexts/UICustomization';
 
 function filterBy(option: any, props: any) {
   if (props.text.length > 2) {
@@ -81,14 +63,8 @@ const renderInput = ({ inputRef, referenceElementRef, ...inputProps }: any) => (
   </Hint>
 );
 
-export const To = ({
-  label,
-  customClasses
-}: {
-  label?: string;
-  customClasses?: DefaultFormToClassesType;
-}) => {
-  const classes = customClasses || defaultFormToClasses;
+export const To = ({ label }: { label?: string }) => {
+  const { formToField: classes } = useUICustomizationContext();
   const { receiverInfo } = useSendFormContext();
 
   const {
@@ -140,7 +116,7 @@ export const To = ({
       {label && <div className={classes.label}>{label}</div>}
       <div
         className={classnames(classes.inputContainer, {
-          [classes.inputContainerError]: isReceiverInvalid
+          [classes.inputContainerError as string]: isReceiverInvalid
         })}
       >
         <Typeahead

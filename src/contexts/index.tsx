@@ -24,6 +24,10 @@ import {
   TokensContextInitializationPropsType,
   TokensContextProvider
 } from './TokensContext';
+import {
+  UICustomizationContextPropsType,
+  UICustomizationContextProvider
+} from './UICustomization';
 
 interface AppInfoContextProviderPropsType {
   accountInfo: AccountContextPropsType;
@@ -33,6 +37,7 @@ interface AppInfoContextProviderPropsType {
   children: React.ReactNode;
   Loader: JSXElementConstructor<any> | null;
   initGasLimitError?: string | null;
+  UICustomization?: UICustomizationContextPropsType;
 }
 export function AppInfoContextProvider({
   accountInfo,
@@ -41,7 +46,8 @@ export function AppInfoContextProvider({
   networkConfig: formNetworkConfig,
   children,
   Loader,
-  initGasLimitError
+  initGasLimitError,
+  UICustomization
 }: AppInfoContextProviderPropsType) {
   const [networkConfig, setNetworkConfig] = useState<NetworkType>();
 
@@ -92,7 +98,9 @@ export function AppInfoContextProvider({
                 <DataContextProvider>
                   <AmountContextProvider>
                     <SendFormContextProvider>
-                      {children}
+                      <UICustomizationContextProvider value={UICustomization}>
+                        {children}
+                      </UICustomizationContextProvider>
                     </SendFormContextProvider>
                   </AmountContextProvider>
                 </DataContextProvider>

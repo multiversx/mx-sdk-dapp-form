@@ -1,40 +1,20 @@
 import React from 'react';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { useUICustomizationContext } from 'contexts/UICustomization';
 import { EgldAmount } from './EgldAmount';
 import { EsdtAmount } from './EsdtAmount';
 import { NftAmount } from './NftAmount';
 
-export type DefaultFormAmountClassesType = {
-  container: string;
-  invalidInput: string;
-  inputContainer: string;
-  input: string;
-  maxBtnContainer: string;
-  maxBtn: string;
-  errorMsg: string;
-};
-export const defaultFormAmountClasses = {
-  container: 'form-group amount',
-  invalidInput: 'is-invalid',
-  inputContainer: 'amount-holder',
-  input: 'form-control amount-input',
-  maxBtnContainer: 'd-flex align-content-center justify-content-end',
-  maxBtn: 'btn btn-link',
-  errorMsg: 'invalid-feedback'
-};
-
 export function Amount({
-  customClasses,
   label,
   TokenSelector
 }: {
-  customClasses?: DefaultFormAmountClassesType;
   label?: string;
   TokenSelector?: React.ReactNode;
 }) {
   const { formInfo } = useSendFormContext();
   const { isNftTransaction, isEsdtTransaction } = formInfo;
-  const classes = customClasses || defaultFormAmountClasses;
+  const { formAmountField: classes } = useUICustomizationContext();
 
   if (isNftTransaction) {
     return (
