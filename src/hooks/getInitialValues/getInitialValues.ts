@@ -1,3 +1,4 @@
+import { setApiConfig } from 'apiCalls';
 import { getIdentifierType } from 'validation';
 import getInitialAmount from './getInitialAmount';
 import { getInitialData } from './getInitialData';
@@ -11,11 +12,14 @@ export async function getInitialValues(props: GetInitialValuesType) {
   const {
     address,
     egldLabel,
-    configValues: { receiver, amount, gasPrice, data, tokenId }
+    configValues: { receiver, amount, gasPrice, data, tokenId },
+    networkConfig
   } = props;
 
   const computedTokenId = tokenId || egldLabel;
-
+  if (networkConfig) {
+    setApiConfig(networkConfig);
+  }
   const [computedNft, esdtToken, gasData] = await Promise.all([
     getNft({ data, address, tokenId }),
     getToken({ identifier: tokenId, address }),
