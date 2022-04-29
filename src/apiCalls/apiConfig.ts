@@ -31,19 +31,8 @@ export async function getApiConfig(chainId?: string): Promise<ApiConfigType> {
     const config = await getNetworkConfigForChainId(chainId);
     return setApiConfig(config);
   }
-  return new Promise((resolve, reject) => {
-    //keep the async call to try and pool the apiConfig when it's initialized
-    const interval = setInterval(() => {
-      if (apiConfig.value != null) {
-        //resolve if apiConfig is initialized
-        resolve(apiConfig.value);
-      }
-    }, 200);
-
-    setTimeout(() => {
-      clearInterval(interval);
-      //after 5 seconds, time out the promise and throw
-      reject('Cannot get API Config');
-    }, 5000);
-  });
+  const message =
+    'Cannot get api config, make sure to initialize the context before calling APIs';
+  console.error(message);
+  throw message;
 }
