@@ -63,8 +63,12 @@ const renderInput = ({ inputRef, referenceElementRef, ...inputProps }: any) => (
   </Hint>
 );
 
-export const To = ({ label }: { label?: string }) => {
-  const { formToField: classes } = useUICustomizationContext();
+export const To = () => {
+  const {
+    fields: {
+      to: { classes: customClasses, label }
+    }
+  } = useUICustomizationContext();
   const { receiverInfo } = useSendFormContext();
 
   const {
@@ -112,11 +116,11 @@ export const To = ({ label }: { label?: string }) => {
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
   return (
-    <div className={classes.container} key={key}>
-      {label && <div className={classes.label}>{label}</div>}
+    <div className={customClasses.container} key={key}>
+      {label && <div className={customClasses.label}>{label}</div>}
       <div
-        className={classnames(classes.inputContainer, {
-          [classes.inputContainerError as string]: isReceiverInvalid
+        className={classnames(customClasses.inputContainer, {
+          [customClasses.inputContainerError as string]: isReceiverInvalid
         })}
       >
         <Typeahead
@@ -139,18 +143,18 @@ export const To = ({ label }: { label?: string }) => {
       </div>
       {isReceiverInvalid && (
         <div
-          className={classes.invalidReceiverErrorMsg}
+          className={customClasses.invalidReceiverErrorMsg}
           data-testid='receiverError'
         >
           {receiverError}
         </div>
       )}
       {scamError && (
-        <div className={classes.scamErrorMsg} data-testid='receiverScam'>
+        <div className={customClasses.scamErrorMsg} data-testid='receiverScam'>
           <span>
             <FontAwesomeIcon
               icon={faExclamationTriangle}
-              className={classes.scamErrorIcon}
+              className={customClasses.scamErrorIcon}
             />
             <small>{scamError}</small>
           </span>

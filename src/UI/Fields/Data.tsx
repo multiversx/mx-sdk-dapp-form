@@ -3,21 +3,25 @@ import classnames from 'classnames';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
-export const Data = ({ label }: { label?: string }) => {
-  const { formDataField: classes } = useUICustomizationContext();
+export const Data = () => {
+  const {
+    fields: {
+      data: { classes: customClasses, label }
+    }
+  } = useUICustomizationContext();
   const {
     formInfo: { isEgldTransaction },
     dataFieldInfo: { data, dataError, isDataInvalid, onChange, onBlur }
   } = useSendFormContext();
 
   return (
-    <div className={classes.container}>
-      <label htmlFor='data' className={classes.label}>
+    <div className={customClasses.container}>
+      <label htmlFor='data' className={customClasses.label}>
         {label}
       </label>
       <textarea
-        className={`${classes.textarea} ${classnames({
-          [classes.invalidTextarea as string]: isDataInvalid
+        className={`${customClasses.textarea} ${classnames({
+          [customClasses.invalidTextarea as string]: isDataInvalid
         })}`}
         id='data'
         name='data'
@@ -29,7 +33,7 @@ export const Data = ({ label }: { label?: string }) => {
       />
 
       {isDataInvalid && (
-        <div className={classes.errorMsg} data-testid='dataError'>
+        <div className={customClasses.errorMsg} data-testid='dataError'>
           {dataError}
         </div>
       )}

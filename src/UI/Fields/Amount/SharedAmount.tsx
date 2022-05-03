@@ -1,25 +1,28 @@
 import React from 'react';
 import classnames from 'classnames';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { DefaultFormAmountClassesType } from '../Amount';
+import { useUICustomizationContext } from 'contexts/UICustomization';
 
 interface SharedAmountType {
   AvailableAmountElement: () => JSX.Element | null;
-  TokenSelector?: React.ReactNode;
-  customClasses: DefaultFormAmountClassesType;
-  label: string;
 }
 
-export const SharedAmount = ({
-  AvailableAmountElement,
-  TokenSelector,
-  customClasses,
-  label
-}: SharedAmountType) => {
+export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   const {
     formInfo: { checkInvalid },
     amountInfo
   } = useSendFormContext();
+
+  const {
+    fields: {
+      amount: {
+        classes: customClasses,
+        label,
+        components: { tokenSelector: TokenSelector }
+      }
+    }
+  } = useUICustomizationContext();
+
   const {
     amount,
     error,
@@ -68,7 +71,7 @@ export const SharedAmount = ({
           </div>
         )}
 
-        {TokenSelector}
+        {TokenSelector ? <TokenSelector /> : null}
       </div>
       {isInvalid ? (
         <div className='invalid-feedback' data-testid='amountError'>
