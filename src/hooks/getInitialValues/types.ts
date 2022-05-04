@@ -1,3 +1,4 @@
+import { NetworkType } from '@elrondnetwork/dapp-core';
 import { FormConfigType, NftType } from 'types';
 
 export interface ComputedNftType {
@@ -13,4 +14,5 @@ export interface GetInitialValuesType {
   egldLabel: string;
   nonce: number;
   chainId: string;
+  networkConfig?: NetworkType;
 }
