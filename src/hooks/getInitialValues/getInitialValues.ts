@@ -1,4 +1,4 @@
-import { getIdentifierType } from 'validation';
+import { getIdentifierType } from '@elrondnetwork/dapp-core';
 import getInitialAmount from './getInitialAmount';
 import { getInitialData } from './getInitialData';
 import getInitialGasLimit from './getInitialGasLimit';

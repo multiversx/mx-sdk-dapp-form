@@ -1,5 +1,5 @@
+import { getIdentifierType } from '@elrondnetwork/dapp-core';
 import { ApiConfigType, getNftByAddressAndIdentifier } from 'apiCalls';
-import { getIdentifierType } from 'validation';
 
 export async function searchNftByIdentifier(
   props: { identifier: string; address: string },

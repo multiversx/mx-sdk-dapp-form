@@ -1,5 +1,5 @@
+import { getIdentifierType } from '@elrondnetwork/dapp-core';
 import { ApiConfigType, getAccountToken } from 'apiCalls';
-import { getIdentifierType } from 'validation';
 
 async function getSingleToken(
   props: { identifier: string; address: string },
