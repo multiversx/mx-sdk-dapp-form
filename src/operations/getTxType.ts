@@ -1,6 +1,6 @@
+import { getIdentifierType } from '@elrondnetwork/dapp-core';
 import { NftEnumType, NftType } from 'types';
 import { TxTypeEnum } from 'types';
-import getIdentifierType from '../validation/getIdentifierType';
 
 export function getTxType({
   nft,

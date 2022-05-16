@@ -1,7 +1,8 @@
 import React, { useCallback, useContext, useState } from 'react';
+import { getIdentifierType } from '@elrondnetwork/dapp-core';
 import { useFormikContext } from 'formik';
 import { ExtendedValuesType, TxTypeEnum } from 'types';
-import { getIdentifierType, verifyInvalid } from 'validation';
+import { verifyInvalid } from 'validation';
 
 export interface FormContextBasePropsType {
   prefilledForm: boolean;

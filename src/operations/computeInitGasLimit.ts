@@ -1,9 +1,9 @@
 import { isContract, constants } from '@elrondnetwork/dapp-core';
+import { getIdentifierType } from '@elrondnetwork/dapp-core';
 import BigNumber from 'bignumber.js';
 import { tokenGasLimit } from 'constants/index';
 import { DelegationContractDataType } from 'types';
 import fetchGasLimit from '../hooks/useFetchGasLimit/fetchGasLimit';
-import getIdentifierType from '../validation/getIdentifierType';
 import calculateGasLimit from './calculateGasLimit';
 import { calculateNftGasLimit } from './calculateNftGasLimit';
 
