@@ -1,21 +1,27 @@
 import React from 'react';
 import classnames from 'classnames';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { useUICustomizationContext } from 'contexts/UICustomization';
 
 export const Data = () => {
+  const {
+    fields: {
+      data: { classes: customClasses, label }
+    }
+  } = useUICustomizationContext();
   const {
     formInfo: { isEgldTransaction },
     dataFieldInfo: { data, dataError, isDataInvalid, onChange, onBlur }
   } = useSendFormContext();
 
   return (
-    <div className='form-group mb-0'>
-      <label htmlFor='data' className='pb-1'>
-        Data
+    <div className={customClasses.container}>
+      <label htmlFor='data' className={customClasses.label}>
+        {label}
       </label>
       <textarea
-        className={`form-control ${classnames({
-          'is-invalid': isDataInvalid
+        className={`${customClasses.textarea} ${classnames({
+          [customClasses.invalidTextarea as string]: isDataInvalid
         })}`}
         id='data'
         name='data'
@@ -27,7 +33,7 @@ export const Data = () => {
       />
 
       {isDataInvalid && (
-        <div className='invalid-feedback' data-testid='dataError'>
+        <div className={customClasses.errorMsg} data-testid='dataError'>
           {dataError}
         </div>
       )}

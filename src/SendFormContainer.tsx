@@ -12,6 +12,7 @@ import {
   TokensContextInitializationPropsType
 } from 'contexts';
 
+import { UICustomizationContextPropsType } from 'contexts/UICustomization';
 import { generateTransaction, getTxType } from 'operations';
 import { ExtendedValuesType, TxTypeEnum, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
@@ -31,6 +32,7 @@ export interface SendFormContainerPropsType {
   networkConfig: FormNetworkConfigType;
   Loader?: JSXElementConstructor<any> | null;
   shouldGenerateTransactionOnSubmit?: boolean;
+  UICustomization?: UICustomizationContextPropsType;
   children: React.ReactNode;
 }
 
@@ -45,6 +47,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     initGasLimitError,
     networkConfig,
     Loader = SendLoader,
+    UICustomization,
     shouldGenerateTransactionOnSubmit = true
   } = props;
 
@@ -112,6 +115,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
         networkConfig={networkConfig}
         tokensInfo={tokensInfo}
         Loader={Loader}
+        UICustomization={UICustomization}
       >
         {children}
       </AppInfoContextProvider>

@@ -18,7 +18,7 @@ const ListOption = (props: any) => {
   );
 };
 
-export function SelectToken() {
+export function SelectToken({ label }: { label?: string }) {
   const { formInfo, accountInfo, tokensInfo } = useSendFormContext();
 
   const { readonly } = formInfo;
@@ -91,7 +91,7 @@ export function SelectToken() {
   return (
     <div className={`form-group select-token ${invalidClassname}`}>
       <label htmlFor='tokenId' data-testid='tokenIdLabel'>
-        Token
+        {label}
       </label>
 
       <div className={`input-group input-group-seamless ${invalidClassname}`}>
