@@ -1,4 +1,5 @@
-import { searchNftByIdentifier, getSearchParamNft } from './getSearchParamNft';
+import { getIdentifierType } from '@elrondnetwork/dapp-core';
+import { searchNftByIdentifier } from './getSearchParamNft';
 import searchNft from './searchNft';
 import { ComputedNftType } from './types';
 
@@ -10,18 +11,21 @@ const emptyData = {
 export async function getNft(props: {
   data?: string;
   address: string;
-  tokenId?: string;
+  identifier?: string;
 }): Promise<ComputedNftType | null> {
-  const { data, address, tokenId } = props;
+  const { data, address, identifier } = props;
   if (data) {
     return await searchNft({ data, address });
   }
-  if (tokenId) {
-    const nft = await searchNftByIdentifier({ identifier: tokenId, address });
+  const { isNft } = getIdentifierType(identifier);
+  if (identifier && isNft) {
+    const nft = await searchNftByIdentifier({
+      identifier,
+      address
+    });
     return nft ? { ...emptyData, nft } : null;
   }
-  const nft = await getSearchParamNft(address);
-  return nft ? { ...emptyData, nft } : null;
+  return null;
 }
 
 export default getNft;

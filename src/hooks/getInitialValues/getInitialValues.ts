@@ -8,21 +8,33 @@ import getNft from './getNft';
 import { getToken } from './getToken';
 import { GetInitialValuesType } from './types';
 
+function getSearchParamTokenId() {
+  const urlSearchParams = new URLSearchParams(window.location.search);
+  const searchParams = Object.fromEntries(urlSearchParams);
+  const searchParamTokenId = searchParams.token;
+  return searchParamTokenId;
+}
+
 export async function getInitialValues(props: GetInitialValuesType) {
   const {
     address,
     egldLabel,
-    configValues: { receiver, amount, gasPrice, data, tokenId },
+    configValues: { receiver, amount, gasPrice, data, tokenId: configTokenId },
     networkConfig
   } = props;
 
-  const computedTokenId = tokenId || egldLabel;
+  const searchParamTokenId = getSearchParamTokenId();
+  const identifier = configTokenId || searchParamTokenId;
+
+  const computedTokenId = identifier || egldLabel;
+
   if (networkConfig) {
     setApiConfig(networkConfig);
   }
+
   const [computedNft, esdtToken, gasData] = await Promise.all([
-    getNft({ data, address, tokenId }),
-    getToken({ identifier: tokenId, address }),
+    getNft({ data, address, identifier }),
+    getToken({ identifier, address }),
     getInitialGasLimit({
       ...props,
       computedTokenId
@@ -40,7 +52,7 @@ export async function getInitialValues(props: GetInitialValuesType) {
     data: getInitialData({ computedNft, data, receiver, amount })
   };
 
-  const { isEsdt } = getIdentifierType(computedTokenId);
+  const { isEsdt } = getIdentifierType(identifier);
 
   const returnValues = {
     initialValues,

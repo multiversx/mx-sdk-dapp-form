@@ -22,7 +22,7 @@ export function getToken(props: { identifier?: string; address: string }) {
   const { identifier, address } = props;
   const { isEsdt } = getIdentifierType(identifier);
 
-  if (isEsdt && identifier) {
+  if (identifier && isEsdt) {
     return getSingleToken({ address, identifier });
   }
 

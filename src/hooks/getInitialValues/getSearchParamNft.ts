@@ -24,15 +24,3 @@ export async function searchNftByIdentifier(
   }
   return null;
 }
-
-export function getSearchParamNft(address: string) {
-  const urlSearchParams = new URLSearchParams(window.location.search);
-  const searchParams = Object.fromEntries(urlSearchParams);
-  const { isNft } = getIdentifierType(searchParams?.token);
-
-  if (!isNft) {
-    return null;
-  }
-
-  return searchNftByIdentifier({ identifier: searchParams.token, address });
-}
