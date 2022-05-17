@@ -13,6 +13,7 @@ import {
   TypeaheadMenuProps
 } from 'react-bootstrap-typeahead';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { useUICustomizationContext } from 'contexts/UICustomization';
 
 function filterBy(option: any, props: any) {
   if (props.text.length > 2) {
@@ -63,6 +64,11 @@ const renderInput = ({ inputRef, referenceElementRef, ...inputProps }: any) => (
 );
 
 export const To = () => {
+  const {
+    fields: {
+      to: { classes: customClasses, label }
+    }
+  } = useUICustomizationContext();
   const { receiverInfo } = useSendFormContext();
 
   const {
@@ -110,10 +116,11 @@ export const To = () => {
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
   return (
-    <div className='form-group' key={key}>
+    <div className={customClasses.container} key={key}>
+      {label && <div className={customClasses.label}>{label}</div>}
       <div
-        className={classnames('notranslate typeahead', {
-          'is-invalid': isReceiverInvalid
+        className={classnames(customClasses.inputContainer, {
+          [customClasses.inputContainerError as string]: isReceiverInvalid
         })}
       >
         <Typeahead
@@ -135,16 +142,19 @@ export const To = () => {
         />
       </div>
       {isReceiverInvalid && (
-        <div className='invalid-feedback' data-testid='receiverError'>
+        <div
+          className={customClasses.invalidReceiverErrorMsg}
+          data-testid='receiverError'
+        >
           {receiverError}
         </div>
       )}
       {scamError && (
-        <div className='text-warning' data-testid='receiverScam'>
+        <div className={customClasses.scamErrorMsg} data-testid='receiverScam'>
           <span>
             <FontAwesomeIcon
               icon={faExclamationTriangle}
-              className='text-warning mr-1'
+              className={customClasses.scamErrorIcon}
             />
             <small>{scamError}</small>
           </span>
