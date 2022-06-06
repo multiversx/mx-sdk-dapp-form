@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
+import { LoginMethodsEnum } from '@elrondnetwork/dapp-core';
 
 export interface AccountContextPropsType {
   address: string;
   nonce: number;
   balance: string;
-  providerType: string;
+  providerType: LoginMethodsEnum;
 }
 
 interface AccountContextProviderPropsType {
