@@ -1,7 +1,6 @@
 import React from 'react';
 import { DappUI, nominate, constants } from '@elrondnetwork/dapp-core';
 import { NftType, TxTypeEnum } from 'types';
-import { UsdValue } from 'UI/UsdValue';
 import Token from './Token';
 
 export interface AmountPropsType {
@@ -80,9 +79,9 @@ const Amount = (props: AmountPropsType) => {
                   data-testid='confirmAmount'
                 />
                 {!isEsdtTransaction && (
-                  <UsdValue
+                  <DappUI.UsdValue
                     amount={amount}
-                    egldPriceInUsd={egldPriceInUsd}
+                    usd={egldPriceInUsd}
                     data-testid='confirmUsdValue'
                   />
                 )}
