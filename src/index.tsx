@@ -2,6 +2,7 @@ export * from './UI';
 export * from './contexts';
 export * from './hooks';
 export * from './operations';
+export * from './utilities';
 export * from './validation';
 export * from './validationSchema';
 export * from './validateSignTransactions';
