@@ -1,5 +1,5 @@
 import { denominate, constants } from '@elrondnetwork/dapp-core';
-import usdValue from 'helpers/misc/usdValue';
+import { usdValue } from 'utilities';
 
 export function calculateFeeInFiat({
   feeLimit,

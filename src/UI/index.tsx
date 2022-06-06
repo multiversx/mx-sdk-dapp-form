@@ -1,4 +1,3 @@
-export * from './UsdValue';
 export * from './InfoDust';
 export * from './Loader';
 export * from './Form';

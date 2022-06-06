@@ -1,5 +1,5 @@
-import { showMax } from 'helpers';
 import { NftType, TxTypeEnum } from 'types';
+import { showMax } from 'utilities';
 
 interface GetIsMaxButtonVisiblePropsType {
   nft?: NftType;
