@@ -1,14 +1,10 @@
 import { nominate, constants } from '@elrondnetwork/dapp-core';
 import {
   Transaction,
-  Nonce,
-  Balance,
-  GasPrice,
-  GasLimit,
   TransactionPayload,
-  ChainID,
   TransactionVersion,
-  Address
+  Address,
+  TokenPayment
 } from '@elrondnetwork/erdjs';
 import BigNumber from 'bignumber.js';
 
@@ -36,13 +32,13 @@ export function prepareTransaction({
   const to = receiver;
 
   const transaction = new Transaction({
-    nonce: new Nonce(nonce),
-    value: Balance.fromString(bNamount.toString(10)),
+    nonce: nonce,
+    value: TokenPayment.egldFromBigInteger(bNamount.toString(10)),
     receiver: new Address(to),
-    gasPrice: new GasPrice(parseInt(gasPrice)),
-    gasLimit: new GasLimit(parseInt(gasLimit)),
+    gasPrice: parseInt(gasPrice),
+    gasLimit: parseInt(gasLimit),
     data: new TransactionPayload(data),
-    chainID: new ChainID(chainId),
+    chainID: chainId,
     version: new TransactionVersion(constants.version)
   });
 
