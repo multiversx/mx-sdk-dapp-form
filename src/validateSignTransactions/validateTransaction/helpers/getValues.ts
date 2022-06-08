@@ -35,9 +35,9 @@ export function getValues(props: {
           addCommas: false
         }),
     tokenId: tokenFound ? tokenId : egldLabel,
-    gasLimit: (transaction.gasLimit.valueOf() || gasLimit).toString(),
+    gasLimit: String(transaction.gasLimit.valueOf() || gasLimit),
     gasPrice: denominate({
-      input: (transaction.gasPrice.valueOf() || constants.gasPrice).toString(),
+      input: String(transaction.gasPrice.valueOf() || constants.gasPrice),
       denomination: constants.denomination,
       decimals: constants.decimals,
       showLastNonZeroDecimal: true,
