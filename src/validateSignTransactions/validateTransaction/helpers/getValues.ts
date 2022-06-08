@@ -35,16 +35,16 @@ export function getValues(props: {
           addCommas: false
         }),
     tokenId: tokenFound ? tokenId : egldLabel,
-    gasLimit: transaction.gasLimit || gasLimit,
+    gasLimit: (transaction.gasLimit.valueOf() || gasLimit).toString(),
     gasPrice: denominate({
-      input: transaction.gasPrice || constants.gasPrice,
+      input: (transaction.gasPrice.valueOf() || constants.gasPrice).toString(),
       denomination: constants.denomination,
       decimals: constants.decimals,
       showLastNonZeroDecimal: true,
       addCommas: false
     }),
     data: String(transaction.data),
-    nonce: transaction.nonce
+    nonce: transaction.nonce.valueOf().toString()
   };
 
   return values;
