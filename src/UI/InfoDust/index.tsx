@@ -4,12 +4,8 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { minDust } from 'constants/index';
-import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
-export const InfoDust = () => {
-  const {
-    tokensInfo: { egldLabel }
-  } = useSendFormContext();
+export const InfoDust = ({ egldLabel }: { egldLabel: string }) => {
   return (
     <div className='info-dust'>
       <OverlayTrigger

@@ -17,7 +17,7 @@ export const EgldAmount = () => {
         <div className='d-flex align-items-center'>
           <DappUI.UsdValue amount={amountInfo.amount} usd={egldPriceInUsd} />
           {amountInfo.amount === maxAmountMinusDust && isMaxClicked && (
-            <InfoDust />
+            <InfoDust egldLabel={egldLabel} />
           )}
         </div>
       );
