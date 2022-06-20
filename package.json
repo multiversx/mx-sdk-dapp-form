@@ -65,6 +65,16 @@
     "tslib": "2.4.0",
     "typescript": "4.7.3"
   },
+  "size-limit": [
+    {
+      "path": "dist/dapp-core-form.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/dapp-core-form.esm.js",
+      "limit": "10 KB"
+    }
+  ],
   "files": [
     "dist",
     "src"
@@ -82,7 +92,8 @@
   },
   "resolutions": {
     "@types/react": "18.0.10",
-    "@types/react-dom": "18.0.5"
+    "@types/react-dom": "18.0.5",
+    "@elrondnetwork/dapp-core": "2.0.0-alpha.5"
   },
   "optionalDependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
