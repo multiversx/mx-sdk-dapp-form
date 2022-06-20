@@ -4,14 +4,8 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';
 import { Form } from 'react-bootstrap';
-import {
-  Typeahead,
-  Menu,
-  MenuItem,
-  Hint,
-  TypeaheadResult,
-  TypeaheadMenuProps
-} from 'react-bootstrap-typeahead';
+import { Typeahead, Menu, MenuItem, Hint } from 'react-bootstrap-typeahead';
+import { MenuProps } from 'react-bootstrap-typeahead/types/components/Menu';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
@@ -22,18 +16,11 @@ function filterBy(option: any, props: any) {
   return false;
 }
 
-const renderMenuItemChildren = (option: TypeaheadResult<string>) => (
-  <div>{option}</div>
-);
+// const shouldSelect = (canSelect: boolean, e: any) => {
+//   return e.key === 'Enter' || e.keyCode === 13 || canSelect;
+// };
 
-const shouldSelect = (canSelect: boolean, e: any) => {
-  return e.key === 'Enter' || e.keyCode === 13 || canSelect;
-};
-
-const renderMenu = (
-  results: TypeaheadResult<string>[],
-  menuProps: TypeaheadMenuProps<string>
-) => {
+const renderMenu = (results: string[], menuProps: MenuProps) => {
   if (!results.length) {
     return null;
   }
@@ -51,7 +38,7 @@ const renderMenu = (
 };
 
 const renderInput = ({ inputRef, referenceElementRef, ...inputProps }: any) => (
-  <Hint shouldSelect={shouldSelect}>
+  <Hint>
     <Form.Control
       {...inputProps}
       data-testid='receiver'
@@ -100,13 +87,6 @@ export const To = () => {
     onChangeReceiver(noSpaces);
   };
 
-  const onChange = (selected: string[]) => {
-    const [selectedValue] = selected;
-    if (selectedValue) {
-      onChangeReceiver(selectedValue);
-    }
-  };
-
   function triggerRerenderOnceOnHook() {
     if (addressIsValid(receiver) && !key) {
       setKey(receiver);
@@ -134,11 +114,12 @@ export const To = () => {
           caseSensitive={false}
           filterBy={filterBy}
           onInputChange={onInputChange}
-          onChange={onChange}
-          onBlur={onBlurReceiver}
-          renderMenuItemChildren={renderMenuItemChildren}
+          onBlur={(e) => {
+            onBlurReceiver(e as any);
+          }}
+          renderMenuItemChildren={(option) => <div>{option.toString()}</div>}
           renderInput={renderInput}
-          renderMenu={renderMenu}
+          renderMenu={renderMenu as any}
         />
       </div>
       {isReceiverInvalid && (
