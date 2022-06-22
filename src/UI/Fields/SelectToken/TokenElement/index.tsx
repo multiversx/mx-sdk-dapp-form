@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { DappUI, constants } from '@elrondnetwork/dapp-core';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import ElrondSymbol from 'symbol.svg';
 import { scamFlag } from 'helpers';
 import { NftEnumType, NftType, TokenType } from 'types';
+import { ReactComponent as ElrondSymbol } from './symbol.svg';
 
 export default function TokenElement({
   inDropdown = false,
@@ -56,12 +56,10 @@ export default function TokenElement({
     <div className='d-flex align-items-center token-element h-100'>
       <div className={inDropdown ? 'mr-1' : 'mr-2'}>
         {isEgld || avatar ? (
-          <img
+          <ElrondSymbol
             className={`${isEgld ? 'elrond-symbol' : 'rounded-circle'} ${
               inDropdown ? avatarDropdownClass : 'mr-2'
             }`}
-            src={isEgld ? ElrondSymbol : avatar}
-            alt={name}
             height={inDropdown ? avatarDropdownSize : 42}
           />
         ) : (
