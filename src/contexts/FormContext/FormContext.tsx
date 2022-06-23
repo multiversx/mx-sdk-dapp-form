@@ -1,5 +1,5 @@
 import React, { useCallback, useContext, useState } from 'react';
-import { getIdentifierType } from '@elrondnetwork/dapp-core';
+import { getIdentifierType } from '@elrondnetwork/dapp-core/utils';
 import { useFormikContext } from 'formik';
 import { ExtendedValuesType, TxTypeEnum } from 'types';
 import { verifyInvalid } from 'validation';

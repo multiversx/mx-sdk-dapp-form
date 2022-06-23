@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { DappUI, constants } from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
+import * as DappUI from '@elrondnetwork/dapp-core/UI';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { scamFlag } from 'helpers';

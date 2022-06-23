@@ -1,5 +1,5 @@
 import React from 'react';
-import { DappUI } from '@elrondnetwork/dapp-core';
+import * as DappUI from '@elrondnetwork/dapp-core/UI';
 import { calculateFeeInFiat } from 'operations';
 
 const Fee = ({

@@ -1,4 +1,4 @@
-import { nominate } from '@elrondnetwork/dapp-core';
+import { nominate } from '@elrondnetwork/dapp-core/utils';
 import BigNumber from 'bignumber.js';
 import { getTransactionCost } from 'apiCalls/transactions';
 import { gasLimitDelta } from 'constants/index';

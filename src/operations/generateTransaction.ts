@@ -1,4 +1,4 @@
-import { nominate } from '@elrondnetwork/dapp-core';
+import { nominate } from '@elrondnetwork/dapp-core/utils';
 import { prepareTransaction } from 'hooks/useFetchGasLimit/prepareTransaction';
 import { ExtendedValuesType } from 'types';
 

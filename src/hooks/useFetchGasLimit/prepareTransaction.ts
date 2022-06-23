@@ -1,4 +1,5 @@
-import { nominate, constants } from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
+import { nominate } from '@elrondnetwork/dapp-core/utils';
 import {
   Transaction,
   TransactionPayload,

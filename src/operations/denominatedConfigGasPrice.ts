@@ -1,4 +1,5 @@
-import { denominate, constants } from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
+import { denominate } from '@elrondnetwork/dapp-core/utils';
 
 export const denominatedConfigGasPrice = denominate({
   input: String(constants.gasPrice),

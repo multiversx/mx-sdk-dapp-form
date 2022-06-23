@@ -96,9 +96,9 @@
     "@elrondnetwork/dapp-core": "2.0.0-alpha.5"
   },
   "optionalDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.1.1",
-    "@fortawesome/free-solid-svg-icons": "^6.1.1",
-    "@fortawesome/react-fontawesome": "^0.1.18",
+    "@fortawesome/fontawesome-svg-core": "6.1.1",
+    "@fortawesome/free-solid-svg-icons": "6.1.1",
+    "@fortawesome/react-fontawesome": "0.1.18",
     "react-bootstrap": "2.4.0",
     "react-bootstrap-typeahead": "6.0.0-rc.2",
     "react-select": "5.3.2"

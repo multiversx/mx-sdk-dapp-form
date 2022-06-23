@@ -1,4 +1,4 @@
-import { constants } from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
 import { tokenGasLimit } from 'constants/index';
 import { calculateNftGasLimit } from 'operations';
 

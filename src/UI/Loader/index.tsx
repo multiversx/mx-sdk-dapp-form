@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DappUI } from '@elrondnetwork/dapp-core';
+import * as DappUI from '@elrondnetwork/dapp-core/UI';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons/faSpinner';
 
 export const Loader = () => {

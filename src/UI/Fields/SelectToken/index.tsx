@@ -1,5 +1,5 @@
 import React from 'react';
-import { constants } from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
 import classnames from 'classnames';
 import Select, { components } from 'react-select';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';

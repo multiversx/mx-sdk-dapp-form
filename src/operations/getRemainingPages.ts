@@ -1,4 +1,4 @@
-import { stringIsInteger } from '@elrondnetwork/dapp-core';
+import { stringIsInteger } from '@elrondnetwork/dapp-core/utils';
 
 export const getRemainingPages = ({
   count,

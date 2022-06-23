@@ -1,4 +1,4 @@
-import { getIdentifierType } from '@elrondnetwork/dapp-core';
+import { getIdentifierType } from '@elrondnetwork/dapp-core/utils';
 import { searchNftByIdentifier } from './getSearchParamNft';
 import searchNft from './searchNft';
 import { ComputedNftType } from './types';

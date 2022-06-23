@@ -1,4 +1,4 @@
-import { constants } from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
 
 export const maxDecimals = (amount: string, customDenomination?: number) => {
   const denomination =

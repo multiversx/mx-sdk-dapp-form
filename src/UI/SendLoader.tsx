@@ -1,5 +1,5 @@
 import React from 'react';
-import { DappUI } from '@elrondnetwork/dapp-core';
+import * as DappUI from '@elrondnetwork/dapp-core/UI';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 export const SendLoader = ({ title = 'Loading...' }: { title?: string }) => {

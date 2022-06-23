@@ -1,4 +1,4 @@
-import { stringIsInteger } from '@elrondnetwork/dapp-core';
+import { stringIsInteger } from '@elrondnetwork/dapp-core/utils';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { maxGasLimit } from 'constants/index';

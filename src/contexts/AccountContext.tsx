@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { LoginMethodsEnum } from '@elrondnetwork/dapp-core';
+import { LoginMethodsEnum } from '@elrondnetwork/dapp-core/types';
 
 export interface AccountContextPropsType {
   address: string;

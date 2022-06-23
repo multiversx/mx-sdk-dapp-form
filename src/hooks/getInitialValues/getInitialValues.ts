@@ -1,4 +1,4 @@
-import { getIdentifierType } from '@elrondnetwork/dapp-core';
+import { getIdentifierType } from '@elrondnetwork/dapp-core/utils';
 import { setApiConfig } from 'apiCalls';
 import getInitialAmount from './getInitialAmount';
 import { getInitialData } from './getInitialData';

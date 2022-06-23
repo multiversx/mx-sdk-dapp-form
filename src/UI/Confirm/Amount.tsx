@@ -1,5 +1,8 @@
 import React from 'react';
-import { DappUI, nominate, constants } from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
+import * as DappUI from '@elrondnetwork/dapp-core/UI';
+import { nominate } from '@elrondnetwork/dapp-core/utils';
+
 import { NftType, TxTypeEnum } from 'types';
 import Token from './Token';
 
