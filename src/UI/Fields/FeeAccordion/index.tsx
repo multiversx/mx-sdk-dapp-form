@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import * as DappUI from '@elrondnetwork/dapp-core/UI';
+import { Denominate } from '@elrondnetwork/dapp-core/UI';
 import {
   faAngleDown,
   faAngleRight,
@@ -48,7 +48,7 @@ export const FeeAccordion = () => {
           />{' '}
           <label className='mb-0 mr-2'>Fee</label>
           <span className='mr-2' data-testid='feeLimit'>
-            <DappUI.Denominate
+            <Denominate
               value={feeLimit}
               showLastNonZeroDecimal
               egldLabel={egldLabel}

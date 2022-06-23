@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as constants from '@elrondnetwork/dapp-core/constants';
-import * as DappUI from '@elrondnetwork/dapp-core/UI';
+import { Denominate } from '@elrondnetwork/dapp-core/UI';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { scamFlag } from 'helpers';
@@ -91,7 +91,7 @@ export default function TokenElement({
         </span>
 
         {!inDropdown && nftType !== NftEnumType.NonFungibleESDT && (
-          <DappUI.Denominate
+          <Denominate
             egldLabel={identifier}
             value={balance || '0'}
             decimals={

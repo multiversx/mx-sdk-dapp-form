@@ -1,5 +1,5 @@
 import React from 'react';
-import * as DappUI from '@elrondnetwork/dapp-core/UI';
+import { Denominate } from '@elrondnetwork/dapp-core/UI';
 import { calculateFeeInFiat } from 'operations';
 
 const Fee = ({
@@ -15,7 +15,7 @@ const Fee = ({
 }) => (
   <div className='form-group'>
     <span className='form-label text-secondary d-block'>{label}</span>
-    <DappUI.Denominate
+    <Denominate
       egldLabel={egldLabel}
       value={feeLimit}
       showLastNonZeroDecimal
