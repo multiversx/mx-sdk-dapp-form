@@ -52,7 +52,6 @@
     "glob": "8.0.3",
     "husky": "8.0.1",
     "jest": "28.1.1",
-    "node-stdlib-browser": "1.2.0",
     "postcss-modules": "4.3.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
