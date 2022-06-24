@@ -1,6 +1,7 @@
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
+@use 'sass:math';
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
 
 $spacer-val: $spacer * 1.7;
 // SPACING
@@ -13,6 +14,6 @@ $spacers: (
 $modal-lg: 565px;
 
 @function toRem($value) {
-  $remValue: ($value / 14) + rem;
+  $remValue: math.div($value, 14) + rem;
   @return $remValue;
 }

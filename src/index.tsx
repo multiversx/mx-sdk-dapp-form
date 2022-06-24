@@ -1,4 +1,3 @@
-export * from './UI';
 export * from './contexts';
 export * from './hooks';
 export * from './operations';

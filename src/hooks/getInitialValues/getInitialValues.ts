@@ -10,7 +10,7 @@ import { GetInitialValuesType } from './types';
 
 function getSearchParamTokenId() {
   const urlSearchParams = new URLSearchParams(window.location.search);
-  const searchParams = Object.fromEntries(urlSearchParams);
+  const searchParams = Object.fromEntries(urlSearchParams as any);
   const searchParamTokenId = searchParams.token;
   return searchParamTokenId;
 }
