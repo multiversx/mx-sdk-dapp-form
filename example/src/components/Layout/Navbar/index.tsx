@@ -4,7 +4,7 @@ import { Navbar as BsNavbar, NavItem, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { dAppName } from 'config';
 import { routeNames } from 'routes';
-import { ReactComponent as ElrondLogo } from './../../../assets/img/elrond.svg';
+import ElrondLogo from './../../../assets/img/elrond.svg';
 
 const Navbar = () => {
   const { address } = useGetAccountInfo();

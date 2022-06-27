@@ -5,7 +5,7 @@ import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { scamFlag } from 'helpers';
 import { NftEnumType, NftType, TokenType } from 'types';
-import { ReactComponent as ElrondSymbol } from './symbol.svg';
+import ElrondSymbol from './symbol.svg';
 
 export default function TokenElement({
   inDropdown = false,
