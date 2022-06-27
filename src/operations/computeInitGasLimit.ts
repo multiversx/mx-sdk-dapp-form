@@ -1,5 +1,5 @@
-import { isContract, constants } from '@elrondnetwork/dapp-core';
-import { getIdentifierType } from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
+import { getIdentifierType, isContract } from '@elrondnetwork/dapp-core/utils';
 import BigNumber from 'bignumber.js';
 import { tokenGasLimit } from 'constants/index';
 import { DelegationContractDataType } from 'types';

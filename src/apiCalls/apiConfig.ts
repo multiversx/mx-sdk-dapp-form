@@ -1,4 +1,4 @@
-import { NetworkType } from '@elrondnetwork/dapp-core';
+import { NetworkType } from '@elrondnetwork/dapp-core/types';
 import { getNetworkConfigForChainId } from 'apiCalls/network';
 
 export interface ApiConfigType {

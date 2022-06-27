@@ -1,10 +1,10 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import * as constants from '@elrondnetwork/dapp-core/constants/index';
 import {
   isContract,
   nominate,
-  calculateFeeLimit,
-  constants
-} from '@elrondnetwork/dapp-core';
+  calculateFeeLimit
+} from '@elrondnetwork/dapp-core/utils';
 import { useFormikContext } from 'formik';
 import { tokenGasLimit } from 'constants/index';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';

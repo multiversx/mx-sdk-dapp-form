@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { DappUI, constants } from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
+import { Denominate } from '@elrondnetwork/dapp-core/UI';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { scamFlag } from 'helpers';
 import { NftEnumType, NftType, TokenType } from 'types';
-import { ReactComponent as ElrondSymbol } from './symbol.svg';
+import ElrondSymbol from './symbol.svg';
 
 export default function TokenElement({
   inDropdown = false,
@@ -90,7 +91,7 @@ export default function TokenElement({
         </span>
 
         {!inDropdown && nftType !== NftEnumType.NonFungibleESDT && (
-          <DappUI.Denominate
+          <Denominate
             egldLabel={identifier}
             value={balance || '0'}
             decimals={

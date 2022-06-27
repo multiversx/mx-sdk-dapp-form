@@ -1,4 +1,5 @@
-import { stringIsFloat, constants } from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
+import { stringIsFloat } from '@elrondnetwork/dapp-core/utils';
 
 import { string } from 'yup';
 import { ExtendedValuesType } from 'types';

@@ -1,4 +1,4 @@
-import { nominate, stringIsFloat } from '@elrondnetwork/dapp-core';
+import { nominate, stringIsFloat } from '@elrondnetwork/dapp-core/utils';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import getTokenDetails from 'operations/getTokenDetails';

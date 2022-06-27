@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DappUI } from '@elrondnetwork/dapp-core';
+import { Denominate } from '@elrondnetwork/dapp-core/UI';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
@@ -14,11 +14,7 @@ export const InfoDust = ({ egldLabel }: { egldLabel: string }) => {
         overlay={(props) => (
           <Tooltip id='info-dust-tooltip' {...props}>
             A minimal amount of{' '}
-            <DappUI.Denominate
-              egldLabel={egldLabel}
-              value={minDust}
-              decimals={3}
-            />{' '}
+            <Denominate egldLabel={egldLabel} value={minDust} decimals={3} />{' '}
             has been left in the account in order to allow you to make future
             smart contract requests.
           </Tooltip>

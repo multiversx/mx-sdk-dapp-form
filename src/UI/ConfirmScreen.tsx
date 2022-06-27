@@ -1,8 +1,6 @@
 import React from 'react';
-import {
-  LoginMethodsEnum,
-  useGetAccountProvider
-} from '@elrondnetwork/dapp-core';
+import { useGetAccountProvider } from '@elrondnetwork/dapp-core/hooks';
+import { LoginMethodsEnum } from '@elrondnetwork/dapp-core/types';
 import classNames from 'classnames';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import Confirm from './Confirm';

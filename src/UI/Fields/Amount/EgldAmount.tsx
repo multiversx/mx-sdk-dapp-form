@@ -1,5 +1,5 @@
 import React from 'react';
-import { DappUI } from '@elrondnetwork/dapp-core';
+import { UsdValue } from '@elrondnetwork/dapp-core/UI';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import InfoDust from 'UI/InfoDust';
 import SharedAmount from './SharedAmount';
@@ -15,7 +15,7 @@ export const EgldAmount = () => {
     if (!isInvalid && amountInfo.amount) {
       return (
         <div className='d-flex align-items-center'>
-          <DappUI.UsdValue amount={amountInfo.amount} usd={egldPriceInUsd} />
+          <UsdValue amount={amountInfo.amount} usd={egldPriceInUsd} />
           {amountInfo.amount === maxAmountMinusDust && isMaxClicked && (
             <InfoDust egldLabel={egldLabel} />
           )}

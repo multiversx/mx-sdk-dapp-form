@@ -1,5 +1,5 @@
 import React from 'react';
-import { decodePart } from '@elrondnetwork/dapp-core';
+import { decodePart } from '@elrondnetwork/dapp-core/utils';
 
 const allOccurences = (sourceStr: string, searchStr: string) =>
   // eslint-disable-next-line

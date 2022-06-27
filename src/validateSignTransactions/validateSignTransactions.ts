@@ -1,12 +1,14 @@
+import * as models from '@elrondnetwork/dapp-core/models';
 import {
-  getTokenFromData,
   MultiSignTxType,
-  parseMultiEsdtTransferData,
   TxsDataTokensType,
-  models,
   MultiEsdtTxType,
   TxDataTokenType
-} from '@elrondnetwork/dapp-core';
+} from '@elrondnetwork/dapp-core/types';
+import {
+  getTokenFromData,
+  parseMultiEsdtTransferData
+} from '@elrondnetwork/dapp-core/utils';
 import getTxWithReceiver from './getTxWithReceiver';
 import {
   SignTxType,

@@ -1,8 +1,6 @@
-import {
-  denominate,
-  calculateFeeLimit,
-  constants
-} from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
+import { denominate, calculateFeeLimit } from '@elrondnetwork/dapp-core/utils';
+
 import BigNumber from 'bignumber.js';
 import { minDust } from 'constants/index';
 

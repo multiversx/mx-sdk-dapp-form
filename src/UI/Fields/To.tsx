@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { addressIsValid } from '@elrondnetwork/dapp-core';
+import { addressIsValid } from '@elrondnetwork/dapp-core/utils';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classnames from 'classnames';

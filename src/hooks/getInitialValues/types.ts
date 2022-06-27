@@ -1,4 +1,4 @@
-import { NetworkType } from '@elrondnetwork/dapp-core';
+import { NetworkType } from '@elrondnetwork/dapp-core/types';
 import { FormConfigType, NftType } from 'types';
 
 export interface ComputedNftType {

@@ -2,7 +2,7 @@ import {
   nominate,
   stringIsFloat,
   stringIsInteger
-} from '@elrondnetwork/dapp-core';
+} from '@elrondnetwork/dapp-core/utils';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { NftEnumType } from 'types';

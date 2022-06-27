@@ -1,4 +1,5 @@
-import { apiCalls, NetworkType } from '@elrondnetwork/dapp-core';
+import { getServerConfiguration } from '@elrondnetwork/dapp-core/apiCalls';
+import { NetworkType } from '@elrondnetwork/dapp-core/types';
 import { getApiAddressForChainID } from 'apiCalls/network/getApiAddressForChainID';
 
 export async function getNetworkConfigForChainId(
@@ -6,5 +7,5 @@ export async function getNetworkConfigForChainId(
 ): Promise<NetworkType> {
   const apiAddress = getApiAddressForChainID(chainId);
 
-  return await apiCalls.getServerConfiguration(apiAddress);
+  return await getServerConfiguration(apiAddress);
 }

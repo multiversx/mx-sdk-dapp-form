@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { DappUI } from '@elrondnetwork/dapp-core';
+import { PageState } from '@elrondnetwork/dapp-core/UI';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons/faSpinner';
 
 export const Loader = () => {
   return (
-    <DappUI.PageState
+    <PageState
       title='Loading...'
       icon={faSpinner}
       iconClass='text-primary fa-spin fast-spin'

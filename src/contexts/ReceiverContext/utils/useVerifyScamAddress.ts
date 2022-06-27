@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { addressIsValid } from '@elrondnetwork/dapp-core';
+import { addressIsValid } from '@elrondnetwork/dapp-core/utils';
 import { ApiConfigType, getScamAddressData } from 'apiCalls';
 
 interface VerifiedAddressesType {

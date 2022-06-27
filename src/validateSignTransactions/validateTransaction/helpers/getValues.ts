@@ -1,9 +1,6 @@
-import {
-  isTokenTransfer,
-  denominate,
-  MultiSignTxType,
-  constants
-} from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants/index';
+import { MultiSignTxType } from '@elrondnetwork/dapp-core/types';
+import { isTokenTransfer, denominate } from '@elrondnetwork/dapp-core/utils';
 import { tokenGasLimit } from 'constants/index';
 import { TxSignValuesType } from '../types';
 

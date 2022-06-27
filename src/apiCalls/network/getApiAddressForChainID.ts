@@ -1,4 +1,4 @@
-import { fallbackNetworkConfigurations } from '@elrondnetwork/dapp-core';
+import { fallbackNetworkConfigurations } from '@elrondnetwork/dapp-core/constants';
 import { getEnvironmentForChainId } from 'apiCalls/network/getEnvironmentForChainId';
 
 export function getApiAddressForChainID(chainId: string) {

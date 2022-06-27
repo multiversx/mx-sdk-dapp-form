@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { nominate, constants } from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
+import { nominate } from '@elrondnetwork/dapp-core/utils';
 import { useFormikContext } from 'formik';
 import { useAccountContext } from 'contexts/AccountContext';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';

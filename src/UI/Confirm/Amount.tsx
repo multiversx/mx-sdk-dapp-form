@@ -1,5 +1,8 @@
 import React from 'react';
-import { DappUI, nominate, constants } from '@elrondnetwork/dapp-core';
+import * as constants from '@elrondnetwork/dapp-core/constants';
+import { Denominate, UsdValue } from '@elrondnetwork/dapp-core/UI';
+import { nominate } from '@elrondnetwork/dapp-core/utils';
+
 import { NftType, TxTypeEnum } from 'types';
 import Token from './Token';
 
@@ -51,7 +54,7 @@ const Amount = (props: AmountPropsType) => {
           <div className='form-group'>
             <span className='form-label text-secondary d-block'>{label}</span>
             {showNftAmount ? (
-              <DappUI.Denominate
+              <Denominate
                 egldLabel={props.egldLabel}
                 value={value}
                 denomination={nftDenomination}
@@ -64,7 +67,7 @@ const Amount = (props: AmountPropsType) => {
               />
             ) : (
               <React.Fragment>
-                <DappUI.Denominate
+                <Denominate
                   egldLabel={props.egldLabel}
                   value={nominate(
                     amount,
@@ -79,7 +82,7 @@ const Amount = (props: AmountPropsType) => {
                   data-testid='confirmAmount'
                 />
                 {!isEsdtTransaction && (
-                  <DappUI.UsdValue
+                  <UsdValue
                     amount={amount}
                     usd={egldPriceInUsd}
                     data-testid='confirmUsdValue'
