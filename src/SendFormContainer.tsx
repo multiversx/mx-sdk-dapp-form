@@ -1,7 +1,7 @@
 import React, { JSXElementConstructor } from 'react';
 import { fallbackNetworkConfigurations } from '@elrondnetwork/dapp-core/constants';
-import * as constants from '@elrondnetwork/dapp-core/constants/index';
-import { Transaction } from '@elrondnetwork/erdjs/out';
+import { gasLimit } from '@elrondnetwork/dapp-core/constants';
+import { Transaction } from '@elrondnetwork/erdjs';
 import { Formik } from 'formik';
 import {
   AccountContextPropsType,
@@ -14,7 +14,6 @@ import { UICustomizationContextPropsType } from 'contexts/UICustomization';
 import { generateTransaction, getTxType } from 'operations';
 import { ExtendedValuesType, TxTypeEnum, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
-import { SendLoader } from 'UI';
 import { getInitialErrors } from 'validation';
 import validationSchema from 'validationSchema';
 import denominatedConfigGasPrice from './operations/denominatedConfigGasPrice';
@@ -44,7 +43,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     tokensInfo,
     initGasLimitError,
     networkConfig,
-    Loader = SendLoader,
+    Loader,
     UICustomization,
     shouldGenerateTransactionOnSubmit = true
   } = props;
@@ -87,7 +86,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     gasPrice: initialValues?.gasPrice || denominatedConfigGasPrice,
     data: initialValues?.data || '',
     amount: initialValues?.amount || '0',
-    gasLimit: initialValues?.gasLimit || String(constants.gasLimit),
+    gasLimit: initialValues?.gasLimit || String(gasLimit),
     txType:
       initialValues?.txType ||
       getTxType({ nft: tokensInfo?.initialNft, tokenId }),

@@ -34,7 +34,7 @@ interface AppInfoContextProviderPropsType {
   tokensInfo?: TokensContextInitializationPropsType;
   networkConfig: FormNetworkConfigType;
   children: React.ReactNode;
-  Loader: JSXElementConstructor<any> | null;
+  Loader?: JSXElementConstructor<any> | null;
   initGasLimitError?: string | null;
   UICustomization?: UICustomizationContextPropsType;
 }
