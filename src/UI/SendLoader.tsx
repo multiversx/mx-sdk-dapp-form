@@ -1,5 +1,5 @@
 import React from 'react';
-import { PageState } from '@elrondnetwork/dapp-core/UI';
+import { PageState } from '@elrondnetwork/dapp-core/UI/PageState';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 export const SendLoader = ({ title = 'Loading...' }: { title?: string }) => {
