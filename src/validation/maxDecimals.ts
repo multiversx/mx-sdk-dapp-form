@@ -1,12 +1,10 @@
-import * as constants from '@elrondnetwork/dapp-core/constants';
+import { denomination as defaultDenomination } from '@elrondnetwork/dapp-core/constants/index';
 
 export const maxDecimals = (amount: string, customDenomination?: number) => {
   const denomination =
-    customDenomination === undefined
-      ? constants.denomination
-      : customDenomination;
+    customDenomination == null ? defaultDenomination : customDenomination;
   if (
-    amount !== undefined &&
+    amount != null &&
     amount.toString().indexOf('.') >= 0 &&
     (amount as any).toString().split('.').pop().length > denomination
   ) {

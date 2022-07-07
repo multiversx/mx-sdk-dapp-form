@@ -1,5 +1,9 @@
-import * as constants from '@elrondnetwork/dapp-core/constants';
-import { nominate, calculateFeeLimit } from '@elrondnetwork/dapp-core/utils';
+import {
+  gasPerDataByte,
+  gasPriceModifier
+} from '@elrondnetwork/dapp-core/constants/index';
+import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/calculateFeeLimit';
+import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 
 import BigNumber from 'bignumber.js';
 
@@ -29,8 +33,8 @@ export function validateGasLimitAmount({
       gasLimit,
       data,
       chainId,
-      gasPerDataByte: String(constants.gasPerDataByte),
-      gasPriceModifier: String(constants.gasPriceModifier)
+      gasPerDataByte: String(gasPerDataByte),
+      gasPriceModifier: String(gasPriceModifier)
     })
   );
 

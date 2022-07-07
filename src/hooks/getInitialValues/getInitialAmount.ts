@@ -1,5 +1,5 @@
-import * as constants from '@elrondnetwork/dapp-core/constants';
-import { denominate } from '@elrondnetwork/dapp-core/utils';
+import { decimals } from '@elrondnetwork/dapp-core/constants/index';
+import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { NftEnumType } from 'types';
 import { ComputedNftType } from './types';
 
@@ -24,7 +24,7 @@ export function getInitialAmount(props: {
       denomination: computedNft?.nft?.decimals,
       showLastNonZeroDecimal: true,
       addCommas: false,
-      decimals: constants.decimals
+      decimals
     });
   }
   return amountValue;

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useGetAccountProvider } from '@elrondnetwork/dapp-core/hooks';
 import { LoginMethodsEnum } from '@elrondnetwork/dapp-core/types';
 import classNames from 'classnames';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
@@ -7,12 +6,13 @@ import Confirm from './Confirm';
 
 interface ConfirmScreenType {
   isConfirmCloseBtnVisible?: boolean;
+  providerType: string;
 }
 
 export const ConfirmScreen = ({
-  isConfirmCloseBtnVisible = true
+  isConfirmCloseBtnVisible = true,
+  providerType
 }: ConfirmScreenType) => {
-  const { providerType } = useGetAccountProvider();
   const {
     tokensInfo,
     receiverInfo,
