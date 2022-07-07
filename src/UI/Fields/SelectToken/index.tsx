@@ -1,22 +1,12 @@
 import React from 'react';
 import * as constants from '@elrondnetwork/dapp-core/constants';
-import classnames from 'classnames';
-import Select, { components } from 'react-select';
+import Select from 'react-select';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { selectCustomStyles } from 'helpers';
 import { TokenType } from 'types';
-import TokenElement from './TokenElement';
 
-const ListOption = (props: any) => {
-  return (
-    <div
-      className={`token-option ${props.isSelected ? 'is-selected' : ''}`}
-      data-testid={`${props.value}-option`}
-    >
-      <components.Option {...props} />
-    </div>
-  );
-};
+import styles from './styles.module.scss';
+import TokenElement from './TokenElement';
 
 export function SelectToken({ label }: { label?: string }) {
   const { formInfo, accountInfo, tokensInfo } = useSendFormContext();
@@ -34,15 +24,13 @@ export function SelectToken({ label }: { label?: string }) {
     isTokenIdInvalid
   } = tokensInfo;
 
-  const FormatOptionLabel = ({ token }: { token: TokenType }) => {
-    return (
-      <TokenElement
-        inDropdown
-        token={token}
-        isEgld={token.identifier === egldLabel}
-      />
-    );
-  };
+  const FormatOptionLabel = ({ token }: { token: TokenType }) => (
+    <TokenElement
+      inDropdown
+      token={token}
+      isEgld={token.identifier === egldLabel}
+    />
+  );
 
   const allTokens: TokenType[] = [
     {
@@ -75,46 +63,49 @@ export function SelectToken({ label }: { label?: string }) {
   };
 
   const filterOptions = ({ value, label: filterLabel }: any, input: string) => {
-    if (input) {
+    if (Boolean(input)) {
       const trimmedInput = input.trim().toLowerCase();
-      return [value.toLowerCase(), filterLabel.toLowerCase()].includes(
-        trimmedInput
-      );
+      const match = (haystack: string) =>
+        haystack.toLowerCase().indexOf(trimmedInput) > -1;
+
+      return match(value) || match(filterLabel);
     }
+
     return true;
   };
 
   const docStyle = window.getComputedStyle(document.documentElement);
   const selectStyle = selectCustomStyles({ docStyle });
 
-  const invalidClassname = classnames({ 'is-invalid': isTokenIdInvalid });
   return (
-    <div className={`form-group select-token ${invalidClassname}`}>
-      <label htmlFor='tokenId' data-testid='tokenIdLabel'>
-        {label}
-      </label>
+    <div className={styles.token}>
+      {label && (
+        <label
+          htmlFor='tokenId'
+          data-testid='tokenIdLabel'
+          className={styles.label}
+        >
+          {label}
+        </label>
+      )}
 
-      <div className={`input-group input-group-seamless ${invalidClassname}`}>
-        <Select
-          inputId='tokenId'
-          name='tokenId'
-          openMenuOnFocus
-          isDisabled={readonly}
-          isLoading={areTokensLoading}
-          styles={selectStyle}
-          value={options.find(({ value }: any) => value === tokenId)}
-          options={options}
-          components={{ Option: ListOption }}
-          className='w-100'
-          classNamePrefix='react-select'
-          onChange={onChange}
-          onMenuOpen={onMenuOpen}
-          filterOption={filterOptions}
-          formatOptionLabel={FormatOptionLabel}
-        />
-      </div>
+      <Select
+        inputId='tokenId'
+        name='tokenId'
+        openMenuOnFocus
+        isDisabled={readonly}
+        isLoading={areTokensLoading}
+        styles={selectStyle}
+        value={options.find(({ value }: any) => value === tokenId)}
+        options={options}
+        onChange={onChange}
+        onMenuOpen={onMenuOpen}
+        filterOption={filterOptions}
+        formatOptionLabel={FormatOptionLabel}
+      />
+
       {isTokenIdInvalid && (
-        <div className='text-danger d-block' data-testid='tokenIdError'>
+        <div className={styles.error} data-testid='tokenIdError'>
           <small>{tokenIdError}</small>
         </div>
       )}

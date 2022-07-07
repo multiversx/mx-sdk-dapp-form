@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import * as constants from '@elrondnetwork/dapp-core/constants';
 import { Denominate, UsdValue } from '@elrondnetwork/dapp-core/UI';
 import { nominate } from '@elrondnetwork/dapp-core/utils';
 
 import { NftType, TxTypeEnum } from 'types';
-import Token from './Token';
+import Token from '../Token';
+
+import styles from './styles.module.scss';
 
 export interface AmountPropsType {
   amount: string;
@@ -48,52 +50,51 @@ const Amount = (props: AmountPropsType) => {
   };
 
   return (
-    <div className='row'>
+    <div className={styles.amount}>
       {txType !== TxTypeEnum.NonFungibleESDT && (
-        <div className='col-6'>
-          <div className='form-group'>
-            <span className='form-label text-secondary d-block'>{label}</span>
-            {showNftAmount ? (
+        <div className={styles.left}>
+          <span className={styles.label}>{label}</span>
+
+          {showNftAmount ? (
+            <Denominate
+              egldLabel={props.egldLabel}
+              value={value}
+              denomination={nftDenomination}
+              decimals={txType === TxTypeEnum.MetaESDT ? constants.decimals : 0}
+              showLastNonZeroDecimal
+              showLabel={false}
+              data-testid='confirmAmount'
+            />
+          ) : (
+            <Fragment>
               <Denominate
                 egldLabel={props.egldLabel}
-                value={value}
-                denomination={nftDenomination}
-                decimals={
-                  txType === TxTypeEnum.MetaESDT ? constants.decimals : 0
+                value={nominate(
+                  amount,
+                  isEsdtTransaction ? tokenDecimals : constants.denomination
+                )}
+                denomination={
+                  isEsdtTransaction ? tokenDecimals : constants.denomination
                 }
                 showLastNonZeroDecimal
                 showLabel={false}
+                token={isEsdtTransaction ? tokenLabel : egldLabel}
                 data-testid='confirmAmount'
               />
-            ) : (
-              <React.Fragment>
-                <Denominate
-                  egldLabel={props.egldLabel}
-                  value={nominate(
-                    amount,
-                    isEsdtTransaction ? tokenDecimals : constants.denomination
-                  )}
-                  denomination={
-                    isEsdtTransaction ? tokenDecimals : constants.denomination
-                  }
-                  showLastNonZeroDecimal
-                  showLabel={false}
-                  token={isEsdtTransaction ? tokenLabel : egldLabel}
-                  data-testid='confirmAmount'
+
+              {!isEsdtTransaction && (
+                <UsdValue
+                  amount={amount}
+                  usd={egldPriceInUsd}
+                  data-testid='confirmUsdValue'
                 />
-                {!isEsdtTransaction && (
-                  <UsdValue
-                    amount={amount}
-                    usd={egldPriceInUsd}
-                    data-testid='confirmUsdValue'
-                  />
-                )}
-              </React.Fragment>
-            )}
-          </div>
+              )}
+            </Fragment>
+          )}
         </div>
       )}
-      <div className='col-6'>
+
+      <div className={styles.right}>
         <Token {...tokenProps} />
       </div>
     </div>

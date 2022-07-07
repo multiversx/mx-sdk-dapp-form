@@ -1,6 +1,8 @@
 import React from 'react';
 import { Denominate } from '@elrondnetwork/dapp-core/UI';
+
 import { calculateFeeInFiat } from 'operations';
+import styles from './styles.module.scss';
 
 const Fee = ({
   egldPriceInUsd,
@@ -13,16 +15,18 @@ const Fee = ({
   feeLimit: string;
   egldLabel: string;
 }) => (
-  <div className='form-group'>
-    <span className='form-label text-secondary d-block'>{label}</span>
+  <div className={styles.fee}>
+    <span className={styles.text}>{label}</span>
+
     <Denominate
       egldLabel={egldLabel}
       value={feeLimit}
-      showLastNonZeroDecimal
+      showLastNonZeroDecimal={true}
       data-testid='confirmFee'
     />
+
     {feeLimit !== '0' && (
-      <small className='d-block text-secondary'>
+      <small className={styles.text}>
         {calculateFeeInFiat({
           feeLimit,
           egldPriceInUsd

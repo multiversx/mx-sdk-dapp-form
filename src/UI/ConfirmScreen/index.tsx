@@ -2,8 +2,10 @@ import React from 'react';
 import { useGetAccountProvider } from '@elrondnetwork/dapp-core/hooks';
 import { LoginMethodsEnum } from '@elrondnetwork/dapp-core/types';
 import classNames from 'classnames';
+
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import Confirm from './Confirm';
+import Confirm from '../Confirm';
+import styles from './styles.module.scss';
 
 interface ConfirmScreenType {
   isConfirmCloseBtnVisible?: boolean;
@@ -22,8 +24,13 @@ export const ConfirmScreen = ({
     gasInfo
   } = useSendFormContext();
   const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
-  const { readonly, onCloseForm, onInvalidateForm, onSubmitForm, txType } =
-    formInfo;
+  const {
+    readonly,
+    onCloseForm,
+    onInvalidateForm,
+    onSubmitForm,
+    txType
+  } = formInfo;
   const { data } = dataFieldInfo;
   const { receiver, scamError } = receiverInfo;
   const { feeLimit, gasCostError } = gasInfo;
@@ -52,7 +59,7 @@ export const ConfirmScreen = ({
   };
 
   return (
-    <div className='text-left'>
+    <div className={styles.confirm}>
       <Confirm.To {...{ receiver, nft }} scamReport={scamError} />
 
       <Confirm.Amount
@@ -72,28 +79,26 @@ export const ConfirmScreen = ({
       <Confirm.Fee {...{ feeLimit, egldPriceInUsd, egldLabel }} />
       <Confirm.Data {...{ data, egldPriceInUsd }} />
 
-      <div className='d-flex align-items-center flex-column mt-spacer'>
+      <div className={styles.buttons}>
         {gasCostError && (
-          <p className='text-danger'>
+          <p className={styles.error}>
             {`Transaction simulation has failed with error ${gasCostError}`}
           </p>
         )}
 
         <button
-          onClick={onSubmitForm}
-          className={classNames('btn px-spacer', {
-            'btn-warning': Boolean(scamError),
-            'btn-primary': !Boolean(scamError)
-          })}
+          className={classNames(styles.send, { [styles.warning]: scamError })}
+          type='button'
           id='sendTrxBtn'
           data-testid='sendTrxBtn'
+          onClick={onSubmitForm}
         >
           {confirmText}
         </button>
+
         {isConfirmCloseBtnVisible && (
           <a
             href='/#'
-            className='mt-3'
             id='cancelTrxBtn'
             data-testid='cancelTrxBtn'
             onClick={onCloseClick}

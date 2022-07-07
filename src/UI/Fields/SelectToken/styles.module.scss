@@ -1,0 +1,13 @@
+@import 'assets/sass/variables/variables';
+
+.token {
+  .label {
+    margin-bottom: 0.5rem;
+  }
+
+  .error {
+    color: #dc3545 !important;
+    display: block;
+    line-height: 1.5;
+  }
+}

@@ -1,7 +1,9 @@
 import React from 'react';
-import classNames from 'classnames';
-import { NftEnumType, NftType } from 'types';
+
+import { NftType } from 'types';
 import TokenElement from 'UI/Fields/SelectToken/TokenElement';
+
+import styles from './styles.module.scss';
 
 export interface TokenPropsType {
   tokenId: string;
@@ -22,15 +24,14 @@ const Token = ({
 }: TokenPropsType) => {
   const tokenLabel = nft?.name || '';
 
-  const isNft = nft?.type === NftEnumType.NonFungibleESDT;
-
   return (
-    <div className='form-group token-confirm'>
-      <span className='form-label d-block'>
+    <div className={styles.token}>
+      <span className={styles.label}>
         {nft ? <span>{nft?.name} </span> : ''}
         Token
       </span>
-      <div className={classNames('', { 'token-container': isNft })}>
+
+      <div>
         {nft ? (
           <TokenElement
             inDropdown
@@ -62,7 +63,8 @@ const Token = ({
           />
         )}
       </div>
-      {tokenIdError && <div className='text-danger'>{tokenIdError}</div>}
+
+      {tokenIdError && <div className={styles.error}>{tokenIdError}</div>}
     </div>
   );
 };

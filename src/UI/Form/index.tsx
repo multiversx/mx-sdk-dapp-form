@@ -13,6 +13,8 @@ import {
   To
 } from 'UI/Fields';
 
+import styles from './styles.module.scss';
+
 export const Form = () => {
   const { formInfo, receiverInfo } = useSendFormContext();
   const {
@@ -20,7 +22,6 @@ export const Form = () => {
   } = useFormikContext<ExtendedValuesType>();
 
   const { renderKey, onValidateForm, readonly, onCloseForm } = formInfo;
-
   const { scamError } = receiverInfo;
 
   function handleCloseClick(e: any) {
@@ -29,50 +30,50 @@ export const Form = () => {
   }
 
   return (
-    <form key={renderKey} onSubmit={onValidateForm} className='m-4'>
-      <div>
-        <fieldset disabled={readonly} className='text-left'>
-          <To />
-          <div className='row'>
-            <div className='col-sm-6 col-12'>
-              <Amount />
-            </div>
-            <div className='col-sm-6 col-12'>
-              {[TxTypeEnum.EGLD, TxTypeEnum.ESDT, TxTypeEnum.MetaESDT].includes(
-                txType
-              ) ? (
-                <SelectToken />
-              ) : (
-                <NftSftToken />
-              )}
-            </div>
+    <form key={renderKey} onSubmit={onValidateForm} className={styles.form}>
+      <fieldset disabled={readonly} className={styles.fieldset}>
+        <To />
+
+        <div className={styles.wrapper}>
+          <div className={styles.left}>
+            <Amount />
           </div>
-          <FeeAccordion />
-          <Data />
-        </fieldset>
-        <div className='d-flex align-items-center flex-column mt-spacer'>
-          <button
-            className={classNames('btn px-spacer', {
-              ['btn-warning']: scamError,
-              ['btn-primary']: !scamError
-            })}
-            type={'button'}
-            id='sendBtn'
-            data-testid='sendBtn'
-            onClick={onValidateForm}
-          >
-            Send
-          </button>
-          <a
-            href='/#'
-            id='closeButton'
-            data-testid='returnToWalletBtn'
-            onClick={handleCloseClick}
-            className='mt-3'
-          >
-            Cancel
-          </a>
+
+          <div className={styles.right}>
+            {[TxTypeEnum.EGLD, TxTypeEnum.ESDT, TxTypeEnum.MetaESDT].includes(
+              txType
+            ) ? (
+              <SelectToken />
+            ) : (
+              <NftSftToken />
+            )}
+          </div>
         </div>
+
+        <FeeAccordion />
+
+        <Data />
+      </fieldset>
+
+      <div className={styles.buttons}>
+        <button
+          className={classNames(styles.send, { [styles.warning]: scamError })}
+          type='button'
+          id='sendBtn'
+          data-testid='sendBtn'
+          onClick={onValidateForm}
+        >
+          Send
+        </button>
+
+        <a
+          href='/#'
+          id='closeButton'
+          data-testid='returnToWalletBtn'
+          onClick={handleCloseClick}
+        >
+          Cancel
+        </a>
       </div>
     </form>
   );

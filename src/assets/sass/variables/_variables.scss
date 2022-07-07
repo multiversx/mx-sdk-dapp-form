@@ -1,19 +1,47 @@
 @use 'sass:math';
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/mixins';
 
-$spacer-val: $spacer * 1.7;
-// SPACING
-$spacers: (
-  spacer: (
-    $spacer-val
-  )
-);
+$a: #1392ff;
+$light: #fafafa;
+$white: white;
+$black: black;
+$primary: #1b46c2;
+$secondary: #6c757d;
+$input-border-radius: 0.25rem;
+$card-border-radius: 0.25rem;
+$card-bg: $white;
+$border-color: #dee2e6;
+$link-hover-color: #122e7f;
 
-$modal-lg: 565px;
+:root {
+  --primary: #1b46c2;
+  --border-color: #dee2e6;
+  --card-bg: white;
+}
 
-@function toRem($value) {
-  $remValue: math.div($value, 14) + rem;
-  @return $remValue;
+@mixin media-breakpoint-up($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: 576px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == md {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-down($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: 575px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == sm {
+    @media (max-width: 767px) {
+      @content;
+    }
+  }
 }

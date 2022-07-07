@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { decodePart } from '@elrondnetwork/dapp-core/utils';
+
+import styles from './styles.module.scss';
 
 const allOccurences = (sourceStr: string, searchStr: string) =>
   // eslint-disable-next-line
@@ -19,7 +21,7 @@ const Data = ({
   highlight?: string;
   isScCall?: boolean;
 }) => {
-  let output = <React.Fragment>{data}</React.Fragment>;
+  let output = <Fragment>{data}</Fragment>;
 
   const [encodedScCall, ...remainingDataFields] =
     highlight && isScCall ? highlight.split('@') : [];
@@ -29,20 +31,20 @@ const Data = ({
       case data.startsWith(highlight): {
         const [, rest] = data.split(highlight);
         output = (
-          <React.Fragment>
+          <Fragment>
             {highlight}
-            <span className='text-muted'>{rest}</span>
-          </React.Fragment>
+            <span className={styles.secondary}>{rest}</span>
+          </Fragment>
         );
         break;
       }
       case data.endsWith(highlight): {
         const [rest] = data.split(highlight);
         output = (
-          <React.Fragment>
-            <span className='text-muted'>{rest}</span>
+          <Fragment>
+            <span className={styles.secondary}>{rest}</span>
             {highlight}
-          </React.Fragment>
+          </Fragment>
         );
         break;
       }
@@ -51,11 +53,11 @@ const Data = ({
         const [start, end] = data.split(highlight);
 
         output = (
-          <React.Fragment>
-            <span className='text-muted'>{start}</span>
+          <Fragment>
+            <span className={styles.secondary}>{start}</span>
             {highlight}
-            <span className='text-muted'>{end}</span>
-          </React.Fragment>
+            <span className={styles.secondary}>{end}</span>
+          </Fragment>
         );
         break;
       }
@@ -63,32 +65,25 @@ const Data = ({
   }
 
   return (
-    <React.Fragment>
+    <Fragment>
       {encodedScCall && (
-        <div className='form-group mb-0 data-field mw-100'>
-          <span className='form-label text-secondary d-block'>
-            {scCallLabel}
-          </span>
+        <div className={styles.data}>
+          <span className={styles.label}>{scCallLabel}</span>
 
-          <div
-            data-testid='confirmScCall'
-            className='textarea form-control cursor-text mt-1 text-break-all'
-          >
+          <div data-testid='confirmScCall' className={styles.textarea}>
             {[decodePart(encodedScCall), ...remainingDataFields].join('@')}
           </div>
         </div>
       )}
-      <div className='form-group mb-0 data-field mw-100'>
-        <span className='form-label text-secondary d-block'>{label}</span>
 
-        <div
-          data-testid='confirmData'
-          className='textarea form-control cursor-text mt-1 text-break-all'
-        >
+      <div className={styles.data}>
+        <span className={styles.label}>{label}</span>
+
+        <div data-testid='confirmData' className={styles.textarea}>
           {data ? output : 'N/A'}
         </div>
       </div>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

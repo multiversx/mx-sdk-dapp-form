@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useRef, useState } from 'react';
 import { Denominate } from '@elrondnetwork/dapp-core/UI';
 import {
   faAngleDown,
@@ -6,51 +6,38 @@ import {
   faSpinner
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  Accordion,
-  AccordionContext,
-  useAccordionButton
-} from 'react-bootstrap';
+
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import GasLimit from '../GasLimit';
 import GasPrice from '../GasPrice';
 import FeeInFiat from './FeeInFiat';
 
+import styles from './styles.module.scss';
+
 export const FeeAccordion = () => {
+  const accordion = useRef<any>(null);
+  const [active, setActive] = useState(false);
+
   const { gasInfo, tokensInfo } = useSendFormContext();
-  const { feeLimit, hasErrors, gasCostLoading } = gasInfo;
+  const { feeLimit, gasCostLoading } = gasInfo;
   const { egldPriceInUsd, egldLabel } = tokensInfo;
 
-  const accordionProps = {
-    ...(hasErrors
-      ? {
-          defaultActiveKey: '0'
-        }
-      : {})
-  };
-
-  function ContextAwareToggle({ eventKey, callback }: any) {
-    const { activeEventKey } = useContext(AccordionContext);
-
-    const decoratedOnClick = useAccordionButton(
-      eventKey,
-      () => callback && callback(eventKey)
-    );
-
-    const isOpen = activeEventKey === eventKey;
-
-    return (
-      <span className='d-flex flex-column' onClick={decoratedOnClick}>
+  return (
+    <div className={styles.accordion}>
+      <span
+        className={styles.trigger}
+        onClick={(): void => setActive((active) => !active)}
+      >
         <span>
           <FontAwesomeIcon
-            style={{ marginLeft: '-0.28rem' }}
-            icon={isOpen ? faAngleDown : faAngleRight}
+            icon={active ? faAngleDown : faAngleRight}
+            className={styles.icon}
           />{' '}
-          <label className='mb-0 mr-2'>Fee</label>
-          <span className='mr-2' data-testid='feeLimit'>
+          <label className={styles.label}>Fee</label>
+          <span className={styles.limit} data-testid='feeLimit'>
             <Denominate
               value={feeLimit}
-              showLastNonZeroDecimal
+              showLastNonZeroDecimal={true}
               egldLabel={egldLabel}
             />
           </span>
@@ -58,21 +45,23 @@ export const FeeAccordion = () => {
             <FontAwesomeIcon icon={faSpinner} className='fa-spin fast-spin' />
           )}
         </span>
+
         <FeeInFiat egldPriceInUsd={egldPriceInUsd} feeLimit={feeLimit} />
       </span>
-    );
-  }
 
-  return (
-    <Accordion className='mb-3' {...accordionProps}>
-      <ContextAwareToggle eventKey='0' />
-      <Accordion.Collapse eventKey='0'>
-        <div className='mt-2 py-3 bg-light rounded border container'>
+      <div
+        ref={accordion}
+        className={styles.expandable}
+        style={{
+          height: active && accordion ? accordion?.current?.scrollHeight : 0
+        }}
+      >
+        <div className={styles.content}>
           <GasPrice />
           <GasLimit />
         </div>
-      </Accordion.Collapse>
-    </Accordion>
+      </div>
+    </div>
   );
 };
 

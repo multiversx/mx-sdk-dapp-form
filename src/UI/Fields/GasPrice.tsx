@@ -1,9 +1,12 @@
 import React from 'react';
-import { faUndo } from '@fortawesome/free-solid-svg-icons';
+import { faUndo, faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classnames from 'classnames';
+import classNames from 'classnames';
+
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { denominatedConfigGasPrice } from 'operations';
+
+import styles from './styles.module.scss';
 
 const GasPrice = () => {
   const { gasInfo, formInfo } = useSendFormContext();
@@ -17,47 +20,63 @@ const GasPrice = () => {
     onResetGasPrice
   } = gasInfo;
   const { readonly } = formInfo;
-
-  const invalidClassName = classnames({ 'is-invalid': isGasPriceInvalid });
-
   const showUndoButton = gasPrice !== denominatedConfigGasPrice && !readonly;
 
   return (
-    <div className='form-group row'>
-      <label className='col-5 col-sm-3 pl-0 col-form-label text-right'>
+    <div className={classNames(styles.gas, styles.price)}>
+      <label className={styles.left} htmlFor='gasPrice'>
         Gas Price
       </label>
-      <div className='col-7 col-sm-9 pl-0'>
-        <div className={`input-group input-group-seamless ${invalidClassName}`}>
-          <input
-            type='text'
-            className={`form-control ${invalidClassName}`}
-            id='gasPrice'
-            name='gasPrice'
-            data-testid='gasPrice'
-            required
-            disabled
-            value={gasPrice}
-            onChange={onChangeGasPrice}
-            onBlur={onBlurGasPrice}
-            autoComplete='off'
-          />
+
+      <div className={styles.right}>
+        <div
+          className={classNames(styles.form, {
+            [styles.invalid]: isGasPriceInvalid
+          })}
+        >
+          <div className={styles.wrapper}>
+            <input
+              type='text'
+              id='gasPrice'
+              name='gasPrice'
+              data-testid='gasPrice'
+              required
+              disabled
+              value={gasPrice}
+              onChange={onChangeGasPrice}
+              onBlur={onBlurGasPrice}
+              autoComplete='off'
+              className={styles.input}
+            />
+
+            {isGasPriceInvalid && (
+              <span className={styles.exclamation}>
+                <FontAwesomeIcon
+                  icon={faExclamation}
+                  size='xs'
+                  className={styles.svg}
+                />
+              </span>
+            )}
+          </div>
+
           {showUndoButton && (
-            <span className='input-group-append'>
+            <span className={styles.undo}>
               <a
                 href='/#'
-                className='input-group-text'
+                className={classNames(styles.reset, styles.default)}
                 onClick={onResetGasPrice}
               >
-                <i className='material-icons'>
+                <i>
                   <FontAwesomeIcon icon={faUndo} />
                 </i>
               </a>
             </span>
           )}
         </div>
+
         {isGasPriceInvalid && (
-          <div className='invalid-feedback'>{gasPriceError}</div>
+          <div className={styles.error}>{gasPriceError}</div>
         )}
       </div>
     </div>

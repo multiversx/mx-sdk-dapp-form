@@ -17,12 +17,13 @@ export function selectCustomStyles({ docStyle }: { docStyle: any }) {
     control: (props: any, state: any) => ({
       ...props,
       minHeight: '0',
+      flexWrap: 'nowrap',
       backgroundColor: state.isDisabled ? '#e9ecef' : 'transparent',
       borderColor: state.isDisabled
         ? customColors.hoverColor
         : state.isFocused
         ? customColors.primaryColor
-        : customColors.hoverColor,
+        : 'black',
       boxShadow: state.isFocused
         ? `0 0 0 0.2rem #${customColors.primaryColor.replace('#', '').trim()}33`
         : null,

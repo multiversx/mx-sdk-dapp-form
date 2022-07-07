@@ -3,11 +3,15 @@ import * as constants from '@elrondnetwork/dapp-core/constants';
 import { Denominate } from '@elrondnetwork/dapp-core/UI';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+
 import { scamFlag } from 'helpers';
 import { NftEnumType, NftType, TokenType } from 'types';
+
+import styles from './styles.module.scss';
 import ElrondSymbol from './symbol.svg';
 
-export default function TokenElement({
+const TokenElement = ({
   inDropdown = false,
   isEgld,
   nftType,
@@ -19,10 +23,9 @@ export default function TokenElement({
   isEgld?: boolean;
   nftType?: NftEnumType;
   nftTokenDetails?: NftType;
-}) {
+}) => {
   const { name, identifier, balance, decimals } = token;
   const avatar = token.assets?.svgUrl || token.assets?.pngUrl || '';
-  const avatarDropdownClass = avatar ? 'mr-1' : '';
   const avatarDropdownSize = avatar ? 28 : 20;
   const [title, setTitle] = useState(name);
 
@@ -38,7 +41,7 @@ export default function TokenElement({
   }, [name]);
 
   let symbol = <FontAwesomeIcon icon={faDiamond} />;
-  if (nftType === NftEnumType.NonFungibleESDT) {
+  if (nftType == NftEnumType.NonFungibleESDT) {
     symbol = (
       <div className='nft-type' data-testid={`${identifier}-type-nft`}>
         NFT
@@ -54,40 +57,25 @@ export default function TokenElement({
   }
 
   return (
-    <div className='d-flex align-items-center token-element h-100'>
-      <div className={inDropdown ? 'mr-1' : 'mr-2'}>
+    <div className={styles.token}>
+      <div className={styles.wrapper}>
         {isEgld || avatar ? (
           <ElrondSymbol
-            className={`${isEgld ? 'elrond-symbol' : 'rounded-circle'} ${
-              inDropdown ? avatarDropdownClass : 'mr-2'
-            }`}
-            height={inDropdown ? avatarDropdownSize : 42}
+            height={avatarDropdownSize}
+            className={classNames({
+              [styles.spaced]: Boolean(avatar),
+              [styles.circle]: !isEgld
+            })}
           />
         ) : (
-          <div
-            className={
-              inDropdown
-                ? 'px-2 dropdown-token-icon'
-                : 'token-icon mr-2 d-none d-sm-block'
-            }
-          >
-            {symbol}
-          </div>
+          <div className={styles.symbol}>{symbol}</div>
         )}
       </div>
-      <div
-        className={`${inDropdown ? 'token-text' : 'd-flex flex-column'}`}
-        data-testid='tokenName'
-      >
+
+      <div data-testid='tokenName'>
         <span data-testid={`${identifier}-element`}>
-          <span className='token-name'>{title}</span>{' '}
-          {inDropdown ? (
-            <span className='token-identifier'>{identifier}</span>
-          ) : (
-            <div className='token-identifier'>
-              <small>{identifier}</small>
-            </div>
-          )}
+          <span>{title}</span>{' '}
+          <span className={styles.identifier}>{identifier}</span>
         </span>
 
         {!inDropdown && nftType !== NftEnumType.NonFungibleESDT && (
@@ -106,4 +94,6 @@ export default function TokenElement({
       </div>
     </div>
   );
-}
+};
+
+export default TokenElement;
