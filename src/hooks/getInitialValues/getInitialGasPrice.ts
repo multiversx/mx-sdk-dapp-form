@@ -5,9 +5,7 @@ import {
 } from '@elrondnetwork/dapp-core/constants/index';
 import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 
-export function getInitialGasPrice(
-  gasPrice: string | number = defaultGasPrice
-) {
+export function getInitialGasPrice(gasPrice = String(defaultGasPrice)) {
   return gasPrice !== '0'
     ? gasPrice
     : denominate({
