@@ -1,4 +1,4 @@
-import { buildUrlParams } from '@elrondnetwork/dapp-core/utils';
+import { buildUrlParams } from '@elrondnetwork/dapp-core/utils/buildUrlParams';
 
 interface ReplyToDappBasicType {
   callbackUrl: string;

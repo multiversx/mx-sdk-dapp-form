@@ -1,4 +1,4 @@
-import { getIdentifierType } from '@elrondnetwork/dapp-core/utils';
+import { getIdentifierType } from '@elrondnetwork/dapp-core/utils/validation/getIdentifierType';
 import { ApiConfigType, getNftByAddressAndIdentifier } from 'apiCalls';
 
 export async function searchNftByIdentifier(

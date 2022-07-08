@@ -1,8 +1,6 @@
-import {
-  nominate,
-  stringIsFloat,
-  stringIsInteger
-} from '@elrondnetwork/dapp-core/utils';
+import nominate from '@elrondnetwork/dapp-core/utils/operations/nominate';
+import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
+import { stringIsInteger } from '@elrondnetwork/dapp-core/utils/validation/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { NftEnumType } from 'types';

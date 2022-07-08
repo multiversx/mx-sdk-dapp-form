@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { isContract } from '@elrondnetwork/dapp-core/utils';
+import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
 import { fetchGasLimit, FetchGasLimitType } from './fetchGasLimit';
 import useDebounce from './useDebounce';
 

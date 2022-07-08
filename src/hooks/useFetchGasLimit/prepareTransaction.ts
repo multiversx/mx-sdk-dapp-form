@@ -1,5 +1,5 @@
-import * as constants from '@elrondnetwork/dapp-core/constants';
-import { nominate } from '@elrondnetwork/dapp-core/utils';
+import { version } from '@elrondnetwork/dapp-core/constants/index';
+import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import {
   Transaction,
   TransactionPayload,
@@ -40,7 +40,7 @@ export function prepareTransaction({
     gasLimit: parseInt(gasLimit),
     data: new TransactionPayload(data),
     chainID: chainId,
-    version: new TransactionVersion(constants.version)
+    version: new TransactionVersion(version)
   });
 
   return transaction;

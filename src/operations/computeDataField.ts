@@ -1,4 +1,4 @@
-import { nominate } from '@elrondnetwork/dapp-core/utils';
+import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import BigNumber from 'bignumber.js';
 import { bech32 } from 'helpers';
 import { NftEnumType, NftType, TxTypeEnum, ExtendedValuesType } from 'types';

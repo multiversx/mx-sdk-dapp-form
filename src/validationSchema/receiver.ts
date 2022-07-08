@@ -1,4 +1,4 @@
-import { addressIsValid } from '@elrondnetwork/dapp-core/utils';
+import { addressIsValid } from '@elrondnetwork/dapp-core/utils/account/addressIsValid';
 import { string } from 'yup';
 import { TxTypeEnum, ExtendedValuesType } from 'types';
 

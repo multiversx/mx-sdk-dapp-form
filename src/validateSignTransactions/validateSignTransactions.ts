@@ -1,22 +1,18 @@
-import * as models from '@elrondnetwork/dapp-core/models';
+import { newTransaction } from '@elrondnetwork/dapp-core/models/newTransaction';
 import {
   MultiSignTxType,
   TxsDataTokensType,
   MultiEsdtTxType,
   TxDataTokenType
 } from '@elrondnetwork/dapp-core/types';
-import {
-  getTokenFromData,
-  parseMultiEsdtTransferData
-} from '@elrondnetwork/dapp-core/utils';
+import { getTokenFromData } from '@elrondnetwork/dapp-core/utils/transactions/getTokenFromData';
+import { parseMultiEsdtTransferData } from '@elrondnetwork/dapp-core/utils/transactions/parseMultiEsdtTransferData';
 import getTxWithReceiver from './getTxWithReceiver';
 import {
   SignTxType,
   ValidateSignTransactionsType,
   validateTransaction
 } from './validateTransaction';
-
-const { newTransaction } = models;
 
 function processMultiTx(props: {
   trx: MultiEsdtTxType;
