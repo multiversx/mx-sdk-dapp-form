@@ -6,7 +6,7 @@ import {
 } from '@elrondnetwork/dapp-core/constants/index';
 import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/calculateFeeLimit';
 import nominate from '@elrondnetwork/dapp-core/utils/operations/nominate';
-import isContract from '@elrondnetwork/dapp-core/utils/smartContracts';
+import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
 import { useFormikContext } from 'formik';
 import { tokenGasLimit } from 'constants/index';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
