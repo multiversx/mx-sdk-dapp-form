@@ -80,8 +80,8 @@ export function AmountContextProvider({
 
   const onMaxClicked = useCallback(() => {
     setIsMaxClicked(true);
-    return onChange(maxAmountAvailable || values.amount);
-  }, [maxAmountAvailable]);
+    return onChange(maxAmountMinusDust || values.amount);
+  }, [maxAmountMinusDust]);
 
   const value = {
     amount: values.amount,
