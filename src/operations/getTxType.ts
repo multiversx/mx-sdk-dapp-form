@@ -1,4 +1,4 @@
-import { getIdentifierType } from '@elrondnetwork/dapp-core/utils';
+import { getIdentifierType } from '@elrondnetwork/dapp-core/utils/validation/getIdentifierType';
 import { NftEnumType, NftType } from 'types';
 import { TxTypeEnum } from 'types';
 

@@ -1,4 +1,4 @@
-import { addressIsValid } from '@elrondnetwork/dapp-core/utils';
+import { addressIsValid } from '@elrondnetwork/dapp-core/utils/account/addressIsValid';
 import { isNftOrMultiEsdtTx } from 'validation';
 import { SignTxType } from './validateTransaction';
 

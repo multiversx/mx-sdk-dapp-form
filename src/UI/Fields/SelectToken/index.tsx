@@ -1,5 +1,5 @@
 import React from 'react';
-import * as constants from '@elrondnetwork/dapp-core/constants';
+import { denomination } from '@elrondnetwork/dapp-core/constants/index';
 import classnames from 'classnames';
 import Select, { components } from 'react-select';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
@@ -49,7 +49,7 @@ export function SelectToken({ label }: { label?: string }) {
       name: 'Elrond eGold',
       identifier: egldLabel,
       balance,
-      decimals: constants.denomination,
+      decimals: denomination,
       ticker: ''
       // add type
     },

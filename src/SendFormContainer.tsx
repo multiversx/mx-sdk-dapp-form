@@ -1,6 +1,8 @@
 import React, { JSXElementConstructor } from 'react';
-import { fallbackNetworkConfigurations } from '@elrondnetwork/dapp-core/constants';
-import { gasLimit } from '@elrondnetwork/dapp-core/constants';
+import {
+  fallbackNetworkConfigurations,
+  gasLimit
+} from '@elrondnetwork/dapp-core/constants/index';
 import { Transaction } from '@elrondnetwork/erdjs';
 import { Formik } from 'formik';
 import {

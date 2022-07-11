@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import * as constants from '@elrondnetwork/dapp-core/constants';
-import { Denominate } from '@elrondnetwork/dapp-core/UI';
+import { decimals as defaultDecimals } from '@elrondnetwork/dapp-core/constants/index';
+import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { scamFlag } from 'helpers';
@@ -95,7 +95,7 @@ export default function TokenElement({
             egldLabel={identifier}
             value={balance || '0'}
             decimals={
-              nftType === NftEnumType.SemiFungibleESDT ? 0 : constants.decimals
+              nftType === NftEnumType.SemiFungibleESDT ? 0 : defaultDecimals
             }
             token={identifier}
             showLabel={false}

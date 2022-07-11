@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Denominate } from '@elrondnetwork/dapp-core/UI';
+import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate';
 import {
   faAngleDown,
   faAngleRight,
