@@ -103,8 +103,8 @@
     "react-select": "5.3.2"
   },
   "dependencies": {
-    "@elrondnetwork/dapp-core": "^2.0.0-alpha.18",
-    "@elrondnetwork/erdjs": "10.2.5",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.1",
+    "@elrondnetwork/erdjs": "10.2.7",
     "anchorme": "2.1.2",
     "axios": "0.24.0",
     "bignumber.js": "9.x",
