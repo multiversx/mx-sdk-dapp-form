@@ -1,4 +1,4 @@
-import { denominate } from '@elrondnetwork/dapp-core/utils';
+import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { ApiConfigType, getToken } from 'apiCalls';
 
 export async function getDataToken(

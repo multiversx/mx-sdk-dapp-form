@@ -1,4 +1,6 @@
-import { nominate, stringIsFloat } from '@elrondnetwork/dapp-core/utils';
+import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
+import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
+
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import getTokenDetails from 'operations/getTokenDetails';

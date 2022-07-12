@@ -1,5 +1,5 @@
 import { TxsDataTokensType } from '@elrondnetwork/dapp-core/types';
-import { isContract } from '@elrondnetwork/dapp-core/utils';
+import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
 import { Address } from '@elrondnetwork/erdjs';
 import getTxWithReceiver from './getTxWithReceiver';
 import { SignTxType } from './validateTransaction';

@@ -1,4 +1,7 @@
-import * as constants from '@elrondnetwork/dapp-core/constants';
+import {
+  gasLimit,
+  gasPerDataByte
+} from '@elrondnetwork/dapp-core/constants/index';
 import BigNumber from 'bignumber.js';
 
 interface CalculateGasLimitType {
@@ -6,14 +9,13 @@ interface CalculateGasLimitType {
 }
 
 export function calculateGasLimit({ data }: CalculateGasLimitType) {
-  const bNconfigGasLimit = new BigNumber(constants.gasLimit);
-  const bNgasPerDataByte = new BigNumber(constants.gasPerDataByte);
+  const bNconfigGasLimit = new BigNumber(gasLimit);
+  const bNgasPerDataByte = new BigNumber(gasPerDataByte);
   const bNgasValue = data
     ? bNgasPerDataByte.times(Buffer.from(data).length)
     : 0;
   const bNgasLimit = bNconfigGasLimit.plus(bNgasValue);
-  const gasLimit = bNgasLimit.toString(10);
-  return gasLimit;
+  return bNgasLimit.toString(10);
 }
 
 export default calculateGasLimit;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import * as constants from '@elrondnetwork/dapp-core/constants';
+import { decimals } from '@elrondnetwork/dapp-core/constants/index';
 import { getEconomicsInfo } from 'apiCalls';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 
@@ -28,6 +28,6 @@ export function useGetEconomicsInfo(): EconomicsInfoType {
   return {
     egldLabel: networkConfig.egldLabel,
     egldPriceInUsd,
-    decimals: constants.decimals
+    decimals
   };
 }

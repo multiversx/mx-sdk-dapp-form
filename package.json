@@ -1,6 +1,6 @@
 {
   "name": "@elrondnetwork/dapp-core-form",
-  "version": "0.2.0-alpha.2",
+  "version": "0.2.0-alpha.4",
   "description": "A library to hold the main logic for a validating a form for transactions on the Elrond Network",
   "author": "ElrondNetwork",
   "license": "GPL-3.0-or-later",
@@ -54,8 +54,6 @@
     "husky": "8.0.1",
     "jest": "28.1.1",
     "postcss-modules": "4.3.1",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
     "react-is": "18.0.0",
     "react-scripts": "5.0.1",
     "size-limit": "7.0.8",
@@ -88,11 +86,15 @@
   ],
   "peerDependencies": {
     "react": ">=18",
-    "react-dom": ">=18"
+    "react-dom": ">=18",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.1",
+    "@elrondnetwork/erdjs": "10.2.7"
   },
   "resolutions": {
-    "@types/react": "18.0.10",
-    "@types/react-dom": "18.0.5"
+    "@elrondnetwork/dapp-core": "2.0.0-beta.1",
+    "@elrondnetwork/erdjs": "10.2.7",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "optionalDependencies": {
     "@fortawesome/fontawesome-svg-core": "6.1.0",
@@ -104,8 +106,6 @@
     "react-tooltip": "4.2.21"
   },
   "dependencies": {
-    "@elrondnetwork/dapp-core": "2.0.0-alpha.18",
-    "@elrondnetwork/erdjs": "10.2.5",
     "anchorme": "2.1.2",
     "axios": "0.24.0",
     "bignumber.js": "9.x",

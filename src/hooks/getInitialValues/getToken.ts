@@ -1,4 +1,4 @@
-import { getIdentifierType } from '@elrondnetwork/dapp-core/utils';
+import { getIdentifierType } from '@elrondnetwork/dapp-core/utils/validation/getIdentifierType';
 import { ApiConfigType, getAccountToken } from 'apiCalls';
 
 async function getSingleToken(
