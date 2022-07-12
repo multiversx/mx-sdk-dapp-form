@@ -23,7 +23,7 @@
     transform: translateX(120%);
     background-color: #fff;
     border-radius: 0.25rem;
-    border-color: #dee2e6;
+    border-color: $border-color;
 
     &.clickable {
       cursor: pointer;

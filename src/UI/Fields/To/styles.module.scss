@@ -17,18 +17,18 @@
       font-size: 1rem;
       font-weight: 400;
       line-height: 1.5;
-      color: #495057;
+      color: $input-color;
       background-color: $white;
       background-clip: padding-box;
-      border: 1px solid #ced4da;
+      border: 1px solid $input-border-color;
       border-radius: 0.25rem;
       height: auto;
       transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
       &:focus {
-        color: #495057;
+        color: $input-color;
         background-color: $white;
-        border-color: #7191eb;
+        border-color: $input-border-focus;
         outline: 0;
         box-shadow: 0 0 0 0.2rem rgb(27 70 194 / 25%);
       }
@@ -43,7 +43,7 @@
       float: left;
       min-width: 10rem;
       font-size: 1rem;
-      color: #212529;
+      color: $brown;
       text-align: left;
       list-style: none;
       background-color: $white;
@@ -58,7 +58,7 @@
         padding: 0.25rem 1.5rem;
         clear: both;
         font-weight: 400;
-        color: #212529;
+        color: $brown;
         text-align: inherit;
         white-space: nowrap;
         background-color: transparent;
@@ -87,13 +87,13 @@
     width: 100%;
     margin-top: 0.25rem;
     font-size: 80%;
-    color: #dc3545;
+    color: $error;
     display: block;
   }
 
   .scam {
     line-height: 1.5;
-    color: #ffc107 !important;
+    color: $warning !important;
 
     svg {
       margin-right: 0.25rem;

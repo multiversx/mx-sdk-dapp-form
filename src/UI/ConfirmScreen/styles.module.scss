@@ -23,17 +23,17 @@
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
       &:hover {
-        background-color: #163aa0;
+        background-color: $btn-blue;
       }
 
       &.warning {
-        background-color: #ffc107;
-        color: #212529;
+        background-color: $warning;
+        color: $brown;
       }
     }
   }
 
   .error {
-    color: #dc3545;
+    color: $error;
   }
 }

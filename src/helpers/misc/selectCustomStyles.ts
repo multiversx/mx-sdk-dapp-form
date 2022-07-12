@@ -3,7 +3,8 @@ export function selectCustomStyles({ docStyle }: { docStyle: any }) {
     hoverColor: docStyle.getPropertyValue('--border-color'),
     primaryColor: docStyle.getPropertyValue('--primary'),
     bgColor: docStyle.getPropertyValue('--card-bg'),
-    mutedColor: docStyle.getPropertyValue('--muted')
+    mutedColor: docStyle.getPropertyValue('--muted'),
+    blackColor: docStyle.getPropertyValue('--black')
   };
 
   return {
@@ -23,7 +24,7 @@ export function selectCustomStyles({ docStyle }: { docStyle: any }) {
         ? customColors.hoverColor
         : state.isFocused
         ? customColors.primaryColor
-        : 'black',
+        : customColors.blackColor,
       boxShadow: state.isFocused
         ? `0 0 0 0.2rem #${customColors.primaryColor.replace('#', '').trim()}33`
         : null,

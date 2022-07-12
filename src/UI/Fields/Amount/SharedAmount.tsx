@@ -85,7 +85,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
         </div>
       )}
 
-      {TokenSelector ? <TokenSelector /> : null}
+      {TokenSelector && <TokenSelector />}
 
       {!isInvalid && <AvailableAmountElement />}
     </div>

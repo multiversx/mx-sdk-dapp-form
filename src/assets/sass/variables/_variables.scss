@@ -4,6 +4,7 @@ $a: #1392ff;
 $light: #fafafa;
 $white: white;
 $black: black;
+$brown: #212529;
 $primary: #1b46c2;
 $secondary: #6c757d;
 $input-border-radius: 0.25rem;
@@ -11,11 +12,19 @@ $card-border-radius: 0.25rem;
 $card-bg: $white;
 $border-color: #dee2e6;
 $link-hover-color: #122e7f;
+$error: #dc3545;
+$warning: #ffc107;
+$btn-blue: #163aa0;
+
+$input-color: #495057;
+$input-border-color: #ced4da;
+$input-border-focus: #7191eb;
 
 :root {
   --primary: #1b46c2;
   --border-color: #dee2e6;
   --card-bg: white;
+  --black: black;
 }
 
 @mixin media-breakpoint-up($breakpoint) {

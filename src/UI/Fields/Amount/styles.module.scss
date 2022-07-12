@@ -18,25 +18,25 @@
       font-size: 1rem;
       font-weight: 400;
       line-height: 1.5;
-      color: #495057;
+      color: $input-color;
       background-color: $white;
       background-clip: padding-box;
-      border: 1px solid #ced4da;
+      border: 1px solid $input-border-color;
       width: 100%;
       border-radius: $input-border-radius;
       height: auto;
       transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
       &:focus {
-        color: #495057;
+        color: $input-color;
         background-color: $white;
-        border-color: #7191eb;
+        border-color: $input-border-focus;
         outline: 0;
         box-shadow: 0 0 0 0.2rem rgb(27 70 194 / 25%);
       }
 
       &.invalid {
-        border-color: #dc3545;
+        border-color: $error;
         padding-right: calc(1.5em + 0.75rem);
       }
     }
@@ -47,7 +47,7 @@
       top: 50%;
       transform: translateY(-50%);
       border-radius: 50%;
-      border: 1px solid #dc3545;
+      border: 1px solid $error;
       width: 1rem;
       height: 1rem;
       right: 0.75rem;
@@ -57,7 +57,7 @@
 
       .svg {
         path {
-          fill: #dc3545;
+          fill: $error;
         }
       }
     }
