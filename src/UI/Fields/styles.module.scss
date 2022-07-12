@@ -40,57 +40,10 @@
         top: 0;
       }
 
-      .input {
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        color: $input-color;
-        background-clip: padding-box;
-        border: 1px solid $input-border-color;
-        border-radius: 0.25rem;
-        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-        width: 100%;
-        background-color: $white;
-
-        &:focus {
-          color: $input-color;
-          background-color: $white;
-          border-color: $input-border-focus;
-          outline: 0;
-          box-shadow: 0 0 0 0.2rem rgb(27 70 194 / 25%);
-        }
-
-        &:disabled {
-          background-color: #e9ecef;
-        }
-      }
-
       .wrapper {
         position: relative;
         display: flex;
         width: 100%;
-
-        .exclamation {
-          position: absolute;
-          width: calc(1.5em + 0.75rem);
-          top: 50%;
-          transform: translateY(-50%);
-          border-radius: 50%;
-          border: 1px solid $error;
-          width: 1rem;
-          height: 1rem;
-          right: 0.75rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
-          .svg {
-            path {
-              fill: $error;
-            }
-          }
-        }
       }
 
       .undo {
@@ -118,13 +71,6 @@
           }
         }
       }
-    }
-
-    .error {
-      width: 100%;
-      margin-top: 0.25rem;
-      font-size: 80%;
-      color: $error;
     }
   }
 }

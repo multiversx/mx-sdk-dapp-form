@@ -7,6 +7,7 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { denominatedConfigGasPrice } from 'operations';
 
 import styles from './styles.module.scss';
+import globals from 'assets/sass/globals.module.scss';
 
 const GasPrice = () => {
   const { gasInfo, formInfo } = useSendFormContext();
@@ -46,16 +47,12 @@ const GasPrice = () => {
               onChange={onChangeGasPrice}
               onBlur={onBlurGasPrice}
               autoComplete='off'
-              className={styles.input}
+              className={globals.input}
             />
 
             {isGasPriceInvalid && (
-              <span className={styles.exclamation}>
-                <FontAwesomeIcon
-                  icon={faExclamation}
-                  size='xs'
-                  className={styles.svg}
-                />
+              <span className={globals.errorExclamation}>
+                <FontAwesomeIcon icon={faExclamation} size='xs' />
               </span>
             )}
           </div>
@@ -76,7 +73,7 @@ const GasPrice = () => {
         </div>
 
         {isGasPriceInvalid && (
-          <div className={styles.error}>{gasPriceError}</div>
+          <div className={globals.error}>{gasPriceError}</div>
         )}
       </div>
     </div>

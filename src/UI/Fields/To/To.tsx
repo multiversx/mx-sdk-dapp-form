@@ -17,6 +17,7 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import styles from './styles.module.scss';
+import globals from 'assets/sass/globals.module.scss';
 
 const Item = (address: string, highlighted: boolean) => (
   <div
@@ -94,6 +95,7 @@ export const To = () => {
         <Autocomplete
           {...{
             getItemValue: (item: string) => item,
+            inputProps: { className: globals.input },
             wrapperStyle: { display: 'flex' },
             items: knownAddresses,
             renderItem: Item,
@@ -107,7 +109,7 @@ export const To = () => {
       </div>
 
       {isReceiverInvalid && (
-        <div data-testid='receiverError' className={styles.error}>
+        <div data-testid='receiverError' className={globals.error}>
           {receiverError}
         </div>
       )}

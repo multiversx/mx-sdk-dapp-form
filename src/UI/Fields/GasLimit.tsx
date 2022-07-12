@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import styles from './styles.module.scss';
+import globals from 'assets/sass/globals.module.scss';
 
 export const GasLimit = () => {
   const { formInfo, gasInfo } = useSendFormContext();
@@ -47,16 +48,12 @@ export const GasLimit = () => {
               onChange={onChangeGasLimit}
               onBlur={onBlurGasLimit}
               autoComplete='off'
-              className={styles.input}
+              className={globals.input}
             />
 
             {isGasLimitInvalid && (
-              <span className={styles.exclamation}>
-                <FontAwesomeIcon
-                  icon={faExclamation}
-                  size='xs'
-                  className={styles.svg}
-                />
+              <span className={globals.errorExclamation}>
+                <FontAwesomeIcon icon={faExclamation} size='xs' />
               </span>
             )}
 
@@ -78,7 +75,7 @@ export const GasLimit = () => {
         </div>
 
         {isGasLimitInvalid && (
-          <div className={styles.error}>{gasLimitError}</div>
+          <div className={globals.error}>{gasLimitError}</div>
         )}
       </div>
     </div>

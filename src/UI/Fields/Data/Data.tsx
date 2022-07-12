@@ -7,6 +7,7 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import styles from './styles.module.scss';
+import globals from 'assets/sass/globals.module.scss';
 
 export const Data = () => {
   const {
@@ -36,24 +37,20 @@ export const Data = () => {
           value={data}
           onBlur={onBlur}
           onChange={onChange}
-          className={classNames(styles.textarea, {
-            [styles.invalid]: isDataInvalid
+          className={classNames(globals.textarea, {
+            [globals.invalid]: isDataInvalid
           })}
         />
 
         {isDataInvalid && (
-          <span className={styles.exclamation}>
-            <FontAwesomeIcon
-              icon={faExclamation}
-              size='xs'
-              className={styles.svg}
-            />
+          <span className={globals.errorExclamation}>
+            <FontAwesomeIcon icon={faExclamation} size='xs' />
           </span>
         )}
       </div>
 
       {isDataInvalid && (
-        <div className={styles.error} data-testid='dataError'>
+        <div className={globals.error} data-testid='dataError'>
           {dataError}
         </div>
       )}

@@ -12,54 +12,8 @@
     position: relative;
     display: flex;
 
-    .input {
-      display: block;
-      padding: 0.375rem 0.75rem;
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.5;
-      color: $input-color;
-      background-color: $white;
-      background-clip: padding-box;
-      border: 1px solid $input-border-color;
-      width: 100%;
-      border-radius: $input-border-radius;
-      height: auto;
-      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-
-      &:focus {
-        color: $input-color;
-        background-color: $white;
-        border-color: $input-border-focus;
-        outline: 0;
-        box-shadow: 0 0 0 0.2rem rgb(27 70 194 / 25%);
-      }
-
-      &.invalid {
-        border-color: $error;
-        padding-right: calc(1.5em + 0.75rem);
-      }
-    }
-
-    .exclamation {
-      position: absolute;
-      width: calc(1.5em + 0.75rem);
-      top: 50%;
-      transform: translateY(-50%);
-      border-radius: 50%;
-      border: 1px solid $error;
-      width: 1rem;
-      height: 1rem;
-      right: 0.75rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      .svg {
-        path {
-          fill: $error;
-        }
-      }
+    .invalid {
+      padding-right: calc(1.5em + 0.75rem);
     }
   }
 

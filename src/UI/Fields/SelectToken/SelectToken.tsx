@@ -6,6 +6,8 @@ import { selectCustomStyles } from 'helpers';
 import { TokenType, TokenAssetsType } from 'types';
 
 import styles from './styles.module.scss';
+import globals from 'assets/sass/globals.module.scss';
+
 import TokenElement from './TokenElement';
 
 interface OptionType {
@@ -118,7 +120,7 @@ export function SelectToken({ label }: { label?: string }) {
       />
 
       {isTokenIdInvalid && (
-        <div className={styles.error} data-testid='tokenIdError'>
+        <div className={globals.error} data-testid='tokenIdError'>
           <small>{tokenIdError}</small>
         </div>
       )}

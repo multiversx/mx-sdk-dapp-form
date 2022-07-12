@@ -4,6 +4,7 @@ import { NftType } from 'types';
 import TokenElement from 'UI/Fields/SelectToken/TokenElement';
 
 import styles from './styles.module.scss';
+import globals from 'assets/sass/globals.module.scss';
 
 export interface TokenPropsType {
   tokenId: string;
@@ -64,7 +65,7 @@ const Token = ({
         )}
       </div>
 
-      {tokenIdError && <div className={styles.error}>{tokenIdError}</div>}
+      {tokenIdError && <div className={globals.error}>{tokenIdError}</div>}
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import styles from './styles.module.scss';
+import globals from 'assets/sass/globals.module.scss';
 
 interface SharedAmountType {
   AvailableAmountElement: () => JSX.Element | null;
@@ -57,18 +58,15 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
           onBlur={onBlur}
           onChange={onChange}
           autoComplete='off'
-          className={classNames(styles.input, {
+          className={classNames(globals.input, {
+            [globals.invalid]: isInvalid,
             [styles.invalid]: isInvalid
           })}
         />
 
         {isInvalid && (
-          <span className={styles.exclamation}>
-            <FontAwesomeIcon
-              icon={faExclamation}
-              size='xs'
-              className={styles.svg}
-            />
+          <span className={globals.errorExclamation}>
+            <FontAwesomeIcon icon={faExclamation} size='xs' />
           </span>
         )}
       </div>

@@ -14,6 +14,7 @@ import {
 } from 'UI/Fields';
 
 import styles from './styles.module.scss';
+import globals from 'assets/sass/globals.module.scss';
 
 export const Form = () => {
   const { formInfo, receiverInfo } = useSendFormContext();
@@ -57,7 +58,9 @@ export const Form = () => {
 
       <div className={styles.buttons}>
         <button
-          className={classNames(styles.send, { [styles.warning]: scamError })}
+          className={classNames(globals.btn, globals.btnPrimary, {
+            [globals.btnWarning]: scamError
+          })}
           type='button'
           id='sendBtn'
           data-testid='sendBtn'

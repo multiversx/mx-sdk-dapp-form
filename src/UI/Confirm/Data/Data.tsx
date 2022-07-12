@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { decodePart } from '@elrondnetwork/dapp-core/utils';
 
 import styles from './styles.module.scss';
+import globals from 'assets/sass/globals.module.scss';
 
 const allOccurences = (sourceStr: string, searchStr: string) =>
   [...sourceStr.matchAll(new RegExp(searchStr, 'gi'))].map((a) => a.index);
@@ -68,7 +69,7 @@ const Data = ({
         <div className={styles.data}>
           <span className={styles.label}>{scCallLabel}</span>
 
-          <div data-testid='confirmScCall' className={styles.textarea}>
+          <div data-testid='confirmScCall' className={globals.textarea}>
             {[decodePart(encodedScCall), ...remainingDataFields].join('@')}
           </div>
         </div>
@@ -77,7 +78,7 @@ const Data = ({
       <div className={styles.data}>
         <span className={styles.label}>{label}</span>
 
-        <div data-testid='confirmData' className={styles.textarea}>
+        <div data-testid='confirmData' className={globals.textarea}>
           {data ? output : 'N/A'}
         </div>
       </div>

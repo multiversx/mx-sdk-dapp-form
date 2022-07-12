@@ -4,7 +4,9 @@ import classNames from 'classnames';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import Confirm from '../Confirm';
+
 import styles from './styles.module.scss';
+import globals from 'assets/sass/globals.module.scss';
 
 interface ConfirmScreenType {
   isConfirmCloseBtnVisible?: boolean;
@@ -81,13 +83,15 @@ export const ConfirmScreen = ({
 
       <div className={styles.buttons}>
         {gasCostError && (
-          <p className={styles.error}>
+          <p className={globals.error}>
             {`Transaction simulation has failed with error ${gasCostError}`}
           </p>
         )}
 
         <button
-          className={classNames(styles.send, { [styles.warning]: scamError })}
+          className={classNames(globals.btn, globals.btnPrimary, {
+            [globals.btnWarning]: scamError
+          })}
           type='button'
           id='sendTrxBtn'
           data-testid='sendTrxBtn'
