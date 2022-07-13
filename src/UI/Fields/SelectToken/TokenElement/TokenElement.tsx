@@ -5,6 +5,7 @@ import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
+import { ZERO } from 'constants/index';
 import { scamFlag } from 'helpers';
 import { NftEnumType, NftType, TokenType } from 'types';
 
@@ -81,7 +82,7 @@ const TokenElement = ({
         {!inDropdown && nftType !== NftEnumType.NonFungibleESDT && (
           <Denominate
             egldLabel={identifier}
-            value={balance || '0'}
+            value={balance || ZERO}
             decimals={
               nftType === NftEnumType.SemiFungibleESDT ? 0 : constants.decimals
             }
@@ -96,4 +97,4 @@ const TokenElement = ({
   );
 };
 
-export default TokenElement;
+export { TokenElement };

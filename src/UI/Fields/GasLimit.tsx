@@ -8,7 +8,7 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import styles from './styles.module.scss';
 import globals from 'assets/sass/globals.module.scss';
 
-export const GasLimit = () => {
+const GasLimit = () => {
   const { formInfo, gasInfo } = useSendFormContext();
   const { readonly } = formInfo;
   const {
@@ -82,4 +82,4 @@ export const GasLimit = () => {
   );
 };
 
-export default GasLimit;
+export { GasLimit };

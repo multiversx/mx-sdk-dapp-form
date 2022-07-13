@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { NftType } from 'types';
-import TokenElement from 'UI/Fields/SelectToken/TokenElement';
+import { TokenElement } from 'UI/Fields/SelectToken/TokenElement';
+
+import { ZERO } from 'constants/index';
 
 import styles from './styles.module.scss';
 import globals from 'assets/sass/globals.module.scss';
@@ -40,7 +42,7 @@ const Token = ({
               name: nft?.identifier,
               identifier: nft?.identifier,
               decimals: 0,
-              balance: '0',
+              balance: ZERO,
               ticker: '',
               assets: {
                 svgUrl: nft?.assets?.svgUrl || ''
@@ -54,7 +56,7 @@ const Token = ({
               name: isEsdtTransaction ? tokenLabel : 'Elrond eGold',
               identifier: isEsdtTransaction ? tokenId : egldLabel,
               decimals: 0,
-              balance: '0',
+              balance: ZERO,
               ticker: '',
               assets: {
                 svgUrl: tokenAvatar || ''
@@ -70,4 +72,4 @@ const Token = ({
   );
 };
 
-export default Token;
+export { Token };

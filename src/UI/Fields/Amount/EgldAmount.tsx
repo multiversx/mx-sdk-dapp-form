@@ -1,12 +1,14 @@
 import React from 'react';
 import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue';
+
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import InfoDust from 'UI/InfoDust';
-import SharedAmount from './SharedAmount';
+import { InfoDust } from 'UI/InfoDust';
+import { SharedAmount } from './SharedAmount';
+import { ZERO } from 'constants/index';
 
 import styles from './styles.module.scss';
 
-export const EgldAmount = () => {
+const EgldAmount = () => {
   const { tokensInfo, amountInfo } = useSendFormContext();
 
   const { egldLabel, egldPriceInUsd } = tokensInfo;
@@ -32,7 +34,7 @@ export const EgldAmount = () => {
       );
     }
 
-    if (maxAmountAvailable !== '0') {
+    if (maxAmountAvailable !== ZERO) {
       return (
         <small
           className={styles.small}
@@ -50,4 +52,4 @@ export const EgldAmount = () => {
   return <SharedAmount AvailableAmountElement={AvailableAmountElement} />;
 };
 
-export default EgldAmount;
+export { EgldAmount };

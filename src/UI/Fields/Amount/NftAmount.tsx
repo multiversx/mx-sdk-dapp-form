@@ -3,11 +3,11 @@ import BigNumber from 'bignumber.js';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { NftEnumType } from 'types';
-import SharedAmount from './SharedAmount';
+import { SharedAmount } from './SharedAmount';
 
 import styles from './styles.module.scss';
 
-export const NftAmount = () => {
+const NftAmount = () => {
   const { amountInfo, tokensInfo } = useSendFormContext();
   const { nft } = tokensInfo;
   const { maxAmountAvailable, isMaxClicked } = amountInfo;
@@ -34,4 +34,4 @@ export const NftAmount = () => {
   return <SharedAmount AvailableAmountElement={AvailableAmountElement} />;
 };
 
-export default NftAmount;
+export { NftAmount };

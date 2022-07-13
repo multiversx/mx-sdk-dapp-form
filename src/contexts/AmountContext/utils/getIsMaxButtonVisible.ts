@@ -1,4 +1,5 @@
 import { NftType, TxTypeEnum } from 'types';
+import { ZERO } from 'constants/index';
 import { showMax } from 'utilities';
 
 interface GetIsMaxButtonVisiblePropsType {
@@ -28,7 +29,9 @@ export function getIsMaxButtonVisible({
       });
     case TxTypeEnum.ESDT:
       const differentFromMaxBalance = amount !== maxAmountAvailable;
-      return differentFromMaxBalance && !readonly && maxAmountAvailable !== '0';
+      return (
+        differentFromMaxBalance && !readonly && maxAmountAvailable !== ZERO
+      );
     default:
       const isNftAmountDifferentFromBalance =
         nft != null && amount !== nft?.balance;

@@ -1,4 +1,3 @@
-import FeeAccordion from './FeeAccordion';
+import { FeeAccordion } from './FeeAccordion';
 
 export { FeeAccordion };
-export default FeeAccordion;

@@ -12,6 +12,8 @@ import {
   getEntireTokenBalance,
   getTokenDetails
 } from 'operations';
+
+import { ZERO } from 'constants/index';
 import { ExtendedValuesType, NftEnumType } from 'types';
 import { useFormContext } from '../../FormContext';
 import { useGasContext } from '../../GasContext';
@@ -31,12 +33,15 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
   const [tokenBalance, setTokenBalance] = useState<string | null>(null);
   const [nftBalance, setNftBalance] = useState<string | null>(null);
-  const [denominatedEgldBalance, setDenominatedEgldBalance] = useState('0');
+  const [denominatedEgldBalance, setDenominatedEgldBalance] = useState(ZERO);
   const [balanceMinusDust, setBalanceMinusDust] = useState(balance);
 
   const { nft, tokens } = useTokensContext();
-  const { isEsdtTransaction, isNftTransaction, isEgldTransaction } =
-    useFormContext();
+  const {
+    isEsdtTransaction,
+    isNftTransaction,
+    isEgldTransaction
+  } = useFormContext();
   const { gasLimit, gasPrice } = useGasContext();
   const { tokenId, txType } = values;
 
@@ -69,15 +74,17 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
   useEffect(() => {
     if (balance && isEgldTransaction) {
-      const { entireBalance: denominatedBalance, entireBalanceMinusDust } =
-        getEntireBalance({
-          balance,
-          gasPrice: nominate(gasPrice),
-          gasLimit: gasLimit,
-          denomination: defaultDenomination,
-          decimals: defaultDecimals,
-          chainId
-        });
+      const {
+        entireBalance: denominatedBalance,
+        entireBalanceMinusDust
+      } = getEntireBalance({
+        balance,
+        gasPrice: nominate(gasPrice),
+        gasLimit: gasLimit,
+        denomination: defaultDenomination,
+        decimals: defaultDecimals,
+        chainId
+      });
       setDenominatedEgldBalance(denominatedBalance);
       setBalanceMinusDust(entireBalanceMinusDust);
     }
@@ -94,7 +101,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
     : maxAmountAvailable;
 
   return {
-    maxAmountAvailable: maxAmountAvailable || '0',
-    maxAmountMinusDust: maxAmountMinusDust || '0'
+    maxAmountAvailable: maxAmountAvailable || ZERO,
+    maxAmountMinusDust: maxAmountMinusDust || ZERO
   };
 }

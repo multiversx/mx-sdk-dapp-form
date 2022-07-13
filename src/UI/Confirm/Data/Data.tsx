@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { decodePart } from '@elrondnetwork/dapp-core/utils';
 
 import styles from './styles.module.scss';
@@ -20,7 +20,7 @@ const Data = ({
   highlight?: string;
   isScCall?: boolean;
 }) => {
-  let output = <Fragment>{data}</Fragment>;
+  let output = <>{data}</>;
 
   const [encodedScCall, ...remainingDataFields] =
     highlight && isScCall ? highlight.split('@') : [];
@@ -30,20 +30,20 @@ const Data = ({
       case data.startsWith(highlight): {
         const [, rest] = data.split(highlight);
         output = (
-          <Fragment>
+          <>
             {highlight}
             <span className={styles.secondary}>{rest}</span>
-          </Fragment>
+          </>
         );
         break;
       }
       case data.endsWith(highlight): {
         const [rest] = data.split(highlight);
         output = (
-          <Fragment>
+          <>
             <span className={styles.secondary}>{rest}</span>
             {highlight}
-          </Fragment>
+          </>
         );
         break;
       }
@@ -52,11 +52,11 @@ const Data = ({
         const [start, end] = data.split(highlight);
 
         output = (
-          <Fragment>
+          <>
             <span className={styles.secondary}>{start}</span>
             {highlight}
             <span className={styles.secondary}>{end}</span>
-          </Fragment>
+          </>
         );
         break;
       }
@@ -64,7 +64,7 @@ const Data = ({
   }
 
   return (
-    <Fragment>
+    <>
       {encodedScCall && (
         <div className={styles.data}>
           <span className={styles.label}>{scCallLabel}</span>
@@ -82,8 +82,8 @@ const Data = ({
           {data ? output : 'N/A'}
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 
-export default Data;
+export { Data };

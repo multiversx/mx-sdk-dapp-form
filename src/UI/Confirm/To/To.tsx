@@ -11,7 +11,7 @@ const To = ({
 }: {
   label?: string;
   receiver: string;
-  scamReport?: ReactNode | string;
+  scamReport?: ReactNode;
 }) => (
   <div className={styles.to}>
     <span className={styles.label}>{label}</span>
@@ -31,4 +31,4 @@ const To = ({
   </div>
 );
 
-export default To;
+export { To };

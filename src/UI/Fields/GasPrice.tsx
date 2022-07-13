@@ -80,4 +80,4 @@ const GasPrice = () => {
   );
 };
 
-export default GasPrice;
+export { GasPrice };

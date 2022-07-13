@@ -7,7 +7,7 @@ import ReactTooltip from 'react-tooltip';
 import { minDust } from 'constants/index';
 import styles from './styles.module.scss';
 
-export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
+const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
   <div className={styles.info}>
     <ReactTooltip
       effect='solid'
@@ -34,4 +34,4 @@ export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
   </div>
 );
 
-export default InfoDust;
+export { InfoDust };

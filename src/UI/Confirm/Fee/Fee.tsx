@@ -1,5 +1,7 @@
 import React from 'react';
 import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate';
+
+import { ZERO } from 'constants/index';
 import { calculateFeeInFiat } from 'operations';
 import styles from './styles.module.scss';
 
@@ -24,7 +26,7 @@ const Fee = ({
       data-testid='confirmFee'
     />
 
-    {feeLimit !== '0' && (
+    {feeLimit !== ZERO && (
       <small className={styles.text}>
         {calculateFeeInFiat({
           feeLimit,
@@ -35,4 +37,4 @@ const Fee = ({
   </div>
 );
 
-export default Fee;
+export { Fee };

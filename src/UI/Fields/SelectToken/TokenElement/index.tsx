@@ -1,3 +1,3 @@
-import TokenElement from './TokenElement';
+import { TokenElement } from './TokenElement';
 
-export default TokenElement;
+export { TokenElement };

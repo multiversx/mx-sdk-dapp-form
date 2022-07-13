@@ -9,7 +9,7 @@ import { useUICustomizationContext } from 'contexts/UICustomization';
 import styles from './styles.module.scss';
 import globals from 'assets/sass/globals.module.scss';
 
-export const Data = () => {
+const Data = () => {
   const {
     fields: {
       data: { label }
@@ -20,20 +20,22 @@ export const Data = () => {
     dataFieldInfo: { data, dataError, isDataInvalid, onChange, onBlur }
   } = useSendFormContext();
 
+  const DATA = 'data';
+
   return (
     <div className={styles.data}>
       {label && (
-        <label htmlFor='data' className={styles.label}>
+        <label htmlFor={DATA} className={styles.label}>
           {label}
         </label>
       )}
 
       <div className={styles.wrapper}>
         <textarea
-          id='data'
-          name='data'
+          id={DATA}
+          name={DATA}
           disabled={!isEgldTransaction}
-          data-testid='data'
+          data-testid={DATA}
           value={data}
           onBlur={onBlur}
           onChange={onChange}
@@ -58,4 +60,4 @@ export const Data = () => {
   );
 };
 
-export default Data;
+export { Data };

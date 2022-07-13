@@ -8,13 +8,13 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import GasLimit from '../GasLimit';
-import GasPrice from '../GasPrice';
-import FeeInFiat from './FeeInFiat';
+import { GasLimit } from '../GasLimit';
+import { GasPrice } from '../GasPrice';
+import { FeeInFiat } from './FeeInFiat';
 
 import styles from './styles.module.scss';
 
-export const FeeAccordion = () => {
+const FeeAccordion = () => {
   const accordion = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(false);
 
@@ -66,4 +66,4 @@ export const FeeAccordion = () => {
   );
 };
 
-export default FeeAccordion;
+export { FeeAccordion };

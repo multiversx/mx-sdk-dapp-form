@@ -1,4 +1,3 @@
-import ConfirmScreen from './ConfirmScreen';
+import { ConfirmScreen } from './ConfirmScreen';
 
 export { ConfirmScreen };
-export default ConfirmScreen;

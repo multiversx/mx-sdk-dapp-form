@@ -5,10 +5,10 @@ import {
   gasPriceModifier
 } from '@elrondnetwork/dapp-core/constants/index';
 import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/calculateFeeLimit';
-import nominate from '@elrondnetwork/dapp-core/utils/operations/nominate';
-import isContract from '@elrondnetwork/dapp-core/utils/smartContracts';
+import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
+import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
 import { useFormikContext } from 'formik';
-import { tokenGasLimit } from 'constants/index';
+import { tokenGasLimit, ZERO } from 'constants/index';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
@@ -63,7 +63,7 @@ export function GasContextProvider({
   children,
   initGasLimitError
 }: GasContextProviderPropsType) {
-  const [feeLimit, setFeeLimit] = useState('0');
+  const [feeLimit, setFeeLimit] = useState(ZERO);
 
   const {
     values,
@@ -78,8 +78,12 @@ export function GasContextProvider({
   } = useFormikContext<ExtendedValuesType>();
   const { gasPrice, gasLimit, data, tokenId, receiver, txType } = values;
 
-  const { checkInvalid, isNftTransaction, isEsdtTransaction, prefilledForm } =
-    useFormContext();
+  const {
+    checkInvalid,
+    isNftTransaction,
+    isEsdtTransaction,
+    prefilledForm
+  } = useFormContext();
   const { balance, address, nonce } = useAccountContext();
   const {
     networkConfig: { id: chainId }
@@ -159,7 +163,7 @@ export function GasContextProvider({
           gasPerDataByte: String(gasPerDataByte),
           gasPriceModifier: String(gasPriceModifier)
         })
-      : '0';
+      : ZERO;
     setFeeLimit(newFeeLimit);
   }, [gasLimit, data, chainId, gasPrice, hasErrors]);
 

@@ -5,16 +5,15 @@ import classNames from 'classnames';
 
 import styles from './styles.module.scss';
 
-export const Loader = () => (
-  <div className={styles.loader}>
-    <PageState
-      title='Loading...'
-      icon={faSpinner}
-      iconClass={classNames(styles.icon, 'fa-spin')}
-      iconSize='5x'
-      dataTestId='loader'
-    />
-  </div>
+const Loader = () => (
+  <PageState
+    title='Loading...'
+    icon={faSpinner}
+    iconClass={classNames(styles.icon, 'fa-spin')}
+    iconSize='5x'
+    dataTestId='loader'
+    className={styles.loader}
+  />
 );
 
-export default Loader;
+export { Loader };

@@ -1,4 +1,3 @@
-import To from './To';
+import { To } from './To';
 
 export { To };
-export default To;

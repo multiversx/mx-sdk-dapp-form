@@ -13,7 +13,7 @@ interface SharedAmountType {
   AvailableAmountElement: () => JSX.Element | null;
 }
 
-export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
+const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   const {
     formInfo: { checkInvalid },
     amountInfo
@@ -90,4 +90,4 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   );
 };
 
-export default SharedAmount;
+export { SharedAmount };

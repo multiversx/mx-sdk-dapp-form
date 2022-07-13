@@ -30,7 +30,6 @@
     "@tsconfig/create-react-app": "1.0.2",
     "@tsconfig/recommended": "1.0.1",
     "@types/react": "18.0.14",
-    "@types/react-autocomplete": "1.8.6",
     "@types/react-dom": "18.0.5",
     "@typescript-eslint/eslint-plugin": "5.0.0",
     "@typescript-eslint/parser": "5.22.0",
@@ -85,13 +84,13 @@
     "transaction"
   ],
   "peerDependencies": {
-    "react": ">=18",
-    "react-dom": ">=18",
-    "@elrondnetwork/dapp-core": "2.0.0-beta.1",
-    "@elrondnetwork/erdjs": "10.2.7"
+    "@elrondnetwork/dapp-core": "2.0.0-beta.4",
+    "@elrondnetwork/erdjs": "10.2.7",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   },
   "resolutions": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.1",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.4",
     "@elrondnetwork/erdjs": "10.2.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"
@@ -101,13 +100,14 @@
     "@fortawesome/free-solid-svg-icons": "6.1.0",
     "@fortawesome/react-fontawesome": "0.1.18",
     "classnames": "2.3.1",
-    "react-autocomplete": "1.8.1",
+    "react-bootstrap-typeahead": "6.0.0-rc.3",
     "react-select": "5.4.0",
     "react-tooltip": "4.2.21"
   },
   "dependencies": {
     "anchorme": "2.1.2",
     "axios": "0.24.0",
+    "bech32": "2.0.0",
     "bignumber.js": "9.x",
     "formik": "2.2.9",
     "lodash": "4.17.21",

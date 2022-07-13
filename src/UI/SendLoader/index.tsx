@@ -1,4 +1,3 @@
-import SendLoader from './SendLoader';
+import { SendLoader } from './SendLoader';
 
 export { SendLoader };
-export default SendLoader;

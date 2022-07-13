@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import * as constants from '@elrondnetwork/dapp-core/constants';
 import { Denominate, UsdValue } from '@elrondnetwork/dapp-core/UI';
 import { nominate } from '@elrondnetwork/dapp-core/utils';
 
 import { NftType, TxTypeEnum } from 'types';
-import Token from '../Token';
+import { Token } from '../Token';
 
 import styles from './styles.module.scss';
 
@@ -64,7 +64,7 @@ const Amount = (props: AmountPropsType) => {
       data-testid='confirmAmount'
     />
   ) : (
-    <Fragment>
+    <>
       <Denominate
         egldLabel={props.egldLabel}
         value={nominate(amount, denomination)}
@@ -82,7 +82,7 @@ const Amount = (props: AmountPropsType) => {
           data-testid='confirmUsdValue'
         />
       )}
-    </Fragment>
+    </>
   );
 
   return (
@@ -102,4 +102,4 @@ const Amount = (props: AmountPropsType) => {
   );
 };
 
-export default Amount;
+export { Amount };

@@ -1,40 +1,46 @@
-import React, {
-  useState,
-  ChangeEvent,
-  ReactNode,
-  useEffect,
-  useCallback,
-  Children
-} from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { addressIsValid } from '@elrondnetwork/dapp-core/utils';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
-import Autocomplete from 'react-autocomplete';
+import { Typeahead, Menu, MenuItem } from 'react-bootstrap-typeahead';
+import { MenuProps } from 'react-bootstrap-typeahead/types/components/Menu';
+import {
+  FilterByCallback,
+  Option,
+  TypeaheadManagerChildProps
+} from 'react-bootstrap-typeahead/types/types';
 
+import classNames from 'classnames';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import styles from './styles.module.scss';
 import globals from 'assets/sass/globals.module.scss';
 
-const Item = (address: string, highlighted: boolean) => (
-  <div
-    key={address}
-    className={classNames(styles.item, { [styles.highlighted]: highlighted })}
-  >
-    {address}
-  </div>
+const CustomMenu = (
+  results: Array<Option>,
+  props: MenuProps,
+  state: TypeaheadManagerChildProps
+) => (
+  <Menu {...props} className={styles.menu}>
+    {results.map((option: Option, position: number) => (
+      <MenuItem
+        {...{
+          option,
+          position,
+          className: classNames(styles.item, {
+            [styles.highlighted]: position === state.activeIndex
+          })
+        }}
+      >
+        {option.toString()}
+      </MenuItem>
+    ))}
+  </Menu>
 );
 
-const Menu = (children: Array<ReactNode>) => (
-  <div className={styles.menu}>
-    {Children.map(children, (child, index) => (index < 5 ? child : null))}
-  </div>
-);
-
-export const To = () => {
+const To = () => {
   const {
     fields: {
       to: { label }
@@ -56,27 +62,22 @@ export const To = () => {
   const [value, setValue] = useState(receiver);
   const [key, setKey] = useState('');
 
-  const changeAndBlurInput = useCallback((props: { value?: string }) => {
-    onChangeReceiver(props.value ? props.value.trim() : '');
+  const changeAndBlurInput = useCallback((value: string) => {
+    onChangeReceiver(value ? value.trim() : '');
+
+    // Trigger validation after blur, by instantiating a new Event class and
+    // skipping the event loop through the setTimeout function.
     setTimeout(() => onBlurReceiver(new Event('blur')));
   }, []);
 
-  const shouldItemRender = (item: string, value: string) =>
-    item.toLowerCase().indexOf(value.toLowerCase()) !== -1 && value.length > 2;
-
-  const onChange = (event: ChangeEvent<HTMLInputElement>, value: string) => {
-    event.preventDefault();
-    onInputChange(event.target.value);
+  const onInputChange = (value: string) => {
+    changeAndBlurInput(value);
     setValue(value);
   };
 
-  const onSelect = (option: string) => {
-    setValue(option);
-    onInputChange(option);
-  };
-
-  const onInputChange = (value: string) => {
-    changeAndBlurInput({ value });
+  const onChange = ([option]: Array<Option>) => {
+    setValue(option.toString());
+    changeAndBlurInput(option.toString());
   };
 
   const triggerRerenderOnceOnHook = () => {
@@ -85,6 +86,10 @@ export const To = () => {
     }
   };
 
+  const filterBy: FilterByCallback = (option, props) =>
+    option.toLowerCase().indexOf(props.text.toLowerCase()) !== -1 &&
+    props.text.length > 2;
+
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
   return (
@@ -92,19 +97,19 @@ export const To = () => {
       {label && <div className={styles.label}>{label}</div>}
 
       <div className={styles.autocomplete}>
-        <Autocomplete
-          {...{
-            getItemValue: (item: string) => item,
-            inputProps: { className: globals.input },
-            wrapperStyle: { display: 'flex' },
-            items: knownAddresses,
-            renderItem: Item,
-            renderMenu: Menu,
-            shouldItemRender,
-            onSelect,
-            onChange,
-            value
-          }}
+        <Typeahead
+          id='receiverWrapper'
+          filterBy={filterBy}
+          ignoreDiacritics={true}
+          emptyLabel={false}
+          maxResults={5}
+          caseSensitive={false}
+          defaultInputValue={value}
+          options={knownAddresses}
+          onChange={onChange}
+          onInputChange={onInputChange}
+          renderMenu={CustomMenu}
+          inputProps={{ className: globals.input }}
         />
       </div>
 
@@ -126,4 +131,4 @@ export const To = () => {
   );
 };
 
-export default To;
+export { To };

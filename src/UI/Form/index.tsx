@@ -1,4 +1,3 @@
-import Form from './Form';
+import { Form } from './Form';
 
 export { Form };
-export default Form;

@@ -13,7 +13,7 @@ interface ConfirmScreenType {
   providerType: string;
 }
 
-export const ConfirmScreen = ({
+const ConfirmScreen = ({
   isConfirmCloseBtnVisible = true,
   providerType
 }: ConfirmScreenType) => {
@@ -82,11 +82,7 @@ export const ConfirmScreen = ({
       <Confirm.Data {...{ data, egldPriceInUsd }} />
 
       <div className={styles.buttons}>
-        {gasCostError && (
-          <p className={globals.error}>
-            {`Transaction simulation has failed with error ${gasCostError}`}
-          </p>
-        )}
+        {gasCostError && <p className={globals.error}>${gasCostError}</p>}
 
         <button
           className={classNames(globals.btn, globals.btnPrimary, {
@@ -101,18 +97,21 @@ export const ConfirmScreen = ({
         </button>
 
         {isConfirmCloseBtnVisible && (
-          <a
-            href='/#'
+          <button
+            className={classNames(globals.btn, globals.btnLink, {
+              [globals.btnWarning]: scamError
+            })}
+            type='button'
             id='cancelTrxBtn'
             data-testid='cancelTrxBtn'
             onClick={onCloseClick}
           >
             {readonly ? 'Close' : 'Back'}
-          </a>
+          </button>
         )}
       </div>
     </div>
   );
 };
 
-export default ConfirmScreen;
+export { ConfirmScreen };

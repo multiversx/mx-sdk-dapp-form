@@ -1,3 +1,3 @@
-import Token from './Token';
+import { TokenPropsType, Token } from './Token';
 
-export default Token;
+export { TokenPropsType, Token };

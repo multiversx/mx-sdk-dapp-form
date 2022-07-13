@@ -6,3 +6,4 @@ export const ledgerMultiAccountMinimumVersion = '1.0.8';
 export const ledgerHashSignMinimumVersion = '1.0.11';
 export const ledgerSignAuthTokenMinimumVersion = '1.0.15';
 export const ledgerWithWhitelistedTokensMinimumVersion = '1.0.17';
+export const ZERO = '0';

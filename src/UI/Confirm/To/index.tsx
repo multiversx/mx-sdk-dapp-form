@@ -1,3 +1,3 @@
-import To from './To';
+import { To } from './To';
 
-export default To;
+export { To };

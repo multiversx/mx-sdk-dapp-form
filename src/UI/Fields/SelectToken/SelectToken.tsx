@@ -8,20 +8,16 @@ import { TokenType, TokenAssetsType } from 'types';
 import styles from './styles.module.scss';
 import globals from 'assets/sass/globals.module.scss';
 
-import TokenElement from './TokenElement';
+import { TokenElement } from './TokenElement';
 
 interface OptionType {
   value: string;
   label: string;
   assets?: TokenAssetsType;
-  token: {
-    identifier: string;
-    name: string;
-    assets?: TokenAssetsType;
-  };
+  token: TokenType;
 }
 
-export function SelectToken({ label }: { label?: string }) {
+const SelectToken = ({ label }: { label?: string }) => {
   const { formInfo, accountInfo, tokensInfo } = useSendFormContext();
 
   const { readonly } = formInfo;
@@ -52,18 +48,16 @@ export function SelectToken({ label }: { label?: string }) {
       balance,
       decimals: constants.denomination,
       ticker: ''
-      // add type
     },
     ...tokens
-    // ...metaEsdts
   ];
 
   const options: Array<OptionType> = allTokens.map(
-    ({ identifier, name, assets }) => ({
-      value: identifier,
-      label: name,
-      assets,
-      token: { identifier, name, assets }
+    (token: TokenType): OptionType => ({
+      value: token.identifier,
+      label: token.name,
+      assets: token.assets,
+      token
     })
   );
 
@@ -111,7 +105,10 @@ export function SelectToken({ label }: { label?: string }) {
         isDisabled={readonly}
         isLoading={areTokensLoading}
         styles={selectStyle}
-        value={options.find(({ value }: OptionType) => value === tokenId)}
+        value={
+          options.find(({ value }: OptionType) => value === tokenId) ||
+          undefined
+        }
         options={options}
         onChange={onChange}
         onMenuOpen={onMenuOpen}
@@ -126,6 +123,6 @@ export function SelectToken({ label }: { label?: string }) {
       )}
     </div>
   );
-}
+};
 
-export default SelectToken;
+export { SelectToken };

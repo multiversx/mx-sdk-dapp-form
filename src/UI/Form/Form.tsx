@@ -16,7 +16,7 @@ import {
 import styles from './styles.module.scss';
 import globals from 'assets/sass/globals.module.scss';
 
-export const Form = () => {
+const Form = () => {
   const { formInfo, receiverInfo } = useSendFormContext();
   const {
     values: { txType }
@@ -69,17 +69,20 @@ export const Form = () => {
           Send
         </button>
 
-        <a
-          href='/#'
+        <button
+          className={classNames(globals.btn, globals.btnLink, {
+            [globals.btnWarning]: scamError
+          })}
+          type='button'
           id='closeButton'
           data-testid='returnToWalletBtn'
           onClick={handleCloseClick}
         >
           Cancel
-        </a>
+        </button>
       </div>
     </form>
   );
 };
 
-export default Form;
+export { Form };

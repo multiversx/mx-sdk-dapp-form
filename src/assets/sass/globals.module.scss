@@ -85,4 +85,14 @@
     background-color: $warning;
     color: $brown;
   }
+
+  &.btnLink {
+    color: $primary-light;
+    background: none;
+    padding: 0;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }

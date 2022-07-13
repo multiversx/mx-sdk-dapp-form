@@ -1,4 +1,3 @@
-import Data from './Data';
+import { Data } from './Data';
 
 export { Data };
-export default Data;

@@ -1,4 +1,3 @@
-import InfoDust from './InfoDust';
+import { InfoDust } from './InfoDust';
 
 export { InfoDust };
-export default InfoDust;

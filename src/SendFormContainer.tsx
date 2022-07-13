@@ -12,6 +12,7 @@ import {
   TokensContextInitializationPropsType
 } from 'contexts';
 
+import { ZERO } from 'constants/index';
 import { UICustomizationContextPropsType } from 'contexts/UICustomization';
 import { generateTransaction, getTxType } from 'operations';
 import { ExtendedValuesType, TxTypeEnum, ValuesType } from 'types';
@@ -61,7 +62,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   });
   async function handleOnSubmit(values: ExtendedValuesType) {
     const actualTransactionAmount =
-      values.txType === TxTypeEnum.EGLD ? values.amount : '0';
+      values.txType === TxTypeEnum.EGLD ? values.amount : ZERO;
     const parsedValues = { ...values, amount: actualTransactionAmount };
 
     const transaction = shouldGenerateTransactionOnSubmit
@@ -87,7 +88,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     receiver: initialValues?.receiver || '',
     gasPrice: initialValues?.gasPrice || denominatedConfigGasPrice,
     data: initialValues?.data || '',
-    amount: initialValues?.amount || '0',
+    amount: initialValues?.amount || ZERO,
     gasLimit: initialValues?.gasLimit || String(gasLimit),
     txType:
       initialValues?.txType ||

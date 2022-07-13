@@ -1,3 +1,3 @@
-import Fee from './Fee.tsx';
+import { Fee } from './Fee';
 
-export default Fee;
+export { Fee };

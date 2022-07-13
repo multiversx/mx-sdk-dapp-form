@@ -28,17 +28,17 @@ html {
 // }
 a,
 .link-style {
-  color: $a;
+  color: $primary-light;
 }
 
 .link-second-style {
   color: #9dabbd;
 
   &:hover {
-    color: $a;
+    color: $primary-light;
 
     svg {
-      color: $a;
+      color: $primary-light;
     }
   }
 }
@@ -106,20 +106,20 @@ a,
     justify-content: center;
     align-items: center;
     color: #fff !important;
-    background-color: $a;
+    background-color: $primary-light;
     padding: 15px 20px 15px 16px;
     border-radius: 6px;
     gap: 8px;
 
     &:hover,
     &:active {
-      background-color: $a;
+      background-color: $primary-light;
       background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
     }
   }
 
   .info {
-    color: $a;
+    color: $primary-light;
     margin-left: 48px;
   }
 }
