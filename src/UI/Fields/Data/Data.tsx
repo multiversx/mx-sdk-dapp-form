@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
+import { DATA_FIELD } from 'constants/index';
 
 import styles from './styles.module.scss';
 import globals from 'assets/sass/globals.module.scss';
@@ -20,22 +21,20 @@ const Data = () => {
     dataFieldInfo: { data, dataError, isDataInvalid, onChange, onBlur }
   } = useSendFormContext();
 
-  const DATA = 'data';
-
   return (
     <div className={styles.data}>
       {label && (
-        <label htmlFor={DATA} className={styles.label}>
+        <label htmlFor={DATA_FIELD} className={styles.label}>
           {label}
         </label>
       )}
 
       <div className={styles.wrapper}>
         <textarea
-          id={DATA}
-          name={DATA}
+          id={DATA_FIELD}
+          name={DATA_FIELD}
           disabled={!isEgldTransaction}
-          data-testid={DATA}
+          data-testid={DATA_FIELD}
           value={data}
           onBlur={onBlur}
           onChange={onChange}

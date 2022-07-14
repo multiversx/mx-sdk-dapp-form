@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
+import { AMOUNT_FIELD } from 'constants/index';
+
 import styles from './styles.module.scss';
 import globals from 'assets/sass/globals.module.scss';
 
@@ -28,7 +30,7 @@ const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
     }
   } = useUICustomizationContext();
 
-  const isInvalid = checkInvalid('amount');
+  const isInvalid = checkInvalid(AMOUNT_FIELD);
   const {
     amount,
     isMaxButtonVisible,
@@ -41,7 +43,7 @@ const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   return (
     <div className={styles.amount}>
       {label && (
-        <label htmlFor='amount' className={styles.label}>
+        <label htmlFor={AMOUNT_FIELD} className={styles.label}>
           {label}
         </label>
       )}
@@ -49,9 +51,9 @@ const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
       <div className={styles.wrapper}>
         <input
           type='text'
-          id='amount'
-          name='amount'
-          data-testid='amount'
+          id={AMOUNT_FIELD}
+          name={AMOUNT_FIELD}
+          data-testid={AMOUNT_FIELD}
           required={true}
           value={amount}
           onFocus={onFocus}

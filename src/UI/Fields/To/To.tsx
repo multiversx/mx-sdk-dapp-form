@@ -66,7 +66,7 @@ const To = () => {
     onChangeReceiver(value ? value.trim() : '');
 
     // Trigger validation after blur, by instantiating a new Event class and
-    // skipping the event loop through the setTimeout function.
+    // pushing the action at the end of the event loop through setTimeout function.
     setTimeout(() => onBlurReceiver(new Event('blur')));
   }, []);
 

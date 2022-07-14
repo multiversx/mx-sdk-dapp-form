@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { denominatedConfigGasPrice } from 'operations';
+import { GAS_PRICE_FIELD } from 'constants/index';
 
 import styles from './styles.module.scss';
 import globals from 'assets/sass/globals.module.scss';
@@ -25,7 +26,7 @@ const GasPrice = () => {
 
   return (
     <div className={classNames(styles.gas, styles.price)}>
-      <label className={styles.left} htmlFor='gasPrice'>
+      <label className={styles.left} htmlFor={GAS_PRICE_FIELD}>
         Gas Price
       </label>
 
@@ -38,9 +39,9 @@ const GasPrice = () => {
           <div className={styles.wrapper}>
             <input
               type='text'
-              id='gasPrice'
-              name='gasPrice'
-              data-testid='gasPrice'
+              id={GAS_PRICE_FIELD}
+              name={GAS_PRICE_FIELD}
+              data-testid={GAS_PRICE_FIELD}
               required
               disabled
               value={gasPrice}

@@ -5,6 +5,7 @@ import { ExtendedValuesType, TxTypeEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useGasContext } from '../GasContext';
 import { useTokensContext } from '../TokensContext';
+import { DATA_FIELD } from 'constants/index';
 
 export interface DataContextPropsType {
   data: string;
@@ -24,8 +25,6 @@ interface DataContextProviderPropsType {
 
 export const DataFieldContext = React.createContext({} as DataContextPropsType);
 
-const dataField = 'data';
-
 export function DataContextProvider({
   children
 }: DataContextProviderPropsType) {
@@ -42,7 +41,7 @@ export function DataContextProvider({
   const { receiver, txType, amount, tokenId } = values;
   const { onChangeGasLimit } = useGasContext();
 
-  const isDataInvalid = checkInvalid(dataField);
+  const isDataInvalid = checkInvalid(DATA_FIELD);
 
   const handleUpdateData = (
     newValue: React.ChangeEvent<any> | string,
@@ -50,7 +49,7 @@ export function DataContextProvider({
   ) => {
     const value =
       typeof newValue === 'string' ? newValue : newValue?.target?.value;
-    setFieldValue(dataField, value, shouldValidate);
+    setFieldValue(DATA_FIELD, value, shouldValidate);
     if (!prefilledForm && !touched.gasLimit && isEgldTransaction) {
       const newGasLimit = calculateGasLimit({
         data: value
@@ -60,7 +59,7 @@ export function DataContextProvider({
   };
 
   const handleBlurData = useCallback(() => {
-    setFieldTouched(dataField, true);
+    setFieldTouched(DATA_FIELD, true);
   }, [handleBlur]);
 
   const handleResetData = useCallback(() => {
