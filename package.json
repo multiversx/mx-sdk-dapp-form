@@ -1,6 +1,6 @@
 {
   "name": "@elrondnetwork/dapp-core-form",
-  "version": "0.2.0-alpha.5",
+  "version": "0.2.0-alpha.6",
   "description": "A library to hold the main logic for a validating a form for transactions on the Elrond Network",
   "author": "ElrondNetwork",
   "license": "GPL-3.0-or-later",
@@ -86,11 +86,11 @@
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
-    "@elrondnetwork/dapp-core": "2.0.0-beta.1",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.5",
     "@elrondnetwork/erdjs": "10.2.7"
   },
   "resolutions": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.1",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.5",
     "@elrondnetwork/erdjs": "10.2.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"
