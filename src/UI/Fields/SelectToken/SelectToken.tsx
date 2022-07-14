@@ -1,6 +1,6 @@
 import React from 'react';
 import * as constants from '@elrondnetwork/dapp-core/constants';
-import Select from 'react-select';
+import Select, { SingleValue } from 'react-select';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { selectCustomStyles } from 'helpers';
 import { TokenType, TokenAssetsType } from 'types';
@@ -9,6 +9,7 @@ import styles from './styles.module.scss';
 import globals from 'assets/sass/globals.module.scss';
 
 import { TokenElement } from './TokenElement';
+import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
 interface OptionType {
   value: string;
@@ -65,13 +66,16 @@ const SelectToken = ({ label }: { label?: string }) => {
     await getTokens();
   }
 
-  const onChange = (props: any) => {
+  const onChange = (props: SingleValue<OptionType>) => {
     if (props) {
       onChangeTokenId(props.value);
     }
   };
 
-  const filterOptions = ({ value, label: filterLabel }: any, input: string) => {
+  const filterOptions = (
+    { value, label: filterLabel }: FilterOptionOption<OptionType>,
+    input: string
+  ) => {
     if (Boolean(input)) {
       const trimmedInput = input.trim().toLowerCase();
       const match = (option: string) =>
