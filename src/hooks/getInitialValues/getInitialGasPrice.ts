@@ -6,8 +6,8 @@ import {
 import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 
 export function getInitialGasPrice(gasPrice?: string) {
-  const validGasPrice = gasPrice != null && gasPrice !== '0';
-  const gasPriceValue = validGasPrice
+  const isGasPriceValid = gasPrice != null && gasPrice !== '0';
+  const gasPriceValue = isGasPriceValid
     ? gasPrice
     : denominate({
         input: String(defaultGasPrice),
