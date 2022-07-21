@@ -7,7 +7,7 @@
   "repository": "ElrondNetwork/dapp-core-form",
   "main": "./",
   "module": "./",
-  "types": "./dist",
+  "types": "./dist/types/*",
   "engines": {
     "node": ">=16"
   },
@@ -18,10 +18,8 @@
     "publish-package": "yarn build && cp package.json dist && cd dist && npm publish",
     "publish-yalc": "yarn build && cd dist && yalc publish",
     "watch": "yarn node esbuild-watch.js && yarn build:types -- --watch",
-    "test": "run-s test:unit test:build",
-    "test:build": "run-s build",
-    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "7.0.8",
@@ -56,7 +54,7 @@
     "react-is": "18.0.0",
     "react-scripts": "5.0.1",
     "size-limit": "7.0.8",
-    "ts-jest": "28.0.4",
+    "ts-jest": "^28.0.7",
     "tslib": "2.4.0",
     "typescript": "4.7.3"
   },
@@ -84,16 +82,23 @@
     "transaction"
   ],
   "peerDependencies": {
+    "@elrondnetwork/dapp-core": "2.0.0-beta.7",
+    "@elrondnetwork/erdjs": "10.2.7",
     "react": ">=18",
-    "react-dom": ">=18",
-    "@elrondnetwork/dapp-core": "2.0.0-beta.5",
-    "@elrondnetwork/erdjs": "10.2.7"
+    "react-dom": ">=18"
   },
   "resolutions": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.5",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.7",
     "@elrondnetwork/erdjs": "10.2.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "exports": {
+    "./*": {
+      "browser": "./esm/*",
+      "require": "./cjs/*",
+      "import": "./esm/*"
+    }
   },
   "optionalDependencies": {
     "@fortawesome/fontawesome-svg-core": "6.1.0",
@@ -109,6 +114,9 @@
     "axios": "0.24.0",
     "bignumber.js": "9.x",
     "formik": "2.2.9",
+    "identity-obj-proxy": "^3.0.0",
+    "jest-environment-jsdom": "^28.1.3",
+    "jest-scss-transform": "^1.0.3",
     "lodash": "4.17.21",
     "yup": "0.32.11"
   }
