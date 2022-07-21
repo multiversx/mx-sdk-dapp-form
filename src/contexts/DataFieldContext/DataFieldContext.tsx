@@ -1,11 +1,12 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { useFormikContext } from 'formik';
+
+import { DATA_FIELD } from 'constants/index';
 import { calculateGasLimit, getEsdtNftDataField } from 'operations';
 import { ExtendedValuesType, TxTypeEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useGasContext } from '../GasContext';
 import { useTokensContext } from '../TokensContext';
-import { DATA_FIELD } from 'constants/index';
 
 export interface DataContextPropsType {
   data: string;

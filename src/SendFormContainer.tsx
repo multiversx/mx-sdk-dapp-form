@@ -5,6 +5,8 @@ import {
 } from '@elrondnetwork/dapp-core/constants/index';
 import { Transaction } from '@elrondnetwork/erdjs';
 import { Formik } from 'formik';
+
+import { ZERO } from 'constants/index';
 import {
   AccountContextPropsType,
   AppInfoContextProvider,
@@ -12,7 +14,6 @@ import {
   TokensContextInitializationPropsType
 } from 'contexts';
 
-import { ZERO } from 'constants/index';
 import { UICustomizationContextPropsType } from 'contexts/UICustomization';
 import { generateTransaction, getTxType } from 'operations';
 import { ExtendedValuesType, TxTypeEnum, ValuesType } from 'types';
@@ -60,6 +61,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     initialValues,
     prefilledForm: formInfo.prefilledForm
   });
+
   async function handleOnSubmit(values: ExtendedValuesType) {
     const actualTransactionAmount =
       values.txType === TxTypeEnum.EGLD ? values.amount : ZERO;

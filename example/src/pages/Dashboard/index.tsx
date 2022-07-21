@@ -1,66 +1,55 @@
-import React from 'react';
-import {
-  useGetAccountInfo,
-  useGetAccountProvider
-} from '@elrondnetwork/dapp-core/hooks';
-import { SendFormContainer } from '@elrondnetwork/dapp-core-form';
-import {
-  ConfirmScreen,
-  SendLoader,
-  Form
-} from '@elrondnetwork/dapp-core-form/UI';
+import React, { useState } from 'react';
+import { SendLoader } from '@elrondnetwork/dapp-core-form/UI';
+import classNames from 'classnames';
+
+import { DashboardContextProvider, useFormProps } from './context';
+import { Initial, Filled, FilledDisabled, ConfirmForm } from './Statuses';
+
+import styles from './styles.module.scss';
 
 const Dashboard = () => {
-  const { providerType } = useGetAccountProvider();
-  const { account } = useGetAccountInfo();
+  const [current, setCurrent] = useState(0);
+  const tabs = [
+    { label: 'Initial View', component: Initial },
+    { label: 'Prefilled View', component: Filled },
+    { label: 'Prefilled Disabled View', component: FilledDisabled },
+    { label: 'Confirmation Screen View', component: ConfirmForm, last: true }
+  ];
 
-  const props = {
-    onFormSubmit: console.log,
-    networkConfig: {
-      default: true,
-      id: 'devnet',
-      name: 'Devnet',
-      chainId: 'D',
-      apiAddress: 'https://devnet-api.elrond.com',
-      theme: 'testnet',
-      egldLabel: 'xEGLD',
-      faucet: true,
-      walletAddress: 'https://devnet-wallet.elrond.com',
-      explorerAddress: 'https://devnet-explorer.elrond.com',
-      auctionContract:
-        'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqplllst77y4l',
-      stakingContract:
-        'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqllls0lczs7',
-      delegationContract:
-        'erd1qqqqqqqqqqqqqpgqp699jngundfqw07d8jzkepucvpzush6k3wvqyc44rx',
-      esdtContract:
-        'erd1qqqqqqqqqqqqqqqpqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqzllls8a5w6u',
-      delegationApi: 'https://devnet-delegation-api.elrond.com',
-      graphQlAddress: 'https://devnet-nfts-graph.elrond.com/graphql'
-    },
-    formInfo: {
-      onCloseForm: console.log,
-      preFilledForm: false
-    },
-    accountInfo: {
-      nonce: account.nonce,
-      providerType,
-      address: account.address,
-      balance: account.balance
-    }
-  };
-
-  console.log({ providerType });
+  const tab = tabs[current];
+  const formProps = useFormProps();
 
   return (
-    <div style={{ width: 500 }}>
-      <SendFormContainer {...props}>
-        <Form />
-        <SendLoader />
-        <ConfirmScreen providerType={providerType} />
-      </SendFormContainer>
+    <div className={styles.wrapper}>
+      <div className={styles.triggers}>
+        {tabs.map((item, index) => (
+          <div
+            key={`tab-${item.label}-trigger`}
+            onClick={() => setCurrent(index)}
+            className={classNames(styles.trigger, {
+              [styles.active]: index === current
+            })}
+          >
+            Form - {item.label}
+          </div>
+        ))}
+      </div>
+
+      <div
+        className={classNames(styles.content, {
+          [styles.borderless]: tab.last
+        })}
+      >
+        {formProps.networkConfig ? (
+          <div className={styles.tab}>
+            <tab.component />
+          </div>
+        ) : (
+          <SendLoader />
+        )}
+      </div>
     </div>
   );
 };
 
-export default Dashboard;
+export default DashboardContextProvider(Dashboard);
