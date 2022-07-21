@@ -2,7 +2,7 @@ import {
   decimals,
   denomination,
   gasPrice as defaultGasPrice
-} from '@elrondnetwork/dapp-core/constants/index';
+} from '@elrondnetwork/dapp-core/esm/constants/index';
 import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 
 export function getInitialGasPrice(gasPrice?: string) {

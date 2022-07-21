@@ -1,4 +1,4 @@
-import bech32lib from 'bech32';
+import { bech32 as bech32lib } from 'bech32';
 
 const encode = (publicKey: any) => {
   const words = bech32lib.toWords(Buffer.from(publicKey, 'hex'));

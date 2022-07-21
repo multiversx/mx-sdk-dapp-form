@@ -1,6 +1,8 @@
 const svgrPlugin = require('esbuild-plugin-svgr');
 const esbuild = require('esbuild');
 const glob = require('glob');
+const stdLibBrowser = require('node-stdlib-browser');
+const plugin = require('node-stdlib-browser/helpers/esbuild/plugin');
 const { nodeExternalsPlugin } = require('esbuild-node-externals');
 const { sassPlugin, postcssModules } = require('esbuild-sass-plugin');
 
