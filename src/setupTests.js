@@ -1,14 +1,5 @@
 window.scrollTo = jest.fn();
 
-// jest.mock('./utils/network/getEgldLabel', () => {
-//   return {
-//     __esModule: true, // this property makes it work
-//     default: () => {
-//       return 'EGLD';
-//     }
-//   };
-// });
-
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({

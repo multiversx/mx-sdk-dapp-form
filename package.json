@@ -7,17 +7,19 @@
   "repository": "ElrondNetwork/dapp-core-form",
   "main": "./",
   "module": "./",
-  "types": "./dist/types/*",
+  "types": "./",
   "engines": {
     "node": ">=16"
   },
   "scripts": {
     "start": "yarn watch",
-    "build:types": "tsc --project tsconfig.json",
-    "build": "rimraf dist && node esbuild.js && yarn build:types && cp package.json dist",
-    "publish-package": "yarn build && cp package.json dist && cd dist && npm publish",
+    "build:esmtypes": "tsc --project tsconfig.esm.json",
+    "build:cjstypes": "tsc --project tsconfig.cjs.json",
+    "build": "rimraf dist && node esbuild.js && yarn build:esmtypes && yarn build:cjstypes && cp package.json dist && cp README.md dist",
+    "publish-package": "yarn build && cd dist && npm publish",
+    "publish-package-next": "yarn build && cd dist && npm publish --tag next",
     "publish-yalc": "yarn build && cd dist && yalc publish",
-    "watch": "yarn node esbuild-watch.js && yarn build:types -- --watch",
+    "watch": "yarn node esbuild-watch.js && yarn build:esmtypes && yarn build:cjstypes -- --watch",
     "test": "jest",
     "test:watch": "jest --watch"
   },
@@ -97,9 +99,8 @@
   },
   "exports": {
     "./*": {
-      "browser": "./esm/*",
-      "require": "./cjs/*",
-      "import": "./esm/*"
+      "import": "./*.js",
+      "require": "./cjs/*.js"
     }
   },
   "optionalDependencies": {

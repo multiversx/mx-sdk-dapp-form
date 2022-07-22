@@ -1171,7 +1171,7 @@
 
 "@elrondnetwork/dapp-core@file:../dapp-core/dist":
   "resolved" "file:../dapp-core/dist"
-  "version" "2.0.0-beta.6"
+  "version" "2.0.0-beta.7"
   dependencies:
     "@elrondnetwork/erdjs" "10.2.7"
     "@elrondnetwork/erdjs-extension-provider" "2.0.5"
@@ -9749,8 +9749,7 @@
     "prop-types" "^15.6.2"
 
 "react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0-rc.1 || ^18.0.0", "react@^18.0.0", "react@^18.2.0", "react@>= 16", "react@>=0.14.0", "react@>=15.0.0", "react@>=16.14.0", "react@>=16.3.0", "react@>=16.6.0", "react@>=16.8.0", "react@>=16.x", "react@>=18":
-  "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
-  "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
+  "resolved" "file:../new-wallet/node_modules/react"
   "version" "18.2.0"
   dependencies:
     "loose-envify" "^1.1.0"
