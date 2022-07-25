@@ -87,7 +87,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     receiver: initialValues?.receiver ?? '',
     gasPrice: initialValues?.gasPrice ?? denominatedConfigGasPrice,
     data: initialValues?.data ?? '',
-    amount: initialValues?.amount ?? '',
+    amount: initialValues?.amount ?? 0,
     gasLimit: initialValues?.gasLimit ?? String(gasLimit),
     txType:
       initialValues?.txType ??
