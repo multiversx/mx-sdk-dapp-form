@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { ZERO } from 'constants/index';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { SharedAmount } from './SharedAmount';
-import { ZERO } from 'constants/index';
 
 import styles from './styles.module.scss';
 

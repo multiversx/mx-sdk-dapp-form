@@ -14,7 +14,7 @@ export interface ExtendedValuesType extends ValuesType {
   txType: TxTypeEnum;
   address: string;
   balance: string;
-  validationRules?: FormConfigType['validationRules'];
+  customBalanceRules?: FormConfigType['customBalanceRules'];
 
   chainId: string;
   ignoreTokenBalance?: boolean;
@@ -56,12 +56,13 @@ export interface FormConfigType {
   gasPrice: string;
   data: string;
 
-  validationRules?: {
+  customBalanceRules?: {
     /**
      * **customBalance**: Used to configure EGLD balance when widthdrawing from a contract
      */
     customBalance?: string;
     minAmount?: string;
+    dataFieldBuilder?: (props: ValuesType) => string;
   };
   /**
    * **readonly**: Configure the form with disabled fields

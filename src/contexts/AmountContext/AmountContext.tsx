@@ -1,12 +1,11 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { useFormikContext } from 'formik';
+import { AMOUNT_FIELD } from 'constants/index';
 import { ExtendedValuesType } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';
 import { useGetMaxAmountAvailable } from './hooks';
 import { getIsMaxButtonVisible } from './utils';
-
-import { AMOUNT_FIELD } from 'constants/index';
 
 export interface AmountContextPropsType {
   amount: string;

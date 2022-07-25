@@ -3,12 +3,14 @@ import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
+import { useFormikContext } from 'formik';
+import globals from 'assets/sass/globals.module.scss';
+import { DATA_FIELD } from 'constants/index';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
-import { DATA_FIELD } from 'constants/index';
 
+import { ExtendedValuesType } from 'types/form';
 import styles from './styles.module.scss';
-import globals from 'assets/sass/globals.module.scss';
 
 const Data = () => {
   const {
@@ -20,6 +22,14 @@ const Data = () => {
     formInfo: { isEgldTransaction },
     dataFieldInfo: { data, dataError, isDataInvalid, onChange, onBlur }
   } = useSendFormContext();
+
+  const {
+    values: { customBalanceRules }
+  } = useFormikContext<ExtendedValuesType>();
+
+  const disabled = Boolean(
+    !isEgldTransaction || customBalanceRules?.dataFieldBuilder != null
+  );
 
   return (
     <div className={styles.data}>
@@ -33,7 +43,7 @@ const Data = () => {
         <textarea
           id={DATA_FIELD}
           name={DATA_FIELD}
-          disabled={!isEgldTransaction}
+          disabled={disabled}
           data-testid={DATA_FIELD}
           value={data}
           onBlur={onBlur}

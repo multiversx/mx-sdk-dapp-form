@@ -1,9 +1,14 @@
-import { denomination } from '@elrondnetwork/dapp-core/constants/index';
+import {
+  denomination,
+  decimals as defaultDecimals
+} from '@elrondnetwork/dapp-core/constants/index';
+import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
+import { AMOUNT_FIELD } from 'constants/index';
 import { ExtendedValuesType } from 'types';
 import maxDecimals from 'validation/maxDecimals';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
@@ -39,9 +44,9 @@ const customBalance = string().test(
   'customBalance',
   'Not enough balance',
   function(amount) {
-    const { validationRules } = this.parent as ExtendedValuesType;
-    if (amount != null && validationRules?.customBalance) {
-      const bnCustomBalance = new BigNumber(validationRules?.customBalance);
+    const { customBalanceRules } = this.parent as ExtendedValuesType;
+    if (amount != null && customBalanceRules?.customBalance) {
+      const bnCustomBalance = new BigNumber(customBalanceRules?.customBalance);
       const nominatedAmount = nominate(amount.toString());
       const valid = bnCustomBalance.isGreaterThanOrEqualTo(nominatedAmount);
       return valid;
@@ -49,6 +54,36 @@ const customBalance = string().test(
     return true;
   }
 );
+
+const min = string().test({
+  name: 'min',
+  test: function(amount) {
+    const { customBalanceRules } = this.parent as ExtendedValuesType;
+
+    if (amount != null && customBalanceRules?.minAmount) {
+      const nominatedAmount = nominate(amount.toString());
+      const valid = new BigNumber(nominatedAmount).isGreaterThanOrEqualTo(
+        customBalanceRules?.minAmount
+      );
+      if (!valid) {
+        const denominatedMinAmount = denominate({
+          input: customBalanceRules?.minAmount,
+          denomination,
+          showLastNonZeroDecimal: true,
+          addCommas: true,
+          decimals: defaultDecimals
+        });
+
+        return this.createError({
+          message: `Minimum ${denominatedMinAmount}`,
+          path: AMOUNT_FIELD
+        });
+      }
+    }
+
+    return true;
+  }
+});
 
 const isValidNumber = string().test(
   'isValidNumber',
@@ -58,7 +93,14 @@ const isValidNumber = string().test(
   }
 );
 
-const validations = [required, isValidNumber, decimals, funds, customBalance];
+const validations = [
+  required,
+  isValidNumber,
+  decimals,
+  funds,
+  customBalance,
+  min
+];
 
 export const egldAmount = validations.reduce(
   (previousValue, currentValue) => previousValue.concat(currentValue),

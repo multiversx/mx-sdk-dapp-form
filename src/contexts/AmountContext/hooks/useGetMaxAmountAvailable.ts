@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
+
 import {
   decimals as defaultDecimals,
   denomination as defaultDenomination
 } from '@elrondnetwork/dapp-core/constants/index';
+import { denominate } from '@elrondnetwork/dapp-core/utils';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { useFormikContext } from 'formik';
+import { ZERO } from 'constants/index';
 import { useAccountContext } from 'contexts/AccountContext';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import {
@@ -13,7 +16,6 @@ import {
   getTokenDetails
 } from 'operations';
 
-import { ZERO } from 'constants/index';
 import { ExtendedValuesType, NftEnumType } from 'types';
 import { useFormContext } from '../../FormContext';
 import { useGasContext } from '../../GasContext';
@@ -43,7 +45,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
     isEgldTransaction
   } = useFormContext();
   const { gasLimit, gasPrice } = useGasContext();
-  const { tokenId, txType } = values;
+  const { tokenId, txType, customBalanceRules } = values;
 
   useEffect(() => {
     if (isNftTransaction && nft) {
@@ -74,6 +76,19 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
   useEffect(() => {
     if (balance && isEgldTransaction) {
+      console.log(customBalanceRules);
+
+      if (customBalanceRules?.customBalance) {
+        const entireBalance = denominate({
+          input: customBalanceRules?.customBalance,
+          denomination: defaultDenomination,
+          showLastNonZeroDecimal: true,
+          decimals: defaultDecimals
+        });
+        setDenominatedEgldBalance(entireBalance);
+        setBalanceMinusDust(entireBalance);
+        return;
+      }
       const {
         entireBalance: denominatedBalance,
         entireBalanceMinusDust
@@ -88,7 +103,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
       setDenominatedEgldBalance(denominatedBalance);
       setBalanceMinusDust(entireBalanceMinusDust);
     }
-  }, [balance, gasLimit, gasPrice]);
+  }, [balance, gasLimit, gasPrice, customBalanceRules]);
 
   const esdtAmountAvailable = nft && nftBalance ? nftBalance : tokenBalance;
 

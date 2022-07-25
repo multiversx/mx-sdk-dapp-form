@@ -3,13 +3,12 @@ import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
+import globals from 'assets/sass/globals.module.scss';
+import { AMOUNT_FIELD } from 'constants/index';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
-import { AMOUNT_FIELD } from 'constants/index';
-
 import styles from './styles.module.scss';
-import globals from 'assets/sass/globals.module.scss';
 
 interface SharedAmountType {
   AvailableAmountElement: () => JSX.Element | null;
@@ -31,6 +30,7 @@ const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   } = useUICustomizationContext();
 
   const isInvalid = checkInvalid(AMOUNT_FIELD);
+
   const {
     amount,
     isMaxButtonVisible,
