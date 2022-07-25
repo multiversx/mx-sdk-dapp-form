@@ -51,17 +51,18 @@ export interface ValidationSchemaType {
 export interface FormConfigType {
   receiver: string;
   amount: string;
-  validationRules?: {
-    /**
-     * **customBalance**: Used to configure balance when widthdrawing from a contract
-     */
-    customBalance?: string;
-    minAmount?: string;
-  };
   tokenId?: string;
   gasLimit: string;
   gasPrice: string;
   data: string;
+
+  validationRules?: {
+    /**
+     * **customBalance**: Used to configure EGLD balance when widthdrawing from a contract
+     */
+    customBalance?: string;
+    minAmount?: string;
+  };
   /**
    * **readonly**: Configure the form with disabled fields
    */

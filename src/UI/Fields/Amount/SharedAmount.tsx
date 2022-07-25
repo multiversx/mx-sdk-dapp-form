@@ -43,7 +43,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
       <label htmlFor='amount'>{label}</label>
 
       <div className='amount'>
-        <div className={customClasses.inputContainer}>
+        <div className={`${customClasses.inputContainer} ${invalidClassname}`}>
           <input
             type='text'
             className={`${customClasses.input} ${invalidClassname}`}
@@ -74,7 +74,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
         {TokenSelector ? <TokenSelector /> : null}
       </div>
       {isInvalid ? (
-        <div className='invalid-feedback' data-testid='amountError'>
+        <div className={customClasses.errorMsg} data-testid='amountError'>
           {error}
         </div>
       ) : (

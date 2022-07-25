@@ -8,8 +8,12 @@ export const EgldAmount = () => {
   const { tokensInfo, amountInfo } = useSendFormContext();
 
   const { egldLabel, egldPriceInUsd } = tokensInfo;
-  const { isMaxClicked, isInvalid, maxAmountAvailable, maxAmountMinusDust } =
-    amountInfo;
+  const {
+    isMaxClicked,
+    isInvalid,
+    maxAmountAvailable,
+    maxAmountMinusDust
+  } = amountInfo;
 
   function AvailableAmountElement() {
     if (!isInvalid && amountInfo.amount) {

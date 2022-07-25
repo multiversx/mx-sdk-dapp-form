@@ -1,6 +1,8 @@
 import { denomination } from '@elrondnetwork/dapp-core/constants/index';
+import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 
+import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { ExtendedValuesType } from 'types';
 import maxDecimals from 'validation/maxDecimals';
@@ -33,6 +35,21 @@ const funds = string().test('funds', 'Insufficient funds', function(amount) {
   return true;
 });
 
+const customBalance = string().test(
+  'customBalance',
+  'Not enough balance',
+  function(amount) {
+    const { validationRules } = this.parent as ExtendedValuesType;
+    if (amount != null && validationRules?.customBalance) {
+      const bnCustomBalance = new BigNumber(validationRules?.customBalance);
+      const nominatedAmount = nominate(amount.toString());
+      const valid = bnCustomBalance.isGreaterThanOrEqualTo(nominatedAmount);
+      return valid;
+    }
+    return true;
+  }
+);
+
 const isValidNumber = string().test(
   'isValidNumber',
   'Invalid number',
@@ -41,7 +58,7 @@ const isValidNumber = string().test(
   }
 );
 
-const validations = [required, isValidNumber, decimals, funds];
+const validations = [required, isValidNumber, decimals, funds, customBalance];
 
 export const egldAmount = validations.reduce(
   (previousValue, currentValue) => previousValue.concat(currentValue),
