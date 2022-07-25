@@ -86,11 +86,11 @@
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18",
-    "@elrondnetwork/dapp-core": "2.0.0-beta.5",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.7",
     "@elrondnetwork/erdjs": "10.2.7"
   },
   "resolutions": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.5",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.7",
     "@elrondnetwork/erdjs": "10.2.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"

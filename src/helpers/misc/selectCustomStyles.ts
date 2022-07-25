@@ -8,7 +8,7 @@ export function selectCustomStyles({ docStyle }: { docStyle: any }) {
   };
 
   return {
-    valueContainer: () => ({
+    valueContainer: (a: any, b: any) => ({
       padding: '0.125rem 0 0.125rem 0.2rem',
       lineHeight: '1.5',
       fontSize: '0.8125rem',
@@ -50,10 +50,6 @@ export function selectCustomStyles({ docStyle }: { docStyle: any }) {
     dropdownIndicator: (props: any) => ({
       ...props,
       padding: '0 0.4rem'
-    }),
-    singleValue: (props: any) => ({
-      ...props,
-      backgroundColor: customColors.bgColor
     }),
     multiValue: (props: any) => ({
       ...props,

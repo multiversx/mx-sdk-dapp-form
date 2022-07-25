@@ -32,6 +32,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   const isInvalid = checkInvalid(AMOUNT_FIELD);
   const {
     amount,
+    error,
     isMaxButtonVisible,
     onMaxClicked,
     onFocus,
@@ -71,6 +72,8 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
           </span>
         )}
       </div>
+
+      {isInvalid && <div className={globals.error}>{error}</div>}
 
       {isMaxButtonVisible && (
         <div className={styles.max}>

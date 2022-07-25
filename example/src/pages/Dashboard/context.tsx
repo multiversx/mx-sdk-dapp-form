@@ -6,18 +6,21 @@ import React, {
   useEffect,
   ComponentType
 } from 'react';
-import { sendTransactions } from '@elrondnetwork/dapp-core/services';
-import { useGetNetworkConfig } from '@elrondnetwork/dapp-core/hooks';
+
 import {
   getNetworkConfigForChainId,
   SendFormContainerPropsType,
   ExtendedValuesType
 } from '@elrondnetwork/dapp-core-form';
-import { Transaction } from '@elrondnetwork/erdjs';
+
 import {
+  useGetNetworkConfig,
   useGetAccountInfo,
   useGetAccountProvider
 } from '@elrondnetwork/dapp-core/hooks';
+
+import { sendTransactions } from '@elrondnetwork/dapp-core/services';
+import { Transaction } from '@elrondnetwork/erdjs';
 
 interface ContextType {
   children: ReactNode;

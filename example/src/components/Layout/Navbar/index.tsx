@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Denominate } from '@elrondnetwork/dapp-core/UI';
 import { useGetAccountInfo } from '@elrondnetwork/dapp-core/hooks';
+import { Denominate } from '@elrondnetwork/dapp-core/UI';
 
 import styles from './styles.module.scss';
 

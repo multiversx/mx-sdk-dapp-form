@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SendLoader } from '@elrondnetwork/dapp-core-form/UI';
+import { Loader } from '@elrondnetwork/dapp-core-form/UI/Loader';
 import classNames from 'classnames';
 
 import { DashboardContextProvider, useFormProps } from './context';
@@ -45,7 +45,7 @@ const Dashboard = () => {
             <tab.component />
           </div>
         ) : (
-          <SendLoader />
+          <Loader />
         )}
       </div>
     </div>
