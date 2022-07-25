@@ -1,13 +1,21 @@
 import React from 'react';
-import classnames from 'classnames';
+import { faExclamation } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
+
+import { AMOUNT_FIELD } from 'constants/index';
+
+import styles from './styles.module.scss';
+import globals from 'assets/sass/globals.module.scss';
 
 interface SharedAmountType {
   AvailableAmountElement: () => JSX.Element | null;
 }
 
-export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
+const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   const {
     formInfo: { checkInvalid },
     amountInfo
@@ -16,16 +24,15 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   const {
     fields: {
       amount: {
-        classes: customClasses,
         label,
         components: { tokenSelector: TokenSelector }
       }
     }
   } = useUICustomizationContext();
 
+  const isInvalid = checkInvalid(AMOUNT_FIELD);
   const {
     amount,
-    error,
     isMaxButtonVisible,
     onMaxClicked,
     onFocus,
@@ -33,55 +40,56 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
     onChange
   } = amountInfo;
 
-  const isInvalid = checkInvalid('amount');
-  const invalidClassname = classnames({
-    [customClasses.invalidInput]: isInvalid
-  });
-
   return (
-    <div className='form-group'>
-      <label htmlFor='amount'>{label}</label>
-
-      <div className='amount'>
-        <div className={`${customClasses.inputContainer} ${invalidClassname}`}>
-          <input
-            type='text'
-            className={`${customClasses.input} ${invalidClassname}`}
-            id='amount'
-            name='amount'
-            data-testid='amount'
-            required={true}
-            value={amount}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onChange={onChange}
-            autoComplete='off'
-          />
-        </div>
-
-        {isMaxButtonVisible && (
-          <div className={customClasses.maxBtnContainer}>
-            <button
-              data-testid='maxBtn'
-              className={customClasses.maxBtn}
-              onClick={onMaxClicked}
-            >
-              Max
-            </button>
-          </div>
-        )}
-
-        {TokenSelector ? <TokenSelector /> : null}
-      </div>
-      {isInvalid ? (
-        <div className={customClasses.errorMsg} data-testid='amountError'>
-          {error}
-        </div>
-      ) : (
-        <AvailableAmountElement />
+    <div className={styles.amount}>
+      {label && (
+        <label htmlFor={AMOUNT_FIELD} className={styles.label}>
+          {label}
+        </label>
       )}
+
+      <div className={styles.wrapper}>
+        <input
+          type='text'
+          id={AMOUNT_FIELD}
+          name={AMOUNT_FIELD}
+          data-testid={AMOUNT_FIELD}
+          required={true}
+          value={amount}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onChange={onChange}
+          autoComplete='off'
+          className={classNames(globals.input, {
+            [globals.invalid]: isInvalid,
+            [styles.invalid]: isInvalid
+          })}
+        />
+
+        {isInvalid && (
+          <span className={globals.errorExclamation}>
+            <FontAwesomeIcon icon={faExclamation} size='xs' />
+          </span>
+        )}
+      </div>
+
+      {isMaxButtonVisible && (
+        <div className={styles.max}>
+          <button
+            data-testid='maxBtn'
+            className={styles.button}
+            onClick={onMaxClicked}
+          >
+            Max
+          </button>
+        </div>
+      )}
+
+      {TokenSelector && <TokenSelector />}
+
+      {!isInvalid && <AvailableAmountElement />}
     </div>
   );
 };
 
-export default SharedAmount;
+export { SharedAmount };

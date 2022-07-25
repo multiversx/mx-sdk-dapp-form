@@ -4,6 +4,7 @@ import { calculateNftGasLimit } from 'operations/calculateNftGasLimit';
 import { ExtendedValuesType } from 'types';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 import { sharedGaslimit } from './sharedGaslimit';
+import { ZERO } from 'constants/index';
 
 const required = string().required('Required');
 
@@ -40,7 +41,7 @@ const funds = string().test('funds', 'Insufficient funds', function funds(
     .parent as ExtendedValuesType;
   if (value && !ignoreTokenBalance) {
     const valid = validateGasLimitAmount({
-      amount: '0',
+      amount: ZERO,
       balance,
       gasLimit: value,
       gasPrice,

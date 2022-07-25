@@ -1,5 +1,6 @@
 import { denomination } from '@elrondnetwork/dapp-core/constants/index';
 import { TokenType } from 'types';
+import { ZERO } from 'constants/index';
 
 export function getTokenDetails({
   tokens,
@@ -10,7 +11,7 @@ export function getTokenDetails({
 }): TokenType {
   const selectedToken = tokens.find(({ identifier }) => identifier === tokenId);
   const tokenDecimals = selectedToken ? selectedToken.decimals : denomination;
-  const tokenBalance = selectedToken?.balance || '0';
+  const tokenBalance = selectedToken?.balance || ZERO;
 
   return {
     ...selectedToken,

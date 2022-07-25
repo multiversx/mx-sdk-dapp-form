@@ -1,17 +1,21 @@
 import React from 'react';
-import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import SharedAmount from './SharedAmount';
 
-export const EsdtAmount = () => {
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { SharedAmount } from './SharedAmount';
+import { ZERO } from 'constants/index';
+
+import styles from './styles.module.scss';
+
+const EsdtAmount = () => {
   const { amountInfo, tokensInfo } = useSendFormContext();
   const { maxAmountAvailable } = amountInfo;
   const { tokenId } = tokensInfo;
 
   function AvailableAmountElement() {
-    if (maxAmountAvailable !== '0') {
+    if (maxAmountAvailable !== ZERO) {
       return (
         <small
-          className='form-text text-secondary mt-1'
+          className={styles.small}
           data-testid={`available${tokenId}`}
           data-value={`${maxAmountAvailable} ${tokenId}`}
         >
@@ -26,4 +30,4 @@ export const EsdtAmount = () => {
   return <SharedAmount AvailableAmountElement={AvailableAmountElement} />;
 };
 
-export default EsdtAmount;
+export { EsdtAmount };
