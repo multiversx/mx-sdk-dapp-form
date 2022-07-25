@@ -10,7 +10,7 @@ import { ConfirmScreen } from '@elrondnetwork/dapp-core-form/UI';
 import { useFormProps } from 'pages/Dashboard/context';
 import styles from './styles.module.scss';
 
-const ConfirmForm = () => {
+export const ConfirmForm = () => {
   const formProps = useFormProps();
   const props: SendFormContainerPropsType = {
     ...formProps,
@@ -38,5 +38,3 @@ const ConfirmForm = () => {
     </div>
   );
 };
-
-export { ConfirmForm };

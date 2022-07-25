@@ -3,14 +3,14 @@ import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
+import globals from 'assets/sass/globals.module.scss';
+import { DATA_FIELD } from 'constants/index';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
-import { DATA_FIELD } from 'constants/index';
 
 import styles from './styles.module.scss';
-import globals from 'assets/sass/globals.module.scss';
 
-const Data = () => {
+export const Data = () => {
   const {
     fields: {
       data: { label }
@@ -58,5 +58,3 @@ const Data = () => {
     </div>
   );
 };
-
-export { Data };

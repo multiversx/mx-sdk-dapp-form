@@ -13,7 +13,7 @@ const Dashboard = () => {
     { label: 'Initial View', component: Initial },
     { label: 'Prefilled View', component: Filled },
     { label: 'Prefilled Disabled View', component: FilledDisabled },
-    { label: 'Confirmation Screen View', component: ConfirmForm, last: true }
+    { label: 'Confirmation Screen View', component: ConfirmForm }
   ];
 
   const tab = tabs[current];
@@ -37,7 +37,7 @@ const Dashboard = () => {
 
       <div
         className={classNames(styles.content, {
-          [styles.borderless]: tab.last
+          [styles.borderless]: current === tabs.length - 1
         })}
       >
         {formProps.networkConfig ? (

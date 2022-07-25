@@ -4,7 +4,7 @@ import { EgldAmount } from './EgldAmount';
 import { EsdtAmount } from './EsdtAmount';
 import { NftAmount } from './NftAmount';
 
-const Amount = () => {
+export const Amount = () => {
   const { formInfo } = useSendFormContext();
   const { isNftTransaction, isEsdtTransaction } = formInfo;
 
@@ -18,5 +18,3 @@ const Amount = () => {
 
   return <EgldAmount />;
 };
-
-export { Amount };

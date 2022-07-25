@@ -1,3 +1,1 @@
-import { Amount } from './Amount';
-
-export { Amount };
+export * from './Amount';

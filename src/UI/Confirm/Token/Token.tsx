@@ -1,12 +1,11 @@
 import React from 'react';
 
+import globals from 'assets/sass/globals.module.scss';
+import { ZERO } from 'constants/index';
 import { NftType } from 'types';
 import { TokenElement } from 'UI/Fields/SelectToken/TokenElement';
 
-import { ZERO } from 'constants/index';
-
 import styles from './styles.module.scss';
-import globals from 'assets/sass/globals.module.scss';
 
 export interface TokenPropsType {
   tokenId: string;
@@ -17,7 +16,7 @@ export interface TokenPropsType {
   nft?: NftType;
 }
 
-const Token = ({
+export const Token = ({
   nft,
   isEsdtTransaction,
   tokenId,
@@ -71,5 +70,3 @@ const Token = ({
     </div>
   );
 };
-
-export { Token };

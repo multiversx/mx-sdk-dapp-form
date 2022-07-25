@@ -1,3 +1,1 @@
-import { Fee } from './Fee';
-
-export { Fee };
+export * from './Fee';

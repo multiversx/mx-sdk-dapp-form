@@ -3,28 +3,13 @@ import React from 'react';
 import {
   SendFormContainer,
   denominatedConfigGasPrice,
-  SendFormContainerPropsType,
-  useSendFormContext
+  SendFormContainerPropsType
 } from '@elrondnetwork/dapp-core-form';
-import { Form, ConfirmScreen } from '@elrondnetwork/dapp-core-form/UI';
-import { useGetAccountProvider } from '@elrondnetwork/dapp-core/hooks';
+import { Form } from '@elrondnetwork/dapp-core-form/UI';
 
 import { useFormProps } from 'pages/Dashboard/context';
 
-const FormContent = () => {
-  const {
-    formInfo: { areValidatedValuesReady }
-  } = useSendFormContext();
-  const { providerType } = useGetAccountProvider();
-
-  return areValidatedValuesReady ? (
-    <ConfirmScreen providerType={providerType} />
-  ) : (
-    <Form />
-  );
-};
-
-const FilledDisabled = () => {
+export const FilledDisabled = () => {
   const formProps = useFormProps();
   const props: SendFormContainerPropsType = {
     ...formProps,
@@ -45,9 +30,7 @@ const FilledDisabled = () => {
 
   return (
     <SendFormContainer {...props}>
-      <FormContent />
+      <Form />
     </SendFormContainer>
   );
 };
-
-export { FilledDisabled };

@@ -1,3 +1,1 @@
-import { ConfirmScreen } from './ConfirmScreen';
-
-export { ConfirmScreen };
+export * from './ConfirmScreen';

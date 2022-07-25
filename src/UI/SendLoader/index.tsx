@@ -1,3 +1,1 @@
-import { SendLoader } from './SendLoader';
-
-export { SendLoader };
+export * from './SendLoader';

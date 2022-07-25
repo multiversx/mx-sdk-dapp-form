@@ -1,1 +1,1 @@
-export { FilledDisabled } from './FilledDisabled';
+export * from './FilledDisabled';

@@ -2,8 +2,12 @@ import React from 'react';
 
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
+
+import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { ExtendedValuesType, TxTypeEnum } from 'types';
+
+import { ConfirmScreen } from 'UI/ConfirmScreen';
 import {
   Amount,
   Data,
@@ -14,16 +18,21 @@ import {
 } from 'UI/Fields';
 
 import styles from './styles.module.scss';
-import globals from 'assets/sass/globals.module.scss';
 
-const Form = () => {
-  const { formInfo, receiverInfo } = useSendFormContext();
+export const Form = () => {
+  const { formInfo, receiverInfo, accountInfo } = useSendFormContext();
   const {
     values: { txType }
   } = useFormikContext<ExtendedValuesType>();
 
-  const { renderKey, onValidateForm, readonly, onCloseForm } = formInfo;
   const { scamError } = receiverInfo;
+  const {
+    renderKey,
+    onValidateForm,
+    readonly,
+    onCloseForm,
+    areValidatedValuesReady
+  } = formInfo;
 
   function handleCloseClick(e: any) {
     e.preventDefault();
@@ -35,6 +44,10 @@ const Form = () => {
     TxTypeEnum.ESDT,
     TxTypeEnum.MetaESDT
   ].includes(txType);
+
+  if (areValidatedValuesReady) {
+    return <ConfirmScreen providerType={accountInfo.providerType} />;
+  }
 
   return (
     <form key={renderKey} onSubmit={onValidateForm} className={styles.form}>
@@ -84,5 +97,3 @@ const Form = () => {
     </form>
   );
 };
-
-export { Form };

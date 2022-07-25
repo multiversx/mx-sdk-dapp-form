@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from './styles.module.scss';
 
-const To = ({
+export const To = ({
   label = 'To',
   receiver,
   scamReport
@@ -30,5 +30,3 @@ const To = ({
     )}
   </div>
 );
-
-export { To };

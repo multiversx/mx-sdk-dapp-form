@@ -7,7 +7,7 @@ import { SharedAmount } from './SharedAmount';
 
 import styles from './styles.module.scss';
 
-const NftAmount = () => {
+export const NftAmount = () => {
   const { amountInfo, tokensInfo } = useSendFormContext();
   const { nft } = tokensInfo;
   const { maxAmountAvailable, isMaxClicked } = amountInfo;
@@ -33,5 +33,3 @@ const NftAmount = () => {
 
   return <SharedAmount AvailableAmountElement={AvailableAmountElement} />;
 };
-
-export { NftAmount };
