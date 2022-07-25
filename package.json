@@ -60,7 +60,10 @@
     "size-limit": "7.0.8",
     "ts-jest": "28.0.4",
     "tslib": "2.4.0",
-    "typescript": "4.7.3"
+    "typescript": "4.7.3",
+    "identity-obj-proxy": "3.0.0",
+    "jest-environment-jsdom": "28.1.3",
+    "jest-scss-transform": "1.0.3"
   },
   "size-limit": [
     {
@@ -118,9 +121,6 @@
     "bech32": "2.0.0",
     "bignumber.js": "9.x",
     "formik": "2.2.9",
-    "identity-obj-proxy": "^3.0.0",
-    "jest-environment-jsdom": "^28.1.3",
-    "jest-scss-transform": "^1.0.3",
     "lodash": "4.17.21",
     "yup": "0.32.11"
   }
