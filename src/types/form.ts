@@ -14,6 +14,8 @@ export interface ExtendedValuesType extends ValuesType {
   txType: TxTypeEnum;
   address: string;
   balance: string;
+  validationRules?: FormConfigType['validationRules'];
+
   chainId: string;
   ignoreTokenBalance?: boolean;
   readonly?: boolean;
@@ -31,6 +33,10 @@ export interface ValidationSchemaType {
   egldLabel: string;
   balance: string;
   chainId: string;
+  /**
+   * **ignoreTokenBalance**: Gets set automaticaly in case of validating multiple
+   * sign transactions when some tokens will be available only after execution
+   */
   ignoreTokenBalance?: boolean;
   readonly?: boolean;
   tokenId: string;
@@ -45,10 +51,20 @@ export interface ValidationSchemaType {
 export interface FormConfigType {
   receiver: string;
   amount: string;
+  validationRules?: {
+    /**
+     * **customBalance**: Used to configure balance when widthdrawing from a contract
+     */
+    customBalance?: string;
+    minAmount?: string;
+  };
   tokenId?: string;
   gasLimit: string;
   gasPrice: string;
   data: string;
+  /**
+   * **readonly**: Configure the form with disabled fields
+   */
   readonly?: boolean;
   successTitle?: string;
   successDescription?: string;
