@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js';
 
 import { ZERO } from 'constants/index';
 import { getIsDisabled } from 'helpers';
-import { ExtendedValuesType } from 'types';
+import { ExtendedValuesType, ValuesEnum } from 'types';
 
 export function showMax({
   amount = '',
@@ -22,7 +22,7 @@ export function showMax({
   );
   const valueIsUndefined = !amount;
 
-  const isDisabled = getIsDisabled('amount', readonly);
+  const isDisabled = getIsDisabled(ValuesEnum.amount, readonly);
 
   return (
     (valueIsUndefined || amountSmallerThanAvailable) &&

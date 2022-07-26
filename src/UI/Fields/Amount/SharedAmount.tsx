@@ -58,7 +58,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
           data-testid={ValuesEnum.amount}
           required={true}
           value={amount}
-          disabled={getIsDisabled('amount', readonly)}
+          disabled={getIsDisabled(ValuesEnum.amount, readonly)}
           onFocus={onFocus}
           onBlur={onBlur}
           onChange={onChange}

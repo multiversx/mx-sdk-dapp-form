@@ -8,6 +8,7 @@ import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
+import { getIsDisabled } from 'helpers';
 import { ExtendedValuesType, ValuesEnum } from 'types/form';
 import styles from './styles.module.scss';
 
@@ -26,10 +27,10 @@ export const Data = () => {
     values: { customBalanceRules }
   } = useFormikContext<ExtendedValuesType>();
 
-  const disabled = Boolean(
+  const isDisabled = Boolean(
     !isEgldTransaction ||
       customBalanceRules?.dataFieldBuilder != null ||
-      readonly
+      getIsDisabled(ValuesEnum.data, readonly)
   );
 
   return (
@@ -44,7 +45,7 @@ export const Data = () => {
         <textarea
           id={ValuesEnum.data}
           name={ValuesEnum.data}
-          disabled={disabled}
+          disabled={isDisabled}
           data-testid={ValuesEnum.data}
           value={data}
           onBlur={onBlur}

@@ -18,6 +18,7 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import { getIsDisabled } from 'helpers';
+import { ValuesEnum } from 'types';
 import styles from './styles.module.scss';
 
 const CustomMenu = (
@@ -104,7 +105,7 @@ export const To = () => {
         <Typeahead
           id='receiverWrapper'
           filterBy={filterBy}
-          disabled={getIsDisabled('receiver', readonly)}
+          disabled={getIsDisabled(ValuesEnum.receiver, readonly)}
           ignoreDiacritics={true}
           emptyLabel={false}
           maxResults={5}

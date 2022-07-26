@@ -45,7 +45,7 @@ export const GasLimit = () => {
               id={ValuesEnum.gasLimit}
               name={ValuesEnum.gasLimit}
               data-testid={ValuesEnum.gasLimit}
-              disabled={getIsDisabled('gasLimit', readonly)}
+              disabled={getIsDisabled(ValuesEnum.gasLimit, readonly)}
               required
               value={gasLimit}
               onChange={onChangeGasLimit}
