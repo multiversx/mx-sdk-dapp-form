@@ -1,0 +1,19 @@
+@import 'assets/sass/variables/_variables.scss';
+
+.to {
+  line-height: 1.5;
+  margin-bottom: 1rem;
+
+  .label {
+    color: $secondary;
+    display: block;
+  }
+
+  .scam {
+    color: $warning !important;
+
+    .icon {
+      margin-right: 0.25rem;
+    }
+  }
+}

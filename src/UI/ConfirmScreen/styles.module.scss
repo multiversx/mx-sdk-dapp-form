@@ -1,0 +1,12 @@
+@import 'assets/sass/variables/variables';
+
+.confirm {
+  text-align: left;
+  line-height: 1.5;
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

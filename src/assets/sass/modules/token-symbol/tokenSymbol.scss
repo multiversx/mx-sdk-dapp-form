@@ -42,7 +42,7 @@
 
 .token-symbol-combined {
   svg {
-    //filter: drop-shadow(0 0 0.25rem $shadow-color);
+    filter: drop-shadow(0 0 0.25rem $black);
     circle {
       fill: $card-bg;
     }

@@ -5,6 +5,8 @@ import {
 } from '@elrondnetwork/dapp-core/constants/index';
 import { Transaction } from '@elrondnetwork/erdjs';
 import { Formik } from 'formik';
+
+import { ZERO } from 'constants/index';
 import {
   AccountContextPropsType,
   AppInfoContextProvider,
@@ -59,9 +61,10 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     initialValues,
     prefilledForm: formInfo.prefilledForm
   });
+
   async function handleOnSubmit(values: ExtendedValuesType) {
     const actualTransactionAmount =
-      values.txType === TxTypeEnum.EGLD ? values.amount : '0';
+      values.txType === TxTypeEnum.EGLD ? values.amount : ZERO;
     const parsedValues = { ...values, amount: actualTransactionAmount };
 
     const transaction = shouldGenerateTransactionOnSubmit
@@ -87,7 +90,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     receiver: initialValues?.receiver ?? '',
     gasPrice: initialValues?.gasPrice ?? denominatedConfigGasPrice,
     data: initialValues?.data ?? '',
-    amount: initialValues?.amount ?? '0',
+    amount: initialValues?.amount ?? ZERO,
     gasLimit: initialValues?.gasLimit ?? String(gasLimit),
     txType:
       initialValues?.txType ??

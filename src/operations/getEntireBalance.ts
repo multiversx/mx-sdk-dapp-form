@@ -6,7 +6,7 @@ import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/cal
 import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 
 import BigNumber from 'bignumber.js';
-import { minDust } from 'constants/index';
+import { minDust, ZERO } from 'constants/index';
 
 interface EntireBalanceType {
   balance?: string;
@@ -19,8 +19,8 @@ interface EntireBalanceType {
 }
 
 export function getEntireBalance({
-  balance = '0',
-  gasLimit = '0',
+  balance = ZERO,
+  gasLimit = ZERO,
   gasPrice,
   denomination,
   decimals,
@@ -54,7 +54,7 @@ export function getEntireBalance({
           showLastNonZeroDecimal: true,
           addCommas: false
         })
-      : '0';
+      : ZERO;
 
   const entireBalanceMinusDust =
     // entireBalanceMinusDust >= 0
@@ -73,12 +73,12 @@ export function getEntireBalance({
     entireBalanceMinusDust,
     nominatedEntireBalance: bNentireBalance.isGreaterThan(0)
       ? bNentireBalance.toString(10)
-      : '0'
+      : ZERO
   };
 }
 
 export function getEntireTokenBalance({
-  balance = '0',
+  balance = ZERO,
   denomination = 18,
   decimals = 4
 }) {
@@ -94,6 +94,6 @@ export function getEntireTokenBalance({
       addCommas: false
     });
   }
-  return '0';
+  return ZERO;
 }
 export default getEntireBalance;

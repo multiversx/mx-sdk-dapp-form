@@ -1,0 +1,41 @@
+@import 'assets/sass/variables/_variables.scss';
+
+.fiat {
+  color: $secondary;
+  line-height: 1;
+}
+
+.accordion {
+  margin-bottom: 2.5rem;
+
+  .trigger {
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+
+    .icon {
+      margin-left: -0.28rem;
+    }
+
+    .label {
+      margin-right: 0.5rem;
+    }
+
+    .limit {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .expandable {
+    overflow: hidden;
+    transition: height 0.2s ease;
+
+    .content {
+      border-radius: 0.25rem;
+      background-color: $light;
+      border: 1px solid $border-color;
+      margin-top: 0.5rem;
+      padding: 1rem 0;
+    }
+  }
+}

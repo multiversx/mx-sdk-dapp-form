@@ -1,19 +1,12 @@
-.dapp-core-form-ui-component {
-  display: contents;
-
+* {
   $headings-font-weight: 300 !important;
   $primary: #1b46c2;
   $light: #fafafa;
-  $a: #1392ff;
-
-  @import '~bootstrap/scss/bootstrap.scss';
 
   @import './themes/theme.scss';
 
   // Variables override
   @import './variables/variables';
-
-  @import '~bootstrap/scss/reboot';
 
   @import './modules/trim/trim';
   @import './modules/modal/modal';

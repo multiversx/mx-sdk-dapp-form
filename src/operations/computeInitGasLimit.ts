@@ -3,7 +3,7 @@ import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
 import { getIdentifierType } from '@elrondnetwork/dapp-core/utils/validation/getIdentifierType';
 
 import BigNumber from 'bignumber.js';
-import { tokenGasLimit } from 'constants/index';
+import { tokenGasLimit, ZERO } from 'constants/index';
 import { DelegationContractDataType } from 'types';
 import fetchGasLimit from '../hooks/useFetchGasLimit/fetchGasLimit';
 import calculateGasLimit from './calculateGasLimit';
@@ -25,7 +25,9 @@ export interface ComputeInitGasLimitType {
   egldLabel: string;
 }
 
-export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
+export const computeInitGasLimit: (
+  props: ComputeInitGasLimitType
+) => Promise<{
   initGasLimit: string;
   initGasLimitError: string | null;
 }> = async ({
@@ -44,20 +46,22 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
 }) => {
   const initGasLimitError = null;
   if (isContract(receiver) && !isInternal) {
-    const { gasLimit: resultedGasLimit, gasLimitCostError } =
-      await fetchGasLimit({
-        balance,
-        address,
-        nonce,
-        values: {
-          amount,
-          receiver,
-          data,
-          gasLimit,
-          gasPrice
-        },
-        chainId
-      });
+    const {
+      gasLimit: resultedGasLimit,
+      gasLimitCostError
+    } = await fetchGasLimit({
+      balance,
+      address,
+      nonce,
+      values: {
+        amount,
+        receiver,
+        data,
+        gasLimit,
+        gasPrice
+      },
+      chainId
+    });
 
     const initGasLimit =
       receiver === delegationContract
@@ -72,7 +76,7 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
     };
   }
 
-  if (gasLimit !== '0') {
+  if (gasLimit !== ZERO) {
     return { initGasLimit: gasLimit, initGasLimitError };
   }
 

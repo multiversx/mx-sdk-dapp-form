@@ -1,9 +1,10 @@
 import React from 'react';
-import Amount from './Amount';
-import Data from './Data';
-import Fee from './Fee';
-import To from './To';
-import Token from './Token';
+
+import { Amount } from './Amount';
+import { Data } from './Data';
+import { Fee } from './Fee';
+import { To } from './To';
+import { Token } from './Token';
 
 export class Confirm extends React.Component {
   static To = To;

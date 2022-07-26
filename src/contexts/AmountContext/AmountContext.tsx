@@ -6,6 +6,8 @@ import { useTokensContext } from '../TokensContext';
 import { useGetMaxAmountAvailable } from './hooks';
 import { getIsMaxButtonVisible } from './utils';
 
+import { AMOUNT_FIELD } from 'constants/index';
+
 export interface AmountContextPropsType {
   amount: string;
   error?: string;
@@ -26,8 +28,6 @@ export interface AmountContextPropsType {
 interface AmountContextProviderPropsType {
   children: React.ReactNode;
 }
-
-const amountField = 'amount';
 
 export const AmountContext = React.createContext({} as AmountContextPropsType);
 
@@ -66,16 +66,16 @@ export function AmountContextProvider({
     (newValue: string | React.ChangeEvent<any>, shouldValidate = true) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
-      return setFieldValue(amountField, value, shouldValidate);
+      return setFieldValue(AMOUNT_FIELD, value, shouldValidate);
     },
     [setFieldValue]
   );
   const onSetError = useCallback(
-    (value: string) => setFieldError(amountField, value),
+    (value: string) => setFieldError(AMOUNT_FIELD, value),
     [setFieldError]
   );
   const onBlur = useCallback(() => {
-    setFieldTouched(amountField, true);
+    setFieldTouched(AMOUNT_FIELD, true);
   }, [handleBlur]);
 
   const onMaxClicked = useCallback(() => {
@@ -86,7 +86,7 @@ export function AmountContextProvider({
   const value = {
     amount: values.amount,
     error: errors.amount,
-    isInvalid: checkInvalid(amountField),
+    isInvalid: checkInvalid(AMOUNT_FIELD),
     maxAmountAvailable,
     maxAmountMinusDust,
     isMaxButtonVisible,

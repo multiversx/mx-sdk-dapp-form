@@ -1,5 +1,7 @@
 import BigNumber from 'bignumber.js';
 
+import { ZERO } from 'constants/index';
+
 export function showMax({
   amount = '',
   available,
@@ -18,7 +20,7 @@ export function showMax({
   const valueIsUndefined = !amount;
   return (
     (valueIsUndefined || amountSmallerThanAvailable) &&
-    available !== '0' &&
+    available !== ZERO &&
     !readonly
   );
 }

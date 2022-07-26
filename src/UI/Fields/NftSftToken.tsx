@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import Token, { TokenPropsType } from 'UI/Confirm/Token';
+import { Token, TokenPropsType } from 'UI/Confirm/Token';
 
 export const NftSftToken = () => {
   const { formInfo, tokensInfo } = useSendFormContext();
@@ -20,5 +20,3 @@ export const NftSftToken = () => {
 
   return <Token {...tokenProps} />;
 };
-
-export default NftSftToken;
