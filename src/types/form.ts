@@ -26,8 +26,8 @@ export interface ExtendedValuesType extends ValuesType {
   chainId: string;
   ignoreTokenBalance?: boolean;
   /**
-   * **readonly**: Configure disabled fields by disabling all or individual
-   * example: readonly: { amount: true } will disable only the amount field
+   * **readonly**: Configure disabled fields by disabling all or individual fields.\
+   * Example: `readonly: [ 'amount' ]` will disable only the amount field.
    */
   readonly?: boolean | Array<ValueKeyType>;
   nft?: NftType;
