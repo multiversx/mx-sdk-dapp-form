@@ -8,7 +8,7 @@ export function selectCustomStyles({ docStyle }: { docStyle: any }) {
   };
 
   return {
-    valueContainer: (a: any, b: any) => ({
+    valueContainer: () => ({
       padding: '0.125rem 0 0.125rem 0.2rem',
       lineHeight: '1.5',
       fontSize: '0.8125rem',
