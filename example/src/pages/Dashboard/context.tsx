@@ -71,7 +71,7 @@ const ContextProvider = (props: ContextType) => {
       balance: account.balance
     },
     formInfo: {
-      onCloseForm: console.log,
+      onCloseForm: () => false,
       preFilledForm: false
     }
   });

@@ -18,7 +18,7 @@ interface OptionType {
   token: TokenType;
 }
 
-const SelectToken = ({ label }: { label?: string }) => {
+export const SelectToken = ({ label }: { label?: string }) => {
   const { formInfo, accountInfo, tokensInfo } = useSendFormContext();
 
   const { readonly } = formInfo;
@@ -128,5 +128,3 @@ const SelectToken = ({ label }: { label?: string }) => {
     </div>
   );
 };
-
-export { SelectToken };
