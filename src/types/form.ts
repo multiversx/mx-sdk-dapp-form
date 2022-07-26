@@ -45,8 +45,8 @@ export interface ValidationSchemaType {
   balance: string;
   chainId: string;
   /**
-   * **ignoreTokenBalance**: Gets set automaticaly in case of validating multiple
-   * sign transactions when some tokens will be available only after execution
+   * **ignoreTokenBalance**: Gets set automaticaly in case of validating multiple\
+   * sign transactions, when some tokens will be available only after execution.
    */
   ignoreTokenBalance?: boolean;
   /**
