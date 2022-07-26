@@ -27,11 +27,10 @@ export const Data = () => {
     values: { customBalanceRules }
   } = useFormikContext<ExtendedValuesType>();
 
-  const isDisabled = Boolean(
+  const isDisabled =
     !isEgldTransaction ||
-      customBalanceRules?.dataFieldBuilder != null ||
-      getIsDisabled(ValuesEnum.data, readonly)
-  );
+    customBalanceRules?.dataFieldBuilder != null ||
+    getIsDisabled(ValuesEnum.data, readonly);
 
   return (
     <div className={styles.data}>
