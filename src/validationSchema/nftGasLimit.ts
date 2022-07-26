@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
+import { ZERO } from 'constants/index';
 import { calculateNftGasLimit } from 'operations/calculateNftGasLimit';
 import { ExtendedValuesType } from 'types';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 import { sharedGaslimit } from './sharedGaslimit';
-import { ZERO } from 'constants/index';
 
 const required = string().required('Required');
 

@@ -4,9 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
-import { GAS_LIMIT_FIELD } from 'constants/index';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
+import { getIsDisabled } from 'helpers';
+import { ValuesEnum } from 'types';
 import styles from './styles.module.scss';
 
 export const GasLimit = () => {
@@ -28,7 +29,7 @@ export const GasLimit = () => {
 
   return (
     <div className={styles.gas}>
-      <label className={styles.left} htmlFor={GAS_LIMIT_FIELD}>
+      <label className={styles.left} htmlFor={ValuesEnum.gasLimit}>
         Gas Limit
       </label>
 
@@ -41,9 +42,10 @@ export const GasLimit = () => {
           <div className={styles.wrapper}>
             <input
               type='text'
-              id={GAS_LIMIT_FIELD}
-              name={GAS_LIMIT_FIELD}
-              data-testid={GAS_LIMIT_FIELD}
+              id={ValuesEnum.gasLimit}
+              name={ValuesEnum.gasLimit}
+              data-testid={ValuesEnum.gasLimit}
+              disabled={getIsDisabled(ValuesEnum.gasLimit, readonly)}
               required
               value={gasLimit}
               onChange={onChangeGasLimit}

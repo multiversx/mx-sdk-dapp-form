@@ -3,10 +3,10 @@ import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringI
 import { stringIsInteger } from '@elrondnetwork/dapp-core/utils/validation/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
+import { ZERO } from 'constants/index';
 import { NftEnumType } from 'types';
 import { TxTypeEnum, ExtendedValuesType } from 'types';
 import maxDecimals from 'validation/maxDecimals';
-import { ZERO } from 'constants/index';
 
 const required = string().required('Required');
 

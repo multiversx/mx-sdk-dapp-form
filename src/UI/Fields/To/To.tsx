@@ -17,6 +17,8 @@ import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
+import { getIsDisabled } from 'helpers';
+import { ValuesEnum } from 'types';
 import styles from './styles.module.scss';
 
 const CustomMenu = (
@@ -58,7 +60,8 @@ export const To = () => {
       isReceiverInvalid,
       onBlurReceiver,
       onChangeReceiver
-    }
+    },
+    formInfo: { readonly }
   } = useSendFormContext();
 
   const [value, setValue] = useState(receiver);
@@ -102,6 +105,7 @@ export const To = () => {
         <Typeahead
           id='receiverWrapper'
           filterBy={filterBy}
+          disabled={getIsDisabled(ValuesEnum.receiver, readonly)}
           ignoreDiacritics={true}
           emptyLabel={false}
           maxResults={5}

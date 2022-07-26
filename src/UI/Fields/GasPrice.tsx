@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
-import { GAS_PRICE_FIELD } from 'constants/index';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { denominatedConfigGasPrice } from 'operations';
 
+import { ValuesEnum } from 'types';
 import styles from './styles.module.scss';
 
 export const GasPrice = () => {
@@ -26,7 +26,7 @@ export const GasPrice = () => {
 
   return (
     <div className={classNames(styles.gas, styles.price)}>
-      <label className={styles.left} htmlFor={GAS_PRICE_FIELD}>
+      <label className={styles.left} htmlFor={ValuesEnum.gasPrice}>
         Gas Price
       </label>
 
@@ -39,9 +39,9 @@ export const GasPrice = () => {
           <div className={styles.wrapper}>
             <input
               type='text'
-              id={GAS_PRICE_FIELD}
-              name={GAS_PRICE_FIELD}
-              data-testid={GAS_PRICE_FIELD}
+              id={ValuesEnum.gasPrice}
+              name={ValuesEnum.gasPrice}
+              data-testid={ValuesEnum.gasPrice}
               required
               disabled
               value={gasPrice}

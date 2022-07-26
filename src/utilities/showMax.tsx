@@ -1,6 +1,8 @@
 import BigNumber from 'bignumber.js';
 
 import { ZERO } from 'constants/index';
+import { getIsDisabled } from 'helpers';
+import { ExtendedValuesType, ValuesEnum } from 'types';
 
 export function showMax({
   amount = '',
@@ -11,17 +13,21 @@ export function showMax({
   amount: string | undefined;
   available: string;
   entireBalanceMinusDust: string;
-  readonly?: boolean;
+  readonly?: ExtendedValuesType['readonly'];
 }) {
   const bNamount = new BigNumber(amount);
   const bNentireBalanceMinusDust = new BigNumber(entireBalanceMinusDust);
-  const amountSmallerThanAvailable =
-    bNentireBalanceMinusDust.comparedTo(bNamount) === 1;
+  const amountSmallerThanAvailable = bNentireBalanceMinusDust.isGreaterThan(
+    bNamount
+  );
   const valueIsUndefined = !amount;
+
+  const isDisabled = getIsDisabled(ValuesEnum.amount, readonly);
+
   return (
     (valueIsUndefined || amountSmallerThanAvailable) &&
     available !== ZERO &&
-    !readonly
+    !isDisabled
   );
 }
 export default showMax;

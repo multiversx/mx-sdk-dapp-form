@@ -97,8 +97,9 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
       getTxType({ nft: tokensInfo?.initialNft, tokenId }),
     address: initialValues?.address ?? address,
     nft: tokensInfo?.initialNft,
-    balance: initialValues?.balance ?? balance,
-    chainId: initialValues?.chainId ?? networkConfig.chainId,
+    balance: initialValues?.balance || balance,
+    customBalanceRules: initialValues?.customBalanceRules,
+    chainId: initialValues?.chainId || networkConfig.chainId,
     tokens: tokensInfo?.initialTokens
   };
 
