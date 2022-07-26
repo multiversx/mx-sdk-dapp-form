@@ -7,7 +7,7 @@ import { verifyInvalid } from 'validation';
 export interface FormContextBasePropsType {
   prefilledForm: boolean;
   skipToConfirm?: boolean;
-  readonly?: boolean;
+  readonly?: ExtendedValuesType['readonly'];
   onCloseForm: () => void;
 }
 

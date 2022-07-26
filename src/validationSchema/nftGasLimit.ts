@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
+import { ZERO } from 'constants/index';
 import { calculateNftGasLimit } from 'operations/calculateNftGasLimit';
 import { ExtendedValuesType } from 'types';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
@@ -9,7 +10,7 @@ const required = string().required('Required');
 
 const minValueData = string().test({
   name: 'minValueData',
-  test: function (value) {
+  test: function(value) {
     const parent: ExtendedValuesType = this.parent;
     const { data } = parent;
 
@@ -33,26 +34,24 @@ const minValueData = string().test({
   }
 });
 
-const funds = string().test(
-  'funds',
-  'Insufficient funds',
-  function funds(value) {
-    const { data, gasPrice, balance, chainId, ignoreTokenBalance } = this
-      .parent as ExtendedValuesType;
-    if (value && !ignoreTokenBalance) {
-      const valid = validateGasLimitAmount({
-        amount: '0',
-        balance,
-        gasLimit: value,
-        gasPrice,
-        data,
-        chainId
-      });
-      return valid;
-    }
-    return true;
+const funds = string().test('funds', 'Insufficient funds', function funds(
+  value
+) {
+  const { data, gasPrice, balance, chainId, ignoreTokenBalance } = this
+    .parent as ExtendedValuesType;
+  if (value && !ignoreTokenBalance) {
+    const valid = validateGasLimitAmount({
+      amount: ZERO,
+      balance,
+      gasLimit: value,
+      gasPrice,
+      data,
+      chainId
+    });
+    return valid;
   }
-);
+  return true;
+});
 
 const validations = [required, minValueData, funds, ...sharedGaslimit()];
 

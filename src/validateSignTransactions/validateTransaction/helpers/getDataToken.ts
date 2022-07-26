@@ -1,5 +1,6 @@
 import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { ApiConfigType, getToken } from 'apiCalls';
+import { ZERO } from 'constants/index';
 
 export async function getDataToken(
   {
@@ -29,7 +30,7 @@ export async function getDataToken(
   } catch (e) {
     return {
       tokenData: null,
-      tokenAmount: '0',
+      tokenAmount: ZERO,
       tokenFound: false
     };
   }

@@ -1,11 +1,16 @@
 import React from 'react';
-import { faUndo } from '@fortawesome/free-solid-svg-icons';
+import { faUndo, faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classnames from 'classnames';
+import classNames from 'classnames';
+
+import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { denominatedConfigGasPrice } from 'operations';
 
-const GasPrice = () => {
+import { ValuesEnum } from 'types';
+import styles from './styles.module.scss';
+
+export const GasPrice = () => {
   const { gasInfo, formInfo } = useSendFormContext();
 
   const {
@@ -17,51 +22,60 @@ const GasPrice = () => {
     onResetGasPrice
   } = gasInfo;
   const { readonly } = formInfo;
-
-  const invalidClassName = classnames({ 'is-invalid': isGasPriceInvalid });
-
   const showUndoButton = gasPrice !== denominatedConfigGasPrice && !readonly;
 
   return (
-    <div className='form-group row'>
-      <label className='col-5 col-sm-3 pl-0 col-form-label text-right'>
+    <div className={classNames(styles.gas, styles.price)}>
+      <label className={styles.left} htmlFor={ValuesEnum.gasPrice}>
         Gas Price
       </label>
-      <div className='col-7 col-sm-9 pl-0'>
-        <div className={`input-group input-group-seamless ${invalidClassName}`}>
-          <input
-            type='text'
-            className={`form-control ${invalidClassName}`}
-            id='gasPrice'
-            name='gasPrice'
-            data-testid='gasPrice'
-            required
-            disabled
-            value={gasPrice}
-            onChange={onChangeGasPrice}
-            onBlur={onBlurGasPrice}
-            autoComplete='off'
-          />
+
+      <div className={styles.right}>
+        <div
+          className={classNames(styles.form, {
+            [styles.invalid]: isGasPriceInvalid
+          })}
+        >
+          <div className={styles.wrapper}>
+            <input
+              type='text'
+              id={ValuesEnum.gasPrice}
+              name={ValuesEnum.gasPrice}
+              data-testid={ValuesEnum.gasPrice}
+              required
+              disabled
+              value={gasPrice}
+              onChange={onChangeGasPrice}
+              onBlur={onBlurGasPrice}
+              autoComplete='off'
+              className={globals.input}
+            />
+
+            {isGasPriceInvalid && (
+              <span className={globals.errorExclamation}>
+                <FontAwesomeIcon icon={faExclamation} size='xs' />
+              </span>
+            )}
+          </div>
+
           {showUndoButton && (
-            <span className='input-group-append'>
-              <a
-                href='/#'
-                className='input-group-text'
+            <span className={styles.undo}>
+              <button
+                className={classNames(styles.reset, styles.default)}
                 onClick={onResetGasPrice}
               >
-                <i className='material-icons'>
+                <i>
                   <FontAwesomeIcon icon={faUndo} />
                 </i>
-              </a>
+              </button>
             </span>
           )}
         </div>
+
         {isGasPriceInvalid && (
-          <div className='invalid-feedback'>{gasPriceError}</div>
+          <div className={globals.error}>{gasPriceError}</div>
         )}
       </div>
     </div>
   );
 };
-
-export default GasPrice;

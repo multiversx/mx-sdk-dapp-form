@@ -53,7 +53,7 @@ export const computeNftDataField = ({
   }
 };
 
-export const getEsdtNftDataField = ({
+export const getDataField = ({
   txType,
   values,
   nft,
@@ -66,7 +66,7 @@ export const getEsdtNftDataField = ({
   amountError?: boolean;
   receiverError?: string;
 }) => {
-  const { tokens, tokenId, amount, receiver } = values;
+  const { tokens, tokenId, amount, receiver, customBalanceRules } = values;
   if (tokens && txType === TxTypeEnum.ESDT && !amountError) {
     const { decimals } = getTokenDetails({
       tokens,
@@ -87,6 +87,9 @@ export const getEsdtNftDataField = ({
       receiver,
       errors: Boolean(amountError || receiverError)
     });
+  }
+  if (customBalanceRules?.dataFieldBuilder != null) {
+    return customBalanceRules.dataFieldBuilder(values);
   }
   return '';
 };

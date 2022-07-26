@@ -28,17 +28,17 @@ html {
 // }
 a,
 .link-style {
-  color: #1392ff;
+  color: $primary-light;
 }
 
 .link-second-style {
   color: #9dabbd;
 
   &:hover {
-    color: #1392ff;
+    color: $primary-light;
 
     svg {
-      color: #1392ff;
+      color: $primary-light;
     }
   }
 }
@@ -106,20 +106,20 @@ a,
     justify-content: center;
     align-items: center;
     color: #fff !important;
-    background-color: #1392ff;
+    background-color: $primary-light;
     padding: 15px 20px 15px 16px;
     border-radius: 6px;
     gap: 8px;
 
     &:hover,
     &:active {
-      background-color: #1392ff;
+      background-color: $primary-light;
       background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
     }
   }
 
   .info {
-    color: #1392ff;
+    color: $primary-light;
     margin-left: 48px;
   }
 }
@@ -192,7 +192,7 @@ a,
 
     tr:last-of-type {
       td {
-        border-bottom: 1px solid #dee2e6;
+        border-bottom: 1px solid $border-color;
       }
     }
   }

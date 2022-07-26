@@ -3,11 +3,12 @@ export function selectCustomStyles({ docStyle }: { docStyle: any }) {
     hoverColor: docStyle.getPropertyValue('--border-color'),
     primaryColor: docStyle.getPropertyValue('--primary'),
     bgColor: docStyle.getPropertyValue('--card-bg'),
-    mutedColor: docStyle.getPropertyValue('--muted')
+    mutedColor: docStyle.getPropertyValue('--muted'),
+    blackColor: docStyle.getPropertyValue('--black')
   };
 
   return {
-    valueContainer: () => ({
+    valueContainer: (a: any, b: any) => ({
       padding: '0.125rem 0 0.125rem 0.2rem',
       lineHeight: '1.5',
       fontSize: '0.8125rem',
@@ -17,12 +18,13 @@ export function selectCustomStyles({ docStyle }: { docStyle: any }) {
     control: (props: any, state: any) => ({
       ...props,
       minHeight: '0',
+      flexWrap: 'nowrap',
       backgroundColor: state.isDisabled ? '#e9ecef' : 'transparent',
       borderColor: state.isDisabled
         ? customColors.hoverColor
         : state.isFocused
         ? customColors.primaryColor
-        : customColors.hoverColor,
+        : customColors.blackColor,
       boxShadow: state.isFocused
         ? `0 0 0 0.2rem #${customColors.primaryColor.replace('#', '').trim()}33`
         : null,
@@ -48,10 +50,6 @@ export function selectCustomStyles({ docStyle }: { docStyle: any }) {
     dropdownIndicator: (props: any) => ({
       ...props,
       padding: '0 0.4rem'
-    }),
-    singleValue: (props: any) => ({
-      ...props,
-      backgroundColor: customColors.bgColor
     }),
     multiValue: (props: any) => ({
       ...props,

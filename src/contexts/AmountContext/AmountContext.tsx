@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { useFormikContext } from 'formik';
-import { ExtendedValuesType } from 'types';
+import { ExtendedValuesType, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';
 import { useGetMaxAmountAvailable } from './hooks';
@@ -26,8 +26,6 @@ export interface AmountContextPropsType {
 interface AmountContextProviderPropsType {
   children: React.ReactNode;
 }
-
-const amountField = 'amount';
 
 export const AmountContext = React.createContext({} as AmountContextPropsType);
 
@@ -66,16 +64,16 @@ export function AmountContextProvider({
     (newValue: string | React.ChangeEvent<any>, shouldValidate = true) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
-      return setFieldValue(amountField, value, shouldValidate);
+      return setFieldValue(ValuesEnum.amount, value, shouldValidate);
     },
     [setFieldValue]
   );
   const onSetError = useCallback(
-    (value: string) => setFieldError(amountField, value),
+    (value: string) => setFieldError(ValuesEnum.amount, value),
     [setFieldError]
   );
   const onBlur = useCallback(() => {
-    setFieldTouched(amountField, true);
+    setFieldTouched(ValuesEnum.amount, true);
   }, [handleBlur]);
 
   const onMaxClicked = useCallback(() => {
@@ -86,7 +84,7 @@ export function AmountContextProvider({
   const value = {
     amount: values.amount,
     error: errors.amount,
-    isInvalid: checkInvalid(amountField),
+    isInvalid: checkInvalid(ValuesEnum.amount),
     maxAmountAvailable,
     maxAmountMinusDust,
     isMaxButtonVisible,

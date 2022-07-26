@@ -1,19 +1,56 @@
 @use 'sass:math';
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/mixins';
 
-$spacer-val: $spacer * 1.7;
-// SPACING
-$spacers: (
-  spacer: (
-    $spacer-val
-  )
-);
+$light: #fafafa;
+$white: white;
+$black: black;
+$brown: #212529;
+$primary: #1b46c2;
+$secondary: #6c757d;
+$primary-light: #1392ff;
+$input-border-radius: 0.25rem;
+$card-border-radius: 0.25rem;
+$card-bg: $white;
+$border-color: #dee2e6;
+$link-hover-color: #122e7f;
+$error: #dc3545;
+$warning: #ffc107;
+$btn-blue: #163aa0;
 
-$modal-lg: 565px;
+$input-color: #495057;
+$input-border-color: #ced4da;
+$input-border-focus: #7191eb;
 
-@function toRem($value) {
-  $remValue: math.div($value, 14) + rem;
-  @return $remValue;
+:root {
+  --primary: #1b46c2;
+  --border-color: #dee2e6;
+  --card-bg: white;
+  --black: black;
+}
+
+@mixin media-breakpoint-up($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: 576px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == md {
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+}
+
+@mixin media-breakpoint-down($breakpoint) {
+  @if $breakpoint == sm {
+    @media (max-width: 575px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == sm {
+    @media (max-width: 767px) {
+      @content;
+    }
+  }
 }

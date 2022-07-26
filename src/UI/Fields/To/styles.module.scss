@@ -1,0 +1,73 @@
+@import 'assets/sass/variables/_variables.scss';
+
+.to {
+  margin-bottom: 2.5rem;
+
+  .label {
+    margin-bottom: 0.5rem;
+  }
+
+  .autocomplete {
+    position: relative;
+
+    .menu {
+      left: 0px;
+      top: 0px;
+      float: left;
+      min-width: 10rem;
+      font-size: 1rem;
+      color: $brown;
+      text-align: left;
+      list-style: none;
+      background-color: $white;
+      background-clip: padding-box;
+      border: 1px solid rgba($black, 0.15);
+      border-radius: $card-border-radius;
+      z-index: 1000;
+      inset: unset !important;
+      width: auto !important;
+      max-height: 300px !important;
+      overflow: unset !important;
+      transform: none !important;
+
+      .item {
+        display: block;
+        line-height: 1.5;
+        padding: 0.25rem 1.5rem;
+        clear: both;
+        font-weight: 400;
+        color: $brown;
+        text-align: inherit;
+        white-space: nowrap;
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+        text-decoration: none;
+
+        &:hover,
+        &.highlighted {
+          color: #16181b;
+          text-decoration: none;
+          background-color: #e9ecef;
+        }
+
+        &:first-child {
+          margin-top: 0.675rem;
+        }
+
+        &:last-child {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .scam {
+    line-height: 1.5;
+    color: $warning !important;
+
+    svg {
+      margin-right: 0.25rem;
+    }
+  }
+}

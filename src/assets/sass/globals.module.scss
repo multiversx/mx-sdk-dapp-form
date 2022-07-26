@@ -1,0 +1,99 @@
+@import 'assets/sass/variables/variables';
+
+.error {
+  width: 100%;
+  font-size: 80%;
+  display: block;
+  color: $error;
+  margin-top: 0.25rem;
+  line-height: 1.5;
+}
+
+.input,
+.textarea {
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: $input-color;
+  background-clip: padding-box;
+  border: 1px solid $input-border-color;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: $white;
+
+  &:focus {
+    color: $input-color;
+    background-color: $white;
+    border-color: $input-border-focus;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgb(27 70 194 / 25%);
+  }
+
+  &:disabled {
+    background-color: #e9ecef;
+  }
+
+  &.invalid {
+    border-color: $error;
+  }
+}
+
+.errorExclamation {
+  position: absolute;
+  width: calc(1.5em + 0.75rem);
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  border: 1px solid $error;
+  width: 1rem;
+  height: 1rem;
+  right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    path {
+      fill: $error;
+    }
+  }
+}
+
+.btn {
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 1rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+  &.btnPrimary {
+    background-color: $primary;
+    color: $white;
+
+    &:hover {
+      background-color: $btn-blue;
+    }
+  }
+
+  &.btnWarning {
+    background-color: $warning;
+    color: $brown;
+  }
+
+  &.btnLink {
+    color: $primary-light;
+    background: none;
+    padding: 0;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
