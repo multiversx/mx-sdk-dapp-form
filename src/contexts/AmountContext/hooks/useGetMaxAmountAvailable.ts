@@ -76,8 +76,6 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
   useEffect(() => {
     if (balance && isEgldTransaction) {
-      console.log(customBalanceRules);
-
       if (customBalanceRules?.customBalance) {
         const entireBalance = denominate({
           input: customBalanceRules?.customBalance,
