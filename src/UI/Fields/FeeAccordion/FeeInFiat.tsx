@@ -1,15 +1,16 @@
 import React from 'react';
+
+import { ZERO } from 'constants/index';
 import { calculateFeeInFiat } from 'operations';
 
 import styles from './styles.module.scss';
-import { ZERO } from 'constants/index';
 
 interface FeeInFiatType {
   feeLimit: string;
   egldPriceInUsd: number;
 }
 
-const FeeInFiat = ({ feeLimit, egldPriceInUsd }: FeeInFiatType) =>
+export const FeeInFiat = ({ feeLimit, egldPriceInUsd }: FeeInFiatType) =>
   feeLimit !== ZERO ? (
     <small className={styles.fiat}>
       {calculateFeeInFiat({
@@ -18,5 +19,3 @@ const FeeInFiat = ({ feeLimit, egldPriceInUsd }: FeeInFiatType) =>
       })}
     </small>
   ) : null;
-
-export { FeeInFiat };

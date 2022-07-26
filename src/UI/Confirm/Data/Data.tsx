@@ -7,7 +7,7 @@ import styles from './styles.module.scss';
 const allOccurences = (sourceStr: string, searchStr: string) =>
   [...sourceStr.matchAll(new RegExp(searchStr, 'gi'))].map((a) => a.index);
 
-const Data = ({
+export const Data = ({
   label = 'Data',
   scCallLabel = 'SC Call',
   data,
@@ -85,5 +85,3 @@ const Data = ({
     </>
   );
 };
-
-export { Data };

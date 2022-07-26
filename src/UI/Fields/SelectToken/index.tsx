@@ -1,3 +1,1 @@
-import { SelectToken } from './SelectToken';
-
-export { SelectToken };
+export * from './SelectToken';

@@ -12,7 +12,7 @@ import { NftEnumType, NftType, TokenType } from 'types';
 import styles from './styles.module.scss';
 import ElrondSymbol from './symbol.svg';
 
-const TokenElement = ({
+export const TokenElement = ({
   inDropdown = false,
   isEgld,
   nftType,
@@ -57,6 +57,9 @@ const TokenElement = ({
     );
   }
 
+  const showDenomination =
+    !inDropdown && nftType !== NftEnumType.NonFungibleESDT;
+
   return (
     <div className={styles.token}>
       <div className={styles.wrapper}>
@@ -79,7 +82,7 @@ const TokenElement = ({
           <span className={styles.identifier}>{identifier}</span>
         </span>
 
-        {!inDropdown && nftType !== NftEnumType.NonFungibleESDT && (
+        {showDenomination && (
           <Denominate
             egldLabel={identifier}
             value={balance || ZERO}
@@ -96,5 +99,3 @@ const TokenElement = ({
     </div>
   );
 };
-
-export { TokenElement };

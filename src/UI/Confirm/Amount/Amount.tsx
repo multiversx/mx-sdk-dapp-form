@@ -22,7 +22,7 @@ export interface AmountPropsType {
   nft?: NftType;
 }
 
-const Amount = (props: AmountPropsType) => {
+export const Amount = (props: AmountPropsType) => {
   const {
     label = 'Amount',
     amount,
@@ -101,5 +101,3 @@ const Amount = (props: AmountPropsType) => {
     </div>
   );
 };
-
-export { Amount };

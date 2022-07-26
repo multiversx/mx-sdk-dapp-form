@@ -1,3 +1,1 @@
-import { InfoDust } from './InfoDust';
-
-export { InfoDust };
+export * from './InfoDust';

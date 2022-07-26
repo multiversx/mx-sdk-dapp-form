@@ -2,18 +2,18 @@ import React from 'react';
 import { LoginMethodsEnum } from '@elrondnetwork/dapp-core/types';
 import classNames from 'classnames';
 
+import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import Confirm from '../Confirm';
 
 import styles from './styles.module.scss';
-import globals from 'assets/sass/globals.module.scss';
 
 interface ConfirmScreenType {
   isConfirmCloseBtnVisible?: boolean;
   providerType: string;
 }
 
-const ConfirmScreen = ({
+export const ConfirmScreen = ({
   isConfirmCloseBtnVisible = true,
   providerType
 }: ConfirmScreenType) => {
@@ -26,13 +26,8 @@ const ConfirmScreen = ({
     gasInfo
   } = useSendFormContext();
   const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
-  const {
-    readonly,
-    onCloseForm,
-    onInvalidateForm,
-    onSubmitForm,
-    txType
-  } = formInfo;
+  const { readonly, onCloseForm, onInvalidateForm, onSubmitForm, txType } =
+    formInfo;
   const { data } = dataFieldInfo;
   const { receiver, scamError } = receiverInfo;
   const { feeLimit, gasCostError } = gasInfo;
@@ -113,5 +108,3 @@ const ConfirmScreen = ({
     </div>
   );
 };
-
-export { ConfirmScreen };

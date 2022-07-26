@@ -12,7 +12,7 @@ import { useUICustomizationContext } from 'contexts/UICustomization';
 import { ExtendedValuesType } from 'types/form';
 import styles from './styles.module.scss';
 
-const Data = () => {
+export const Data = () => {
   const {
     fields: {
       data: { label }
@@ -68,5 +68,3 @@ const Data = () => {
     </div>
   );
 };
-
-export { Data };

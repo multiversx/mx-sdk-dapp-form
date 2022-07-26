@@ -14,7 +14,7 @@ interface SharedAmountType {
   AvailableAmountElement: () => JSX.Element | null;
 }
 
-const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
+export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   const {
     formInfo: { checkInvalid },
     amountInfo
@@ -33,6 +33,7 @@ const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
 
   const {
     amount,
+    error,
     isMaxButtonVisible,
     onMaxClicked,
     onFocus,
@@ -73,6 +74,8 @@ const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
         )}
       </div>
 
+      {isInvalid && <div className={globals.error}>{error}</div>}
+
       {isMaxButtonVisible && (
         <div className={styles.max}>
           <button
@@ -91,5 +94,3 @@ const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
     </div>
   );
 };
-
-export { SharedAmount };

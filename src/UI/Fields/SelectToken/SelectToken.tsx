@@ -1,15 +1,15 @@
 import React from 'react';
 import * as constants from '@elrondnetwork/dapp-core/constants';
 import Select, { SingleValue } from 'react-select';
+import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
+
+import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { selectCustomStyles } from 'helpers';
 import { TokenType, TokenAssetsType } from 'types';
 
 import styles from './styles.module.scss';
-import globals from 'assets/sass/globals.module.scss';
-
 import { TokenElement } from './TokenElement';
-import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
 interface OptionType {
   value: string;

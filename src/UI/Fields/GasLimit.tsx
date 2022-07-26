@@ -3,13 +3,13 @@ import { faUndo, faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import globals from 'assets/sass/globals.module.scss';
 import { GAS_LIMIT_FIELD } from 'constants/index';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import styles from './styles.module.scss';
-import globals from 'assets/sass/globals.module.scss';
 
-const GasLimit = () => {
+export const GasLimit = () => {
   const { formInfo, gasInfo } = useSendFormContext();
   const { readonly } = formInfo;
   const {
@@ -60,8 +60,7 @@ const GasLimit = () => {
 
             {gasLimit !== defaultGasLimit && !readonly && (
               <span className={styles.undo}>
-                <a
-                  href='/#'
+                <button
                   className={styles.reset}
                   onClick={onResetClick}
                   data-testid='gasLimitResetBtn'
@@ -69,7 +68,7 @@ const GasLimit = () => {
                   <i>
                     <FontAwesomeIcon icon={faUndo} />
                   </i>
-                </a>
+                </button>
               </span>
             )}
           </div>
@@ -82,5 +81,3 @@ const GasLimit = () => {
     </div>
   );
 };
-
-export { GasLimit };

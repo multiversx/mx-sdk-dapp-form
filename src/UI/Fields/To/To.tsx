@@ -3,6 +3,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { addressIsValid } from '@elrondnetwork/dapp-core/utils';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+
 import { Typeahead, Menu, MenuItem } from 'react-bootstrap-typeahead';
 import { MenuProps } from 'react-bootstrap-typeahead/types/components/Menu';
 import {
@@ -11,12 +13,11 @@ import {
   TypeaheadManagerChildProps
 } from 'react-bootstrap-typeahead/types/types';
 
-import classNames from 'classnames';
+import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import styles from './styles.module.scss';
-import globals from 'assets/sass/globals.module.scss';
 
 const CustomMenu = (
   results: Array<Option>,
@@ -26,6 +27,7 @@ const CustomMenu = (
   <Menu {...props} className={styles.menu}>
     {results.map((option: Option, position: number) => (
       <MenuItem
+        key={option.toString()}
         {...{
           option,
           position,
@@ -40,7 +42,7 @@ const CustomMenu = (
   </Menu>
 );
 
-const To = () => {
+export const To = () => {
   const {
     fields: {
       to: { label }
@@ -130,5 +132,3 @@ const To = () => {
     </div>
   );
 };
-
-export { To };

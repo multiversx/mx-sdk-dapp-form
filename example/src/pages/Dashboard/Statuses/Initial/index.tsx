@@ -1,1 +1,1 @@
-export { Initial } from './Initial';
+export * from './Initial';

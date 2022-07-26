@@ -3,14 +3,14 @@ import { faUndo, faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
+import globals from 'assets/sass/globals.module.scss';
+import { GAS_PRICE_FIELD } from 'constants/index';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { denominatedConfigGasPrice } from 'operations';
-import { GAS_PRICE_FIELD } from 'constants/index';
 
 import styles from './styles.module.scss';
-import globals from 'assets/sass/globals.module.scss';
 
-const GasPrice = () => {
+export const GasPrice = () => {
   const { gasInfo, formInfo } = useSendFormContext();
 
   const {
@@ -60,15 +60,14 @@ const GasPrice = () => {
 
           {showUndoButton && (
             <span className={styles.undo}>
-              <a
-                href='/#'
+              <button
                 className={classNames(styles.reset, styles.default)}
                 onClick={onResetGasPrice}
               >
                 <i>
                   <FontAwesomeIcon icon={faUndo} />
                 </i>
-              </a>
+              </button>
             </span>
           )}
         </div>
@@ -80,5 +79,3 @@ const GasPrice = () => {
     </div>
   );
 };
-
-export { GasPrice };

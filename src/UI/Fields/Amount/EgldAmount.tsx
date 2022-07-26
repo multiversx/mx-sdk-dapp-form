@@ -8,16 +8,12 @@ import { SharedAmount } from './SharedAmount';
 
 import styles from './styles.module.scss';
 
-const EgldAmount = () => {
+export const EgldAmount = () => {
   const { tokensInfo, amountInfo } = useSendFormContext();
 
   const { egldLabel, egldPriceInUsd } = tokensInfo;
-  const {
-    isMaxClicked,
-    isInvalid,
-    maxAmountAvailable,
-    maxAmountMinusDust
-  } = amountInfo;
+  const { isMaxClicked, isInvalid, maxAmountAvailable, maxAmountMinusDust } =
+    amountInfo;
 
   function AvailableAmountElement() {
     if (!isInvalid && amountInfo.amount) {
@@ -51,5 +47,3 @@ const EgldAmount = () => {
 
   return <SharedAmount AvailableAmountElement={AvailableAmountElement} />;
 };
-
-export { EgldAmount };

@@ -1,3 +1,1 @@
-import { TokenElement } from './TokenElement';
-
-export { TokenElement };
+export * from './TokenElement';

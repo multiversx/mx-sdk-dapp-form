@@ -6,19 +6,21 @@ import React, {
   useEffect,
   ComponentType
 } from 'react';
-import { sendTransactions } from '@elrondnetwork/dapp-core/services';
+
 import {
   getNetworkConfigForChainId,
   SendFormContainerPropsType,
   ExtendedValuesType
 } from '@elrondnetwork/dapp-core-form';
-import { Transaction } from '@elrondnetwork/erdjs';
+
 import {
+  useGetNetworkConfig,
   useGetAccountInfo,
   useGetAccountProvider
 } from '@elrondnetwork/dapp-core/hooks';
 
-import { chainId } from 'config';
+import { sendTransactions } from '@elrondnetwork/dapp-core/services';
+import { Transaction } from '@elrondnetwork/erdjs';
 
 interface ContextType {
   children: ReactNode;
@@ -34,6 +36,7 @@ const DashboardContext = createContext<SendFormContainerPropsType>({
 
 const ContextProvider = (props: ContextType) => {
   const { providerType } = useGetAccountProvider();
+  const { chainID } = useGetNetworkConfig();
   const { account } = useGetAccountInfo();
 
   const onFormSubmit = async (
@@ -41,6 +44,10 @@ const ContextProvider = (props: ContextType) => {
     transaction: Transaction | null
   ) => {
     if (!transaction) {
+      console.warn(
+        'Transaction either missing, or no pending transaction available.'
+      );
+
       return;
     }
 
@@ -71,7 +78,7 @@ const ContextProvider = (props: ContextType) => {
 
   useEffect(() => {
     const fetchConfig = async () => {
-      const networkConfig = await getNetworkConfigForChainId(chainId);
+      const networkConfig = await getNetworkConfigForChainId(chainID);
 
       setValue((payload) => ({
         ...payload,
@@ -80,7 +87,7 @@ const ContextProvider = (props: ContextType) => {
     };
 
     fetchConfig();
-  }, [chainId]);
+  }, [chainID]);
 
   return (
     <DashboardContext.Provider value={value}>
@@ -89,13 +96,12 @@ const ContextProvider = (props: ContextType) => {
   );
 };
 
-const DashboardContextProvider = (Component: ComponentType) => (props: any) =>
-  (
-    <ContextProvider>
-      <Component {...props} />
-    </ContextProvider>
-  );
+export const DashboardContextProvider =
+  (Component: ComponentType) => (props: any) =>
+    (
+      <ContextProvider>
+        <Component {...props} />
+      </ContextProvider>
+    );
 
-const useFormProps = () => useContext(DashboardContext);
-
-export { useFormProps, DashboardContextProvider };
+export const useFormProps = () => useContext(DashboardContext);

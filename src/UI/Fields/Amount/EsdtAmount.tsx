@@ -6,7 +6,7 @@ import { SharedAmount } from './SharedAmount';
 
 import styles from './styles.module.scss';
 
-const EsdtAmount = () => {
+export const EsdtAmount = () => {
   const { amountInfo, tokensInfo } = useSendFormContext();
   const { maxAmountAvailable } = amountInfo;
   const { tokenId } = tokensInfo;
@@ -29,5 +29,3 @@ const EsdtAmount = () => {
 
   return <SharedAmount AvailableAmountElement={AvailableAmountElement} />;
 };
-
-export { EsdtAmount };

@@ -1,1 +1,1 @@
-export { Filled } from './Filled';
+export * from './Filled';

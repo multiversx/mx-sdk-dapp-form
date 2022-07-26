@@ -1,1 +1,1 @@
-export { ConfirmForm } from './ConfirmForm';
+export * from './ConfirmForm';

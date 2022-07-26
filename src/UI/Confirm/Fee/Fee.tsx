@@ -5,7 +5,7 @@ import { ZERO } from 'constants/index';
 import { calculateFeeInFiat } from 'operations';
 import styles from './styles.module.scss';
 
-const Fee = ({
+export const Fee = ({
   egldPriceInUsd,
   label = 'Fee',
   feeLimit,
@@ -36,5 +36,3 @@ const Fee = ({
     )}
   </div>
 );
-
-export { Fee };

@@ -14,7 +14,7 @@ import { FeeInFiat } from './FeeInFiat';
 
 import styles from './styles.module.scss';
 
-const FeeAccordion = () => {
+export const FeeAccordion = () => {
   const accordion = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(false);
 
@@ -65,5 +65,3 @@ const FeeAccordion = () => {
     </div>
   );
 };
-
-export { FeeAccordion };

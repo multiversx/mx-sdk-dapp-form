@@ -42,6 +42,8 @@ $primary: #1b46c2;
   border: 1px solid $primary;
   display: inline-block;
   margin: 30px;
+  width: 100%;
+  max-width: 500px;
 
   &.borderless {
     border: none;
