@@ -87,18 +87,18 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
 
   const formikInitialValues = {
     tokenId,
-    receiver: initialValues?.receiver || '',
-    gasPrice: initialValues?.gasPrice || denominatedConfigGasPrice,
-    data: initialValues?.data || '',
-    amount: initialValues?.amount || ZERO,
-    gasLimit: initialValues?.gasLimit || String(gasLimit),
+    receiver: initialValues?.receiver ?? '',
+    gasPrice: initialValues?.gasPrice ?? denominatedConfigGasPrice,
+    data: initialValues?.data ?? '',
+    amount: initialValues?.amount ?? ZERO,
+    gasLimit: initialValues?.gasLimit ?? String(gasLimit),
     txType:
-      initialValues?.txType ||
+      initialValues?.txType ??
       getTxType({ nft: tokensInfo?.initialNft, tokenId }),
-    address: initialValues?.address || address,
+    address: initialValues?.address ?? address,
     nft: tokensInfo?.initialNft,
-    balance: initialValues?.balance || balance,
-    chainId: initialValues?.chainId || networkConfig.chainId,
+    balance: initialValues?.balance ?? balance,
+    chainId: initialValues?.chainId ?? networkConfig.chainId,
     tokens: tokensInfo?.initialTokens
   };
 
