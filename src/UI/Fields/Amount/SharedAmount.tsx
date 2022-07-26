@@ -4,10 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
-import { AMOUNT_FIELD } from 'constants/index';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
+import { getIsDisabled } from 'helpers';
+import { ValuesEnum } from 'types';
 import styles from './styles.module.scss';
 
 interface SharedAmountType {
@@ -16,7 +17,7 @@ interface SharedAmountType {
 
 export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   const {
-    formInfo: { checkInvalid },
+    formInfo: { checkInvalid, readonly },
     amountInfo
   } = useSendFormContext();
 
@@ -29,7 +30,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
     }
   } = useUICustomizationContext();
 
-  const isInvalid = checkInvalid(AMOUNT_FIELD);
+  const isInvalid = checkInvalid(ValuesEnum.amount);
 
   const {
     amount,
@@ -44,7 +45,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   return (
     <div className={styles.amount}>
       {label && (
-        <label htmlFor={AMOUNT_FIELD} className={styles.label}>
+        <label htmlFor={ValuesEnum.amount} className={styles.label}>
           {label}
         </label>
       )}
@@ -52,11 +53,12 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
       <div className={styles.wrapper}>
         <input
           type='text'
-          id={AMOUNT_FIELD}
-          name={AMOUNT_FIELD}
-          data-testid={AMOUNT_FIELD}
+          id={ValuesEnum.amount}
+          name={ValuesEnum.amount}
+          data-testid={ValuesEnum.amount}
           required={true}
           value={amount}
+          disabled={getIsDisabled('amount', readonly)}
           onFocus={onFocus}
           onBlur={onBlur}
           onChange={onChange}

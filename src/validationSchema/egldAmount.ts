@@ -8,8 +8,7 @@ import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringI
 
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
-import { AMOUNT_FIELD } from 'constants/index';
-import { ExtendedValuesType } from 'types';
+import { ExtendedValuesType, ValuesEnum } from 'types';
 import maxDecimals from 'validation/maxDecimals';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 
@@ -76,7 +75,7 @@ const min = string().test({
 
         return this.createError({
           message: `Minimum ${denominatedMinAmount}`,
-          path: AMOUNT_FIELD
+          path: ValuesEnum.amount
         });
       }
     }

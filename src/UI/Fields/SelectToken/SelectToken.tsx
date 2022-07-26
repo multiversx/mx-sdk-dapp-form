@@ -5,8 +5,8 @@ import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { selectCustomStyles } from 'helpers';
-import { TokenType, TokenAssetsType } from 'types';
+import { getIsDisabled, selectCustomStyles } from 'helpers';
+import { TokenType, TokenAssetsType, ValuesEnum } from 'types';
 
 import styles from './styles.module.scss';
 import { TokenElement } from './TokenElement';
@@ -94,7 +94,7 @@ const SelectToken = ({ label }: { label?: string }) => {
     <div className={styles.token}>
       {label && (
         <label
-          htmlFor='tokenId'
+          htmlFor={ValuesEnum.tokenId}
           data-testid='tokenIdLabel'
           className={styles.label}
         >
@@ -103,10 +103,10 @@ const SelectToken = ({ label }: { label?: string }) => {
       )}
 
       <Select
-        inputId='tokenId'
-        name='tokenId'
+        inputId={ValuesEnum.tokenId}
+        name={ValuesEnum.tokenId}
         openMenuOnFocus
-        isDisabled={readonly}
+        isDisabled={getIsDisabled(ValuesEnum.tokenId, readonly)}
         isLoading={areTokensLoading}
         styles={selectStyle}
         value={

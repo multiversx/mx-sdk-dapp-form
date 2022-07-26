@@ -1,9 +1,8 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { useFormikContext } from 'formik';
 
-import { DATA_FIELD } from 'constants/index';
 import { calculateGasLimit, getDataField } from 'operations';
-import { ExtendedValuesType, TxTypeEnum } from 'types';
+import { ExtendedValuesType, TxTypeEnum, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useGasContext } from '../GasContext';
 import { useTokensContext } from '../TokensContext';
@@ -42,7 +41,7 @@ export function DataContextProvider({
   const { receiver, txType, amount, tokenId, customBalanceRules } = values;
   const { onChangeGasLimit } = useGasContext();
 
-  const isDataInvalid = checkInvalid(DATA_FIELD);
+  const isDataInvalid = checkInvalid(ValuesEnum.data);
 
   const handleUpdateData = (
     newValue: React.ChangeEvent<any> | string,
@@ -50,7 +49,7 @@ export function DataContextProvider({
   ) => {
     const value =
       typeof newValue === 'string' ? newValue : newValue?.target?.value;
-    setFieldValue(DATA_FIELD, value, shouldValidate);
+    setFieldValue(ValuesEnum.data, value, shouldValidate);
     if (!prefilledForm && !touched.gasLimit && isEgldTransaction) {
       const newGasLimit = calculateGasLimit({
         data: value
@@ -60,7 +59,7 @@ export function DataContextProvider({
   };
 
   const handleBlurData = useCallback(() => {
-    setFieldTouched(DATA_FIELD, true);
+    setFieldTouched(ValuesEnum.data, true);
   }, [handleBlur]);
 
   const handleResetData = useCallback(() => {

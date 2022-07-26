@@ -29,7 +29,6 @@ export const Form = () => {
   const {
     renderKey,
     onValidateForm,
-    readonly,
     onCloseForm,
     areValidatedValuesReady
   } = formInfo;
@@ -51,7 +50,7 @@ export const Form = () => {
 
   return (
     <form key={renderKey} onSubmit={onValidateForm} className={styles.form}>
-      <fieldset disabled={readonly} className={styles.fieldset}>
+      <fieldset className={styles.fieldset}>
         <To />
 
         <div className={styles.wrapper}>

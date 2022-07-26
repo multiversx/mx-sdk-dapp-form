@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js';
 
 import { ZERO } from 'constants/index';
+import { ExtendedValuesType } from 'types';
 
 export function showMax({
   amount = '',
@@ -11,7 +12,7 @@ export function showMax({
   amount: string | undefined;
   available: string;
   entireBalanceMinusDust: string;
-  readonly?: boolean;
+  readonly?: ExtendedValuesType['readonly'];
 }) {
   const bNamount = new BigNumber(amount);
   const bNentireBalanceMinusDust = new BigNumber(entireBalanceMinusDust);
