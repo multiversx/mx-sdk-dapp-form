@@ -25,18 +25,18 @@ export const GasPrice = () => {
   const showUndoButton = gasPrice !== denominatedConfigGasPrice && !readonly;
 
   return (
-    <div className={classNames(styles.gas, styles.price)}>
-      <label className={styles.left} htmlFor={ValuesEnum.gasPrice}>
+    <div className={classNames(styles.gas, styles.gasPrice)}>
+      <label className={styles.gasLeft} htmlFor={ValuesEnum.gasPrice}>
         Gas Price
       </label>
 
-      <div className={styles.right}>
+      <div className={styles.gasRight}>
         <div
-          className={classNames(styles.form, {
-            [styles.invalid]: isGasPriceInvalid
+          className={classNames(styles.gasForm, {
+            [styles.gasInvalid]: isGasPriceInvalid
           })}
         >
-          <div className={styles.wrapper}>
+          <div className={styles.gasWrapper}>
             <input
               type='text'
               id={ValuesEnum.gasPrice}
@@ -59,9 +59,9 @@ export const GasPrice = () => {
           </div>
 
           {showUndoButton && (
-            <span className={styles.undo}>
+            <span className={styles.gasUndo}>
               <button
-                className={classNames(styles.reset, styles.default)}
+                className={classNames(styles.gasReset, styles.default)}
                 onClick={onResetGasPrice}
               >
                 <i>

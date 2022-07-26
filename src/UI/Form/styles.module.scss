@@ -3,13 +3,13 @@
 .form {
   margin: 1.5rem;
 
-  .fieldset {
+  .formFieldset {
     padding: 0;
     margin: 0;
     border: none;
   }
 
-  .wrapper {
+  .formWrapper {
     margin-bottom: 2.5rem;
 
     @include media-breakpoint-up(sm) {
@@ -17,15 +17,15 @@
       justify-content: space-between;
     }
 
-    .left,
-    .right {
+    .formLeft,
+    .formRight {
       @include media-breakpoint-up(sm) {
         width: calc(50% - 15px);
       }
     }
   }
 
-  .buttons {
+  .formButtons {
     display: flex;
     flex-direction: column;
     align-items: center;

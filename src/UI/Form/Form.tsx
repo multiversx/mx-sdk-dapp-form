@@ -14,7 +14,8 @@ import {
   FeeAccordion,
   NftSftToken,
   SelectToken,
-  To
+  To,
+  AmountSlider
 } from 'UI/Fields';
 
 import styles from './styles.module.scss';
@@ -26,12 +27,8 @@ export const Form = () => {
   } = useFormikContext<ExtendedValuesType>();
 
   const { scamError } = receiverInfo;
-  const {
-    renderKey,
-    onValidateForm,
-    onCloseForm,
-    areValidatedValuesReady
-  } = formInfo;
+  const { renderKey, onValidateForm, onCloseForm, areValidatedValuesReady } =
+    formInfo;
 
   function handleCloseClick(e: any) {
     e.preventDefault();
@@ -50,25 +47,27 @@ export const Form = () => {
 
   return (
     <form key={renderKey} onSubmit={onValidateForm} className={styles.form}>
-      <fieldset className={styles.fieldset}>
+      <fieldset className={styles.formFieldset}>
         <To />
 
-        <div className={styles.wrapper}>
-          <div className={styles.left}>
+        <div className={styles.formWrapper}>
+          <div className={styles.formLeft}>
             <Amount />
           </div>
 
-          <div className={styles.right}>
+          <div className={styles.formRight}>
             {isNFTTransaction ? <NftSftToken /> : <SelectToken />}
           </div>
         </div>
+
+        <AmountSlider />
 
         <FeeAccordion />
 
         <Data />
       </fieldset>
 
-      <div className={styles.buttons}>
+      <div className={styles.formButtons}>
         <button
           className={classNames(globals.btn, globals.btnPrimary, {
             [globals.btnWarning]: scamError

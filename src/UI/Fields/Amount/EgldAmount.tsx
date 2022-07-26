@@ -22,7 +22,7 @@ export const EgldAmount = () => {
           <UsdValue amount={amountInfo.amount} usd={egldPriceInUsd} />
 
           {amountInfo.amount === maxAmountMinusDust && isMaxClicked && (
-            <span className={styles.info}>
+            <span className={styles.amountInfo}>
               <InfoDust egldLabel={egldLabel} />
             </span>
           )}

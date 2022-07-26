@@ -27,15 +27,15 @@ export const FeeAccordion = () => {
     active && accordion ? accordion?.current?.scrollHeight : 0;
 
   return (
-    <div className={styles.accordion}>
-      <span className={styles.trigger} onClick={toggleAccordion}>
+    <div className={styles.feeAccordion}>
+      <span className={styles.feeAccordionTrigger} onClick={toggleAccordion}>
         <span>
           <FontAwesomeIcon
             icon={active ? faAngleDown : faAngleRight}
-            className={styles.icon}
+            className={styles.feeAccordionIcon}
           />{' '}
-          <label className={styles.label}>Fee</label>
-          <span className={styles.limit} data-testid='feeLimit'>
+          <label className={styles.feeAccordionLabel}>Fee</label>
+          <span className={styles.feeAccordionLimit} data-testid='feeLimit'>
             <Denominate
               value={feeLimit}
               showLastNonZeroDecimal
@@ -52,12 +52,12 @@ export const FeeAccordion = () => {
 
       <div
         ref={accordion}
-        className={styles.expandable}
+        className={styles.feeAccordionExpandable}
         style={{
           height: dynamicAccordionHeight
         }}
       >
-        <div className={styles.content}>
+        <div className={styles.feeAccordionContent}>
           <GasPrice />
           <GasLimit />
         </div>

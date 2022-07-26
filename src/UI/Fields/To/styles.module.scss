@@ -1,16 +1,16 @@
 @import 'assets/sass/variables/_variables.scss';
 
-.to {
+.toField {
   margin-bottom: 2.5rem;
 
-  .label {
+  .toFieldLabel {
     margin-bottom: 0.5rem;
   }
 
-  .autocomplete {
+  .toFieldAutocomplete {
     position: relative;
 
-    .menu {
+    .toFieldMenu {
       left: 0px;
       top: 0px;
       float: left;
@@ -30,7 +30,7 @@
       overflow: unset !important;
       transform: none !important;
 
-      .item {
+      .toFieldItem {
         display: block;
         line-height: 1.5;
         padding: 0.25rem 1.5rem;
@@ -62,7 +62,7 @@
     }
   }
 
-  .scam {
+  .toFieldScam {
     line-height: 1.5;
     color: $warning !important;
 

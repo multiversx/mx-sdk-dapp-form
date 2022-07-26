@@ -26,14 +26,14 @@ const CustomMenu = (
   props: MenuProps,
   state: TypeaheadManagerChildProps
 ) => (
-  <Menu {...props} className={styles.menu}>
+  <Menu {...props} className={styles.toFieldMenu}>
     {results.map((option: Option, position: number) => (
       <MenuItem
         key={option.toString()}
         {...{
           option,
           position,
-          className: classNames(styles.item, {
+          className: classNames(styles.toFieldItem, {
             [styles.highlighted]: position === state.activeIndex
           })
         }}
@@ -98,10 +98,10 @@ export const To = () => {
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
   return (
-    <div className={styles.to}>
-      {label && <div className={styles.label}>{label}</div>}
+    <div className={styles.toField}>
+      {label && <div className={styles.toFieldLabel}>{label}</div>}
 
-      <div className={styles.autocomplete}>
+      <div className={styles.toFieldAutocomplete}>
         <Typeahead
           id='receiverWrapper'
           filterBy={filterBy}
@@ -126,7 +126,7 @@ export const To = () => {
       )}
 
       {scamError && (
-        <div data-testid='receiverScam' className={styles.scam}>
+        <div data-testid='receiverScam' className={styles.toFieldScam}>
           <span>
             <FontAwesomeIcon icon={faExclamationTriangle} />
             <small>{scamError}</small>

@@ -8,13 +8,13 @@ import { minDust } from 'constants/index';
 import styles from './styles.module.scss';
 
 export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
-  <div className={styles.info}>
+  <div className={styles.infoDust}>
     <ReactTooltip
       effect='solid'
       id='info-dust'
       delayHide={400}
       delayShow={250}
-      className={styles.tooltip}
+      className={styles.infoDustTooltip}
       arrowColor='transparent'
     >
       A minimal amount of{' '}
@@ -27,7 +27,7 @@ export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
       data-tip
       data-for='info-dust'
       data-testid='infoDust'
-      className={styles.trigger}
+      className={styles.infoDustTrigger}
     >
       <FontAwesomeIcon icon={faInfoCircle} className='i-icon' />
     </div>

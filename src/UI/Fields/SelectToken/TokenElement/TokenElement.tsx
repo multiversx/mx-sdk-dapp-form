@@ -61,25 +61,25 @@ export const TokenElement = ({
     !inDropdown && nftType !== NftEnumType.NonFungibleESDT;
 
   return (
-    <div className={styles.token}>
-      <div className={styles.wrapper}>
+    <div className={styles.tokenElement}>
+      <div className={styles.tokenElementWrapper}>
         {isEgld || avatar ? (
           <ElrondSymbol
             height={avatarDropdownSize}
             className={classNames({
-              [styles.spaced]: Boolean(avatar),
-              [styles.circle]: !isEgld
+              [styles.tokenElementSpaced]: Boolean(avatar),
+              [styles.tokenElementCircle]: !isEgld
             })}
           />
         ) : (
-          <div className={styles.symbol}>{symbol}</div>
+          <div className={styles.tokenElementSymbol}>{symbol}</div>
         )}
       </div>
 
       <div data-testid='tokenName'>
         <span data-testid={`${identifier}-element`}>
           <span>{title}</span>{' '}
-          <span className={styles.identifier}>{identifier}</span>
+          <span className={styles.tokenElementIdentifier}>{identifier}</span>
         </span>
 
         {showDenomination && (

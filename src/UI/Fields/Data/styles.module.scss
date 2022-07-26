@@ -1,11 +1,11 @@
 @import 'assets/sass/variables/_variables.scss';
 
-.data {
-  .label {
+.fieldData {
+  .fieldDataLabel {
     margin-bottom: 0.5rem;
   }
 
-  .wrapper {
+  .fieldDataWrapper {
     display: flex;
     position: relative;
   }
