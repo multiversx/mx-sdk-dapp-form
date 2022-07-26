@@ -6,16 +6,20 @@ import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { getIsDisabled } from 'helpers';
+import { ValuesEnum } from 'types';
 
 import styles from './styles.module.scss';
 
 export const AmountSlider = () => {
   const {
+    formInfo: { readonly },
     amountInfo: { onChange, maxAmountMinusDust, amount }
   } = useSendFormContext();
 
   const [range, setRange] = useState(0);
   const breakpoints = [0, 25, 50, 75, 100];
+  const disabled = getIsDisabled(ValuesEnum.amountSlider, readonly);
 
   const handleChange = (percentage: number, callChangeEvent = true) => {
     const total = maxAmountMinusDust;
@@ -35,30 +39,38 @@ export const AmountSlider = () => {
     const percentage = 100 / Number(String(total.dividedBy(difference)));
 
     handleChange(Math.round(percentage), false);
-  }, [amount]);
+  }, [amount, maxAmountMinusDust]);
 
   return (
     <div className={styles.amountSlider}>
       <div className={styles.amountSliderRange}>
         <input
-          className={styles.amountSliderInput}
-          name='amountSlider'
+          name={ValuesEnum.amountSlider}
+          id={ValuesEnum.amountSlider}
+          data-testid={ValuesEnum.amountSlider}
           type='range'
+          disabled={disabled}
           min={0}
           max={100}
           value={range}
+          className={classNames(styles.amountSliderInput, {
+            [styles.disabled]: disabled
+          })}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
             handleChange(Number(event.target.value))
           }
         />
 
         <span
-          className={styles.amountSliderThumb}
           style={{ left: `${range}%` }}
+          className={classNames(styles.amountSliderThumb, {
+            [styles.disabled]: disabled
+          })}
         >
           <strong
             className={classNames(styles.amountSliderThumbPercentage, {
-              [styles.hidden]: breakpoints.includes(range)
+              [styles.hidden]: breakpoints.includes(range),
+              [styles.disabled]: disabled
             })}
           >
             {range}%
@@ -66,8 +78,10 @@ export const AmountSlider = () => {
         </span>
 
         <div
-          className={styles.amountSliderCompletion}
           style={{ width: `${range}%` }}
+          className={classNames(styles.amountSliderCompletion, {
+            [styles.disabled]: disabled
+          })}
         ></div>
 
         {breakpoints.map((breakpoint) => (
@@ -75,13 +89,15 @@ export const AmountSlider = () => {
             key={`breakpoint-${breakpoint}`}
             style={{ left: `${breakpoint}%` }}
             className={classNames(styles.amountSliderBreakpoint, {
-              [styles.completed]: breakpoint <= range
+              [styles.completed]: breakpoint <= range,
+              [styles.disabled]: disabled
             })}
           >
             <span
               onClick={() => handleChange(breakpoint)}
               className={classNames(styles.amountSliderPercentage, {
-                [styles.exact]: breakpoint === range
+                [styles.exact]: breakpoint === range,
+                [styles.disabled]: disabled
               })}
             >
               {breakpoint}%

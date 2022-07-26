@@ -23,6 +23,11 @@
       z-index: 6;
       cursor: pointer;
       margin-right: -16px;
+
+      &.disabled {
+        pointer-events: none;
+        cursor: default;
+      }
     }
 
     .amountSliderThumb {
@@ -36,6 +41,10 @@
       background-color: $black;
       z-index: 5;
 
+      &.disabled {
+        background-color: $secondary;
+      }
+
       .amountSliderThumbPercentage {
         line-height: 1;
         color: $primary;
@@ -47,6 +56,10 @@
 
         &.hidden {
           display: none;
+        }
+
+        &.disabled {
+          color: $secondary;
         }
       }
     }
@@ -60,6 +73,10 @@
       transform: translateY(-50%);
       z-index: 3;
       margin-left: 2px;
+
+      &.disabled {
+        background: $secondary;
+      }
     }
 
     .amountSliderBreakpoint {
@@ -75,6 +92,14 @@
 
       &.completed {
         background-color: $primary;
+
+        &.disabled {
+          background-color: $secondary;
+        }
+      }
+
+      &.disabled {
+        border-color: $secondary;
       }
 
       .amountSliderPercentage {
@@ -88,6 +113,10 @@
 
         &.exact {
           font-weight: bold;
+        }
+
+        &.disabled {
+          pointer-events: none;
         }
       }
     }
