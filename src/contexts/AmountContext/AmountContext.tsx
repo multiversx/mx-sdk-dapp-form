@@ -1,5 +1,6 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { useFormikContext } from 'formik';
+
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';
@@ -64,6 +65,7 @@ export function AmountContextProvider({
     (newValue: string | React.ChangeEvent<any>, shouldValidate = true) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
+
       return setFieldValue(ValuesEnum.amount, value, shouldValidate);
     },
     [setFieldValue]

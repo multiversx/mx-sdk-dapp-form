@@ -50,15 +50,9 @@ export const Form = () => {
       <fieldset className={styles.formFieldset}>
         <To />
 
-        <div className={styles.formWrapper}>
-          <div className={styles.formLeft}>
-            <Amount />
-          </div>
+        {isNFTTransaction ? <NftSftToken /> : <SelectToken />}
 
-          <div className={styles.formRight}>
-            {isNFTTransaction ? <NftSftToken /> : <SelectToken />}
-          </div>
-        </div>
+        <Amount />
 
         <AmountSlider />
 

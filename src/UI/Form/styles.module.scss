@@ -10,19 +10,7 @@
   }
 
   .formWrapper {
-    margin-bottom: 2.5rem;
-
-    @include media-breakpoint-up(sm) {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .formLeft,
-    .formRight {
-      @include media-breakpoint-up(sm) {
-        width: calc(50% - 15px);
-      }
-    }
+    margin-bottom: 1.5rem;
   }
 
   .formButtons {

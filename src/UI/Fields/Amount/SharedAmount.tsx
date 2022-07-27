@@ -74,21 +74,21 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
             <FontAwesomeIcon icon={faExclamation} size='xs' />
           </span>
         )}
+
+        {isMaxButtonVisible && (
+          <div className={styles.max}>
+            <button
+              data-testid='maxBtn'
+              className={styles.button}
+              onClick={onMaxClicked}
+            >
+              Max
+            </button>
+          </div>
+        )}
       </div>
 
       {isInvalid && <div className={globals.error}>{error}</div>}
-
-      {isMaxButtonVisible && (
-        <div className={styles.max}>
-          <button
-            data-testid='maxBtn'
-            className={styles.button}
-            onClick={onMaxClicked}
-          >
-            Max
-          </button>
-        </div>
-      )}
 
       {TokenSelector && <TokenSelector />}
 

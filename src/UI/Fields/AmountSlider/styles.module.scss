@@ -4,7 +4,7 @@
   .amountSliderRange {
     position: relative;
     display: flex;
-    margin: 30px 16px 45px 0;
+    margin: 10px 16px 45px 0;
 
     &:after {
       width: 100%;
@@ -43,24 +43,6 @@
 
       &.disabled {
         background-color: $secondary;
-      }
-
-      .amountSliderThumbPercentage {
-        line-height: 1;
-        color: $primary;
-        font-weight: 500;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: calc(100% + 5px);
-
-        &.hidden {
-          display: none;
-        }
-
-        &.disabled {
-          color: $secondary;
-        }
       }
     }
 

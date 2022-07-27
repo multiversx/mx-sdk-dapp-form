@@ -66,16 +66,7 @@ export const AmountSlider = () => {
           className={classNames(styles.amountSliderThumb, {
             [styles.disabled]: disabled
           })}
-        >
-          <strong
-            className={classNames(styles.amountSliderThumbPercentage, {
-              [styles.hidden]: breakpoints.includes(range),
-              [styles.disabled]: disabled
-            })}
-          >
-            {range}%
-          </strong>
-        </span>
+        ></span>
 
         <div
           style={{ width: `${range}%` }}
