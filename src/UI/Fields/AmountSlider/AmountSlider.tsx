@@ -1,8 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import { decimals } from '@elrondnetwork/dapp-core/constants/index';
-import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
-import BigNumber from 'bignumber.js';
+import React, { ChangeEvent } from 'react';
 import classNames from 'classnames';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
@@ -14,32 +10,11 @@ import styles from './styles.module.scss';
 export const AmountSlider = () => {
   const {
     formInfo: { readonly },
-    amountInfo: { onChange, maxAmountMinusDust, amount }
+    amountInfo: { amountRange, onSetAmountPercentage }
   } = useSendFormContext();
 
-  const [range, setRange] = useState(0);
   const breakpoints = [0, 25, 50, 75, 100];
   const disabled = getIsDisabled(ValuesEnum.amountSlider, readonly);
-
-  const handleChange = (percentage: number, callChangeEvent = true) => {
-    const total = maxAmountMinusDust;
-    const big = new BigNumber(total).times(percentage).dividedBy(100);
-    const value = denominate({ input: nominate(String(big)), decimals });
-
-    setRange(percentage <= 100 ? percentage : 100);
-
-    if (callChangeEvent) {
-      onChange(value);
-    }
-  };
-
-  useEffect(() => {
-    const total = new BigNumber(nominate(maxAmountMinusDust));
-    const difference = new BigNumber(nominate(amount));
-    const percentage = 100 / Number(String(total.dividedBy(difference)));
-
-    handleChange(Math.round(percentage), false);
-  }, [amount, maxAmountMinusDust]);
 
   return (
     <div className={styles.amountSlider}>
@@ -52,24 +27,24 @@ export const AmountSlider = () => {
           disabled={disabled}
           min={0}
           max={100}
-          value={range}
+          value={amountRange}
           className={classNames(styles.amountSliderInput, {
             [styles.disabled]: disabled
           })}
           onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            handleChange(Number(event.target.value))
+            onSetAmountPercentage(Number(event.target.value))
           }
         />
 
         <span
-          style={{ left: `${range}%` }}
+          style={{ left: `${amountRange}%` }}
           className={classNames(styles.amountSliderThumb, {
             [styles.disabled]: disabled
           })}
         ></span>
 
         <div
-          style={{ width: `${range}%` }}
+          style={{ width: `${amountRange}%` }}
           className={classNames(styles.amountSliderCompletion, {
             [styles.disabled]: disabled
           })}
@@ -80,14 +55,14 @@ export const AmountSlider = () => {
             key={`breakpoint-${breakpoint}`}
             style={{ left: `${breakpoint}%` }}
             className={classNames(styles.amountSliderBreakpoint, {
-              [styles.completed]: breakpoint <= range,
+              [styles.completed]: breakpoint <= amountRange,
               [styles.disabled]: disabled
             })}
           >
             <span
-              onClick={() => handleChange(breakpoint)}
+              onClick={() => onSetAmountPercentage(breakpoint)}
               className={classNames(styles.amountSliderPercentage, {
-                [styles.exact]: breakpoint === range,
+                [styles.exact]: breakpoint === amountRange,
                 [styles.disabled]: disabled
               })}
             >

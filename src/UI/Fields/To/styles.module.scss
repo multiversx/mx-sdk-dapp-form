@@ -10,6 +10,10 @@
   .toFieldAutocomplete {
     position: relative;
 
+    input[aria-hidden='true'] {
+      display: none !important;
+    }
+
     .toFieldMenu {
       left: 0px;
       top: 0px;
@@ -25,13 +29,13 @@
       border-radius: $card-border-radius;
       z-index: 1000;
       inset: unset !important;
-      width: auto !important;
       max-height: 300px !important;
       overflow: unset !important;
       transform: none !important;
+      overflow-x: scroll !important;
 
       .toFieldItem {
-        display: block;
+        display: inline-block;
         line-height: 1.5;
         padding: 0.25rem 1.5rem;
         clear: both;
@@ -56,7 +60,7 @@
         }
 
         &:last-child {
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.675rem;
         }
       }
     }

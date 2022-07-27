@@ -81,8 +81,10 @@ export const To = () => {
   };
 
   const onChange = ([option]: Array<Option>) => {
-    setValue(option.toString());
-    changeAndBlurInput(option.toString());
+    if (option) {
+      setValue(option.toString());
+      changeAndBlurInput(option.toString());
+    }
   };
 
   const triggerRerenderOnceOnHook = () => {

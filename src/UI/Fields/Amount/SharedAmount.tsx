@@ -76,7 +76,11 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
         )}
 
         {isMaxButtonVisible && (
-          <div className={styles.max}>
+          <div
+            className={classNames(styles.max, {
+              [styles.maxOffset]: isInvalid
+            })}
+          >
             <button
               data-testid='maxBtn'
               className={styles.button}

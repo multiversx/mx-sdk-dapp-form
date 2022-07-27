@@ -25,6 +25,10 @@
       transform: translateY(-50%);
       align-items: center;
 
+      &.maxOffset {
+        right: 1.75rem;
+      }
+
       .button {
         background: none;
         border: 1px solid transparent;

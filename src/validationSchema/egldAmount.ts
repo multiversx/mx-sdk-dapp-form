@@ -1,14 +1,11 @@
-import {
-  denomination,
-  decimals as defaultDecimals
-} from '@elrondnetwork/dapp-core/constants/index';
-import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
+import { denomination } from '@elrondnetwork/dapp-core/constants/index';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { ExtendedValuesType, ValuesEnum } from 'types';
+import { getCustomValidationRules } from 'validation';
 import maxDecimals from 'validation/maxDecimals';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 
@@ -20,7 +17,7 @@ const decimals = string().test(
   (value) => maxDecimals(String(value))
 );
 
-const funds = string().test('funds', 'Insufficient funds', function(amount) {
+const funds = string().test('funds', 'Insufficient funds', function (amount) {
   if (amount != null) {
     const { gasLimit, data, gasPrice, balance, chainId } = this
       .parent as ExtendedValuesType;
@@ -42,7 +39,7 @@ const funds = string().test('funds', 'Insufficient funds', function(amount) {
 const customBalance = string().test(
   'customBalance',
   'Not enough balance',
-  function(amount) {
+  function (amount) {
     const { customBalanceRules } = this.parent as ExtendedValuesType;
     if (amount != null && customBalanceRules?.customBalance) {
       const bnCustomBalance = new BigNumber(customBalanceRules?.customBalance);
@@ -53,36 +50,6 @@ const customBalance = string().test(
     return true;
   }
 );
-
-const min = string().test({
-  name: 'min',
-  test: function(amount) {
-    const { customBalanceRules } = this.parent as ExtendedValuesType;
-
-    if (amount != null && customBalanceRules?.minAmount) {
-      const nominatedAmount = nominate(amount.toString());
-      const valid = new BigNumber(nominatedAmount).isGreaterThanOrEqualTo(
-        customBalanceRules?.minAmount
-      );
-      if (!valid) {
-        const denominatedMinAmount = denominate({
-          input: customBalanceRules?.minAmount,
-          denomination,
-          showLastNonZeroDecimal: true,
-          addCommas: true,
-          decimals: defaultDecimals
-        });
-
-        return this.createError({
-          message: `Minimum ${denominatedMinAmount}`,
-          path: ValuesEnum.amount
-        });
-      }
-    }
-
-    return true;
-  }
-});
 
 const isValidNumber = string().test(
   'isValidNumber',
@@ -98,7 +65,7 @@ const validations = [
   decimals,
   funds,
   customBalance,
-  min
+  getCustomValidationRules(ValuesEnum.amount)
 ];
 
 export const egldAmount = validations.reduce(
