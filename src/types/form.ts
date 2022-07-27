@@ -21,8 +21,33 @@ export interface ExtendedValuesType extends ValuesType {
   txType: TxTypeEnum;
   address: string;
   balance: string;
-  customBalanceRules?: FormConfigType['customBalanceRules'];
-
+  customBalanceRules?: {
+    /**
+     * **customBalance**: Used to configure EGLD balance when widthdrawing from a contract
+     */
+    customBalance?: string;
+    dataFieldBuilder?: (props: ValuesType) => string;
+  };
+  /**
+   * **customValidationRules**: Use this to extend form validation by passing an array of tests for one or more form fields.\
+   *  Example: `{ amount: [{ title: 'min', message: 'Minimum 2', test: (value) => value > 2 }] }`
+   */
+  customValidationRules?: {
+    [key in ValueKeyType]?: {
+      /**
+       * **name**: Validation name
+       */
+      name: string;
+      /**
+       * **name**: Validation error message
+       */
+      message: string;
+      /**
+       * **test**: Test function
+       */
+      test: (value?: string | undefined) => boolean;
+    }[];
+  };
   chainId: string;
   ignoreTokenBalance?: boolean;
   /**
@@ -49,10 +74,7 @@ export interface ValidationSchemaType {
    * sign transactions, when some tokens will be available only after execution.
    */
   ignoreTokenBalance?: boolean;
-  /**
-   * **readonly**: Configure disabled fields by disabling all or individual
-   * example: readonly: { amount: false } will disable all but amount field
-   */
+
   readonly?: ExtendedValuesType['readonly'];
   tokenId: string;
   nft?: NftType;
@@ -71,15 +93,8 @@ export interface FormConfigType {
   gasPrice: string;
   data: string;
 
-  customBalanceRules?: {
-    /**
-     * **customBalance**: Used to configure EGLD balance when widthdrawing from a contract
-     */
-    customBalance?: string;
-    minAmount?: string;
-    dataFieldBuilder?: (props: ValuesType) => string;
-  };
-
+  customValidationRules?: ExtendedValuesType['customValidationRules'];
+  customBalanceRules?: ExtendedValuesType['customBalanceRules'];
   readonly?: ExtendedValuesType['readonly'];
   successTitle?: string;
   successDescription?: string;
