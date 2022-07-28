@@ -6,6 +6,7 @@ import {
   faSpinner
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { GasLimit } from '../GasLimit';
@@ -18,7 +19,7 @@ export const FeeAccordion = () => {
   const accordion = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(false);
 
-  const { gasInfo, tokensInfo } = useSendFormContext();
+  const { gasInfo, tokensInfo, formInfo } = useSendFormContext();
   const { feeLimit, gasCostLoading } = gasInfo;
   const { egldPriceInUsd, egldLabel } = tokensInfo;
 
@@ -27,7 +28,11 @@ export const FeeAccordion = () => {
     active && accordion ? accordion?.current?.scrollHeight : 0;
 
   return (
-    <div className={styles.feeAccordion}>
+    <div
+      className={classNames(styles.feeAccordion, {
+        [styles.feeAccordionSpaced]: !formInfo.conditionalUI?.hideAmountSlider
+      })}
+    >
       <span className={styles.feeAccordionTrigger} onClick={toggleAccordion}>
         <span>
           <FontAwesomeIcon

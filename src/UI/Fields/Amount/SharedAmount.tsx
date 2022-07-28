@@ -17,7 +17,7 @@ interface SharedAmountType {
 
 export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   const {
-    formInfo: { checkInvalid, readonly },
+    formInfo: { checkInvalid, readonly, conditionalUI },
     amountInfo
   } = useSendFormContext();
 

@@ -44,8 +44,6 @@ const balance = string().test(
         tokenId: this.parent.tokenId
       });
 
-      console.log(7, tokenAmount);
-
       const nominatedAmount = nominate(tokenAmount.toString(), decimals);
       const bnAmount = new BigNumber(nominatedAmount);
       const bnTokenBalance = new BigNumber(tokenBalance);

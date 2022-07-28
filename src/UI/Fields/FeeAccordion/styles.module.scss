@@ -6,7 +6,11 @@
 }
 
 .feeAccordion {
-  margin-bottom: 1.5rem;
+  margin: 15px 0 1.5rem;
+
+  &.feeAccordionSpaced {
+    margin-top: 45px;
+  }
 
   .feeAccordionTrigger {
     line-height: 1.5;

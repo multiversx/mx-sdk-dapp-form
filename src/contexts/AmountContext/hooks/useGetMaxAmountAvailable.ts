@@ -39,11 +39,8 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
   const [balanceMinusDust, setBalanceMinusDust] = useState(balance);
 
   const { nft, tokens } = useTokensContext();
-  const {
-    isEsdtTransaction,
-    isNftTransaction,
-    isEgldTransaction
-  } = useFormContext();
+  const { isEsdtTransaction, isNftTransaction, isEgldTransaction } =
+    useFormContext();
   const { gasLimit, gasPrice } = useGasContext();
   const { tokenId, txType, customBalanceRules } = values;
 
@@ -87,17 +84,15 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
         setBalanceMinusDust(entireBalance);
         return;
       }
-      const {
-        entireBalance: denominatedBalance,
-        entireBalanceMinusDust
-      } = getEntireBalance({
-        balance,
-        gasPrice: nominate(gasPrice),
-        gasLimit: gasLimit,
-        denomination: defaultDenomination,
-        decimals: defaultDecimals,
-        chainId
-      });
+      const { entireBalance: denominatedBalance, entireBalanceMinusDust } =
+        getEntireBalance({
+          balance,
+          gasPrice: nominate(gasPrice),
+          gasLimit: gasLimit,
+          denomination: defaultDenomination,
+          decimals: defaultDecimals,
+          chainId
+        });
       setDenominatedEgldBalance(denominatedBalance);
       setBalanceMinusDust(entireBalanceMinusDust);
     }

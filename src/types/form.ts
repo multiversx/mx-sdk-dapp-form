@@ -63,6 +63,10 @@ export interface ExtendedValuesType extends ValuesType {
     ledgerDataActive: boolean;
     version: string;
   };
+  conditionalUI?: {
+    hideAmountMaxButton: boolean;
+    hideAmountSlider: boolean;
+  };
 }
 
 export interface ValidationSchemaType {

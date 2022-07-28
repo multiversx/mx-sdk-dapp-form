@@ -27,8 +27,13 @@ export const Form = () => {
   } = useFormikContext<ExtendedValuesType>();
 
   const { scamError } = receiverInfo;
-  const { renderKey, onValidateForm, onCloseForm, areValidatedValuesReady } =
-    formInfo;
+  const {
+    renderKey,
+    onValidateForm,
+    onCloseForm,
+    areValidatedValuesReady,
+    conditionalUI
+  } = formInfo;
 
   function handleCloseClick(e: any) {
     e.preventDefault();
@@ -54,7 +59,7 @@ export const Form = () => {
 
         <Amount />
 
-        <AmountSlider />
+        {!conditionalUI?.hideAmountSlider && <AmountSlider />}
 
         <FeeAccordion />
 
