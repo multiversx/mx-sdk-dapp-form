@@ -12,7 +12,7 @@ import styles from './styles.module.scss';
 
 export const GasLimit = () => {
   const { formInfo, gasInfo } = useSendFormContext();
-  const { readonly } = formInfo;
+  const { readonly, hiddenFields } = formInfo;
   const {
     defaultGasLimit,
     onResetGasLimit,
@@ -22,13 +22,20 @@ export const GasLimit = () => {
     gasLimitError,
     isGasLimitInvalid
   } = gasInfo;
+
   const onResetClick = (e: React.MouseEvent) => {
     e.preventDefault();
     onResetGasLimit();
   };
 
+  const isDisabled = getIsDisabled(ValuesEnum.gasLimit, readonly);
+  const isHidden =
+    hiddenFields?.includes(ValuesEnum.gasLimit) &&
+    !gasLimitError &&
+    !isGasLimitInvalid;
+
   return (
-    <div className={styles.gas}>
+    <div className={classNames(styles.gas, { [styles.gasHidden]: isHidden })}>
       <label className={styles.gasLeft} htmlFor={ValuesEnum.gasLimit}>
         Gas Limit
       </label>
@@ -36,7 +43,7 @@ export const GasLimit = () => {
       <div className={styles.gasRight}>
         <div
           className={classNames(styles.gasForm, {
-            [styles.gasInvalid]: isGasLimitInvalid
+            [styles.gasInvalid]: isGasLimitInvalid || gasLimitError
           })}
         >
           <div className={styles.gasWrapper}>
@@ -45,7 +52,7 @@ export const GasLimit = () => {
               id={ValuesEnum.gasLimit}
               name={ValuesEnum.gasLimit}
               data-testid={ValuesEnum.gasLimit}
-              disabled={getIsDisabled(ValuesEnum.gasLimit, readonly)}
+              disabled={isDisabled}
               required
               value={gasLimit}
               onChange={onChangeGasLimit}
@@ -76,9 +83,7 @@ export const GasLimit = () => {
           </div>
         </div>
 
-        {isGasLimitInvalid && (
-          <div className={globals.error}>{gasLimitError}</div>
-        )}
+        {gasLimitError && <div className={globals.error}>{gasLimitError}</div>}
       </div>
     </div>
   );

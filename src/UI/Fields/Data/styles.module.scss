@@ -1,6 +1,10 @@
 @import 'assets/sass/variables/_variables.scss';
 
 .fieldData {
+  &.fieldDataHidden {
+    display: none;
+  }
+
   .fieldDataLabel {
     margin-bottom: 0.5rem;
   }

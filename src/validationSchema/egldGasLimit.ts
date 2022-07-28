@@ -7,28 +7,31 @@ import { sharedGaslimit } from './sharedGaslimit';
 
 const required = string().required('Required');
 
-const funds = string().test('funds', 'Insufficient funds', function fundsCheck(
-  value
-) {
-  const { data, gasPrice, amount, balance, chainId } = this
-    .parent as ExtendedValuesType;
-  if (amount && value !== undefined) {
-    const valid = validateGasLimitAmount({
-      amount,
-      balance,
-      gasLimit: value,
-      gasPrice,
-      data,
-      chainId
-    });
-    return valid;
+const funds = string().test(
+  'funds',
+  'Insufficient funds',
+  function fundsCheck(value) {
+    const { data, gasPrice, amount, balance, chainId } = this
+      .parent as ExtendedValuesType;
+
+    if (amount && value !== undefined && balance) {
+      const valid = validateGasLimitAmount({
+        amount,
+        balance,
+        gasLimit: value,
+        gasPrice,
+        data,
+        chainId
+      });
+      return valid;
+    }
+    return true;
   }
-  return true;
-});
+);
 
 const minValueData = string().test({
   name: 'minValueData',
-  test: function(value) {
+  test: function (value) {
     const parent: ExtendedValuesType = this.parent;
     const { data } = parent;
 

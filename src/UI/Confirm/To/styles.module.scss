@@ -1,18 +1,35 @@
 @import 'assets/sass/variables/_variables.scss';
 
-.to {
+.confirmTo {
   line-height: 1.5;
   margin-bottom: 1rem;
 
-  .label {
+  .confirmToLabel {
     color: $secondary;
     display: block;
   }
 
-  .scam {
+  .confirmToReceiver {
+    overflow: scroll;
+    display: block;
+
+    &::-webkit-scrollbar {
+      height: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $black;
+    }
+  }
+
+  .confirmToScam {
     color: $warning !important;
 
-    .icon {
+    .confirmToIcon {
       margin-right: 0.25rem;
     }
   }

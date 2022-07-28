@@ -16,8 +16,8 @@ export const Fee = ({
   feeLimit: string;
   egldLabel: string;
 }) => (
-  <div className={styles.fee}>
-    <span className={styles.text}>{label}</span>
+  <div className={styles.confirmFee}>
+    <span className={styles.confirmFeeText}>{label}</span>
 
     <Denominate
       egldLabel={egldLabel}
@@ -27,7 +27,7 @@ export const Fee = ({
     />
 
     {feeLimit !== ZERO && (
-      <small className={styles.text}>
+      <small className={styles.confirmFeeText}>
         {calculateFeeInFiat({
           feeLimit,
           egldPriceInUsd

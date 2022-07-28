@@ -2,6 +2,7 @@ import React from 'react';
 import * as constants from '@elrondnetwork/dapp-core/constants';
 import Select, { SingleValue } from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
+import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
@@ -21,7 +22,7 @@ interface OptionType {
 export const SelectToken = ({ label }: { label?: string }) => {
   const { formInfo, accountInfo, tokensInfo } = useSendFormContext();
 
-  const { readonly } = formInfo;
+  const { readonly, hiddenFields } = formInfo;
   const { balance } = accountInfo;
   const {
     getTokens,
@@ -90,8 +91,16 @@ export const SelectToken = ({ label }: { label?: string }) => {
   const docStyle = window.getComputedStyle(document.documentElement);
   const selectStyle = selectCustomStyles({ docStyle });
 
+  const isDisabled = getIsDisabled(ValuesEnum.tokenId, readonly);
+  const isHidden =
+    hiddenFields?.includes(ValuesEnum.tokenId) && !isTokenIdInvalid;
+
   return (
-    <div className={styles.selectToken}>
+    <div
+      className={classNames(styles.selectToken, {
+        [styles.selectTokenHidden]: isHidden
+      })}
+    >
       {label && (
         <label
           htmlFor={ValuesEnum.tokenId}
@@ -106,7 +115,7 @@ export const SelectToken = ({ label }: { label?: string }) => {
         inputId={ValuesEnum.tokenId}
         name={ValuesEnum.tokenId}
         openMenuOnFocus
-        isDisabled={getIsDisabled(ValuesEnum.tokenId, readonly)}
+        isDisabled={isDisabled}
         isLoading={areTokensLoading}
         styles={selectStyle}
         value={

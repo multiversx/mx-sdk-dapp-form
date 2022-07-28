@@ -13,16 +13,16 @@ export const To = ({
   receiver: string;
   scamReport?: ReactNode;
 }) => (
-  <div className={styles.to}>
-    <span className={styles.label}>{label}</span>
-    {receiver && <span>{receiver}</span>}
+  <div className={styles.confirmTo}>
+    <span className={styles.confirmToLabel}>{label}</span>
+    {receiver && <span className={styles.confirmToReceiver}>{receiver}</span>}
 
     {scamReport && (
-      <div className={styles.scam}>
+      <div className={styles.confirmToScam}>
         <span>
           <FontAwesomeIcon
             icon={faExclamationTriangle}
-            className={styles.icon}
+            className={styles.confirmToIcon}
           />
           <small>{scamReport}</small>
         </span>

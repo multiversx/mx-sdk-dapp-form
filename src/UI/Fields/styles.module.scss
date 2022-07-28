@@ -5,6 +5,10 @@
   align-items: center;
   box-sizing: border-box;
 
+  &.gasHidden {
+    display: none;
+  }
+
   &.gasPrice {
     margin-bottom: 1rem;
   }

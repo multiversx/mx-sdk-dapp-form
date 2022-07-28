@@ -2,27 +2,37 @@ import React, { ChangeEvent } from 'react';
 import classNames from 'classnames';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
 
 import styles from './styles.module.scss';
 
 export const AmountSlider = () => {
   const {
-    formInfo: { readonly },
+    formInfo: { readonly, hiddenFields, checkInvalid },
     amountInfo: { amountRange, onSetAmountPercentage }
   } = useSendFormContext();
 
   const breakpoints = [0, 25, 50, 75, 100];
-  const disabled = getIsDisabled(ValuesEnum.amountSlider, readonly);
+  const isHidden =
+    hiddenFields?.includes(ValuesEnum.amount) &&
+    !checkInvalid(ValuesEnum.amount);
+
+  const disabled =
+    typeof readonly === 'boolean'
+      ? readonly
+      : readonly?.includes(ValuesEnum.amount);
 
   return (
-    <div className={styles.amountSlider}>
+    <div
+      className={classNames(styles.amountSlider, {
+        [styles.amountSliderHidden]: isHidden
+      })}
+    >
       <div className={styles.amountSliderRange}>
         <input
-          name={ValuesEnum.amountSlider}
-          id={ValuesEnum.amountSlider}
-          data-testid={ValuesEnum.amountSlider}
+          name='amountSlider'
+          id='amountSlider'
+          data-testid='amountSlider'
           type='range'
           disabled={disabled}
           min={0}
@@ -31,7 +41,7 @@ export const AmountSlider = () => {
           className={classNames(styles.amountSliderInput, {
             [styles.disabled]: disabled
           })}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          onChange={(event: ChangeEvent<any>) =>
             onSetAmountPercentage(Number(event.target.value))
           }
         />

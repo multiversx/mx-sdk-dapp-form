@@ -32,7 +32,7 @@ export const Data = ({
         output = (
           <>
             {highlight}
-            <span className={styles.secondary}>{rest}</span>
+            <span className={styles.confirmDataOutput}>{rest}</span>
           </>
         );
         break;
@@ -41,7 +41,7 @@ export const Data = ({
         const [rest] = data.split(highlight);
         output = (
           <>
-            <span className={styles.secondary}>{rest}</span>
+            <span className={styles.confirmDataOutput}>{rest}</span>
             {highlight}
           </>
         );
@@ -53,9 +53,9 @@ export const Data = ({
 
         output = (
           <>
-            <span className={styles.secondary}>{start}</span>
+            <span className={styles.confirmDataOutput}>{start}</span>
             {highlight}
-            <span className={styles.secondary}>{end}</span>
+            <span className={styles.confirmDataOutput}>{end}</span>
           </>
         );
         break;
@@ -66,8 +66,8 @@ export const Data = ({
   return (
     <>
       {encodedScCall && (
-        <div className={styles.data}>
-          <span className={styles.label}>{scCallLabel}</span>
+        <div className={styles.confirmData}>
+          <span className={styles.confirmDataLabel}>{scCallLabel}</span>
 
           <div data-testid='confirmScCall' className={globals.textarea}>
             {[decodePart(encodedScCall), ...remainingDataFields].join('@')}
@@ -75,8 +75,8 @@ export const Data = ({
         </div>
       )}
 
-      <div className={styles.data}>
-        <span className={styles.label}>{label}</span>
+      <div className={styles.confirmData}>
+        <span className={styles.confirmDataLabel}>{label}</span>
 
         <div data-testid='confirmData' className={globals.textarea}>
           {data ? output : 'N/A'}

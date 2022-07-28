@@ -10,7 +10,7 @@ const required = string().required('Required');
 
 const minValueData = string().test({
   name: 'minValueData',
-  test: function(value) {
+  test: function (value) {
     const parent: ExtendedValuesType = this.parent;
     const { data } = parent;
 
@@ -34,24 +34,27 @@ const minValueData = string().test({
   }
 });
 
-const funds = string().test('funds', 'Insufficient funds', function funds(
-  value
-) {
-  const { data, gasPrice, balance, chainId, ignoreTokenBalance } = this
-    .parent as ExtendedValuesType;
-  if (value && !ignoreTokenBalance) {
-    const valid = validateGasLimitAmount({
-      amount: ZERO,
-      balance,
-      gasLimit: value,
-      gasPrice,
-      data,
-      chainId
-    });
-    return valid;
+const funds = string().test(
+  'funds',
+  'Insufficient funds',
+  function funds(value) {
+    const { data, gasPrice, balance, chainId, ignoreTokenBalance } = this
+      .parent as ExtendedValuesType;
+
+    if (value && !ignoreTokenBalance && balance) {
+      const valid = validateGasLimitAmount({
+        amount: ZERO,
+        balance,
+        gasLimit: value,
+        gasPrice,
+        data,
+        chainId
+      });
+      return valid;
+    }
+    return true;
   }
-  return true;
-});
+);
 
 const validations = [required, minValueData, funds, ...sharedGaslimit()];
 

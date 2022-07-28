@@ -4,6 +4,10 @@
   display: flex;
   flex-direction: column;
 
+  &.sharedAmountHidden {
+    display: none;
+  }
+
   .sharedAmountLabel {
     margin-bottom: 0.5rem;
   }

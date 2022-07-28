@@ -30,7 +30,7 @@ export interface AmountContextPropsType {
   onFocus: () => void;
   onBlur: () => void;
   onChange: (
-    newValue: string | ChangeEvent<HTMLInputElement>,
+    newValue: string | ChangeEvent<any>,
     shouldValidate?: boolean
   ) => void;
   onMaxClicked: () => void;
@@ -106,10 +106,7 @@ export function AmountContextProvider({
   );
 
   const onChange = useCallback(
-    (
-      newValue: string | ChangeEvent<HTMLInputElement>,
-      shouldValidate = true
-    ) => {
+    (newValue: string | ChangeEvent<any>, shouldValidate = true) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
 

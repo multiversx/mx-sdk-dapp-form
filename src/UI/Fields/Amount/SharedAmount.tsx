@@ -17,7 +17,7 @@ interface SharedAmountType {
 
 export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   const {
-    formInfo: { checkInvalid, readonly },
+    formInfo: { checkInvalid, readonly, hiddenFields },
     amountInfo
   } = useSendFormContext();
 
@@ -42,8 +42,15 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
     onChange
   } = amountInfo;
 
+  const isDisabled = getIsDisabled(ValuesEnum.amount, readonly);
+  const isHidden = hiddenFields?.includes(ValuesEnum.amount) && !isInvalid;
+
   return (
-    <div className={styles.sharedAmount}>
+    <div
+      className={classNames(styles.sharedAmount, {
+        [styles.sharedAmountHidden]: isHidden
+      })}
+    >
       {label && (
         <label htmlFor={ValuesEnum.amount} className={styles.sharedAmountLabel}>
           {label}
@@ -58,7 +65,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
           data-testid={ValuesEnum.amount}
           required={true}
           value={amount}
-          disabled={getIsDisabled(ValuesEnum.amount, readonly)}
+          disabled={isDisabled}
           onFocus={onFocus}
           onBlur={onBlur}
           onChange={onChange}

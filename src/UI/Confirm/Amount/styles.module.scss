@@ -1,17 +1,17 @@
 @import 'assets/sass/variables/_variables.scss';
 
-.amount {
+.confirmAmount {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1rem;
   line-height: 1.5;
 
-  .left,
-  .right {
+  .confirmAmountLeft,
+  .confirmAmountRight {
     width: calc(50% - 15px);
 
-    .label {
+    .confirmAmountLabel {
       color: $secondary;
       display: block;
     }

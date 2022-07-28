@@ -87,16 +87,16 @@ export const Amount = (props: AmountPropsType) => {
   );
 
   return (
-    <div className={styles.amount}>
+    <div className={styles.confirmAmount}>
       {txType !== TxTypeEnum.NonFungibleESDT && (
-        <div className={styles.left}>
-          <span className={styles.label}>{label}</span>
+        <div className={styles.confirmAmountLeft}>
+          <span className={styles.confirmAmountLabel}>{label}</span>
 
           {amountRenderer}
         </div>
       )}
 
-      <div className={styles.right}>
+      <div className={styles.confirmAmountRight}>
         <Token {...tokenProps} />
       </div>
     </div>

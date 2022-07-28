@@ -21,11 +21,21 @@ export const GasPrice = () => {
     onBlurGasPrice,
     onResetGasPrice
   } = gasInfo;
-  const { readonly } = formInfo;
+
+  const { readonly, hiddenFields } = formInfo;
   const showUndoButton = gasPrice !== denominatedConfigGasPrice && !readonly;
 
+  const isHidden =
+    hiddenFields?.includes(ValuesEnum.gasLimit) &&
+    !gasPriceError &&
+    !isGasPriceInvalid;
+
   return (
-    <div className={classNames(styles.gas, styles.gasPrice)}>
+    <div
+      className={classNames(styles.gas, styles.gasPrice, {
+        [styles.gasHidden]: isHidden
+      })}
+    >
       <label className={styles.gasLeft} htmlFor={ValuesEnum.gasPrice}>
         Gas Price
       </label>
@@ -33,7 +43,7 @@ export const GasPrice = () => {
       <div className={styles.gasRight}>
         <div
           className={classNames(styles.gasForm, {
-            [styles.gasInvalid]: isGasPriceInvalid
+            [styles.gasInvalid]: isGasPriceInvalid || gasPriceError
           })}
         >
           <div className={styles.gasWrapper}>
@@ -72,9 +82,7 @@ export const GasPrice = () => {
           )}
         </div>
 
-        {isGasPriceInvalid && (
-          <div className={globals.error}>{gasPriceError}</div>
-        )}
+        {gasPriceError && <div className={globals.error}>{gasPriceError}</div>}
       </div>
     </div>
   );

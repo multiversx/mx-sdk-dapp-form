@@ -1,4 +1,12 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+  createContext,
+  ReactNode,
+  ChangeEvent
+} from 'react';
 
 import {
   gasPerDataByte,
@@ -36,11 +44,11 @@ export interface GasContextPropsType {
   feeLimit: string;
   onChangeFeeLimit: (newValue: string) => void;
   onChangeGasPrice: (
-    newValue: string | React.ChangeEvent<any>,
+    newValue: string | ChangeEvent<any>,
     shouldValidate?: boolean
   ) => void;
   onChangeGasLimit: (
-    newValue: string | React.ChangeEvent<any>,
+    newValue: string | ChangeEvent<any>,
     shouldValidate?: boolean
   ) => void;
   onBlurGasPrice: () => void;
@@ -50,11 +58,11 @@ export interface GasContextPropsType {
 }
 
 interface GasContextProviderPropsType {
-  children: React.ReactNode;
+  children: ReactNode;
   initGasLimitError?: string | null;
 }
 
-export const GasContext = React.createContext({} as GasContextPropsType);
+export const GasContext = createContext({} as GasContextPropsType);
 
 export function GasContextProvider({
   children,
@@ -75,12 +83,8 @@ export function GasContextProvider({
   } = useFormikContext<ExtendedValuesType>();
   const { gasPrice, gasLimit, data, tokenId, receiver, txType } = values;
 
-  const {
-    checkInvalid,
-    isNftTransaction,
-    isEsdtTransaction,
-    prefilledForm
-  } = useFormContext();
+  const { checkInvalid, isNftTransaction, isEsdtTransaction, prefilledForm } =
+    useFormContext();
   const { balance, address, nonce } = useAccountContext();
   const {
     networkConfig: { id: chainId }
@@ -110,7 +114,7 @@ export function GasContextProvider({
   const isGasPriceInvalid = checkInvalid(ValuesEnum.gasPrice);
 
   const handleUpdateGasPrice = useCallback(
-    (newValue: string | React.ChangeEvent<any>, shouldValidate = false) => {
+    (newValue: string | ChangeEvent<any>, shouldValidate = false) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
       if (isNaN(Number(value))) {
@@ -122,7 +126,7 @@ export function GasContextProvider({
   );
 
   const handleUpdateGasLimit = useCallback(
-    (newValue: string | React.ChangeEvent<any>, shouldValidate = false) => {
+    (newValue: string | ChangeEvent<any>, shouldValidate = false) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
       if (isNaN(Number(value))) {

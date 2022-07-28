@@ -3,6 +3,10 @@
 .toField {
   margin-bottom: 1.5rem;
 
+  &.toFieldHidden {
+    display: none;
+  }
+
   .toFieldLabel {
     margin-bottom: 0.5rem;
   }

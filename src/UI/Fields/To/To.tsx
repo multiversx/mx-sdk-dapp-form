@@ -21,12 +21,26 @@ import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
 import styles from './styles.module.scss';
 
+const filteredMenuProps = (props: MenuProps) => {
+  const filters = [
+    'newSelectionPrefix',
+    'paginationText',
+    'renderMenuItemChildren'
+  ];
+
+  filters.forEach((filter) => {
+    delete props[filter];
+  });
+
+  return props;
+};
+
 const CustomMenu = (
   results: Array<Option>,
   props: MenuProps,
   state: TypeaheadManagerChildProps
 ) => (
-  <Menu {...props} className={styles.toFieldMenu}>
+  <Menu {...filteredMenuProps(props)} className={styles.toFieldMenu}>
     {results.map((option: Option, position: number) => (
       <MenuItem
         key={option.toString()}
@@ -61,7 +75,7 @@ export const To = () => {
       onBlurReceiver,
       onChangeReceiver
     },
-    formInfo: { readonly }
+    formInfo: { readonly, hiddenFields }
   } = useSendFormContext();
 
   const [value, setValue] = useState(receiver);
@@ -99,15 +113,23 @@ export const To = () => {
 
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
+  const isDisabled = getIsDisabled(ValuesEnum.receiver, readonly);
+  const isHidden =
+    hiddenFields?.includes(ValuesEnum.receiver) && !isReceiverInvalid;
+
   return (
-    <div className={styles.toField}>
+    <div
+      className={classNames(styles.toField, {
+        [styles.toFieldHidden]: isHidden
+      })}
+    >
       {label && <div className={styles.toFieldLabel}>{label}</div>}
 
       <div className={styles.toFieldAutocomplete}>
         <Typeahead
           id='receiverWrapper'
           filterBy={filterBy}
-          disabled={getIsDisabled(ValuesEnum.receiver, readonly)}
+          disabled={isDisabled}
           ignoreDiacritics={true}
           emptyLabel={false}
           maxResults={5}
@@ -117,7 +139,11 @@ export const To = () => {
           onChange={onChange}
           onInputChange={onInputChange}
           renderMenu={CustomMenu}
-          inputProps={{ className: globals.input }}
+          inputProps={{
+            className: classNames(globals.input, {
+              [globals.invalid]: isReceiverInvalid
+            })
+          }}
         />
       </div>
 

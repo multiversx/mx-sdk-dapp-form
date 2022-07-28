@@ -1,6 +1,10 @@
 @import 'assets/sass/variables/_variables.scss';
 
 .amountSlider {
+  &.amountSliderHidden {
+    display: none;
+  }
+
   .amountSliderRange {
     position: relative;
     display: flex;

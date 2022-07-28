@@ -27,8 +27,8 @@ export const Token = ({
   const tokenLabel = nft?.name || '';
 
   return (
-    <div className={styles.token}>
-      <span className={styles.label}>
+    <div className={styles.confirmToken}>
+      <span className={styles.confirmTokenLabel}>
         {nft ? <span>{nft?.name} </span> : ''}
         Token
       </span>

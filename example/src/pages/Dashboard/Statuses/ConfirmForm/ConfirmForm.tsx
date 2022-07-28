@@ -30,11 +30,9 @@ export const ConfirmForm = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.inner}>
-        <SendFormContainer {...props}>
-          <ConfirmScreen providerType={formProps.formInfo.providerType} />
-        </SendFormContainer>
-      </div>
+      <SendFormContainer {...props}>
+        <ConfirmScreen providerType={formProps.formInfo.providerType} />
+      </SendFormContainer>
     </div>
   );
 };

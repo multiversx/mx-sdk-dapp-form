@@ -7,8 +7,7 @@ export enum ValuesEnum {
   data = 'data',
   tokenId = 'tokenId',
   amount = 'amount',
-  gasLimit = 'gasLimit',
-  amountSlider = 'amountSlider'
+  gasLimit = 'gasLimit'
 }
 
 type ValueKeyType = keyof typeof ValuesEnum;
@@ -52,7 +51,7 @@ export interface ExtendedValuesType extends ValuesType {
   chainId: string;
   ignoreTokenBalance?: boolean;
   /**
-   * **readonly**: Configure disabled fields by disabling all or individual fields.\
+   * **readonly**: Configure disabled fields by disabling all or individual fields.
    * Example: `readonly: [ 'amount' ]` will disable only the amount field.
    */
   readonly?: boolean | Array<ValueKeyType>;
@@ -64,8 +63,7 @@ export interface ExtendedValuesType extends ValuesType {
     version: string;
   };
   /**
-   * Conditionally hide various User Interface components through an object with intuitive key names.
-   * Can be later extended to support other components as well.
+   * **uiOptions**: Conditionally control Form visual elements.
    */
   uiOptions?: {
     hideAmountMaxButton: boolean;

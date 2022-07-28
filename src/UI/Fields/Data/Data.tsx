@@ -19,7 +19,7 @@ export const Data = () => {
     }
   } = useUICustomizationContext();
   const {
-    formInfo: { isEgldTransaction, readonly },
+    formInfo: { isEgldTransaction, readonly, hiddenFields },
     dataFieldInfo: { data, dataError, isDataInvalid, onChange, onBlur }
   } = useSendFormContext();
 
@@ -27,13 +27,18 @@ export const Data = () => {
     values: { customBalanceRules }
   } = useFormikContext<ExtendedValuesType>();
 
+  const isHidden = hiddenFields?.includes(ValuesEnum.data) && !isDataInvalid;
   const isDisabled =
     !isEgldTransaction ||
     customBalanceRules?.dataFieldBuilder != null ||
     getIsDisabled(ValuesEnum.data, readonly);
 
   return (
-    <div className={styles.fieldData}>
+    <div
+      className={classNames(styles.fieldData, {
+        [styles.fieldDataHidden]: isHidden
+      })}
+    >
       {label && (
         <label htmlFor={ValuesEnum.data} className={styles.fieldDataLabel}>
           {label}
