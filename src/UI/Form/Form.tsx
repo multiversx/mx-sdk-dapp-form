@@ -32,7 +32,7 @@ export const Form = () => {
     onValidateForm,
     onCloseForm,
     areValidatedValuesReady,
-    conditionalUI
+    uiOptions
   } = formInfo;
 
   function handleCloseClick(e: any) {
@@ -59,7 +59,7 @@ export const Form = () => {
 
         <Amount />
 
-        {!conditionalUI?.hideAmountSlider && <AmountSlider />}
+        {!uiOptions?.hideAmountSlider && <AmountSlider />}
 
         <FeeAccordion />
 

@@ -63,7 +63,11 @@ export interface ExtendedValuesType extends ValuesType {
     ledgerDataActive: boolean;
     version: string;
   };
-  conditionalUI?: {
+  /**
+   * Conditionally hide various User Interface components through an object with intuitive key names.
+   * Can be later extended to support other components as well.
+   */
+  uiOptions?: {
     hideAmountMaxButton: boolean;
     hideAmountSlider: boolean;
   };

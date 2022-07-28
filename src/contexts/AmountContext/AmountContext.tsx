@@ -55,7 +55,7 @@ export function AmountContextProvider({
     setFieldTouched
   } = useFormikContext<ExtendedValuesType>();
 
-  const { checkInvalid, readonly, conditionalUI } = useFormContext();
+  const { checkInvalid, readonly, uiOptions } = useFormContext();
   const { maxAmountAvailable, maxAmountMinusDust } = useGetMaxAmountAvailable();
 
   const [amountRange, setAmountRange] = useState(
@@ -65,7 +65,7 @@ export function AmountContextProvider({
   const [isMaxClicked, setIsMaxClicked] = useState(false);
   const { nft } = useTokensContext();
 
-  const isMaxButtonVisible = conditionalUI?.hideAmountMaxButton
+  const isMaxButtonVisible = uiOptions?.hideAmountMaxButton
     ? false
     : getIsMaxButtonVisible({
         nft,

@@ -9,7 +9,7 @@ export interface FormContextBasePropsType {
   skipToConfirm?: boolean;
   readonly?: ExtendedValuesType['readonly'];
   hiddenFields?: ExtendedValuesType['hiddenFields'];
-  conditionalUI?: ExtendedValuesType['conditionalUI'];
+  uiOptions?: ExtendedValuesType['uiOptions'];
   onCloseForm: () => void;
 }
 

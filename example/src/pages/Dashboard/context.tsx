@@ -73,7 +73,7 @@ const ContextProvider = (props: ContextType) => {
     formInfo: {
       onCloseForm: () => false,
       preFilledForm: false,
-      conditionalUI: {
+      uiOptions: {
         hideAmountMaxButton: true
       }
     }

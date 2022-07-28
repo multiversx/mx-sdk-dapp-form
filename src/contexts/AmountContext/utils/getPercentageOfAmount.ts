@@ -8,9 +8,9 @@ export const getPercentageOfAmount = (
   maxAmountMinusDust: string
 ) => {
   const value = Boolean(amount) ? amount : ZERO;
-  const total = new BigNumber(maxAmountMinusDust.replace('.', ''));
-  const difference = new BigNumber(nominate(value));
-  const percentage = 100 / Number(String(total.dividedBy(difference)));
+  const denominatedBN = new BigNumber(maxAmountMinusDust.replace('.', ''));
+  const nominatedBN = new BigNumber(nominate(value));
+  const percentage = 100 / Number(String(denominatedBN.dividedBy(nominatedBN)));
 
   return Math.round(percentage);
 };
