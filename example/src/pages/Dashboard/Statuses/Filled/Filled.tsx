@@ -16,8 +16,8 @@ export const Filled = () => {
     initialValues: {
       receiver:
         'erd13rrn3fwjds8r5260n6q3pd2qa6wqkudrhczh26d957c0edyzermshds0k8',
-      data: 'I am sending you over 2 EGLD!',
-      amount: '2',
+      data: 'I am sending you over 580 EGLD!',
+      amount: '580',
       gasLimit: (75_000_000).toString(),
       gasPrice: denominatedConfigGasPrice
     },

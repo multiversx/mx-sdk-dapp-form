@@ -1,28 +1,28 @@
 @import 'assets/sass/variables/variables';
 
-.token {
+.tokenElement {
   height: 100%;
   display: flex;
   align-items: center;
 
-  .wrapper {
+  .tokenElementWrapper {
     margin-right: 0.25rem;
     display: flex;
 
-    .circle {
+    .tokenElementCircle {
       border-radius: 50%;
     }
 
-    .spaced {
+    .tokenElementSpaced {
       margin-right: 0.25rem;
     }
 
-    .symbol {
+    .tokenElementSymbol {
       padding: 0 0.5rem;
     }
   }
 
-  .identifier {
+  .tokenElementIdentifier {
     line-height: 1.5;
   }
 }

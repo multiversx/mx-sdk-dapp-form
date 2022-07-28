@@ -1,7 +1,7 @@
 @import 'assets/sass/variables/variables';
 
-.token {
-  .label {
-    margin-bottom: 0.5rem;
-  }
+.selectToken {
+  margin-bottom: 1.5rem;
+  z-index: 6;
+  position: relative;
 }
