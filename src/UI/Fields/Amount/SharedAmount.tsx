@@ -43,14 +43,14 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   } = amountInfo;
 
   return (
-    <div className={styles.amount}>
+    <div className={styles.sharedAmount}>
       {label && (
-        <label htmlFor={ValuesEnum.amount} className={styles.label}>
+        <label htmlFor={ValuesEnum.amount} className={styles.sharedAmountLabel}>
           {label}
         </label>
       )}
 
-      <div className={styles.wrapper}>
+      <div className={styles.sharedAmountWrapper}>
         <input
           type='text'
           id={ValuesEnum.amount}
@@ -65,7 +65,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
           autoComplete='off'
           className={classNames(globals.input, {
             [globals.invalid]: isInvalid,
-            [styles.invalid]: isInvalid
+            [styles.sharedAmountInvalid]: isInvalid
           })}
         />
 
@@ -74,21 +74,25 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
             <FontAwesomeIcon icon={faExclamation} size='xs' />
           </span>
         )}
+
+        {isMaxButtonVisible && (
+          <div
+            className={classNames(styles.max, {
+              [styles.maxOffset]: isInvalid
+            })}
+          >
+            <button
+              data-testid='maxBtn'
+              className={styles.button}
+              onClick={onMaxClicked}
+            >
+              Max
+            </button>
+          </div>
+        )}
       </div>
 
       {isInvalid && <div className={globals.error}>{error}</div>}
-
-      {isMaxButtonVisible && (
-        <div className={styles.max}>
-          <button
-            data-testid='maxBtn'
-            className={styles.button}
-            onClick={onMaxClicked}
-          >
-            Max
-          </button>
-        </div>
-      )}
 
       {TokenSelector && <TokenSelector />}
 

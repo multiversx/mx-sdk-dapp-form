@@ -29,17 +29,17 @@ export const GasLimit = () => {
 
   return (
     <div className={styles.gas}>
-      <label className={styles.left} htmlFor={ValuesEnum.gasLimit}>
+      <label className={styles.gasLeft} htmlFor={ValuesEnum.gasLimit}>
         Gas Limit
       </label>
 
-      <div className={styles.right}>
+      <div className={styles.gasRight}>
         <div
-          className={classNames(styles.form, {
-            [styles.invalid]: isGasLimitInvalid
+          className={classNames(styles.gasForm, {
+            [styles.gasInvalid]: isGasLimitInvalid
           })}
         >
-          <div className={styles.wrapper}>
+          <div className={styles.gasWrapper}>
             <input
               type='text'
               id={ValuesEnum.gasLimit}
@@ -61,9 +61,9 @@ export const GasLimit = () => {
             )}
 
             {gasLimit !== defaultGasLimit && !readonly && (
-              <span className={styles.undo}>
+              <span className={styles.gasUndo}>
                 <button
-                  className={styles.reset}
+                  className={styles.gasReset}
                   onClick={onResetClick}
                   data-testid='gasLimitResetBtn'
                 >

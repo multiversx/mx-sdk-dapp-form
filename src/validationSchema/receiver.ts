@@ -1,6 +1,7 @@
 import { addressIsValid } from '@elrondnetwork/dapp-core/utils/account/addressIsValid';
 import { string } from 'yup';
-import { TxTypeEnum, ExtendedValuesType } from 'types';
+import { TxTypeEnum, ExtendedValuesType, ValuesEnum } from 'types';
+import { getCustomValidationRules } from 'validation/getCustomValidationRules';
 
 const required = string().required('Required');
 
@@ -27,7 +28,12 @@ const sameAddress = string().test(
   }
 );
 
-const validations = [required, validAddress, sameAddress];
+const validations = [
+  required,
+  validAddress,
+  sameAddress,
+  getCustomValidationRules(ValuesEnum.receiver)
+];
 
 export const receiver = validations.reduce(
   (previousValue, currentValue) => previousValue.concat(currentValue),

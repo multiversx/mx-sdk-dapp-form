@@ -14,7 +14,8 @@ import {
   FeeAccordion,
   NftSftToken,
   SelectToken,
-  To
+  To,
+  AmountSlider
 } from 'UI/Fields';
 
 import styles from './styles.module.scss';
@@ -30,7 +31,8 @@ export const Form = () => {
     renderKey,
     onValidateForm,
     onCloseForm,
-    areValidatedValuesReady
+    areValidatedValuesReady,
+    uiOptions
   } = formInfo;
 
   function handleCloseClick(e: any) {
@@ -50,25 +52,21 @@ export const Form = () => {
 
   return (
     <form key={renderKey} onSubmit={onValidateForm} className={styles.form}>
-      <fieldset className={styles.fieldset}>
+      <fieldset className={styles.formFieldset}>
         <To />
 
-        <div className={styles.wrapper}>
-          <div className={styles.left}>
-            <Amount />
-          </div>
+        {isNFTTransaction ? <NftSftToken /> : <SelectToken />}
 
-          <div className={styles.right}>
-            {isNFTTransaction ? <NftSftToken /> : <SelectToken />}
-          </div>
-        </div>
+        <Amount />
+
+        {!uiOptions?.hideAmountSlider && <AmountSlider />}
 
         <FeeAccordion />
 
         <Data />
       </fieldset>
 
-      <div className={styles.buttons}>
+      <div className={styles.formButtons}>
         <button
           className={classNames(globals.btn, globals.btnPrimary, {
             [globals.btnWarning]: scamError

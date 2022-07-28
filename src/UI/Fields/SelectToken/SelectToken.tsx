@@ -91,12 +91,12 @@ export const SelectToken = ({ label }: { label?: string }) => {
   const selectStyle = selectCustomStyles({ docStyle });
 
   return (
-    <div className={styles.token}>
+    <div className={styles.selectToken}>
       {label && (
         <label
           htmlFor={ValuesEnum.tokenId}
           data-testid='tokenIdLabel'
-          className={styles.label}
+          className={styles.selectTokenLabel}
         >
           {label}
         </label>
