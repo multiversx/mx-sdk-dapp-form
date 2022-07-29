@@ -38,6 +38,7 @@ export const Amount = (props: AmountPropsType) => {
   const nftDenomination = nft?.decimals || 0;
   const isEsdtTransaction = txType === TxTypeEnum.ESDT;
   const isMetaEsdt = txType === TxTypeEnum.MetaESDT;
+
   const value = isMetaEsdt ? nominate(amount, nft?.decimals) : amount;
   const showNftAmount = Boolean(nft && amount);
   const tokenLabel = tokenId.split('-')[0];

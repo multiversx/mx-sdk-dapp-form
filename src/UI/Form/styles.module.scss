@@ -3,29 +3,17 @@
 .form {
   margin: 1.5rem;
 
-  .fieldset {
+  .formFieldset {
     padding: 0;
     margin: 0;
     border: none;
   }
 
-  .wrapper {
-    margin-bottom: 2.5rem;
-
-    @include media-breakpoint-up(sm) {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .left,
-    .right {
-      @include media-breakpoint-up(sm) {
-        width: calc(50% - 15px);
-      }
-    }
+  .formWrapper {
+    margin-bottom: 1.5rem;
   }
 
-  .buttons {
+  .formButtons {
     display: flex;
     flex-direction: column;
     align-items: center;

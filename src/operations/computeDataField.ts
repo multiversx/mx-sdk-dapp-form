@@ -1,5 +1,7 @@
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import BigNumber from 'bignumber.js';
+
+import { ZERO } from 'constants/index';
 import { bech32 } from 'helpers';
 import { NftEnumType, NftType, TxTypeEnum, ExtendedValuesType } from 'types';
 import getTokenDetails from './getTokenDetails';
@@ -16,9 +18,11 @@ export const computeTokenDataField = ({
   tokenId: string;
   decimals: number;
 }) => {
+  const amountValue = Boolean(amount) ? amount : ZERO;
   const hexEncodedId = evenLengthValue(Buffer.from(tokenId).toString('hex'));
+
   const hexEncodedValue = evenLengthValue(
-    new BigNumber(nominate(amount, decimals)).toString(16)
+    new BigNumber(nominate(amountValue, decimals)).toString(16)
   );
   const data = `ESDTTransfer@${hexEncodedId}@${hexEncodedValue}`;
   return data;

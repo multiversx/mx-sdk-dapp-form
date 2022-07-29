@@ -12,7 +12,7 @@ interface FeeInFiatType {
 
 export const FeeInFiat = ({ feeLimit, egldPriceInUsd }: FeeInFiatType) =>
   feeLimit !== ZERO ? (
-    <small className={styles.fiat}>
+    <small className={styles.feeInFiat}>
       {calculateFeeInFiat({
         feeLimit,
         egldPriceInUsd

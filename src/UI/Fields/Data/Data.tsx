@@ -26,14 +26,14 @@ export const Data = () => {
     !isEgldTransaction || getIsDisabled(ValuesEnum.data, readonly);
 
   return (
-    <div className={styles.data}>
+    <div className={styles.fieldData}>
       {label && (
-        <label htmlFor={ValuesEnum.data} className={styles.label}>
+        <label htmlFor={ValuesEnum.data} className={styles.fieldDataLabel}>
           {label}
         </label>
       )}
 
-      <div className={styles.wrapper}>
+      <div className={styles.fieldDataWrapper}>
         <textarea
           id={ValuesEnum.data}
           name={ValuesEnum.data}

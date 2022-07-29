@@ -1,16 +1,20 @@
 @import 'assets/sass/variables/_variables.scss';
 
-.to {
-  margin-bottom: 2.5rem;
+.toField {
+  margin-bottom: 1.5rem;
 
-  .label {
+  .toFieldLabel {
     margin-bottom: 0.5rem;
   }
 
-  .autocomplete {
+  .toFieldAutocomplete {
     position: relative;
 
-    .menu {
+    input[aria-hidden='true'] {
+      display: none !important;
+    }
+
+    .toFieldMenu {
       left: 0px;
       top: 0px;
       float: left;
@@ -25,13 +29,13 @@
       border-radius: $card-border-radius;
       z-index: 1000;
       inset: unset !important;
-      width: auto !important;
       max-height: 300px !important;
       overflow: unset !important;
       transform: none !important;
+      overflow-x: scroll !important;
 
-      .item {
-        display: block;
+      .toFieldItem {
+        display: inline-block;
         line-height: 1.5;
         padding: 0.25rem 1.5rem;
         clear: both;
@@ -56,13 +60,13 @@
         }
 
         &:last-child {
-          margin-bottom: 0.5rem;
+          margin-bottom: 0.675rem;
         }
       }
     }
   }
 
-  .scam {
+  .toFieldScam {
     line-height: 1.5;
     color: $warning !important;
 

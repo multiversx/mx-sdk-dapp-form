@@ -28,11 +28,20 @@ export interface ExtendedValuesType extends ValuesType {
    * Example: `readonly: [ 'amount' ]` will disable only the amount field.
    */
   readonly?: boolean | Array<ValueKeyType>;
+  hiddenFields?: Array<ValueKeyType>;
   nft?: NftType;
   tokens?: TokenType[] | null;
   ledger?: {
     ledgerDataActive: boolean;
     version: string;
+  };
+  /**
+   * Conditionally hide various User Interface components through an object with intuitive key names.
+   * Can be later extended to support other components as well.
+   */
+  uiOptions?: {
+    hideAmountMaxButton: boolean;
+    hideAmountSlider: boolean;
   };
 }
 
