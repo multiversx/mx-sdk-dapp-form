@@ -2,8 +2,6 @@ import React, { ChangeEvent } from 'react';
 import classNames from 'classnames';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { getIsDisabled } from 'helpers';
-import { ValuesEnum } from 'types';
 
 import styles from './styles.module.scss';
 
@@ -14,15 +12,18 @@ export const AmountSlider = () => {
   } = useSendFormContext();
 
   const breakpoints = [0, 25, 50, 75, 100];
-  const disabled = getIsDisabled(ValuesEnum.amountSlider, readonly);
+
+  const amountSliderField = 'amountSlider';
+
+  const disabled = Boolean(readonly);
 
   return (
     <div className={styles.amountSlider}>
       <div className={styles.amountSliderRange}>
         <input
-          name={ValuesEnum.amountSlider}
-          id={ValuesEnum.amountSlider}
-          data-testid={ValuesEnum.amountSlider}
+          name={amountSliderField}
+          id={amountSliderField}
+          data-testid={amountSliderField}
           type='range'
           disabled={disabled}
           min={0}
@@ -41,14 +42,14 @@ export const AmountSlider = () => {
           className={classNames(styles.amountSliderThumb, {
             [styles.disabled]: disabled
           })}
-        ></span>
+        />
 
         <div
           style={{ width: `${amountRange}%` }}
           className={classNames(styles.amountSliderCompletion, {
             [styles.disabled]: disabled
           })}
-        ></div>
+        />
 
         {breakpoints.map((breakpoint) => (
           <div
