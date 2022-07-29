@@ -72,7 +72,10 @@ const ContextProvider = (props: ContextType) => {
     },
     formInfo: {
       onCloseForm: () => false,
-      preFilledForm: false
+      preFilledForm: false,
+      uiOptions: {
+        hideAmountMaxButton: true
+      }
     }
   });
 

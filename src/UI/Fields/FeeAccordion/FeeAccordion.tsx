@@ -6,6 +6,7 @@ import {
   faSpinner
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { GasLimit } from '../GasLimit';
@@ -18,7 +19,7 @@ export const FeeAccordion = () => {
   const accordion = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(false);
 
-  const { gasInfo, tokensInfo } = useSendFormContext();
+  const { gasInfo, tokensInfo, formInfo } = useSendFormContext();
   const { feeLimit, gasCostLoading } = gasInfo;
   const { egldPriceInUsd, egldLabel } = tokensInfo;
 
@@ -27,15 +28,19 @@ export const FeeAccordion = () => {
     active && accordion ? accordion?.current?.scrollHeight : 0;
 
   return (
-    <div className={styles.accordion}>
-      <span className={styles.trigger} onClick={toggleAccordion}>
+    <div
+      className={classNames(styles.feeAccordion, {
+        [styles.feeAccordionSpaced]: !formInfo.uiOptions?.hideAmountSlider
+      })}
+    >
+      <span className={styles.feeAccordionTrigger} onClick={toggleAccordion}>
         <span>
           <FontAwesomeIcon
             icon={active ? faAngleDown : faAngleRight}
-            className={styles.icon}
+            className={styles.feeAccordionIcon}
           />{' '}
-          <label className={styles.label}>Fee</label>
-          <span className={styles.limit} data-testid='feeLimit'>
+          <label className={styles.feeAccordionLabel}>Fee</label>
+          <span className={styles.feeAccordionLimit} data-testid='feeLimit'>
             <Denominate
               value={feeLimit}
               showLastNonZeroDecimal
@@ -52,12 +57,12 @@ export const FeeAccordion = () => {
 
       <div
         ref={accordion}
-        className={styles.expandable}
+        className={styles.feeAccordionExpandable}
         style={{
           height: dynamicAccordionHeight
         }}
       >
-        <div className={styles.content}>
+        <div className={styles.feeAccordionContent}>
           <GasPrice />
           <GasLimit />
         </div>
