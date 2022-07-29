@@ -1,7 +1,8 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { useFormikContext } from 'formik';
-import { calculateGasLimit, getEsdtNftDataField } from 'operations';
-import { ExtendedValuesType, TxTypeEnum } from 'types';
+
+import { calculateGasLimit, getDataField } from 'operations';
+import { ExtendedValuesType, TxTypeEnum, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useGasContext } from '../GasContext';
 import { useTokensContext } from '../TokensContext';
@@ -24,8 +25,6 @@ interface DataContextProviderPropsType {
 
 export const DataFieldContext = React.createContext({} as DataContextPropsType);
 
-const dataField = 'data';
-
 export function DataContextProvider({
   children
 }: DataContextProviderPropsType) {
@@ -39,10 +38,10 @@ export function DataContextProvider({
   } = useFormikContext<ExtendedValuesType>();
   const { checkInvalid, prefilledForm, isEgldTransaction } = useFormContext();
   const { nft } = useTokensContext();
-  const { receiver, txType, amount, tokenId } = values;
+  const { receiver, txType, amount, tokenId, customBalanceRules } = values;
   const { onChangeGasLimit } = useGasContext();
 
-  const isDataInvalid = checkInvalid(dataField);
+  const isDataInvalid = checkInvalid(ValuesEnum.data);
 
   const handleUpdateData = (
     newValue: React.ChangeEvent<any> | string,
@@ -50,7 +49,7 @@ export function DataContextProvider({
   ) => {
     const value =
       typeof newValue === 'string' ? newValue : newValue?.target?.value;
-    setFieldValue(dataField, value, shouldValidate);
+    setFieldValue(ValuesEnum.data, value, shouldValidate);
     if (!prefilledForm && !touched.gasLimit && isEgldTransaction) {
       const newGasLimit = calculateGasLimit({
         data: value
@@ -60,7 +59,7 @@ export function DataContextProvider({
   };
 
   const handleBlurData = useCallback(() => {
-    setFieldTouched(dataField, true);
+    setFieldTouched(ValuesEnum.data, true);
   }, [handleBlur]);
 
   const handleResetData = useCallback(() => {
@@ -68,9 +67,10 @@ export function DataContextProvider({
   }, []);
 
   useEffect(() => {
-    if (!prefilledForm) {
+    if (!prefilledForm || customBalanceRules?.dataFieldBuilder) {
       const receiverError = txType !== TxTypeEnum.ESDT ? errors.receiver : '';
-      const newDataField = getEsdtNftDataField({
+
+      const newDataField = getDataField({
         txType,
         values,
         nft,

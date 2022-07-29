@@ -23,8 +23,8 @@
     transform: translateX(120%);
     background-color: #fff;
     border-radius: 0.25rem;
-    border-color: #dee2e6;
-    // box-shadow: 0 0 0.2rem 0.2rem opacity($shadow-color, 0.1);
+    border-color: $border-color;
+
     &.clickable {
       cursor: pointer;
     }

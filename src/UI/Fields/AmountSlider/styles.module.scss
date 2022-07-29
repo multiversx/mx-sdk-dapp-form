@@ -1,0 +1,107 @@
+@import 'assets/sass/variables/_variables.scss';
+
+.amountSlider {
+  .amountSliderRange {
+    position: relative;
+    display: flex;
+    margin-top: 10px;
+    margin-right: 16px;
+
+    &:after {
+      width: 100%;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      content: '';
+      position: absolute;
+      background: $border-color;
+      height: 4px;
+    }
+
+    .amountSliderInput {
+      width: calc(100% + 16px);
+      opacity: 0;
+      z-index: 6;
+      cursor: pointer;
+      margin-right: -16px;
+
+      &.disabled {
+        pointer-events: none;
+        cursor: default;
+      }
+    }
+
+    .amountSliderThumb {
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      background-color: $black;
+      z-index: 5;
+
+      &.disabled {
+        background-color: $secondary;
+      }
+    }
+
+    .amountSliderCompletion {
+      height: 4px;
+      background: $primary;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 3;
+      margin-left: 2px;
+
+      &.disabled {
+        background: $secondary;
+      }
+    }
+
+    .amountSliderBreakpoint {
+      border-radius: 50%;
+      background-color: $white;
+      border: 2px solid $primary;
+      height: 12px;
+      width: 12px;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 4;
+
+      &.completed {
+        background-color: $primary;
+
+        &.disabled {
+          background-color: $secondary;
+        }
+      }
+
+      &.disabled {
+        border-color: $secondary;
+      }
+
+      .amountSliderPercentage {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        padding-top: 15px;
+        color: $black;
+        font-size: 12px;
+        cursor: pointer;
+
+        &.exact {
+          font-weight: bold;
+        }
+
+        &.disabled {
+          pointer-events: none;
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,11 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
+
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { NftEnumType } from 'types';
-import SharedAmount from './SharedAmount';
+import { SharedAmount } from './SharedAmount';
+
+import styles from './styles.module.scss';
 
 export const NftAmount = () => {
   const { amountInfo, tokensInfo } = useSendFormContext();
@@ -15,7 +18,7 @@ export const NftAmount = () => {
     );
     return hasPositiveBalance && !isMaxClicked ? (
       <small
-        className='form-text text-secondary mt-1'
+        className={styles.small}
         data-testid={`available-${nft?.identifier}`}
         data-value={`${maxAmountAvailable} ${nft?.identifier}`}
       >
@@ -30,5 +33,3 @@ export const NftAmount = () => {
 
   return <SharedAmount AvailableAmountElement={AvailableAmountElement} />;
 };
-
-export default NftAmount;

@@ -11,7 +11,7 @@ const required = string().required('Required');
 
 const decimals = string().test({
   name: 'denomination',
-  test: function (value) {
+  test: function(value) {
     const { tokenId, tokens } = this.parent as ExtendedValuesType;
     if (tokens) {
       const { decimals } = getTokenDetails({
@@ -43,6 +43,7 @@ const balance = string().test(
         tokens,
         tokenId: this.parent.tokenId
       });
+
       const nominatedAmount = nominate(tokenAmount.toString(), decimals);
       const bnAmount = new BigNumber(nominatedAmount);
       const bnTokenBalance = new BigNumber(tokenBalance);

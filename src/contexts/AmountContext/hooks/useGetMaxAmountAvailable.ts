@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
+
 import {
   decimals as defaultDecimals,
   denomination as defaultDenomination
 } from '@elrondnetwork/dapp-core/constants/index';
+import { denominate } from '@elrondnetwork/dapp-core/utils';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { useFormikContext } from 'formik';
+import { ZERO } from 'constants/index';
 import { useAccountContext } from 'contexts/AccountContext';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import {
@@ -12,6 +15,7 @@ import {
   getEntireTokenBalance,
   getTokenDetails
 } from 'operations';
+
 import { ExtendedValuesType, NftEnumType } from 'types';
 import { useFormContext } from '../../FormContext';
 import { useGasContext } from '../../GasContext';
@@ -31,14 +35,14 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
   const [tokenBalance, setTokenBalance] = useState<string | null>(null);
   const [nftBalance, setNftBalance] = useState<string | null>(null);
-  const [denominatedEgldBalance, setDenominatedEgldBalance] = useState('0');
+  const [denominatedEgldBalance, setDenominatedEgldBalance] = useState(ZERO);
   const [balanceMinusDust, setBalanceMinusDust] = useState(balance);
 
   const { nft, tokens } = useTokensContext();
   const { isEsdtTransaction, isNftTransaction, isEgldTransaction } =
     useFormContext();
   const { gasLimit, gasPrice } = useGasContext();
-  const { tokenId, txType } = values;
+  const { tokenId, txType, customBalanceRules } = values;
 
   useEffect(() => {
     if (isNftTransaction && nft) {
@@ -69,6 +73,17 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
   useEffect(() => {
     if (balance && isEgldTransaction) {
+      if (customBalanceRules?.customBalance) {
+        const entireBalance = denominate({
+          input: customBalanceRules?.customBalance,
+          denomination: defaultDenomination,
+          showLastNonZeroDecimal: true,
+          decimals: defaultDecimals
+        });
+        setDenominatedEgldBalance(entireBalance);
+        setBalanceMinusDust(entireBalance);
+        return;
+      }
       const { entireBalance: denominatedBalance, entireBalanceMinusDust } =
         getEntireBalance({
           balance,
@@ -81,7 +96,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
       setDenominatedEgldBalance(denominatedBalance);
       setBalanceMinusDust(entireBalanceMinusDust);
     }
-  }, [balance, gasLimit, gasPrice]);
+  }, [balance, gasLimit, gasPrice, customBalanceRules]);
 
   const esdtAmountAvailable = nft && nftBalance ? nftBalance : tokenBalance;
 
@@ -94,7 +109,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
     : maxAmountAvailable;
 
   return {
-    maxAmountAvailable: maxAmountAvailable || '0',
-    maxAmountMinusDust: maxAmountMinusDust || '0'
+    maxAmountAvailable: maxAmountAvailable || ZERO,
+    maxAmountMinusDust: maxAmountMinusDust || ZERO
   };
 }

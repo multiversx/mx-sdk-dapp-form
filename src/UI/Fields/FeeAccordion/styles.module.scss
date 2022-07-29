@@ -1,0 +1,45 @@
+@import 'assets/sass/variables/_variables.scss';
+
+.feeInFiat {
+  color: $secondary;
+  line-height: 1;
+}
+
+.feeAccordion {
+  margin: 15px 0 1.5rem;
+
+  &.feeAccordionSpaced {
+    margin-top: 45px;
+  }
+
+  .feeAccordionTrigger {
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+
+    .feeAccordionIcon {
+      margin-left: -0.28rem;
+    }
+
+    .feeAccordionLabel {
+      margin-right: 0.5rem;
+    }
+
+    .feeAccordionLimit {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .feeAccordionExpandable {
+    overflow: hidden;
+    transition: height 0.2s ease;
+
+    .feeAccordionContent {
+      border-radius: 0.25rem;
+      background-color: $light;
+      border: 1px solid $border-color;
+      margin-top: 0.5rem;
+      padding: 1rem 0;
+    }
+  }
+}

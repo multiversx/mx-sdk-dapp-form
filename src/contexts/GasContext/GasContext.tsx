@@ -8,7 +8,7 @@ import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/cal
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
 import { useFormikContext } from 'formik';
-import { tokenGasLimit } from 'constants/index';
+import { tokenGasLimit, ZERO } from 'constants/index';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
@@ -16,7 +16,7 @@ import {
   calculateNftGasLimit,
   denominatedConfigGasPrice
 } from 'operations';
-import { ExtendedValuesType, TxTypeEnum } from 'types';
+import { ExtendedValuesType, TxTypeEnum, ValuesEnum } from 'types';
 import { useAccountContext } from '../AccountContext';
 import { useFormContext } from '../FormContext';
 import { getDefaultGasLimit } from './utils';
@@ -56,14 +56,11 @@ interface GasContextProviderPropsType {
 
 export const GasContext = React.createContext({} as GasContextPropsType);
 
-const gasLimitField = 'gasLimit';
-const gasPriceField = 'gasPrice';
-
 export function GasContextProvider({
   children,
   initGasLimitError
 }: GasContextProviderPropsType) {
-  const [feeLimit, setFeeLimit] = useState('0');
+  const [feeLimit, setFeeLimit] = useState(ZERO);
 
   const {
     values,
@@ -78,8 +75,12 @@ export function GasContextProvider({
   } = useFormikContext<ExtendedValuesType>();
   const { gasPrice, gasLimit, data, tokenId, receiver, txType } = values;
 
-  const { checkInvalid, isNftTransaction, isEsdtTransaction, prefilledForm } =
-    useFormContext();
+  const {
+    checkInvalid,
+    isNftTransaction,
+    isEsdtTransaction,
+    prefilledForm
+  } = useFormContext();
   const { balance, address, nonce } = useAccountContext();
   const {
     networkConfig: { id: chainId }
@@ -105,8 +106,8 @@ export function GasContextProvider({
     isEsdtTransaction,
     data
   });
-  const isGasLimitInvalid = checkInvalid(gasLimitField);
-  const isGasPriceInvalid = checkInvalid(gasPriceField);
+  const isGasLimitInvalid = checkInvalid(ValuesEnum.gasPrice);
+  const isGasPriceInvalid = checkInvalid(ValuesEnum.gasPrice);
 
   const handleUpdateGasPrice = useCallback(
     (newValue: string | React.ChangeEvent<any>, shouldValidate = false) => {
@@ -115,7 +116,7 @@ export function GasContextProvider({
       if (isNaN(Number(value))) {
         return;
       }
-      setFieldValue(gasPriceField, value, shouldValidate);
+      setFieldValue(ValuesEnum.gasPrice, value, shouldValidate);
     },
     []
   );
@@ -127,25 +128,25 @@ export function GasContextProvider({
       if (isNaN(Number(value))) {
         return;
       }
-      setFieldValue(gasLimitField, value, shouldValidate);
+      setFieldValue(ValuesEnum.gasLimit, value, shouldValidate);
     },
     []
   );
 
   const handleResetGasPrice = useCallback(() => {
-    setFieldValue(gasPriceField, denominatedConfigGasPrice);
+    setFieldValue(ValuesEnum.gasPrice, denominatedConfigGasPrice);
   }, []);
 
   const handleResetGasLimit = useCallback(() => {
-    setFieldValue(gasLimitField, defaultGasLimit);
+    setFieldValue(ValuesEnum.gasLimit, defaultGasLimit);
   }, [isNftTransaction]);
 
   const handleBlurGasPrice = useCallback(() => {
-    setFieldTouched(gasPriceField, true);
+    setFieldTouched(ValuesEnum.gasPrice, true);
   }, []);
 
   const handleBlurGasLimit = useCallback(() => {
-    setFieldTouched(gasLimitField, true);
+    setFieldTouched(ValuesEnum.gasLimit, true);
   }, []);
 
   const hasErrors = Boolean(gasPriceError) || Boolean(gasLimitError);
@@ -159,7 +160,7 @@ export function GasContextProvider({
           gasPerDataByte: String(gasPerDataByte),
           gasPriceModifier: String(gasPriceModifier)
         })
-      : '0';
+      : ZERO;
     setFeeLimit(newFeeLimit);
   }, [gasLimit, data, chainId, gasPrice, hasErrors]);
 

@@ -1,0 +1,19 @@
+@import 'assets/sass/variables/_variables.scss';
+
+.amount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  line-height: 1.5;
+
+  .left,
+  .right {
+    width: calc(50% - 15px);
+
+    .label {
+      color: $secondary;
+      display: block;
+    }
+  }
+}

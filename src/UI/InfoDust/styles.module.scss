@@ -1,0 +1,24 @@
+@import 'assets/sass/variables/_variables.scss';
+
+.infoDust {
+  display: inline-block;
+
+  .infoDustTrigger {
+    cursor: pointer;
+    color: $primary-light;
+
+    &:hover {
+      color: $link-hover-color;
+    }
+  }
+
+  .infoDustTooltip {
+    width: 200px;
+    max-width: 200px;
+    padding: 0.25rem 0.5rem;
+    color: $white;
+    text-align: center;
+    border-radius: 0.25rem;
+    background-color: $black;
+  }
+}

@@ -1,5 +1,7 @@
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import BigNumber from 'bignumber.js';
+
+import { ZERO } from 'constants/index';
 import { bech32 } from 'helpers';
 import { NftEnumType, NftType, TxTypeEnum, ExtendedValuesType } from 'types';
 import getTokenDetails from './getTokenDetails';
@@ -16,9 +18,11 @@ export const computeTokenDataField = ({
   tokenId: string;
   decimals: number;
 }) => {
+  const amountValue = Boolean(amount) ? amount : ZERO;
   const hexEncodedId = evenLengthValue(Buffer.from(tokenId).toString('hex'));
+
   const hexEncodedValue = evenLengthValue(
-    new BigNumber(nominate(amount, decimals)).toString(16)
+    new BigNumber(nominate(amountValue, decimals)).toString(16)
   );
   const data = `ESDTTransfer@${hexEncodedId}@${hexEncodedValue}`;
   return data;
@@ -53,7 +57,7 @@ export const computeNftDataField = ({
   }
 };
 
-export const getEsdtNftDataField = ({
+export const getDataField = ({
   txType,
   values,
   nft,
@@ -66,7 +70,7 @@ export const getEsdtNftDataField = ({
   amountError?: boolean;
   receiverError?: string;
 }) => {
-  const { tokens, tokenId, amount, receiver } = values;
+  const { tokens, tokenId, amount, receiver, customBalanceRules } = values;
   if (tokens && txType === TxTypeEnum.ESDT && !amountError) {
     const { decimals } = getTokenDetails({
       tokens,
@@ -87,6 +91,9 @@ export const getEsdtNftDataField = ({
       receiver,
       errors: Boolean(amountError || receiverError)
     });
+  }
+  if (customBalanceRules?.dataFieldBuilder != null) {
+    return customBalanceRules.dataFieldBuilder(values);
   }
   return '';
 };

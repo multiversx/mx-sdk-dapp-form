@@ -1,0 +1,51 @@
+$white: white;
+$black: black;
+$primary: #1b46c2;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.triggers {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  .trigger {
+    border-radius: 15px;
+    padding: 10px 15px;
+    margin: 0 15px;
+    line-height: 1;
+    cursor: pointer;
+    transition: all 400ms ease;
+    background-color: $white;
+    color: $black;
+
+    &.active {
+      background-color: $black;
+      color: $white;
+    }
+  }
+}
+
+.tab {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.content {
+  border-radius: 15px;
+  border: 1px solid $primary;
+  display: inline-block;
+  margin: 30px;
+  width: 100%;
+  max-width: 350px;
+
+  &.borderless {
+    border: none;
+  }
+}
