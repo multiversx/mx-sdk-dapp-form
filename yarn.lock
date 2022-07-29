@@ -1210,41 +1210,6 @@
     qrcode "1.5.0"
     swr "1.1.2"
 
-"@elrondnetwork/dapp-core@2.0.0-beta.7":
-  version "2.0.0-beta.7"
-  resolved "https://registry.yarnpkg.com/@elrondnetwork/dapp-core/-/dapp-core-2.0.0-beta.7.tgz#289a418eae65e60bda5158caa1f135e937175b5b"
-  integrity sha512-Kk9ayT2r1r++IidX7RelCaMZ1peDP5MuAU8L3mP99TN6YEbByZRdj34Ye8pBcEuCPF3fDGrJKAxUEcQ7bQ0qWQ==
-  dependencies:
-    "@elrondnetwork/erdjs" "10.2.7"
-    "@elrondnetwork/erdjs-extension-provider" "2.0.5"
-    "@elrondnetwork/erdjs-hw-provider" "2.0.4"
-    "@elrondnetwork/erdjs-network-providers" "0.1.6"
-    "@elrondnetwork/erdjs-wallet-connect-provider" "2.1.0-alpha.3"
-    "@elrondnetwork/erdjs-web-wallet-provider" "2.1.1"
-    "@reduxjs/toolkit" "1.8.2"
-    axios "0.24.0"
-    bignumber.js "9.x"
-    lodash.debounce "4.0.8"
-    lodash.isequal "4.5.0"
-    lodash.omit "4.5.0"
-    lodash.throttle "4.1.1"
-    lodash.uniqby "4.7.0"
-    qs "6.10.3"
-    react-idle-timer "5.0.0"
-    react-redux "8.0.2"
-    redux-persist "6.0.0"
-    reselect "4.0.0"
-    shx "0.3.4"
-  optionalDependencies:
-    "@fortawesome/fontawesome-svg-core" "6.1.0"
-    "@fortawesome/free-solid-svg-icons" "6.1.0"
-    "@fortawesome/react-fontawesome" "0.1.18"
-    classnames "2.3.1"
-    moment "2.29.1"
-    platform "1.3.6"
-    qrcode "1.5.0"
-    swr "1.1.2"
-
 "@elrondnetwork/erdjs-extension-provider@2.0.5":
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/@elrondnetwork/erdjs-extension-provider/-/erdjs-extension-provider-2.0.5.tgz#bdf127dc42c0cd1edcac1e332160eb9f1f98d554"
@@ -7948,7 +7913,7 @@ idb@^7.0.1:
   resolved "https://registry.yarnpkg.com/idb/-/idb-7.0.2.tgz#7a067e20dd16539938e456814b7d714ba8db3892"
   integrity sha512-jjKrT1EnyZewQ/gCBb/eyiYrhGzws2FeY92Yx8qT9S9GeQAmo4JFVIiWRIfKW/6Ob9A+UDAOW9j9jn58fy2HIg==
 
-identity-obj-proxy@^3.0.0:
+identity-obj-proxy@3.0.0, identity-obj-proxy@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/identity-obj-proxy/-/identity-obj-proxy-3.0.0.tgz#94d2bda96084453ef36fbc5aaec37e0f79f1fc14"
   integrity sha512-00n6YnVHKrinT9t0d9+5yZC6UBNJANpYEQvL2LlX6Ab9lnmxzIRcEmTPuyGScvl1+jKuCICX1Z0Ab1pPKKdikA==
@@ -8673,20 +8638,7 @@ jest-each@^28.1.3:
     jest-util "^28.1.3"
     pretty-format "^28.1.3"
 
-jest-environment-jsdom@^27.5.1:
-  version "27.5.1"
-  resolved "https://registry.yarnpkg.com/jest-environment-jsdom/-/jest-environment-jsdom-27.5.1.tgz#ea9ccd1fc610209655a77898f86b2b559516a546"
-  integrity sha512-TFBvkTC1Hnnnrka/fUb56atfDtJ9VMZ94JkjTbggl1PEpwrYtUBKMezB3inLmWqQsXYLcMwNoDQwoBTAvFfsfw==
-  dependencies:
-    "@jest/environment" "^27.5.1"
-    "@jest/fake-timers" "^27.5.1"
-    "@jest/types" "^27.5.1"
-    "@types/node" "*"
-    jest-mock "^27.5.1"
-    jest-util "^27.5.1"
-    jsdom "^16.6.0"
-
-jest-environment-jsdom@^28.1.3:
+jest-environment-jsdom@28.1.3:
   version "28.1.3"
   resolved "https://registry.yarnpkg.com/jest-environment-jsdom/-/jest-environment-jsdom-28.1.3.tgz#2d4e5d61b7f1d94c3bddfbb21f0308ee506c09fb"
   integrity sha512-HnlGUmZRdxfCByd3GM2F100DgQOajUBzEitjGqIREcb45kGjZvRrKUdlaF6escXBdcXNl0OBh+1ZrfeZT3GnAg==
@@ -8699,6 +8651,19 @@ jest-environment-jsdom@^28.1.3:
     jest-mock "^28.1.3"
     jest-util "^28.1.3"
     jsdom "^19.0.0"
+
+jest-environment-jsdom@^27.5.1:
+  version "27.5.1"
+  resolved "https://registry.yarnpkg.com/jest-environment-jsdom/-/jest-environment-jsdom-27.5.1.tgz#ea9ccd1fc610209655a77898f86b2b559516a546"
+  integrity sha512-TFBvkTC1Hnnnrka/fUb56atfDtJ9VMZ94JkjTbggl1PEpwrYtUBKMezB3inLmWqQsXYLcMwNoDQwoBTAvFfsfw==
+  dependencies:
+    "@jest/environment" "^27.5.1"
+    "@jest/fake-timers" "^27.5.1"
+    "@jest/types" "^27.5.1"
+    "@types/node" "*"
+    jest-mock "^27.5.1"
+    jest-util "^27.5.1"
+    jsdom "^16.6.0"
 
 jest-environment-node@^27.5.1:
   version "27.5.1"
@@ -9076,11 +9041,6 @@ jest-runtime@^28.1.3:
     jest-util "^28.1.3"
     slash "^3.0.0"
     strip-bom "^4.0.0"
-
-jest-scss-transform@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/jest-scss-transform/-/jest-scss-transform-1.0.3.tgz#448b0d3e548a8889e444eab53c1deb3646468c86"
-  integrity sha512-e9MBgPIYbjBN86DC3xKBGAtWUnR43r8NSzsrWxCF8+5WD1maDbWI7bOW1AygVxdzMNCrqjh5pvHqJ9vMzoyebQ==
 
 jest-serializer@^26.6.2:
   version "26.6.2"
