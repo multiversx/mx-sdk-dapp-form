@@ -4,7 +4,7 @@ import {
   decimals as defaultDecimals,
   denomination as defaultDenomination
 } from '@elrondnetwork/dapp-core/constants/index';
-import { denominate } from '@elrondnetwork/dapp-core/utils';
+import { denominate, stringIsFloat } from '@elrondnetwork/dapp-core/utils';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { useFormikContext } from 'formik';
 import { ZERO } from 'constants/index';
@@ -76,9 +76,9 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
   useEffect(() => {
     if (balance && isEgldTransaction) {
-      if (customBalanceRules?.customBalance) {
+      if (stringIsFloat(String(customBalanceRules?.customBalance))) {
         const entireBalance = denominate({
-          input: customBalanceRules?.customBalance,
+          input: String(customBalanceRules?.customBalance),
           denomination: defaultDenomination,
           showLastNonZeroDecimal: true,
           decimals: defaultDecimals

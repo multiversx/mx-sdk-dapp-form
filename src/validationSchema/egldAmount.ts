@@ -1,8 +1,6 @@
 import { denomination } from '@elrondnetwork/dapp-core/constants/index';
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 
-import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { getCustomValidationRules } from 'validation';
@@ -36,21 +34,6 @@ const funds = string().test('funds', 'Insufficient funds', function(amount) {
   return true;
 });
 
-const customBalance = string().test(
-  'customBalance',
-  'Not enough balance',
-  function(amount) {
-    const { customBalanceRules } = this.parent as ExtendedValuesType;
-    if (amount != null && customBalanceRules?.customBalance) {
-      const bnCustomBalance = new BigNumber(customBalanceRules?.customBalance);
-      const nominatedAmount = nominate(amount.toString());
-      const valid = bnCustomBalance.isGreaterThanOrEqualTo(nominatedAmount);
-      return valid;
-    }
-    return true;
-  }
-);
-
 const isValidNumber = string().test(
   'isValidNumber',
   'Invalid number',
@@ -64,7 +47,6 @@ const validations = [
   isValidNumber,
   decimals,
   funds,
-  customBalance,
   getCustomValidationRules(ValuesEnum.amount)
 ];
 
