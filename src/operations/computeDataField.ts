@@ -66,7 +66,7 @@ export const getDataField = ({
   amountError?: boolean;
   receiverError?: string;
 }) => {
-  const { tokens, tokenId, amount, receiver, customBalanceRules } = values;
+  const { tokens, tokenId, amount, receiver } = values;
   if (tokens && txType === TxTypeEnum.ESDT && !amountError) {
     const { decimals } = getTokenDetails({
       tokens,
@@ -88,8 +88,6 @@ export const getDataField = ({
       errors: Boolean(amountError || receiverError)
     });
   }
-  if (customBalanceRules?.dataFieldBuilder != null) {
-    return customBalanceRules.dataFieldBuilder(values);
-  }
+
   return '';
 };

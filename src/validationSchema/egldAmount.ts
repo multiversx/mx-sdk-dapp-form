@@ -2,8 +2,7 @@ import { denomination } from '@elrondnetwork/dapp-core/constants/index';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 
 import { string } from 'yup';
-import { ExtendedValuesType, ValuesEnum } from 'types';
-import { getCustomValidationRules } from 'validation';
+import { ExtendedValuesType } from 'types';
 import maxDecimals from 'validation/maxDecimals';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 
@@ -42,13 +41,7 @@ const isValidNumber = string().test(
   }
 );
 
-const validations = [
-  required,
-  isValidNumber,
-  decimals,
-  funds,
-  getCustomValidationRules(ValuesEnum.amount)
-];
+const validations = [required, isValidNumber, decimals, funds];
 
 export const egldAmount = validations.reduce(
   (previousValue, currentValue) => previousValue.concat(currentValue),

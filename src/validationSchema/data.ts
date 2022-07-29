@@ -1,8 +1,7 @@
 import { string } from 'yup';
 import { ledgerHashSignMinimumVersion } from 'constants/index';
 import { getLedgerVersionOptions } from 'operations';
-import { ExtendedValuesType, ValuesEnum } from 'types';
-import { getCustomValidationRules } from 'validation/getCustomValidationRules';
+import { ExtendedValuesType } from 'types';
 
 const ledgerDataActive = string().test(
   'ledgerDataActive',
@@ -36,11 +35,7 @@ const hashSign = string().test({
   }
 });
 
-const validations = [
-  ledgerDataActive,
-  hashSign,
-  getCustomValidationRules(ValuesEnum.data)
-];
+const validations = [ledgerDataActive, hashSign];
 
 export const data = validations.reduce(
   (previousValue, currentValue) => previousValue.concat(currentValue),

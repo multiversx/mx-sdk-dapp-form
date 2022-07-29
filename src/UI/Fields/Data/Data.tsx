@@ -3,13 +3,12 @@ import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import { useFormikContext } from 'formik';
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import { getIsDisabled } from 'helpers';
-import { ExtendedValuesType, ValuesEnum } from 'types/form';
+import { ValuesEnum } from 'types/form';
 import styles from './styles.module.scss';
 
 export const Data = () => {
@@ -23,14 +22,8 @@ export const Data = () => {
     dataFieldInfo: { data, dataError, isDataInvalid, onChange, onBlur }
   } = useSendFormContext();
 
-  const {
-    values: { customBalanceRules }
-  } = useFormikContext<ExtendedValuesType>();
-
   const isDisabled =
-    !isEgldTransaction ||
-    customBalanceRules?.dataFieldBuilder != null ||
-    getIsDisabled(ValuesEnum.data, readonly);
+    !isEgldTransaction || getIsDisabled(ValuesEnum.data, readonly);
 
   return (
     <div className={styles.data}>

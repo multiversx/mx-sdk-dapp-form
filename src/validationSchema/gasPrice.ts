@@ -3,8 +3,6 @@ import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringI
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import denominatedConfigGasPrice from 'operations/denominatedConfigGasPrice';
-import { ValuesEnum } from 'types';
-import { getCustomValidationRules } from 'validation/getCustomValidationRules';
 import maxDecimals from 'validation/maxDecimals';
 
 const required = string().required('Required');
@@ -31,13 +29,7 @@ const validNumber = string().test('isValidNumber', 'Invalid number', (value) =>
   Boolean(value && stringIsFloat(value))
 );
 
-const validations = [
-  required,
-  decimalsValidation,
-  minimum,
-  validNumber,
-  getCustomValidationRules(ValuesEnum.gasPrice)
-];
+const validations = [required, decimalsValidation, minimum, validNumber];
 
 export const gasPrice = validations.reduce(
   (previousValue, currentValue) => previousValue.concat(currentValue),
