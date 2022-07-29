@@ -5,6 +5,7 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
+import { omit } from 'lodash';
 import { Typeahead, Menu, MenuItem } from 'react-bootstrap-typeahead';
 import { MenuProps } from 'react-bootstrap-typeahead/types/components/Menu';
 import {
@@ -21,26 +22,18 @@ import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
 import styles from './styles.module.scss';
 
-const filteredMenuProps = (props: MenuProps) => {
-  const filters = [
-    'newSelectionPrefix',
-    'paginationText',
-    'renderMenuItemChildren'
-  ];
-
-  filters.forEach((filter) => {
-    delete props[filter];
-  });
-
-  return props;
-};
+const menuOmittedProps = [
+  'newSelectionPrefix',
+  'paginationText',
+  'renderMenuItemChildren'
+];
 
 const CustomMenu = (
   results: Array<Option>,
   props: MenuProps,
   state: TypeaheadManagerChildProps
 ) => (
-  <Menu {...filteredMenuProps(props)} className={styles.toFieldMenu}>
+  <Menu {...omit(props, menuOmittedProps)} className={styles.toFieldMenu}>
     {results.map((option: Option, position: number) => (
       <MenuItem
         key={option.toString()}

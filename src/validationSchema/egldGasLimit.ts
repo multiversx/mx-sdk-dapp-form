@@ -14,7 +14,7 @@ const funds = string().test(
     const { data, gasPrice, amount, balance, chainId } = this
       .parent as ExtendedValuesType;
 
-    if (amount && value !== undefined && balance) {
+    if (amount && value != null && balance) {
       const valid = validateGasLimitAmount({
         amount,
         balance,
