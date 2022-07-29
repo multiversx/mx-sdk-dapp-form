@@ -6,5 +6,5 @@ export * from './validation';
 export * from './validationSchema';
 export * from './validateSignTransactions';
 export * from './types';
-export * from './SendFormContainer';
+export * from './containers';
 export * from './apiCalls';
