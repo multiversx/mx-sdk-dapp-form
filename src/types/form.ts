@@ -7,8 +7,7 @@ export enum ValuesEnum {
   data = 'data',
   tokenId = 'tokenId',
   amount = 'amount',
-  gasLimit = 'gasLimit',
-  amountSlider = 'amountSlider'
+  gasLimit = 'gasLimit'
 }
 
 type ValueKeyType = keyof typeof ValuesEnum;
