@@ -6,5 +6,6 @@ export * from './validation';
 export * from './validationSchema';
 export * from './validateSignTransactions';
 export * from './types';
+export * from './UI';
 export * from './containers';
 export * from './apiCalls';
