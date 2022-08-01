@@ -1,5 +1,5 @@
 import React from 'react';
-import { decodePart } from '@elrondnetwork/dapp-core/utils';
+import { decodePart } from '@elrondnetwork/dapp-core/utils/decoders/decodePart';
 
 import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';

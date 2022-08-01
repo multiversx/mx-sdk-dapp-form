@@ -4,7 +4,7 @@ import {
   decimals as defaultDecimals,
   denomination as defaultDenomination
 } from '@elrondnetwork/dapp-core/constants/index';
-import { denominate } from '@elrondnetwork/dapp-core/utils';
+import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { useFormikContext } from 'formik';
 import { ZERO } from 'constants/index';
@@ -39,8 +39,11 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
   const [balanceMinusDust, setBalanceMinusDust] = useState(balance);
 
   const { nft, tokens } = useTokensContext();
-  const { isEsdtTransaction, isNftTransaction, isEgldTransaction } =
-    useFormContext();
+  const {
+    isEsdtTransaction,
+    isNftTransaction,
+    isEgldTransaction
+  } = useFormContext();
   const { gasLimit, gasPrice } = useGasContext();
   const { tokenId, txType, customBalanceRules } = values;
 
@@ -84,15 +87,17 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
         setBalanceMinusDust(entireBalance);
         return;
       }
-      const { entireBalance: denominatedBalance, entireBalanceMinusDust } =
-        getEntireBalance({
-          balance,
-          gasPrice: nominate(gasPrice),
-          gasLimit: gasLimit,
-          denomination: defaultDenomination,
-          decimals: defaultDecimals,
-          chainId
-        });
+      const {
+        entireBalance: denominatedBalance,
+        entireBalanceMinusDust
+      } = getEntireBalance({
+        balance,
+        gasPrice: nominate(gasPrice),
+        gasLimit: gasLimit,
+        denomination: defaultDenomination,
+        decimals: defaultDecimals,
+        chainId
+      });
       setDenominatedEgldBalance(denominatedBalance);
       setBalanceMinusDust(entireBalanceMinusDust);
     }

@@ -34,7 +34,7 @@ export interface SendFormContainerPropsType {
   Loader?: JSXElementConstructor<any> | null;
   shouldGenerateTransactionOnSubmit?: boolean;
   UICustomization?: UICustomizationContextPropsType;
-  children: React.ReactNode;
+  children: React.ReactNode | JSX.Element;
 }
 
 export function SendFormContainer(props: SendFormContainerPropsType) {
