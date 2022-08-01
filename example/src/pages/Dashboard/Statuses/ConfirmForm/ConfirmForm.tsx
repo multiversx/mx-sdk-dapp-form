@@ -3,7 +3,9 @@ import React from 'react';
 import {
   SendFormContainer,
   denominatedConfigGasPrice,
-  SendFormContainerPropsType
+  SendFormContainerPropsType,
+  useGetInitialValues,
+  getTxType
 } from '@elrondnetwork/dapp-core-form';
 import { ConfirmScreen } from '@elrondnetwork/dapp-core-form/UI';
 
@@ -28,9 +30,35 @@ export const ConfirmForm = () => {
     }
   };
 
+  const initializedValues = useGetInitialValues({
+    configValues: props.initialValues,
+    balance: props.accountInfo.balance,
+    nonce: props.accountInfo.nonce,
+    address: props.accountInfo.address,
+    chainId: props.networkConfig.chainId,
+    egldLabel: props.networkConfig.egldLabel
+  });
+
+  const initialValues = {
+    ...(initializedValues ? initializedValues.initialValues : {}),
+    balance: props.accountInfo.balance,
+    address: props.accountInfo.address,
+    chainId: props.networkConfig.chainId,
+    txType: initializedValues
+      ? getTxType({
+          nft: initializedValues.nft,
+          tokenId: initializedValues.initialValues.tokenId
+        })
+      : null
+  };
+
+  if (!initializedValues) {
+    return null;
+  }
+
   return (
     <div className={styles.wrapper}>
-      <SendFormContainer {...props}>
+      <SendFormContainer {...{ ...props, initialValues }}>
         <ConfirmScreen providerType={formProps.formInfo.providerType} />
       </SendFormContainer>
     </div>
