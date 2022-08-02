@@ -5,6 +5,8 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import styles from './styles.module.scss';
 
+const amountSliderField = 'amountSlider';
+
 export const AmountSlider = () => {
   const {
     formInfo: { readonly },
@@ -12,8 +14,6 @@ export const AmountSlider = () => {
   } = useSendFormContext();
 
   const breakpoints = [0, 25, 50, 75, 100];
-
-  const amountSliderField = 'amountSlider';
 
   const disabled = Boolean(readonly);
 

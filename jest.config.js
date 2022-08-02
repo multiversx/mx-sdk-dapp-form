@@ -17,6 +17,6 @@ module.exports = {
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$':
       'identity-obj-proxy',
     '@elrondnetwork/dapp-core/(.*)':
-      '<rootDir>/node_modules/@elrondnetwork/dapp-core/__commonjs/$1.js'
+      '<rootDir>/node_modules/@elrondnetwork/dapp-core/__commonjs/$1'
   }
 };
