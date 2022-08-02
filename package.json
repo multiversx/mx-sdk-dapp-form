@@ -1,6 +1,6 @@
 {
   "name": "@elrondnetwork/dapp-core-form",
-  "version": "0.2.0-alpha.8",
+  "version": "0.2.0-alpha.9",
   "description": "A library to hold the main logic for a validating a form for transactions on the Elrond Network",
   "author": "ElrondNetwork",
   "license": "GPL-3.0-or-later",
@@ -8,6 +8,7 @@
   "main": "./",
   "module": "./",
   "types": "./",
+  "react-native": "./",
   "engines": {
     "node": ">=16"
   },
@@ -23,6 +24,7 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
+    "@elrondnetwork/dapp-core": "2.0.0-beta.11",
     "@size-limit/preset-small-lib": "7.0.8",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
