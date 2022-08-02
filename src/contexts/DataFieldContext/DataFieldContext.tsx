@@ -38,7 +38,7 @@ export function DataContextProvider({
   } = useFormikContext<ExtendedValuesType>();
   const { checkInvalid, prefilledForm, isEgldTransaction } = useFormContext();
   const { nft } = useTokensContext();
-  const { receiver, txType, amount, tokenId, customBalanceRules } = values;
+  const { receiver, txType, amount, tokenId } = values;
   const { onChangeGasLimit } = useGasContext();
 
   const isDataInvalid = checkInvalid(ValuesEnum.data);
@@ -67,7 +67,7 @@ export function DataContextProvider({
   }, []);
 
   useEffect(() => {
-    if (!prefilledForm || customBalanceRules?.dataFieldBuilder) {
+    if (!prefilledForm) {
       const receiverError = txType !== TxTypeEnum.ESDT ? errors.receiver : '';
 
       const newDataField = getDataField({

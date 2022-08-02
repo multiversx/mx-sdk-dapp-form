@@ -26,8 +26,13 @@ export const ConfirmScreen = ({
     gasInfo
   } = useSendFormContext();
   const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
-  const { readonly, onCloseForm, onInvalidateForm, onSubmitForm, txType } =
-    formInfo;
+  const {
+    readonly,
+    onCloseForm,
+    onInvalidateForm,
+    onSubmitForm,
+    txType
+  } = formInfo;
   const { data } = dataFieldInfo;
   const { receiver, scamError } = receiverInfo;
   const { feeLimit, gasCostError } = gasInfo;

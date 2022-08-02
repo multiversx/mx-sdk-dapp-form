@@ -2,8 +2,6 @@ import { stringIsInteger } from '@elrondnetwork/dapp-core/utils/validation/strin
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { maxGasLimit } from 'constants/index';
-import { ValuesEnum } from 'types';
-import { getCustomValidationRules } from 'validation/getCustomValidationRules';
 
 export const sharedGaslimit = () => {
   const required = string().required('Required');
@@ -27,12 +25,7 @@ export const sharedGaslimit = () => {
     }
   );
 
-  const validations = [
-    required,
-    validInteger,
-    maximum,
-    getCustomValidationRules(ValuesEnum.gasLimit)
-  ];
+  const validations = [required, validInteger, maximum];
 
   return validations;
 };

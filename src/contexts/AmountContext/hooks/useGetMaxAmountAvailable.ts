@@ -4,7 +4,6 @@ import {
   decimals as defaultDecimals,
   denomination as defaultDenomination
 } from '@elrondnetwork/dapp-core/constants/index';
-import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { useFormikContext } from 'formik';
 import { ZERO } from 'constants/index';
@@ -45,7 +44,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
     isEgldTransaction
   } = useFormContext();
   const { gasLimit, gasPrice } = useGasContext();
-  const { tokenId, txType, customBalanceRules } = values;
+  const { tokenId, txType } = values;
 
   useEffect(() => {
     if (isNftTransaction && nft) {
@@ -76,17 +75,6 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
   useEffect(() => {
     if (balance && isEgldTransaction) {
-      if (customBalanceRules?.customBalance) {
-        const entireBalance = denominate({
-          input: customBalanceRules?.customBalance,
-          denomination: defaultDenomination,
-          showLastNonZeroDecimal: true,
-          decimals: defaultDecimals
-        });
-        setDenominatedEgldBalance(entireBalance);
-        setBalanceMinusDust(entireBalance);
-        return;
-      }
       const {
         entireBalance: denominatedBalance,
         entireBalanceMinusDust
@@ -101,7 +89,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
       setDenominatedEgldBalance(denominatedBalance);
       setBalanceMinusDust(entireBalanceMinusDust);
     }
-  }, [balance, gasLimit, gasPrice, customBalanceRules]);
+  }, [balance, gasLimit, gasPrice]);
 
   const esdtAmountAvailable = nft && nftBalance ? nftBalance : tokenBalance;
 
