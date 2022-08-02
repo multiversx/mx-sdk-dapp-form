@@ -16,11 +16,11 @@ import {
 
 import { UICustomizationContextPropsType } from 'contexts/UICustomization';
 import { generateTransaction, getTxType } from 'operations';
+import denominatedConfigGasPrice from 'operations/denominatedConfigGasPrice';
 import { ExtendedValuesType, TxTypeEnum, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
 import { getInitialErrors } from 'validation';
 import validationSchema from 'validationSchema';
-import denominatedConfigGasPrice from './operations/denominatedConfigGasPrice';
 
 export interface SendFormContainerPropsType {
   initialValues?: ExtendedValuesType;
@@ -98,8 +98,6 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     address: initialValues?.address ?? address,
     nft: tokensInfo?.initialNft,
     balance: initialValues?.balance || balance,
-    customBalanceRules: initialValues?.customBalanceRules,
-    customValidationRules: initialValues?.customValidationRules,
     chainId: initialValues?.chainId || networkConfig.chainId,
     tokens: tokensInfo?.initialTokens
   };

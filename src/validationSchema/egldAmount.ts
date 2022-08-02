@@ -1,11 +1,8 @@
 import { denomination } from '@elrondnetwork/dapp-core/constants/index';
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 
-import BigNumber from 'bignumber.js';
 import { string } from 'yup';
-import { ExtendedValuesType, ValuesEnum } from 'types';
-import { getCustomValidationRules } from 'validation';
+import { ExtendedValuesType } from 'types';
 import maxDecimals from 'validation/maxDecimals';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 
@@ -17,7 +14,7 @@ const decimals = string().test(
   (value) => maxDecimals(String(value))
 );
 
-const funds = string().test('funds', 'Insufficient funds', function (amount) {
+const funds = string().test('funds', 'Insufficient funds', function(amount) {
   if (amount != null) {
     const { gasLimit, data, gasPrice, balance, chainId } = this
       .parent as ExtendedValuesType;
@@ -36,21 +33,6 @@ const funds = string().test('funds', 'Insufficient funds', function (amount) {
   return true;
 });
 
-const customBalance = string().test(
-  'customBalance',
-  'Not enough balance',
-  function (amount) {
-    const { customBalanceRules } = this.parent as ExtendedValuesType;
-    if (amount != null && customBalanceRules?.customBalance) {
-      const bnCustomBalance = new BigNumber(customBalanceRules?.customBalance);
-      const nominatedAmount = nominate(amount.toString());
-      const valid = bnCustomBalance.isGreaterThanOrEqualTo(nominatedAmount);
-      return valid;
-    }
-    return true;
-  }
-);
-
 const isValidNumber = string().test(
   'isValidNumber',
   'Invalid number',
@@ -59,14 +41,7 @@ const isValidNumber = string().test(
   }
 );
 
-const validations = [
-  required,
-  isValidNumber,
-  decimals,
-  funds,
-  customBalance,
-  getCustomValidationRules(ValuesEnum.amount)
-];
+const validations = [required, isValidNumber, decimals, funds];
 
 export const egldAmount = validations.reduce(
   (previousValue, currentValue) => previousValue.concat(currentValue),
