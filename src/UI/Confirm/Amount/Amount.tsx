@@ -4,7 +4,7 @@ import {
   decimals as defaultDecimals
 } from '@elrondnetwork/dapp-core/constants';
 import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
-import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue/index';
+import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue';
 
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { NftType, TxTypeEnum } from 'types';
