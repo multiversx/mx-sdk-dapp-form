@@ -1,5 +1,6 @@
 import { newTransaction } from '@elrondnetwork/dapp-core/models/newTransaction';
 import {
+  MultiEsdtTxType,
   MultiSignTxType,
   TxDataTokenType,
   TxsDataTokensType
