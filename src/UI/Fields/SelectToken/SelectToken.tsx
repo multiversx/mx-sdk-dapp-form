@@ -1,5 +1,5 @@
 import React from 'react';
-import * as constants from '@elrondnetwork/dapp-core/constants';
+import * as constants from '@elrondnetwork/dapp-core/constants/index';
 import Select, { SingleValue } from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 

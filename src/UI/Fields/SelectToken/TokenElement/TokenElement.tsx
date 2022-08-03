@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import * as constants from '@elrondnetwork/dapp-core/constants';
-import { Denominate } from '@elrondnetwork/dapp-core/UI';
+import * as constants from '@elrondnetwork/dapp-core/constants/index';
+import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';

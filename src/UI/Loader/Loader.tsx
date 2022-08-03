@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Loader as SendLoader } from '@elrondnetwork/dapp-core/UI/Loader';
+import { Loader as SendLoader } from '@elrondnetwork/dapp-core/UI/Loader/index';
 
 import styles from './styles.module.scss';
 

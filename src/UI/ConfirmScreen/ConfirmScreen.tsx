@@ -1,5 +1,5 @@
 import React from 'react';
-import { LoginMethodsEnum } from '@elrondnetwork/dapp-core/types';
+import { LoginMethodsEnum } from '@elrondnetwork/dapp-core/types/enums';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';

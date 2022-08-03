@@ -1,8 +1,9 @@
 import React from 'react';
-import * as constants from '@elrondnetwork/dapp-core/constants';
-import { Denominate, UsdValue } from '@elrondnetwork/dapp-core/UI';
-import { nominate } from '@elrondnetwork/dapp-core/utils';
+import * as constants from '@elrondnetwork/dapp-core/constants/index';
 
+import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
+import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue/index';
+import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { NftType, TxTypeEnum } from 'types';
 import { Token } from '../Token';
 

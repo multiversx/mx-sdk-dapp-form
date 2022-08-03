@@ -1,5 +1,5 @@
 import React from 'react';
-import { Denominate } from '@elrondnetwork/dapp-core/UI';
+import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTooltip from 'react-tooltip';

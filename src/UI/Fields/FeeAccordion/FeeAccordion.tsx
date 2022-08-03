@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate';
+import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
 import {
   faAngleDown,
   faAngleRight,

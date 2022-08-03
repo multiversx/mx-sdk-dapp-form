@@ -1,6 +1,6 @@
 import React, { JSXElementConstructor, useEffect, useState } from 'react';
 import { fallbackNetworkConfigurations } from '@elrondnetwork/dapp-core/constants/index';
-import { NetworkType } from '@elrondnetwork/dapp-core/types';
+import { NetworkType } from '@elrondnetwork/dapp-core/types/network';
 
 import {
   getEnvironmentForChainId,

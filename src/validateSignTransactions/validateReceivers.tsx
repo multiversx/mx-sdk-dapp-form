@@ -1,4 +1,4 @@
-import { TxsDataTokensType } from '@elrondnetwork/dapp-core/types';
+import { TxsDataTokensType } from '@elrondnetwork/dapp-core/types/transactions';
 import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
 import { Address } from '@elrondnetwork/erdjs';
 import getTxWithReceiver from './getTxWithReceiver';

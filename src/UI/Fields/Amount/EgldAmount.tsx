@@ -1,5 +1,5 @@
 import React from 'react';
-import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue';
+import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue/index';
 
 import { ZERO } from 'constants/index';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
@@ -12,8 +12,12 @@ export const EgldAmount = () => {
   const { tokensInfo, amountInfo } = useSendFormContext();
 
   const { egldLabel, egldPriceInUsd } = tokensInfo;
-  const { isMaxClicked, isInvalid, maxAmountAvailable, maxAmountMinusDust } =
-    amountInfo;
+  const {
+    isMaxClicked,
+    isInvalid,
+    maxAmountAvailable,
+    maxAmountMinusDust
+  } = amountInfo;
 
   function AvailableAmountElement() {
     if (!isInvalid && amountInfo.amount) {
