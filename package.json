@@ -1,13 +1,14 @@
 {
   "name": "@elrondnetwork/dapp-core-form",
-  "version": "0.2.0-alpha.10",
+  "version": "0.2.0-alpha.11",
   "description": "A library to hold the main logic for a validating a form for transactions on the Elrond Network",
   "author": "ElrondNetwork",
   "license": "GPL-3.0-or-later",
   "repository": "ElrondNetwork/dapp-core-form",
-  "main": "./",
+  "main": "./__commonjs",
   "module": "./",
   "types": "./",
+  "react-native": "./",
   "engines": {
     "node": ">=16"
   },
