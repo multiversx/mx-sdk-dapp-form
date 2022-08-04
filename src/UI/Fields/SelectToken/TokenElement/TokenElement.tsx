@@ -10,7 +10,7 @@ import { scamFlag } from 'helpers';
 import { NftEnumType, NftType, TokenType } from 'types';
 
 import styles from './styles.module.scss';
-import ElrondSymbol from './symbol.svg';
+const ElrondSymbol = require('./symbol.svg').default;
 
 export const TokenElement = ({
   inDropdown = false,

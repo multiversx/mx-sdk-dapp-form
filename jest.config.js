@@ -5,7 +5,8 @@ module.exports = {
   roots: ['<rootDir>/src'],
   transform: {
     '^.+\\.[t|j]sx?$': 'ts-jest',
-    '^.+\\.scss$': 'jest-css-modules-transform'
+    '^.+\\.scss$': 'jest-css-modules-transform',
+    '\\.svg$': '<rootDir>/jestFileTransformer.js'
   },
 
   setupFiles: ['<rootDir>/src/setupTests.js'],
@@ -17,7 +18,6 @@ module.exports = {
       'identity-obj-proxy',
     '@elrondnetwork/dapp-core/(.*)':
       '<rootDir>/node_modules/@elrondnetwork/dapp-core/__commonjs/$1',
-    // react: '<rootDir>/node_modules/react',
     uint8arrays: '<rootDir>/node_modules/uint8arrays/cjs/src',
     multiformats: '<rootDir>/node_modules/multiformats/cjs/src'
   }
