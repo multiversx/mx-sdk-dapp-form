@@ -26,6 +26,16 @@ export const Token = ({
 }: TokenPropsType) => {
   const tokenLabel = nft?.name || '';
 
+  console.log({
+    tokenLabel,
+    isEsdtTransaction,
+    tokenId,
+    egldLabel,
+    tokenAvatar,
+    ZERO,
+    TokenElement
+  });
+
   return (
     <div className={styles.token}>
       <span className={styles.label}>
@@ -33,7 +43,7 @@ export const Token = ({
         Token
       </span>
 
-      <div>
+      {/* <div>
         {nft ? (
           <TokenElement
             inDropdown
@@ -64,7 +74,7 @@ export const Token = ({
             isEgld={tokenId === egldLabel}
           />
         )}
-      </div>
+      </div> */}
 
       {tokenIdError && <div className={globals.error}>{tokenIdError}</div>}
     </div>

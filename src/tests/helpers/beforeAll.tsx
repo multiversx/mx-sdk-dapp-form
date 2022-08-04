@@ -6,11 +6,14 @@ import {
   LoginMethodsEnum
 } from '@elrondnetwork/dapp-core/types/enums';
 import { render } from '@testing-library/react';
-import { SendFormContainer } from 'containers';
+import { SendFormContainer, SendFormContainerPropsType } from 'containers';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import useGetInitialValues, {
   GetInitialValuesReturnType
 } from 'hooks/useGetInitialValues';
+// import useGetInitialValues, {
+//   GetInitialValuesReturnType
+// } from 'hooks/useGetInitialValues';
 import getTxType from 'operations/getTxType';
 import { ExtendedValuesType } from 'types/form';
 import { ConfirmScreen } from 'UI/ConfirmScreen';
@@ -18,16 +21,17 @@ import { Form } from 'UI/Form';
 
 const activeNetwork = fallbackNetworkConfigurations[EnvironmentsEnum.devnet];
 
-export const beforeAll = () => {
+const TestWrapper = () => {
+  const configValues = {
+    receiver: '',
+    amount: '0',
+    tokenId: '',
+    gasLimit: '0',
+    gasPrice: '0',
+    data: ''
+  };
   const initValues = useGetInitialValues({
-    configValues: {
-      receiver: '',
-      amount: '',
-      tokenId: '',
-      gasLimit: '',
-      gasPrice: '',
-      data: ''
-    },
+    configValues,
     egldLabel: 'EGLD',
     address: '',
     chainId: '1',
@@ -36,8 +40,12 @@ export const beforeAll = () => {
     networkConfig: activeNetwork
   });
 
+  if (!initValues) {
+    return <span data-testid='span'>11</span>;
+  }
+
+  const initialValues = configValues;
   const {
-    initialValues,
     nft: initialNft,
     gasLimitCostError
     // computedTokens,
@@ -54,35 +62,41 @@ export const beforeAll = () => {
     // ...(isLedger ? ledgerProps : {})
   };
 
-  return render(
-    <SendFormContainer
-      networkConfig={{
-        ...activeNetwork,
-        skipFetchFromServer: true
-      }}
-      initGasLimitError={gasLimitCostError}
-      initialValues={validationValues}
-      onFormSubmit={() => 'log submit'}
-      accountInfo={{
-        address: '',
-        nonce: 0,
-        balance: '',
-        providerType: LoginMethodsEnum.extra
-      }}
-      formInfo={{
-        prefilledForm: Boolean(false),
-        skipToConfirm: false,
-        readonly: false,
-        onCloseForm: () => 'this is close form'
-      }}
-      tokensInfo={{
-        initialNft,
-        initialTokens: []
-      }}
-    >
+  const containerProps: Omit<SendFormContainerPropsType, 'children'> = {
+    networkConfig: {
+      ...activeNetwork,
+      skipFetchFromServer: true
+    },
+    initGasLimitError: gasLimitCostError,
+    initialValues: validationValues,
+    onFormSubmit: () => 'log submit',
+    accountInfo: {
+      address: '',
+      nonce: 0,
+      balance: '',
+      providerType: LoginMethodsEnum.extra
+    },
+    formInfo: {
+      prefilledForm: Boolean(false),
+      skipToConfirm: false,
+      readonly: false,
+      onCloseForm: () => 'this is close form'
+    },
+    tokensInfo: {
+      initialNft,
+      initialTokens: []
+    }
+  };
+  return (
+    <SendFormContainer {...containerProps}>
+      <span data-testid='span'>12</span>
       <FormContent />
     </SendFormContainer>
   );
+};
+
+export const beforeAll = () => {
+  return render(<TestWrapper />);
 };
 
 function FormContent() {

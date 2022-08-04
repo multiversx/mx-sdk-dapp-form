@@ -34,13 +34,18 @@ export const SelectToken = ({ label }: { label?: string }) => {
     isTokenIdInvalid
   } = tokensInfo;
 
-  const FormatOptionLabel = ({ token }: { token: TokenType }) => (
-    <TokenElement
-      inDropdown
-      token={token}
-      isEgld={token.identifier === egldLabel}
-    />
-  );
+  const FormatOptionLabel = ({ token }: { token: TokenType }) => {
+    console.log(TokenElement);
+
+    return <div>{JSON.stringify(token)}</div>;
+    // return (
+    //   <TokenElement
+    //     inDropdown
+    //     token={token}
+    //     isEgld={token.identifier === egldLabel}
+    //   />
+    // );
+  };
 
   const allTokens: TokenType[] = [
     {
