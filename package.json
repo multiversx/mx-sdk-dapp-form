@@ -114,7 +114,6 @@
     "react-tooltip": "4.2.21"
   },
   "dependencies": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.12",
     "anchorme": "2.1.2",
     "axios": "0.24.0",
     "bech32": "2.0.0",
