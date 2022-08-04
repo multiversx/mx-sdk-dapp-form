@@ -106,6 +106,7 @@ export const To = () => {
       <div className={styles.toFieldAutocomplete}>
         <Typeahead
           id='receiverWrapper'
+          data-testid={ValuesEnum.receiver}
           filterBy={filterBy}
           disabled={getIsDisabled(ValuesEnum.receiver, readonly)}
           ignoreDiacritics={true}

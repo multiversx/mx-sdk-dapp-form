@@ -13,6 +13,7 @@ import {
   EnvironmentsEnum,
   LoginMethodsEnum
 } from '@elrondnetwork/dapp-core/types/enums';
+import { Loader } from '@elrondnetwork/dapp-core/UI/Loader';
 import { render } from '@testing-library/react';
 import { SendFormContainer, SendFormContainerPropsType } from 'containers';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
@@ -67,7 +68,7 @@ const TestWrapper = ({
   });
 
   if (!initValues) {
-    return <span data-testid='span'>11</span>;
+    return <Loader dataTestId='loader' />;
   }
 
   const initialValues = formConfigValues;
