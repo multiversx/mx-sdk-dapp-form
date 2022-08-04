@@ -14,6 +14,7 @@ import { ExtendedValuesType, NftType, TokenType, TxTypeEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useNetworkConfigContext } from '../NetworkContext';
 import { useGetEconomicsInfo } from './utils';
+import uniqBy from 'lodash/uniqBy';
 
 export interface TokensContextInitializationPropsType {
   initialNft?: NftType;
@@ -73,7 +74,12 @@ export function TokensContextProvider({
     setAreTokensLoading(true);
     const newTokens = await fetchAllTokens(address);
     const newMetaEsdts = await fetchAllMetaEsdts(address);
-    const tokensFromServer = [...newTokens, ...newMetaEsdts];
+    const currentTokens = tokens ?? [];
+    const tokensFromServer = uniqBy(
+      [...currentTokens, ...newTokens, ...newMetaEsdts],
+      (token) => token.identifier
+    );
+
     setFieldValue(tokensField, tokensFromServer);
     previouslyFetchedTokens = tokensFromServer;
     setAreTokensLoading(false);

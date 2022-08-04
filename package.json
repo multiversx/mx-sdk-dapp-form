@@ -1,11 +1,11 @@
 {
   "name": "@elrondnetwork/dapp-core-form",
-  "version": "0.2.0-alpha.10",
+  "version": "0.2.0-alpha.12",
   "description": "A library to hold the main logic for a validating a form for transactions on the Elrond Network",
   "author": "ElrondNetwork",
   "license": "GPL-3.0-or-later",
   "repository": "ElrondNetwork/dapp-core-form",
-  "main": "./",
+  "main": "./__commonjs",
   "module": "./",
   "types": "./",
   "react-native": "./",
@@ -24,7 +24,7 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.11",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.14",
     "@size-limit/preset-small-lib": "7.0.8",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
@@ -89,23 +89,16 @@
     "transaction"
   ],
   "peerDependencies": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.11",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.14",
     "@elrondnetwork/erdjs": "10.2.7",
     "react": ">=18",
     "react-dom": ">=18"
   },
   "resolutions": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.11",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.14",
     "@elrondnetwork/erdjs": "10.2.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"
-  },
-  "exports": {
-    "./*": {
-      "import": "./*",
-      "require": "./__commonjs/*",
-      "default": "./*"
-    }
   },
   "optionalDependencies": {
     "@fortawesome/fontawesome-svg-core": "6.1.0",
