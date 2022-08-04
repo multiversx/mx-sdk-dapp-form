@@ -1,5 +1,13 @@
 import React from 'react';
-import { fallbackNetworkConfigurations } from '@elrondnetwork/dapp-core/constants/network';
+import {
+  gasLimit,
+  gasPrice,
+  testnetEgldLabel
+} from '@elrondnetwork/dapp-core/constants/index';
+import {
+  fallbackNetworkConfigurations,
+  testnetChainId
+} from '@elrondnetwork/dapp-core/constants/network';
 
 import {
   EnvironmentsEnum,
@@ -11,40 +19,58 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import useGetInitialValues, {
   GetInitialValuesReturnType
 } from 'hooks/useGetInitialValues';
-// import useGetInitialValues, {
-//   GetInitialValuesReturnType
-// } from 'hooks/useGetInitialValues';
 import getTxType from 'operations/getTxType';
-import { ExtendedValuesType } from 'types/form';
+import { ExtendedValuesType, FormConfigType } from 'types/form';
 import { ConfirmScreen } from 'UI/ConfirmScreen';
 import { Form } from 'UI/Form';
 
-const activeNetwork = fallbackNetworkConfigurations[EnvironmentsEnum.devnet];
+const activeNetwork = fallbackNetworkConfigurations[EnvironmentsEnum.testnet];
 
-const TestWrapper = () => {
-  const configValues = {
-    receiver: '',
-    amount: '0',
-    tokenId: '',
-    gasLimit: '0',
-    gasPrice: '0',
-    data: ''
-  };
+const formConfiguration: FormConfigType = {
+  receiver: '',
+  amount: '',
+  tokenId: testnetEgldLabel,
+  gasLimit: gasLimit,
+  gasPrice: gasPrice.toString(),
+  data: ''
+};
+
+const accountConfiguration = {
+  egldLabel: testnetEgldLabel,
+  address: '',
+  chainId: testnetChainId,
+  balance: '812350000000000000',
+  nonce: 0,
+  networkConfig: activeNetwork
+};
+
+interface TestWrapperType {
+  formConfigValues?: FormConfigType;
+  balance?: string;
+  address?: string;
+  chainId?: string;
+  ledger?: ExtendedValuesType['ledger'];
+}
+
+const TestWrapper = ({
+  formConfigValues = formConfiguration,
+  balance = accountConfiguration.balance,
+  address = accountConfiguration.address,
+  chainId = accountConfiguration.chainId,
+  ledger
+}: TestWrapperType) => {
   const initValues = useGetInitialValues({
-    configValues,
-    egldLabel: 'EGLD',
-    address: '',
-    chainId: '1',
-    balance: '0',
-    nonce: 0,
-    networkConfig: activeNetwork
+    configValues: formConfigValues,
+    ...accountConfiguration,
+    balance,
+    address
   });
 
   if (!initValues) {
     return <span data-testid='span'>11</span>;
   }
 
-  const initialValues = configValues;
+  const initialValues = formConfigValues;
   const {
     nft: initialNft,
     gasLimitCostError
@@ -55,11 +81,15 @@ const TestWrapper = () => {
 
   const validationValues: ExtendedValuesType = {
     ...initialValues,
-    txType: getTxType({ nft: initialNft, tokenId: initialValues.tokenId }),
-    address: '',
-    chainId: '1',
-    balance: '0'
-    // ...(isLedger ? ledgerProps : {})
+    tokenId: String(initialValues.tokenId),
+    txType: getTxType({
+      nft: initialNft,
+      tokenId: String(initialValues.tokenId)
+    }),
+    address,
+    chainId,
+    balance,
+    ...(ledger ? ledger : {})
   };
 
   const containerProps: Omit<SendFormContainerPropsType, 'children'> = {
@@ -71,13 +101,13 @@ const TestWrapper = () => {
     initialValues: validationValues,
     onFormSubmit: () => 'log submit',
     accountInfo: {
-      address: '',
-      nonce: 0,
-      balance: '',
+      address,
+      nonce: accountConfiguration.nonce,
+      balance,
       providerType: LoginMethodsEnum.extra
     },
     formInfo: {
-      prefilledForm: Boolean(false),
+      prefilledForm: false,
       skipToConfirm: false,
       readonly: false,
       onCloseForm: () => 'this is close form'
@@ -89,14 +119,13 @@ const TestWrapper = () => {
   };
   return (
     <SendFormContainer {...containerProps}>
-      <span data-testid='span'>12</span>
       <FormContent />
     </SendFormContainer>
   );
 };
 
-export const beforeAll = () => {
-  return render(<TestWrapper />);
+export const beforeAll = (props?: TestWrapperType) => {
+  return render(<TestWrapper {...props} />);
 };
 
 function FormContent() {
