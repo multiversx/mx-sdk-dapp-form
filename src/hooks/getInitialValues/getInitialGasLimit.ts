@@ -6,9 +6,7 @@ export async function getInitialGasLimit(
   props: GetInitialValuesType & { computedTokenId: string }
 ) {
   const { configValues, ...rest } = props;
-  const delegationContractData = await getDelegationDataForChainId(
-    props.chainId
-  );
+  const delegationContractData = getDelegationDataForChainId(props.chainId);
 
   const computeGasLimitProps: ComputeInitGasLimitType = {
     isInternal: ['1', 'T'].includes(props.chainId),
