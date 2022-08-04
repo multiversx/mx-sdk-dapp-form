@@ -5,7 +5,7 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import { Typeahead, Menu, MenuItem } from 'react-bootstrap-typeahead';
+import { Typeahead, Menu, MenuItem, Hint } from 'react-bootstrap-typeahead';
 import { MenuProps } from 'react-bootstrap-typeahead/types/components/Menu';
 import {
   FilterByCallback,
@@ -67,12 +67,14 @@ export const To = () => {
   const [value, setValue] = useState(receiver);
   const [key, setKey] = useState('');
 
+  const onBlur = () => onBlurReceiver(new Event('blur'));
+
   const changeAndBlurInput = useCallback((value: string) => {
     onChangeReceiver(value ? value.trim() : '');
 
     // Trigger validation after blur, by instantiating a new Event class and
     // pushing the action at the end of the event loop through setTimeout function.
-    setTimeout(() => onBlurReceiver(new Event('blur')));
+    setTimeout(onBlur);
   }, []);
 
   const onInputChange = (value: string) => {
@@ -93,6 +95,23 @@ export const To = () => {
     }
   };
 
+  const renderInput = ({
+    inputRef,
+    referenceElementRef,
+    ...inputProps
+  }: any) => (
+    <Hint>
+      <input
+        {...inputProps}
+        data-testid='destinationAddress'
+        ref={(node: any) => {
+          inputRef(node);
+          referenceElementRef(node);
+        }}
+      />
+    </Hint>
+  );
+
   const filterBy: FilterByCallback = (option, props) =>
     option.toLowerCase().indexOf(props.text.toLowerCase()) !== -1 &&
     props.text.length > 2;
@@ -106,7 +125,6 @@ export const To = () => {
       <div className={styles.toFieldAutocomplete}>
         <Typeahead
           id='receiverWrapper'
-          data-testid={ValuesEnum.receiver}
           filterBy={filterBy}
           disabled={getIsDisabled(ValuesEnum.receiver, readonly)}
           ignoreDiacritics={true}
@@ -116,6 +134,8 @@ export const To = () => {
           defaultInputValue={value}
           options={knownAddresses}
           onChange={onChange}
+          onBlur={onBlur}
+          renderInput={renderInput}
           onInputChange={onInputChange}
           renderMenu={CustomMenu}
           inputProps={{ className: globals.input }}

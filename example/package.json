@@ -7,7 +7,7 @@
   "repository": "@elrondnetwork/dapp-core-form",
   "dependencies": {
     "@elrondnetwork/dapp-core": "2.0.0-beta.14",
-    "@elrondnetwork/dapp-core-form": "0.2.0-alpha.12",
+    "@elrondnetwork/dapp-core-form": "0.2.0-alpha.13",
     "@elrondnetwork/erdjs": "10.2.7",
     "@elrondnetwork/erdjs-network-providers": "0.1.5",
     "@fortawesome/fontawesome-svg-core": "6.1.0",
@@ -25,7 +25,8 @@
     "web-vitals": "1.0.1"
   },
   "scripts": {
-    "start": "npm link ../dist ../node_modules/react && HTTPS=true PORT=3001 react-scripts start",
+    "start1": "npm link ../dist && cd ../ && npm link ./example/node_modules/react & cd ./example && HTTPS=true PORT=3001 react-scripts start",
+    "start": "HTTPS=true PORT=3001 react-scripts start",
     "start-testnet": "npm link ../dist ../node_modules/react && npm run copy-testnet-config & npm run start",
     "start-devnet": "npm link ../dist ../node_modules/react && npm run copy-devnet-config & npm run start",
     "build": "react-scripts build",
