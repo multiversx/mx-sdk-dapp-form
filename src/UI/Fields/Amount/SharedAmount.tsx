@@ -92,7 +92,11 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
         )}
       </div>
 
-      {isInvalid && <div className={globals.error}>{error}</div>}
+      {isInvalid && (
+        <div className={globals.error} data-testid='amountError'>
+          {error}
+        </div>
+      )}
 
       {TokenSelector && <TokenSelector />}
 

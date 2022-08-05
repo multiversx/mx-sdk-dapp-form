@@ -8,8 +8,12 @@ export const getPercentageOfAmount = (
   amount: string,
   maxAmountMinusDust: string
 ) => {
-  const value = stringIsFloat(amount) ? amount : ZERO;
-  const denominatedBN = new BigNumber(maxAmountMinusDust.replace('.', ''));
+  const isAmountValid = !isNaN(amount as any) && stringIsFloat(String(amount));
+  const value = isAmountValid ? amount : ZERO;
+
+  const denominatedBN = stringIsFloat(String(maxAmountMinusDust))
+    ? new BigNumber(String(maxAmountMinusDust).replace('.', ''))
+    : new BigNumber(ZERO);
   const nominatedBN = new BigNumber(nominate(value));
   const percentage = 100 / Number(String(denominatedBN.dividedBy(nominatedBN)));
 

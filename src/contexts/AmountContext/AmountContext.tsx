@@ -82,8 +82,15 @@ export function AmountContextProvider({
 
   const onSetAmountPercentage = useCallback(
     (percentage: number, updateFieldValue = true) => {
-      const total = maxAmountMinusDust;
-      const amountBN = new BigNumber(total).times(percentage).dividedBy(100);
+      const avoidDivisionByZero = new BigNumber(maxAmountMinusDust).isZero();
+      if (avoidDivisionByZero) {
+        setAmountRange(0);
+        return;
+      }
+
+      const amountBN = new BigNumber(maxAmountMinusDust)
+        .times(percentage)
+        .dividedBy(100);
       const value = denominate({ input: nominate(String(amountBN)), decimals });
 
       if (updateFieldValue) {
