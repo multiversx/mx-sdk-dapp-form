@@ -125,9 +125,7 @@ export function GasContextProvider({
     (newValue: string | React.ChangeEvent<any>, shouldValidate = false) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
-      if (isNaN(Number(value))) {
-        return;
-      }
+
       setFieldValue(ValuesEnum.gasLimit, value, shouldValidate);
     },
     []

@@ -8,7 +8,7 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
-import styles from './styles.module.scss';
+import styles from './../styles.module.scss';
 
 export const GasLimit = () => {
   const { formInfo, gasInfo } = useSendFormContext();
