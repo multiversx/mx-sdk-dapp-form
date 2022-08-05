@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { GasLimit } from '../GasLimit';
+import { GasLimit } from '../GasLimit/GasLimit';
 import { GasPrice } from '../GasPrice';
 import { FeeInFiat } from './FeeInFiat';
 
