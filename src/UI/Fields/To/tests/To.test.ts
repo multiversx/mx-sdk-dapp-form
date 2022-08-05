@@ -16,7 +16,7 @@ describe('Destination address', () => {
       expect(req!.innerHTML).toBe('Required');
     });
   });
-  test('should validate address', async () => {
+  it('should validate address', async () => {
     const { findByTestId, queryByText } = beforeAll();
     const input: any = await findByTestId('destinationAddress');
     const value = '123';

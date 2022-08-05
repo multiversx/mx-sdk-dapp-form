@@ -15,7 +15,7 @@ const decimals = string().test(
 );
 
 const funds = string().test('funds', 'Insufficient funds', function(amount) {
-  if (amount != null) {
+  if (amount && stringIsFloat(amount)) {
     const { gasLimit, data, gasPrice, balance, chainId } = this
       .parent as ExtendedValuesType;
 
