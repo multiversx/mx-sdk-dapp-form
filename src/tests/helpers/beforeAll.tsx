@@ -15,6 +15,7 @@ import {
 } from '@elrondnetwork/dapp-core/types/enums';
 import { Loader } from '@elrondnetwork/dapp-core/UI/Loader';
 import { render } from '@testing-library/react';
+import { testAddress } from '__mocks__';
 import { SendFormContainer, SendFormContainerPropsType } from 'containers';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import useGetInitialValues, {
@@ -38,7 +39,7 @@ const formConfiguration: FormConfigType = {
 
 const accountConfiguration = {
   egldLabel: testnetEgldLabel,
-  address: '',
+  address: testAddress,
   chainId: testnetChainId,
   balance: '812350000000000000',
   nonce: 0,

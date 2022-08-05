@@ -29,4 +29,16 @@ describe('SendFormContainer', () => {
       expect(req!.innerHTML).toBe('Required');
     });
   });
+  test('should validate address', async () => {
+    const { findByTestId, queryByText } = beforeAll();
+    const input: any = await findByTestId('destinationAddress');
+    const value = '123';
+    const data = { target: { value } };
+    fireEvent.change(input, data);
+    fireEvent.blur(input);
+    await waitFor(() => {
+      const req = queryByText('Invalid address');
+      expect(req!.innerHTML).toBe('Invalid address');
+    });
+  });
 });

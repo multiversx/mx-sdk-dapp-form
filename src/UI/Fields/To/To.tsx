@@ -25,24 +25,37 @@ const CustomMenu = (
   results: Array<Option>,
   props: MenuProps,
   state: TypeaheadManagerChildProps
-) => (
-  <Menu {...props} className={styles.toFieldMenu}>
-    {results.map((option: Option, position: number) => (
-      <MenuItem
-        key={option.toString()}
-        {...{
-          option,
-          position,
-          className: classNames(styles.toFieldItem, {
-            [styles.highlighted]: position === state.activeIndex
-          })
-        }}
-      >
-        {option.toString()}
-      </MenuItem>
-    ))}
-  </Menu>
-);
+) => {
+  const {
+    // remove unused props which are not recognized by react
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    renderMenuItemChildren,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    newSelectionPrefix,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    paginationText,
+    ...menuProps
+  } = props as any;
+
+  return (
+    <Menu {...menuProps} className={styles.toFieldMenu}>
+      {results.map((option: Option, position: number) => (
+        <MenuItem
+          key={option.toString()}
+          {...{
+            option,
+            position,
+            className: classNames(styles.toFieldItem, {
+              [styles.highlighted]: position === state.activeIndex
+            })
+          }}
+        >
+          {option.toString()}
+        </MenuItem>
+      ))}
+    </Menu>
+  );
+};
 
 export const To = () => {
   const {
