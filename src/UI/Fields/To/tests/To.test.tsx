@@ -1,20 +1,7 @@
 import { fireEvent, waitFor } from '@testing-library/react';
-import { beforeAll } from './helpers/beforeAll';
+import { beforeAll } from 'tests/helpers/beforeAll';
 
-describe('SendFormContainer', () => {
-  test('renders SendFormContainer component', async () => {
-    const { findByTestId } = beforeAll();
-
-    const loader = await findByTestId('loader');
-
-    expect(loader).toBeDefined();
-
-    waitFor(async () => {
-      const span = await findByTestId('span');
-
-      expect(span.innerHTML).toBe('12');
-    });
-  });
+describe('Destination address', () => {
   test('Destination address should not be empty', async () => {
     const { findByTestId, queryByText } = beforeAll();
 
