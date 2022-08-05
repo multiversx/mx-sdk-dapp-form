@@ -106,7 +106,7 @@ export function GasContextProvider({
     isEsdtTransaction,
     data
   });
-  const isGasLimitInvalid = checkInvalid(ValuesEnum.gasPrice);
+  const isGasLimitInvalid = checkInvalid(ValuesEnum.gasLimit);
   const isGasPriceInvalid = checkInvalid(ValuesEnum.gasPrice);
 
   const handleUpdateGasPrice = useCallback(
