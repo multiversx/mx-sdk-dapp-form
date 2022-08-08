@@ -25,6 +25,8 @@ export const Data = () => {
   const isDisabled =
     !isEgldTransaction || getIsDisabled(ValuesEnum.data, readonly);
 
+  console.log(112, isDataInvalid);
+
   return (
     <div className={styles.fieldData}>
       {label && (

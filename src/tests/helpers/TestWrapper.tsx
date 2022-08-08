@@ -65,8 +65,12 @@ export const TestWrapper = ({
     address,
     chainId,
     balance,
-    ...(ledger ? ledger : {})
+    ledger: ledger != null ? { ...ledger } : undefined
   };
+
+  console.log('\x1b[42m%s\x1b[0m', '--------');
+
+  console.log('\x1b[42m%s\x1b[0m', validationValues.ledger?.version, ledger);
 
   const containerProps: Omit<SendFormContainerPropsType, 'children'> = {
     networkConfig: {

@@ -27,4 +27,27 @@ describe('Data field tests', () => {
       expect(feeValue.textContent).toBe('≈ $0.0029');
     });
   });
+  test('data field over 300 character error for ledger app version 1.0.10', async () => {
+    const data = {
+      target: {
+        value: new Array(300 + 2).join('0') // creates a 301 characters long string
+      }
+    };
+
+    const methods = beforeAll({
+      ledger: {
+        ledgerDataActive: true,
+        version: '1.0.8'
+      }
+    });
+
+    const input = await methods.findByTestId('data');
+    fireEvent.change(input, data);
+    fireEvent.blur(input);
+
+    const dataError = await methods.findByTestId('dataError');
+    expect(dataError.textContent).toBe(
+      'Data too long. You need at least Elrond app version 1.0.11. Update Elrond app to continue'
+    );
+  });
 });
