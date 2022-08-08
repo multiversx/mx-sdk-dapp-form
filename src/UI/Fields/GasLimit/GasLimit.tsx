@@ -22,6 +22,7 @@ export const GasLimit = () => {
     gasLimitError,
     isGasLimitInvalid
   } = gasInfo;
+
   const onResetClick = (e: React.MouseEvent) => {
     e.preventDefault();
     onResetGasLimit();
@@ -77,7 +78,12 @@ export const GasLimit = () => {
         </div>
 
         {isGasLimitInvalid && (
-          <div className={globals.error}>{gasLimitError}</div>
+          <div
+            className={globals.error}
+            data-testid={`${ValuesEnum.gasLimit}Error`}
+          >
+            {gasLimitError}
+          </div>
         )}
       </div>
     </div>

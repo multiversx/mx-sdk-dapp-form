@@ -106,7 +106,11 @@ export function GasContextProvider({
     isEsdtTransaction,
     data
   });
-  const isGasLimitInvalid = checkInvalid(ValuesEnum.gasLimit);
+
+  const isAmountValid = !checkInvalid(ValuesEnum.amount);
+  // gasLimit errors should only show once amonut is valid
+  const isGasLimitInvalid = isAmountValid && checkInvalid(ValuesEnum.gasLimit);
+
   const isGasPriceInvalid = checkInvalid(ValuesEnum.gasPrice);
 
   const handleUpdateGasPrice = useCallback(
