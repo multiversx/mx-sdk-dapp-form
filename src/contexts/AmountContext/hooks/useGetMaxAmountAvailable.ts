@@ -86,12 +86,6 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
         decimals: defaultDecimals,
         chainId
       });
-      console.log('\x1b[42m%s\x1b[0m', 'ba;', {
-        balance,
-        denominatedBalance,
-        gasLimit,
-        gasPrice: nominate(gasPrice)
-      });
 
       setDenominatedEgldBalance(denominatedBalance);
       setBalanceMinusDust(entireBalanceMinusDust);

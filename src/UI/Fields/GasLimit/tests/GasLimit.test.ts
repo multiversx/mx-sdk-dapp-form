@@ -164,31 +164,31 @@ describe('GasLimit field', () => {
       expect(req).toBe(null);
     });
   });
-  // it('should show error when not enough balance for zero transaction with large gas', async () => {
-  //   const render = beforeAll({
-  //     balance: '1_000_000_000_000_000'.replace('_', '') // 0.001
-  //   });
+  it('should show error when not enough balance for zero transaction with large gas', async () => {
+    const render = beforeAll({
+      balance: '1_000_000_000_000_000'.replace('_', '') // 0.001
+    });
 
-  //   const destinationAddress: any = await render.findByTestId(
-  //     'destinationAddress'
-  //   );
-  //   const value =
-  //     'erd15s35epmf7pvq822yrcgr20utj8lsn7fvgqnrl3ls9gtazu7leeyqr5kkaf';
-  //   fireEvent.change(destinationAddress, { target: { value } });
+    const destinationAddress: any = await render.findByTestId(
+      'destinationAddress'
+    );
+    const value =
+      'erd15s35epmf7pvq822yrcgr20utj8lsn7fvgqnrl3ls9gtazu7leeyqr5kkaf';
+    fireEvent.change(destinationAddress, { target: { value } });
 
-  //   const amount = render.getByTestId('amount');
-  //   fireEvent.change(amount, { target: { value: '0' } });
+    const amount = render.getByTestId('amount');
+    fireEvent.change(amount, { target: { value: '0' } });
 
-  //   const gasLimit = render.getByTestId('gasLimit');
-  //   fireEvent.change(gasLimit, { target: { value: '600000000' } });
+    const gasLimit = render.getByTestId('gasLimit');
+    fireEvent.change(gasLimit, { target: { value: '600000000' } });
 
-  //   const sendButton = render.getByTestId('sendBtn');
-  //   fireEvent.click(sendButton);
-  //   await waitFor(() => {
-  //     const gasLimitError = render.getByTestId('gasLimitError');
-  //     expect(gasLimitError.innerHTML).toBe('Insufficient funds');
-  //     const amountError = render.queryByTestId('amountError');
-  //     expect(amountError).toBeNull();
-  //   });
-  // });
+    const sendButton = render.getByTestId('sendBtn');
+    fireEvent.click(sendButton);
+    await waitFor(() => {
+      const gasLimitError = render.getByTestId('gasLimitError');
+      expect(gasLimitError.innerHTML).toBe('Insufficient funds');
+      const amountError = render.queryByTestId('amountError');
+      expect(amountError).toBeNull();
+    });
+  });
 });
