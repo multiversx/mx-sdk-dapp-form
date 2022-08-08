@@ -16,7 +16,11 @@ import { ExtendedValuesType, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';
 import { useGetMaxAmountAvailable } from './hooks';
-import { getIsMaxButtonVisible, getPercentageOfAmount } from './utils';
+import {
+  getIsAmountInvalid,
+  getIsMaxButtonVisible,
+  getPercentageOfAmount
+} from './utils';
 
 export interface AmountContextPropsType {
   amount: string;
@@ -49,13 +53,14 @@ export function AmountContextProvider({
   const {
     values,
     errors,
+    touched,
     handleBlur,
     setFieldValue,
     setFieldError,
     setFieldTouched
   } = useFormikContext<ExtendedValuesType>();
 
-  const { checkInvalid, readonly, uiOptions } = useFormContext();
+  const { readonly, uiOptions } = useFormContext();
   const { maxAmountAvailable, maxAmountMinusDust } = useGetMaxAmountAvailable();
 
   const [amountRange, setAmountRange] = useState(
@@ -143,10 +148,17 @@ export function AmountContextProvider({
     return onChange(maxAmountMinusDust || values.amount);
   }, [maxAmountMinusDust]);
 
+  // if the amount is zero, let the insufficient funds error go to gasLimit
+  const isInvalid = getIsAmountInvalid({
+    amount: values.amount,
+    errors,
+    touched
+  });
+
   const value = {
     amount: values.amount,
     error: errors.amount,
-    isInvalid: checkInvalid(ValuesEnum.amount),
+    isInvalid,
     maxAmountAvailable,
     maxAmountMinusDust,
     isMaxButtonVisible,

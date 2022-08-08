@@ -9,6 +9,7 @@ import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
 import { useFormikContext } from 'formik';
 import { tokenGasLimit, ZERO } from 'constants/index';
+import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
@@ -62,6 +63,8 @@ export function GasContextProvider({
 }: GasContextProviderPropsType) {
   const [feeLimit, setFeeLimit] = useState(ZERO);
 
+  const formikContext = useFormikContext<ExtendedValuesType>();
+
   const {
     values,
     touched,
@@ -72,8 +75,17 @@ export function GasContextProvider({
     },
     setFieldValue,
     setFieldTouched
-  } = useFormikContext<ExtendedValuesType>();
-  const { gasPrice, gasLimit, data, tokenId, receiver, txType } = values;
+  } = formikContext;
+
+  const {
+    gasPrice,
+    gasLimit,
+    data,
+    tokenId,
+    receiver,
+    txType,
+    amount
+  } = values;
 
   const {
     checkInvalid,
@@ -107,9 +119,15 @@ export function GasContextProvider({
     data
   });
 
-  const isAmountValid = !checkInvalid(ValuesEnum.amount);
+  const isAmountInvalid = getIsAmountInvalid({
+    amount,
+    errors: formikContext.errors,
+    touched
+  });
+
   // gasLimit errors should only show once amonut is valid
-  const isGasLimitInvalid = isAmountValid && checkInvalid(ValuesEnum.gasLimit);
+  const isGasLimitInvalid =
+    !isAmountInvalid && checkInvalid(ValuesEnum.gasLimit);
 
   const isGasPriceInvalid = checkInvalid(ValuesEnum.gasPrice);
 

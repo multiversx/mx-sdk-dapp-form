@@ -23,7 +23,11 @@ export const EgldAmount = () => {
     if (!isInvalid && amountInfo.amount) {
       return (
         <div className={styles.container}>
-          <UsdValue amount={amountInfo.amount} usd={egldPriceInUsd} />
+          <UsdValue
+            amount={amountInfo.amount}
+            usd={egldPriceInUsd}
+            data-testid={`egldPrice_${egldPriceInUsd}`}
+          />
 
           {amountInfo.amount === maxAmountMinusDust && isMaxClicked && (
             <span className={styles.amountInfo}>

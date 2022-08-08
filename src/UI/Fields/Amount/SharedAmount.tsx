@@ -17,7 +17,7 @@ interface SharedAmountType {
 
 export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   const {
-    formInfo: { checkInvalid, readonly },
+    formInfo: { readonly },
     amountInfo
   } = useSendFormContext();
 
@@ -30,8 +30,6 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
     }
   } = useUICustomizationContext();
 
-  const isInvalid = checkInvalid(ValuesEnum.amount);
-
   const {
     amount,
     error,
@@ -39,7 +37,8 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
     onMaxClicked,
     onFocus,
     onBlur,
-    onChange
+    onChange,
+    isInvalid
   } = amountInfo;
 
   return (

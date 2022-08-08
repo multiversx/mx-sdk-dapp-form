@@ -135,12 +135,9 @@ describe('GasLimit field', () => {
     });
   });
   it('should not show error when writing in data', async () => {
-    const {
-      getByLabelText,
-      queryByText,
-      getByText,
-      findByTestId
-    } = beforeAll();
+    const methods = beforeAll();
+
+    const { getByLabelText, queryByText, getByText, findByTestId } = methods;
 
     const address: any = await findByTestId('destinationAddress'); // TODO change to receiver
     fireEvent.change(address, { target: { value: testAddress } });
@@ -163,31 +160,34 @@ describe('GasLimit field', () => {
       const req = queryByText(/^Gas limit must be greater/);
       expect(req).toBe(null);
     });
+
+    const usdValue = await findByTestId('egldPrice_58.14');
+
+    expect(usdValue).toBeDefined();
   });
   it('should show error when not enough balance for zero transaction with large gas', async () => {
-    const render = beforeAll({
+    const methods = beforeAll({
       balance: '1_000_000_000_000_000'.replace('_', '') // 0.001
     });
 
-    const destinationAddress: any = await render.findByTestId(
+    const destinationAddress: any = await methods.findByTestId(
       'destinationAddress'
     );
-    const value =
-      'erd15s35epmf7pvq822yrcgr20utj8lsn7fvgqnrl3ls9gtazu7leeyqr5kkaf';
-    fireEvent.change(destinationAddress, { target: { value } });
+    fireEvent.change(destinationAddress, { target: { value: testAddress } });
 
-    const amount = render.getByTestId('amount');
+    const amount = methods.getByTestId('amount');
     fireEvent.change(amount, { target: { value: '0' } });
 
-    const gasLimit = render.getByTestId('gasLimit');
+    const gasLimit = methods.getByTestId('gasLimit');
     fireEvent.change(gasLimit, { target: { value: '600000000' } });
 
-    const sendButton = render.getByTestId('sendBtn');
+    const sendButton = methods.getByTestId('sendBtn');
     fireEvent.click(sendButton);
+
     await waitFor(() => {
-      const gasLimitError = render.getByTestId('gasLimitError');
+      const gasLimitError = methods.getByTestId('gasLimitError');
       expect(gasLimitError.innerHTML).toBe('Insufficient funds');
-      const amountError = render.queryByTestId('amountError');
+      const amountError = methods.queryByTestId('amountError');
       expect(amountError).toBeNull();
     });
   });
