@@ -1,6 +1,5 @@
 import {
   gasLimit,
-  gasPrice,
   testnetEgldLabel
 } from '@elrondnetwork/dapp-core/constants/index';
 
@@ -11,6 +10,6 @@ export const formConfiguration: FormConfigType = {
   amount: '',
   tokenId: testnetEgldLabel,
   gasLimit: gasLimit,
-  gasPrice: gasPrice.toString(),
+  gasPrice: '0.000000001',
   data: ''
 };
