@@ -1,6 +1,6 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { denominateSelector } from 'tests/helpers';
-import { beforeAll, preventAsyncLogging } from 'tests/helpers';
+import { beforeAll } from 'tests/helpers';
 
 describe('Data field tests', () => {
   test('data changes transaction fee', async () => {
