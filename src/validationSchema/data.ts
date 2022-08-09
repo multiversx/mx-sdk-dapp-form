@@ -22,8 +22,6 @@ const hashSign = string().test({
   test: function hashSignCheck(value) {
     const { ledger } = this.parent as ExtendedValuesType;
 
-    console.log('\x1b[42m%s\x1b[0m', 'in test', ledger);
-
     if (ledger) {
       const { ledgerWithHashSign } = getLedgerVersionOptions(ledger.version);
       if (value && value.length > 300 && !ledgerWithHashSign) {

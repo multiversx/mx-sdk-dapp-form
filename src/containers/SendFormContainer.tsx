@@ -99,7 +99,8 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     nft: tokensInfo?.initialNft,
     balance: initialValues?.balance || balance,
     chainId: initialValues?.chainId || networkConfig.chainId,
-    tokens: tokensInfo?.initialTokens
+    tokens: tokensInfo?.initialTokens,
+    ledger: initialValues?.ledger
   };
 
   return (
