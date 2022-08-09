@@ -9,7 +9,8 @@ import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
-import styles from './styles.module.scss';
+import styles from './../styles.module.scss';
+import { MaxButton } from './MaxButton';
 
 interface SharedAmountType {
   AvailableAmountElement: () => JSX.Element | null;
@@ -30,16 +31,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
     }
   } = useUICustomizationContext();
 
-  const {
-    amount,
-    error,
-    isMaxButtonVisible,
-    onMaxClicked,
-    onFocus,
-    onBlur,
-    onChange,
-    isInvalid
-  } = amountInfo;
+  const { amount, error, onFocus, onBlur, onChange, isInvalid } = amountInfo;
 
   return (
     <div className={styles.sharedAmount}>
@@ -74,21 +66,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
           </span>
         )}
 
-        {isMaxButtonVisible && (
-          <div
-            className={classNames(styles.max, {
-              [styles.maxOffset]: isInvalid
-            })}
-          >
-            <button
-              data-testid='maxBtn'
-              className={styles.button}
-              onClick={onMaxClicked}
-            >
-              Max
-            </button>
-          </div>
-        )}
+        <MaxButton />
       </div>
 
       {isInvalid && (

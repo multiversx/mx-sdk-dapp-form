@@ -48,7 +48,11 @@ export const FeeAccordion = () => {
             />
           </span>
           {gasCostLoading && (
-            <FontAwesomeIcon icon={faSpinner} className='fa-spin fast-spin' />
+            <FontAwesomeIcon
+              icon={faSpinner}
+              className='fa-spin fast-spin'
+              data-testid='gasCostLoadingSpinner'
+            />
           )}
         </span>
 

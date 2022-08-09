@@ -1,6 +1,6 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { denominateSelector } from 'tests/helpers';
-import { beforeAll } from 'tests/helpers/beforeAll';
+import { beforeAll, preventAsyncLogging } from 'tests/helpers';
 
 describe('Data field tests', () => {
   test('data changes transaction fee', async () => {
@@ -13,6 +13,7 @@ describe('Data field tests', () => {
     expect(denominateSelector(feeLimit).intAmount).toBe('0');
 
     const input = methods.getByTestId('data');
+
     fireEvent.change(input, data);
 
     const gasInput: any = methods.getByTestId('gasLimit');
@@ -21,10 +22,10 @@ describe('Data field tests', () => {
     expect(denominateSelector(feeLimit).intAmount).toBe('0');
     expect(denominateSelector(feeLimit).decimalAmount).toBe('.000056');
 
-    const feeValue = methods.getByTestId('feeInFiat');
-
+    // prevent async effects error logging
+    const feeInFiat = await methods.findByTestId('feeInFiat');
     await waitFor(() => {
-      expect(feeValue.textContent).toBe('≈ $0.0029');
+      expect(feeInFiat.textContent).toBe('≈ $0.0029');
     });
   });
   test('data field over 300 character error for ledger app version 1.0.10', async () => {

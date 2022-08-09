@@ -4,7 +4,7 @@ import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue/index';
 import { ZERO } from 'constants/index';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { InfoDust } from 'UI/InfoDust';
-import { SharedAmount } from './SharedAmount';
+import { SharedAmount } from './components';
 
 import styles from './styles.module.scss';
 
