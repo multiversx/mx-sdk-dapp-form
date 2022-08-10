@@ -55,7 +55,7 @@ export const Form = () => {
       <fieldset className={styles.formFieldset}>
         <To />
 
-        {isNFTTransaction ? <NftSftToken /> : <SelectToken />}
+        {isNFTTransaction ? <NftSftToken /> : <SelectToken label='Token' />}
 
         <Amount />
 

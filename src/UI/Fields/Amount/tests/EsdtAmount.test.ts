@@ -1,4 +1,5 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
+import selectEvent from 'react-select-event';
 import { testAddress, testNetwork } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
 import { formConfiguration, beforeAll as beginAll } from 'tests/helpers';
@@ -179,6 +180,22 @@ describe('Send tokens', () => {
       await waitFor(() => {
         expect(input.value).toBe('500000');
       });
+    });
+
+    test('Selecting token after default EGLD fills in data field', async () => {
+      const methods = beforAllTokens();
+      const setAmountInput = useAmountInput(methods);
+
+      await setAmountInput('10');
+
+      selectEvent.openMenu(methods.getByLabelText('Token'));
+
+      const oneTokenOption = await methods.findByTestId('TWO-824e70-option');
+      expect(oneTokenOption.innerHTML).toBeDefined();
+
+      selectEvent.select(methods.getByLabelText('Token'), 'TwoTToken');
+      const dataInput: any = methods.getByTestId('data');
+      expect(dataInput.value).toBe('ESDTTransfer@54574f2d383234653730@03e8');
     });
   });
 });
