@@ -28,6 +28,8 @@ export const GasLimit = () => {
     onResetGasLimit();
   };
 
+  const showResetButton = gasLimit !== defaultGasLimit && !readonly;
+
   return (
     <div className={styles.gas}>
       <label className={styles.gasLeft} htmlFor={ValuesEnum.gasLimit}>
@@ -61,7 +63,7 @@ export const GasLimit = () => {
               </span>
             )}
 
-            {gasLimit !== defaultGasLimit && !readonly && (
+            {showResetButton && (
               <span className={styles.gasUndo}>
                 <button
                   className={styles.gasReset}

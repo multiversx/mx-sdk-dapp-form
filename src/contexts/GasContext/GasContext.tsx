@@ -208,7 +208,7 @@ export function GasContextProvider({
     gasLimit,
     gasCostLoading,
     feeLimit,
-    defaultGasLimit: String(gasLimit),
+    defaultGasLimit,
     gasPriceError,
     gasLimitError,
     gasCostError,

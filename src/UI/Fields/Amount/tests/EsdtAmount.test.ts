@@ -137,7 +137,7 @@ describe('Send tokens', () => {
   });
 
   describe('Tokens gasLimit', () => {
-    test.only('Tokens gasLimit min and max', async () => {
+    test('Tokens gasLimit min and max', async () => {
       const methods = beforAllTokens();
       const setInput = useGasLimitInput(methods);
 
@@ -154,6 +154,30 @@ describe('Send tokens', () => {
 
       await waitFor(() => {
         expect(gasLimitError.textContent).toBe('Must be lower than 600000000');
+      });
+    });
+
+    test('Tokens gasLimit by amount and reset', async () => {
+      const methods = beforAllTokens();
+      const setGasLimitInput = useGasLimitInput(methods);
+      const setAmountInput = useAmountInput(methods);
+
+      const input = await setGasLimitInput('50000');
+      await setAmountInput('10');
+
+      const gasLimitError = await methods.findByTestId('gasLimitError');
+      expect(gasLimitError.textContent).toBe(
+        'Gas limit must be greater or equal to 500000'
+      );
+
+      const feeLimit = methods.getByTestId('feeLimit');
+      fireEvent.click(feeLimit);
+
+      const gasLimitResetBtn = await methods.findByTestId('gasLimitResetBtn');
+      fireEvent.click(gasLimitResetBtn);
+
+      await waitFor(() => {
+        expect(input.value).toBe('500000');
       });
     });
   });
