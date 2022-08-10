@@ -150,7 +150,7 @@ export function AmountContextProvider({
 
   // if the amount is zero, let the insufficient funds error go to gasLimit
   const isInvalid = getIsAmountInvalid({
-    amount: values.amount,
+    values,
     errors,
     touched
   });

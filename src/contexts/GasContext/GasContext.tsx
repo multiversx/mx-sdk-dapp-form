@@ -77,15 +77,7 @@ export function GasContextProvider({
     setFieldTouched
   } = formikContext;
 
-  const {
-    gasPrice,
-    gasLimit,
-    data,
-    tokenId,
-    receiver,
-    txType,
-    amount
-  } = values;
+  const { gasPrice, gasLimit, data, tokenId, receiver, txType } = values;
 
   const {
     checkInvalid,
@@ -120,7 +112,7 @@ export function GasContextProvider({
   });
 
   const isAmountInvalid = getIsAmountInvalid({
-    amount,
+    values,
     errors: formikContext.errors,
     touched
   });

@@ -66,11 +66,30 @@ describe('Send tokens', () => {
     expect(input.value).toBe('1.1234567890123456789');
 
     input = await setInput('1100');
-    let tokenAmountError = await methods.findByTestId('amountError');
+    const tokenAmountError = await methods.findByTestId('amountError');
     expect(tokenAmountError.textContent).toBe('Insufficient funds');
+  });
 
-    input = await setInput('0');
-    tokenAmountError = await methods.findByTestId('amountError');
+  test('Tokens amount valid', async () => {
+    const methods = beforAllTokens();
+    const setInput = useAmountInput(methods);
+
+    const input: any = await setInput('1.123456789012345678');
+    expect(input.value).toBe('1.123456789012345678');
+    const data: any = await methods.findByTestId('data');
+
+    expect(data.value).toBe(
+      'ESDTTransfer@54574f2d383234653730@0f9751ff4d94f34e'
+    );
+
+    expect(data.disabled).toBeTruthy(); // check disabled
+  });
+  test('Tokens amount not zero', async () => {
+    const methods = beforAllTokens();
+    const setInput = useAmountInput(methods);
+
+    await setInput('0');
+    const tokenAmountError = await methods.findByTestId('amountError');
     expect(tokenAmountError.textContent).toBe('Cannot be zero');
   });
 });

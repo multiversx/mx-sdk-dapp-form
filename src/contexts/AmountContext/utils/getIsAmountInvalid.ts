@@ -1,14 +1,14 @@
 import { FormikErrors, FormikTouched } from 'formik';
-import { ExtendedValuesType, ValuesEnum } from 'types';
+import { ExtendedValuesType, TxTypeEnum, ValuesEnum } from 'types';
 
 // amount and gasLimit validation are interdependent
 // this is why there is a separate function used to compute amount validation
 export function getIsAmountInvalid({
-  amount,
+  values,
   errors,
   touched
 }: {
-  amount: string;
+  values: ExtendedValuesType;
   errors: FormikErrors<ExtendedValuesType>;
   touched: FormikTouched<ExtendedValuesType>;
 }) {
@@ -16,7 +16,11 @@ export function getIsAmountInvalid({
     errors[ValuesEnum.amount] && touched[ValuesEnum.amount]
   );
 
-  // if the amount is zero, let the insufficient funds error go to gasLimit
-  const isInvalid = amount != '0' ? isAmountInvalid : false;
-  return isInvalid;
+  // if the EGLD amount is zero, let the insufficient funds error go to gasLimit
+  if (values.txType === TxTypeEnum.EGLD) {
+    const isInvalid = values.amount != '0' ? isAmountInvalid : false;
+    return isInvalid;
+  }
+
+  return isAmountInvalid;
 }
