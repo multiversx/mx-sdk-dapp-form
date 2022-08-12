@@ -20,6 +20,7 @@ export const MaxButton = () => {
         >
           <button
             data-testid='maxBtn'
+            type='button'
             className={styles.button}
             onClick={onMaxClicked}
           >

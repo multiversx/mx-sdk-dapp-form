@@ -6,3 +6,6 @@ export const testAddress =
 
 export const testNetwork =
   fallbackNetworkConfigurations[EnvironmentsEnum.testnet];
+
+export const testReceiver =
+  'erd1qqqqqqqqqqqqqpgqp699jngundfqw07d8jzkepucvpzush6k3wvqyc44rx';

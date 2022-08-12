@@ -1,66 +1,119 @@
-// import { fireEvent, render } from '@testing-library/react';
-import { testAddress, testNetwork } from '__mocks__';
+import { fireEvent, waitFor } from '@testing-library/react';
+import selectEvent from 'react-select-event';
+import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
 import { formConfiguration, beforeAll as beginAll } from 'tests/helpers';
-// import { ValuesEnum } from 'types';
 
 const beforAllTokens = (balance?: string) =>
   beginAll({
     formConfigValues: {
-      ...formConfiguration,
-      gasLimit: '500000',
-      tokenId: 'TWO-824e70'
+      ...formConfiguration
     },
     ...(balance ? { balance } : {})
   });
 
-const twoToken = {
-  identifier: 'TWO-824e70',
-  name: 'TwoTToken',
-  ticker: 'Two',
-  decimals: 2,
-  balance: '100000'
+const metaToken = {
+  identifier: 'MT1-ff89d3-01',
+  collection: 'MT1-ff89d3',
+  nonce: 1,
+  type: 'MetaESDT',
+  name: 'MetaOne',
+  creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+  isWhitelistedStorage: false,
+  balance: '10000000000000000000000',
+  decimals: 18,
+  ticker: 'MT1-ff89d3'
 };
-
-// const useInput = (field: ValuesEnum) => (
-//   methods: ReturnType<typeof render>
-// ) => async (value: string) => {
-//   const input: any = await methods.findByTestId(field);
-//   const data = { target: { value } };
-//   fireEvent.change(input, data);
-//   fireEvent.blur(input);
-//   return input;
-// };
-
-// const useAmountInput = useInput(ValuesEnum.amount);
-// const useGasLimitInput = useInput(ValuesEnum.gasLimit);
 
 describe('Send tokens', () => {
   beforeEach(() => {
     server.use(
       rest.get(
-        `${testNetwork.apiAddress}/accounts/${testAddress}/tokens/${twoToken.identifier}`,
-        mockResponse(twoToken)
+        `${testNetwork.apiAddress}/accounts/${testAddress}/nfts/${metaToken.identifier}`,
+        mockResponse(metaToken)
       )
     );
     server.use(
       rest.get(
-        `${testNetwork.apiAddress}/accounts/${testAddress}/tokens`,
-        mockResponse([twoToken])
+        `${testNetwork.apiAddress}/accounts/${testAddress}/nfts`,
+        mockResponse([metaToken])
+      )
+    );
+    server.use(
+      rest.get(
+        `${testNetwork.apiAddress}/accounts/${testReceiver}`,
+        mockResponse({})
       )
     );
   });
-  test('Tokens labels and values', async () => {
-    const { getByTestId, findByTestId } = beforAllTokens();
+  test.only('MetaEsdt send', async () => {
+    const methods = beforAllTokens();
 
-    // TODO: bring back
-    // const amountLabel = await findByTestId('amountLabel');
-    // expect(amountLabel.textContent).toBe('Amount');
+    // fill in receiver
+    const input = await methods.findByTestId('destinationAddress');
 
-    const availableTokens = await findByTestId('availableTWO-824e70');
-    expect(availableTokens.getAttribute('data-value')).toBe('1000 TWO-824e70');
+    const data = { target: { value: testReceiver } };
+    fireEvent.change(input, data);
 
-    const gasLimit: any = getByTestId('gasLimit');
-    expect(gasLimit.value).toBe('500000');
+    // confirm metaEsdt token is in list
+    const selectInput = await methods.findByLabelText('Token');
+    selectEvent.openMenu(selectInput);
+    const metaTokenOption = await methods.findByTestId(
+      `${metaToken.identifier}-option`
+    );
+    expect(metaTokenOption.innerHTML).toBeDefined();
+
+    // select metaEsdt token
+    selectEvent.select(selectInput, metaToken.name);
+
+    const tokenId: any = methods.container.querySelector(
+      'input[name="tokenId"]'
+    );
+
+    await waitFor(() => {
+      expect(tokenId.value).toBe(metaToken.identifier);
+    });
+
+    // check available
+    const available = methods.getByTestId(`available-${metaToken.identifier}`);
+    expect(available.innerHTML).toBe('Available 10000');
+
+    // fill in amount
+    const amount: any = await methods.findByTestId('amount');
+    fireEvent.change(amount, { target: { value: '10' } });
+    fireEvent.blur(amount, { target: { value: '10' } });
+
+    const dataInput: any = methods.getByTestId('data');
+
+    // check data input disabled
+    expect(dataInput.disabled).toBeTruthy();
+
+    const dataString =
+      'ESDTNFTTransfer@4d54312d666638396433@01@8ac7230489e80000@000000000000000005000e8a594d1c9b52073fcd3c856c87986045c85f568b98';
+
+    await waitFor(() => {
+      expect(dataInput.value).toBe(dataString);
+    });
+
+    const gasLimit: any = methods.getByTestId('gasLimit');
+    expect(gasLimit.value).toBe('1000000');
+
+    //press send
+    const sendButton = methods.getByTestId('sendBtn');
+    fireEvent.click(sendButton);
+
+    // testConfirm({ render: methods, checkUsd: false })({
+    //   fee: '0.000254035 EGLD',
+    //   amount: '307.046899999999999998',
+    //   data: dataString
+    // });
+
+    const confirmScreen = await methods.findByTestId('confirmScreen');
+
+    expect(confirmScreen).toBeDefined();
+    expect(methods.getByTestId('confirmAmount').textContent).toBe('10.0000');
+    expect(methods.getByTestId('confirmFee').textContent?.toString()).toContain(
+      '0.000239185\u00a0xEGLD'
+    );
   });
 });

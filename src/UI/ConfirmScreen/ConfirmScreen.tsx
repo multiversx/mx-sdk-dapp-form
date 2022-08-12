@@ -61,7 +61,7 @@ export const ConfirmScreen = ({
   };
 
   return (
-    <div className={styles.confirm}>
+    <div className={styles.confirm} data-testid='confirmScreen'>
       <Confirm.To {...{ receiver, nft }} scamReport={scamError} />
 
       <Confirm.Amount

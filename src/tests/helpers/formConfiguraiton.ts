@@ -9,7 +9,7 @@ export const formConfiguration: FormConfigType = {
   receiver: '',
   amount: '',
   tokenId: testnetEgldLabel,
-  gasLimit: gasLimit,
+  gasLimit,
   gasPrice: '0.000000001',
   data: ''
 };

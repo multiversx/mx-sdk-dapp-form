@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, RenderResult, waitFor } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { testAddress, testNetwork } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
@@ -23,9 +23,9 @@ const twoToken = {
   balance: '100000'
 };
 
-const useInput = (field: ValuesEnum) => (
-  methods: ReturnType<typeof render>
-) => async (value: string) => {
+const useInput = (field: ValuesEnum) => (methods: RenderResult) => async (
+  value: string
+) => {
   const input: any = await methods.findByTestId(field);
   const data = { target: { value } };
   fireEvent.change(input, data);
