@@ -77,7 +77,6 @@ export function DataContextProvider({
         amountError: Boolean(errors.amount),
         receiverError
       });
-      console.log(errors.amount);
 
       handleUpdateData(newDataField);
     }

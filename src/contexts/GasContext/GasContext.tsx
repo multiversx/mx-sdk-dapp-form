@@ -173,6 +173,7 @@ export function GasContextProvider({
           gasPriceModifier: String(gasPriceModifier)
         })
       : ZERO;
+
     setFeeLimit(newFeeLimit);
   }, [gasLimit, data, chainId, gasPrice, hasErrors]);
 

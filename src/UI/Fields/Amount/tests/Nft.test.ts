@@ -127,6 +127,12 @@ describe('Send tokens', () => {
 
     expect(gasLimit.value).toBe('1000000');
 
+    const feeLimit: any = methods.getByTestId('feeLimit');
+
+    await waitFor(() => {
+      expect(feeLimit.textContent).toContain('0.000218395');
+    });
+
     await sendAndConfirmTest({ methods })({
       fee: '0.000218395',
       data: dataString
