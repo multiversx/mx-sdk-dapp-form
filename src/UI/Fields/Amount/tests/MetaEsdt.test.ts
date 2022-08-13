@@ -2,7 +2,11 @@ import { fireEvent, waitFor } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
-import { formConfiguration, beforeAll as beginAll } from 'tests/helpers';
+import {
+  formConfiguration,
+  beforeAll as beginAll,
+  sendAndConfirmTest
+} from 'tests/helpers';
 
 const beforAllTokens = (balance?: string) =>
   beginAll({
@@ -98,22 +102,9 @@ describe('Send tokens', () => {
     const gasLimit: any = methods.getByTestId('gasLimit');
     expect(gasLimit.value).toBe('1000000');
 
-    //press send
-    const sendButton = methods.getByTestId('sendBtn');
-    fireEvent.click(sendButton);
-
-    // testConfirm({ render: methods, checkUsd: false })({
-    //   fee: '0.000254035 EGLD',
-    //   amount: '307.046899999999999998',
-    //   data: dataString
-    // });
-
-    const confirmScreen = await methods.findByTestId('confirmScreen');
-
-    expect(confirmScreen).toBeDefined();
-    expect(methods.getByTestId('confirmAmount').textContent).toBe('10.0000');
-    expect(methods.getByTestId('confirmFee').textContent?.toString()).toContain(
-      '0.000239185\u00a0xEGLD'
-    );
+    sendAndConfirmTest({ methods })({
+      amount: '10.0000',
+      fee: '0.000239185'
+    });
   });
 });
