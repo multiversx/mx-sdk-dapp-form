@@ -7,7 +7,7 @@ import {
   RestRequest
 } from 'msw';
 import { setupServer } from 'msw/node';
-import { testAddress, testNetwork } from './accountConfig';
+import { testAddress, testNetwork, testReceiver } from './accountConfig';
 
 export const mockResponse = <T>(body: T) => (
   _req: RestRequest<never, PathParams<string>>,
@@ -24,6 +24,10 @@ const handlers = [
       mockResponse([])
     );
   }),
+  rest.get(
+    `${testNetwork.apiAddress}/accounts/${testReceiver}`,
+    mockResponse({})
+  ),
   rest.get(
     `${testNetwork.apiAddress}/economics`,
     mockResponse({
