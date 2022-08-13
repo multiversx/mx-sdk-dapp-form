@@ -1,4 +1,4 @@
-import { fireEvent, RenderResult } from '@testing-library/react';
+import { fireEvent, RenderResult, waitFor } from '@testing-library/react';
 
 interface ConfirmScreenType {
   methods: RenderResult;
@@ -7,7 +7,7 @@ interface ConfirmScreenType {
 interface ConfirmScreenPropsType {
   amount?: string;
   data?: string;
-  fee?: string;
+  fee: string;
 }
 
 export const sendAndConfirmTest = ({ methods }: ConfirmScreenType) => async ({
@@ -15,6 +15,13 @@ export const sendAndConfirmTest = ({ methods }: ConfirmScreenType) => async ({
   fee,
   data
 }: ConfirmScreenPropsType) => {
+  const feeLimit: any = methods.getByTestId('feeLimit');
+
+  // wait for fee update before
+  await waitFor(() => {
+    expect(feeLimit.textContent).toContain(fee);
+  });
+
   const sendButton = methods.getByTestId('sendBtn');
   fireEvent.click(sendButton);
   const confirmScreen = await methods.findByTestId('confirmScreen');

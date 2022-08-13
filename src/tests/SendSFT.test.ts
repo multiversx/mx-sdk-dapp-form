@@ -39,7 +39,7 @@ const beforAllTokens = (balance?: string) =>
     ...(balance ? { balance } : {})
   });
 
-describe('Send tokens', () => {
+describe('Send SFT tokens', () => {
   beforeEach(() => {
     server.use(
       rest.get(

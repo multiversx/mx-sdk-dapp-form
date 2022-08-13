@@ -50,7 +50,7 @@ const beforAllTokens = (balance?: string) =>
     ...(balance ? { balance } : {})
   });
 
-describe('Send tokens', () => {
+describe('Send NFT tokens', () => {
   beforeEach(() => {
     server.use(
       rest.get(
@@ -126,12 +126,6 @@ describe('Send tokens', () => {
     fireEvent.click(gasLimitResetBtn);
 
     expect(gasLimit.value).toBe('1000000');
-
-    const feeLimit: any = methods.getByTestId('feeLimit');
-
-    await waitFor(() => {
-      expect(feeLimit.textContent).toContain('0.000218395');
-    });
 
     await sendAndConfirmTest({ methods })({
       fee: '0.000218395',

@@ -1,4 +1,4 @@
-import { fireEvent, RenderResult, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor, RenderResult, act } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { testAddress, testNetwork } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
@@ -85,11 +85,13 @@ describe('Send tokens', () => {
       expect(input.value).toBe('1.123456789012345678');
       const data: any = await methods.findByTestId('data');
 
-      expect(data.value).toBe(
-        'ESDTTransfer@54574f2d383234653730@0f9751ff4d94f34e'
-      );
+      await act(async () => {
+        expect(data.value).toBe(
+          'ESDTTransfer@54574f2d383234653730@0f9751ff4d94f34e'
+        );
 
-      expect(data.disabled).toBeTruthy(); // check disabled
+        expect(data.disabled).toBeTruthy(); // check disabled
+      });
     });
     test('Tokens amount not zero', async () => {
       const methods = beforAllTokens();
@@ -115,12 +117,12 @@ describe('Send tokens', () => {
       const input: any = await methods.findByTestId('amount');
 
       expect(input.value).toBe('1000');
-
       const data: any = await methods.findByTestId('data');
-
+      // await act(async () => {
       await waitFor(() => {
         expect(data.value).toBe('ESDTTransfer@54574f2d383234653730@0186a0');
       });
+      // });
     });
 
     test('Tokens amount no EGLD balance', async () => {
@@ -177,7 +179,7 @@ describe('Send tokens', () => {
       const gasLimitResetBtn = await methods.findByTestId('gasLimitResetBtn');
       fireEvent.click(gasLimitResetBtn);
 
-      await waitFor(() => {
+      await act(async () => {
         expect(input.value).toBe('500000');
       });
     });
@@ -188,12 +190,15 @@ describe('Send tokens', () => {
 
       await setAmountInput('10');
 
-      selectEvent.openMenu(methods.getByLabelText('Token'));
+      await act(async () => {
+        selectEvent.openMenu(methods.getByLabelText('Token'));
+      });
 
       const oneTokenOption = await methods.findByTestId('TWO-824e70-option');
       expect(oneTokenOption.innerHTML).toBeDefined();
 
       selectEvent.select(methods.getByLabelText('Token'), 'TwoTToken');
+
       const dataInput: any = methods.getByTestId('data');
       expect(dataInput.value).toBe('ESDTTransfer@54574f2d383234653730@03e8');
     });

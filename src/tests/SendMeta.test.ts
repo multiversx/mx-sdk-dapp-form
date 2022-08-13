@@ -29,7 +29,7 @@ const metaToken = {
   ticker: 'MT1-ff89d3'
 };
 
-describe('Send tokens', () => {
+describe('Send Meta ESDT', () => {
   beforeEach(() => {
     server.use(
       rest.get(

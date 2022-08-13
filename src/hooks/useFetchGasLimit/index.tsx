@@ -13,7 +13,7 @@ interface UseFetchGasLimitProps extends FetchGasLimitType {
   gasLimitCostError?: string | null;
 }
 
-const ms500 = process.env.NODE_ENV !== 'test' ? 500 : 10;
+const ms500 = process.env.NODE_ENV !== 'test' ? 500 : 1;
 
 export function useFetchGasLimit(props: UseFetchGasLimitProps) {
   const {
