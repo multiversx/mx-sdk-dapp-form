@@ -29,7 +29,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
   const { values } = useFormikContext<ExtendedValuesType>();
   const { balance } = useAccountContext();
   const {
-    networkConfig: { id: chainId }
+    networkConfig: { chainId }
   } = useNetworkConfigContext();
 
   const [tokenBalance, setTokenBalance] = useState<string | null>(null);
