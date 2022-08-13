@@ -5,7 +5,11 @@ import useVerifyScamAddress from './useVerifyScamAddress';
 export function useScamError(receiver: string) {
   const { address } = useAccountContext();
 
-  const { verifiedAddresses, verifyScamAddress } = useVerifyScamAddress();
+  const {
+    verifiedAddresses,
+    verifyScamAddress,
+    fetchingScamAddress
+  } = useVerifyScamAddress();
   const scamError = verifiedAddresses[receiver]?.info;
 
   useEffect(() => {
@@ -17,5 +21,5 @@ export function useScamError(receiver: string) {
     }
   }, [receiver]);
 
-  return scamError;
+  return { scamError, fetchingScamAddress };
 }
