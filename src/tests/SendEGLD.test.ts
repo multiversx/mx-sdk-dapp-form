@@ -2,7 +2,7 @@ import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress } from '__mocks__';
 import { beforeAll } from 'tests/helpers/beforeAll';
 
-describe('Amount field', () => {
+describe('EGLD Amount field', () => {
   it('should not be empty', async () => {
     const { queryByText, findByTestId } = beforeAll();
     const data = { target: { value: '' } };

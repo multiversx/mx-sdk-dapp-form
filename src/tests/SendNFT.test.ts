@@ -71,7 +71,7 @@ describe('Send tokens', () => {
       )
     );
   });
-  test.only('Sft send', async () => {
+  test('Sft send', async () => {
     const methods = beforAllTokens();
 
     // fill in receiver
