@@ -7,34 +7,45 @@ import {
   sendAndConfirmTest
 } from 'tests/helpers';
 
-const sftToken = {
-  identifier: 'CNTMBLT-efb397-01',
-  collection: 'CNTMBLT-efb397',
+const nftToken = {
+  identifier: 'NFT-f0806e-01',
+  collection: 'NFT-f0806e',
+  attributes:
+    'dGFnczo7bWV0YWRhdGE6UW1SY1A5NGtYcjV6WmpSR3ZpN21KNnVuN0xweFVoWVZSNFI0UnBpY3h6Z1lrdA==',
   nonce: 1,
-  type: 'SemiFungibleESDT',
-  name: 'Confirmed Won',
-  creator: 'erd1qqqqqqqqqqqqqpgqgl22w4ucmwvst7pnqpfsfm0rkvant2lzad7qjcvhhh',
-  royalties: 0,
+  type: 'NonFungibleESDT',
+  name: 'NFT',
+  creator: 'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',
+  royalties: 25,
+  uris: [
+    'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1aaHlUVjVLZTdFQ0VMOWVwc0RtNXpSdG5nQ2ZSMWk4em9adkJQM29RRHFOeg=='
+  ],
+  url:
+    'https://testnet-media.elrond.com/nfts/asset/QmZhyTV5Ke7ECEL9epsDm5zRtngCfR1i8zoZvBP3oQDqNz',
   media: [
     {
-      url: 'https://media.elrond.com/nfts/thumbnail/default.png',
-      originalUrl: 'https://media.elrond.com/nfts/thumbnail/default.png',
-      thumbnailUrl: 'https://media.elrond.com/nfts/thumbnail/default.png',
+      url:
+        'https://testnet-media.elrond.com/nfts/asset/QmZhyTV5Ke7ECEL9epsDm5zRtngCfR1i8zoZvBP3oQDqNz',
+      originalUrl:
+        'https://ipfs.io/ipfs/QmZhyTV5Ke7ECEL9epsDm5zRtngCfR1i8zoZvBP3oQDqNz',
+      thumbnailUrl:
+        'https://testnet-media.elrond.com/nfts/thumbnail/NFT-f0806e-c432eb5a',
       fileType: 'image/png',
-      fileSize: 29512
+      fileSize: 64286
     }
   ],
-  isWhitelistedStorage: false,
+  isWhitelistedStorage: true,
+  tags: [''],
   metadata: {},
-  balance: '1',
-  ticker: 'CNTMBLT-efb397'
+  ticker: 'NFT-f0806e',
+  isNsfw: false
 };
 
 const beforAllTokens = (balance?: string) =>
   beginAll({
     formConfigValues: {
-      ...formConfiguration,
-      tokenId: sftToken.identifier
+      ...{ ...formConfiguration, amount: '1' },
+      tokenId: nftToken.identifier
     },
     ...(balance ? { balance } : {})
   });
@@ -43,14 +54,14 @@ describe('Send tokens', () => {
   beforeEach(() => {
     server.use(
       rest.get(
-        `${testNetwork.apiAddress}/accounts/${testAddress}/nfts/${sftToken.identifier}`,
-        mockResponse(sftToken)
+        `${testNetwork.apiAddress}/accounts/${testAddress}/nfts/${nftToken.identifier}`,
+        mockResponse(nftToken)
       )
     );
     server.use(
       rest.get(
         `${testNetwork.apiAddress}/accounts/${testAddress}/nfts`,
-        mockResponse([sftToken])
+        mockResponse([nftToken])
       )
     );
     server.use(
@@ -60,7 +71,7 @@ describe('Send tokens', () => {
       )
     );
   });
-  test('Sft send', async () => {
+  test.only('Sft send', async () => {
     const methods = beforAllTokens();
 
     // fill in receiver
@@ -82,51 +93,19 @@ describe('Send tokens', () => {
     const tokenName = methods.getByTestId('tokenName');
 
     await waitFor(() => {
-      expect(tokenName.textContent).toBe('Confirmed Won CNTMBLT-efb397-01');
+      expect(tokenName.textContent).toBe('NFT NFT-f0806e-01');
     });
-
-    // check available
-    const available = methods.getByTestId(`available-${sftToken.identifier}`);
-    expect(available.innerHTML).toBe('Available 1');
-
-    const entireTokenBalaceButton = await methods.findByText('Max');
-    fireEvent.click(entireTokenBalaceButton);
-
-    const amountInput: any = await methods.findByTestId('amount');
-
-    await waitFor(() => {
-      expect(amountInput.value).toBe('1');
-    });
-
-    // test sending decimals
-    fireEvent.change(amountInput, { target: { value: '1.1' } });
-    fireEvent.blur(amountInput);
-
-    await waitFor(() => {
-      const req = methods.queryByText('Invalid number');
-      expect(req!.innerHTML).toBe('Invalid number');
-    });
-
-    // test funds
-    fireEvent.change(amountInput, { target: { value: '2' } });
-    fireEvent.blur(amountInput);
-
-    await waitFor(() => {
-      const req = methods.queryByText('Insufficient funds');
-      expect(req!.innerHTML).toBe('Insufficient funds');
-    });
-
-    fireEvent.change(amountInput, { target: { value: '1' } });
-    fireEvent.blur(amountInput);
 
     const data: any = await methods.findByTestId('data');
+    fireEvent.blur(data);
 
     const dataString =
-      'ESDTNFTTransfer@434e544d424c542d656662333937@01@01@000000000000000005000e8a594d1c9b52073fcd3c856c87986045c85f568b98';
+      'ESDTNFTTransfer@4e46542d663038303665@01@01@000000000000000005000e8a594d1c9b52073fcd3c856c87986045c85f568b98';
 
     await waitFor(() => {
       expect(data.value).toBe(dataString);
     });
+
     expect(data.disabled).toBeTruthy(); // check disabled
 
     const gasLimit: any = methods.getByTestId('gasLimit');
@@ -149,8 +128,8 @@ describe('Send tokens', () => {
     expect(gasLimit.value).toBe('1000000');
 
     await sendAndConfirmTest({ methods })({
-      amount: '1',
-      fee: '0.000230275'
+      fee: '0.000218395',
+      data: dataString
     });
   });
 });

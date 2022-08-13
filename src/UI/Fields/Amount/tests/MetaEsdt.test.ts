@@ -102,7 +102,7 @@ describe('Send tokens', () => {
     const gasLimit: any = methods.getByTestId('gasLimit');
     expect(gasLimit.value).toBe('1000000');
 
-    sendAndConfirmTest({ methods })({
+    await sendAndConfirmTest({ methods })({
       amount: '10.0000',
       fee: '0.000239185'
     });

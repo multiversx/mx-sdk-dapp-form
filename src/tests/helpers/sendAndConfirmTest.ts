@@ -6,12 +6,14 @@ interface ConfirmScreenType {
 
 interface ConfirmScreenPropsType {
   amount?: string;
+  data?: string;
   fee?: string;
 }
 
 export const sendAndConfirmTest = ({ methods }: ConfirmScreenType) => async ({
   amount,
-  fee
+  fee,
+  data
 }: ConfirmScreenPropsType) => {
   const sendButton = methods.getByTestId('sendBtn');
   fireEvent.click(sendButton);
@@ -25,6 +27,10 @@ export const sendAndConfirmTest = ({ methods }: ConfirmScreenType) => async ({
     expect(methods.getByTestId('confirmFee').textContent?.toString()).toContain(
       fee + '\u00a0xEGLD'
     );
+  }
+
+  if (data != null) {
+    expect(methods.getByTestId('confirmData').textContent).toBe(data);
   }
 
   expect(confirmScreen).toBeDefined();
