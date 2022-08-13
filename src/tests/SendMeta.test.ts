@@ -49,8 +49,11 @@ describe('Send Meta ESDT', () => {
         mockResponse({})
       )
     );
+    server.use(
+      rest.post(`${testNetwork.apiAddress}/transaction/cost`, mockResponse({}))
+    );
   });
-  test.only('MetaEsdt send', async () => {
+  test('MetaEsdt send', async () => {
     const methods = beforAllTokens();
 
     // fill in receiver
