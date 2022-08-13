@@ -7,6 +7,7 @@ import {
   getNetworkConfigForChainId,
   setApiConfig
 } from 'apiCalls';
+import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { FormNetworkConfigType } from 'types';
 import {
   AccountContextPropsType,
@@ -35,7 +36,7 @@ interface AppInfoContextProviderPropsType {
   networkConfig: FormNetworkConfigType;
   children: React.ReactNode;
   Loader?: JSXElementConstructor<any> | null;
-  initGasLimitError?: string | null;
+  initGasLimitError?: SendFormContainerPropsType['initGasLimitError'];
   UICustomization?: UICustomizationContextPropsType;
 }
 export function AppInfoContextProvider({

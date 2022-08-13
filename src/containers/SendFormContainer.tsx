@@ -25,7 +25,7 @@ import validationSchema from 'validationSchema';
 export interface SendFormContainerPropsType {
   initialValues?: ExtendedValuesType;
   enableReinitialize?: boolean;
-  initGasLimitError?: string | null;
+  initGasLimitError?: string;
   onFormSubmit: (values: ValuesType, transaction: Transaction | null) => void;
   accountInfo: AccountContextPropsType;
   formInfo: Omit<FormContextBasePropsType, 'txType' | 'setTxType'>;

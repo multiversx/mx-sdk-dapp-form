@@ -6,7 +6,7 @@ import calculateGasLimit from 'operations/calculateGasLimit';
 import { ValuesType } from 'types';
 import { prepareTransaction } from './prepareTransaction';
 
-export interface FetchGasLimitType {
+interface FetchGasLimitType {
   balance: string;
   address: string;
   nonce: number;
