@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import { addressIsValid } from '@elrondnetwork/dapp-core/utils/account/addressIsValid';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faExclamationTriangle,
+  faSpinner
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
@@ -60,13 +63,15 @@ const CustomMenu = (
 export const To = () => {
   const {
     fields: {
-      to: { label }
+      to: { label: customLabel }
     }
   } = useUICustomizationContext();
+  const label = customLabel || 'To';
 
   const {
     receiverInfo: {
       scamError,
+      fetchingScamAddress,
       knownAddresses,
       receiverError,
       receiver,
@@ -133,7 +138,15 @@ export const To = () => {
 
   return (
     <div className={styles.toField}>
-      {label && <div className={styles.toFieldLabel}>{label}</div>}
+      {label !== null && (
+        <div
+          className={styles.toFieldLabel}
+          data-testid='receiverLabel'
+          data-loading={fetchingScamAddress}
+        >
+          {label}
+        </div>
+      )}
 
       <div className={styles.toFieldAutocomplete}>
         <Typeahead

@@ -10,6 +10,7 @@ export interface ReceiverContextPropsType {
   isReceiverInvalid: boolean;
   knownAddresses: string[];
   scamError?: string;
+  fetchingScamAddress: boolean;
   onChangeReceiver: (newReceiver: string, shouldValidate?: boolean) => void;
   onBlurReceiver: (e: Event) => void;
 }
@@ -35,7 +36,7 @@ export function ReceiverContextProvider({
   } = useFormikContext<ExtendedValuesType>();
   const { checkInvalid } = useFormContext();
 
-  const scamError = useScamError(receiver);
+  const { scamError, fetchingScamAddress } = useScamError(receiver);
   const knownAddresses = useFetchKnownAddresses();
 
   const handleChangeReceiver = useCallback(
@@ -54,6 +55,7 @@ export function ReceiverContextProvider({
     receiverError,
     isReceiverInvalid: checkInvalid(receiverField),
     scamError,
+    fetchingScamAddress,
     knownAddresses,
     onChangeReceiver: handleChangeReceiver,
     onBlurReceiver: handleBlurReceiver

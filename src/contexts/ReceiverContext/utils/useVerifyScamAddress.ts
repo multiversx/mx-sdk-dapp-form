@@ -43,7 +43,8 @@ export function useVerifyScamAddress(apiConfig?: ApiConfigType) {
 
   return {
     verifiedAddresses,
-    verifyScamAddress
+    verifyScamAddress,
+    fetchingScamAddress: fetching
   };
 }
 
