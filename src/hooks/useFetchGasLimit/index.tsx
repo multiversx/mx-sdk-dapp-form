@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { mainnetChainId } from '@elrondnetwork/dapp-core/constants';
 import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
 import { useFormikContext } from 'formik';
+import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { useAccountContext } from 'contexts/AccountContext';
 import { useFormContext } from 'contexts/FormContext/FormContext';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
@@ -11,7 +12,9 @@ import useDebounce from './useDebounce';
 
 const ms500 = process.env.NODE_ENV !== 'test' ? 500 : 1;
 
-export function useFetchGasLimit(initGasLimitError?: string) {
+export function useFetchGasLimit(
+  initGasLimitError?: SendFormContainerPropsType['initGasLimitError']
+) {
   const {
     networkConfig: { chainId }
   } = useNetworkConfigContext();
