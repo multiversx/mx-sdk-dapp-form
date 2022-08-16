@@ -6,7 +6,7 @@ import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { useAccountContext } from 'contexts/AccountContext';
 import { useFormContext } from 'contexts/FormContext/FormContext';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
-import { ExtendedValuesType } from 'types/form';
+import { ExtendedValuesType, ValuesEnum } from 'types/form';
 import { fetchGasLimit } from './fetchGasLimit';
 import useDebounce from './useDebounce';
 
@@ -57,7 +57,7 @@ export function useFetchGasLimit(
         .then(({ gasLimit: resultedGasLimit, gasLimitCostError: error }) => {
           setGasCostLoading(false);
           setGasCostError(error);
-          setFieldValue('gasLimit', resultedGasLimit, true);
+          setFieldValue(ValuesEnum.gasLimit, resultedGasLimit, true);
         })
         .catch((err) => {
           setGasCostLoading(false);
