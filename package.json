@@ -34,7 +34,7 @@
     "@types/react-dom": "18.0.5",
     "@typescript-eslint/eslint-plugin": "5.0.0",
     "@typescript-eslint/parser": "5.22.0",
-    "better-sqlite3": "^7.6.2",
+    "better-sqlite3": "7.6.2",
     "esbuild": "0.14.47",
     "esbuild-node-externals": "1.4.1",
     "esbuild-plugin-svgr": "1.0.1",
