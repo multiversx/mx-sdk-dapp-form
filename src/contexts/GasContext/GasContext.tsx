@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 
 import {
   gasPerDataByte,
@@ -33,7 +33,6 @@ export interface GasContextPropsType {
   gasLimitError?: string;
   defaultGasLimit: string;
   feeLimit: string;
-  onChangeFeeLimit: (newValue: string) => void;
   onChangeGasPrice: (
     newValue: string | React.ChangeEvent<any>,
     shouldValidate?: boolean
@@ -62,8 +61,6 @@ export function GasContextProvider({
   children,
   initGasLimitError
 }: GasContextProviderPropsType) {
-  const [feeLimit, setFeeLimit] = useState(ZERO);
-
   const formikContext = useFormikContext<ExtendedValuesType>();
 
   const {
@@ -145,20 +142,16 @@ export function GasContextProvider({
   }, []);
 
   const hasErrors = Boolean(gasPriceError) || Boolean(gasLimitError);
-  useEffect(() => {
-    const newFeeLimit = !hasErrors
-      ? calculateFeeLimit({
-          gasLimit,
-          gasPrice: nominate(gasPrice),
-          data: data.trim(),
-          chainId,
-          gasPerDataByte: String(gasPerDataByte),
-          gasPriceModifier: String(gasPriceModifier)
-        })
-      : ZERO;
-
-    setFeeLimit(newFeeLimit);
-  }, [gasLimit, data, chainId, gasPrice, hasErrors]);
+  const feeLimit = !hasErrors
+    ? calculateFeeLimit({
+        gasLimit,
+        gasPrice: nominate(gasPrice),
+        data: data.trim(),
+        chainId,
+        gasPerDataByte: String(gasPerDataByte),
+        gasPriceModifier: String(gasPriceModifier)
+      })
+    : ZERO;
 
   useEffect(() => {
     if (!prefilledForm && isNftTransaction && !touched.gasLimit) {
@@ -199,7 +192,6 @@ export function GasContextProvider({
     hasErrors,
     isGasLimitInvalid,
     isGasPriceInvalid,
-    onChangeFeeLimit: setFeeLimit,
     onChangeGasLimit: handleUpdateGasLimit,
     onChangeGasPrice: handleUpdateGasPrice,
     onBlurGasPrice: handleBlurGasPrice,
