@@ -1,5 +1,5 @@
+import { useState, useEffect } from 'react';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
-import * as React from 'react';
 import { NftType, TokenType } from 'types';
 import { getInitialValues } from './getInitialValues';
 import { GetInitialValuesType } from './getInitialValues/types';
@@ -21,14 +21,14 @@ export interface GetInitialValuesReturnType {
 }
 
 export function useGetInitialValues(props: GetInitialValuesType) {
-  const [state, setState] = React.useState<GetInitialValuesReturnType>();
+  const [state, setState] = useState<GetInitialValuesReturnType>();
 
   async function getValues() {
     const values = await getInitialValues(props);
     setState(values);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     getValues();
   }, []);
 
