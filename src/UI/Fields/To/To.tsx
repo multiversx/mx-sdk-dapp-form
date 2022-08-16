@@ -1,10 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
 import { addressIsValid } from '@elrondnetwork/dapp-core/utils/account/addressIsValid';
-import {
-  faExclamationTriangle,
-  faSpinner
-} from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
