@@ -16,15 +16,15 @@
     "start": "yarn watch",
     "build:types": "tsc --project tsconfig.json",
     "build": "rimraf dist && node esbuild.js && yarn build:types && cp package.json dist && cp README.md dist",
-    "publish-package": "yarn build && cd dist && npm publish",
-    "publish-package-next": "yarn build && cd dist && npm publish --tag next",
+    "publish-package": "yarn test && yarn build && cd dist && npm publish",
+    "publish-package-next": "yarn test && yarn build && cd dist && npm publish --tag next",
     "publish-yalc": "yarn build && cd dist && yalc publish",
     "watch": "yarn node esbuild-watch.js && yarn build:types -- --watch",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.16",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.18",
     "@size-limit/preset-small-lib": "7.0.8",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
@@ -95,13 +95,13 @@
     "transaction"
   ],
   "peerDependencies": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.16",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.18",
     "@elrondnetwork/erdjs": "10.2.7",
     "react": ">=18",
     "react-dom": ">=18"
   },
   "resolutions": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.16",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.18",
     "@elrondnetwork/erdjs": "10.2.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"
