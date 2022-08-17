@@ -1,9 +1,9 @@
 import { fireEvent, waitFor } from '@testing-library/react';
-import { beforeAll } from 'tests/helpers/beforeAll';
+import { renderForm } from 'tests/helpers/renderForm';
 
 describe('Destination address', () => {
   test('Destination address should not be empty', async () => {
-    const { findByTestId, queryByText } = beforeAll();
+    const { findByTestId, queryByText } = renderForm();
 
     const data = { target: { value: '' } };
     const input: any = await findByTestId('destinationAddress');
@@ -17,7 +17,7 @@ describe('Destination address', () => {
     });
   });
   it('should validate address', async () => {
-    const { findByTestId, queryByText } = beforeAll();
+    const { findByTestId, queryByText } = renderForm();
     const input: any = await findByTestId('destinationAddress');
     const value = '123';
     const data = { target: { value } };

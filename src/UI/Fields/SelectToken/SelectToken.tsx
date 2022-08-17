@@ -21,7 +21,6 @@ interface OptionType {
 const ListOption = (props: any) => {
   return (
     <div
-      // TODO @Miro check styles here
       className={`token-option ${props.isSelected ? 'is-selected' : ''}`}
       data-testid={`${props.value}-option`}
     >

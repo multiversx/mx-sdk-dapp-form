@@ -1,12 +1,12 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { denominateSelector } from 'tests/helpers';
-import { beforeAll } from 'tests/helpers';
+import { renderForm } from 'tests/helpers';
 
 describe('Data field tests', () => {
   test('data changes transaction fee', async () => {
     const data = { target: { value: 'four' } };
 
-    const methods = beforeAll();
+    const methods = renderForm();
 
     const feeLimit = await methods.findByTestId('feeLimit');
 
@@ -35,7 +35,7 @@ describe('Data field tests', () => {
       }
     };
 
-    const methods = beforeAll({
+    const methods = renderForm({
       ledger: {
         ledgerDataActive: true,
         version: '1.0.8'

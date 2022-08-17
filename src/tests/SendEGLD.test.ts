@@ -1,10 +1,10 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress } from '__mocks__';
-import { beforeAll } from 'tests/helpers/beforeAll';
+import { renderForm } from 'tests/helpers/renderForm';
 
 describe('EGLD Amount field', () => {
   it('should not be empty', async () => {
-    const { queryByText, findByTestId } = beforeAll();
+    const { queryByText, findByTestId } = renderForm();
     const data = { target: { value: '' } };
     const input: any = await findByTestId('amount');
     fireEvent.change(input, data);
@@ -16,7 +16,7 @@ describe('EGLD Amount field', () => {
     });
   });
   it('should be numeric', async () => {
-    const { queryByText, findByTestId } = beforeAll();
+    const { queryByText, findByTestId } = renderForm();
     const input: any = await findByTestId('amount');
     const value = 'asd';
     const data = { target: { value } };
@@ -28,7 +28,7 @@ describe('EGLD Amount field', () => {
     });
   });
   it('should not be negative', async () => {
-    const { queryByText, findByTestId } = beforeAll();
+    const { queryByText, findByTestId } = renderForm();
     const input: any = await findByTestId('amount');
     const value = '-1';
     const data = { target: { value } };
@@ -40,7 +40,7 @@ describe('EGLD Amount field', () => {
     });
   });
   it('should not be explicit positive', async () => {
-    const { queryByText, findByTestId } = beforeAll();
+    const { queryByText, findByTestId } = renderForm();
     const input: any = await findByTestId('amount');
     const value = '+1';
     const data = { target: { value } };
@@ -52,7 +52,7 @@ describe('EGLD Amount field', () => {
     });
   });
   it('should not allow exponential', async () => {
-    const { queryByText, findByTestId } = beforeAll();
+    const { queryByText, findByTestId } = renderForm();
     const input: any = await findByTestId('amount');
     const value = '1e2';
     const data = { target: { value } };
@@ -64,7 +64,7 @@ describe('EGLD Amount field', () => {
     });
   });
   it('should not allow hexadecimal', async () => {
-    const { queryByText, findByTestId } = beforeAll();
+    const { queryByText, findByTestId } = renderForm();
     const input: any = await findByTestId('amount');
     const value = '0x1';
     const data = { target: { value } };
@@ -76,7 +76,7 @@ describe('EGLD Amount field', () => {
     });
   });
   it('should not allow comma , ', async () => {
-    const { queryByText, findByTestId } = beforeAll();
+    const { queryByText, findByTestId } = renderForm();
     const input: any = await findByTestId('amount');
     const value = '1,2';
     const data = { target: { value } };
@@ -88,7 +88,7 @@ describe('EGLD Amount field', () => {
     });
   });
   it('should allow only max number of decimals configured by config', async () => {
-    const { queryByText, findByTestId } = beforeAll();
+    const { queryByText, findByTestId } = renderForm();
     const input: any = await findByTestId('amount');
     const value = '1.1234567890123456789';
     const data = { target: { value } };
@@ -101,7 +101,7 @@ describe('EGLD Amount field', () => {
     });
   });
   it('should be =< than balance - transaction fee', async () => {
-    const { queryByText, findByTestId, getByTestId } = beforeAll();
+    const { queryByText, findByTestId, getByTestId } = renderForm();
     const input: any = await findByTestId('amount');
     const value = '9999979.9998';
 
@@ -118,7 +118,7 @@ describe('EGLD Amount field', () => {
     });
   });
   it('should show error when not enough balance for non-zero transaction with large gas', async () => {
-    const render = beforeAll({
+    const render = renderForm({
       balance: '1_000_000_000_000_000'.replace('_', '') // 0.001
     });
 

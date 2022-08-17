@@ -2,7 +2,7 @@ import { fireEvent, waitFor, RenderResult, act } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { testAddress, testNetwork } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
-import { formConfiguration, beforeAll as beginAll } from 'tests/helpers';
+import { formConfiguration, renderForm as beginAll } from 'tests/helpers';
 import { ValuesEnum } from 'types';
 
 const beforAllTokens = (balance?: string) =>

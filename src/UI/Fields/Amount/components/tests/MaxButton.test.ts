@@ -1,9 +1,9 @@
 import { act, fireEvent, waitFor } from '@testing-library/react';
-import { beforeAll } from 'tests/helpers';
+import { renderForm } from 'tests/helpers';
 
 describe('Entire balance button', () => {
   test('Entering smaller amount than entireBalanceMinusDust shows Max', async () => {
-    const render = beforeAll();
+    const render = renderForm();
     const amount = await render.findByTestId('amount');
     const value = { target: { value: '0.7122' } };
     await act(async () => {
@@ -16,7 +16,7 @@ describe('Entire balance button', () => {
     });
   });
   test('Entering larger amount than entireBalanceMinusDust hides Max', async () => {
-    const render = beforeAll();
+    const render = renderForm();
     const amount = await render.findByTestId('amount');
     const value = { target: { value: '0.8074' } };
 
@@ -30,7 +30,7 @@ describe('Entire balance button', () => {
     });
   });
   test('Pressing entire balance fills amount with balance - fee - minDust', async () => {
-    const render = beforeAll();
+    const render = renderForm();
     const entireBalaceButton = await render.findByTestId('maxBtn');
     fireEvent.click(entireBalaceButton);
 
@@ -51,7 +51,7 @@ describe('Entire balance button', () => {
     expect(noInfoDust).toBeNull();
   });
   test('Using entire balance and writing in data filed triggers error', async () => {
-    const methods = beforeAll();
+    const methods = renderForm();
     const amount: any = await methods.findByTestId('amount');
     const value = { target: { value: '0.8123' } }; // max + 0.1 minDust
 

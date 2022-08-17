@@ -3,7 +3,7 @@ import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
 import {
   formConfiguration,
-  beforeAll as beginAll,
+  renderForm as beginAll,
   sendAndConfirmTest
 } from 'tests/helpers';
 

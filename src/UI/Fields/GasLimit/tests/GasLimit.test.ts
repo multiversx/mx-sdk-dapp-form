@@ -1,7 +1,7 @@
 import { gasLimit } from '@elrondnetwork/dapp-core/constants/index';
 import { fireEvent, waitFor, render } from '@testing-library/react';
 import { testAddress } from '__mocks__';
-import { beforeAll } from 'tests/helpers/beforeAll';
+import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types';
 
 // prevent async effects error logging
@@ -12,13 +12,13 @@ const afterEach = async (methods: ReturnType<typeof render>) => {
 
 describe('GasLimit field', () => {
   it('should not be empty', async () => {
-    const methods = beforeAll();
+    const methods = renderForm();
     const input: any = await methods.findByLabelText('Gas Limit');
     expect(input.value).toBe('50000');
     await afterEach(methods);
   });
   it('should not be string', async () => {
-    const { findByLabelText, findByText } = await beforeAll();
+    const { findByLabelText, findByText } = await renderForm();
     const input: any = await findByLabelText('Gas Limit');
     const value = 'string';
     const data = { target: { value } };
@@ -28,7 +28,7 @@ describe('GasLimit field', () => {
     expect(req!.innerHTML).toBe('Invalid number');
   });
   it('should be integer', async () => {
-    const { findByLabelText, queryByText } = await beforeAll();
+    const { findByLabelText, queryByText } = await renderForm();
     const input: any = await findByLabelText('Gas Limit');
     const value = '0.1';
     const data = { target: { value } };
@@ -40,7 +40,7 @@ describe('GasLimit field', () => {
     });
   });
   it('should not allow exponential gasLimit', async () => {
-    const { findByLabelText, queryByText } = await beforeAll();
+    const { findByLabelText, queryByText } = await renderForm();
     const input: any = await findByLabelText('Gas Limit');
     const value = '1e20';
     const data = { target: { value } };
@@ -52,7 +52,7 @@ describe('GasLimit field', () => {
     });
   });
   it('should not allow negative gasLimit', async () => {
-    const { findByLabelText, queryByText } = await beforeAll();
+    const { findByLabelText, queryByText } = await renderForm();
     const input: any = await findByLabelText('Gas Limit');
     const value = '-1';
     const data = { target: { value } };
@@ -64,7 +64,7 @@ describe('GasLimit field', () => {
     });
   });
   it('should not allow explicit positive gasLimit', async () => {
-    const { findByLabelText, queryByText } = await beforeAll();
+    const { findByLabelText, queryByText } = await renderForm();
     const input: any = await findByLabelText('Gas Limit');
     const value = '+1';
     const data = { target: { value } };
@@ -76,7 +76,7 @@ describe('GasLimit field', () => {
     });
   });
   it('should >= than the one set by config', async () => {
-    const { findByLabelText, queryByText } = await beforeAll();
+    const { findByLabelText, queryByText } = await renderForm();
     const input: any = await findByLabelText('Gas Limit');
     const value = parseInt(gasLimit) - 1;
     const data = { target: { value } };
@@ -91,7 +91,7 @@ describe('GasLimit field', () => {
     });
   });
   it('should >= than the configGasLimit + data.length if data is set', async () => {
-    const methods = beforeAll();
+    const methods = renderForm();
 
     const dataInput: any = await methods.findByTestId(ValuesEnum.data);
     const dataValue = 'four';
@@ -117,7 +117,7 @@ describe('GasLimit field', () => {
       getByTestId,
       queryByText,
       findByTestId
-    } = beforeAll();
+    } = renderForm();
     const input: any = await findByTestId('amount');
     const value = '0.8123';
     const data = { target: { value } };
@@ -135,7 +135,7 @@ describe('GasLimit field', () => {
     });
   });
   it('should not show error when writing in data', async () => {
-    const methods = beforeAll();
+    const methods = renderForm();
 
     const { getByLabelText, queryByText, getByText, findByTestId } = methods;
 
@@ -166,7 +166,7 @@ describe('GasLimit field', () => {
     expect(usdValue).toBeDefined();
   });
   it('should show error when not enough balance for zero transaction with large gas', async () => {
-    const methods = beforeAll({
+    const methods = renderForm({
       balance: '1_000_000_000_000_000'.replace('_', '') // 0.001
     });
 
