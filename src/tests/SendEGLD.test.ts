@@ -109,6 +109,10 @@ describe('EGLD Amount field', () => {
     fireEvent.change(input, fullBalance);
     fireEvent.blur(input);
 
+    await waitFor(() => {
+      expect(input.value).toBe(value);
+    });
+
     const sendButton = getByTestId('sendBtn');
     fireEvent.click(sendButton);
 

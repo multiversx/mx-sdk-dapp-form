@@ -1,21 +1,14 @@
 import { gasLimit } from '@elrondnetwork/dapp-core/constants/index';
-import { fireEvent, waitFor, render } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress } from '__mocks__';
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types';
-
-// prevent async effects error logging
-const afterEach = async (methods: ReturnType<typeof render>) => {
-  const feeInFiat = await methods.findByTestId('feeInFiat');
-  expect(feeInFiat.innerHTML).toBe('≈ $0.0029');
-};
 
 describe('GasLimit field', () => {
   it('should not be empty', async () => {
     const methods = renderForm();
     const input: any = await methods.findByLabelText('Gas Limit');
     expect(input.value).toBe('50000');
-    await afterEach(methods);
   });
   it('should not be string', async () => {
     const { findByLabelText, findByText } = await renderForm();

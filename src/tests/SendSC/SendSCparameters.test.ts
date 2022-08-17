@@ -1,4 +1,4 @@
-import { act, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { testAddress, testReceiver } from '__mocks__';
 import { fillInForm, finalFee, setResponse } from './helpers';
@@ -24,7 +24,7 @@ describe('SendForm Smart Contract', () => {
   test('GasLimit gets fetched from server', async () => {
     const transactionCost = jest.spyOn(axios, 'post');
     const { render } = await fillInForm();
-    const fee = await render.findByTestId('feeLimit');
+    const fee = render.getByTestId('feeLimit');
 
     await waitFor(() => {
       expect(fee.textContent).toBe(finalFee);
@@ -42,18 +42,14 @@ describe('SendForm Smart Contract', () => {
 
     expect(gasLimit.value).toBe('101200');
 
-    await act(async () => {
-      fireEvent.change(gasLimit, { target: { value: '101201' } });
-      fireEvent.blur(gasLimit);
-    });
+    fireEvent.change(gasLimit, { target: { value: '101201' } });
+    fireEvent.blur(gasLimit);
 
     const sendBtn = render.getByTestId('sendBtn');
 
-    await act(async () => {
-      fireEvent.click(sendBtn);
-    });
+    fireEvent.click(sendBtn);
 
-    const confirmFee = render.getByTestId('confirmFee');
+    const confirmFee = await render.findByTestId('confirmFee');
     expect(confirmFee.textContent).toContain('0.00005793701');
 
     // after gasLimit edit, transactionCost does no longer get called

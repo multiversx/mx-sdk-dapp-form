@@ -47,5 +47,3 @@ export function useVerifyScamAddress(apiConfig?: ApiConfigType) {
     fetchingScamAddress: fetching
   };
 }
-
-export default useVerifyScamAddress;

@@ -9,6 +9,7 @@ import React, {
 import { decimals } from '@elrondnetwork/dapp-core/constants/index';
 import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
+import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 
@@ -88,7 +89,7 @@ export function AmountContextProvider({
   const onSetAmountPercentage = useCallback(
     (percentage: number, updateFieldValue = true) => {
       const avoidDivisionByZero = new BigNumber(maxAmountMinusDust).isZero();
-      if (avoidDivisionByZero) {
+      if (avoidDivisionByZero || !stringIsFloat(percentage.toString())) {
         setAmountRange(0);
         return;
       }

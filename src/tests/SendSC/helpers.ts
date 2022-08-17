@@ -1,5 +1,5 @@
-// import { act, fireEvent } from '@testing-library/react';
-import { testNetwork } from '__mocks__';
+import { fireEvent } from '@testing-library/react';
+import { testNetwork, testReceiver } from '__mocks__';
 import { server, rest } from '__mocks__/server';
 import { renderForm } from '../helpers';
 
@@ -14,35 +14,27 @@ export const fillInForm = async () => {
     balance: '7600000000000000000000'
   });
 
-  // const amount: any = await render.findByTestId('amount');
-  // act(() => {
-  //   fireEvent.change(amount, { target: { value: '0.1' } });
-  //   fireEvent.blur(amount);
-  // });
+  const amount: any = await render.findByTestId('amount');
+  fireEvent.change(amount, { target: { value: '0.1' } });
+  fireEvent.blur(amount);
 
-  // expect(amount.value).toBe('0.1');
+  expect(amount.value).toBe('0.1');
 
-  // const destinationAddress: any = render.getByTestId('destinationAddress');
-  // act(() => {
-  //   fireEvent.change(destinationAddress, {
-  //     target: {
-  //       value: testReceiver
-  //     }
-  //   });
-  //   fireEvent.blur(destinationAddress);
-  // });
+  const destinationAddress: any = render.getByTestId('destinationAddress');
+  fireEvent.change(destinationAddress, {
+    target: {
+      value: testReceiver
+    }
+  });
+  fireEvent.blur(destinationAddress);
 
-  // const dataInput: any = render.getByTestId('data');
+  const dataInput: any = render.getByTestId('data');
 
-  // act(() => {
-  //   fireEvent.change(dataInput, { target: { value: 'claim' } });
-  //   fireEvent.blur(dataInput);
-  // });
+  fireEvent.change(dataInput, { target: { value: 'claim' } });
+  fireEvent.blur(dataInput);
 
-  // const fee = await render.findByTestId('feeLimit');
-  // await waitFor(() => {
-  //   expect(fee.textContent).toBe('0.0000575\u00a0xEGLD');
-  // });
+  const fee = await render.findByTestId('feeLimit');
+  expect(fee.textContent).toBe('0.0000575\u00a0xEGLD');
 
   return { render };
 };

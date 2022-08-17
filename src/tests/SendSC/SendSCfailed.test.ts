@@ -1,4 +1,4 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { act, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { maxGasLimit } from 'constants/index';
 import { fillInForm, finalFee, setResponse } from './helpers';
@@ -24,15 +24,22 @@ describe('SendForm Smart Contract', () => {
     });
 
     let gasLimit = render.getByTestId('gasLimit') as HTMLInputElement;
-    expect(gasLimit.value).toBe('1650063250');
+
+    await waitFor(() => {
+      expect(gasLimit.value).toBe('1650063250');
+    });
 
     const sendBtn = render.getByTestId('sendBtn');
-    fireEvent.click(sendBtn);
+
+    act(() => {
+      fireEvent.click(sendBtn);
+    });
 
     // first server response fetches a gasLimit value over maxGasLimit
     const req = await render.findByText(/^Must be lower than/);
-    expect(req.innerHTML).toBe(`Must be lower than ${maxGasLimit}`);
-
+    await waitFor(() => {
+      expect(req.innerHTML).toBe(`Must be lower than ${maxGasLimit}`);
+    });
     // modify data field to get a new gasLimit value from the server
     let dataInput = render.getByTestId('data') as HTMLInputElement;
     fireEvent.change(dataInput, { target: { value: 'claim@' } });
@@ -44,9 +51,7 @@ describe('SendForm Smart Contract', () => {
 
     // call fails so default value is filled in
     gasLimit = render.getByTestId('gasLimit') as HTMLInputElement;
-    await waitFor(() => {
-      expect(gasLimit.value).toBe('59000');
-    });
+    expect(gasLimit.value).toBe('59000');
 
     // 3rd data field change fetches correct server response
     dataInput = render.getByTestId('data') as HTMLInputElement;
@@ -58,8 +63,6 @@ describe('SendForm Smart Contract', () => {
       expect(fee.textContent).toBe(finalFee);
     });
 
-    await waitFor(() => {
-      expect(transactionCost).toHaveBeenCalledTimes(3);
-    });
+    expect(transactionCost).toHaveBeenCalledTimes(3);
   });
 });
