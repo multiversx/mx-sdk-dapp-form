@@ -33,7 +33,24 @@ More info about this can be found in [dapp-core documentation](https://github.co
 
 ### Step 3. Running in development mode
 
-In the project folder run:
+In order to develop `dapp-core-form` you need to do a series of steps for the first time. This is due to a [limitation](https://stackoverflow.com/questions/59056714/react-scripts-parent-folder-node-modules-error-when-running-in-child-location) of react-scripts.
+First make sure the parent dependencies are installed. 
+Then run:
+```bash
+npm run rename
+```
+```bash
+npm run start
+```
+After the project starts, stop it with `CTRL+C`
+```bash
+npm run undo-rename
+```
+```bash
+npm run link
+```
+
+Once these operations are done, in the project folder run:
 
 ```bash
 npm run start

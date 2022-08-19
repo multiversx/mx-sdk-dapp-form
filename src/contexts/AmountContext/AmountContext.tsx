@@ -9,6 +9,7 @@ import React, {
 import { decimals } from '@elrondnetwork/dapp-core/constants/index';
 import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
+import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 
@@ -16,7 +17,11 @@ import { ExtendedValuesType, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';
 import { useGetMaxAmountAvailable } from './hooks';
-import { getIsMaxButtonVisible, getPercentageOfAmount } from './utils';
+import {
+  getIsAmountInvalid,
+  getIsMaxButtonVisible,
+  getPercentageOfAmount
+} from './utils';
 
 export interface AmountContextPropsType {
   amount: string;
@@ -49,13 +54,14 @@ export function AmountContextProvider({
   const {
     values,
     errors,
+    touched,
     handleBlur,
     setFieldValue,
     setFieldError,
     setFieldTouched
   } = useFormikContext<ExtendedValuesType>();
 
-  const { checkInvalid, readonly, uiOptions } = useFormContext();
+  const { readonly, uiOptions } = useFormContext();
   const { maxAmountAvailable, maxAmountMinusDust } = useGetMaxAmountAvailable();
 
   const [amountRange, setAmountRange] = useState(
@@ -82,8 +88,15 @@ export function AmountContextProvider({
 
   const onSetAmountPercentage = useCallback(
     (percentage: number, updateFieldValue = true) => {
-      const total = maxAmountMinusDust;
-      const amountBN = new BigNumber(total).times(percentage).dividedBy(100);
+      const avoidDivisionByZero = new BigNumber(maxAmountMinusDust).isZero();
+      if (avoidDivisionByZero || !stringIsFloat(percentage.toString())) {
+        setAmountRange(0);
+        return;
+      }
+
+      const amountBN = new BigNumber(maxAmountMinusDust)
+        .times(percentage)
+        .dividedBy(100);
       const value = denominate({ input: nominate(String(amountBN)), decimals });
 
       if (updateFieldValue) {
@@ -136,10 +149,17 @@ export function AmountContextProvider({
     return onChange(maxAmountMinusDust || values.amount);
   }, [maxAmountMinusDust]);
 
+  // if the amount is zero, let the insufficient funds error go to gasLimit
+  const isInvalid = getIsAmountInvalid({
+    values,
+    errors,
+    touched
+  });
+
   const value = {
     amount: values.amount,
     error: errors.amount,
-    isInvalid: checkInvalid(ValuesEnum.amount),
+    isInvalid,
     maxAmountAvailable,
     maxAmountMinusDust,
     isMaxButtonVisible,

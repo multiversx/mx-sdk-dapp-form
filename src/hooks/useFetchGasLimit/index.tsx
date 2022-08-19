@@ -1,63 +1,72 @@
 import { useEffect, useState } from 'react';
+import { mainnetChainId } from '@elrondnetwork/dapp-core/constants';
 import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
-import { fetchGasLimit, FetchGasLimitType } from './fetchGasLimit';
+import { useFormikContext } from 'formik';
+import { SendFormContainerPropsType } from 'containers/SendFormContainer';
+import { useAccountContext } from 'contexts/AccountContext';
+import { useFormContext } from 'contexts/FormContext/FormContext';
+import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
+import { ExtendedValuesType, ValuesEnum } from 'types/form';
+import { fetchGasLimit } from './fetchGasLimit';
 import useDebounce from './useDebounce';
 
-interface UseFetchGasLimitProps extends FetchGasLimitType {
-  receiver: string;
-  gasLimitTouched: boolean;
-  amountError: boolean;
-  gasLimitError: boolean;
-  prefilledForm: boolean;
-  receiverIsContract: boolean;
-  gasLimitCostError?: string | null;
-}
+const ms500 = process.env.NODE_ENV !== 'test' ? 500 : 1;
 
-const ms500 = process.env.NODE_ENV !== 'test' ? 500 : 10;
+export function useFetchGasLimit(
+  initGasLimitError?: SendFormContainerPropsType['initGasLimitError']
+) {
+  const {
+    networkConfig: { chainId }
+  } = useNetworkConfigContext();
 
-export function useFetchGasLimit(props: UseFetchGasLimitProps) {
+  const { prefilledForm } = useFormContext();
+  const formikContext = useFormikContext<ExtendedValuesType>();
+  const { balance, address, nonce } = useAccountContext();
+
   const {
     values,
-    gasLimitTouched,
-    amountError,
-    gasLimitError,
-    receiver,
-    gasLimitCostError,
-    prefilledForm,
-    chainId
-  } = props;
+    touched,
+    errors: { gasLimit: gasLimitError, amount: amountError },
+    setFieldValue
+  } = formikContext;
+
   const { data, amount } = values;
   const debouncedData = useDebounce(data, ms500);
   const debouncedAmount = useDebounce(amount, ms500);
   const [gasCostLoading, setGasCostLoading] = useState(false);
-  const [gasCostError, setGasCostError] = useState(gasLimitCostError);
-  const [gasCostLimit, setGasCostLimit] = useState(values.gasLimit);
+  const [gasCostError, setGasCostError] = useState(initGasLimitError);
 
   useEffect(() => {
     const hasErrors = gasLimitError || amountError;
     if (
       !prefilledForm &&
-      isContract(receiver) &&
-      (chainId !== '1' || process.env.NODE_ENV === 'test') && // TODO: remove when ready
-      !gasLimitTouched &&
+      isContract(values.receiver) &&
+      (chainId !== mainnetChainId || process.env.NODE_ENV === 'test') && // TODO: remove when ready
+      !touched.gasLimit &&
       !hasErrors &&
       debouncedData.length > 0
     ) {
       setGasCostLoading(true);
-      fetchGasLimit(props)
+      fetchGasLimit({
+        balance,
+        address,
+        nonce,
+        values,
+        chainId
+      })
         .then(({ gasLimit: resultedGasLimit, gasLimitCostError: error }) => {
           setGasCostLoading(false);
-          setGasCostError(error || null);
-          setGasCostLimit(resultedGasLimit);
+          setGasCostError(error);
+          setFieldValue(ValuesEnum.gasLimit, resultedGasLimit, true);
         })
         .catch((err) => {
           setGasCostLoading(false);
           console.error(err);
         });
     }
-  }, [debouncedData, debouncedAmount, receiver]);
+  }, [debouncedData, debouncedAmount, values.receiver]);
 
-  return { gasCostLoading, gasCostError, gasCostLimit };
+  return { gasCostLoading, gasCostError };
 }
 
 export default useFetchGasLimit;

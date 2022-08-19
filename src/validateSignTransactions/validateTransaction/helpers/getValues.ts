@@ -3,7 +3,7 @@ import {
   denomination,
   gasPrice
 } from '@elrondnetwork/dapp-core/constants/index';
-import { MultiSignTxType } from '@elrondnetwork/dapp-core/types';
+import { MultiSignTxType } from '@elrondnetwork/dapp-core/types/transactions';
 import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { isTokenTransfer } from '@elrondnetwork/dapp-core/utils/transactions/isTokenTransfer';
 

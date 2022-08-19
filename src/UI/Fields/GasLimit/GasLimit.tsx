@@ -8,7 +8,7 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
-import styles from './styles.module.scss';
+import styles from './../styles.module.scss';
 
 export const GasLimit = () => {
   const { formInfo, gasInfo } = useSendFormContext();
@@ -22,10 +22,13 @@ export const GasLimit = () => {
     gasLimitError,
     isGasLimitInvalid
   } = gasInfo;
+
   const onResetClick = (e: React.MouseEvent) => {
     e.preventDefault();
     onResetGasLimit();
   };
+
+  const showResetButton = gasLimit !== defaultGasLimit && !readonly;
 
   return (
     <div className={styles.gas}>
@@ -60,7 +63,7 @@ export const GasLimit = () => {
               </span>
             )}
 
-            {gasLimit !== defaultGasLimit && !readonly && (
+            {showResetButton && (
               <span className={styles.gasUndo}>
                 <button
                   className={styles.gasReset}
@@ -77,7 +80,12 @@ export const GasLimit = () => {
         </div>
 
         {isGasLimitInvalid && (
-          <div className={globals.error}>{gasLimitError}</div>
+          <div
+            className={globals.error}
+            data-testid={`${ValuesEnum.gasLimit}Error`}
+          >
+            {gasLimitError}
+          </div>
         )}
       </div>
     </div>

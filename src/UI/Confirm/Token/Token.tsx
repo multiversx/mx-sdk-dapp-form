@@ -38,7 +38,7 @@ export const Token = ({
           <TokenElement
             inDropdown
             token={{
-              name: nft?.identifier,
+              name: nft?.name,
               identifier: nft?.identifier,
               decimals: 0,
               balance: ZERO,

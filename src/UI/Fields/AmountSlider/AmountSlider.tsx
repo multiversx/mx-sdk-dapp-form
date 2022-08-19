@@ -28,7 +28,7 @@ export const AmountSlider = () => {
           disabled={disabled}
           min={0}
           max={100}
-          value={amountRange}
+          value={String(amountRange)}
           className={classNames(styles.amountSliderInput, {
             [styles.disabled]: disabled
           })}

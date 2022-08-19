@@ -1,3 +1,4 @@
+import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import calculateGasLimit from 'operations/calculateGasLimit';
@@ -12,7 +13,7 @@ const funds = string().test('funds', 'Insufficient funds', function fundsCheck(
 ) {
   const { data, gasPrice, amount, balance, chainId } = this
     .parent as ExtendedValuesType;
-  if (amount && value !== undefined) {
+  if (amount && stringIsFloat(amount) && value != null) {
     const valid = validateGasLimitAmount({
       amount,
       balance,

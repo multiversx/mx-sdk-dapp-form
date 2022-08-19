@@ -10,7 +10,7 @@ interface FormDataFieldType {
     invalidTextarea: string;
     errorMsg: string;
   };
-  label: string;
+  label: string | null;
   ignoreDefaultClasses: boolean;
 }
 
@@ -24,7 +24,7 @@ interface FormToFieldType {
     scamErrorMsg: string;
     scamErrorIcon: string;
   };
-  label: string;
+  label: string | null;
   ignoreDefaultClasses: boolean;
 }
 
@@ -38,7 +38,7 @@ interface FormAmountFieldType {
     maxBtn: string;
     errorMsg: string;
   };
-  label: string;
+  label: string | null;
   components: {
     tokenSelector: React.ElementType | null;
   };
@@ -47,7 +47,7 @@ interface FormAmountFieldType {
 
 interface CustomFields {
   data: FormDataFieldType;
-  to: FormToFieldType;
+  to: FormToFieldType; // TODO: chage to receiver, use ValuesEnum
   amount: FormAmountFieldType;
 }
 

@@ -1,12 +1,13 @@
 import React, { JSXElementConstructor, useEffect, useState } from 'react';
 import { fallbackNetworkConfigurations } from '@elrondnetwork/dapp-core/constants/index';
-import { NetworkType } from '@elrondnetwork/dapp-core/types';
+import { NetworkType } from '@elrondnetwork/dapp-core/types/network';
 
 import {
   getEnvironmentForChainId,
   getNetworkConfigForChainId,
   setApiConfig
 } from 'apiCalls';
+import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { FormNetworkConfigType } from 'types';
 import {
   AccountContextPropsType,
@@ -35,7 +36,7 @@ interface AppInfoContextProviderPropsType {
   networkConfig: FormNetworkConfigType;
   children: React.ReactNode;
   Loader?: JSXElementConstructor<any> | null;
-  initGasLimitError?: string | null;
+  initGasLimitError?: SendFormContainerPropsType['initGasLimitError'];
   UICustomization?: UICustomizationContextPropsType;
 }
 export function AppInfoContextProvider({

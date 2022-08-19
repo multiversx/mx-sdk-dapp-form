@@ -3,6 +3,7 @@
 
 # dependencies
 node_modules
+temp_node_modules
 
 # builds
 build

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate';
+import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
 import {
   faAngleDown,
   faAngleRight,
@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { GasLimit } from '../GasLimit';
+import { GasLimit } from '../GasLimit/GasLimit';
 import { GasPrice } from '../GasPrice';
 import { FeeInFiat } from './FeeInFiat';
 
@@ -48,7 +48,11 @@ export const FeeAccordion = () => {
             />
           </span>
           {gasCostLoading && (
-            <FontAwesomeIcon icon={faSpinner} className='fa-spin fast-spin' />
+            <FontAwesomeIcon
+              icon={faSpinner}
+              className='fa-spin fast-spin'
+              data-testid='gasCostLoadingSpinner'
+            />
           )}
         </span>
 

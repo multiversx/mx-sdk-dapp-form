@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import {
   decimals as defaultDecimals,
   denomination as defaultDenomination
@@ -29,13 +27,8 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
   const { values } = useFormikContext<ExtendedValuesType>();
   const { balance } = useAccountContext();
   const {
-    networkConfig: { id: chainId }
+    networkConfig: { chainId }
   } = useNetworkConfigContext();
-
-  const [tokenBalance, setTokenBalance] = useState<string | null>(null);
-  const [nftBalance, setNftBalance] = useState<string | null>(null);
-  const [denominatedEgldBalance, setDenominatedEgldBalance] = useState(ZERO);
-  const [balanceMinusDust, setBalanceMinusDust] = useState(balance);
 
   const { nft, tokens } = useTokensContext();
   const {
@@ -44,52 +37,50 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
     isEgldTransaction
   } = useFormContext();
   const { gasLimit, gasPrice } = useGasContext();
-  const { tokenId, txType } = values;
+  const { tokenId } = values;
 
-  useEffect(() => {
-    if (isNftTransaction && nft) {
-      const computedNftBalance = getEntireTokenBalance({
-        balance: nft.balance,
-        denomination: nft.type === NftEnumType.MetaESDT ? nft.decimals : 0,
-        decimals: defaultDecimals
-      });
-      setNftBalance(computedNftBalance);
-    }
-  }, [nft]);
+  let nftBalance = null;
+  if (isNftTransaction && nft) {
+    const computedNftBalance = getEntireTokenBalance({
+      balance: nft.balance,
+      denomination: nft.type === NftEnumType.MetaESDT ? nft.decimals : 0,
+      decimals: defaultDecimals
+    });
+    nftBalance = computedNftBalance;
+  }
 
-  useEffect(() => {
-    if (isEsdtTransaction) {
-      const { decimals, balance: newTokenBalance } = getTokenDetails({
-        tokens,
-        tokenId
-      });
+  let tokenBalance = null;
+  if (isEsdtTransaction) {
+    const { decimals, balance: newTokenBalance } = getTokenDetails({
+      tokens,
+      tokenId
+    });
 
-      const tokenAmount = getEntireTokenBalance({
-        balance: newTokenBalance,
-        denomination: decimals,
-        decimals: defaultDecimals
-      });
-      setTokenBalance(tokenAmount);
-    }
-  }, [txType, tokenId, isEsdtTransaction, tokens]);
+    const tokenAmount = getEntireTokenBalance({
+      balance: newTokenBalance,
+      denomination: decimals,
+      decimals: defaultDecimals
+    });
+    tokenBalance = tokenAmount;
+  }
 
-  useEffect(() => {
-    if (balance && isEgldTransaction) {
-      const {
-        entireBalance: denominatedBalance,
-        entireBalanceMinusDust
-      } = getEntireBalance({
-        balance,
-        gasPrice: nominate(gasPrice),
-        gasLimit: gasLimit,
-        denomination: defaultDenomination,
-        decimals: defaultDecimals,
-        chainId
-      });
-      setDenominatedEgldBalance(denominatedBalance);
-      setBalanceMinusDust(entireBalanceMinusDust);
-    }
-  }, [balance, gasLimit, gasPrice]);
+  let denominatedEgldBalance = ZERO;
+  let balanceMinusDust = balance;
+  if (balance && isEgldTransaction) {
+    const {
+      entireBalance: denominatedBalance,
+      entireBalanceMinusDust
+    } = getEntireBalance({
+      balance,
+      gasPrice: nominate(gasPrice),
+      gasLimit: gasLimit,
+      denomination: defaultDenomination,
+      decimals: defaultDecimals,
+      chainId
+    });
+    denominatedEgldBalance = denominatedBalance;
+    balanceMinusDust = entireBalanceMinusDust;
+  }
 
   const esdtAmountAvailable = nft && nftBalance ? nftBalance : tokenBalance;
 

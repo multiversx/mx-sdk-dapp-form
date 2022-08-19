@@ -28,7 +28,7 @@ export const delegationContractDataByEnvironment: Record<
   }
 };
 
-export async function getDelegationDataForChainId(chainId: string) {
+export function getDelegationDataForChainId(chainId: string) {
   const environment = getEnvironmentForChainId(chainId);
   return delegationContractDataByEnvironment[environment];
 }

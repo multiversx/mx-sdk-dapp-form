@@ -44,29 +44,27 @@ export function getEntireBalance({
   const bNentireBalance = bnBalance.minus(fee);
   const bNentireBalanceMinusDust = bNentireBalance.minus(bnMinDust);
 
-  const entireBalance =
-    // entireBalance >= 0
-    bNentireBalance.comparedTo(0) === 1
-      ? denominate({
-          input: bNentireBalance.toString(10),
-          denomination,
-          decimals,
-          showLastNonZeroDecimal: true,
-          addCommas: false
-        })
-      : ZERO;
+  const entireBalance = bNentireBalance.isGreaterThanOrEqualTo(0)
+    ? denominate({
+        input: bNentireBalance.toString(10),
+        denomination,
+        decimals,
+        showLastNonZeroDecimal: true,
+        addCommas: false
+      })
+    : ZERO;
 
-  const entireBalanceMinusDust =
-    // entireBalanceMinusDust >= 0
-    bNentireBalanceMinusDust.comparedTo(0) === 1
-      ? denominate({
-          input: bNentireBalanceMinusDust.toString(10),
-          denomination,
-          decimals,
-          showLastNonZeroDecimal: true,
-          addCommas: false
-        })
-      : entireBalance;
+  const entireBalanceMinusDust = bNentireBalanceMinusDust.isGreaterThanOrEqualTo(
+    0
+  )
+    ? denominate({
+        input: bNentireBalanceMinusDust.toString(10),
+        denomination,
+        decimals,
+        showLastNonZeroDecimal: true,
+        addCommas: false
+      })
+    : entireBalance;
 
   return {
     entireBalance,

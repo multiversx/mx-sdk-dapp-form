@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import * as constants from '@elrondnetwork/dapp-core/constants';
-import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate';
+import * as constants from '@elrondnetwork/dapp-core/constants/index';
+import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
@@ -10,7 +10,7 @@ import { scamFlag } from 'helpers';
 import { NftEnumType, NftType, TokenType } from 'types';
 
 import styles from './styles.module.scss';
-import ElrondSymbol from './symbol.svg';
+const ElrondSymbol = require('./symbol.svg').default;
 
 export const TokenElement = ({
   inDropdown = false,
@@ -65,6 +65,7 @@ export const TokenElement = ({
       <div className={styles.tokenElementWrapper}>
         {isEgld || avatar ? (
           <ElrondSymbol
+            is='x3d' // fixes jest Warning: The tag <default> is unrecognized in this browser.
             height={avatarDropdownSize}
             className={classNames({
               [styles.tokenElementSpaced]: Boolean(avatar),

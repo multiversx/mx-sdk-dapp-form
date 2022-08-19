@@ -1,10 +1,11 @@
 import { newTransaction } from '@elrondnetwork/dapp-core/models/newTransaction';
 import {
-  MultiSignTxType,
-  TxsDataTokensType,
   MultiEsdtTxType,
-  TxDataTokenType
-} from '@elrondnetwork/dapp-core/types';
+  MultiSignTxType,
+  TxDataTokenType,
+  TxsDataTokensType
+} from '@elrondnetwork/dapp-core/types/transactions';
+
 import { getTokenFromData } from '@elrondnetwork/dapp-core/utils/transactions/getTokenFromData';
 import { parseMultiEsdtTransferData } from '@elrondnetwork/dapp-core/utils/transactions/parseMultiEsdtTransferData';
 import getTxWithReceiver from './getTxWithReceiver';
