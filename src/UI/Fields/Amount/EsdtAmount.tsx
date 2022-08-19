@@ -2,8 +2,8 @@ import React from 'react';
 
 import { ZERO } from 'constants/index';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { SharedAmount } from './SharedAmount';
 
+import { SharedAmount } from './components';
 import styles from './styles.module.scss';
 
 export const EsdtAmount = () => {

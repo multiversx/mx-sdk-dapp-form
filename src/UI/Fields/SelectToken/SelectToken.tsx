@@ -1,6 +1,6 @@
 import React from 'react';
-import * as constants from '@elrondnetwork/dapp-core/constants';
-import Select, { SingleValue } from 'react-select';
+import * as constants from '@elrondnetwork/dapp-core/constants/index';
+import Select, { SingleValue, components } from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
 import globals from 'assets/sass/globals.module.scss';
@@ -18,6 +18,17 @@ interface OptionType {
   token: TokenType;
 }
 
+const ListOption = (props: any) => {
+  return (
+    <div
+      className={`token-option ${props.isSelected ? 'is-selected' : ''}`}
+      data-testid={`${props.value}-option`}
+    >
+      <components.Option {...props} />
+    </div>
+  );
+};
+
 export const SelectToken = ({ label }: { label?: string }) => {
   const { formInfo, accountInfo, tokensInfo } = useSendFormContext();
 
@@ -34,13 +45,15 @@ export const SelectToken = ({ label }: { label?: string }) => {
     isTokenIdInvalid
   } = tokensInfo;
 
-  const FormatOptionLabel = ({ token }: { token: TokenType }) => (
-    <TokenElement
-      inDropdown
-      token={token}
-      isEgld={token.identifier === egldLabel}
-    />
-  );
+  const FormatOptionLabel = ({ token }: { token: TokenType }) => {
+    return (
+      <TokenElement
+        inDropdown
+        token={token}
+        isEgld={token.identifier === egldLabel}
+      />
+    );
+  };
 
   const allTokens: TokenType[] = [
     {
@@ -113,6 +126,7 @@ export const SelectToken = ({ label }: { label?: string }) => {
           options.find(({ value }: OptionType) => value === tokenId) ||
           undefined
         }
+        components={{ Option: ListOption }}
         options={options}
         onChange={onChange}
         onMenuOpen={onMenuOpen}

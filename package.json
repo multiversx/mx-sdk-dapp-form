@@ -1,6 +1,6 @@
 {
   "name": "@elrondnetwork/dapp-core-form",
-  "version": "0.2.0-alpha.13",
+  "version": "0.2.0-alpha.14",
   "description": "A library to hold the main logic for a validating a form for transactions on the Elrond Network",
   "author": "ElrondNetwork",
   "license": "GPL-3.0-or-later",
@@ -16,15 +16,15 @@
     "start": "yarn watch",
     "build:types": "tsc --project tsconfig.json",
     "build": "rimraf dist && node esbuild.js && yarn build:types && cp package.json dist && cp README.md dist",
-    "publish-package": "yarn build && cd dist && npm publish",
-    "publish-package-next": "yarn build && cd dist && npm publish --tag next",
+    "publish-package": "yarn test && yarn build && cd dist && npm publish",
+    "publish-package-next": "yarn test && yarn build && cd dist && npm publish --tag next",
     "publish-yalc": "yarn build && cd dist && yalc publish",
     "watch": "yarn node esbuild-watch.js && yarn build:types -- --watch",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.14",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.19",
     "@size-limit/preset-small-lib": "7.0.8",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
@@ -34,6 +34,7 @@
     "@types/react-dom": "18.0.5",
     "@typescript-eslint/eslint-plugin": "5.0.0",
     "@typescript-eslint/parser": "5.22.0",
+    "better-sqlite3": "7.6.2",
     "esbuild": "0.14.47",
     "esbuild-node-externals": "1.4.1",
     "esbuild-plugin-svgr": "1.0.1",
@@ -56,14 +57,19 @@
     "jest": "28.1.3",
     "jest-css-modules-transform": "4.4.2",
     "jest-environment-jsdom": "28.1.3",
+    "msw": "0.44.2",
+    "multiformats": "9.7.1",
     "node-stdlib-browser": "1.2.0",
-    "postcss-modules": "4.3.1",
+    "postcss-modules": "5.0.0",
+    "react": "18.2.0",
     "react-is": "18.0.0",
     "react-scripts": "5.0.1",
+    "react-select-event": "5.5.1",
     "size-limit": "7.0.8",
     "ts-jest": "28.0.7",
     "tslib": "2.4.0",
-    "typescript": "4.7.4"
+    "typescript": "4.7.4",
+    "uint8arrays": "3.1.0"
   },
   "size-limit": [
     {
@@ -89,13 +95,13 @@
     "transaction"
   ],
   "peerDependencies": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.14",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.19",
     "@elrondnetwork/erdjs": "10.2.7",
     "react": ">=18",
     "react-dom": ">=18"
   },
   "resolutions": {
-    "@elrondnetwork/dapp-core": "2.0.0-beta.14",
+    "@elrondnetwork/dapp-core": "2.0.0-beta.19",
     "@elrondnetwork/erdjs": "10.2.7",
     "react": "18.2.0",
     "react-dom": "18.2.0"

@@ -16,7 +16,7 @@ export function useFetchKnownAddresses() {
       });
 
       const addresses = resolvedTransactions.reduce((prev, curr) => {
-        return [...prev, curr.receiver, curr.sender];
+        return curr ? [...prev, curr.receiver, curr.sender] : prev;
       }, [] as string[]);
 
       const uniqAddresses = uniq(addresses);

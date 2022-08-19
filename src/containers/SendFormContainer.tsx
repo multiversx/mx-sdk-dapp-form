@@ -25,7 +25,7 @@ import validationSchema from 'validationSchema';
 export interface SendFormContainerPropsType {
   initialValues?: ExtendedValuesType;
   enableReinitialize?: boolean;
-  initGasLimitError?: string | null;
+  initGasLimitError?: string;
   onFormSubmit: (values: ValuesType, transaction: Transaction | null) => void;
   accountInfo: AccountContextPropsType;
   formInfo: Omit<FormContextBasePropsType, 'txType' | 'setTxType'>;
@@ -99,7 +99,8 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     nft: tokensInfo?.initialNft,
     balance: initialValues?.balance || balance,
     chainId: initialValues?.chainId || networkConfig.chainId,
-    tokens: tokensInfo?.initialTokens
+    tokens: tokensInfo?.initialTokens,
+    ledger: initialValues?.ledger
   };
 
   return (

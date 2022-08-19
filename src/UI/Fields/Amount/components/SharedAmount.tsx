@@ -9,7 +9,8 @@ import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
-import styles from './styles.module.scss';
+import styles from './../styles.module.scss';
+import { MaxButton } from './MaxButton';
 
 interface SharedAmountType {
   AvailableAmountElement: () => JSX.Element | null;
@@ -17,7 +18,7 @@ interface SharedAmountType {
 
 export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
   const {
-    formInfo: { checkInvalid, readonly },
+    formInfo: { readonly },
     amountInfo
   } = useSendFormContext();
 
@@ -30,17 +31,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
     }
   } = useUICustomizationContext();
 
-  const isInvalid = checkInvalid(ValuesEnum.amount);
-
-  const {
-    amount,
-    error,
-    isMaxButtonVisible,
-    onMaxClicked,
-    onFocus,
-    onBlur,
-    onChange
-  } = amountInfo;
+  const { amount, error, onFocus, onBlur, onChange, isInvalid } = amountInfo;
 
   return (
     <div className={styles.sharedAmount}>
@@ -56,7 +47,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
           id={ValuesEnum.amount}
           name={ValuesEnum.amount}
           data-testid={ValuesEnum.amount}
-          required={true}
+          required
           value={amount}
           disabled={getIsDisabled(ValuesEnum.amount, readonly)}
           onFocus={onFocus}
@@ -75,24 +66,14 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
           </span>
         )}
 
-        {isMaxButtonVisible && (
-          <div
-            className={classNames(styles.max, {
-              [styles.maxOffset]: isInvalid
-            })}
-          >
-            <button
-              data-testid='maxBtn'
-              className={styles.button}
-              onClick={onMaxClicked}
-            >
-              Max
-            </button>
-          </div>
-        )}
+        <MaxButton />
       </div>
 
-      {isInvalid && <div className={globals.error}>{error}</div>}
+      {isInvalid && (
+        <div className={globals.error} data-testid='amountError'>
+          {error}
+        </div>
+      )}
 
       {TokenSelector && <TokenSelector />}
 

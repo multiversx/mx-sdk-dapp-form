@@ -1,4 +1,4 @@
-import { TxsDataTokensType } from '@elrondnetwork/dapp-core/types';
+import { TxsDataTokensType } from '@elrondnetwork/dapp-core/types/transactions';
 
 export function extractTokenData(props: {
   dataId: string;

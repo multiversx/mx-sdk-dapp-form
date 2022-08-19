@@ -7,7 +7,7 @@
     "declarationMap": true,
     "sourceMap": true,
     "strict": true,
-    "lib": ["dom", "esnext"],
+    "lib": ["dom", "esnext", "DOM.Iterable"],
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "rootDir": "./src",

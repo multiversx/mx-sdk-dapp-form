@@ -4,6 +4,7 @@ import { getIdentifierType } from '@elrondnetwork/dapp-core/utils/validation/get
 
 import BigNumber from 'bignumber.js';
 import { tokenGasLimit, ZERO } from 'constants/index';
+import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { DelegationContractDataType } from 'types';
 import fetchGasLimit from '../hooks/useFetchGasLimit/fetchGasLimit';
 import calculateGasLimit from './calculateGasLimit';
@@ -29,7 +30,7 @@ export const computeInitGasLimit: (
   props: ComputeInitGasLimitType
 ) => Promise<{
   initGasLimit: string;
-  initGasLimitError: string | null;
+  initGasLimitError?: SendFormContainerPropsType['initGasLimitError'];
 }> = async ({
   computedTokenId,
   receiver,
@@ -44,7 +45,6 @@ export const computeInitGasLimit: (
   delegationContractData: { delegationContractData, delegationContract },
   chainId
 }) => {
-  const initGasLimitError = null;
   if (isContract(receiver) && !isInternal) {
     const {
       gasLimit: resultedGasLimit,
@@ -72,29 +72,29 @@ export const computeInitGasLimit: (
 
     return {
       initGasLimit,
-      initGasLimitError: gasLimitCostError || null
+      initGasLimitError: gasLimitCostError
     };
   }
 
   if (gasLimit !== ZERO) {
-    return { initGasLimit: gasLimit, initGasLimitError };
+    return { initGasLimit: gasLimit };
   }
 
   if (data.length > 0) {
     const initGasLimit = calculateGasLimit({
       data: data.trim()
     });
-    return { initGasLimit, initGasLimitError };
+    return { initGasLimit };
   }
 
   const { isEsdt, isNft } = getIdentifierType(computedTokenId);
 
   if (isEsdt) {
-    return { initGasLimit: tokenGasLimit, initGasLimitError };
+    return { initGasLimit: tokenGasLimit };
   }
 
   if (isNft) {
-    return { initGasLimit: calculateNftGasLimit(), initGasLimitError };
+    return { initGasLimit: calculateNftGasLimit() };
   }
-  return { initGasLimit: defaultGasLimit, initGasLimitError };
+  return { initGasLimit: defaultGasLimit };
 };

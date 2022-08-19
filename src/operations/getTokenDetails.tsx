@@ -1,6 +1,6 @@
 import { denomination } from '@elrondnetwork/dapp-core/constants/index';
-import { TokenType } from 'types';
 import { ZERO } from 'constants/index';
+import { TokenType } from 'types';
 
 export function getTokenDetails({
   tokens,
