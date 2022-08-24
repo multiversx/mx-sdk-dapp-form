@@ -1,5 +1,5 @@
 import { TxTypeEnum } from 'types/enums';
-import { NftType, TokenType } from 'types/tokens';
+import { PartialNftType, PartialTokenType } from 'types/tokens';
 
 export enum ValuesEnum {
   receiver = 'receiver',
@@ -29,8 +29,8 @@ export interface ExtendedValuesType extends ValuesType {
    */
   readonly?: boolean | Array<ValueKeyType>;
   hiddenFields?: Array<ValueKeyType>;
-  nft?: NftType;
-  tokens?: TokenType[] | null;
+  nft?: PartialNftType;
+  tokens?: PartialTokenType[] | null;
   ledger?: {
     ledgerDataActive: boolean;
     version: string;
@@ -59,8 +59,8 @@ export interface ValidationSchemaType {
 
   readonly?: ExtendedValuesType['readonly'];
   tokenId: string;
-  nft?: NftType;
-  tokens?: TokenType[];
+  nft?: PartialNftType;
+  tokens?: PartialTokenType[];
   ledger?: {
     ledgerDataActive: boolean;
     version: string;

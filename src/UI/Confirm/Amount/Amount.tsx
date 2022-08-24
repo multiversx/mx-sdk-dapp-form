@@ -4,7 +4,7 @@ import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
 import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue/index';
 
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
-import { NftType, TxTypeEnum } from 'types';
+import { PartialNftType, TxTypeEnum } from 'types';
 import { Token } from '../Token';
 
 import styles from './styles.module.scss';
@@ -20,7 +20,7 @@ export interface AmountPropsType {
   egldPriceInUsd: number;
   tokenDecimals: number;
   txType: TxTypeEnum;
-  nft?: NftType;
+  nft?: PartialNftType;
 }
 
 export const Amount = (props: AmountPropsType) => {

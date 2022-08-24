@@ -6,19 +6,24 @@ import React, {
   useState
 } from 'react';
 import { useFormikContext } from 'formik';
+import uniqBy from 'lodash/uniqBy';
 import { fetchAllMetaEsdts, fetchAllTokens } from 'apiCalls';
 import { useAccountContext } from 'contexts/AccountContext';
 import { getTokenDetails, getTxType } from 'operations';
-import { ExtendedValuesType, NftType, TokenType, TxTypeEnum } from 'types';
+import {
+  ExtendedValuesType,
+  PartialNftType,
+  PartialTokenType,
+  TxTypeEnum
+} from 'types';
 
 import { useFormContext } from '../FormContext';
 import { useNetworkConfigContext } from '../NetworkContext';
 import { useGetEconomicsInfo } from './utils';
-import uniqBy from 'lodash/uniqBy';
 
 export interface TokensContextInitializationPropsType {
-  initialNft?: NftType;
-  initialTokens?: TokenType[] | null;
+  initialNft?: PartialNftType;
+  initialTokens?: PartialTokenType[] | null;
 }
 
 export interface TokensContextPropsType {
@@ -29,10 +34,10 @@ export interface TokensContextPropsType {
   egldPriceInUsd: number;
   tokenIdError?: string;
   areTokensLoading: boolean;
-  tokenDetails: TokenType;
-  tokens: TokenType[];
-  allAvailableTokens: TokenType[];
-  nft?: NftType;
+  tokenDetails: PartialTokenType;
+  tokens: PartialTokenType[];
+  allAvailableTokens: PartialTokenType[];
+  nft?: PartialNftType;
   getTokens: () => void;
   onChangeTokenId: (value: string) => void;
 }
@@ -49,7 +54,7 @@ const nftField = 'nft';
 const tokensField = 'tokens';
 const txTypeField = 'txType';
 
-let previouslyFetchedTokens: TokenType[] = [];
+let previouslyFetchedTokens: PartialTokenType[] = [];
 
 export function TokensContextProvider({
   children,
@@ -108,7 +113,7 @@ export function TokensContextProvider({
       const selectedNft = allAvailableTokens?.find(
         (token) => token.identifier === tokenId
       );
-      setFieldValue(nftField, selectedNft as NftType);
+      setFieldValue(nftField, selectedNft as PartialNftType);
     } else {
       setFieldValue(nftField, undefined);
     }
@@ -116,7 +121,7 @@ export function TokensContextProvider({
 
   const isTokenIdInvalid = checkInvalid(tokenIdField);
 
-  const allAvailableTokens: TokenType[] = [
+  const allAvailableTokens: PartialTokenType[] = [
     {
       name: 'Elrond eGold',
       identifier: egldLabel,

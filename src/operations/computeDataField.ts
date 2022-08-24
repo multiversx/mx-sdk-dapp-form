@@ -3,7 +3,12 @@ import BigNumber from 'bignumber.js';
 
 import { ZERO } from 'constants/index';
 import { bech32 } from 'helpers';
-import { NftEnumType, NftType, TxTypeEnum, ExtendedValuesType } from 'types';
+import {
+  NftEnumType,
+  PartialNftType,
+  TxTypeEnum,
+  ExtendedValuesType
+} from 'types';
 import getTokenDetails from './getTokenDetails';
 
 const evenLengthValue = (value: string) =>
@@ -34,7 +39,7 @@ export const computeNftDataField = ({
   receiver,
   errors
 }: {
-  nft?: NftType;
+  nft?: PartialNftType;
   amount: string;
   receiver: string;
   errors: boolean;
@@ -66,7 +71,7 @@ export const getDataField = ({
 }: {
   txType: TxTypeEnum;
   values: ExtendedValuesType;
-  nft?: NftType;
+  nft?: PartialNftType;
   amountError?: boolean;
   receiverError?: string;
 }) => {

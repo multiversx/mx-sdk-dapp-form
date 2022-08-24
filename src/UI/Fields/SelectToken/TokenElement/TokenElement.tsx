@@ -7,7 +7,7 @@ import classNames from 'classnames';
 
 import { ZERO } from 'constants/index';
 import { scamFlag } from 'helpers';
-import { NftEnumType, NftType, TokenType } from 'types';
+import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
 
 import styles from './styles.module.scss';
 const ElrondSymbol = require('./symbol.svg').default;
@@ -19,11 +19,11 @@ export const TokenElement = ({
   nftTokenDetails,
   token
 }: {
-  token: TokenType;
+  token: PartialTokenType;
   inDropdown?: boolean;
   isEgld?: boolean;
   nftType?: NftEnumType;
-  nftTokenDetails?: NftType;
+  nftTokenDetails?: PartialNftType;
 }) => {
   const { name, identifier, balance, decimals } = token;
   const avatar = token.assets?.svgUrl || token.assets?.pngUrl || '';

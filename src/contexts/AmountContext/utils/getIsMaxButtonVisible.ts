@@ -1,9 +1,9 @@
 import { ZERO } from 'constants/index';
-import { ExtendedValuesType, NftType, TxTypeEnum } from 'types';
+import { ExtendedValuesType, PartialNftType, TxTypeEnum } from 'types';
 import { showMax } from 'utilities';
 
 interface GetIsMaxButtonVisiblePropsType {
-  nft?: NftType;
+  nft?: PartialNftType;
   amount: string;
   readonly?: ExtendedValuesType['readonly'];
   maxAmountAvailable: string;

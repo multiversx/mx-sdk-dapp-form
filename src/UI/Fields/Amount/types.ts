@@ -1,4 +1,4 @@
-import { NftType } from 'types';
+import { PartialNftType } from 'types';
 
 export interface EsdtAmountType {
   tokenBalance: string;
@@ -6,5 +6,5 @@ export interface EsdtAmountType {
 
 export interface NftAmountType {
   nftBalance: string;
-  nft: NftType;
+  nft: PartialNftType;
 }

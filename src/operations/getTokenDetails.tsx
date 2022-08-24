@@ -1,14 +1,14 @@
 import { DECIMALS } from '@elrondnetwork/dapp-core/constants/index';
 import { ZERO } from 'constants/index';
-import { TokenType } from 'types';
+import { PartialTokenType } from 'types';
 
 export function getTokenDetails({
   tokens,
   tokenId
 }: {
-  tokens: TokenType[];
+  tokens: PartialTokenType[];
   tokenId: string;
-}): TokenType {
+}): PartialTokenType {
   const selectedToken = tokens.find(({ identifier }) => identifier === tokenId);
   const tokenDecimals = selectedToken ? selectedToken.decimals : DECIMALS;
   const tokenBalance = selectedToken?.balance || ZERO;

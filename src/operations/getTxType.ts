@@ -1,12 +1,12 @@
 import { getIdentifierType } from '@elrondnetwork/dapp-core/utils/validation/getIdentifierType';
-import { NftEnumType, NftType } from 'types';
+import { NftEnumType, PartialNftType } from 'types';
 import { TxTypeEnum } from 'types';
 
 export function getTxType({
   nft,
   tokenId
 }: {
-  nft?: NftType;
+  nft?: PartialNftType;
   tokenId: string;
 }): TxTypeEnum {
   const { isEsdt, isNft, isEgld } = getIdentifierType(tokenId);

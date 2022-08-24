@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
-import { NftType, TokenType } from 'types';
+import { PartialNftType, PartialTokenType } from 'types';
 import { getInitialValues } from './getInitialValues';
 import { GetInitialValuesType } from './getInitialValues/types';
 
@@ -13,9 +13,9 @@ export interface GetInitialValuesReturnType {
     gasPrice: string;
     data: string;
   };
-  nft?: NftType;
+  nft?: PartialNftType;
   gasLimitCostError?: SendFormContainerPropsType['initGasLimitError'];
-  computedTokens: TokenType[];
+  computedTokens: PartialTokenType[];
   computedTokenId: string;
   tokenFound: boolean;
 }
