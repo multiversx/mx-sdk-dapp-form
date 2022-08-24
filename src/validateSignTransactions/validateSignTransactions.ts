@@ -2,7 +2,7 @@ import { newTransaction } from '@elrondnetwork/dapp-core/models/newTransaction';
 import {
   MultiEsdtTxType,
   MultiSignTxType,
-  TxDataTokenType,
+  TransactionDataTokenType,
   TxsDataTokensType
 } from '@elrondnetwork/dapp-core/types/transactions';
 
@@ -88,7 +88,7 @@ function extractAllTransactions(props: ValidateSignTransactionsType) {
 async function getTxsErrors(
   props: ValidateSignTransactionsType & {
     allTransactions: MultiSignTxType[];
-    txsDataTokens: Record<string, TxDataTokenType>;
+    txsDataTokens: Record<string, TransactionDataTokenType>;
   }
 ) {
   const {

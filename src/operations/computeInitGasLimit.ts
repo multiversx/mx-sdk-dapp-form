@@ -1,9 +1,9 @@
-import { gasLimit as defaultGasLimit } from '@elrondnetwork/dapp-core/constants/index';
+import { GAS_LIMIT } from '@elrondnetwork/dapp-core/constants/index';
 import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
 import { getIdentifierType } from '@elrondnetwork/dapp-core/utils/validation/getIdentifierType';
 
 import BigNumber from 'bignumber.js';
-import { tokenGasLimit, ZERO } from 'constants/index';
+import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { DelegationContractDataType } from 'types';
 import fetchGasLimit from '../hooks/useFetchGasLimit/fetchGasLimit';
@@ -90,11 +90,11 @@ export const computeInitGasLimit: (
   const { isEsdt, isNft } = getIdentifierType(computedTokenId);
 
   if (isEsdt) {
-    return { initGasLimit: tokenGasLimit };
+    return { initGasLimit: TOKEN_GAS_LIMIT };
   }
 
   if (isNft) {
     return { initGasLimit: calculateNftGasLimit() };
   }
-  return { initGasLimit: defaultGasLimit };
+  return { initGasLimit: String(GAS_LIMIT) };
 };

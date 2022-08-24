@@ -1,8 +1,8 @@
 import {
-  ledgerHashSignMinimumVersion,
-  ledgerMultiAccountMinimumVersion,
-  ledgerSignAuthTokenMinimumVersion,
-  ledgerWithWhitelistedTokensMinimumVersion
+  LEDGER_HASH_SIGN_MINIMUM_VERSION,
+  LEDGER_MULTI_ACCOUNT_MINIMUM_VERSION,
+  LEDGER_SIGN_AUTH_TOKEN_MINIMUM_VERSION,
+  LEDGER_WITH_WHITELISTED_TOKENS_MINIMUM_VERSION
 } from 'constants/index';
 
 function compareVersions(a: string, b: string) {
@@ -23,22 +23,24 @@ function compareVersions(a: string, b: string) {
 
 export function getLedgerVersionOptions(version: string) {
   const sortedVersions = [
-    ledgerMultiAccountMinimumVersion,
-    ledgerHashSignMinimumVersion,
-    ledgerSignAuthTokenMinimumVersion,
-    ledgerWithWhitelistedTokensMinimumVersion,
+    LEDGER_MULTI_ACCOUNT_MINIMUM_VERSION,
+    LEDGER_HASH_SIGN_MINIMUM_VERSION,
+    LEDGER_SIGN_AUTH_TOKEN_MINIMUM_VERSION,
+    LEDGER_WITH_WHITELISTED_TOKENS_MINIMUM_VERSION,
     version
   ].sort((a, b) => compareVersions(a, b));
 
   const indexOfMultiAccount = sortedVersions.indexOf(
-    ledgerMultiAccountMinimumVersion
+    LEDGER_MULTI_ACCOUNT_MINIMUM_VERSION
   );
-  const indexOfHashSign = sortedVersions.indexOf(ledgerHashSignMinimumVersion);
+  const indexOfHashSign = sortedVersions.indexOf(
+    LEDGER_HASH_SIGN_MINIMUM_VERSION
+  );
   const indexOfSignAuthToken = sortedVersions.indexOf(
-    ledgerSignAuthTokenMinimumVersion
+    LEDGER_SIGN_AUTH_TOKEN_MINIMUM_VERSION
   );
   const indexOfWhitelistedTokens = sortedVersions.indexOf(
-    ledgerWithWhitelistedTokensMinimumVersion
+    LEDGER_WITH_WHITELISTED_TOKENS_MINIMUM_VERSION
   );
   const indexOfVersion = sortedVersions.indexOf(version);
 

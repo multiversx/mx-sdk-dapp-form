@@ -1,13 +1,13 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 
 import {
-  gasPerDataByte,
-  gasPriceModifier
+  GAS_PER_DATA_BYTE,
+  GAS_PRICE_MODIFIER
 } from '@elrondnetwork/dapp-core/constants/index';
 import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/calculateFeeLimit';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { useFormikContext } from 'formik';
-import { tokenGasLimit, ZERO } from 'constants/index';
+import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
@@ -148,8 +148,8 @@ export function GasContextProvider({
         gasPrice: nominate(gasPrice),
         data: data.trim(),
         chainId,
-        gasPerDataByte: String(gasPerDataByte),
-        gasPriceModifier: String(gasPriceModifier)
+        gasPerDataByte: String(GAS_PER_DATA_BYTE),
+        gasPriceModifier: String(GAS_PRICE_MODIFIER)
       })
     : ZERO;
 
@@ -163,7 +163,7 @@ export function GasContextProvider({
     if (!prefilledForm) {
       switch (txType) {
         case TxTypeEnum.ESDT:
-          handleUpdateGasLimit(tokenGasLimit);
+          handleUpdateGasLimit(TOKEN_GAS_LIMIT);
           break;
         case TxTypeEnum.EGLD:
           handleUpdateGasLimit(

@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  denomination as defaultDenomination,
-  decimals as defaultDecimals
-} from '@elrondnetwork/dapp-core/constants/index';
+import { DECIMALS, DIGITS } from '@elrondnetwork/dapp-core/constants/index';
 import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
 import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue/index';
 
@@ -54,14 +51,14 @@ export const Amount = (props: AmountPropsType) => {
     tokenIdError
   };
 
-  const denomination = isEsdtTransaction ? tokenDecimals : defaultDenomination;
+  const denomination = isEsdtTransaction ? tokenDecimals : DECIMALS;
 
   const amountRenderer = showNftAmount ? (
     <Denominate
       egldLabel={props.egldLabel}
       value={value}
       denomination={nftDenomination}
-      decimals={txType === TxTypeEnum.MetaESDT ? defaultDecimals : 0}
+      decimals={txType === TxTypeEnum.MetaESDT ? DIGITS : 0}
       showLastNonZeroDecimal
       showLabel={false}
       data-testid='confirmAmount'

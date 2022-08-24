@@ -1,6 +1,6 @@
 import {
-  gasPerDataByte,
-  gasPriceModifier
+  GAS_PER_DATA_BYTE,
+  GAS_PRICE_MODIFIER
 } from '@elrondnetwork/dapp-core/constants/index';
 import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/calculateFeeLimit';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
@@ -33,8 +33,8 @@ export function validateGasLimitAmount({
       gasLimit,
       data,
       chainId,
-      gasPerDataByte: String(gasPerDataByte),
-      gasPriceModifier: String(gasPriceModifier)
+      gasPerDataByte: String(GAS_PER_DATA_BYTE),
+      gasPriceModifier: String(GAS_PRICE_MODIFIER)
     })
   );
 

@@ -1,4 +1,4 @@
-import { mainnetChainId } from '@elrondnetwork/dapp-core/constants';
+import { MAINNET_CHAIN_ID } from '@elrondnetwork/dapp-core/constants/index';
 import { getEntireBalance } from '../getEntireBalance';
 
 describe('Entire balance', () => {
@@ -12,7 +12,7 @@ describe('Entire balance', () => {
       gasLimit: '50000',
       denomination: 18,
       decimals: 4,
-      chainId: mainnetChainId
+      chainId: MAINNET_CHAIN_ID
     });
     expect(available).toBe('1');
     expect(entireBalanceMinusDust).toBe('0.9950');
@@ -28,7 +28,7 @@ describe('Entire balance', () => {
       gasLimit: '50000',
       denomination: 18,
       decimals: 4,
-      chainId: mainnetChainId
+      chainId: MAINNET_CHAIN_ID
     });
     expect(available).toBe('0');
     expect(entireBalanceMinusDust).toBe('0');

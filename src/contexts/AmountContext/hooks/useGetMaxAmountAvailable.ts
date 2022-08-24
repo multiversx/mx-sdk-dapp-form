@@ -1,7 +1,4 @@
-import {
-  decimals as defaultDecimals,
-  denomination as defaultDenomination
-} from '@elrondnetwork/dapp-core/constants/index';
+import { DIGITS, DECIMALS } from '@elrondnetwork/dapp-core/constants/index';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { useFormikContext } from 'formik';
 import { ZERO } from 'constants/index';
@@ -44,7 +41,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
     const computedNftBalance = getEntireTokenBalance({
       balance: nft.balance,
       denomination: nft.type === NftEnumType.MetaESDT ? nft.decimals : 0,
-      decimals: defaultDecimals
+      decimals: DIGITS
     });
     nftBalance = computedNftBalance;
   }
@@ -59,7 +56,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
     const tokenAmount = getEntireTokenBalance({
       balance: newTokenBalance,
       denomination: decimals,
-      decimals: defaultDecimals
+      decimals: DIGITS
     });
     tokenBalance = tokenAmount;
   }
@@ -74,8 +71,8 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
       balance,
       gasPrice: nominate(gasPrice),
       gasLimit: gasLimit,
-      denomination: defaultDenomination,
-      decimals: defaultDecimals,
+      denomination: DECIMALS,
+      decimals: DIGITS,
       chainId
     });
     denominatedEgldBalance = denominatedBalance;

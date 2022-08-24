@@ -1,15 +1,15 @@
-import { denomination } from '@elrondnetwork/dapp-core/constants/index';
+import { DECIMALS } from '@elrondnetwork/dapp-core/constants/index';
+import { maxDecimals } from '@elrondnetwork/dapp-core/utils/validation/maxDecimals';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import denominatedConfigGasPrice from 'operations/denominatedConfigGasPrice';
-import maxDecimals from 'validation/maxDecimals';
 
 const required = string().required('Required');
 
 const decimalsValidation = string().test(
   'denomination',
-  `Maximum ${denomination} decimals allowed`,
+  `Maximum ${DECIMALS} decimals allowed`,
   (value) => maxDecimals(String(value))
 );
 const minimum = string().test(

@@ -60,7 +60,7 @@ export const SelectToken = ({ label }: { label?: string }) => {
       name: 'Elrond eGold',
       identifier: egldLabel,
       balance,
-      decimals: constants.denomination,
+      decimals: constants.DECIMALS,
       ticker: ''
     },
     ...tokens

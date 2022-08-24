@@ -88,7 +88,7 @@ export const TokenElement = ({
             egldLabel={identifier}
             value={balance || ZERO}
             decimals={
-              nftType === NftEnumType.SemiFungibleESDT ? 0 : constants.decimals
+              nftType === NftEnumType.SemiFungibleESDT ? 0 : constants.DIGITS
             }
             token={identifier}
             showLabel={false}

@@ -1,7 +1,7 @@
 import {
-  decimals,
-  denomination,
-  gasPrice as defaultGasPrice
+  DIGITS,
+  DECIMALS,
+  GAS_PRICE
 } from '@elrondnetwork/dapp-core/constants/index';
 
 import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
@@ -12,10 +12,10 @@ export function getInitialGasPrice(gasPrice?: string) {
   const gasPriceValue = isGasPriceValid
     ? gasPrice
     : denominate({
-        input: String(defaultGasPrice),
-        denomination: denomination,
+        input: String(GAS_PRICE),
+        denomination: DECIMALS,
         showLastNonZeroDecimal: true,
-        decimals: decimals
+        decimals: DIGITS
       });
 
   return gasPriceValue;

@@ -1,7 +1,7 @@
 import React, { JSXElementConstructor } from 'react';
 import {
   fallbackNetworkConfigurations,
-  gasLimit
+  GAS_LIMIT
 } from '@elrondnetwork/dapp-core/constants/index';
 import { Transaction } from '@elrondnetwork/erdjs';
 import { Formik } from 'formik';
@@ -91,7 +91,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     gasPrice: initialValues?.gasPrice ?? denominatedConfigGasPrice,
     data: initialValues?.data ?? '',
     amount: initialValues?.amount ?? ZERO,
-    gasLimit: initialValues?.gasLimit ?? String(gasLimit),
+    gasLimit: initialValues?.gasLimit ?? String(GAS_LIMIT),
     txType:
       initialValues?.txType ??
       getTxType({ nft: tokensInfo?.initialNft, tokenId }),
