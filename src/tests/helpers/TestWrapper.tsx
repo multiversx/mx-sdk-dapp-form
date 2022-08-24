@@ -4,7 +4,7 @@ import { fallbackNetworkConfigurations } from '@elrondnetwork/dapp-core/constant
 import {
   EnvironmentsEnum,
   LoginMethodsEnum
-} from '@elrondnetwork/dapp-core/types/enums';
+} from '@elrondnetwork/dapp-core/types/enums.types';
 import { Loader } from '@elrondnetwork/dapp-core/UI/Loader';
 import { SendFormContainer, SendFormContainerPropsType } from 'containers';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';

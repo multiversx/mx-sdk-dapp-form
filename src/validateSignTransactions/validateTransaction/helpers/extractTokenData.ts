@@ -1,9 +1,9 @@
-import { TxsDataTokensType } from '@elrondnetwork/dapp-core/types/transactions';
+import { TransactionsDataTokensType } from '@elrondnetwork/dapp-core/types/transactions.types';
 
 export function extractTokenData(props: {
   dataId: string;
   egldLabel: string;
-  txsDataTokens: TxsDataTokensType;
+  txsDataTokens: TransactionsDataTokensType;
 }) {
   const { txsDataTokens, dataId, egldLabel } = props;
   const extractedTokenData = txsDataTokens?.[dataId];

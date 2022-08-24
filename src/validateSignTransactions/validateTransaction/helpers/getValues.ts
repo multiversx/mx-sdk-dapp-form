@@ -3,7 +3,7 @@ import {
   DECIMALS,
   GAS_PRICE
 } from '@elrondnetwork/dapp-core/constants/index';
-import { MultiSignTxType } from '@elrondnetwork/dapp-core/types/transactions';
+import { MultiSignTransactionType } from '@elrondnetwork/dapp-core/types/transactions.types';
 import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { isTokenTransfer } from '@elrondnetwork/dapp-core/utils/transactions/isTokenTransfer';
 
@@ -11,7 +11,7 @@ import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
 import { TxSignValuesType } from '../types';
 
 export function getValues(props: {
-  tx: MultiSignTxType;
+  tx: MultiSignTransactionType;
   tokenId: string;
   egldLabel: string;
   tokenFound?: boolean;

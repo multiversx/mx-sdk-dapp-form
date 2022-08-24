@@ -1,10 +1,10 @@
 import { newTransaction } from '@elrondnetwork/dapp-core/models/newTransaction';
 import {
-  MultiEsdtTxType,
-  MultiSignTxType,
+  MultiEsdtTransactionType,
+  MultiSignTransactionType,
   TransactionDataTokenType,
-  TxsDataTokensType
-} from '@elrondnetwork/dapp-core/types/transactions';
+  TransactionsDataTokensType
+} from '@elrondnetwork/dapp-core/types/transactions.types';
 
 import { getTokenFromData } from '@elrondnetwork/dapp-core/utils/transactions/getTokenFromData';
 import { parseMultiEsdtTransferData } from '@elrondnetwork/dapp-core/utils/transactions/parseMultiEsdtTransferData';
@@ -16,12 +16,12 @@ import {
 } from './validateTransaction';
 
 function processMultiTx(props: {
-  trx: MultiEsdtTxType;
+  trx: MultiEsdtTransactionType;
   transaction: SignTxType;
   transactionIndex: number;
 }) {
   const { transaction, transactionIndex, trx } = props;
-  const newTx: MultiSignTxType = {
+  const newTx: MultiSignTransactionType = {
     ...transaction,
     transaction: newTransaction(trx),
     multiTxData: trx.data,
@@ -45,8 +45,8 @@ function processMultiTx(props: {
 
 function extractAllTransactions(props: ValidateSignTransactionsType) {
   const { extractedTxs, address, chainId } = props;
-  let txsDataTokens: TxsDataTokensType = {};
-  const allTransactions: MultiSignTxType[] = [];
+  let txsDataTokens: TransactionsDataTokensType = {};
+  const allTransactions: MultiSignTransactionType[] = [];
 
   extractedTxs.forEach((tx, transactionIndex) => {
     const transaction = getTxWithReceiver({ address, tx });
@@ -87,7 +87,7 @@ function extractAllTransactions(props: ValidateSignTransactionsType) {
 
 async function getTxsErrors(
   props: ValidateSignTransactionsType & {
-    allTransactions: MultiSignTxType[];
+    allTransactions: MultiSignTransactionType[];
     txsDataTokens: Record<string, TransactionDataTokenType>;
   }
 ) {

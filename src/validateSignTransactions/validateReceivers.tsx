@@ -1,4 +1,4 @@
-import { TxsDataTokensType } from '@elrondnetwork/dapp-core/types/transactions';
+import { TransactionsDataTokensType } from '@elrondnetwork/dapp-core/types/transactions.types';
 import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
 import { Address } from '@elrondnetwork/erdjs';
 import getTxWithReceiver from './getTxWithReceiver';
@@ -6,7 +6,7 @@ import { SignTxType } from './validateTransaction';
 
 interface ValidateReceiversType {
   transactions: SignTxType[];
-  txsDataTokens?: TxsDataTokensType;
+  txsDataTokens?: TransactionsDataTokensType;
   isMainnet: boolean;
   address: string;
 }

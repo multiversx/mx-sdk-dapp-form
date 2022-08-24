@@ -1,7 +1,7 @@
 import {
   TokenType,
   NftType as NftInterface
-} from '@elrondnetwork/dapp-core/types/tokens';
+} from '@elrondnetwork/dapp-core/types/tokens.types';
 import { NftEnumType, TxTypeEnum } from 'types/enums';
 
 // partial because it's only defining propreties needed by dapp-core-form

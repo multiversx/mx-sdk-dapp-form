@@ -1,4 +1,4 @@
-import { NftEnumType } from '@elrondnetwork/dapp-core/types/tokens';
+import { NftEnumType } from '@elrondnetwork/dapp-core/types/tokens.types';
 
 export { NftEnumType };
 

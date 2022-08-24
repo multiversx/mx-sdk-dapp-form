@@ -3,7 +3,7 @@ import {
   ServerTransactionType,
   ScResultType as SmartContractResultType,
   OperationType
-} from '@elrondnetwork/dapp-core/types/server-transactions';
+} from '@elrondnetwork/dapp-core/types/serverTransactions.types';
 
 export type TxOperationType = OperationType;
 
