@@ -1,8 +1,8 @@
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 
 import { ZERO } from 'constants/index';
+import { parseAmount } from 'helpers';
 
 export const getPercentageOfAmount = (
   amount: string,
@@ -14,7 +14,7 @@ export const getPercentageOfAmount = (
   const denominatedBN = stringIsFloat(String(maxAmountMinusDust))
     ? new BigNumber(String(maxAmountMinusDust).replace('.', ''))
     : new BigNumber(ZERO);
-  const nominatedBN = new BigNumber(nominate(value));
+  const nominatedBN = new BigNumber(parseAmount(value));
   const percentage = 100 / Number(String(denominatedBN.dividedBy(nominatedBN)));
 
   return Math.round(percentage);

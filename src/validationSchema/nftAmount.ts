@@ -1,10 +1,10 @@
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { maxDecimals } from '@elrondnetwork/dapp-core/utils/validation/maxDecimals';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import { stringIsInteger } from '@elrondnetwork/dapp-core/utils/validation/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { ZERO } from 'constants/index';
+import { parseAmount } from 'helpers';
 import { NftEnumType } from 'types';
 import { TxTypeEnum, ExtendedValuesType } from 'types';
 
@@ -43,7 +43,7 @@ const balance = string().test(
     }
 
     if (txType === TxTypeEnum.MetaESDT) {
-      const nominatedAmount = nominate(amount, nft?.decimals);
+      const nominatedAmount = parseAmount(amount, nft?.decimals);
       const bnAmount = new BigNumber(nominatedAmount);
       const bnTokenBalance = new BigNumber(nft?.balance || ZERO);
       return bnTokenBalance.isGreaterThanOrEqualTo(bnAmount);

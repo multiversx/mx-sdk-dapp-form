@@ -7,12 +7,11 @@ import React, {
   createContext
 } from 'react';
 import { DIGITS } from '@elrondnetwork/dapp-core/constants/index';
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 
-import { formatAmount } from 'helpers';
+import { formatAmount, parseAmount } from 'helpers';
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';
@@ -98,7 +97,7 @@ export function AmountContextProvider({
         .times(percentage)
         .dividedBy(100);
       const value = formatAmount({
-        input: nominate(String(amountBN)),
+        input: parseAmount(String(amountBN)),
         digits: DIGITS
       });
 

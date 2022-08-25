@@ -5,12 +5,12 @@ import {
   GAS_PRICE_MODIFIER
 } from '@elrondnetwork/dapp-core/constants/index';
 import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/calculateFeeLimit';
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { useFormikContext } from 'formik';
 import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
+import { parseAmount } from 'helpers';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
   calculateGasLimit,
@@ -145,7 +145,7 @@ export function GasContextProvider({
   const feeLimit = !hasErrors
     ? calculateFeeLimit({
         gasLimit,
-        gasPrice: nominate(gasPrice),
+        gasPrice: parseAmount(gasPrice),
         data: data.trim(),
         chainId,
         gasPerDataByte: String(GAS_PER_DATA_BYTE),

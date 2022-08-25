@@ -1,8 +1,7 @@
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import BigNumber from 'bignumber.js';
 
 import { ZERO } from 'constants/index';
-import { bech32 } from 'helpers';
+import { bech32, parseAmount } from 'helpers';
 import {
   NftEnumType,
   PartialNftType,
@@ -27,7 +26,7 @@ export const computeTokenDataField = ({
   const hexEncodedId = evenLengthValue(Buffer.from(tokenId).toString('hex'));
 
   const hexEncodedValue = evenLengthValue(
-    new BigNumber(nominate(amountValue, decimals)).toString(16)
+    new BigNumber(parseAmount(amountValue, decimals)).toString(16)
   );
   const data = `ESDTTransfer@${hexEncodedId}@${hexEncodedValue}`;
   return data;
@@ -48,7 +47,7 @@ export const computeNftDataField = ({
     let dataStr = 'ESDTNFTTransfer';
     const quantity =
       nft?.type === NftEnumType.MetaESDT
-        ? nominate(amount, nft.decimals)
+        ? parseAmount(amount, nft.decimals)
         : amount;
     dataStr += `@${Buffer.from(String(nft.collection)).toString('hex')}`;
     dataStr += `@${evenLengthValue(

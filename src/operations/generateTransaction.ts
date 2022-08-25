@@ -1,4 +1,4 @@
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
+import { parseAmount } from 'helpers';
 import { prepareTransaction } from 'hooks/useFetchGasLimit/prepareTransaction';
 import { ExtendedValuesType } from 'types';
 
@@ -20,7 +20,7 @@ export async function generateTransaction(props: GenerateTransactionPropsType) {
       balance,
       amount: String(amount),
       gasLimit: String(gasLimit),
-      gasPrice: nominate(gasPrice),
+      gasPrice: parseAmount(gasPrice),
       data: data.trim(),
       receiver: transactionReceiver,
       nonce,

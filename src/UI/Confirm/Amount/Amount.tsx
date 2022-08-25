@@ -3,7 +3,7 @@ import { DECIMALS, DIGITS } from '@elrondnetwork/dapp-core/constants/index';
 import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
 import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue/index';
 
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
+import { parseAmount } from 'helpers';
 import { PartialNftType, TxTypeEnum } from 'types';
 import { Token } from '../Token';
 
@@ -40,7 +40,7 @@ export const Amount = (props: AmountPropsType) => {
   const isEsdtTransaction = txType === TxTypeEnum.ESDT;
   const isMetaEsdt = txType === TxTypeEnum.MetaESDT;
 
-  const value = isMetaEsdt ? nominate(amount, nft?.decimals) : amount;
+  const value = isMetaEsdt ? parseAmount(amount, nft?.decimals) : amount;
   const showNftAmount = Boolean(nft && amount);
   const tokenLabel = tokenId.split('-')[0];
   const tokenProps = {
@@ -67,7 +67,7 @@ export const Amount = (props: AmountPropsType) => {
     <>
       <Denominate
         egldLabel={props.egldLabel}
-        value={nominate(amount, denomination)}
+        value={parseAmount(amount, denomination)}
         denomination={denomination}
         showLastNonZeroDecimal
         showLabel={false}

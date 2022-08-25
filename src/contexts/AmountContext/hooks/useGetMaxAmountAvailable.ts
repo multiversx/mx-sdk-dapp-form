@@ -1,9 +1,9 @@
 import { DIGITS, DECIMALS } from '@elrondnetwork/dapp-core/constants/index';
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { useFormikContext } from 'formik';
 import { ZERO } from 'constants/index';
 import { useAccountContext } from 'contexts/AccountContext';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
+import { parseAmount } from 'helpers';
 import {
   getEntireBalance,
   getEntireTokenBalance,
@@ -69,7 +69,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
       entireBalanceMinusDust
     } = getEntireBalance({
       balance,
-      gasPrice: nominate(gasPrice),
+      gasPrice: parseAmount(gasPrice),
       gasLimit: gasLimit,
       decimals: DECIMALS,
       digits: DIGITS,

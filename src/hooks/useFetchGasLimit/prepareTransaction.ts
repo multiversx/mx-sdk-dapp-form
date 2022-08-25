@@ -1,5 +1,4 @@
 import { VERSION } from '@elrondnetwork/dapp-core/constants/index';
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import {
   Transaction,
   TransactionPayload,
@@ -8,6 +7,7 @@ import {
   TokenPayment
 } from '@elrondnetwork/erdjs';
 import BigNumber from 'bignumber.js';
+import { parseAmount } from 'helpers';
 
 interface PrepareTransactionType {
   balance: string;
@@ -28,7 +28,7 @@ export function prepareTransaction({
   gasLimit,
   chainId
 }: PrepareTransactionType) {
-  const bNamount = new BigNumber(nominate(amount));
+  const bNamount = new BigNumber(parseAmount(amount));
 
   const to = receiver;
 

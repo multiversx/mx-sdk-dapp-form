@@ -1,7 +1,7 @@
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import BigNumber from 'bignumber.js';
 import { getTransactionCost } from 'apiCalls/transactions';
 import { GAS_LIMIT_DELTA, ZERO } from 'constants/index';
+import { parseAmount } from 'helpers';
 import calculateGasLimit from 'operations/calculateGasLimit';
 import { ValuesType } from 'types';
 import { prepareTransaction } from './prepareTransaction';
@@ -30,7 +30,7 @@ export const fetchGasLimit = async ({
     balance,
     amount: String(amount),
     gasLimit: String(gasLimit),
-    gasPrice: nominate(gasPrice),
+    gasPrice: parseAmount(gasPrice),
     data: data.trim(),
     receiver,
     nonce,

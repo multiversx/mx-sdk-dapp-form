@@ -3,9 +3,8 @@ import {
   GAS_PRICE_MODIFIER
 } from '@elrondnetwork/dapp-core/constants/index';
 import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/calculateFeeLimit';
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
-
 import BigNumber from 'bignumber.js';
+import { parseAmount } from 'helpers';
 
 interface ValidateGasLimitAmountType {
   amount: string;
@@ -24,12 +23,12 @@ export function validateGasLimitAmount({
   data,
   chainId
 }: ValidateGasLimitAmountType) {
-  const nominatedAmount = nominate(amount.toString());
+  const nominatedAmount = parseAmount(amount.toString());
   const bnAmount = new BigNumber(nominatedAmount);
   const bnBalance = new BigNumber(balance);
   const fee = new BigNumber(
     calculateFeeLimit({
-      gasPrice: nominate(gasPrice),
+      gasPrice: parseAmount(gasPrice),
       gasLimit,
       data,
       chainId,
