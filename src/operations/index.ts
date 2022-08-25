@@ -7,6 +7,6 @@ export * from './getRemainingPages';
 export * from './getTxType';
 export * from './computeDataField';
 export * from './computeInitGasLimit';
-export * from './denominatedConfigGasPrice';
+export * from './formattedConfigGasPrice';
 export * from './getEntireBalance';
 export * from './ledger';

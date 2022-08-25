@@ -23,6 +23,7 @@ export async function generateTransaction(props: GenerateTransactionPropsType) {
       gasPrice: parseAmount(gasPrice),
       data: data.trim(),
       receiver: transactionReceiver,
+      sender: address,
       nonce,
       chainId
     });

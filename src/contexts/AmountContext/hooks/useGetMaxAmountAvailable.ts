@@ -61,11 +61,11 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
     tokenBalance = tokenAmount;
   }
 
-  let denominatedEgldBalance = ZERO;
+  let formattedEgldBalance = ZERO;
   let balanceMinusDust = balance;
   if (balance && isEgldTransaction) {
     const {
-      entireBalance: denominatedBalance,
+      entireBalance: formattedBalance,
       entireBalanceMinusDust
     } = getEntireBalance({
       balance,
@@ -75,14 +75,14 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
       digits: DIGITS,
       chainId
     });
-    denominatedEgldBalance = denominatedBalance;
+    formattedEgldBalance = formattedBalance;
     balanceMinusDust = entireBalanceMinusDust;
   }
 
   const esdtAmountAvailable = nft && nftBalance ? nftBalance : tokenBalance;
 
   const maxAmountAvailable = isEgldTransaction
-    ? denominatedEgldBalance
+    ? formattedEgldBalance
     : esdtAmountAvailable;
 
   const maxAmountMinusDust = isEgldTransaction

@@ -69,9 +69,9 @@ export function TokensContextProvider({
   const { address, balance } = useAccountContext();
   const { checkInvalid } = useFormContext();
   const {
-    networkConfig: { egldDenomination }
+    networkConfig: { decimals }
   } = useNetworkConfigContext();
-  const { egldPriceInUsd, decimals, egldLabel } = useGetEconomicsInfo();
+  const { egldPriceInUsd, digits, egldLabel } = useGetEconomicsInfo();
 
   const esdtTokens = tokens || previouslyFetchedTokens;
 
@@ -126,7 +126,7 @@ export function TokensContextProvider({
       name: 'Elrond eGold',
       identifier: egldLabel,
       balance: balance,
-      decimals: Number(egldDenomination),
+      decimals: Number(decimals),
       ticker: egldLabel
     },
     ...esdtTokens
@@ -153,7 +153,7 @@ export function TokensContextProvider({
         tokenDetails,
         egldLabel,
         egldPriceInUsd,
-        decimals,
+        decimals: digits,
         isTokenIdInvalid,
         getTokens: handleGetTokens,
         onChangeTokenId: handleChangeTokenId

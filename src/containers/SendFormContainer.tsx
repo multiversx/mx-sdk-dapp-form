@@ -16,7 +16,7 @@ import {
 
 import { UICustomizationContextPropsType } from 'contexts/UICustomization';
 import { generateTransaction, getTxType } from 'operations';
-import denominatedConfigGasPrice from 'operations/denominatedConfigGasPrice';
+import { formattedConfigGasPrice } from 'operations/formattedConfigGasPrice';
 import { ExtendedValuesType, TxTypeEnum, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
 import { getInitialErrors } from 'validation';
@@ -88,7 +88,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   const formikInitialValues = {
     tokenId,
     receiver: initialValues?.receiver ?? '',
-    gasPrice: initialValues?.gasPrice ?? denominatedConfigGasPrice,
+    gasPrice: initialValues?.gasPrice ?? formattedConfigGasPrice,
     data: initialValues?.data ?? '',
     amount: initialValues?.amount ?? ZERO,
     gasLimit: initialValues?.gasLimit ?? String(GAS_LIMIT),

@@ -11,11 +11,11 @@ export const getPercentageOfAmount = (
   const isAmountValid = !isNaN(amount as any) && stringIsFloat(String(amount));
   const value = isAmountValid ? amount : ZERO;
 
-  const denominatedBN = stringIsFloat(String(maxAmountMinusDust))
+  const formattedBN = stringIsFloat(String(maxAmountMinusDust))
     ? new BigNumber(String(maxAmountMinusDust).replace('.', ''))
     : new BigNumber(ZERO);
   const nominatedBN = new BigNumber(parseAmount(value));
-  const percentage = 100 / Number(String(denominatedBN.dividedBy(nominatedBN)));
+  const percentage = 100 / Number(String(formattedBN.dividedBy(nominatedBN)));
 
   return Math.round(percentage);
 };

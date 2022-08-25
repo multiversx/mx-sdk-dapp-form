@@ -5,7 +5,7 @@ import { useNetworkConfigContext } from 'contexts/NetworkContext';
 
 interface EconomicsInfoType {
   egldPriceInUsd: number;
-  decimals: number;
+  digits: number;
   egldLabel: string;
 }
 
@@ -28,6 +28,6 @@ export function useGetEconomicsInfo(): EconomicsInfoType {
   return {
     egldLabel: networkConfig.egldLabel,
     egldPriceInUsd,
-    decimals: DIGITS
+    digits: DIGITS
   };
 }

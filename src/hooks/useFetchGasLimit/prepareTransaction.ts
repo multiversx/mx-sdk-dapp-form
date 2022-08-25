@@ -13,6 +13,7 @@ interface PrepareTransactionType {
   balance: string;
   amount: string;
   receiver: string;
+  sender: string;
   data: string;
   gasPrice: string;
   gasLimit: string;
@@ -24,18 +25,18 @@ export function prepareTransaction({
   data,
   nonce,
   receiver,
+  sender,
   gasPrice,
   gasLimit,
   chainId
 }: PrepareTransactionType) {
   const bNamount = new BigNumber(parseAmount(amount));
 
-  const to = receiver;
-
   const transaction = new Transaction({
     nonce: nonce,
     value: TokenPayment.egldFromBigInteger(bNamount.toString(10)),
-    receiver: new Address(to),
+    sender: new Address(sender),
+    receiver: new Address(receiver),
     gasPrice: parseInt(gasPrice),
     gasLimit: parseInt(gasLimit),
     data: new TransactionPayload(data),

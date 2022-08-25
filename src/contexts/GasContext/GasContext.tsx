@@ -15,7 +15,7 @@ import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
   calculateGasLimit,
   calculateNftGasLimit,
-  denominatedConfigGasPrice
+  formattedConfigGasPrice
 } from 'operations';
 import { ExtendedValuesType, TxTypeEnum, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
@@ -126,7 +126,7 @@ export function GasContextProvider({
   );
 
   const handleResetGasPrice = useCallback(() => {
-    setFieldValue(ValuesEnum.gasPrice, denominatedConfigGasPrice);
+    setFieldValue(ValuesEnum.gasPrice, formattedConfigGasPrice);
   }, []);
 
   const handleResetGasLimit = useCallback(() => {

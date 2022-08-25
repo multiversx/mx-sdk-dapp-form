@@ -36,8 +36,8 @@ export function NetworkContextProvider({
     fetchDelegationData();
   }, [networkConfig]);
 
-  async function fetchDelegationData() {
-    const delegationData = await getDelegationDataForChainId(networkConfig.id);
+  function fetchDelegationData() {
+    const delegationData = getDelegationDataForChainId(networkConfig.id);
     setDelegationContractData(delegationData);
   }
 

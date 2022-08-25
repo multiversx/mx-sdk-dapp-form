@@ -112,8 +112,7 @@ export async function fetchAllTokens(address: string) {
       }
       const newTokens: PartialTokenType[] = data.map(
         (item: PartialTokenType) => ({
-          ...item,
-          denomination: item.decimals
+          ...item
         })
       );
       tokens.push(...newTokens);
