@@ -1,5 +1,5 @@
 import React from 'react';
-import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
+import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmount';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTooltip from 'react-tooltip';
@@ -18,7 +18,7 @@ export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
       arrowColor='transparent'
     >
       A minimal amount of{' '}
-      <Denominate egldLabel={egldLabel} value={MIN_DUST} decimals={3} /> has
+      <FormatAmount egldLabel={egldLabel} value={MIN_DUST} digits={3} /> has
       been left in the account in order to allow you to make future smart
       contract requests.
     </ReactTooltip>

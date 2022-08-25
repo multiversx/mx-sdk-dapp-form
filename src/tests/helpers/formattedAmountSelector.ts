@@ -1,4 +1,4 @@
-export function denominateSelector(elemet: HTMLElement) {
+export function formattedAmountSelector(elemet: HTMLElement) {
   const intAmount = elemet.querySelector('span[data-testid="formatAmountInt"]')
     ?.textContent;
   const decimalAmount = elemet.querySelector(

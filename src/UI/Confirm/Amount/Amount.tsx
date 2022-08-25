@@ -1,6 +1,6 @@
 import React from 'react';
 import { DECIMALS, DIGITS } from '@elrondnetwork/dapp-core/constants/index';
-import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
+import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmount';
 import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue/index';
 
 import { parseAmount } from 'helpers';
@@ -36,7 +36,7 @@ export const Amount = (props: AmountPropsType) => {
     nft
   } = props;
 
-  const nftDenomination = nft?.decimals || 0;
+  const nftDecimals = nft?.decimals || 0;
   const isEsdtTransaction = txType === TxTypeEnum.ESDT;
   const isMetaEsdt = txType === TxTypeEnum.MetaESDT;
 
@@ -51,24 +51,24 @@ export const Amount = (props: AmountPropsType) => {
     tokenIdError
   };
 
-  const denomination = isEsdtTransaction ? tokenDecimals : DECIMALS;
+  const decimals = isEsdtTransaction ? tokenDecimals : DECIMALS;
 
   const amountRenderer = showNftAmount ? (
-    <Denominate
+    <FormatAmount
       egldLabel={props.egldLabel}
       value={value}
-      denomination={nftDenomination}
-      decimals={txType === TxTypeEnum.MetaESDT ? DIGITS : 0}
+      decimals={nftDecimals}
+      digits={txType === TxTypeEnum.MetaESDT ? DIGITS : 0}
       showLastNonZeroDecimal
       showLabel={false}
       data-testid='confirmAmount'
     />
   ) : (
     <>
-      <Denominate
+      <FormatAmount
         egldLabel={props.egldLabel}
-        value={parseAmount(amount, denomination)}
-        denomination={denomination}
+        value={parseAmount(amount, decimals)}
+        decimals={decimals}
         showLastNonZeroDecimal
         showLabel={false}
         token={isEsdtTransaction ? tokenLabel : egldLabel}

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
+import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmount';
 import {
   faAngleDown,
   faAngleRight,
@@ -41,7 +41,7 @@ export const FeeAccordion = () => {
           />{' '}
           <label className={styles.feeAccordionLabel}>Fee</label>
           <span className={styles.feeAccordionLimit} data-testid='feeLimit'>
-            <Denominate
+            <FormatAmount
               value={feeLimit}
               showLastNonZeroDecimal
               egldLabel={egldLabel}

@@ -8,7 +8,7 @@ import { formattedConfigGasPrice } from 'operations/formattedConfigGasPrice';
 const required = string().required('Required');
 
 const decimalsValidation = string().test(
-  'denomination',
+  'decimalFormat',
   `Maximum ${DECIMALS} decimals allowed`,
   (value) => maxDecimals(String(value))
 );
@@ -17,9 +17,9 @@ const minimum = string().test(
   `Must be higher than ${formattedConfigGasPrice}`,
   (value) => {
     const bNgasPrice = new BigNumber(String(value));
-    const bNdenominatedConfigGasPrice = new BigNumber(formattedConfigGasPrice);
+    const bNformattedConfigGasPrice = new BigNumber(formattedConfigGasPrice);
     const result =
-      value && bNgasPrice.comparedTo(bNdenominatedConfigGasPrice) >= 0;
+      value && bNgasPrice.comparedTo(bNformattedConfigGasPrice) >= 0;
     return Boolean(result);
   }
 );

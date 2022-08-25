@@ -10,7 +10,7 @@ import { ExtendedValuesType } from 'types';
 const required = string().required('Required');
 
 const decimals = string().test({
-  name: 'denomination',
+  name: 'decimalFormat',
   test: function(value) {
     const { tokenId, tokens } = this.parent as ExtendedValuesType;
     if (tokens) {

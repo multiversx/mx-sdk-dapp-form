@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as constants from '@elrondnetwork/dapp-core/constants/index';
-import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
+import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmount';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
@@ -57,7 +57,7 @@ export const TokenElement = ({
     );
   }
 
-  const showDenomination =
+  const showFormattedValue =
     !inDropdown && nftType !== NftEnumType.NonFungibleESDT;
 
   return (
@@ -83,16 +83,16 @@ export const TokenElement = ({
           <span className={styles.tokenElementIdentifier}>{identifier}</span>
         </span>
 
-        {showDenomination && (
-          <Denominate
+        {showFormattedValue && (
+          <FormatAmount
             egldLabel={identifier}
             value={balance || ZERO}
-            decimals={
+            digits={
               nftType === NftEnumType.SemiFungibleESDT ? 0 : constants.DIGITS
             }
             token={identifier}
             showLabel={false}
-            denomination={decimals}
+            decimals={decimals}
             data-testid={`${identifier}-balance`}
           />
         )}

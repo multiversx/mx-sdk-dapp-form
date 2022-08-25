@@ -8,7 +8,7 @@ import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 const required = string().required('Required');
 
 const decimals = string().test(
-  'denomination',
+  'decimalFormat',
   `Maximum ${DECIMALS} decimals allowed`,
   (value) => maxDecimals(String(value))
 );

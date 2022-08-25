@@ -10,8 +10,8 @@ import { TxTypeEnum, ExtendedValuesType } from 'types';
 
 const required = string().required('Required');
 
-const metaDenomination = string().test({
-  name: 'denomination',
+const metaFormattedAmount = string().test({
+  name: 'formatDecimals',
   test: function hashSignCheck(value) {
     const { nft, txType } = this.parent as ExtendedValuesType;
 
@@ -72,7 +72,7 @@ const isValidNumber = string().test(
   }
 );
 
-const validations = [required, isValidNumber, balance, metaDenomination];
+const validations = [required, isValidNumber, balance, metaFormattedAmount];
 
 export const nftAmount = validations.reduce(
   (previousValue, currentValue) => previousValue.concat(currentValue),

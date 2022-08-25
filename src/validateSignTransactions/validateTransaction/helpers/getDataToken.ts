@@ -14,7 +14,7 @@ export async function getDataToken(
 ) {
   try {
     const { data } = await getToken(tokenId, apiConfig);
-    const denominatedAmount = formatAmount({
+    const formattedAmount = formatAmount({
       input: nominatedTokenAmount,
       decimals: data.decimals,
       digits: data.decimals,
@@ -24,7 +24,7 @@ export async function getDataToken(
 
     return {
       tokenData: data,
-      tokenAmount: denominatedAmount,
+      tokenAmount: formattedAmount,
       tokenFound: true
     };
   } catch (e) {
