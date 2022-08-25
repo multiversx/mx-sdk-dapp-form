@@ -40,8 +40,8 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
   if (isNftTransaction && nft) {
     const computedNftBalance = getEntireTokenBalance({
       balance: nft.balance,
-      denomination: nft.type === NftEnumType.MetaESDT ? nft.decimals : 0,
-      decimals: DIGITS
+      decimals: nft.type === NftEnumType.MetaESDT ? nft.decimals : 0,
+      digits: DIGITS
     });
     nftBalance = computedNftBalance;
   }
@@ -55,8 +55,8 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
     const tokenAmount = getEntireTokenBalance({
       balance: newTokenBalance,
-      denomination: decimals,
-      decimals: DIGITS
+      decimals: decimals,
+      digits: DIGITS
     });
     tokenBalance = tokenAmount;
   }

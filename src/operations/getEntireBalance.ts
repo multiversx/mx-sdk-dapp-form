@@ -5,7 +5,7 @@ import {
 
 import BigNumber from 'bignumber.js';
 import { MIN_DUST, ZERO } from 'constants/index';
-import { denominate, calculateFeeLimit } from 'helpers';
+import { formatAmount, calculateFeeLimit } from 'helpers';
 
 interface EntireBalanceType {
   balance?: string;
@@ -44,7 +44,7 @@ export function getEntireBalance({
   const bNentireBalanceMinusDust = bNentireBalance.minus(bnMinDust);
 
   const entireBalance = bNentireBalance.isGreaterThanOrEqualTo(0)
-    ? denominate({
+    ? formatAmount({
         input: bNentireBalance.toString(10),
         decimals,
         digits,
@@ -56,7 +56,7 @@ export function getEntireBalance({
   const entireBalanceMinusDust = bNentireBalanceMinusDust.isGreaterThanOrEqualTo(
     0
   )
-    ? denominate({
+    ? formatAmount({
         input: bNentireBalanceMinusDust.toString(10),
         decimals,
         digits,
@@ -83,7 +83,7 @@ export function getEntireTokenBalance({
   // entireBalance >= 0
   if (bnBalance.isGreaterThanOrEqualTo(0)) {
     const input = bnBalance.toString(10);
-    return denominate({
+    return formatAmount({
       input,
       decimals,
       digits,

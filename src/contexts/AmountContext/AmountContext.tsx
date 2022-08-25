@@ -12,7 +12,7 @@ import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringI
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 
-import { denominate } from 'helpers';
+import { formatAmount } from 'helpers';
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';
@@ -97,7 +97,7 @@ export function AmountContextProvider({
       const amountBN = new BigNumber(maxAmountMinusDust)
         .times(percentage)
         .dividedBy(100);
-      const value = denominate({
+      const value = formatAmount({
         input: nominate(String(amountBN)),
         digits: DIGITS
       });

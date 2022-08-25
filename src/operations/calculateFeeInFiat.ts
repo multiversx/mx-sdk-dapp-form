@@ -1,5 +1,5 @@
 import { DECIMALS, DIGITS } from '@elrondnetwork/dapp-core/constants/index';
-import { denominate, usdValue } from 'helpers';
+import { formatAmount, usdValue } from 'helpers';
 
 export function calculateFeeInFiat({
   feeLimit,
@@ -8,7 +8,7 @@ export function calculateFeeInFiat({
   feeLimit: string;
   egldPriceInUsd: number;
 }) {
-  const amount = denominate({
+  const amount = formatAmount({
     input: feeLimit,
     decimals: DECIMALS,
     digits: DIGITS,

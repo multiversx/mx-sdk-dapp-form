@@ -3,9 +3,9 @@ import {
   DECIMALS,
   GAS_PRICE
 } from '@elrondnetwork/dapp-core/constants/index';
-import { denominate } from 'helpers';
+import { formatAmount } from 'helpers';
 
-export const denominatedConfigGasPrice = denominate({
+export const denominatedConfigGasPrice = formatAmount({
   input: String(GAS_PRICE),
   decimals: DECIMALS,
   showLastNonZeroDecimal: true,

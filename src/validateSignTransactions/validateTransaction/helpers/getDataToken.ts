@@ -1,6 +1,6 @@
 import { ApiConfigType, getToken } from 'apiCalls';
 import { ZERO } from 'constants/index';
-import { denominate } from 'helpers';
+import { formatAmount } from 'helpers';
 
 export async function getDataToken(
   {
@@ -14,7 +14,7 @@ export async function getDataToken(
 ) {
   try {
     const { data } = await getToken(tokenId, apiConfig);
-    const denominatedAmount = denominate({
+    const denominatedAmount = formatAmount({
       input: nominatedTokenAmount,
       decimals: data.decimals,
       digits: data.decimals,
