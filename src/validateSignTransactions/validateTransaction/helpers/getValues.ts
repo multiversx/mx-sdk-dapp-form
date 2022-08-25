@@ -4,10 +4,10 @@ import {
   GAS_PRICE
 } from '@elrondnetwork/dapp-core/constants/index';
 import { MultiSignTransactionType } from '@elrondnetwork/dapp-core/types/transactions.types';
-import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { isTokenTransfer } from '@elrondnetwork/dapp-core/utils/transactions/isTokenTransfer';
 
 import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
+import { denominate } from 'helpers';
 import { TxSignValuesType } from '../types';
 
 export function getValues(props: {
@@ -32,8 +32,8 @@ export function getValues(props: {
       ? tokenAmount
       : denominate({
           input: transaction.value ? transaction.value : ZERO,
-          denomination: DECIMALS,
-          decimals: DIGITS,
+          decimals: DECIMALS,
+          digits: DIGITS,
           showLastNonZeroDecimal: true,
           addCommas: false
         }),
@@ -41,8 +41,8 @@ export function getValues(props: {
     gasLimit: String(transaction.gasLimit.valueOf() || gasLimit),
     gasPrice: denominate({
       input: String(transaction.gasPrice.valueOf() || GAS_PRICE),
-      denomination: DECIMALS,
-      decimals: DIGITS,
+      decimals: DECIMALS,
+      digits: DIGITS,
       showLastNonZeroDecimal: true,
       addCommas: false
     }),

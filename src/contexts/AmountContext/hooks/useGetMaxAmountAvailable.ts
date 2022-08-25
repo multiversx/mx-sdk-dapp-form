@@ -71,8 +71,8 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
       balance,
       gasPrice: nominate(gasPrice),
       gasLimit: gasLimit,
-      denomination: DECIMALS,
-      decimals: DIGITS,
+      decimals: DECIMALS,
+      digits: DIGITS,
       chainId
     });
     denominatedEgldBalance = denominatedBalance;

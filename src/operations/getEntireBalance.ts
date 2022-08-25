@@ -2,18 +2,17 @@ import {
   GAS_PER_DATA_BYTE,
   GAS_PRICE_MODIFIER
 } from '@elrondnetwork/dapp-core/constants/index';
-import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/calculateFeeLimit';
-import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 
 import BigNumber from 'bignumber.js';
 import { MIN_DUST, ZERO } from 'constants/index';
+import { denominate, calculateFeeLimit } from 'helpers';
 
 interface EntireBalanceType {
   balance?: string;
   gasPrice: string;
   gasLimit?: string;
-  denomination: number;
   decimals: number;
+  digits: number;
   data?: string;
   chainId: string;
 }
@@ -22,8 +21,8 @@ export function getEntireBalance({
   balance = ZERO,
   gasLimit = ZERO,
   gasPrice,
-  denomination,
   decimals,
+  digits,
   data = '',
   chainId
 }: EntireBalanceType) {
@@ -47,8 +46,8 @@ export function getEntireBalance({
   const entireBalance = bNentireBalance.isGreaterThanOrEqualTo(0)
     ? denominate({
         input: bNentireBalance.toString(10),
-        denomination,
         decimals,
+        digits,
         showLastNonZeroDecimal: true,
         addCommas: false
       })
@@ -59,8 +58,8 @@ export function getEntireBalance({
   )
     ? denominate({
         input: bNentireBalanceMinusDust.toString(10),
-        denomination,
         decimals,
+        digits,
         showLastNonZeroDecimal: true,
         addCommas: false
       })
@@ -77,17 +76,17 @@ export function getEntireBalance({
 
 export function getEntireTokenBalance({
   balance = ZERO,
-  denomination = 18,
-  decimals = 4
+  decimals = 18,
+  digits = 4
 }) {
   const bnBalance = new BigNumber(balance);
   // entireBalance >= 0
-  if (bnBalance.comparedTo(0) === 1) {
+  if (bnBalance.isGreaterThanOrEqualTo(0)) {
     const input = bnBalance.toString(10);
     return denominate({
       input,
-      denomination,
       decimals,
+      digits,
       showLastNonZeroDecimal: true,
       addCommas: false
     });

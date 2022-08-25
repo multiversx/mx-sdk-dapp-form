@@ -7,12 +7,12 @@ import React, {
   createContext
 } from 'react';
 import { DIGITS } from '@elrondnetwork/dapp-core/constants/index';
-import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 
+import { denominate } from 'helpers';
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';
@@ -99,7 +99,7 @@ export function AmountContextProvider({
         .dividedBy(100);
       const value = denominate({
         input: nominate(String(amountBN)),
-        decimals: DIGITS
+        digits: DIGITS
       });
 
       if (updateFieldValue) {

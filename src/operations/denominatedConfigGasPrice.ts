@@ -3,13 +3,13 @@ import {
   DECIMALS,
   GAS_PRICE
 } from '@elrondnetwork/dapp-core/constants/index';
-import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
+import { denominate } from 'helpers';
 
 export const denominatedConfigGasPrice = denominate({
   input: String(GAS_PRICE),
-  denomination: DECIMALS,
+  decimals: DECIMALS,
   showLastNonZeroDecimal: true,
-  decimals: DIGITS
+  digits: DIGITS
 });
 
 export default denominatedConfigGasPrice;
