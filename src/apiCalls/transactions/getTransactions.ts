@@ -1,6 +1,6 @@
+import { ServerTransactionType } from '@elrondnetwork/dapp-core/types/serverTransactions.types';
 import axios from 'axios';
 import { getApiConfig } from 'apiCalls/apiConfig';
-import { TransactionType } from 'types';
 
 export interface GetTransactionsType {
   address: string;
@@ -18,7 +18,7 @@ export async function getTransactions({
   before
 }: GetTransactionsType) {
   const apiConfig = await getApiConfig();
-  return axios.get<TransactionType[]>('/transactions', {
+  return axios.get<ServerTransactionType[]>('/transactions', {
     params: {
       sender: address,
       receiver: address,
