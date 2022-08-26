@@ -19,7 +19,7 @@ const minimum = string().test(
     const bNgasPrice = new BigNumber(String(value));
     const bNformattedConfigGasPrice = new BigNumber(formattedConfigGasPrice);
     const result =
-      value && bNgasPrice.comparedTo(bNformattedConfigGasPrice) >= 0;
+      value && bNgasPrice.isGreaterThanOrEqualTo(bNformattedConfigGasPrice);
     return Boolean(result);
   }
 );
