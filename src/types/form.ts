@@ -1,4 +1,4 @@
-import { TxTypeEnum } from 'types/enums';
+import { TransactionTypeEnum } from 'types/enums';
 import { PartialNftType, PartialTokenType } from 'types/tokens';
 
 export enum ValuesEnum {
@@ -18,7 +18,7 @@ export type ValuesType = {
 
 export interface ExtendedValuesType extends ValuesType {
   // validationSchema
-  txType: TxTypeEnum;
+  txType: TransactionTypeEnum;
   address: string;
   balance: string;
   chainId: string;
@@ -46,7 +46,7 @@ export interface ExtendedValuesType extends ValuesType {
 }
 
 export interface ValidationSchemaType {
-  txType: TxTypeEnum;
+  txType: TransactionTypeEnum;
   address: string;
   egldLabel: string;
   balance: string;

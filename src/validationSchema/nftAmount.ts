@@ -6,7 +6,7 @@ import { string } from 'yup';
 import { ZERO } from 'constants/index';
 import { parseAmount } from 'helpers';
 import { NftEnumType } from 'types';
-import { TxTypeEnum, ExtendedValuesType } from 'types';
+import { TransactionTypeEnum, ExtendedValuesType } from 'types';
 
 const required = string().required('Required');
 
@@ -15,7 +15,7 @@ const metaFormattedAmount = string().test({
   test: function hashSignCheck(value) {
     const { nft, txType } = this.parent as ExtendedValuesType;
 
-    if (txType !== TxTypeEnum.MetaESDT) {
+    if (txType !== TransactionTypeEnum.MetaESDT) {
       return true;
     }
 
@@ -42,14 +42,14 @@ const balance = string().test(
       return true;
     }
 
-    if (txType === TxTypeEnum.MetaESDT) {
+    if (txType === TransactionTypeEnum.MetaESDT) {
       const nominatedAmount = parseAmount(amount, nft?.decimals);
       const bnAmount = new BigNumber(nominatedAmount);
       const bnTokenBalance = new BigNumber(nft?.balance || ZERO);
       return bnTokenBalance.isGreaterThanOrEqualTo(bnAmount);
     }
 
-    if (txType === TxTypeEnum.SemiFungibleESDT) {
+    if (txType === TransactionTypeEnum.SemiFungibleESDT) {
       const bnAmount = new BigNumber(amount);
       const bnTokenBalance = new BigNumber(nft?.balance || ZERO);
       return bnTokenBalance.isGreaterThanOrEqualTo(bnAmount);

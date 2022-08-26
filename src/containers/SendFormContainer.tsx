@@ -17,7 +17,7 @@ import {
 import { UICustomizationContextPropsType } from 'contexts/UICustomization';
 import { generateTransaction, getTxType } from 'operations';
 import { formattedConfigGasPrice } from 'operations/formattedConfigGasPrice';
-import { ExtendedValuesType, TxTypeEnum, ValuesType } from 'types';
+import { ExtendedValuesType, TransactionTypeEnum, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
 import { getInitialErrors } from 'validation';
 import validationSchema from 'validationSchema';
@@ -64,7 +64,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
 
   async function handleOnSubmit(values: ExtendedValuesType) {
     const actualTransactionAmount =
-      values.txType === TxTypeEnum.EGLD ? values.amount : ZERO;
+      values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
     const parsedValues = { ...values, amount: actualTransactionAmount };
 
     const transaction = shouldGenerateTransactionOnSubmit

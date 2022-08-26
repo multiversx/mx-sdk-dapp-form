@@ -2,7 +2,7 @@ import {
   TokenType,
   NftType as NftInterface
 } from '@elrondnetwork/dapp-core/types/tokens.types';
-import { NftEnumType, TxTypeEnum } from 'types/enums';
+import { NftEnumType, TransactionTypeEnum } from 'types/enums';
 
 // partial because it's only defining propreties needed by dapp-core-form
 export type PartialTokenType = {
@@ -15,7 +15,7 @@ export type PartialTokenType = {
 };
 
 export interface SelectedTokenType extends PartialTokenType {
-  type: TxTypeEnum;
+  type: TransactionTypeEnum;
 }
 
 export type TokenAssetsType = TokenType['assets'];

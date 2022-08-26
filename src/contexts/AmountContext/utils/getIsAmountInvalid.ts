@@ -1,6 +1,6 @@
 import { FormikErrors, FormikTouched } from 'formik';
 import { ZERO } from 'constants/index';
-import { ExtendedValuesType, TxTypeEnum, ValuesEnum } from 'types';
+import { ExtendedValuesType, TransactionTypeEnum, ValuesEnum } from 'types';
 
 // amount and gasLimit validation are interdependent
 // this is why there is a separate function used to compute amount validation
@@ -18,7 +18,7 @@ export function getIsAmountInvalid({
   );
 
   // if the EGLD amount is zero, let the insufficient funds error go to gasLimit
-  if (values.txType === TxTypeEnum.EGLD) {
+  if (values.txType === TransactionTypeEnum.EGLD) {
     const isInvalid = values.amount != ZERO ? isAmountInvalid : false;
     return isInvalid;
   }

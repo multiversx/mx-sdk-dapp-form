@@ -4,7 +4,7 @@ import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmo
 import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue/index';
 
 import { parseAmount } from 'helpers';
-import { PartialNftType, TxTypeEnum } from 'types';
+import { PartialNftType, TransactionTypeEnum } from 'types';
 import { Token } from '../Token';
 
 import styles from './styles.module.scss';
@@ -19,7 +19,7 @@ export interface AmountPropsType {
   tokenAvatar: string;
   egldPriceInUsd: number;
   tokenDecimals: number;
-  txType: TxTypeEnum;
+  txType: TransactionTypeEnum;
   nft?: PartialNftType;
 }
 
@@ -37,8 +37,8 @@ export const Amount = (props: AmountPropsType) => {
   } = props;
 
   const nftDecimals = nft?.decimals || 0;
-  const isEsdtTransaction = txType === TxTypeEnum.ESDT;
-  const isMetaEsdt = txType === TxTypeEnum.MetaESDT;
+  const isEsdtTransaction = txType === TransactionTypeEnum.ESDT;
+  const isMetaEsdt = txType === TransactionTypeEnum.MetaESDT;
 
   const value = isMetaEsdt ? parseAmount(amount, nft?.decimals) : amount;
   const showNftAmount = Boolean(nft && amount);
@@ -58,7 +58,7 @@ export const Amount = (props: AmountPropsType) => {
       egldLabel={props.egldLabel}
       value={value}
       decimals={nftDecimals}
-      digits={txType === TxTypeEnum.MetaESDT ? DIGITS : 0}
+      digits={txType === TransactionTypeEnum.MetaESDT ? DIGITS : 0}
       showLastNonZeroDecimal
       showLabel={false}
       data-testid='confirmAmount'
@@ -87,7 +87,7 @@ export const Amount = (props: AmountPropsType) => {
 
   return (
     <div className={styles.amount}>
-      {txType !== TxTypeEnum.NonFungibleESDT && (
+      {txType !== TransactionTypeEnum.NonFungibleESDT && (
         <div className={styles.left}>
           <span className={styles.label}>{label}</span>
 

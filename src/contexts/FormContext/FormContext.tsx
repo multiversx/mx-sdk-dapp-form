@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { getIdentifierType } from '@elrondnetwork/dapp-core/utils/validation/getIdentifierType';
 import { useFormikContext } from 'formik';
-import { ExtendedValuesType, TxTypeEnum } from 'types';
+import { ExtendedValuesType, TransactionTypeEnum } from 'types';
 import { verifyInvalid } from 'validation';
 
 export interface FormContextBasePropsType {
@@ -21,7 +21,7 @@ export interface FormContextPropsType extends FormContextBasePropsType {
   shouldValidateForm: boolean;
   isFormValid: boolean;
   renderKey: number;
-  txType: TxTypeEnum;
+  txType: TransactionTypeEnum;
   checkInvalid: (value: keyof ExtendedValuesType) => boolean;
   onValidateForm: () => void;
   onInvalidateForm: () => void;

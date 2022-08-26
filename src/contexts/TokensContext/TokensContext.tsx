@@ -14,7 +14,7 @@ import {
   ExtendedValuesType,
   PartialNftType,
   PartialTokenType,
-  TxTypeEnum
+  TransactionTypeEnum
 } from 'types';
 
 import { useFormContext } from '../FormContext';
@@ -103,13 +103,13 @@ export function TokensContextProvider({
     setFieldValue(txTypeField, newTxType);
 
     if (
-      newTxType === TxTypeEnum.SemiFungibleESDT ||
-      newTxType === TxTypeEnum.NonFungibleESDT
+      newTxType === TransactionTypeEnum.SemiFungibleESDT ||
+      newTxType === TransactionTypeEnum.NonFungibleESDT
     ) {
       return;
     }
 
-    if (newTxType === TxTypeEnum.MetaESDT) {
+    if (newTxType === TransactionTypeEnum.MetaESDT) {
       const selectedNft = allAvailableTokens?.find(
         (token) => token.identifier === tokenId
       );

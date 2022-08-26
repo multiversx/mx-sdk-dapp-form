@@ -17,7 +17,7 @@ import {
   calculateNftGasLimit,
   formattedConfigGasPrice
 } from 'operations';
-import { ExtendedValuesType, TxTypeEnum, ValuesEnum } from 'types';
+import { ExtendedValuesType, TransactionTypeEnum, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { getDefaultGasLimit } from './utils';
 
@@ -162,10 +162,10 @@ export function GasContextProvider({
   useEffect(() => {
     if (!prefilledForm) {
       switch (txType) {
-        case TxTypeEnum.ESDT:
+        case TransactionTypeEnum.ESDT:
           handleUpdateGasLimit(TOKEN_GAS_LIMIT);
           break;
-        case TxTypeEnum.EGLD:
+        case TransactionTypeEnum.EGLD:
           handleUpdateGasLimit(
             calculateGasLimit({
               data: data.trim()

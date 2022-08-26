@@ -2,7 +2,7 @@ import { NftEnumType } from '@elrondnetwork/dapp-core/types/tokens.types';
 
 export { NftEnumType };
 
-export enum TxTypeEnum {
+export enum TransactionTypeEnum {
   EGLD = 'EGLD',
   ESDT = 'ESDT',
   MetaESDT = 'MetaESDT',

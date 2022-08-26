@@ -5,7 +5,7 @@ import { bech32, parseAmount } from 'helpers';
 import {
   NftEnumType,
   PartialNftType,
-  TxTypeEnum,
+  TransactionTypeEnum,
   ExtendedValuesType
 } from 'types';
 import getTokenDetails from './getTokenDetails';
@@ -68,14 +68,14 @@ export const getDataField = ({
   amountError,
   receiverError
 }: {
-  txType: TxTypeEnum;
+  txType: TransactionTypeEnum;
   values: ExtendedValuesType;
   nft?: PartialNftType;
   amountError?: boolean;
   receiverError?: string;
 }) => {
   const { tokens, tokenId, amount, receiver } = values;
-  if (tokens && txType === TxTypeEnum.ESDT && !amountError) {
+  if (tokens && txType === TransactionTypeEnum.ESDT && !amountError) {
     const { decimals } = getTokenDetails({
       tokens,
       tokenId
@@ -88,7 +88,7 @@ export const getDataField = ({
     });
   }
   // NFT SFT MetaESDT
-  if (txType !== TxTypeEnum.EGLD) {
+  if (txType !== TransactionTypeEnum.EGLD) {
     return computeNftDataField({
       nft,
       amount,
