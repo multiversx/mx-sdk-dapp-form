@@ -53,7 +53,7 @@ export const validateTransaction = async ({
   const { tokenData, tokenAmount, tokenFound } = await getDataToken(
     {
       tokenId: dataTokenId,
-      nominatedTokenAmount: amount
+      parsedTokenAmount: amount
     },
     apiConfig
   );

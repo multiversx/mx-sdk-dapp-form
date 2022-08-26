@@ -5,10 +5,10 @@ import { formatAmount } from 'helpers';
 export async function getDataToken(
   {
     tokenId,
-    nominatedTokenAmount
+    parsedTokenAmount: parsedTokenAmount
   }: {
     tokenId: string;
-    nominatedTokenAmount: string;
+    parsedTokenAmount: string;
   },
   apiConfig: ApiConfigType
 ) {
@@ -16,7 +16,7 @@ export async function getDataToken(
     const { data } = await getToken(tokenId, apiConfig);
     const { decimals } = data;
     const formattedAmount = formatAmount({
-      input: nominatedTokenAmount,
+      input: parsedTokenAmount,
       decimals,
       digits: decimals,
       addCommas: false,

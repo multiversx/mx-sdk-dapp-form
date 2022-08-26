@@ -44,8 +44,8 @@ const balance = string().test(
         tokenId: this.parent.tokenId
       });
 
-      const nominatedAmount = parseAmount(tokenAmount.toString(), decimals);
-      const bnAmount = new BigNumber(nominatedAmount);
+      const parsedAmount = parseAmount(tokenAmount.toString(), decimals);
+      const bnAmount = new BigNumber(parsedAmount);
       const bnTokenBalance = new BigNumber(tokenBalance);
       return bnTokenBalance.comparedTo(bnAmount) >= 0;
     }
@@ -63,8 +63,8 @@ const greaterThanZero = string().test(
         tokens,
         tokenId: this.parent.tokenId
       });
-      const nominatedAmount = parseAmount(tokenAmount.toString(), decimals);
-      const bnAmount = new BigNumber(nominatedAmount);
+      const parsedAmount = parseAmount(tokenAmount.toString(), decimals);
+      const bnAmount = new BigNumber(parsedAmount);
       return bnAmount.isGreaterThan(0);
     }
     return true;

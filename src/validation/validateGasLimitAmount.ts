@@ -23,8 +23,8 @@ export function validateGasLimitAmount({
   data,
   chainId
 }: ValidateGasLimitAmountType) {
-  const nominatedAmount = parseAmount(amount.toString());
-  const bnAmount = new BigNumber(nominatedAmount);
+  const parsedAmount = parseAmount(amount.toString());
+  const bnAmount = new BigNumber(parsedAmount);
   const bnBalance = new BigNumber(balance);
   const fee = new BigNumber(
     calculateFeeLimit({

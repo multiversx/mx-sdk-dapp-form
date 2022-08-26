@@ -14,8 +14,8 @@ export const getPercentageOfAmount = (
   const formattedBN = stringIsFloat(String(maxAmountMinusDust))
     ? new BigNumber(String(maxAmountMinusDust).replace('.', ''))
     : new BigNumber(ZERO);
-  const nominatedBN = new BigNumber(parseAmount(value));
-  const percentage = 100 / Number(String(formattedBN.dividedBy(nominatedBN)));
+  const parsedBN = new BigNumber(parseAmount(value));
+  const percentage = 100 / Number(String(formattedBN.dividedBy(parsedBN)));
 
   return Math.round(percentage);
 };

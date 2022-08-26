@@ -43,8 +43,8 @@ const balance = string().test(
     }
 
     if (txType === TransactionTypeEnum.MetaESDT) {
-      const nominatedAmount = parseAmount(amount, nft?.decimals);
-      const bnAmount = new BigNumber(nominatedAmount);
+      const parsedAmount = parseAmount(amount, nft?.decimals);
+      const bnAmount = new BigNumber(parsedAmount);
       const bnTokenBalance = new BigNumber(nft?.balance || ZERO);
       return bnTokenBalance.isGreaterThanOrEqualTo(bnAmount);
     }
