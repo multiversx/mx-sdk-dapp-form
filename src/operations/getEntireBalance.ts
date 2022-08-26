@@ -70,7 +70,7 @@ export function getEntireBalance({
   return {
     entireBalance,
     entireBalanceMinusDust,
-    nominatedEntireBalance: bNentireBalance.isGreaterThan(0)
+    parsedEntireBalance: bNentireBalance.isGreaterThan(0)
       ? bNentireBalance.toString(10)
       : ZERO
   };
