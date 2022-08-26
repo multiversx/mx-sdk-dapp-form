@@ -29,7 +29,7 @@ export interface TokensContextInitializationPropsType {
 export interface TokensContextPropsType {
   tokenId: string;
   isTokenIdInvalid: boolean;
-  decimals: number;
+  digits: number;
   egldLabel: string;
   egldPriceInUsd: number;
   tokenIdError?: string;
@@ -153,7 +153,7 @@ export function TokensContextProvider({
         tokenDetails,
         egldLabel,
         egldPriceInUsd,
-        decimals: digits,
+        digits,
         isTokenIdInvalid,
         getTokens: handleGetTokens,
         onChangeTokenId: handleChangeTokenId
