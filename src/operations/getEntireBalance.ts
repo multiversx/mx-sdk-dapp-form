@@ -1,6 +1,8 @@
 import {
   GAS_PER_DATA_BYTE,
-  GAS_PRICE_MODIFIER
+  GAS_PRICE_MODIFIER,
+  DECIMALS,
+  DIGITS
 } from '@elrondnetwork/dapp-core/constants/index';
 
 import BigNumber from 'bignumber.js';
@@ -76,8 +78,8 @@ export function getEntireBalance({
 
 export function getEntireTokenBalance({
   balance = ZERO,
-  decimals = 18,
-  digits = 4
+  decimals = DECIMALS,
+  digits = DIGITS
 }) {
   const bnBalance = new BigNumber(balance);
   // entireBalance >= 0
