@@ -14,10 +14,11 @@ export async function getDataToken(
 ) {
   try {
     const { data } = await getToken(tokenId, apiConfig);
+    const { decimals } = data;
     const formattedAmount = formatAmount({
       input: nominatedTokenAmount,
-      decimals: data.decimals,
-      digits: data.decimals,
+      decimals,
+      digits: decimals,
       addCommas: false,
       showLastNonZeroDecimal: true
     });
