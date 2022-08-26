@@ -1,4 +1,4 @@
-import { gasLimit } from '@elrondnetwork/dapp-core/constants/index';
+import { GAS_LIMIT } from '@elrondnetwork/dapp-core/constants/index';
 import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress } from '__mocks__';
 import { renderForm } from 'tests/helpers/renderForm';
@@ -71,7 +71,7 @@ describe('GasLimit field', () => {
   it('should >= than the one set by config', async () => {
     const { findByLabelText, queryByText } = await renderForm();
     const input: any = await findByLabelText('Gas Limit');
-    const value = parseInt(gasLimit) - 1;
+    const value = GAS_LIMIT - 1;
     const data = { target: { value } };
     fireEvent.change(input, data);
     fireEvent.blur(input);
@@ -79,7 +79,7 @@ describe('GasLimit field', () => {
     await waitFor(() => {
       const req = queryByText(/^Gas limit must be greater/);
       expect(req!.innerHTML).toBe(
-        `Gas limit must be greater or equal to ${gasLimit}`
+        `Gas limit must be greater or equal to ${GAS_LIMIT}`
       );
     });
   });
@@ -92,7 +92,7 @@ describe('GasLimit field', () => {
     fireEvent.blur(dataInput);
 
     const input: any = methods.getByLabelText('Gas Limit');
-    const value = gasLimit;
+    const value = GAS_LIMIT;
     const data = { target: { value } };
     fireEvent.change(input, data);
     fireEvent.blur(input);

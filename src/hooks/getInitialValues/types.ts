@@ -1,10 +1,10 @@
-import { NetworkType } from '@elrondnetwork/dapp-core/types/network';
-import { FormConfigType, NftType } from 'types';
+import { NetworkType } from '@elrondnetwork/dapp-core/types/network.types';
+import { FormConfigType, PartialNftType } from 'types';
 
 export interface ComputedNftType {
   receiver: string;
   quantity: string;
-  nft: NftType;
+  nft: PartialNftType;
 }
 
 export interface GetInitialValuesType {

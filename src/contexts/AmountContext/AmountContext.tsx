@@ -6,13 +6,12 @@ import React, {
   ReactNode,
   createContext
 } from 'react';
-import { decimals } from '@elrondnetwork/dapp-core/constants/index';
-import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
+import { DIGITS } from '@elrondnetwork/dapp-core/constants/index';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 
+import { formatAmount, parseAmount } from 'helpers';
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';
@@ -97,7 +96,10 @@ export function AmountContextProvider({
       const amountBN = new BigNumber(maxAmountMinusDust)
         .times(percentage)
         .dividedBy(100);
-      const value = denominate({ input: nominate(String(amountBN)), decimals });
+      const value = formatAmount({
+        input: parseAmount(String(amountBN)),
+        digits: DIGITS
+      });
 
       if (updateFieldValue) {
         setFieldValue(ValuesEnum.amount, value);

@@ -1,5 +1,5 @@
 import { string } from 'yup';
-import { ledgerHashSignMinimumVersion } from 'constants/index';
+import { LEDGER_HASH_SIGN_MINIMUM_VERSION } from 'constants/index';
 import { getLedgerVersionOptions } from 'operations';
 import { ExtendedValuesType } from 'types';
 
@@ -26,7 +26,7 @@ const hashSign = string().test({
       const { ledgerWithHashSign } = getLedgerVersionOptions(ledger.version);
       if (value && value.length > 300 && !ledgerWithHashSign) {
         return this.createError({
-          message: `Data too long. You need at least Elrond app version ${ledgerHashSignMinimumVersion}. Update Elrond app to continue`,
+          message: `Data too long. You need at least Elrond app version ${LEDGER_HASH_SIGN_MINIMUM_VERSION}. Update Elrond app to continue`,
           path: 'data'
         });
       }

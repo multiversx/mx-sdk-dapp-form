@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { mainnetChainId } from '@elrondnetwork/dapp-core/constants';
+import { MAINNET_CHAIN_ID } from '@elrondnetwork/dapp-core/constants/index';
 import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
 import { useFormikContext } from 'formik';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
@@ -41,7 +41,7 @@ export function useFetchGasLimit(
     if (
       !prefilledForm &&
       isContract(values.receiver) &&
-      (chainId !== mainnetChainId || process.env.NODE_ENV === 'test') && // TODO: remove when ready
+      (chainId !== MAINNET_CHAIN_ID || process.env.NODE_ENV === 'test') && // TODO: remove when ready
       !touched.gasLimit &&
       !hasErrors &&
       debouncedData.length > 0

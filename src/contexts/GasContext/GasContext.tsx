@@ -1,23 +1,23 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 
 import {
-  gasPerDataByte,
-  gasPriceModifier
+  GAS_PER_DATA_BYTE,
+  GAS_PRICE_MODIFIER
 } from '@elrondnetwork/dapp-core/constants/index';
 import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/calculateFeeLimit';
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import { useFormikContext } from 'formik';
-import { tokenGasLimit, ZERO } from 'constants/index';
+import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
+import { parseAmount } from 'helpers';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
   calculateGasLimit,
   calculateNftGasLimit,
-  denominatedConfigGasPrice
+  formattedConfigGasPrice
 } from 'operations';
-import { ExtendedValuesType, TxTypeEnum, ValuesEnum } from 'types';
+import { ExtendedValuesType, TransactionTypeEnum, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { getDefaultGasLimit } from './utils';
 
@@ -126,7 +126,7 @@ export function GasContextProvider({
   );
 
   const handleResetGasPrice = useCallback(() => {
-    setFieldValue(ValuesEnum.gasPrice, denominatedConfigGasPrice);
+    setFieldValue(ValuesEnum.gasPrice, formattedConfigGasPrice);
   }, []);
 
   const handleResetGasLimit = useCallback(() => {
@@ -145,11 +145,11 @@ export function GasContextProvider({
   const feeLimit = !hasErrors
     ? calculateFeeLimit({
         gasLimit,
-        gasPrice: nominate(gasPrice),
+        gasPrice: parseAmount(gasPrice),
         data: data.trim(),
         chainId,
-        gasPerDataByte: String(gasPerDataByte),
-        gasPriceModifier: String(gasPriceModifier)
+        gasPerDataByte: String(GAS_PER_DATA_BYTE),
+        gasPriceModifier: String(GAS_PRICE_MODIFIER)
       })
     : ZERO;
 
@@ -162,10 +162,10 @@ export function GasContextProvider({
   useEffect(() => {
     if (!prefilledForm) {
       switch (txType) {
-        case TxTypeEnum.ESDT:
-          handleUpdateGasLimit(tokenGasLimit);
+        case TransactionTypeEnum.ESDT:
+          handleUpdateGasLimit(TOKEN_GAS_LIMIT);
           break;
-        case TxTypeEnum.EGLD:
+        case TransactionTypeEnum.EGLD:
           handleUpdateGasLimit(
             calculateGasLimit({
               data: data.trim()

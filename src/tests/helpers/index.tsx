@@ -1,4 +1,4 @@
 export * from './renderForm';
-export * from './denominateSelector';
+export * from './formattedAmountSelector';
 export * from './formConfiguraiton';
 export * from './sendAndConfirmTest';

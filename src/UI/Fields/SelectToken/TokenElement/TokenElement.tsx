@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import * as constants from '@elrondnetwork/dapp-core/constants/index';
-import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
+import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmount';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
 import { ZERO } from 'constants/index';
 import { scamFlag } from 'helpers';
-import { NftEnumType, NftType, TokenType } from 'types';
+import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
 
 import styles from './styles.module.scss';
 const ElrondSymbol = require('./symbol.svg').default;
@@ -19,11 +19,11 @@ export const TokenElement = ({
   nftTokenDetails,
   token
 }: {
-  token: TokenType;
+  token: PartialTokenType;
   inDropdown?: boolean;
   isEgld?: boolean;
   nftType?: NftEnumType;
-  nftTokenDetails?: NftType;
+  nftTokenDetails?: PartialNftType;
 }) => {
   const { name, identifier, balance, decimals } = token;
   const avatar = token.assets?.svgUrl || token.assets?.pngUrl || '';
@@ -57,7 +57,7 @@ export const TokenElement = ({
     );
   }
 
-  const showDenomination =
+  const showFormattedValue =
     !inDropdown && nftType !== NftEnumType.NonFungibleESDT;
 
   return (
@@ -83,16 +83,16 @@ export const TokenElement = ({
           <span className={styles.tokenElementIdentifier}>{identifier}</span>
         </span>
 
-        {showDenomination && (
-          <Denominate
+        {showFormattedValue && (
+          <FormatAmount
             egldLabel={identifier}
             value={balance || ZERO}
-            decimals={
-              nftType === NftEnumType.SemiFungibleESDT ? 0 : constants.decimals
+            digits={
+              nftType === NftEnumType.SemiFungibleESDT ? 0 : constants.DIGITS
             }
             token={identifier}
             showLabel={false}
-            denomination={decimals}
+            decimals={decimals}
             data-testid={`${identifier}-balance`}
           />
         )}

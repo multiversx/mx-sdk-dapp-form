@@ -1,5 +1,5 @@
 import React from 'react';
-import { Denominate } from '@elrondnetwork/dapp-core/UI/Denominate/index';
+import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmount';
 
 import { ZERO } from 'constants/index';
 import { calculateFeeInFiat } from 'operations';
@@ -19,7 +19,7 @@ export const Fee = ({
   <div className={styles.fee}>
     <span className={styles.text}>{label}</span>
 
-    <Denominate
+    <FormatAmount
       egldLabel={egldLabel}
       value={feeLimit}
       showLastNonZeroDecimal

@@ -1,21 +1,21 @@
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
+import { maxDecimals } from '@elrondnetwork/dapp-core/utils/validation/maxDecimals';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import { stringIsInteger } from '@elrondnetwork/dapp-core/utils/validation/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { ZERO } from 'constants/index';
+import { parseAmount } from 'helpers';
 import { NftEnumType } from 'types';
-import { TxTypeEnum, ExtendedValuesType } from 'types';
-import maxDecimals from 'validation/maxDecimals';
+import { TransactionTypeEnum, ExtendedValuesType } from 'types';
 
 const required = string().required('Required');
 
-const metaDenomination = string().test({
-  name: 'denomination',
+const metaFormattedAmount = string().test({
+  name: 'formatDecimals',
   test: function hashSignCheck(value) {
     const { nft, txType } = this.parent as ExtendedValuesType;
 
-    if (txType !== TxTypeEnum.MetaESDT) {
+    if (txType !== TransactionTypeEnum.MetaESDT) {
       return true;
     }
 
@@ -42,14 +42,14 @@ const balance = string().test(
       return true;
     }
 
-    if (txType === TxTypeEnum.MetaESDT) {
-      const nominatedAmount = nominate(amount, nft?.decimals);
-      const bnAmount = new BigNumber(nominatedAmount);
+    if (txType === TransactionTypeEnum.MetaESDT) {
+      const parsedAmount = parseAmount(amount, nft?.decimals);
+      const bnAmount = new BigNumber(parsedAmount);
       const bnTokenBalance = new BigNumber(nft?.balance || ZERO);
       return bnTokenBalance.isGreaterThanOrEqualTo(bnAmount);
     }
 
-    if (txType === TxTypeEnum.SemiFungibleESDT) {
+    if (txType === TransactionTypeEnum.SemiFungibleESDT) {
       const bnAmount = new BigNumber(amount);
       const bnTokenBalance = new BigNumber(nft?.balance || ZERO);
       return bnTokenBalance.isGreaterThanOrEqualTo(bnAmount);
@@ -72,7 +72,7 @@ const isValidNumber = string().test(
   }
 );
 
-const validations = [required, isValidNumber, balance, metaDenomination];
+const validations = [required, isValidNumber, balance, metaFormattedAmount];
 
 export const nftAmount = validations.reduce(
   (previousValue, currentValue) => previousValue.concat(currentValue),

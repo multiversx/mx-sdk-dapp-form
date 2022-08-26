@@ -5,7 +5,7 @@ import { useFormikContext } from 'formik';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { ExtendedValuesType, TxTypeEnum } from 'types';
+import { ExtendedValuesType, TransactionTypeEnum } from 'types';
 
 import { ConfirmScreen } from 'UI/ConfirmScreen';
 import {
@@ -41,9 +41,9 @@ export const Form = () => {
   }
 
   const isNFTTransaction = ![
-    TxTypeEnum.EGLD,
-    TxTypeEnum.ESDT,
-    TxTypeEnum.MetaESDT
+    TransactionTypeEnum.EGLD,
+    TransactionTypeEnum.ESDT,
+    TransactionTypeEnum.MetaESDT
   ].includes(txType);
 
   if (areValidatedValuesReady) {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import globals from 'assets/sass/globals.module.scss';
 import { ZERO } from 'constants/index';
-import { NftType } from 'types';
+import { PartialNftType } from 'types';
 import { TokenElement } from 'UI/Fields/SelectToken/TokenElement';
 
 import styles from './styles.module.scss';
@@ -13,7 +13,7 @@ export interface TokenPropsType {
   tokenAvatar?: string;
   isEsdtTransaction: boolean;
   tokenIdError?: string;
-  nft?: NftType;
+  nft?: PartialNftType;
 }
 
 export const Token = ({

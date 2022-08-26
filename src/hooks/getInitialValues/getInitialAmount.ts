@@ -1,5 +1,5 @@
-import { decimals } from '@elrondnetwork/dapp-core/constants/index';
-import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
+import { DIGITS } from '@elrondnetwork/dapp-core/constants/index';
+import { formatAmount } from 'helpers';
 import { NftEnumType } from 'types';
 import { ComputedNftType } from './types';
 
@@ -19,12 +19,12 @@ export function getInitialAmount(props: {
   const amountValue = computedNft?.quantity || amount;
 
   if (isMetaESDT && amountValue) {
-    return denominate({
+    return formatAmount({
       input: amountValue,
-      denomination: computedNft?.nft?.decimals,
+      decimals: computedNft?.nft?.decimals,
       showLastNonZeroDecimal: true,
       addCommas: false,
-      decimals
+      digits: DIGITS
     });
   }
   return amountValue;

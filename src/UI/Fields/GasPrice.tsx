@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { denominatedConfigGasPrice } from 'operations';
+import { formattedConfigGasPrice } from 'operations';
 
 import { ValuesEnum } from 'types';
 import styles from './styles.module.scss';
@@ -22,7 +22,7 @@ export const GasPrice = () => {
     onResetGasPrice
   } = gasInfo;
   const { readonly } = formInfo;
-  const showUndoButton = gasPrice !== denominatedConfigGasPrice && !readonly;
+  const showUndoButton = gasPrice !== formattedConfigGasPrice && !readonly;
 
   return (
     <div className={classNames(styles.gas, styles.gasPrice)}>

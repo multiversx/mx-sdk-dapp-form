@@ -1,27 +1,25 @@
-import { denomination } from '@elrondnetwork/dapp-core/constants/index';
+import { DECIMALS } from '@elrondnetwork/dapp-core/constants/index';
+import { maxDecimals } from '@elrondnetwork/dapp-core/utils/validation/maxDecimals';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
-import denominatedConfigGasPrice from 'operations/denominatedConfigGasPrice';
-import maxDecimals from 'validation/maxDecimals';
+import { formattedConfigGasPrice } from 'operations/formattedConfigGasPrice';
 
 const required = string().required('Required');
 
 const decimalsValidation = string().test(
-  'denomination',
-  `Maximum ${denomination} decimals allowed`,
+  'decimalFormat',
+  `Maximum ${DECIMALS} decimals allowed`,
   (value) => maxDecimals(String(value))
 );
 const minimum = string().test(
   'minimum',
-  `Must be higher than ${denominatedConfigGasPrice}`,
+  `Must be higher than ${formattedConfigGasPrice}`,
   (value) => {
     const bNgasPrice = new BigNumber(String(value));
-    const bNdenominatedConfigGasPrice = new BigNumber(
-      denominatedConfigGasPrice
-    );
+    const bNformattedConfigGasPrice = new BigNumber(formattedConfigGasPrice);
     const result =
-      value && bNgasPrice.comparedTo(bNdenominatedConfigGasPrice) >= 0;
+      value && bNgasPrice.isGreaterThanOrEqualTo(bNformattedConfigGasPrice);
     return Boolean(result);
   }
 );
