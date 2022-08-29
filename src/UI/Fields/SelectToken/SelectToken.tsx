@@ -1,6 +1,6 @@
 import React from 'react';
-import * as constants from '@elrondnetwork/dapp-core/constants/index';
-import Select, { SingleValue, components } from 'react-select';
+import * as constants from '@elrondnetwork/dapp-core/constants/index/index';
+import Select, { SingleValue, components, components } from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
 import globals from 'assets/sass/globals.module.scss';
@@ -17,6 +17,17 @@ interface OptionType {
   assets?: TokenAssetsType;
   token: PartialTokenType;
 }
+
+const ListOption = (props: any) => {
+  return (
+    <div
+      className={`token-option ${props.isSelected ? 'is-selected' : ''}`}
+      data-testid={`${props.value}-option`}
+    >
+      <components.Option {...props} />
+    </div>
+  );
+};
 
 const ListOption = (props: any) => {
   return (
@@ -126,6 +137,7 @@ export const SelectToken = ({ label }: { label?: string }) => {
           options.find(({ value }: OptionType) => value === tokenId) ||
           undefined
         }
+        components={{ Option: ListOption }}
         components={{ Option: ListOption }}
         options={options}
         onChange={onChange}

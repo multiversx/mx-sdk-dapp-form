@@ -66,6 +66,7 @@ export const TokenElement = ({
         {isEgld || avatar ? (
           <ElrondSymbol
             is='x3d' // fixes jest Warning: The tag <default> is unrecognized in this browser.
+            is='x3d' // fixes jest Warning: The tag <default> is unrecognized in this browser.
             height={avatarDropdownSize}
             className={classNames({
               [styles.tokenElementSpaced]: Boolean(avatar),

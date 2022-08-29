@@ -57,6 +57,9 @@ export const GasContext = React.createContext({} as GasContextPropsType);
 /**
  * **initGasLimitError**: Value coming from an intial compute of gasLimit in case the form is configured for a smart contract transaction
  */
+/**
+ * **initGasLimitError**: Value coming from an intial compute of gasLimit in case the form is configured for a smart contract transaction
+ */
 export function GasContextProvider({
   children,
   initGasLimitError

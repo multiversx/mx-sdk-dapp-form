@@ -64,7 +64,7 @@ export function useFetchGasLimit(
           console.error(err);
         });
     }
-  }, [debouncedData, debouncedAmount, values.receiver]);
+  }, [debouncedData, debouncedAmount, values.values.receiver]);
 
   return { gasCostLoading, gasCostError };
 }

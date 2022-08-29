@@ -8,6 +8,7 @@ import {
   setApiConfig
 } from 'apiCalls';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
+import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { FormNetworkConfigType } from 'types';
 import {
   AccountContextPropsType,
