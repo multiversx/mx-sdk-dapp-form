@@ -54,7 +54,6 @@ export function AmountContextProvider({
     values,
     errors,
     touched,
-    touched,
     handleBlur,
     setFieldValue,
     setFieldError,
@@ -151,13 +150,6 @@ export function AmountContextProvider({
     setIsMaxClicked(true);
     return onChange(maxAmountMinusDust || values.amount);
   }, [maxAmountMinusDust]);
-
-  // if the amount is zero, let the insufficient funds error go to gasLimit
-  const isInvalid = getIsAmountInvalid({
-    values,
-    errors,
-    touched
-  });
 
   // if the amount is zero, let the insufficient funds error go to gasLimit
   const isInvalid = getIsAmountInvalid({
