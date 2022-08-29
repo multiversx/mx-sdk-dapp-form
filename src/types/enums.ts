@@ -1,10 +1,8 @@
-export enum NftEnumType {
-  NonFungibleESDT = 'NonFungibleESDT',
-  SemiFungibleESDT = 'SemiFungibleESDT',
-  MetaESDT = 'MetaESDT'
-}
+import { NftEnumType } from '@elrondnetwork/dapp-core/types/tokens.types';
 
-export enum TxTypeEnum {
+export { NftEnumType };
+
+export enum TransactionTypeEnum {
   EGLD = 'EGLD',
   ESDT = 'ESDT',
   MetaESDT = 'MetaESDT',

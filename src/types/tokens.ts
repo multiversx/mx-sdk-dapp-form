@@ -1,64 +1,49 @@
-import { NftEnumType, TxTypeEnum } from 'types/enums';
-import { TransactionType } from './transactions';
+import {
+  TokenType,
+  NftType as NftInterface
+} from '@elrondnetwork/dapp-core/types/tokens.types';
+import { NftEnumType, TransactionTypeEnum } from 'types/enums';
 
-export interface TokenType {
-  identifier: string;
-  name: string;
+// partial because it's only defining propreties needed by dapp-core-form
+export type PartialTokenType = {
+  identifier: TokenType['identifier'];
+  name: TokenType['name'];
   decimals: number;
   balance: string;
-  ticker: string;
+  ticker: TokenType['ticker'];
   assets?: TokenAssetsType;
+};
+
+export interface SelectedTokenType extends PartialTokenType {
+  type: TransactionTypeEnum;
 }
 
-export interface SelectedTokenType extends TokenType {
-  type: TxTypeEnum;
-}
-
-export interface TokenAssetsType {
-  description?: string;
-  pngUrl?: string;
-  status?: string;
-  svgUrl?: string;
-  website?: string;
-  ledgerSignature?: string;
-}
-
-interface NftMediaType {
-  url: string;
-  originalUrl: string;
-  thumbnailUrl: string;
-  fileType: string;
-  fileSize: number;
-}
+export type TokenAssetsType = TokenType['assets'];
 
 interface SharedNftType {
-  canFreeze: boolean;
-  canWipe: boolean;
-  canPause: boolean;
-  canTransferNFTCreateRole: boolean;
-  balance: string;
-  identifier: string;
-  decimals: number;
-  name: string;
-  nonce: string;
-  creator: string;
-  scamInfo?: TransactionType['scamInfo'];
-  uris?: (string | null | undefined)[];
-  media?: NftMediaType[];
+  balance: NftInterface['balance'];
+  identifier: NftInterface['identifier'];
+  decimals: NftInterface['decimals'];
+  name: NftInterface['name'];
+  nonce: NftInterface['nonce'];
+  creator: NftInterface['creator'];
+  scamInfo?: NftInterface['scamInfo'];
+  uris?: NftInterface['uris'];
+  media?: NftInterface['media'];
 }
 
-type SharedTokenType = TokenType & {
+type SharedTokenType = PartialTokenType & {
   owner: string;
 };
 
-export type NftType = SharedTokenType &
+export type PartialNftType = SharedTokenType &
   SharedNftType & {
     type: NftEnumType;
     collection: string;
     assets?: TokenAssetsType;
   };
 
-export type MetaEsdtType = SharedTokenType &
+export type PartialMetaEsdtType = SharedTokenType &
   SharedNftType & {
     type: NftEnumType.MetaESDT;
     collection: string;

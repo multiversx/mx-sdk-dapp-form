@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NetworkType } from '@elrondnetwork/dapp-core/types/network';
+import { NetworkType } from '@elrondnetwork/dapp-core/types/network.types';
 import {
   delegationContractDataByEnvironment,
   getDelegationDataForChainId
@@ -36,8 +36,8 @@ export function NetworkContextProvider({
     fetchDelegationData();
   }, [networkConfig]);
 
-  async function fetchDelegationData() {
-    const delegationData = await getDelegationDataForChainId(networkConfig.id);
+  function fetchDelegationData() {
+    const delegationData = getDelegationDataForChainId(networkConfig.id);
     setDelegationContractData(delegationData);
   }
 

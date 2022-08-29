@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
-import { tokenGasLimit, ZERO } from 'constants/index';
+import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
 import { ExtendedValuesType } from 'types';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 import { sharedGaslimit } from './sharedGaslimit';
@@ -9,10 +9,10 @@ const required = string().required('Required');
 
 const minValue = string().test(
   'minValue',
-  `Gas limit must be greater or equal to ${tokenGasLimit}`,
+  `Gas limit must be greater or equal to ${TOKEN_GAS_LIMIT}`,
   function minGasValue(value: any) {
     const bNgasLimit = new BigNumber(value);
-    const bNcalculatedGasLimit = new BigNumber(tokenGasLimit);
+    const bNcalculatedGasLimit = new BigNumber(TOKEN_GAS_LIMIT);
     const isValid =
       value && bNgasLimit.isGreaterThanOrEqualTo(bNcalculatedGasLimit);
 

@@ -6,7 +6,7 @@ import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled, selectCustomStyles } from 'helpers';
-import { TokenType, TokenAssetsType, ValuesEnum } from 'types';
+import { PartialTokenType, TokenAssetsType, ValuesEnum } from 'types';
 
 import styles from './styles.module.scss';
 import { TokenElement } from './TokenElement';
@@ -15,7 +15,7 @@ interface OptionType {
   value: string;
   label: string;
   assets?: TokenAssetsType;
-  token: TokenType;
+  token: PartialTokenType;
 }
 
 const ListOption = (props: any) => {
@@ -45,7 +45,7 @@ export const SelectToken = ({ label }: { label?: string }) => {
     isTokenIdInvalid
   } = tokensInfo;
 
-  const FormatOptionLabel = ({ token }: { token: TokenType }) => {
+  const FormatOptionLabel = ({ token }: { token: PartialTokenType }) => {
     return (
       <TokenElement
         inDropdown
@@ -55,19 +55,19 @@ export const SelectToken = ({ label }: { label?: string }) => {
     );
   };
 
-  const allTokens: TokenType[] = [
+  const allTokens: PartialTokenType[] = [
     {
       name: 'Elrond eGold',
       identifier: egldLabel,
       balance,
-      decimals: constants.denomination,
+      decimals: constants.DECIMALS,
       ticker: ''
     },
     ...tokens
   ];
 
   const options: Array<OptionType> = allTokens.map(
-    (token: TokenType): OptionType => ({
+    (token: PartialTokenType): OptionType => ({
       value: token.identifier,
       label: token.name,
       assets: token.assets,

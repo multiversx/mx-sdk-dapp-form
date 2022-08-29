@@ -1,7 +1,7 @@
 import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
-import { TokenType } from 'types';
+import { PartialTokenType } from 'types';
 
 export interface GetTokensType {
   address: string;
@@ -28,7 +28,7 @@ export async function getTokens({
   }).toString();
 
   const apiConfig = await getApiConfig();
-  return axios.get<TokenType[]>(
+  return axios.get<PartialTokenType[]>(
     `/accounts/${address}/tokens?${params}`,
     apiConfig
   );
@@ -56,12 +56,15 @@ export async function getAccountToken(
   const { address, token } = props;
 
   const config = apiConfig || (await getApiConfig());
-  return axios.get<TokenType>(`/accounts/${address}/tokens/${token}`, config);
+  return axios.get<PartialTokenType>(
+    `/accounts/${address}/tokens/${token}`,
+    config
+  );
 }
 
 export async function getToken(token: string, apiConfig?: ApiConfigType) {
   const config = apiConfig || (await getApiConfig());
-  return axios.get<TokenType>(`/tokens/${token}`, config);
+  return axios.get<PartialTokenType>(`/tokens/${token}`, config);
 }
 
 export interface FetchTokensArgumentsType {
@@ -107,10 +110,11 @@ export async function fetchAllTokens(address: string) {
         hasMoreTokens = false;
         break;
       }
-      const newTokens: TokenType[] = data.map((item: TokenType) => ({
-        ...item,
-        denomination: item.decimals
-      }));
+      const newTokens: PartialTokenType[] = data.map(
+        (item: PartialTokenType) => ({
+          ...item
+        })
+      );
       tokens.push(...newTokens);
       if (data.length != tokenPayloadSize) {
         //the server returned less than max size, meaning these are the last tokens

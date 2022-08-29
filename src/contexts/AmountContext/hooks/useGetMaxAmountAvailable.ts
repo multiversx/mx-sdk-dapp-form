@@ -1,12 +1,9 @@
-import {
-  decimals as defaultDecimals,
-  denomination as defaultDenomination
-} from '@elrondnetwork/dapp-core/constants/index';
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
+import { DIGITS, DECIMALS } from '@elrondnetwork/dapp-core/constants/index';
 import { useFormikContext } from 'formik';
 import { ZERO } from 'constants/index';
 import { useAccountContext } from 'contexts/AccountContext';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
+import { parseAmount } from 'helpers';
 import {
   getEntireBalance,
   getEntireTokenBalance,
@@ -43,8 +40,8 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
   if (isNftTransaction && nft) {
     const computedNftBalance = getEntireTokenBalance({
       balance: nft.balance,
-      denomination: nft.type === NftEnumType.MetaESDT ? nft.decimals : 0,
-      decimals: defaultDecimals
+      decimals: nft.type === NftEnumType.MetaESDT ? nft.decimals : 0,
+      digits: DIGITS
     });
     nftBalance = computedNftBalance;
   }
@@ -58,34 +55,34 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
     const tokenAmount = getEntireTokenBalance({
       balance: newTokenBalance,
-      denomination: decimals,
-      decimals: defaultDecimals
+      decimals: decimals,
+      digits: DIGITS
     });
     tokenBalance = tokenAmount;
   }
 
-  let denominatedEgldBalance = ZERO;
+  let formattedEgldBalance = ZERO;
   let balanceMinusDust = balance;
   if (balance && isEgldTransaction) {
     const {
-      entireBalance: denominatedBalance,
+      entireBalance: formattedBalance,
       entireBalanceMinusDust
     } = getEntireBalance({
       balance,
-      gasPrice: nominate(gasPrice),
+      gasPrice: parseAmount(gasPrice),
       gasLimit: gasLimit,
-      denomination: defaultDenomination,
-      decimals: defaultDecimals,
+      decimals: DECIMALS,
+      digits: DIGITS,
       chainId
     });
-    denominatedEgldBalance = denominatedBalance;
+    formattedEgldBalance = formattedBalance;
     balanceMinusDust = entireBalanceMinusDust;
   }
 
   const esdtAmountAvailable = nft && nftBalance ? nftBalance : tokenBalance;
 
   const maxAmountAvailable = isEgldTransaction
-    ? denominatedEgldBalance
+    ? formattedEgldBalance
     : esdtAmountAvailable;
 
   const maxAmountMinusDust = isEgldTransaction

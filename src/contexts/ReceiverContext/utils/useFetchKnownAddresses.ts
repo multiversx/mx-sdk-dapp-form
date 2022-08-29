@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+import { getTransactions } from '@elrondnetwork/dapp-core/apiCalls/transactions/getTransactions';
+import { ServerTransactionType } from '@elrondnetwork/dapp-core/types';
 import uniq from 'lodash/uniq';
-import { getTransactions } from 'apiCalls';
+import { getApiConfig } from 'apiCalls';
 import { useAccountContext } from '../../AccountContext';
 
 export function useFetchKnownAddresses() {
@@ -10,14 +12,21 @@ export function useFetchKnownAddresses() {
 
   async function getKnownAddresses() {
     try {
+      const apiConfig = await getApiConfig();
       const { data: resolvedTransactions } = await getTransactions({
-        address,
-        transactionSize: 50
+        sender: address,
+        receiver: address,
+        transactionSize: 50,
+        apiAddress: apiConfig.baseURL,
+        apiTimeout: apiConfig.timeout
       });
 
-      const addresses = resolvedTransactions.reduce((prev, curr) => {
-        return curr ? [...prev, curr.receiver, curr.sender] : prev;
-      }, [] as string[]);
+      const addresses: string[] = resolvedTransactions.reduce(
+        (prev: ServerTransactionType[], curr: ServerTransactionType) => {
+          return curr ? [...prev, curr.receiver, curr.sender] : prev;
+        },
+        []
+      );
 
       const uniqAddresses = uniq(addresses);
       setKnownAddresses(uniqAddresses);

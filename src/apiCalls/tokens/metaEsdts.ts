@@ -1,7 +1,7 @@
 import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
 import { getApiConfig } from 'apiCalls/apiConfig';
-import { MetaEsdtType, NftEnumType } from 'types';
+import { PartialMetaEsdtType, NftEnumType } from 'types';
 import { FetchTokensArgumentsType, GetTokensType } from './tokens';
 
 const maxCount = 1000;
@@ -24,7 +24,7 @@ export async function getMetaEsdts({
   }).toString();
 
   const apiConfig = await getApiConfig();
-  return axios.get<MetaEsdtType[]>(
+  return axios.get<PartialMetaEsdtType[]>(
     `/accounts/${address}/nfts?${params}&type=MetaESDT`,
     apiConfig
   );

@@ -1,5 +1,4 @@
-import { version } from '@elrondnetwork/dapp-core/constants/index';
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
+import { VERSION } from '@elrondnetwork/dapp-core/constants/index';
 import {
   Transaction,
   TransactionPayload,
@@ -8,11 +7,13 @@ import {
   TokenPayment
 } from '@elrondnetwork/erdjs';
 import BigNumber from 'bignumber.js';
+import { parseAmount } from 'helpers';
 
 interface PrepareTransactionType {
   balance: string;
   amount: string;
   receiver: string;
+  sender: string;
   data: string;
   gasPrice: string;
   gasLimit: string;
@@ -24,23 +25,23 @@ export function prepareTransaction({
   data,
   nonce,
   receiver,
+  sender,
   gasPrice,
   gasLimit,
   chainId
 }: PrepareTransactionType) {
-  const bNamount = new BigNumber(nominate(amount));
-
-  const to = receiver;
+  const bNamount = new BigNumber(parseAmount(amount));
 
   const transaction = new Transaction({
     nonce: nonce,
     value: TokenPayment.egldFromBigInteger(bNamount.toString(10)),
-    receiver: new Address(to),
+    sender: new Address(sender),
+    receiver: new Address(receiver),
     gasPrice: parseInt(gasPrice),
     gasLimit: parseInt(gasLimit),
     data: new TransactionPayload(data),
     chainID: chainId,
-    version: new TransactionVersion(version)
+    version: new TransactionVersion(VERSION)
   });
 
   return transaction;

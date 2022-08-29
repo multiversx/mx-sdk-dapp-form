@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect } from 'react';
 import { useFormikContext } from 'formik';
 
 import { calculateGasLimit, getDataField } from 'operations';
-import { ExtendedValuesType, TxTypeEnum, ValuesEnum } from 'types';
+import { ExtendedValuesType, TransactionTypeEnum, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useGasContext } from '../GasContext';
 import { useTokensContext } from '../TokensContext';
@@ -68,7 +68,8 @@ export function DataContextProvider({
 
   useEffect(() => {
     if (!prefilledForm) {
-      const receiverError = txType !== TxTypeEnum.ESDT ? errors.receiver : '';
+      const receiverError =
+        txType !== TransactionTypeEnum.ESDT ? errors.receiver : '';
 
       const newDataField = getDataField({
         txType,

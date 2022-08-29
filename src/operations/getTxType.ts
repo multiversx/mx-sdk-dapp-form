@@ -1,32 +1,32 @@
 import { getIdentifierType } from '@elrondnetwork/dapp-core/utils/validation/getIdentifierType';
-import { NftEnumType, NftType } from 'types';
-import { TxTypeEnum } from 'types';
+import { NftEnumType, PartialNftType } from 'types';
+import { TransactionTypeEnum } from 'types';
 
 export function getTxType({
   nft,
   tokenId
 }: {
-  nft?: NftType;
+  nft?: PartialNftType;
   tokenId: string;
-}): TxTypeEnum {
+}): TransactionTypeEnum {
   const { isEsdt, isNft, isEgld } = getIdentifierType(tokenId);
 
   if (isEgld) {
-    return TxTypeEnum.EGLD;
+    return TransactionTypeEnum.EGLD;
   }
   if (nft?.type === NftEnumType.NonFungibleESDT) {
-    return TxTypeEnum.NonFungibleESDT;
+    return TransactionTypeEnum.NonFungibleESDT;
   }
   if (nft?.type === NftEnumType.SemiFungibleESDT) {
-    return TxTypeEnum.SemiFungibleESDT;
+    return TransactionTypeEnum.SemiFungibleESDT;
   }
   if (nft?.type === NftEnumType.MetaESDT || isNft) {
-    return TxTypeEnum.MetaESDT;
+    return TransactionTypeEnum.MetaESDT;
   }
   if (isEsdt) {
-    return TxTypeEnum.ESDT;
+    return TransactionTypeEnum.ESDT;
   }
-  return TxTypeEnum.EGLD;
+  return TransactionTypeEnum.EGLD;
 }
 
 export default getTxType;

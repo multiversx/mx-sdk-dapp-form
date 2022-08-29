@@ -1,17 +1,17 @@
 import {
   fallbackNetworkConfigurations,
-  testnetEgldLabel,
-  testnetChainId
-} from '@elrondnetwork/dapp-core/constants';
-import { EnvironmentsEnum } from '@elrondnetwork/dapp-core/types/enums';
+  TESTNET_EGLD_LABEL,
+  TESTNET_CHAIN_ID
+} from '@elrondnetwork/dapp-core/constants/index';
+import { EnvironmentsEnum } from '@elrondnetwork/dapp-core/types/enums.types';
 import { testAddress } from '__mocks__';
 
 const activeNetwork = fallbackNetworkConfigurations[EnvironmentsEnum.testnet];
 
 export const accountConfiguration = {
-  egldLabel: testnetEgldLabel,
+  egldLabel: TESTNET_EGLD_LABEL,
   address: testAddress,
-  chainId: testnetChainId,
+  chainId: TESTNET_CHAIN_ID,
   balance: '812350000000000000',
   nonce: 0,
   networkConfig: activeNetwork

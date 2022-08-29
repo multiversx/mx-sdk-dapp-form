@@ -1,16 +1,16 @@
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
+import { maxDecimals } from '@elrondnetwork/dapp-core/utils/validation/maxDecimals';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
+import { parseAmount } from 'helpers';
 import getTokenDetails from 'operations/getTokenDetails';
 import { ExtendedValuesType } from 'types';
-import maxDecimals from 'validation/maxDecimals';
 
 const required = string().required('Required');
 
 const decimals = string().test({
-  name: 'denomination',
+  name: 'decimalFormat',
   test: function(value) {
     const { tokenId, tokens } = this.parent as ExtendedValuesType;
     if (tokens) {
@@ -44,8 +44,8 @@ const balance = string().test(
         tokenId: this.parent.tokenId
       });
 
-      const nominatedAmount = nominate(tokenAmount.toString(), decimals);
-      const bnAmount = new BigNumber(nominatedAmount);
+      const parsedAmount = parseAmount(tokenAmount.toString(), decimals);
+      const bnAmount = new BigNumber(parsedAmount);
       const bnTokenBalance = new BigNumber(tokenBalance);
       return bnTokenBalance.comparedTo(bnAmount) >= 0;
     }
@@ -63,8 +63,8 @@ const greaterThanZero = string().test(
         tokens,
         tokenId: this.parent.tokenId
       });
-      const nominatedAmount = nominate(tokenAmount.toString(), decimals);
-      const bnAmount = new BigNumber(nominatedAmount);
+      const parsedAmount = parseAmount(tokenAmount.toString(), decimals);
+      const bnAmount = new BigNumber(parsedAmount);
       return bnAmount.isGreaterThan(0);
     }
     return true;

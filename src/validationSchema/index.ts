@@ -1,5 +1,5 @@
 import { object, string } from 'yup';
-import { TxTypeEnum } from 'types';
+import { TransactionTypeEnum } from 'types';
 import data from './data';
 import egldAmount from './egldAmount';
 import egldGasLimit from './egldGasLimit';
@@ -16,24 +16,24 @@ export const validationSchema = object().shape({
   gasPrice,
   data,
   amount: string().when(['txType'], function amountValidation(
-    txType: TxTypeEnum
+    txType: TransactionTypeEnum
   ) {
     switch (txType) {
-      case TxTypeEnum.ESDT:
+      case TransactionTypeEnum.ESDT:
         return esdtAmount;
-      case TxTypeEnum.EGLD:
+      case TransactionTypeEnum.EGLD:
         return egldAmount;
       default:
         return nftAmount;
     }
   }),
   gasLimit: string().when(['txType'], function amountValidation(
-    txType: TxTypeEnum
+    txType: TransactionTypeEnum
   ) {
     switch (txType) {
-      case TxTypeEnum.ESDT:
+      case TransactionTypeEnum.ESDT:
         return esdtGasLimit;
-      case TxTypeEnum.EGLD:
+      case TransactionTypeEnum.EGLD:
         return egldGasLimit;
       default:
         return nftGasLimit;

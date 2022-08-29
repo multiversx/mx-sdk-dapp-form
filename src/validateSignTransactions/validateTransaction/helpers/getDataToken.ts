@@ -1,30 +1,31 @@
-import { denominate } from '@elrondnetwork/dapp-core/utils/operations/denominate';
 import { ApiConfigType, getToken } from 'apiCalls';
 import { ZERO } from 'constants/index';
+import { formatAmount } from 'helpers';
 
 export async function getDataToken(
   {
     tokenId,
-    nominatedTokenAmount
+    parsedTokenAmount: parsedTokenAmount
   }: {
     tokenId: string;
-    nominatedTokenAmount: string;
+    parsedTokenAmount: string;
   },
   apiConfig: ApiConfigType
 ) {
   try {
     const { data } = await getToken(tokenId, apiConfig);
-    const denominatedAmount = denominate({
-      input: nominatedTokenAmount,
-      denomination: data.decimals,
-      decimals: data.decimals,
+    const { decimals } = data;
+    const formattedAmount = formatAmount({
+      input: parsedTokenAmount,
+      decimals,
+      digits: decimals,
       addCommas: false,
       showLastNonZeroDecimal: true
     });
 
     return {
       tokenData: data,
-      tokenAmount: denominatedAmount,
+      tokenAmount: formattedAmount,
       tokenFound: true
     };
   } catch (e) {

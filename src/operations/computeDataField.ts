@@ -1,9 +1,13 @@
-import { nominate } from '@elrondnetwork/dapp-core/utils/operations/nominate';
 import BigNumber from 'bignumber.js';
 
 import { ZERO } from 'constants/index';
-import { bech32 } from 'helpers';
-import { NftEnumType, NftType, TxTypeEnum, ExtendedValuesType } from 'types';
+import { bech32, parseAmount } from 'helpers';
+import {
+  NftEnumType,
+  PartialNftType,
+  TransactionTypeEnum,
+  ExtendedValuesType
+} from 'types';
 import getTokenDetails from './getTokenDetails';
 
 const evenLengthValue = (value: string) =>
@@ -22,7 +26,7 @@ export const computeTokenDataField = ({
   const hexEncodedId = evenLengthValue(Buffer.from(tokenId).toString('hex'));
 
   const hexEncodedValue = evenLengthValue(
-    new BigNumber(nominate(amountValue, decimals)).toString(16)
+    new BigNumber(parseAmount(amountValue, decimals)).toString(16)
   );
   const data = `ESDTTransfer@${hexEncodedId}@${hexEncodedValue}`;
   return data;
@@ -34,7 +38,7 @@ export const computeNftDataField = ({
   receiver,
   errors
 }: {
-  nft?: NftType;
+  nft?: PartialNftType;
   amount: string;
   receiver: string;
   errors: boolean;
@@ -43,7 +47,7 @@ export const computeNftDataField = ({
     let dataStr = 'ESDTNFTTransfer';
     const quantity =
       nft?.type === NftEnumType.MetaESDT
-        ? nominate(amount, nft.decimals)
+        ? parseAmount(amount, nft.decimals)
         : amount;
     dataStr += `@${Buffer.from(String(nft.collection)).toString('hex')}`;
     dataStr += `@${evenLengthValue(
@@ -64,14 +68,14 @@ export const getDataField = ({
   amountError,
   receiverError
 }: {
-  txType: TxTypeEnum;
+  txType: TransactionTypeEnum;
   values: ExtendedValuesType;
-  nft?: NftType;
+  nft?: PartialNftType;
   amountError?: boolean;
   receiverError?: string;
 }) => {
   const { tokens, tokenId, amount, receiver } = values;
-  if (tokens && txType === TxTypeEnum.ESDT && !amountError) {
+  if (tokens && txType === TransactionTypeEnum.ESDT && !amountError) {
     const { decimals } = getTokenDetails({
       tokens,
       tokenId
@@ -84,7 +88,7 @@ export const getDataField = ({
     });
   }
   // NFT SFT MetaESDT
-  if (txType !== TxTypeEnum.EGLD) {
+  if (txType !== TransactionTypeEnum.EGLD) {
     return computeNftDataField({
       nft,
       amount,

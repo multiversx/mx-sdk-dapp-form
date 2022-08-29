@@ -1,6 +1,6 @@
 import { addressIsValid } from '@elrondnetwork/dapp-core/utils/account/addressIsValid';
 import { string } from 'yup';
-import { TxTypeEnum, ExtendedValuesType } from 'types';
+import { TransactionTypeEnum, ExtendedValuesType } from 'types';
 
 const required = string().required('Required');
 
@@ -16,9 +16,10 @@ const sameAddress = string().test(
   function sameAddressCheck(value) {
     const { ignoreTokenBalance, txType, readonly, address } = this
       .parent as ExtendedValuesType;
-    const isNftTransaction = ![TxTypeEnum.EGLD, TxTypeEnum.ESDT].includes(
-      txType
-    );
+    const isNftTransaction = ![
+      TransactionTypeEnum.EGLD,
+      TransactionTypeEnum.ESDT
+    ].includes(txType);
     const signContext = ignoreTokenBalance;
     if (isNftTransaction && !signContext && !readonly) {
       return address !== value;

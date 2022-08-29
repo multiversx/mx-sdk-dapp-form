@@ -1,14 +1,14 @@
 import { ZERO } from 'constants/index';
-import { ExtendedValuesType, NftType, TxTypeEnum } from 'types';
+import { ExtendedValuesType, PartialNftType, TransactionTypeEnum } from 'types';
 import { showMax } from 'utilities';
 
 interface GetIsMaxButtonVisiblePropsType {
-  nft?: NftType;
+  nft?: PartialNftType;
   amount: string;
   readonly?: ExtendedValuesType['readonly'];
   maxAmountAvailable: string;
   maxAmountMinusDust: string;
-  txType: TxTypeEnum;
+  txType: TransactionTypeEnum;
 }
 
 export function getIsMaxButtonVisible({
@@ -20,14 +20,14 @@ export function getIsMaxButtonVisible({
   txType
 }: GetIsMaxButtonVisiblePropsType) {
   switch (txType) {
-    case TxTypeEnum.EGLD:
+    case TransactionTypeEnum.EGLD:
       return showMax({
         amount,
         entireBalanceMinusDust: maxAmountMinusDust,
         readonly,
         available: maxAmountAvailable
       });
-    case TxTypeEnum.ESDT:
+    case TransactionTypeEnum.ESDT:
       const differentFromMaxBalance = amount !== maxAmountAvailable;
       return (
         differentFromMaxBalance && !readonly && maxAmountAvailable !== ZERO

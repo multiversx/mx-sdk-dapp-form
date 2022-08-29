@@ -1,8 +1,8 @@
 import {
-  MultiEsdtTxType,
-  MultiSignTxType,
-  TxsDataTokensType
-} from '@elrondnetwork/dapp-core/types/transactions';
+  MultiEsdtTransactionType,
+  MultiSignTransactionType,
+  TransactionsDataTokensType
+} from '@elrondnetwork/dapp-core/types/transactions.types';
 import { ApiConfigType } from 'apiCalls';
 import { ExtendedValuesType } from 'types';
 
@@ -28,9 +28,9 @@ export interface TxSignValuesType {
 }
 
 export interface ValidateType {
-  tx: MultiSignTxType;
-  txsDataTokens: TxsDataTokensType;
-  type?: MultiEsdtTxType['type'];
+  tx: MultiSignTransactionType;
+  txsDataTokens: TransactionsDataTokensType;
+  type?: MultiEsdtTransactionType['type'];
   ledger?: ExtendedValuesType['ledger'];
   egldLabel: string;
   address: string;
