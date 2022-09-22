@@ -27,7 +27,7 @@ export const Data = () => {
 
   return (
     <div className={styles.fieldData}>
-      {label && (
+      {label != null && (
         <label htmlFor={ValuesEnum.data} className={styles.fieldDataLabel}>
           {label}
         </label>

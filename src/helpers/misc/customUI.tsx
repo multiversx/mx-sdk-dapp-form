@@ -10,7 +10,7 @@ export const initialUICustomization: UICustomizationContextPropsType = {
         invalidTextarea: 'is-invalid',
         errorMsg: 'invalid-feedback'
       },
-      label: '',
+      label: 'Data',
       ignoreDefaultClasses: false
     },
     to: {
@@ -23,7 +23,7 @@ export const initialUICustomization: UICustomizationContextPropsType = {
         scamErrorMsg: 'text-warning',
         scamErrorIcon: 'text-warning mr-1'
       },
-      label: '',
+      label: 'Receiver',
       ignoreDefaultClasses: false
     },
     amount: {
@@ -36,7 +36,7 @@ export const initialUICustomization: UICustomizationContextPropsType = {
         maxBtn: 'btn btn-link',
         errorMsg: 'invalid-feedback'
       },
-      label: '',
+      label: 'Amount',
       components: {
         tokenSelector: null
       },

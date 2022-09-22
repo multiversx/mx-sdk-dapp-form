@@ -60,10 +60,9 @@ const CustomMenu = (
 export const To = () => {
   const {
     fields: {
-      to: { label: customLabel }
+      to: { label }
     }
   } = useUICustomizationContext();
-  const label = customLabel || 'To';
 
   const {
     receiverInfo: {
