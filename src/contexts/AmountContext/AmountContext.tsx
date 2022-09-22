@@ -70,7 +70,7 @@ export function AmountContextProvider({
   const [isMaxClicked, setIsMaxClicked] = useState(false);
   const { nft } = useTokensContext();
 
-  const isMaxButtonVisible = uiOptions?.hideAmountMaxButton
+  const isMaxButtonVisible = uiOptions?.showAmountSlider
     ? false
     : getIsMaxButtonVisible({
         nft,
