@@ -13,7 +13,7 @@ export const initialUICustomization: UICustomizationContextPropsType = {
       label: 'Data',
       ignoreDefaultClasses: false
     },
-    to: {
+    receiver: {
       classes: {
         container: 'form-group',
         label: 'mb-2',

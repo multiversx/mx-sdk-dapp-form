@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { mergeWith } from 'lodash';
 import { initialUICustomization, mergeCustomizer } from 'helpers';
+import { ValuesEnum } from 'types';
 
 interface FormDataFieldType {
   classes: {
@@ -46,9 +47,9 @@ interface FormAmountFieldType {
 }
 
 interface CustomFields {
-  data: FormDataFieldType;
-  to: FormToFieldType; // TODO: chage to receiver, use ValuesEnum
-  amount: FormAmountFieldType;
+  [ValuesEnum.data]: FormDataFieldType;
+  [ValuesEnum.receiver]: FormToFieldType;
+  [ValuesEnum.amount]: FormAmountFieldType;
 }
 
 export interface UICustomizationContextPropsType {

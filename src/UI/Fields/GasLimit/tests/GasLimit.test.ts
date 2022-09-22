@@ -132,9 +132,9 @@ describe('GasLimit field', () => {
 
     const { getByLabelText, queryByText, getByText, findByTestId } = methods;
 
-    const address: any = await findByTestId('destinationAddress'); // TODO change to receiver
-    fireEvent.change(address, { target: { value: testAddress } });
-    fireEvent.blur(address);
+    const receiver: any = await findByTestId('receiver'); // TODO change to receiver
+    fireEvent.change(receiver, { target: { value: testAddress } });
+    fireEvent.blur(receiver);
 
     const entireBalaceButton = getByText('Max');
     fireEvent.click(entireBalaceButton);
@@ -163,10 +163,8 @@ describe('GasLimit field', () => {
       balance: '1_000_000_000_000_000'.replace('_', '') // 0.001
     });
 
-    const destinationAddress: any = await methods.findByTestId(
-      'destinationAddress'
-    );
-    fireEvent.change(destinationAddress, { target: { value: testAddress } });
+    const receiver: any = await methods.findByTestId('receiver');
+    fireEvent.change(receiver, { target: { value: testAddress } });
 
     const amount = methods.getByTestId('amount');
     fireEvent.change(amount, { target: { value: '0' } });
