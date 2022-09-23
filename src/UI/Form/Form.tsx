@@ -59,7 +59,7 @@ export const Form = () => {
 
         <Amount />
 
-        {!uiOptions?.hideAmountSlider && <AmountSlider />}
+        {uiOptions?.showAmountSlider && <AmountSlider />}
 
         <FeeAccordion />
 

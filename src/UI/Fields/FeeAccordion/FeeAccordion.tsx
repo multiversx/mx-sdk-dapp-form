@@ -30,7 +30,7 @@ export const FeeAccordion = () => {
   return (
     <div
       className={classNames(styles.feeAccordion, {
-        [styles.feeAccordionSpaced]: !formInfo.uiOptions?.hideAmountSlider
+        [styles.feeAccordionSpaced]: formInfo.uiOptions?.showAmountSlider
       })}
     >
       <span className={styles.feeAccordionTrigger} onClick={toggleAccordion}>
