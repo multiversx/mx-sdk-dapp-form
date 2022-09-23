@@ -28,6 +28,7 @@ export const TokenElement = ({
   const { name, identifier, balance, decimals } = token;
   const avatar = token.assets?.svgUrl || token.assets?.pngUrl || '';
   const avatarDropdownSize = avatar ? 28 : 20;
+
   const [title, setTitle] = useState(name);
 
   useEffect(() => {
@@ -60,22 +61,33 @@ export const TokenElement = ({
   const showFormattedValue =
     !inDropdown && nftType !== NftEnumType.NonFungibleESDT;
 
+  let tokenIcon = <div className={styles.tokenElementSymbol}>{symbol}</div>;
+
+  if (avatar) {
+    tokenIcon = (
+      <img
+        className={classNames(styles.tokenElementCircle)}
+        src={avatar}
+        alt={name}
+        height={avatarDropdownSize}
+      />
+    );
+  }
+
+  if (isEgld) {
+    tokenIcon = (
+      <div className={classNames(styles.tokenElementEGLD)}>
+        <ElrondSymbol
+          is='x3d' // fixes jest Warning: The tag <default> is unrecognized in this browser.
+          height={avatarDropdownSize}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className={styles.tokenElement}>
-      <div className={styles.tokenElementWrapper}>
-        {isEgld || avatar ? (
-          <ElrondSymbol
-            is='x3d' // fixes jest Warning: The tag <default> is unrecognized in this browser.
-            height={avatarDropdownSize}
-            className={classNames({
-              [styles.tokenElementSpaced]: Boolean(avatar),
-              [styles.tokenElementCircle]: !isEgld
-            })}
-          />
-        ) : (
-          <div className={styles.tokenElementSymbol}>{symbol}</div>
-        )}
-      </div>
+      <div className={styles.tokenElementWrapper}>{tokenIcon}</div>
 
       <div data-testid='tokenName'>
         <span data-testid={`${identifier}-element`}>
