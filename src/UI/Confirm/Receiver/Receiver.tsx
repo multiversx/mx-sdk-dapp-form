@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from './styles.module.scss';
 
-export const To = ({
-  label = 'To',
+export const Receiver = ({
+  label = 'Receiver',
   receiver,
   scamReport
 }: {
@@ -13,7 +13,7 @@ export const To = ({
   receiver: string;
   scamReport?: ReactNode;
 }) => (
-  <div className={styles.to}>
+  <div className={styles.receiver}>
     <span className={styles.label}>{label}</span>
     {receiver && <span>{receiver}</span>}
 

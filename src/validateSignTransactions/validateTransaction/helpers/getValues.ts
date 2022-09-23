@@ -19,7 +19,7 @@ export function getValues(props: {
 }) {
   const { tx, tokenId, egldLabel, tokenFound, tokenAmount } = props;
   const transaction = tx.transaction.toPlainObject();
-  const destinationAddress = transaction.receiver;
+  const receiver = transaction.receiver;
   const isTokenTransaction = Boolean(
     tokenId && isTokenTransfer({ tokenId, erdLabel: egldLabel })
   );
@@ -27,7 +27,7 @@ export function getValues(props: {
   const gasLimit = isTokenTransaction ? TOKEN_GAS_LIMIT : ZERO;
 
   const values: TxSignValuesType = {
-    receiver: destinationAddress,
+    receiver,
     amount: tokenFound
       ? tokenAmount
       : formatAmount({
