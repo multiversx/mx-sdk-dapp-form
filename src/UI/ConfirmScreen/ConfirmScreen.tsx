@@ -82,7 +82,7 @@ export const ConfirmScreen = ({
       <Confirm.Data {...{ data, egldPriceInUsd }} />
 
       <div className={styles.buttons}>
-        {gasCostError && <p className={globals.error}>${gasCostError}</p>}
+        {gasCostError && <p className={globals.error}>{gasCostError}</p>}
 
         <button
           className={classNames(globals.btn, globals.btnPrimary, {
