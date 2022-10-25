@@ -38,14 +38,14 @@ const CustomMenu = (
   } = props as any;
 
   return (
-    <Menu {...menuProps} className={styles.toFieldMenu}>
+    <Menu {...menuProps} className={styles.receiverFieldMenu}>
       {results.map((option: Option, position: number) => (
         <MenuItem
           key={option.toString()}
           {...{
             option,
             position,
-            className: classNames(styles.toFieldItem, {
+            className: classNames(styles.receiverFieldItem, {
               [styles.highlighted]: position === state.activeIndex
             })
           }}
@@ -57,13 +57,12 @@ const CustomMenu = (
   );
 };
 
-export const To = () => {
+export const Receiver = () => {
   const {
     fields: {
-      to: { label: customLabel }
+      receiver: { label }
     }
   } = useUICustomizationContext();
-  const label = customLabel || 'To';
 
   const {
     receiverInfo: {
@@ -118,7 +117,7 @@ export const To = () => {
     <Hint>
       <input
         {...inputProps}
-        data-testid='destinationAddress'
+        data-testid='receiver'
         ref={(node: any) => {
           inputRef(node);
           referenceElementRef(node);
@@ -134,10 +133,10 @@ export const To = () => {
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
   return (
-    <div className={styles.toField}>
+    <div className={styles.receiverField}>
       {label !== null && (
         <div
-          className={styles.toFieldLabel}
+          className={styles.receiverFieldLabel}
           data-testid='receiverLabel'
           data-loading={fetchingScamAddress}
         >
@@ -145,7 +144,7 @@ export const To = () => {
         </div>
       )}
 
-      <div className={styles.toFieldAutocomplete}>
+      <div className={styles.receiverFieldAutocomplete}>
         <Typeahead
           id='receiverWrapper'
           filterBy={filterBy}
@@ -172,7 +171,7 @@ export const To = () => {
       )}
 
       {scamError && (
-        <div data-testid='receiverScam' className={styles.toFieldScam}>
+        <div data-testid='receiverScam' className={styles.receiverFieldScam}>
           <span>
             <FontAwesomeIcon icon={faExclamationTriangle} />
             <small>{scamError}</small>

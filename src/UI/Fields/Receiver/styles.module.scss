@@ -1,20 +1,20 @@
 @import 'assets/sass/variables/_variables.scss';
 
-.toField {
+.receiverField {
   margin-bottom: 1.5rem;
 
-  .toFieldLabel {
+  .receiverFieldLabel {
     margin-bottom: 0.5rem;
   }
 
-  .toFieldAutocomplete {
+  .receiverFieldAutocomplete {
     position: relative;
 
     input[aria-hidden='true'] {
       display: none !important;
     }
 
-    .toFieldMenu {
+    .receiverFieldMenu {
       left: 0px;
       top: 0px;
       float: left;
@@ -34,7 +34,7 @@
       transform: none !important;
       overflow-x: scroll !important;
 
-      .toFieldItem {
+      .receiverFieldItem {
         display: inline-block;
         line-height: 1.5;
         padding: 0.25rem 1.5rem;
@@ -66,7 +66,7 @@
     }
   }
 
-  .toFieldScam {
+  .receiverFieldScam {
     line-height: 1.5;
     color: $warning !important;
 

@@ -14,7 +14,7 @@ import {
   FeeAccordion,
   NftSftToken,
   SelectToken,
-  To,
+  Receiver,
   AmountSlider
 } from 'UI/Fields';
 
@@ -53,13 +53,13 @@ export const Form = () => {
   return (
     <form key={renderKey} onSubmit={onValidateForm} className={styles.form}>
       <fieldset className={styles.formFieldset}>
-        <To />
+        <Receiver />
 
         {isNFTTransaction ? <NftSftToken /> : <SelectToken label='Token' />}
 
         <Amount />
 
-        {!uiOptions?.hideAmountSlider && <AmountSlider />}
+        {uiOptions?.showAmountSlider && <AmountSlider />}
 
         <FeeAccordion />
 

@@ -62,7 +62,7 @@ export const ConfirmScreen = ({
 
   return (
     <div className={styles.confirm} data-testid='confirmScreen'>
-      <Confirm.To {...{ receiver, nft }} scamReport={scamError} />
+      <Confirm.Receiver {...{ receiver, nft }} scamReport={scamError} />
 
       <Confirm.Amount
         {...{
@@ -82,7 +82,7 @@ export const ConfirmScreen = ({
       <Confirm.Data {...{ data, egldPriceInUsd }} />
 
       <div className={styles.buttons}>
-        {gasCostError && <p className={globals.error}>${gasCostError}</p>}
+        {gasCostError && <p className={globals.error}>{gasCostError}</p>}
 
         <button
           className={classNames(globals.btn, globals.btnPrimary, {

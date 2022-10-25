@@ -64,20 +64,18 @@ describe('Send SFT tokens', () => {
     const methods = beforAllTokens();
 
     // fill in receiver
-    const destinationAddress: any = await methods.findByTestId(
-      'destinationAddress'
-    );
+    const receiver: any = await methods.findByTestId('receiver');
 
-    fireEvent.change(destinationAddress, { target: { value: testAddress } });
-    fireEvent.blur(destinationAddress);
+    fireEvent.change(receiver, { target: { value: testAddress } });
+    fireEvent.blur(receiver);
 
     await waitFor(() => {
-      const destinationAddressError = methods.getByTestId('receiverError');
-      expect(destinationAddressError.innerHTML).toBe('Same as owner address');
+      const receiverError = methods.getByTestId('receiverError');
+      expect(receiverError.innerHTML).toBe('Same as owner address');
     });
 
-    fireEvent.change(destinationAddress, { target: { value: testReceiver } });
-    fireEvent.blur(destinationAddress);
+    fireEvent.change(receiver, { target: { value: testReceiver } });
+    fireEvent.blur(receiver);
 
     const tokenName = methods.getByTestId('tokenName');
 

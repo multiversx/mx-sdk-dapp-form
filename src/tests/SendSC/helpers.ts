@@ -20,13 +20,13 @@ export const fillInForm = async () => {
 
   expect(amount.value).toBe('0.1');
 
-  const destinationAddress: any = render.getByTestId('destinationAddress');
-  fireEvent.change(destinationAddress, {
+  const receiver: any = render.getByTestId('receiver');
+  fireEvent.change(receiver, {
     target: {
       value: testReceiver
     }
   });
-  fireEvent.blur(destinationAddress);
+  fireEvent.blur(receiver);
 
   const dataInput: any = render.getByTestId('data');
 

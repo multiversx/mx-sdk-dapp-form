@@ -126,11 +126,9 @@ describe('EGLD Amount field', () => {
       balance: '1_000_000_000_000_000'.replace('_', '') // 0.001
     });
 
-    const destinationAddress: any = await render.findByTestId(
-      'destinationAddress'
-    );
+    const receiver: any = await render.findByTestId('receiver');
 
-    fireEvent.change(destinationAddress, { target: { value: testAddress } });
+    fireEvent.change(receiver, { target: { value: testAddress } });
 
     const amount: any = await render.findByTestId('amount');
     fireEvent.change(amount, { target: { value: '0.00001' } });

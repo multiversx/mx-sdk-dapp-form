@@ -35,7 +35,7 @@ export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
 
   return (
     <div className={styles.sharedAmount}>
-      {label && (
+      {label != null && (
         <label htmlFor={ValuesEnum.amount} className={styles.sharedAmountLabel}>
           {label}
         </label>

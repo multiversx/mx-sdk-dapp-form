@@ -57,10 +57,10 @@ describe('Send Meta ESDT', () => {
     const methods = beforAllTokens();
 
     // fill in receiver
-    const input = await methods.findByTestId('destinationAddress');
+    const receiver = await methods.findByTestId('receiver');
 
     const data = { target: { value: testReceiver } };
-    fireEvent.change(input, data);
+    fireEvent.change(receiver, data);
 
     // confirm metaEsdt token is in list
     const selectInput = await methods.findByLabelText('Token');
