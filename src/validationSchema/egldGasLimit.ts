@@ -11,8 +11,12 @@ const required = string().required('Required');
 const funds = string().test('funds', 'Insufficient funds', function fundsCheck(
   value
 ) {
-  const { data, gasPrice, amount, balance, chainId } = this
+  const { data, gasPrice, amount, balance, chainId, ignoreTokenBalance } = this
     .parent as ExtendedValuesType;
+  // allow 0 gasLimit signing
+  if (ignoreTokenBalance) {
+    return true;
+  }
   if (amount && stringIsFloat(amount) && value != null) {
     const valid = validateGasLimitAmount({
       amount,
@@ -31,7 +35,12 @@ const minValueData = string().test({
   name: 'minValueData',
   test: function(value) {
     const parent: ExtendedValuesType = this.parent;
-    const { data } = parent;
+    const { data, ignoreTokenBalance } = parent;
+
+    // allow signing with 0 gasLimit
+    if (ignoreTokenBalance) {
+      return true;
+    }
 
     const calculatedGasLimit = calculateGasLimit({
       data: data ? data.trim() : ''

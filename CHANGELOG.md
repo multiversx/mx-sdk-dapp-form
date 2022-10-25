@@ -10,5 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Fixed displaying token symbols in dropdown](https://github.com/ElrondNetwork/dapp-core-form/pull/77)
 - [Changed displaying amount slider by default](https://github.com/ElrondNetwork/dapp-core-form/pull/78)
 - [Fixed displaying field labels](https://github.com/ElrondNetwork/dapp-core-form/pull/79)
-- [Removed usage of `to` and `destinationAddress`, by using only `receiver` ](https://github.com/ElrondNetwork/dapp-core-form/pull/82)
+- [Removed usage of `to` and `destinationAddress`, by using only `receiver` ](https://github.com/ElrondNetwork/dapp-core-form/pull/79)
+- [Allow signing with zerog Gas Limit in validation schema ](https://github.com/ElrondNetwork/dapp-core-form/pull/81)
+
 
