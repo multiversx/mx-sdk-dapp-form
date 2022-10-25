@@ -7,7 +7,7 @@ function* generator(arr: any[]) {
   yield* arr;
 }
 
-export const finalFee = '0.000057937\u00a0xEGLD';
+export const finalFee = '0.000057937 xEGLD';
 
 export const fillInForm = async () => {
   const render = renderForm({
@@ -34,7 +34,7 @@ export const fillInForm = async () => {
   fireEvent.blur(dataInput);
 
   const fee = await render.findByTestId('feeLimit');
-  expect(fee.textContent).toBe('0.0000575\u00a0xEGLD');
+  expect(fee.textContent).toBe('0.0000575 xEGLD');
 
   return { render };
 };

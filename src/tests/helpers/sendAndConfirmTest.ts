@@ -32,7 +32,7 @@ export const sendAndConfirmTest = ({ methods }: ConfirmScreenType) => async ({
 
   if (fee != null) {
     expect(methods.getByTestId('confirmFee').textContent?.toString()).toContain(
-      fee + '\u00a0xEGLD'
+      fee + ' '
     );
   }
 
