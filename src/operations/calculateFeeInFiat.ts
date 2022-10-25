@@ -15,7 +15,7 @@ export function calculateFeeInFiat({
     showLastNonZeroDecimal: true
   });
 
-  return `≈ $${usdValue({
+  return `≈ ${usdValue({
     amount,
     usd: egldPriceInUsd,
     decimals: DIGITS
