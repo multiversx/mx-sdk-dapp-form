@@ -1,15 +1,16 @@
 import React from 'react';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useFormikContext } from 'formik';
 import { CAN_TRANSFER_MESSAGE } from 'constants/index';
-import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { ExtendedValuesType } from 'types';
 
 export const CanTransferNftWarning = () => {
   const {
-    tokensInfo: { allowedReceivers, nft }
-  } = useSendFormContext();
+    values: { nft }
+  } = useFormikContext<ExtendedValuesType>();
 
-  if (!nft || allowedReceivers == null) {
+  if (!nft || nft.allowedReceivers == null) {
     return null;
   }
 
@@ -30,7 +31,7 @@ export const CanTransferNftWarning = () => {
             <div className='font-weight-bold'>Warning</div>
             <div>{CAN_TRANSFER_MESSAGE}</div>
             <ul>
-              {allowedReceivers?.map((receiver) => (
+              {nft.allowedReceivers?.map((receiver) => (
                 <li key={receiver}>
                   <p style={{ wordBreak: 'break-all' }}>{receiver}</p>
                 </li>
