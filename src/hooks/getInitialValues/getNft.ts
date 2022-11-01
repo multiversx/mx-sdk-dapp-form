@@ -1,5 +1,4 @@
 import { getIdentifierType } from '@elrondnetwork/dapp-core/utils/validation/getIdentifierType';
-import { getAllowedReceivers } from 'apiCalls';
 import { searchNftByIdentifier } from './getSearchParamNft';
 import searchNft from './searchNft';
 import { ComputedNftType } from './types';
@@ -25,11 +24,9 @@ export async function getNft(props: {
       address
     });
     if (nft) {
-      const allowedReceivers = await getAllowedReceivers(nft);
       return {
         ...emptyData,
-        nft,
-        allowedReceivers
+        nft
       };
     }
 

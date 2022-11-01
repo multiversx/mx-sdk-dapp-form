@@ -2,7 +2,6 @@ import { Address } from '@elrondnetwork/erdjs';
 import BigNumber from 'bignumber.js';
 import {
   ApiConfigType,
-  getAllowedReceivers,
   getGlobalNftByIdentifier,
   getNftByAddressAndIdentifier
 } from 'apiCalls';
@@ -50,11 +49,9 @@ export async function searchNft(
       const identifier = `${collection}-${nonce}`;
       const apiNft = await searchdNftById({ identifier, address }, apiConfig);
       if (apiNft) {
-        const allowedReceivers = await getAllowedReceivers(apiNft);
         return {
           receiver: new Address(receiver).bech32(),
           nft: apiNft,
-          allowedReceivers,
           quantity: nft ? quantity : new BigNumber(quantity, 16).toString(10)
         };
       }

@@ -57,7 +57,6 @@ export async function getInitialValues(props: GetInitialValuesType) {
   const returnValues = {
     initialValues,
     nft: computedNft?.nft,
-    allowedReceivers: computedNft?.allowedReceivers,
     gasLimitCostError: initGasLimitError,
     computedTokens: esdtToken ? [esdtToken] : [],
     computedTokenId,
