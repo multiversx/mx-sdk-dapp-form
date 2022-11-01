@@ -1,11 +1,10 @@
 import {
-  COLLECTIONS_ENDPOINT,
   ACCOUNTS_ENDPOINT,
   NFTS_ENDPOINT
 } from '@elrondnetwork/dapp-core/apiCalls/endpoints';
 import axios from 'axios';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
-import { NftEnumType, PartialNftType } from 'types';
+import { PartialNftType } from 'types';
 
 export interface GetNftByAddressAndIdentifierArgsType {
   address: string;
@@ -40,45 +39,6 @@ export async function getGlobalNftByIdentifier(
     );
     return data ? data : null;
   } catch (err) {
-    return null;
-  }
-}
-
-export async function getAllowedReceivers(
-  nft: PartialNftType,
-  apiConfig?: ApiConfigType
-) {
-  if (nft.type !== NftEnumType.MetaESDT) {
-    return null;
-  }
-
-  const config = apiConfig || (await getApiConfig());
-  try {
-    const { data: collectionData } = await axios.get<{
-      canTransfer?: boolean;
-      roles: {
-        address: string;
-        canTransfer?: boolean;
-      }[];
-    }>(`/${COLLECTIONS_ENDPOINT}/${nft.collection}`, config);
-
-    const isTransferForbidden = collectionData?.canTransfer === false;
-    const allowedReceivers = isTransferForbidden
-      ? collectionData?.roles
-          .map(({ address, canTransfer }) => {
-            if (canTransfer) {
-              return address;
-            }
-            return '';
-          })
-          .filter((el) => Boolean(el))
-      : null;
-    return allowedReceivers;
-  } catch (error) {
-    console.error(
-      `Unable to get canTransfer information for collection ${nft.collection}`,
-      error
-    );
     return null;
   }
 }
