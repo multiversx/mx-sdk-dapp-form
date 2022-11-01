@@ -9,6 +9,7 @@ import { useFormikContext } from 'formik';
 import uniqBy from 'lodash/uniqBy';
 import { fetchAllMetaEsdts, fetchAllTokens } from 'apiCalls';
 import { useAccountContext } from 'contexts/AccountContext';
+import { ComputedNftType } from 'hooks';
 import { getTokenDetails, getTxType } from 'operations';
 import {
   ExtendedValuesType,
@@ -23,6 +24,7 @@ import { useGetEconomicsInfo } from './utils';
 
 export interface TokensContextInitializationPropsType {
   initialNft?: PartialNftType;
+  allowedReceivers?: ComputedNftType['allowedReceivers'];
   initialTokens?: PartialTokenType[] | null;
 }
 
@@ -38,6 +40,7 @@ export interface TokensContextPropsType {
   tokens: PartialTokenType[];
   allAvailableTokens: PartialTokenType[];
   nft?: PartialNftType;
+  allowedReceivers?: ComputedNftType['allowedReceivers'];
   getTokens: () => void;
   onChangeTokenId: (value: string) => void;
 }
@@ -143,6 +146,7 @@ export function TokensContextProvider({
     <TokensContext.Provider
       value={{
         nft: nft || value?.initialNft,
+        allowedReceivers: value?.allowedReceivers,
         tokens: esdtTokens,
         allAvailableTokens,
         //this will be true on first run,

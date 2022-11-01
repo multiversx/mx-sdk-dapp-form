@@ -18,12 +18,13 @@ import {
   AmountSlider
 } from 'UI/Fields';
 
-import styles from './styles.module.scss';
+import { CanTransferNftWarning, WegldWarning } from 'UI/Warnings';
+import styles from './form.module.scss';
 
 export const Form = () => {
   const { formInfo, receiverInfo, accountInfo } = useSendFormContext();
   const {
-    values: { txType }
+    values: { txType, tokenId }
   } = useFormikContext<ExtendedValuesType>();
 
   const { scamError } = receiverInfo;
@@ -60,6 +61,10 @@ export const Form = () => {
         <Amount />
 
         {uiOptions?.showAmountSlider && <AmountSlider />}
+
+        <WegldWarning tokenId={tokenId} />
+
+        <CanTransferNftWarning />
 
         <FeeAccordion />
 

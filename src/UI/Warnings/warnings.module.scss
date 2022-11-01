@@ -1,0 +1,12 @@
+.wegld-alert-warning {
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.45rem;
+    @include alert-variant($alert-bg, $alert-border, $alert-color);
+}
+  
+.wegld-alert-icon {
+    color: $alert-border;
+}
