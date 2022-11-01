@@ -8,7 +8,8 @@ import {
 import { Loader } from '@elrondnetwork/dapp-core/UI/Loader';
 import { SendFormContainer, SendFormContainerPropsType } from 'containers';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import useGetInitialValues, {
+import {
+  useGetInitialValues,
   GetInitialValuesReturnType
 } from 'hooks/useGetInitialValues';
 import getTxType from 'operations/getTxType';
