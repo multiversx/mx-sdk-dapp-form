@@ -4,9 +4,9 @@
     margin-bottom: 1rem;
     border: 1px solid transparent;
     border-radius: 0.45rem;
-    @include alert-variant($alert-bg, $alert-border, $alert-color);
+    // @include alert-variant($alert-bg, $alert-border, $alert-color);
 }
   
 .wegld-alert-icon {
-    color: $alert-border;
+    // color: $alert-border;
 }
