@@ -15,7 +15,7 @@ export const CanTransferNftWarning = () => {
   }
 
   return (
-    <div className='row'>
+    <div className='row' data-testid='canTransferWarning'>
       <div className='col-12'>
         <small
           className={'wegld-alert-warning align-items-center d-flex p-3'}
