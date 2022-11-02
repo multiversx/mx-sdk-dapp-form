@@ -117,6 +117,9 @@ export function TokensContextProvider({
       // casting is allowed because we know it's a MetaESDT
       let newNft = selectedNft as PartialMetaEsdtType;
 
+      // allow synchroneus change of nft in dropdown and fill in async data later
+      setFieldValue(nftField, newNft);
+
       const allowedReceivers = await getAllowedReceiversData(newNft);
 
       newNft = {
