@@ -28,7 +28,32 @@ const sameAddress = string().test(
   }
 );
 
-const validations = [required, validAddress, sameAddress];
+const canTransfer = string().test(
+  'canTransfer',
+  'Receiver not allowed',
+  function allowedReceivers(value) {
+    const { nft, txType, ignoreTokenBalance } = this
+      .parent as ExtendedValuesType;
+    const isMetaEsdtTransaction = TransactionTypeEnum.MetaESDT === txType;
+    const signContext = ignoreTokenBalance;
+    const allowedReceivers = nft?.allowedReceivers;
+
+    if (!value || !isMetaEsdtTransaction || signContext) {
+      return true;
+    }
+
+    const isReceiverNotAllwed =
+      allowedReceivers != null && !allowedReceivers.includes(value);
+
+    if (isReceiverNotAllwed) {
+      return false;
+    }
+
+    return true;
+  }
+);
+
+const validations = [required, validAddress, sameAddress, canTransfer];
 
 export const receiver = validations.reduce(
   (previousValue, currentValue) => previousValue.concat(currentValue),
