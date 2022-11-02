@@ -2,7 +2,7 @@ import {
   ACCOUNTS_ENDPOINT,
   COLLECTIONS_ENDPOINT,
   NFTS_ENDPOINT
-} from '@elrondnetwork/dapp-core/apiCalls';
+} from '@elrondnetwork/dapp-core/apiCalls/endpoints';
 import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
