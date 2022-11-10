@@ -48,21 +48,19 @@ export const GasPrice = () => {
               onChange={onChangeGasPrice}
               onBlur={onBlurGasPrice}
               autoComplete='off'
-              className={globals.input}
+              className={classNames(globals.input, {
+                [globals.invalid]: isGasPriceInvalid
+              })}
             />
-
-            {isGasPriceInvalid && (
-              <span className={globals.errorExclamation}>
-                <FontAwesomeIcon icon={faExclamation} size='xs' />
-              </span>
-            )}
           </div>
 
           {showUndoButton && (
             <span className={styles.gasUndo}>
               <button
-                className={classNames(styles.gasReset, styles.default)}
                 onClick={onResetGasPrice}
+                className={classNames(styles.gasReset, styles.default, {
+                  [styles.invalid]: isGasPriceInvalid
+                })}
               >
                 <i>
                   <FontAwesomeIcon icon={faUndo} />
@@ -73,7 +71,9 @@ export const GasPrice = () => {
         </div>
 
         {isGasPriceInvalid && (
-          <div className={globals.error}>{gasPriceError}</div>
+          <div className={classNames(globals.error, styles.gasError)}>
+            {gasPriceError}
+          </div>
         )}
       </div>
     </div>

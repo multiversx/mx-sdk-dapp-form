@@ -16,14 +16,19 @@ import { FeeInFiat } from './FeeInFiat';
 import styles from './styles.module.scss';
 
 export const FeeAccordion = () => {
-  const accordion = useRef<HTMLDivElement | null>(null);
-  const [active, setActive] = useState(false);
-
   const { gasInfo, tokensInfo, formInfo } = useSendFormContext();
-  const { feeLimit, gasCostLoading } = gasInfo;
+  const { feeLimit, gasCostLoading, gasPriceError, gasLimitError } = gasInfo;
   const { egldPriceInUsd, egldLabel } = tokensInfo;
 
-  const toggleAccordion = () => setActive((active) => !active);
+  const accordion = useRef<HTMLDivElement | null>(null);
+  const [active, setActive] = useState(
+    gasPriceError || gasLimitError ? true : false
+  );
+
+  const toggleAccordion = () => {
+    setActive((active) => !active);
+  };
+
   const dynamicAccordionHeight =
     active && accordion ? accordion?.current?.scrollHeight : 0;
 

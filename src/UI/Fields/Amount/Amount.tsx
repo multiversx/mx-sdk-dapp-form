@@ -8,6 +8,8 @@ export const Amount = () => {
   const { formInfo } = useSendFormContext();
   const { isNftTransaction, isEsdtTransaction } = formInfo;
 
+  console.log('YESSS');
+
   if (isNftTransaction) {
     return <NftAmount />;
   }
