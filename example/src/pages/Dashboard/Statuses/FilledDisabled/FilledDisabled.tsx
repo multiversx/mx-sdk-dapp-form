@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
   SendFormContainer,
-  denominatedConfigGasPrice,
+  formattedConfigGasPrice,
   SendFormContainerPropsType
 } from '@elrondnetwork/dapp-core-form';
 import { Form } from '@elrondnetwork/dapp-core-form/UI';
@@ -19,7 +19,7 @@ export const FilledDisabled = () => {
       data: 'I am sending you over 100 EGLD!',
       amount: '100',
       gasLimit: (75_000_000).toString(),
-      gasPrice: denominatedConfigGasPrice
+      gasPrice: formattedConfigGasPrice
     },
     formInfo: {
       ...formProps.formInfo,
