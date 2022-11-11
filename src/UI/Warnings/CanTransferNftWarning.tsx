@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useFormikContext } from 'formik';
 import { CAN_TRANSFER_MESSAGE } from 'constants/index';
 import { ExtendedValuesType } from 'types';
+import { Trim } from '@elrondnetwork/dapp-core/UI/Trim';
+
+import styles from './styles.module.scss';
 
 export const CanTransferNftWarning = () => {
   const {
@@ -15,31 +18,29 @@ export const CanTransferNftWarning = () => {
   }
 
   return (
-    <div className='row' data-testid='canTransferWarning'>
-      <div className='col-12'>
-        <small
-          className={'wegld-alert-warning align-items-center d-flex p-3'}
-          role='alert'
-        >
-          <FontAwesomeIcon
-            icon={faExclamationTriangle}
-            size='lg'
-            className='wegld-alert-icon mr-2'
-          />
+    <div className={styles.canTransferWarning} data-testid='canTransferWarning'>
+      <small role='alert' className={styles.wegldAlertWarning}>
+        <FontAwesomeIcon
+          icon={faExclamationTriangle}
+          className={styles.wegldAlertIcon}
+          size='lg'
+        />
 
-          <div>
-            <div className='font-weight-bold'>Warning</div>
-            <div>{CAN_TRANSFER_MESSAGE}</div>
-            <ul>
-              {nft.allowedReceivers?.map((receiver) => (
-                <li key={receiver}>
-                  <p style={{ wordBreak: 'break-all' }}>{receiver}</p>
-                </li>
-              ))}
-            </ul>
+        <div className={styles.canTransferWarningWrapper}>
+          <div className={styles.canTransferWarningLabel}>Warning</div>
+          <div className={styles.canTransferWarningMessage}>
+            {CAN_TRANSFER_MESSAGE}
           </div>
-        </small>
-      </div>
+
+          <ul className={styles.canTransferWarningList}>
+            {nft.allowedReceivers?.map((receiver) => (
+              <li key={receiver}>
+                <Trim text={receiver} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </small>
     </div>
   );
 };
