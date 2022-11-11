@@ -21,9 +21,7 @@ export const FeeAccordion = () => {
   const { egldPriceInUsd, egldLabel } = tokensInfo;
 
   const accordion = useRef<HTMLDivElement | null>(null);
-  const [active, setActive] = useState(
-    gasPriceError || gasLimitError ? true : false
-  );
+  const [active, setActive] = useState(Boolean(gasPriceError || gasLimitError));
 
   const toggleAccordion = () => {
     setActive((active) => !active);
