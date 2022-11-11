@@ -23,7 +23,7 @@ function processMultiTx(props: {
   const { transaction, transactionIndex, trx } = props;
   const newTx: MultiSignTransactionType = {
     ...transaction,
-    transaction: newTransaction(trx),
+    transaction: newTransaction(transaction),
     multiTxData: trx.data,
     transactionIndex
   };
