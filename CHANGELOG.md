@@ -9,7 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] 
 
+## [[0.3.3](https://github.com/ElrondNetwork/dapp-core-form/pull/88)] - 2022-11-15
+- [Fixed gas styling, updated example packages](https://github.com/ElrondNetwork/dapp-core-form/pull/86)
+- [Fixed sign trasnactions validation](https://github.com/ElrondNetwork/dapp-core-form/pull/87)
+
 ## [[0.3.2](https://github.com/ElrondNetwork/dapp-core-form/pull/84)] - 2022-10-25
+
 - [Fixed extra dollar sign fee](https://github.com/ElrondNetwork/dapp-core-form/pull/84)
 - [Fixed displaying token symbols in dropdown](https://github.com/ElrondNetwork/dapp-core-form/pull/77)
 - [Changed displaying amount slider by default](https://github.com/ElrondNetwork/dapp-core-form/pull/78)

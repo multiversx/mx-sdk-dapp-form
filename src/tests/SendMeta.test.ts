@@ -29,12 +29,36 @@ const metaToken = {
   ticker: 'MT1-ff89d3'
 };
 
+const metaFarm = {
+  collection: 'MT1-ff89d3',
+  type: 'MetaESDT',
+  name: 'LockedLPStaked',
+  ticker: 'LKFARM',
+  owner: testReceiver,
+  roles: [
+    {
+      address: testReceiver,
+      canTransfer: true
+    }
+  ],
+  canTransfer: false
+};
+
+const fakeReceiver =
+  'erd1qqqqqqqqqqqqqpgqawujux7w60sjhm8xdx3n0ed8v9h7kpqu2jpsecw6ek';
+
 describe('Send Meta ESDT', () => {
   beforeEach(() => {
     server.use(
       rest.get(
         `${testNetwork.apiAddress}/accounts/${testAddress}/nfts/${metaToken.identifier}`,
         mockResponse(metaToken)
+      )
+    );
+    server.use(
+      rest.get(
+        `${testNetwork.apiAddress}/collections/${metaFarm.collection}`,
+        mockResponse(metaFarm)
       )
     );
     server.use(
@@ -56,12 +80,6 @@ describe('Send Meta ESDT', () => {
   test('MetaEsdt send', async () => {
     const methods = beforAllTokens();
 
-    // fill in receiver
-    const receiver = await methods.findByTestId('receiver');
-
-    const data = { target: { value: testReceiver } };
-    fireEvent.change(receiver, data);
-
     // confirm metaEsdt token is in list
     const selectInput = await methods.findByLabelText('Token');
     selectEvent.openMenu(selectInput);
@@ -80,6 +98,21 @@ describe('Send Meta ESDT', () => {
     await waitFor(() => {
       expect(tokenId.value).toBe(metaToken.identifier);
     });
+
+    const canTransferWarning = await methods.findByTestId('canTransferWarning');
+    expect(canTransferWarning.textContent).toContain('Warning');
+
+    // fill in receiver
+    const receiver = await methods.findByTestId('receiver');
+
+    // expect receiver to be forbidden
+    fireEvent.change(receiver, { target: { value: fakeReceiver } });
+
+    const receiverError = await methods.findByTestId('receiverError');
+    expect(receiverError.textContent).toBe('Receiver not allowed');
+
+    // fill in allowed receiver
+    fireEvent.change(receiver, { target: { value: testReceiver } });
 
     // check available
     const available = methods.getByTestId(`available-${metaToken.identifier}`);

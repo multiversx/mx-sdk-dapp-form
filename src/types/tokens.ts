@@ -30,6 +30,12 @@ interface SharedNftType {
   scamInfo?: NftInterface['scamInfo'];
   uris?: NftInterface['uris'];
   media?: NftInterface['media'];
+  /**
+   * Custom internal proprety based on collection roles.
+   *
+   * If set, warning is shown and `MetaEsdt` transfer is only allowed to listed accounts
+   */
+  allowedReceivers?: string[] | null;
 }
 
 type SharedTokenType = PartialTokenType & {

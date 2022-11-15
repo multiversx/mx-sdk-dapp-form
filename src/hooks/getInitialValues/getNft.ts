@@ -23,7 +23,14 @@ export async function getNft(props: {
       identifier,
       address
     });
-    return nft ? { ...emptyData, nft } : null;
+    if (nft) {
+      return {
+        ...emptyData,
+        nft
+      };
+    }
+
+    return null;
   }
   return null;
 }

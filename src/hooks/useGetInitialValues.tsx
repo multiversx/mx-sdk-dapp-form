@@ -34,5 +34,3 @@ export function useGetInitialValues(props: GetInitialValuesType) {
 
   return state;
 }
-
-export default useGetInitialValues;

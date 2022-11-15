@@ -12,6 +12,7 @@ import { useAccountContext } from 'contexts/AccountContext';
 import { getTokenDetails, getTxType } from 'operations';
 import {
   ExtendedValuesType,
+  PartialMetaEsdtType,
   PartialNftType,
   PartialTokenType,
   TransactionTypeEnum
@@ -19,7 +20,7 @@ import {
 
 import { useFormContext } from '../FormContext';
 import { useNetworkConfigContext } from '../NetworkContext';
-import { useGetEconomicsInfo } from './utils';
+import { getAllowedReceiversData, useGetEconomicsInfo } from './utils';
 
 export interface TokensContextInitializationPropsType {
   initialNft?: PartialNftType;
@@ -98,7 +99,7 @@ export function TokensContextProvider({
     handleGetTokens();
   }, []);
 
-  useEffect(() => {
+  const setNftField = async () => {
     const newTxType = getTxType({ nft, tokenId });
     setFieldValue(txTypeField, newTxType);
 
@@ -109,15 +110,28 @@ export function TokensContextProvider({
       return;
     }
 
-    if (newTxType === TransactionTypeEnum.MetaESDT) {
-      const selectedNft = allAvailableTokens?.find(
-        (token) => token.identifier === tokenId
-      );
-      setFieldValue(nftField, selectedNft as PartialNftType);
+    const selectedNft =
+      allAvailableTokens?.find((token) => token.identifier === tokenId) || nft;
+
+    if (newTxType === TransactionTypeEnum.MetaESDT && selectedNft) {
+      // casting is allowed because we know it's a MetaESDT
+      let newNft = selectedNft as PartialMetaEsdtType;
+
+      // allow synchroneus change of nft in dropdown and fill in async data later
+      setFieldValue(nftField, newNft);
+
+      const allowedReceivers = await getAllowedReceiversData(newNft);
+
+      newNft = {
+        ...newNft,
+        allowedReceivers
+      };
+
+      setFieldValue(nftField, newNft);
     } else {
       setFieldValue(nftField, undefined);
     }
-  }, [tokenId]);
+  };
 
   const isTokenIdInvalid = checkInvalid(tokenIdField);
 
@@ -131,6 +145,10 @@ export function TokensContextProvider({
     },
     ...esdtTokens
   ];
+
+  useEffect(() => {
+    setNftField();
+  }, [tokenId]);
 
   const tokenDetails = useMemo(() => {
     return getTokenDetails({

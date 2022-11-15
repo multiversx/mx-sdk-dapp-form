@@ -1,5 +1,7 @@
+import { NftEnumType } from '@elrondnetwork/dapp-core/types/tokens.types';
 import { getIdentifierType } from '@elrondnetwork/dapp-core/utils/validation/getIdentifierType';
 import { ApiConfigType, getNftByAddressAndIdentifier } from 'apiCalls';
+import { getAllowedReceiversData } from 'contexts/TokensContext/utils';
 
 export async function searchNftByIdentifier(
   props: { identifier: string; address: string },
@@ -11,13 +13,20 @@ export async function searchNftByIdentifier(
     return null;
   }
   try {
-    const nft = await getNftByAddressAndIdentifier(
+    let nft = await getNftByAddressAndIdentifier(
       {
         address,
         identifier
       },
       apiConfig
     );
+    if (nft?.type === NftEnumType.MetaESDT) {
+      const allowedReceivers = await getAllowedReceiversData(nft);
+      nft = {
+        ...nft,
+        allowedReceivers
+      };
+    }
     return nft;
   } catch (e) {
     console.log(e);

@@ -1,7 +1,12 @@
+import {
+  ACCOUNTS_ENDPOINT,
+  COLLECTIONS_ENDPOINT,
+  NFTS_ENDPOINT
+} from '@elrondnetwork/dapp-core/apiCalls/endpoints';
 import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
-import { getApiConfig } from 'apiCalls/apiConfig';
-import { PartialMetaEsdtType, NftEnumType } from 'types';
+import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
+import { NftEnumType, PartialMetaEsdtType, PartialNftType } from 'types';
 import { FetchTokensArgumentsType, GetTokensType } from './tokens';
 
 const maxCount = 1000;
@@ -25,7 +30,7 @@ export async function getMetaEsdts({
 
   const apiConfig = await getApiConfig();
   return axios.get<PartialMetaEsdtType[]>(
-    `/accounts/${address}/nfts?${params}&type=MetaESDT`,
+    `/${ACCOUNTS_ENDPOINT}/${address}/${NFTS_ENDPOINT}?${params}&type=${NftEnumType.MetaESDT}`,
     apiConfig
   );
 }
@@ -37,7 +42,7 @@ export async function getMetaEsdtsCount({ address, search }: GetTokensType) {
 
   const apiConfig = await getApiConfig();
   return axios.get<number>(
-    `/accounts/${address}/nfts/count?${params}&type=${NftEnumType.MetaESDT}`,
+    `/${ACCOUNTS_ENDPOINT}/${address}/${NFTS_ENDPOINT}/count?${params}&type=${NftEnumType.MetaESDT}`,
     apiConfig
   );
 }
@@ -93,4 +98,43 @@ export async function fetchAllMetaEsdts(address: string) {
     }
   }
   return uniqBy(tokens, (t) => t.identifier);
+}
+
+export async function getAllowedReceivers(
+  nft: PartialNftType,
+  apiConfig?: ApiConfigType
+) {
+  if (nft.type !== NftEnumType.MetaESDT) {
+    return null;
+  }
+
+  const config = apiConfig || (await getApiConfig());
+  try {
+    const { data: collectionData } = await axios.get<{
+      canTransfer?: boolean;
+      roles: {
+        address: string;
+        canTransfer?: boolean;
+      }[];
+    }>(`/${COLLECTIONS_ENDPOINT}/${nft.collection}`, config);
+
+    const isTransferForbidden = collectionData?.canTransfer === false;
+    const allowedReceivers = isTransferForbidden
+      ? collectionData?.roles
+          .map(({ address, canTransfer }) => {
+            if (canTransfer) {
+              return address;
+            }
+            return '';
+          })
+          .filter((el) => Boolean(el))
+      : null;
+    return allowedReceivers;
+  } catch (error) {
+    console.error(
+      `Unable to get canTransfer information for collection ${nft.collection}`,
+      error
+    );
+    return null;
+  }
 }

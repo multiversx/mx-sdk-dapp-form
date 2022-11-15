@@ -2,8 +2,8 @@ import React from 'react';
 
 import {
   SendFormContainer,
-  denominatedConfigGasPrice,
-  SendFormContainerPropsType
+  SendFormContainerPropsType,
+  formattedConfigGasPrice
 } from '@elrondnetwork/dapp-core-form';
 import { ConfirmScreen } from '@elrondnetwork/dapp-core-form/UI';
 
@@ -20,7 +20,7 @@ export const ConfirmForm = () => {
       data: 'I am sending you over 100 EGLD!',
       amount: '100',
       gasLimit: (75_000_000).toString(),
-      gasPrice: denominatedConfigGasPrice
+      gasPrice: formattedConfigGasPrice
     },
     formInfo: {
       ...formProps.formInfo,

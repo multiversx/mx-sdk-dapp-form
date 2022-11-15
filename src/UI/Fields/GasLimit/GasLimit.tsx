@@ -1,5 +1,5 @@
 import React from 'react';
-import { faUndo, faExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
@@ -54,21 +54,19 @@ export const GasLimit = () => {
               onChange={onChangeGasLimit}
               onBlur={onBlurGasLimit}
               autoComplete='off'
-              className={globals.input}
+              className={classNames(globals.input, {
+                [globals.invalid]: isGasLimitInvalid
+              })}
             />
-
-            {isGasLimitInvalid && (
-              <span className={globals.errorExclamation}>
-                <FontAwesomeIcon icon={faExclamation} size='xs' />
-              </span>
-            )}
 
             {showResetButton && (
               <span className={styles.gasUndo}>
                 <button
-                  className={styles.gasReset}
                   onClick={onResetClick}
                   data-testid='gasLimitResetBtn'
+                  className={classNames(styles.gasReset, {
+                    [styles.invalid]: isGasLimitInvalid
+                  })}
                 >
                   <i>
                     <FontAwesomeIcon icon={faUndo} />
@@ -81,7 +79,7 @@ export const GasLimit = () => {
 
         {isGasLimitInvalid && (
           <div
-            className={globals.error}
+            className={classNames(globals.error, styles.gasError)}
             data-testid={`${ValuesEnum.gasLimit}Error`}
           >
             {gasLimitError}

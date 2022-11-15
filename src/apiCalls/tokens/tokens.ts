@@ -1,3 +1,7 @@
+import {
+  TOKENS_ENDPOINT,
+  ACCOUNTS_ENDPOINT
+} from '@elrondnetwork/dapp-core/apiCalls/endpoints';
 import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
@@ -29,7 +33,7 @@ export async function getTokens({
 
   const apiConfig = await getApiConfig();
   return axios.get<PartialTokenType[]>(
-    `/accounts/${address}/tokens?${params}`,
+    `/${ACCOUNTS_ENDPOINT}/${address}/${TOKENS_ENDPOINT}?${params}`,
     apiConfig
   );
 }
@@ -41,7 +45,7 @@ export async function getTokensCount({ address, search }: GetTokensType) {
 
   const apiConfig = await getApiConfig();
   return axios.get<number>(
-    `/accounts/${address}/tokens/count?${params}`,
+    `/${ACCOUNTS_ENDPOINT}/${address}/${TOKENS_ENDPOINT}/count?${params}`,
     apiConfig
   );
 }
@@ -57,14 +61,14 @@ export async function getAccountToken(
 
   const config = apiConfig || (await getApiConfig());
   return axios.get<PartialTokenType>(
-    `/accounts/${address}/tokens/${token}`,
+    `/${ACCOUNTS_ENDPOINT}/${address}/${TOKENS_ENDPOINT}/${token}`,
     config
   );
 }
 
 export async function getToken(token: string, apiConfig?: ApiConfigType) {
   const config = apiConfig || (await getApiConfig());
-  return axios.get<PartialTokenType>(`/tokens/${token}`, config);
+  return axios.get<PartialTokenType>(`/${TOKENS_ENDPOINT}/${token}`, config);
 }
 
 export interface FetchTokensArgumentsType {
