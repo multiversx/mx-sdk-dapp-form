@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## [Unreleased] 
+
+## [[0.3.3](https://github.com/ElrondNetwork/dapp-core-form/pull/88)] - 2022-11-15
 - [Fixed gas styling, updated example packages](https://github.com/ElrondNetwork/dapp-core-form/pull/86)
 - [Fixed sign trasnactions validation](https://github.com/ElrondNetwork/dapp-core-form/pull/87)
 
@@ -20,5 +22,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Removed usage of `to` and `destinationAddress`, by using only `receiver` ](https://github.com/ElrondNetwork/dapp-core-form/pull/79)
 - [Allow signing with zerog Gas Limit in validation schema ](https://github.com/ElrondNetwork/dapp-core-form/pull/82)
 
-## [Unreleased]
 
