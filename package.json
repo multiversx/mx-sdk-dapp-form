@@ -1,6 +1,6 @@
 {
   "name": "@elrondnetwork/dapp-core-form",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A library to hold the main logic for a validating a form for transactions on the Elrond Network",
   "author": "ElrondNetwork",
   "license": "GPL-3.0-or-later",
