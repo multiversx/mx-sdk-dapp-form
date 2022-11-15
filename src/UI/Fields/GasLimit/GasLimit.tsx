@@ -1,5 +1,5 @@
 import React from 'react';
-import { faUndo, faExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
