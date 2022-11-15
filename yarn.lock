@@ -1187,10 +1187,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-2.0.2.tgz#1bfafe4b7ed0f3e4105837e056e0a89b108ebe36"
   integrity sha512-IkpVW/ehM1hWKln4fCA3NzJU8KwD+kIOvPZA4cqxoJHtE21CCzjyp+Kxbu0i5I4tBNOlXPL9mjwnWlL0VEG4Fg==
 
-"@elrondnetwork/dapp-core@2.1.9":
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/@elrondnetwork/dapp-core/-/dapp-core-2.1.9.tgz#fb1586c5dbddc55022368e0b9e161cf95440f365"
-  integrity sha512-0prxaOKsYhcWIWBUenCz/+qdRhgtWA+OIe/iy4WCmPFJecbBOeot3x1dyFQNVEA/tE0ikiRIIPbWawegDapeDQ==
+"@elrondnetwork/dapp-core@2.1.11":
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/@elrondnetwork/dapp-core/-/dapp-core-2.1.11.tgz#f6f64d827ff86d7f8ea672d11f8507ede09b9378"
+  integrity sha512-AK9HpFmhyJITIsHsGP23m4+obP2hb4Q+2vQm39vHtZNfJf1NmBmOEaQsOAaKxA/9WkFipa7D107PHsMPAWw8Kg==
   dependencies:
     "@elrondnetwork/erdjs" "11.0.0"
     "@elrondnetwork/erdjs-extension-provider" "2.0.5"
