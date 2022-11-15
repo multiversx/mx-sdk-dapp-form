@@ -65,5 +65,3 @@ export async function getInitialValues(props: GetInitialValuesType) {
 
   return returnValues;
 }
-
-export default getInitialValues;

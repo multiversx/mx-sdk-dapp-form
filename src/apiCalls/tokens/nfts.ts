@@ -1,3 +1,7 @@
+import {
+  ACCOUNTS_ENDPOINT,
+  NFTS_ENDPOINT
+} from '@elrondnetwork/dapp-core/apiCalls/endpoints';
 import axios from 'axios';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
 import { PartialNftType } from 'types';
@@ -14,7 +18,7 @@ export async function getNftByAddressAndIdentifier(
   try {
     const config = apiConfig || (await getApiConfig());
     const { data }: { data: PartialNftType } = await axios.get(
-      `/accounts/${address}/nfts/${identifier}`,
+      `/${ACCOUNTS_ENDPOINT}/${address}/${NFTS_ENDPOINT}/${identifier}`,
       config
     );
     return data ? data : null;
@@ -30,7 +34,7 @@ export async function getGlobalNftByIdentifier(
   try {
     const config = apiConfig || (await getApiConfig());
     const { data }: { data: PartialNftType } = await axios.get(
-      `/nfts/${identifier}`,
+      `/${NFTS_ENDPOINT}/${identifier}`,
       config
     );
     return data ? data : null;
