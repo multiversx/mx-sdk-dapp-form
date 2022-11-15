@@ -1,10 +1,10 @@
 import React from 'react';
+import { Trim } from '@elrondnetwork/dapp-core/UI/Trim';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useFormikContext } from 'formik';
 import { CAN_TRANSFER_MESSAGE } from 'constants/index';
 import { ExtendedValuesType } from 'types';
-import { Trim } from '@elrondnetwork/dapp-core/UI/Trim';
 
 import styles from './styles.module.scss';
 

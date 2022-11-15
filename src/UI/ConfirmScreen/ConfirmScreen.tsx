@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LoginMethodsEnum } from '@elrondnetwork/dapp-core/types/enums.types';
 import classNames from 'classnames';
 
@@ -36,11 +36,13 @@ export const ConfirmScreen = ({
   const { data } = dataFieldInfo;
   const { receiver, scamError } = receiverInfo;
   const { feeLimit, gasCostError } = gasInfo;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   let confirmText: string;
 
   switch (providerType) {
     case LoginMethodsEnum.walletconnect:
+    case LoginMethodsEnum.extension:
       confirmText = 'Confirm & Check your App';
       break;
     case LoginMethodsEnum.ledger:
@@ -58,6 +60,11 @@ export const ConfirmScreen = ({
     } else {
       onInvalidateForm();
     }
+  };
+
+  const onConfirmClick = () => {
+    setIsSubmitting(true);
+    onSubmitForm();
   };
 
   return (
@@ -91,7 +98,8 @@ export const ConfirmScreen = ({
           type='button'
           id='sendTrxBtn'
           data-testid='sendTrxBtn'
-          onClick={onSubmitForm}
+          disabled={isSubmitting}
+          onClick={onConfirmClick}
         >
           {confirmText}
         </button>
