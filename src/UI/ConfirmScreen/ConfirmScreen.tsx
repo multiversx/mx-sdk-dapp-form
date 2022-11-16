@@ -8,7 +8,7 @@ import Confirm from '../Confirm';
 
 import styles from './styles.module.scss';
 
-interface ConfirmScreenType {
+export interface ConfirmScreenPropsType {
   isConfirmCloseBtnVisible?: boolean;
   providerType: string;
 }
@@ -16,7 +16,7 @@ interface ConfirmScreenType {
 export const ConfirmScreen = ({
   isConfirmCloseBtnVisible = true,
   providerType
-}: ConfirmScreenType) => {
+}: ConfirmScreenPropsType) => {
   const {
     tokensInfo,
     receiverInfo,

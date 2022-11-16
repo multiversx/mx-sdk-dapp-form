@@ -7,19 +7,21 @@ import styles from './styles.module.scss';
 const allOccurences = (sourceStr: string, searchStr: string) =>
   [...sourceStr.matchAll(new RegExp(searchStr, 'gi'))].map((a) => a.index);
 
+export interface DataPropsType {
+  label?: string;
+  scCallLabel?: string;
+  data: string;
+  highlight?: string;
+  isScCall?: boolean;
+}
+
 export const Data = ({
   label = 'Data',
   scCallLabel = 'SC Call',
   data,
   highlight,
   isScCall
-}: {
-  label?: string;
-  scCallLabel?: string;
-  data: string;
-  highlight?: string;
-  isScCall?: boolean;
-}) => {
+}: DataPropsType) => {
   let output = <>{data}</>;
 
   const [encodedScCall, ...remainingDataFields] =

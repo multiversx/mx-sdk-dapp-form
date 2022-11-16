@@ -5,17 +5,19 @@ import { ZERO } from 'constants/index';
 import { calculateFeeInFiat } from 'operations';
 import styles from './styles.module.scss';
 
+export interface FeePropsType {
+  label?: string;
+  egldPriceInUsd: number;
+  feeLimit: string;
+  egldLabel: string;
+}
+
 export const Fee = ({
   egldPriceInUsd,
   label = 'Fee',
   feeLimit,
   egldLabel
-}: {
-  label?: string;
-  egldPriceInUsd: number;
-  feeLimit: string;
-  egldLabel: string;
-}) => (
+}: FeePropsType) => (
   <div className={styles.fee}>
     <span className={styles.text}>{label}</span>
 

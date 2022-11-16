@@ -126,9 +126,8 @@ export const Receiver = () => {
   );
 
   /*
-   * Filter the addresses based on input. Should be more than three characters. Look for needle in haystack.
+   * Filter the addresses based on input. Should be more than three characters.
    */
-
   const filterBy: FilterByCallback = (option, props) => {
     const needle = props.text.toLowerCase();
     const haystack = option.toLowerCase();
