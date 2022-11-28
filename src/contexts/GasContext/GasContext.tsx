@@ -6,18 +6,15 @@ import {
 } from '@elrondnetwork/dapp-core/constants/index';
 import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/calculateFeeLimit';
 import { useFormikContext } from 'formik';
-import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
+import { ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import { parseAmount } from 'helpers';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
-import {
-  calculateGasLimit,
-  calculateNftGasLimit,
-  formattedConfigGasPrice
-} from 'operations';
-import { ExtendedValuesType, TransactionTypeEnum, ValuesEnum } from 'types';
+import { calculateNftGasLimit, formattedConfigGasPrice } from 'operations';
+import { getGasLimit } from 'operations/getGasLimit';
+import { ExtendedValuesType, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { getDefaultGasLimit } from './utils';
 
@@ -164,22 +161,7 @@ export function GasContextProvider({
 
   useEffect(() => {
     if (!prefilledForm) {
-      switch (txType) {
-        case TransactionTypeEnum.ESDT:
-          handleUpdateGasLimit(TOKEN_GAS_LIMIT);
-          break;
-        case TransactionTypeEnum.EGLD:
-          handleUpdateGasLimit(
-            calculateGasLimit({
-              data: data.trim()
-            }),
-            true
-          );
-          break;
-        default:
-          handleUpdateGasLimit(calculateNftGasLimit(), true);
-          break;
-      }
+      handleUpdateGasLimit(getGasLimit({ txType, data }));
     }
   }, [tokenId, txType]);
 
