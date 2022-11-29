@@ -7,10 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- [Fixed receiver dropdown, refactored components' interfaces](https://github.com/ElrondNetwork/dapp-core-form/pull/89)
-
-## [[0.3.4](https://github.com/ElrondNetwork/dapp-core-form/pull/90)] - 2022-11-29
+## [[0.3.4](https://github.com/ElrondNetwork/dapp-core-form/pull/91)] - 2022-11-29
 - [Fixed gasLimit intialization](https://github.com/ElrondNetwork/dapp-core-form/pull/90)
+- [Fixed receiver dropdown, refactored components' interfaces](https://github.com/ElrondNetwork/dapp-core-form/pull/89)
 
 ## [[0.3.3](https://github.com/ElrondNetwork/dapp-core-form/pull/88)] - 2022-11-15
 
