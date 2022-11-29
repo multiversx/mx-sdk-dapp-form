@@ -12,19 +12,21 @@ import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
 import styles from './styles.module.scss';
 const ElrondSymbol = require('./symbol.svg').default;
 
+export interface TokenElementPropsType {
+  token: PartialTokenType;
+  inDropdown?: boolean;
+  isEgld?: boolean;
+  nftType?: NftEnumType;
+  nftTokenDetails?: PartialNftType;
+}
+
 export const TokenElement = ({
   inDropdown = false,
   isEgld,
   nftType,
   nftTokenDetails,
   token
-}: {
-  token: PartialTokenType;
-  inDropdown?: boolean;
-  isEgld?: boolean;
-  nftType?: NftEnumType;
-  nftTokenDetails?: PartialNftType;
-}) => {
+}: TokenElementPropsType) => {
   const { name, identifier, balance, decimals } = token;
   const avatar = token.assets?.svgUrl || token.assets?.pngUrl || '';
   const avatarDropdownSize = avatar ? 28 : 20;

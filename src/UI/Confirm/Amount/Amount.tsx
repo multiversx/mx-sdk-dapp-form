@@ -23,19 +23,17 @@ export interface AmountPropsType {
   nft?: PartialNftType;
 }
 
-export const Amount = (props: AmountPropsType) => {
-  const {
-    label = 'Amount',
-    amount,
-    txType,
-    tokenDecimals,
-    tokenId,
-    tokenIdError,
-    egldLabel,
-    egldPriceInUsd,
-    nft
-  } = props;
-
+export const Amount = ({
+  label = 'Amount',
+  amount,
+  txType,
+  tokenDecimals,
+  tokenId,
+  tokenIdError,
+  egldLabel,
+  egldPriceInUsd,
+  nft
+}: AmountPropsType) => {
   const nftDecimals = nft?.decimals || 0;
   const isEsdtTransaction = txType === TransactionTypeEnum.ESDT;
   const isMetaEsdt = txType === TransactionTypeEnum.MetaESDT;
@@ -55,7 +53,7 @@ export const Amount = (props: AmountPropsType) => {
 
   const amountRenderer = showNftAmount ? (
     <FormatAmount
-      egldLabel={props.egldLabel}
+      egldLabel={egldLabel}
       value={value}
       decimals={nftDecimals}
       digits={txType === TransactionTypeEnum.MetaESDT ? DIGITS : 0}
@@ -66,7 +64,7 @@ export const Amount = (props: AmountPropsType) => {
   ) : (
     <>
       <FormatAmount
-        egldLabel={props.egldLabel}
+        egldLabel={egldLabel}
         value={parseAmount(amount, decimals)}
         decimals={decimals}
         showLastNonZeroDecimal
