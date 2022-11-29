@@ -161,7 +161,7 @@ export function GasContextProvider({
 
   useEffect(() => {
     if (!prefilledForm) {
-      handleUpdateGasLimit(getGasLimit({ txType, data }));
+      handleUpdateGasLimit(getGasLimit({ txType, data }), true);
     }
   }, [tokenId, txType]);
 

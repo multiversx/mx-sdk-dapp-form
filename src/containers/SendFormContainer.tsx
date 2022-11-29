@@ -12,9 +12,12 @@ import {
 } from 'contexts';
 
 import { UICustomizationContextPropsType } from 'contexts/UICustomization';
-import { generateTransaction, getTxType } from 'operations';
-import { formattedConfigGasPrice } from 'operations/formattedConfigGasPrice';
-import { getGasLimit } from 'operations/getGasLimit';
+import {
+  generateTransaction,
+  getTxType,
+  formattedConfigGasPrice,
+  getGasLimit
+} from 'operations';
 import { ExtendedValuesType, TransactionTypeEnum, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
 import { getInitialErrors } from 'validation';

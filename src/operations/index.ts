@@ -10,3 +10,4 @@ export * from './computeInitGasLimit';
 export * from './formattedConfigGasPrice';
 export * from './getEntireBalance';
 export * from './ledger';
+export * from './getGasLimit';

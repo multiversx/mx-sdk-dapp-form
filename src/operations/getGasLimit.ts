@@ -1,9 +1,9 @@
 import { TOKEN_GAS_LIMIT } from 'constants/index';
 import { TransactionTypeEnum } from 'types/enums';
-import calculateGasLimit from './calculateGasLimit';
+import { calculateGasLimit } from './calculateGasLimit';
 import { calculateNftGasLimit } from './calculateNftGasLimit';
 
-interface GetGasLimitType {
+export interface GetGasLimitType {
   txType: TransactionTypeEnum;
   data?: string;
 }
