@@ -12,11 +12,13 @@ import { ValuesEnum } from 'types';
 import styles from './../styles.module.scss';
 import { MaxButton } from './MaxButton';
 
-interface SharedAmountType {
+export interface SharedAmountPropsType {
   AvailableAmountElement: () => JSX.Element | null;
 }
 
-export const SharedAmount = ({ AvailableAmountElement }: SharedAmountType) => {
+export const SharedAmount = ({
+  AvailableAmountElement
+}: SharedAmountPropsType) => {
   const {
     formInfo: { readonly },
     amountInfo

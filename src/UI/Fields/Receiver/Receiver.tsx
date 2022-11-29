@@ -13,16 +13,17 @@ import {
   TypeaheadManagerChildProps
 } from 'react-bootstrap-typeahead/types/types';
 
-import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
+
+import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 const CustomMenu = (
-  results: Array<Option>,
+  results: Option[],
   props: MenuProps,
   state: TypeaheadManagerChildProps
 ) => {
@@ -39,16 +40,14 @@ const CustomMenu = (
 
   return (
     <Menu {...menuProps} className={styles.receiverFieldMenu}>
-      {results.map((option: Option, position: number) => (
+      {results.map((option, position) => (
         <MenuItem
           key={option.toString()}
-          {...{
-            option,
-            position,
-            className: classNames(styles.receiverFieldItem, {
-              [styles.highlighted]: position === state.activeIndex
-            })
-          }}
+          option={option}
+          position={position}
+          className={classNames(styles.receiverFieldItem, {
+            [styles.highlighted]: position === state.activeIndex
+          })}
         >
           {option.toString()}
         </MenuItem>
@@ -126,9 +125,19 @@ export const Receiver = () => {
     </Hint>
   );
 
-  const filterBy: FilterByCallback = (option, props) =>
-    option.toLowerCase().indexOf(props.text.toLowerCase()) !== -1 &&
-    props.text.length > 2;
+  /*
+   * Filter the addresses based on input. Should be more than three characters.
+   */
+  const filterBy: FilterByCallback = (option, props) => {
+    const needle = props.text.toLowerCase();
+    const haystack = option.toLowerCase();
+
+    if (needle.length < 3) {
+      return true;
+    }
+
+    return haystack.includes(needle);
+  };
 
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 

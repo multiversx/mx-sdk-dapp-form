@@ -4,15 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import styles from './styles.module.scss';
 
+export interface ReceiverPropsType {
+  label?: string;
+  receiver: string;
+  scamReport?: ReactNode;
+}
+
 export const Receiver = ({
   label = 'Receiver',
   receiver,
   scamReport
-}: {
-  label?: string;
-  receiver: string;
-  scamReport?: ReactNode;
-}) => (
+}: ReceiverPropsType) => (
   <div className={styles.receiver}>
     <span className={styles.label}>{label}</span>
     {receiver && <span>{receiver}</span>}

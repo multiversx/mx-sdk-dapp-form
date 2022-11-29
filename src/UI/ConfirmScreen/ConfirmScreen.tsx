@@ -8,7 +8,7 @@ import Confirm from '../Confirm';
 
 import styles from './styles.module.scss';
 
-interface ConfirmScreenType {
+export interface ConfirmScreenPropsType {
   isConfirmCloseBtnVisible?: boolean;
   providerType: string;
 }
@@ -16,7 +16,7 @@ interface ConfirmScreenType {
 export const ConfirmScreen = ({
   isConfirmCloseBtnVisible = true,
   providerType
-}: ConfirmScreenType) => {
+}: ConfirmScreenPropsType) => {
   const {
     tokensInfo,
     receiverInfo,
@@ -69,24 +69,26 @@ export const ConfirmScreen = ({
 
   return (
     <div className={styles.confirm} data-testid='confirmScreen'>
-      <Confirm.Receiver {...{ receiver, nft }} scamReport={scamError} />
+      <Confirm.Receiver receiver={receiver} scamReport={scamError} />
 
       <Confirm.Amount
-        {...{
-          amount: String(amountInfo.amount),
-          txType,
-          tokenDecimals: tokenDetails.decimals,
-          tokenId,
-          egldLabel,
-          tokenLabel: tokenDetails.name,
-          tokenAvatar: tokenDetails.assets?.svgUrl || '',
-          egldPriceInUsd,
-          nft
-        }}
+        txType={txType}
+        tokenId={tokenId}
+        tokenDecimals={tokenDetails.decimals}
+        amount={String(amountInfo.amount)}
+        nft={nft}
+        egldPriceInUsd={egldPriceInUsd}
+        egldLabel={egldLabel}
+        tokenLabel={tokenDetails.name}
+        tokenAvatar={tokenDetails.assets?.svgUrl || ''}
       />
 
-      <Confirm.Fee {...{ feeLimit, egldPriceInUsd, egldLabel }} />
-      <Confirm.Data {...{ data, egldPriceInUsd }} />
+      <Confirm.Fee
+        egldLabel={egldLabel}
+        egldPriceInUsd={egldPriceInUsd}
+        feeLimit={feeLimit}
+      />
+      <Confirm.Data data={data} />
 
       <div className={styles.buttons}>
         {gasCostError && <p className={globals.error}>{gasCostError}</p>}
