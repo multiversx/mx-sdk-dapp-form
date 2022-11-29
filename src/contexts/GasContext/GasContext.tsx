@@ -12,8 +12,11 @@ import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import { parseAmount } from 'helpers';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
-import { calculateNftGasLimit, formattedConfigGasPrice } from 'operations';
-import { getGasLimit } from 'operations/getGasLimit';
+import {
+  calculateNftGasLimit,
+  formattedConfigGasPrice,
+  getGasLimit
+} from 'operations';
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { getDefaultGasLimit } from './utils';

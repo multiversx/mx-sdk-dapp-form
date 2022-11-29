@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] 
 
+## [[0.3.4](https://github.com/ElrondNetwork/dapp-core-form/pull/90)] - 2022-11-29
+- [Fixed gasLimit intialization](https://github.com/ElrondNetwork/dapp-core-form/pull/90)
+
 ## [[0.3.3](https://github.com/ElrondNetwork/dapp-core-form/pull/88)] - 2022-11-15
 - [Fixed gas styling, updated example packages](https://github.com/ElrondNetwork/dapp-core-form/pull/86)
 - [Fixed sign trasnactions validation](https://github.com/ElrondNetwork/dapp-core-form/pull/87)
