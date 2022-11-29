@@ -1,8 +1,5 @@
 import React, { JSXElementConstructor } from 'react';
-import {
-  fallbackNetworkConfigurations,
-  GAS_LIMIT
-} from '@elrondnetwork/dapp-core/constants/index';
+import { fallbackNetworkConfigurations } from '@elrondnetwork/dapp-core/constants/index';
 import { Transaction } from '@elrondnetwork/erdjs';
 import { Formik } from 'formik';
 
@@ -15,8 +12,12 @@ import {
 } from 'contexts';
 
 import { UICustomizationContextPropsType } from 'contexts/UICustomization';
-import { generateTransaction, getTxType } from 'operations';
-import { formattedConfigGasPrice } from 'operations/formattedConfigGasPrice';
+import {
+  generateTransaction,
+  getTxType,
+  formattedConfigGasPrice,
+  getGasLimit
+} from 'operations';
 import { ExtendedValuesType, TransactionTypeEnum, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
 import { getInitialErrors } from 'validation';
@@ -85,16 +86,22 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     networkConfig?.egldLabel ||
     fallbackNetworkConfigurations.mainnet.egldLabel;
 
+  const data = initialValues?.data ?? '';
+
+  const txType =
+    initialValues?.txType ??
+    getTxType({ nft: tokensInfo?.initialNft, tokenId });
+
+  const gasLimit = initialValues?.gasLimit ?? getGasLimit({ txType, data });
+
   const formikInitialValues = {
     tokenId,
     receiver: initialValues?.receiver ?? '',
     gasPrice: initialValues?.gasPrice ?? formattedConfigGasPrice,
-    data: initialValues?.data ?? '',
+    data,
     amount: initialValues?.amount ?? ZERO,
-    gasLimit: initialValues?.gasLimit ?? String(GAS_LIMIT),
-    txType:
-      initialValues?.txType ??
-      getTxType({ nft: tokensInfo?.initialNft, tokenId }),
+    gasLimit,
+    txType,
     address: initialValues?.address ?? address,
     nft: tokensInfo?.initialNft,
     balance: initialValues?.balance || balance,
