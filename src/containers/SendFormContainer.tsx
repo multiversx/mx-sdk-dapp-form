@@ -48,6 +48,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     tokensInfo,
     initGasLimitError,
     networkConfig,
+    enableReinitialize = true,
     Loader,
     UICustomization,
     shouldGenerateTransactionOnSubmit = true
@@ -113,7 +114,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   return (
     <Formik
       initialValues={formikInitialValues}
-      enableReinitialize
+      enableReinitialize={enableReinitialize}
       onSubmit={handleOnSubmit}
       initialErrors={initialErrors}
       validationSchema={validationSchema}
