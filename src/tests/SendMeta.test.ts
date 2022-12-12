@@ -140,7 +140,7 @@ describe('Send Meta ESDT', () => {
 
     await sendAndConfirmTest({ methods })({
       amount: '10.0000',
-      fee: '0.000239185'
+      fee: '0.0000595'
     });
   });
 });
