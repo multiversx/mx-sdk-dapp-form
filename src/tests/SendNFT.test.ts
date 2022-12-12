@@ -126,7 +126,7 @@ describe('Send NFT tokens', () => {
     expect(gasLimit.value).toBe('1000000');
 
     await sendAndConfirmTest({ methods })({
-      fee: '0.000218395',
+      fee: '0.0000595',
       data: dataString
     });
   });
