@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [[0.3.5](https://github.com/ElrondNetwork/dapp-core-form/pull/94)] - 2022-12-12
+## [[0.3.6](https://github.com/ElrondNetwork/dapp-core-form/pull/94)] - 2022-12-12
 - [Prevent fee recalculation when gasLimit is touched](https://github.com/ElrondNetwork/dapp-core-form/pull/93)
 
 ## [[0.3.4](https://github.com/ElrondNetwork/dapp-core-form/pull/91)] - 2022-11-29
