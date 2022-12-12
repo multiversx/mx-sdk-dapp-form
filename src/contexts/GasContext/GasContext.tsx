@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 
 import {
   GAS_PER_DATA_BYTE,
@@ -80,7 +80,8 @@ export function GasContextProvider({
     checkInvalid,
     isNftTransaction,
     isEsdtTransaction,
-    prefilledForm
+    prefilledForm,
+    isEgldTransaction
   } = useFormContext();
   const {
     networkConfig: { chainId }
@@ -145,16 +146,34 @@ export function GasContextProvider({
   }, []);
 
   const hasErrors = Boolean(gasPriceError) || Boolean(gasLimitError);
-  const feeLimit = !hasErrors
-    ? calculateFeeLimit({
-        gasLimit,
-        gasPrice: parseAmount(gasPrice),
-        data: data.trim(),
-        chainId,
-        gasPerDataByte: String(GAS_PER_DATA_BYTE),
-        gasPriceModifier: String(GAS_PRICE_MODIFIER)
-      })
-    : ZERO;
+
+  const feeLimit = useMemo(() => {
+    if (hasErrors) {
+      return ZERO;
+    }
+
+    const isInitialGasLimit =
+      !prefilledForm && !touched.gasLimit && isEgldTransaction;
+
+    const dataField = isInitialGasLimit ? data.trim() : '';
+
+    return calculateFeeLimit({
+      gasLimit,
+      gasPrice: parseAmount(gasPrice),
+      data: dataField,
+      chainId,
+      gasPerDataByte: String(GAS_PER_DATA_BYTE),
+      gasPriceModifier: String(GAS_PRICE_MODIFIER)
+    });
+  }, [
+    hasErrors,
+    gasPrice,
+    gasLimit,
+    chainId,
+    prefilledForm,
+    isEgldTransaction,
+    touched.gasLimit
+  ]);
 
   useEffect(() => {
     if (!prefilledForm && isNftTransaction && !touched.gasLimit) {
