@@ -1,14 +1,16 @@
 import React from 'react';
 import { Trim } from '@elrondnetwork/dapp-core/UI/Trim';
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 import { CAN_TRANSFER_MESSAGE } from 'constants/index';
 import { ExtendedValuesType } from 'types';
 
 import styles from './styles.module.scss';
 
-export const CanTransferNftWarning = () => {
+export const CanTransferNftWarning = ({ className }: WithClassnameType) => {
   const {
     values: { nft }
   } = useFormikContext<ExtendedValuesType>();
@@ -18,7 +20,10 @@ export const CanTransferNftWarning = () => {
   }
 
   return (
-    <div className={styles.canTransferWarning} data-testid='canTransferWarning'>
+    <div
+      className={classNames(styles.canTransferWarning, className)}
+      data-testid='canTransferWarning'
+    >
       <small role='alert' className={styles.wegldAlertWarning}>
         <FontAwesomeIcon
           icon={faExclamationTriangle}
