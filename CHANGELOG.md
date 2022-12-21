@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- [Fixed WEGLD warning display and improved build time](https://github.com/ElrondNetwork/dapp-core-form/pull/95)
 
 ## [[0.3.6](https://github.com/ElrondNetwork/dapp-core-form/pull/94)] - 2022-12-12
 - [Prevent fee recalculation when gasLimit is touched](https://github.com/ElrondNetwork/dapp-core-form/pull/93)
