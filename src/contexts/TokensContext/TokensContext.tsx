@@ -7,7 +7,7 @@ import React, {
 } from 'react';
 import { useFormikContext } from 'formik';
 import uniqBy from 'lodash/uniqBy';
-import { fetchAllMetaEsdts, fetchAllTokens } from 'apiCalls';
+import { fetchAllTokens } from 'apiCalls';
 import { useAccountContext } from 'contexts/AccountContext';
 import { getTokenDetails, getTxType } from 'operations';
 import {
@@ -78,11 +78,10 @@ export function TokensContextProvider({
 
   const handleGetTokens = useCallback(async () => {
     setAreTokensLoading(true);
-    const newTokens = await fetchAllTokens(address);
-    const newMetaEsdts = await fetchAllMetaEsdts(address);
+    const newTokensAndMetaESDTs = await fetchAllTokens(address);
     const currentTokens = tokens ?? [];
     const tokensFromServer = uniqBy(
-      [...currentTokens, ...newTokens, ...newMetaEsdts],
+      [...currentTokens, ...newTokensAndMetaESDTs],
       (token) => token.identifier
     );
 

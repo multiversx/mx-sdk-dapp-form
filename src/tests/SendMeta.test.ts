@@ -63,8 +63,15 @@ describe('Send Meta ESDT', () => {
     );
     server.use(
       rest.get(
-        `${testNetwork.apiAddress}/accounts/${testAddress}/nfts`,
+        `${testNetwork.apiAddress}/accounts/${testAddress}/tokens`,
         mockResponse([metaToken])
+      )
+    );
+
+    server.use(
+      rest.get(
+        `${testNetwork.apiAddress}/accounts/${fakeReceiver}`,
+        mockResponse({})
       )
     );
     server.use(

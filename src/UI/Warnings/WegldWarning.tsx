@@ -1,12 +1,19 @@
 import React from 'react';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { WEGLD_ID, WEGLD_MESSAGE } from 'constants/index';
-
+import { getWegldIdForChainId } from 'apiCalls';
+import { WEGLD_MESSAGE } from 'constants/index';
+import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import styles from './styles.module.scss';
 
 export const WegldWarning = ({ tokenId }: { tokenId: string }) => {
-  if (WEGLD_ID !== tokenId) {
+  const {
+    networkConfig: { chainId }
+  } = useNetworkConfigContext();
+
+  const wegldId = getWegldIdForChainId(chainId);
+
+  if (wegldId !== tokenId) {
     return null;
   }
 

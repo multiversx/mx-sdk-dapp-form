@@ -5,7 +5,7 @@ import {
 import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
-import { PartialTokenType } from 'types';
+import { PartialMetaEsdtType, PartialTokenType } from 'types';
 
 export interface GetTokensType {
   address: string;
@@ -28,11 +28,12 @@ export async function getTokens({
     ...(from != null && size != null
       ? { from: String(from), size: String(size) }
       : {}),
-    ...(search ? { search } : {})
+    ...(search ? { search } : {}),
+    includeMetaESDT: 'true'
   }).toString();
 
   const apiConfig = await getApiConfig();
-  return axios.get<PartialTokenType[]>(
+  return axios.get<Array<PartialTokenType | PartialMetaEsdtType>>(
     `/${ACCOUNTS_ENDPOINT}/${address}/${TOKENS_ENDPOINT}?${params}`,
     apiConfig
   );
@@ -40,7 +41,8 @@ export async function getTokens({
 
 export async function getTokensCount({ address, search }: GetTokensType) {
   const params = new URLSearchParams({
-    ...(search ? { search } : {})
+    ...(search ? { search } : {}),
+    includeMetaESDT: 'true'
   }).toString();
 
   const apiConfig = await getApiConfig();

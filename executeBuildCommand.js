@@ -29,11 +29,15 @@ module.exports = function esbuildWrapper(buildType = 'esm') {
   return function executeBuildCommand(customOptions = {}) {
     glob('{./src/**/*.tsx,./src/**/*.ts,./src/**/*.scss}', function(
       err,
-      files
+      filesAndTestFiles
     ) {
       if (err) {
         console.log('error reading files', err);
       }
+
+      const files = filesAndTestFiles.filter(
+        (file) => !file.includes('.test.')
+      );
 
       esbuild
         .build({
