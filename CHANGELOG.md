@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [[0.3.7](https://github.com/ElrondNetwork/dapp-core-form/pull/97)] - 2022-12-21
 - [Fixed WEGLD warning display and improved build time](https://github.com/ElrondNetwork/dapp-core-form/pull/95)
 - [Removed call too nfts endpoint for MetaESDTs and include it in tokens endpoint](https://github.com/ElrondNetwork/dapp-core-form/pull/96)
 
