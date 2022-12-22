@@ -1,11 +1,12 @@
 import React, { ChangeEvent } from 'react';
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import classNames from 'classnames';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import styles from './styles.module.scss';
 
-export const AmountSlider = () => {
+export const AmountSlider = ({ className }: WithClassnameType) => {
   const {
     formInfo: { readonly },
     amountInfo: { amountRange, onSetAmountPercentage }
@@ -18,7 +19,7 @@ export const AmountSlider = () => {
   const disabled = Boolean(readonly);
 
   return (
-    <div className={styles.amountSlider}>
+    <div className={classNames(styles.amountSlider, className)}>
       <div className={styles.amountSliderRange}>
         <input
           name={amountSliderField}

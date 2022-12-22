@@ -1,24 +1,24 @@
 @use 'sass:math';
 
-$light: #fafafa;
-$white: white;
-$black: black;
-$brown: #212529;
-$primary: #1b46c2;
-$secondary: #6c757d;
-$primary-light: #1392ff;
-$input-border-radius: 0.25rem;
-$card-border-radius: 0.25rem;
-$card-bg: $white;
-$border-color: #dee2e6;
-$link-hover-color: #122e7f;
-$error: #dc3545;
-$warning: #ffc107;
-$btn-blue: #163aa0;
+$light: #fafafa !default;
+$white: white !default;
+$black: black !default;
+$brown: #212529 !default;
+$primary: #1b46c2 !default;
+$secondary: #6c757d !default;
+$primary-light: #1392ff !default;
+$input-border-radius: 0.25rem !default;
+$card-border-radius: 0.25rem !default;
+$card-bg: $white !default;
+$border-color: #dee2e6 !default;
+$link-hover-color: #122e7f !default;
+$error: #dc3545 !default;
+$warning: #ffc107 !default;
+$btn-blue: #163aa0 !default;
 
-$input-color: #495057;
-$input-border-color: #ced4da;
-$input-border-focus: #7191eb;
+$input-color: #495057 !default;
+$input-border-color: #ced4da !default;
+$input-border-focus: #7191eb !default;
 
 :root {
   --primary: #1b46c2;

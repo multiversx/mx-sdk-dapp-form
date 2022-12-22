@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import globals from 'assets/sass/globals.module.scss';
 import { ZERO } from 'constants/index';
 import { PartialNftType } from 'types';
@@ -7,7 +8,7 @@ import { TokenElement } from 'UI/Fields/SelectToken/TokenElement';
 
 import styles from './styles.module.scss';
 
-export interface TokenPropsType {
+export interface TokenPropsType extends WithClassnameType {
   tokenId: string;
   egldLabel: string;
   tokenAvatar?: string;

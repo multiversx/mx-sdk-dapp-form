@@ -1,4 +1,5 @@
 import React from 'react';
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import BigNumber from 'bignumber.js';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
@@ -7,7 +8,7 @@ import { NftEnumType } from 'types';
 import { SharedAmount } from './components';
 import styles from './styles.module.scss';
 
-export const NftAmount = () => {
+export const NftAmount = ({ className }: WithClassnameType) => {
   const { amountInfo, tokensInfo } = useSendFormContext();
   const { nft } = tokensInfo;
   const { maxAmountAvailable, isMaxClicked } = amountInfo;
@@ -31,5 +32,10 @@ export const NftAmount = () => {
     return null;
   }
 
-  return <SharedAmount AvailableAmountElement={AvailableAmountElement} />;
+  return (
+    <SharedAmount
+      className={className}
+      AvailableAmountElement={AvailableAmountElement}
+    />
+  );
 };

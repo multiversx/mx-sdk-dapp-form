@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmount';
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import {
   faAngleDown,
   faAngleRight,
@@ -15,7 +16,7 @@ import { FeeInFiat } from './FeeInFiat';
 
 import styles from './styles.module.scss';
 
-export const FeeAccordion = () => {
+export const FeeAccordion = ({ className }: WithClassnameType) => {
   const { gasInfo, tokensInfo, formInfo } = useSendFormContext();
   const { feeLimit, gasCostLoading, gasPriceError, gasLimitError } = gasInfo;
   const { egldPriceInUsd, egldLabel } = tokensInfo;
@@ -32,9 +33,13 @@ export const FeeAccordion = () => {
 
   return (
     <div
-      className={classNames(styles.feeAccordion, {
-        [styles.feeAccordionSpaced]: formInfo.uiOptions?.showAmountSlider
-      })}
+      className={classNames(
+        styles.feeAccordion,
+        {
+          [styles.feeAccordionSpaced]: formInfo.uiOptions?.showAmountSlider
+        },
+        className
+      )}
     >
       <span className={styles.feeAccordionTrigger} onClick={toggleAccordion}>
         <span>
