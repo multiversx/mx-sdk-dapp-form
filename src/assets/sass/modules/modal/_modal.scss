@@ -3,7 +3,7 @@
 .modal-container {
   .modal-dialog {
     .modal-content {
-      border-radius: 20px !important;
+      border-radius: 20px;
       border: none;
       .card {
         border: none;
@@ -11,7 +11,7 @@
         box-shadow: unset;
       }
       .card-body {
-        padding: 40px !important;
+        padding: 40px;
       }
 
       .btn-close-link {
@@ -39,14 +39,14 @@
       .card {
         background-color: $card-bg;
         border-radius: 0;
-        box-shadow: none !important;
+        box-shadow: none;
         border: none;
         width: unset;
         > .p-4 {
-          padding: 0 !important;
+          padding: 0;
         }
         &.my-4 {
-          margin: 0 !important;
+          margin: 0;
         }
       }
     }
@@ -65,7 +65,7 @@
       justify-content: center;
       align-items: center;
       background-color: $primary-light;
-      border: 1px solid #007ded !important;
+      border: 1px solid #007ded;
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.04);
       border-radius: 6px;
       gap: 12px;
@@ -76,12 +76,12 @@
       }
     }
     .selectable-option {
-      max-width: 100% !important;
+      max-width: 100%;
     }
     .btn-light {
       color: $primary-light;
       background: #f3f9ff;
-      border: 1px solid #ddeeff !important;
+      border: 1px solid #ddeeff;
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04);
       border-radius: 6px;
       &:hover,

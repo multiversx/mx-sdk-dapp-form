@@ -1,4 +1,5 @@
 import React from 'react';
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
@@ -11,7 +12,7 @@ import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types/form';
 import styles from './styles.module.scss';
 
-export const Data = () => {
+export const Data = ({ className }: WithClassnameType) => {
   const {
     fields: {
       data: { label }
@@ -26,7 +27,7 @@ export const Data = () => {
     !isEgldTransaction || getIsDisabled(ValuesEnum.data, readonly);
 
   return (
-    <div className={styles.fieldData}>
+    <div className={classNames(styles.fieldData, className)}>
       {label != null && (
         <label htmlFor={ValuesEnum.data} className={styles.fieldDataLabel}>
           {label}

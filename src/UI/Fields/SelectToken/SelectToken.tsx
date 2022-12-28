@@ -1,5 +1,7 @@
 import React from 'react';
 import * as constants from '@elrondnetwork/dapp-core/constants/index';
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
+import classNames from 'classnames';
 import Select, { SingleValue, components } from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
@@ -18,6 +20,10 @@ interface OptionType {
   token: PartialTokenType;
 }
 
+export interface SelectTokenPropsType extends WithClassnameType {
+  label?: string;
+}
+
 const ListOption = (props: any) => {
   return (
     <div
@@ -29,7 +35,7 @@ const ListOption = (props: any) => {
   );
 };
 
-export const SelectToken = ({ label }: { label?: string }) => {
+export const SelectToken = ({ className, label }: SelectTokenPropsType) => {
   const { formInfo, accountInfo, tokensInfo } = useSendFormContext();
 
   const { readonly } = formInfo;
@@ -104,7 +110,7 @@ export const SelectToken = ({ label }: { label?: string }) => {
   const selectStyle = selectCustomStyles({ docStyle });
 
   return (
-    <div className={styles.selectToken}>
+    <div className={classNames(styles.selectTokenContainer, className)}>
       {label && (
         <label
           htmlFor={ValuesEnum.tokenId}
@@ -116,22 +122,24 @@ export const SelectToken = ({ label }: { label?: string }) => {
       )}
 
       <Select
+        className='selectToken'
+        classNamePrefix='selectToken'
+        components={{ Option: ListOption }}
+        filterOption={filterOptions}
+        formatOptionLabel={FormatOptionLabel}
         inputId={ValuesEnum.tokenId}
-        name={ValuesEnum.tokenId}
-        openMenuOnFocus
         isDisabled={getIsDisabled(ValuesEnum.tokenId, readonly)}
         isLoading={areTokensLoading}
-        styles={selectStyle}
+        name={ValuesEnum.tokenId}
+        onChange={onChange}
+        onMenuOpen={onMenuOpen}
+        openMenuOnFocus
+        options={options}
+        styles={className ? {} : selectStyle}
         value={
           options.find(({ value }: OptionType) => value === tokenId) ||
           undefined
         }
-        components={{ Option: ListOption }}
-        options={options}
-        onChange={onChange}
-        onMenuOpen={onMenuOpen}
-        filterOption={filterOptions}
-        formatOptionLabel={FormatOptionLabel}
       />
 
       {isTokenIdInvalid && (

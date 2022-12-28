@@ -11,7 +11,7 @@
     position: relative;
 
     input[aria-hidden='true'] {
-      display: none !important;
+      display: none;
     }
 
     .receiverFieldMenu {
@@ -28,11 +28,11 @@
       border: 1px solid rgba($black, 0.15);
       border-radius: $card-border-radius;
       z-index: 1000;
-      inset: unset !important;
-      max-height: 300px !important;
-      overflow: unset !important;
-      transform: none !important;
-      overflow-x: scroll !important;
+      inset: unset;
+      max-height: 300px;
+      overflow: unset;
+      transform: none;
+      overflow-x: scroll;
 
       .receiverFieldItem {
         display: inline-block;
@@ -68,7 +68,7 @@
 
   .receiverFieldScam {
     line-height: 1.5;
-    color: $warning !important;
+    color: $warning;
 
     svg {
       margin-right: 0.25rem;

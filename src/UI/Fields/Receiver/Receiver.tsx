@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import { addressIsValid } from '@elrondnetwork/dapp-core/utils/account/addressIsValid';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -13,13 +14,13 @@ import {
   TypeaheadManagerChildProps
 } from 'react-bootstrap-typeahead/types/types';
 
+import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
 
-import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 const CustomMenu = (
@@ -56,7 +57,7 @@ const CustomMenu = (
   );
 };
 
-export const Receiver = () => {
+export const Receiver = ({ className }: WithClassnameType) => {
   const {
     fields: {
       receiver: { label }
@@ -142,7 +143,7 @@ export const Receiver = () => {
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
   return (
-    <div className={styles.receiverField}>
+    <div className={classNames(styles.receiverField, className)}>
       {label !== null && (
         <div
           className={styles.receiverFieldLabel}

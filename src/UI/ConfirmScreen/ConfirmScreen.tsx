@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { LoginMethodsEnum } from '@elrondnetwork/dapp-core/types/enums.types';
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
@@ -8,14 +9,15 @@ import Confirm from '../Confirm';
 
 import styles from './styles.module.scss';
 
-export interface ConfirmScreenPropsType {
+export interface ConfirmScreenPropsType extends WithClassnameType {
   isConfirmCloseBtnVisible?: boolean;
   providerType: string;
 }
 
 export const ConfirmScreen = ({
   isConfirmCloseBtnVisible = true,
-  providerType
+  providerType,
+  className
 }: ConfirmScreenPropsType) => {
   const {
     tokensInfo,
@@ -68,7 +70,10 @@ export const ConfirmScreen = ({
   };
 
   return (
-    <div className={styles.confirm} data-testid='confirmScreen'>
+    <div
+      className={classNames(styles.confirm, className)}
+      data-testid='confirmScreen'
+    >
       <Confirm.Receiver receiver={receiver} scamReport={scamError} />
 
       <Confirm.Amount

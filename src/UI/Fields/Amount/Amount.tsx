@@ -1,20 +1,21 @@
 import React from 'react';
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { EgldAmount } from './EgldAmount';
 import { EsdtAmount } from './EsdtAmount';
 import { NftAmount } from './NftAmount';
 
-export const Amount = () => {
+export const Amount = ({ className }: WithClassnameType) => {
   const { formInfo } = useSendFormContext();
   const { isNftTransaction, isEsdtTransaction } = formInfo;
 
   if (isNftTransaction) {
-    return <NftAmount />;
+    return <NftAmount className={className} />;
   }
 
   if (isEsdtTransaction) {
-    return <EsdtAmount />;
+    return <EsdtAmount className={className} />;
   }
 
-  return <EgldAmount />;
+  return <EgldAmount className={className} />;
 };

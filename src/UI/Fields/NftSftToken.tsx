@@ -1,8 +1,9 @@
 import React from 'react';
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { Token, TokenPropsType } from 'UI/Confirm/Token';
 
-export const NftSftToken = () => {
+export const NftSftToken = ({ className }: WithClassnameType) => {
   const { formInfo, tokensInfo } = useSendFormContext();
   const { isEsdtTransaction } = formInfo;
   const { tokenId, nft, tokenIdError, egldLabel } = tokensInfo;
@@ -15,7 +16,8 @@ export const NftSftToken = () => {
     tokenId,
     egldLabel,
     tokenAvatar,
-    tokenIdError
+    tokenIdError,
+    className
   };
 
   return <Token {...tokenProps} />;

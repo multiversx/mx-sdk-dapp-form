@@ -1,4 +1,5 @@
 import React from 'react';
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import { faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
@@ -12,12 +13,13 @@ import { ValuesEnum } from 'types';
 import styles from './../styles.module.scss';
 import { MaxButton } from './MaxButton';
 
-export interface SharedAmountPropsType {
+export interface SharedAmountPropsType extends WithClassnameType {
   AvailableAmountElement: () => JSX.Element | null;
 }
 
 export const SharedAmount = ({
-  AvailableAmountElement
+  AvailableAmountElement,
+  className
 }: SharedAmountPropsType) => {
   const {
     formInfo: { readonly },
@@ -36,7 +38,7 @@ export const SharedAmount = ({
   const { amount, error, onFocus, onBlur, onChange, isInvalid } = amountInfo;
 
   return (
-    <div className={styles.sharedAmount}>
+    <div className={classNames(styles.sharedAmount, className)}>
       {label != null && (
         <label htmlFor={ValuesEnum.amount} className={styles.sharedAmountLabel}>
           {label}
