@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 
@@ -21,13 +22,8 @@ import {
 import { CanTransferNftWarning, WegldWarning } from 'UI/Warnings';
 import styles from './form.module.scss';
 
-export const Form = () => {
-  const {
-    formInfo,
-    amountInfo,
-    receiverInfo,
-    accountInfo
-  } = useSendFormContext();
+export const Form = ({ className }: WithClassnameType) => {
+  const { formInfo, receiverInfo, accountInfo, amountInfo } = useSendFormContext();
   const {
     values: { txType, tokenId }
   } = useFormikContext<ExtendedValuesType>();
@@ -60,7 +56,11 @@ export const Form = () => {
   }
 
   return (
-    <form key={renderKey} onSubmit={onValidateForm} className={styles.form}>
+    <form
+      key={renderKey}
+      onSubmit={onValidateForm}
+      className={classNames(styles.form, className)}
+    >
       <fieldset className={styles.formFieldset}>
         <Receiver />
 

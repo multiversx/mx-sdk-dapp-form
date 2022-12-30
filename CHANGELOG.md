@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.3.8](https://github.com/ElrondNetwork/dapp-core-form/pull/99)] - 2022-12-21
+
+- [Added className to form component, added `!default` to variables, and changed `selectToken` class name](https://github.com/ElrondNetwork/dapp-core-form/pull/98)
+
+## [[0.3.7](https://github.com/ElrondNetwork/dapp-core-form/pull/97)] - 2022-12-21
+
+- [Fixed WEGLD warning display and improved build time](https://github.com/ElrondNetwork/dapp-core-form/pull/95)
+- [Removed call too nfts endpoint for MetaESDTs and include it in tokens endpoint](https://github.com/ElrondNetwork/dapp-core-form/pull/96)
+
+## [[0.3.6](https://github.com/ElrondNetwork/dapp-core-form/pull/94)] - 2022-12-12
+
+- [Prevent fee recalculation when gasLimit is touched](https://github.com/ElrondNetwork/dapp-core-form/pull/93)
+
+## [[0.3.4](https://github.com/ElrondNetwork/dapp-core-form/pull/91)] - 2022-11-29
+
+- [Fixed gasLimit intialization](https://github.com/ElrondNetwork/dapp-core-form/pull/90)
 - [Fixed receiver dropdown, refactored components' interfaces](https://github.com/ElrondNetwork/dapp-core-form/pull/89)
 
 ## [[0.3.3](https://github.com/ElrondNetwork/dapp-core-form/pull/88)] - 2022-11-15

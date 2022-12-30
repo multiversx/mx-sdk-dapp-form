@@ -50,7 +50,7 @@ describe('SendForm Smart Contract', () => {
     fireEvent.click(sendBtn);
 
     const confirmFee = await render.findByTestId('confirmFee');
-    expect(confirmFee.textContent).toContain('0.00005793701');
+    expect(confirmFee.textContent).toContain('0.00005051201');
 
     // after gasLimit edit, transactionCost does no longer get called
     expect(transactionCost).toHaveBeenCalledTimes(1);

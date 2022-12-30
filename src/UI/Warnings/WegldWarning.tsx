@@ -1,17 +1,30 @@
 import React from 'react';
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { WEGLD_ID, WEGLD_MESSAGE } from 'constants/index';
-
+import classNames from 'classnames';
+import { getWegldIdForChainId } from 'apiCalls';
+import { WEGLD_MESSAGE } from 'constants/index';
+import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import styles from './styles.module.scss';
 
-export const WegldWarning = ({ tokenId }: { tokenId: string }) => {
-  if (WEGLD_ID !== tokenId) {
+export interface WegldWarningPropsType extends WithClassnameType {
+  tokenId: string;
+}
+
+export const WegldWarning = ({ className, tokenId }: WegldWarningPropsType) => {
+  const {
+    networkConfig: { chainId }
+  } = useNetworkConfigContext();
+
+  const wegldId = getWegldIdForChainId(chainId);
+
+  if (wegldId !== tokenId) {
     return null;
   }
 
   return (
-    <div className={styles.canTransferWarning}>
+    <div className={classNames(styles.canTransferWarning, className)}>
       <small role='alert' className={styles.wegldAlertWarning}>
         <FontAwesomeIcon
           icon={faExclamationTriangle}

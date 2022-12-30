@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import { addressIsValid } from '@elrondnetwork/dapp-core/utils/account/addressIsValid';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -56,7 +57,7 @@ const CustomMenu = (
   );
 };
 
-export const Receiver = () => {
+export const Receiver = ({ className }: WithClassnameType) => {
   const {
     fields: {
       receiver: { label }
@@ -142,7 +143,7 @@ export const Receiver = () => {
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
   return (
-    <div className={styles.receiverField}>
+    <div className={classNames(styles.receiverField, className)}>
       {label !== null && (
         <div
           className={styles.receiverFieldLabel}

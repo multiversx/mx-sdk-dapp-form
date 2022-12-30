@@ -1,9 +1,10 @@
 import React, { ChangeEvent } from 'react';
+import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
 import classNames from 'classnames';
 
 import styles from './styles.module.scss';
 
-export interface AmountSliderPropsType {
+export interface AmountSliderPropsType extends WithClassnameType {
   disabled?: boolean;
   percentageValue: number;
   onPercentageChange: (percentage: number) => void;
@@ -12,13 +13,14 @@ export interface AmountSliderPropsType {
 export const AmountSlider = ({
   disabled,
   percentageValue = 0,
-  onPercentageChange
+  onPercentageChange,
+  className
 }: AmountSliderPropsType) => {
   const breakpoints = [0, 25, 50, 75, 100];
   const amountSliderField = 'amountSlider';
 
   return (
-    <div className={styles.amountSlider}>
+    <div className={classNames(styles.amountSlider, className)}>
       <div className={styles.amountSliderRange}>
         <input
           name={amountSliderField}

@@ -63,8 +63,15 @@ describe('Send Meta ESDT', () => {
     );
     server.use(
       rest.get(
-        `${testNetwork.apiAddress}/accounts/${testAddress}/nfts`,
+        `${testNetwork.apiAddress}/accounts/${testAddress}/tokens`,
         mockResponse([metaToken])
+      )
+    );
+
+    server.use(
+      rest.get(
+        `${testNetwork.apiAddress}/accounts/${fakeReceiver}`,
+        mockResponse({})
       )
     );
     server.use(
@@ -140,7 +147,7 @@ describe('Send Meta ESDT', () => {
 
     await sendAndConfirmTest({ methods })({
       amount: '10.0000',
-      fee: '0.000239185'
+      fee: '0.0000595'
     });
   });
 });

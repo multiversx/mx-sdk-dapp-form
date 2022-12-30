@@ -148,7 +148,7 @@ describe('Send SFT tokens', () => {
 
     await sendAndConfirmTest({ methods })({
       amount: '1',
-      fee: '0.000230275'
+      fee: '0.0000595'
     });
   });
 });

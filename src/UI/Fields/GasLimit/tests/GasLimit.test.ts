@@ -1,6 +1,7 @@
 import { GAS_LIMIT } from '@elrondnetwork/dapp-core/constants/index';
 import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress } from '__mocks__';
+import { formattedAmountSelector } from 'tests/helpers';
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types';
 
@@ -181,5 +182,33 @@ describe('GasLimit field', () => {
       const amountError = methods.queryByTestId('amountError');
       expect(amountError).toBeNull();
     });
+  });
+  it('should keep the fee constant if gasLimit was touched', async () => {
+    async function expectCorrectFee() {
+      const feeLimit = await methods.findByTestId('feeLimit');
+      expect(formattedAmountSelector(feeLimit).intAmount).toBe('0');
+      expect(formattedAmountSelector(feeLimit).decimalAmount).toBe('.0060495');
+    }
+
+    const methods = renderForm({
+      balance: '1_000_000_000_000_000'.replace('_', '') // 0.001
+    });
+
+    const receiver: any = await methods.findByTestId('receiver');
+    fireEvent.change(receiver, { target: { value: testAddress } });
+
+    const amount = methods.getByTestId('amount');
+    fireEvent.change(amount, { target: { value: '0' } });
+
+    const gasLimit = methods.getByTestId('gasLimit');
+    fireEvent.change(gasLimit, { target: { value: '600000000' } });
+    fireEvent.blur(gasLimit, { target: { value: '600000000' } });
+
+    expectCorrectFee();
+
+    const data = await methods.findByTestId('data');
+    fireEvent.change(data, { target: { value: '12345678' } });
+
+    expectCorrectFee();
   });
 });
