@@ -7,7 +7,7 @@ import React, {
   createContext,
   useEffect
 } from 'react';
-import { DECIMALS, DIGITS } from '@elrondnetwork/dapp-core/constants/index';
+import { DIGITS } from '@elrondnetwork/dapp-core/constants/index';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';

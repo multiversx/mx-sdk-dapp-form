@@ -22,11 +22,16 @@
       opacity: 0;
       z-index: 6;
       cursor: pointer;
+      height: 1.25rem;
       margin-right: -16px;
 
       &.disabled {
         pointer-events: none;
         cursor: default;
+      }
+
+      &:hover + .amountSliderThumb .amountSliderThumbPercentage {
+        opacity: 1;
       }
     }
 
@@ -43,6 +48,22 @@
 
       &.disabled {
         background-color: $secondary;
+      }
+
+      .amountSliderThumbPercentage {
+        line-height: 1;
+        opacity: 0;
+        transition: all 400ms ease;
+        color: $white;
+        font-weight: 500;
+        position: absolute;
+        left: 50%;
+        padding: 0.25rem 0.35rem;
+        background: $black;
+        border-radius: 0.25rem;
+        font-size: 11px;
+        transform: translateX(-50%);
+        bottom: calc(100% + 0.25rem);
       }
     }
 
@@ -99,7 +120,8 @@
       left: 50%;
       transform: translateX(-25%);
       z-index: 7;
-      padding: 30px 5px 0;
+      padding: 1.5rem 0 0;
+      line-height: 1;
       color: $black;
       font-size: 12px;
       cursor: pointer;
