@@ -30,7 +30,7 @@
         cursor: default;
       }
 
-      &:hover + .amountSliderThumb .amountSliderThumbPercentage {
+      &:hover ~ .amountSliderThumb .amountSliderThumbPercentage {
         opacity: 1;
       }
     }
@@ -125,6 +125,10 @@
       color: $black;
       font-size: 12px;
       cursor: pointer;
+
+      &:hover ~ .amountSliderThumb .amountSliderThumbPercentage {
+        opacity: 1;
+      }
 
       &.exact {
         font-weight: bold;

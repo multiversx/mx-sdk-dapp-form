@@ -39,21 +39,6 @@ export const AmountSlider = ({
           }}
         />
 
-        <span
-          style={{ left: `${percentageValue}%` }}
-          className={classNames(styles.amountSliderThumb, {
-            [styles.disabled]: disabled
-          })}
-        >
-          <strong
-            className={classNames(styles.amountSliderThumbPercentage, {
-              [styles.hidden]: breakpoints.includes(percentageValue)
-            })}
-          >
-            {Math.round(percentageValue)}%
-          </strong>
-        </span>
-
         <div
           style={{ width: `${percentageValue}%` }}
           className={classNames(styles.amountSliderCompletion, {
@@ -86,6 +71,21 @@ export const AmountSlider = ({
             {breakpoint}%
           </span>
         ))}
+
+        <span
+          style={{ left: `${percentageValue}%` }}
+          className={classNames(styles.amountSliderThumb, {
+            [styles.disabled]: disabled
+          })}
+        >
+          <strong
+            className={classNames(styles.amountSliderThumbPercentage, {
+              [styles.hidden]: breakpoints.includes(percentageValue)
+            })}
+          >
+            {Math.round(percentageValue)}%
+          </strong>
+        </span>
       </div>
     </div>
   );

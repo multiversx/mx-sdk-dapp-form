@@ -10,6 +10,9 @@ import { SharedAmount } from './components';
 
 import styles from './styles.module.scss';
 
+import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
+import { stringIsInteger } from '@elrondnetwork/dapp-core/utils/validation/stringIsInteger';
+
 export const EgldAmount = ({ className }: WithClassnameType) => {
   const { tokensInfo, amountInfo } = useSendFormContext();
 
@@ -22,7 +25,10 @@ export const EgldAmount = ({ className }: WithClassnameType) => {
   } = amountInfo;
 
   function AvailableAmountElement() {
-    const amount = isNaN(Number(amountInfo.amount)) ? '0' : amountInfo.amount;
+    const amount =
+      stringIsFloat(amountInfo.amount) || stringIsInteger(amountInfo.amount)
+        ? amountInfo.amount
+        : '0';
 
     if (!isInvalid && amountInfo.amount) {
       return (
