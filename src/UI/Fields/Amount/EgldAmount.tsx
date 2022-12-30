@@ -20,11 +20,13 @@ export const EgldAmount = () => {
   } = amountInfo;
 
   function AvailableAmountElement() {
+    const amount = isNaN(Number(amountInfo.amount)) ? '0' : amountInfo.amount;
+
     if (!isInvalid && amountInfo.amount) {
       return (
         <div className={styles.container}>
           <UsdValue
-            amount={amountInfo.amount}
+            amount={amount}
             usd={egldPriceInUsd}
             data-testid={`egldPrice_${egldPriceInUsd}`}
           />

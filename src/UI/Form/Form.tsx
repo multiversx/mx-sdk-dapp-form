@@ -22,18 +22,26 @@ import { CanTransferNftWarning, WegldWarning } from 'UI/Warnings';
 import styles from './form.module.scss';
 
 export const Form = () => {
-  const { formInfo, receiverInfo, accountInfo } = useSendFormContext();
+  const {
+    formInfo,
+    amountInfo,
+    receiverInfo,
+    accountInfo
+  } = useSendFormContext();
   const {
     values: { txType, tokenId }
   } = useFormikContext<ExtendedValuesType>();
 
   const { scamError } = receiverInfo;
+  const { amountRange, onSetAmountPercentage } = amountInfo;
+
   const {
     renderKey,
     onValidateForm,
     onCloseForm,
     areValidatedValuesReady,
-    uiOptions
+    uiOptions,
+    readonly
   } = formInfo;
 
   function handleCloseClick(e: any) {
@@ -60,7 +68,13 @@ export const Form = () => {
 
         <Amount />
 
-        {uiOptions?.showAmountSlider && <AmountSlider />}
+        {!uiOptions?.showAmountSlider && !isNFTTransaction && (
+          <AmountSlider
+            onPercentageChange={onSetAmountPercentage}
+            percentageValue={amountRange}
+            disabled={Boolean(readonly)}
+          />
+        )}
 
         <WegldWarning tokenId={tokenId} />
 

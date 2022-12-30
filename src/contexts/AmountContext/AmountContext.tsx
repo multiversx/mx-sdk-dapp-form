@@ -4,9 +4,10 @@ import React, {
   useState,
   ChangeEvent,
   ReactNode,
-  createContext
+  createContext,
+  useEffect
 } from 'react';
-import { DIGITS } from '@elrondnetwork/dapp-core/constants/index';
+import { DECIMALS, DIGITS } from '@elrondnetwork/dapp-core/constants/index';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
@@ -96,9 +97,11 @@ export function AmountContextProvider({
       const amountBN = new BigNumber(maxAmountMinusDust)
         .times(percentage)
         .dividedBy(100);
+
       const value = formatAmount({
         input: parseAmount(String(amountBN)),
-        digits: DIGITS
+        digits: DIGITS,
+        showLastNonZeroDecimal: percentage >= 100 ? true : false
       });
 
       if (updateFieldValue) {
@@ -150,6 +153,15 @@ export function AmountContextProvider({
     setIsMaxClicked(true);
     return onChange(maxAmountMinusDust || values.amount);
   }, [maxAmountMinusDust]);
+
+  useEffect(() => {
+    if (BigNumber(maxAmountMinusDust).gt(0)) {
+      onSetAmountPercentage(
+        getPercentageOfAmount(values.amount, maxAmountMinusDust),
+        false
+      );
+    }
+  }, [getPercentageOfAmount, maxAmountMinusDust]);
 
   // if the amount is zero, let the insufficient funds error go to gasLimit
   const isInvalid = getIsAmountInvalid({

@@ -4,12 +4,11 @@
   .amountSliderRange {
     position: relative;
     display: flex;
-    margin-top: 10px;
-    margin-right: 16px;
+    margin: 10px 16px 30px 0;
 
     &:after {
       width: 100%;
-      left: 0;
+      left: 2px;
       top: 50%;
       transform: translateY(-50%);
       content: '';
@@ -63,44 +62,54 @@
     }
 
     .amountSliderBreakpoint {
-      border-radius: 50%;
-      background-color: $white;
-      border: 2px solid $primary;
-      height: 12px;
-      width: 12px;
       position: absolute;
+      transform: translate(-25%, -50%);
+      padding: 15px;
       top: 50%;
-      transform: translateY(-50%);
       z-index: 4;
 
-      &.completed {
+      &:after {
+        content: '';
+        position: absolute;
+        height: 12px;
+        border-radius: 50%;
+        background-color: $white;
+        border: 2px solid $primary;
+        width: 12px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      &.completed:after {
         background-color: $primary;
 
-        &.disabled {
+        &.disabled:after {
           background-color: $secondary;
         }
       }
 
-      &.disabled {
+      &.disabled:after {
         border-color: $secondary;
       }
+    }
 
-      .amountSliderPercentage {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        padding-top: 15px;
-        color: $black;
-        font-size: 12px;
-        cursor: pointer;
+    .amountSliderPercentage {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-25%);
+      z-index: 7;
+      padding: 30px 5px 0;
+      color: $black;
+      font-size: 12px;
+      cursor: pointer;
 
-        &.exact {
-          font-weight: bold;
-        }
+      &.exact {
+        font-weight: bold;
+      }
 
-        &.disabled {
-          pointer-events: none;
-        }
+      &.disabled {
+        pointer-events: none;
       }
     }
   }

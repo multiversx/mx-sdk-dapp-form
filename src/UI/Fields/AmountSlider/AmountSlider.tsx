@@ -1,21 +1,21 @@
 import React, { ChangeEvent } from 'react';
 import classNames from 'classnames';
 
-import { useSendFormContext } from 'contexts/SendFormProviderContext';
-
 import styles from './styles.module.scss';
 
-export const AmountSlider = () => {
-  const {
-    formInfo: { readonly },
-    amountInfo: { amountRange, onSetAmountPercentage }
-  } = useSendFormContext();
+export interface AmountSliderPropsType {
+  disabled?: boolean;
+  percentageValue: number;
+  onPercentageChange: (percentage: number) => void;
+}
 
+export const AmountSlider = ({
+  disabled,
+  percentageValue = 0,
+  onPercentageChange
+}: AmountSliderPropsType) => {
   const breakpoints = [0, 25, 50, 75, 100];
-
   const amountSliderField = 'amountSlider';
-
-  const disabled = Boolean(readonly);
 
   return (
     <div className={styles.amountSlider}>
@@ -28,48 +28,53 @@ export const AmountSlider = () => {
           disabled={disabled}
           min={0}
           max={100}
-          value={String(amountRange)}
+          value={String(percentageValue)}
           className={classNames(styles.amountSliderInput, {
             [styles.disabled]: disabled
           })}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            onSetAmountPercentage(Number(event.target.value))
-          }
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            onPercentageChange(Number(event.target.value));
+          }}
         />
 
         <span
-          style={{ left: `${amountRange}%` }}
+          style={{ left: `${percentageValue}%` }}
           className={classNames(styles.amountSliderThumb, {
             [styles.disabled]: disabled
           })}
         />
 
         <div
-          style={{ width: `${amountRange}%` }}
+          style={{ width: `${percentageValue}%` }}
           className={classNames(styles.amountSliderCompletion, {
             [styles.disabled]: disabled
           })}
         />
 
         {breakpoints.map((breakpoint) => (
-          <div
+          <span
+            onClick={() => onPercentageChange(breakpoint)}
             key={`breakpoint-${breakpoint}`}
             style={{ left: `${breakpoint}%` }}
             className={classNames(styles.amountSliderBreakpoint, {
-              [styles.completed]: breakpoint <= amountRange,
+              [styles.completed]: breakpoint <= percentageValue,
+              [styles.disabled]: disabled
+            })}
+          />
+        ))}
+
+        {breakpoints.map((breakpoint) => (
+          <span
+            style={{ left: `${breakpoint}%` }}
+            key={`breakpoint-${breakpoint}`}
+            onClick={() => onPercentageChange(breakpoint)}
+            className={classNames(styles.amountSliderPercentage, {
+              [styles.exact]: breakpoint === percentageValue,
               [styles.disabled]: disabled
             })}
           >
-            <span
-              onClick={() => onSetAmountPercentage(breakpoint)}
-              className={classNames(styles.amountSliderPercentage, {
-                [styles.exact]: breakpoint === amountRange,
-                [styles.disabled]: disabled
-              })}
-            >
-              {breakpoint}%
-            </span>
-          </div>
+            {breakpoint}%
+          </span>
         ))}
       </div>
     </div>
