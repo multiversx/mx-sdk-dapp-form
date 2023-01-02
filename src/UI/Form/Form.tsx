@@ -73,7 +73,7 @@ export const Form = ({ className }: WithClassnameType) => {
 
         <Amount />
 
-        {!uiOptions?.showAmountSlider && !isNFTTransaction && (
+        {uiOptions?.showAmountSlider && !isNFTTransaction && (
           <AmountSlider
             onPercentageChange={onSetAmountPercentage}
             percentageValue={amountRange}
