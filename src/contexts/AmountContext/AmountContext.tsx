@@ -101,7 +101,7 @@ export function AmountContextProvider({
       const value = formatAmount({
         input: parseAmount(String(amountBN)),
         digits: DIGITS,
-        showLastNonZeroDecimal: percentage >= 100 ? true : false
+        showLastNonZeroDecimal: percentage >= 100
       });
 
       if (updateFieldValue) {
@@ -131,6 +131,7 @@ export function AmountContextProvider({
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
 
+      setFieldTouched(ValuesEnum.amount, true);
       onSetAmountPercentage(
         getPercentageOfAmount(value, maxAmountMinusDust),
         false
@@ -155,7 +156,7 @@ export function AmountContextProvider({
   }, [maxAmountMinusDust]);
 
   useEffect(() => {
-    if (BigNumber(maxAmountMinusDust).gt(0)) {
+    if (BigNumber(maxAmountMinusDust).isGreaterThan(0)) {
       onSetAmountPercentage(
         getPercentageOfAmount(values.amount, maxAmountMinusDust),
         false
