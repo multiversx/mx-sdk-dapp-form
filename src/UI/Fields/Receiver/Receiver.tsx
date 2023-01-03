@@ -14,13 +14,13 @@ import {
   TypeaheadManagerChildProps
 } from 'react-bootstrap-typeahead/types/types';
 
-import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
 
+import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 const CustomMenu = (

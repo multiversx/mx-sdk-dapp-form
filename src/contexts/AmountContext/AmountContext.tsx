@@ -4,7 +4,8 @@ import React, {
   useState,
   ChangeEvent,
   ReactNode,
-  createContext
+  createContext,
+  useEffect
 } from 'react';
 import { DIGITS } from '@elrondnetwork/dapp-core/constants/index';
 import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
@@ -96,9 +97,11 @@ export function AmountContextProvider({
       const amountBN = new BigNumber(maxAmountMinusDust)
         .times(percentage)
         .dividedBy(100);
+
       const value = formatAmount({
         input: parseAmount(String(amountBN)),
-        digits: DIGITS
+        digits: DIGITS,
+        showLastNonZeroDecimal: percentage >= 100
       });
 
       if (updateFieldValue) {
@@ -128,6 +131,7 @@ export function AmountContextProvider({
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
 
+      setFieldTouched(ValuesEnum.amount, true);
       onSetAmountPercentage(
         getPercentageOfAmount(value, maxAmountMinusDust),
         false
@@ -150,6 +154,15 @@ export function AmountContextProvider({
     setIsMaxClicked(true);
     return onChange(maxAmountMinusDust || values.amount);
   }, [maxAmountMinusDust]);
+
+  useEffect(() => {
+    if (BigNumber(maxAmountMinusDust).isGreaterThan(0)) {
+      onSetAmountPercentage(
+        getPercentageOfAmount(values.amount, maxAmountMinusDust),
+        false
+      );
+    }
+  }, [getPercentageOfAmount, maxAmountMinusDust]);
 
   // if the amount is zero, let the insufficient funds error go to gasLimit
   const isInvalid = getIsAmountInvalid({

@@ -2,20 +2,19 @@ import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringI
 import BigNumber from 'bignumber.js';
 
 import { ZERO } from 'constants/index';
-import { parseAmount } from 'helpers';
 
 export const getPercentageOfAmount = (
   amount: string,
   maxAmountMinusDust: string
 ) => {
-  const isAmountValid = !isNaN(amount as any) && stringIsFloat(String(amount));
-  const value = isAmountValid ? amount : ZERO;
-
-  const formattedBN = stringIsFloat(String(maxAmountMinusDust))
-    ? new BigNumber(String(maxAmountMinusDust).replace('.', ''))
+  const value = stringIsFloat(String(amount)) ? amount : ZERO;
+  const maxBalanceBn = stringIsFloat(String(maxAmountMinusDust))
+    ? new BigNumber(maxAmountMinusDust)
     : new BigNumber(ZERO);
-  const parsedBN = new BigNumber(parseAmount(value));
-  const percentage = 100 / Number(String(formattedBN.dividedBy(parsedBN)));
 
-  return Math.round(percentage);
+  const percentage = BigNumber(100)
+    .dividedBy(maxBalanceBn.dividedBy(value))
+    .toNumber();
+
+  return BigNumber.minimum(percentage, 100).toNumber();
 };
