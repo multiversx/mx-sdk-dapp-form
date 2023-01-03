@@ -25,7 +25,7 @@ describe('getPercentageOfAmount tests', () => {
     expect(percentage).toBe(0);
   });
 
-  test('getPercentageOfAmount works with values above total balance', () => {
+  test('getPercentageOfAmount works with values above the total balance', () => {
     const amount = '1241123';
     const balanceMinusDust = '3311';
     const percentage = getPercentageOfAmount(amount, balanceMinusDust);
