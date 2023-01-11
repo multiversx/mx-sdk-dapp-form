@@ -1,0 +1,33 @@
+@import 'assets/sass/variables/variables';
+
+.tokenElement {
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  .tokenElementWrapper {
+    margin-right: 0.25rem;
+    display: flex;
+
+    .tokenElementCircle {
+      border-radius: 50%;
+    }
+
+    .tokenElementSpaced {
+      margin-right: 0.25rem;
+    }
+
+    .tokenElementEGLD {
+      margin-right: 0.25rem;
+      margin-left: 0.25rem;
+    }
+
+    .tokenElementSymbol {
+      padding: 0 0.5rem;
+    }
+  }
+
+  .tokenElementIdentifier {
+    line-height: 1.5;
+  }
+}
