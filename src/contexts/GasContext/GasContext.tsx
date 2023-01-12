@@ -3,8 +3,8 @@ import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import {
   GAS_PER_DATA_BYTE,
   GAS_PRICE_MODIFIER
-} from '@elrondnetwork/dapp-core/constants/index';
-import { calculateFeeLimit } from '@elrondnetwork/dapp-core/utils/operations/calculateFeeLimit';
+} from '@multiversx/sdk-dapp/constants/index';
+import { calculateFeeLimit } from '@multiversx/sdk-dapp/utils/operations/calculateFeeLimit';
 import { useFormikContext } from 'formik';
 import { ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';

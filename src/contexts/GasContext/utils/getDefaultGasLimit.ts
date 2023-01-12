@@ -1,4 +1,4 @@
-import { GAS_LIMIT } from '@elrondnetwork/dapp-core/constants/index';
+import { GAS_LIMIT } from '@multiversx/sdk-dapp/constants/index';
 import { TOKEN_GAS_LIMIT } from 'constants/index';
 import { calculateNftGasLimit } from 'operations';
 

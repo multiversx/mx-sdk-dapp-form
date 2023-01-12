@@ -3,7 +3,7 @@ import {
   GAS_PRICE_MODIFIER,
   DECIMALS,
   DIGITS
-} from '@elrondnetwork/dapp-core/constants/index';
+} from '@multiversx/sdk-dapp/constants/index';
 
 import BigNumber from 'bignumber.js';
 import { MIN_DUST, ZERO } from 'constants/index';

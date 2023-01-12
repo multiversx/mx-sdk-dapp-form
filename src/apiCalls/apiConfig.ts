@@ -1,4 +1,4 @@
-import { NetworkType } from '@elrondnetwork/dapp-core/types/network.types';
+import { NetworkType } from '@multiversx/sdk-dapp/types/network.types';
 import { getNetworkConfigForChainId } from 'apiCalls/network';
 
 export interface ApiConfigType {

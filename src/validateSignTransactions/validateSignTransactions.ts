@@ -1,13 +1,13 @@
-import { newTransaction } from '@elrondnetwork/dapp-core/models/newTransaction';
+import { newTransaction } from '@multiversx/sdk-dapp/models/newTransaction';
 import {
   MultiEsdtTransactionType,
   MultiSignTransactionType,
   TransactionDataTokenType,
   TransactionsDataTokensType
-} from '@elrondnetwork/dapp-core/types/transactions.types';
+} from '@multiversx/sdk-dapp/types/transactions.types';
 
-import { getTokenFromData } from '@elrondnetwork/dapp-core/utils/transactions/getTokenFromData';
-import { parseMultiEsdtTransferData } from '@elrondnetwork/dapp-core/utils/transactions/parseMultiEsdtTransferData';
+import { getTokenFromData } from '@multiversx/sdk-dapp/utils/transactions/getTokenFromData';
+import { parseMultiEsdtTransferData } from '@multiversx/sdk-dapp/utils/transactions/parseMultiEsdtTransferData';
 import getTxWithReceiver from './getTxWithReceiver';
 import {
   SignTxType,

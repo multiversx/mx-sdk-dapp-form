@@ -1,7 +1,7 @@
 import {
   ACCOUNTS_ENDPOINT,
   NFTS_ENDPOINT
-} from '@elrondnetwork/dapp-core/apiCalls/endpoints';
+} from '@multiversx/sdk-dapp/apiCalls/endpoints';
 import axios from 'axios';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
 import { PartialNftType } from 'types';

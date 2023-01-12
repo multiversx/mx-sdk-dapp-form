@@ -1,4 +1,4 @@
-import { buildUrlParams } from '@elrondnetwork/dapp-core/utils/buildUrlParams';
+import { buildUrlParams } from '@multiversx/sdk-dapp/utils/buildUrlParams';
 
 interface ReplyToDappBasicType {
   callbackUrl: string;

@@ -11,16 +11,16 @@ import {
   getNetworkConfigForChainId,
   SendFormContainerPropsType,
   ExtendedValuesType
-} from '@elrondnetwork/dapp-core-form';
+} from '@multiversx/sdk-dapp-form';
 
 import {
   useGetNetworkConfig,
   useGetAccountInfo,
   useGetAccountProvider
-} from '@elrondnetwork/dapp-core/hooks';
+} from '@multiversx/sdk-dapp/hooks';
 
-import { sendTransactions } from '@elrondnetwork/dapp-core/services';
-import { Transaction } from '@elrondnetwork/erdjs';
+import { sendTransactions } from '@multiversx/sdk-dapp/services';
+import { Transaction } from '@multiversx/sdk-core';
 
 interface ContextType {
   children: ReactNode;
@@ -99,12 +99,12 @@ const ContextProvider = (props: ContextType) => {
   );
 };
 
-export const DashboardContextProvider =
-  (Component: ComponentType) => (props: any) =>
-    (
-      <ContextProvider>
-        <Component {...props} />
-      </ContextProvider>
-    );
+export const DashboardContextProvider = (Component: ComponentType) => (
+  props: any
+) => (
+  <ContextProvider>
+    <Component {...props} />
+  </ContextProvider>
+);
 
 export const useFormProps = () => useContext(DashboardContext);

@@ -17,9 +17,9 @@ const sftToken = {
   royalties: 0,
   media: [
     {
-      url: 'https://media.elrond.com/nfts/thumbnail/default.png',
-      originalUrl: 'https://media.elrond.com/nfts/thumbnail/default.png',
-      thumbnailUrl: 'https://media.elrond.com/nfts/thumbnail/default.png',
+      url: 'https://media.multiversx.com/nfts/thumbnail/default.png',
+      originalUrl: 'https://media.multiversx.com/nfts/thumbnail/default.png',
+      thumbnailUrl: 'https://media.multiversx.com/nfts/thumbnail/default.png',
       fileType: 'image/png',
       fileSize: 29512
     }

@@ -1,6 +1,6 @@
 import React from 'react';
-import * as constants from '@elrondnetwork/dapp-core/constants/index';
-import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
+import * as constants from '@multiversx/sdk-dapp/constants/index';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import Select, { SingleValue, components } from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
@@ -63,7 +63,7 @@ export const SelectToken = ({ className, label }: SelectTokenPropsType) => {
 
   const allTokens: PartialTokenType[] = [
     {
-      name: 'Elrond eGold',
+      name: 'MultiversX eGold',
       identifier: egldLabel,
       balance,
       decimals: constants.DECIMALS,

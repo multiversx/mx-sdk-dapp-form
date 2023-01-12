@@ -1,7 +1,7 @@
 import {
   GAS_LIMIT,
   GAS_PER_DATA_BYTE
-} from '@elrondnetwork/dapp-core/constants/index';
+} from '@multiversx/sdk-dapp/constants/index';
 import BigNumber from 'bignumber.js';
 
 interface CalculateGasLimitType {

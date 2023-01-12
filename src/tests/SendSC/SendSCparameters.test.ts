@@ -35,7 +35,7 @@ describe('SendForm Smart Contract', () => {
     expect(transactionCost).toHaveBeenCalledWith(
       '/transaction/cost',
       transactionData,
-      { baseURL: 'https://testnet-api.elrond.com', timeout: 4000 }
+      { baseURL: 'https://testnet-api.multiversx.com', timeout: 4000 }
     );
 
     const gasLimit = render.getByTestId('gasLimit') as HTMLInputElement;

@@ -1,6 +1,6 @@
-import { TransactionsDataTokensType } from '@elrondnetwork/dapp-core/types/transactions.types';
-import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
-import { Address } from '@elrondnetwork/erdjs';
+import { TransactionsDataTokensType } from '@multiversx/sdk-dapp/types/transactions.types';
+import { isContract } from '@multiversx/sdk-dapp/utils/smartContracts';
+import { Address } from '@multiversx/sdk-core';
 import getTxWithReceiver from './getTxWithReceiver';
 import { SignTxType } from './validateTransaction';
 

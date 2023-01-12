@@ -1,6 +1,6 @@
 import React from 'react';
-import { Trim } from '@elrondnetwork/dapp-core/UI/Trim';
-import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
+import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';

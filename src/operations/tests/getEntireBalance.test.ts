@@ -1,4 +1,4 @@
-import { MAINNET_CHAIN_ID } from '@elrondnetwork/dapp-core/constants/index';
+import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/constants/index';
 import { getEntireBalance } from '../getEntireBalance';
 
 describe('Entire balance', () => {

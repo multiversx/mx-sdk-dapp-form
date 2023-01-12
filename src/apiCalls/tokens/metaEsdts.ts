@@ -1,4 +1,4 @@
-import { COLLECTIONS_ENDPOINT } from '@elrondnetwork/dapp-core/apiCalls/endpoints';
+import { COLLECTIONS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
 import axios from 'axios';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
 import { NftEnumType, PartialNftType } from 'types';
