@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { NetworkType } from '@elrondnetwork/dapp-core/types/network.types';
+import { NetworkType } from '@multiversx/sdk-dapp/types/network.types';
 import {
   delegationContractDataByEnvironment,
   getDelegationDataForChainId

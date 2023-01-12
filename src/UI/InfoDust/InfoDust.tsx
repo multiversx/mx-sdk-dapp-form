@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmount';
+import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactTooltip from 'react-tooltip';

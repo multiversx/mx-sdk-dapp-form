@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import * as constants from '@elrondnetwork/dapp-core/constants/index';
-import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmount';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as constants from '@multiversx/sdk-dapp/constants/index';
+import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 import classNames from 'classnames';
 
 import { ZERO } from 'constants/index';
@@ -10,7 +10,7 @@ import { scamFlag } from 'helpers';
 import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
 
 import styles from './styles.module.scss';
-const ElrondSymbol = require('./symbol.svg').default;
+const EgldSymbol = require('./symbol.svg').default;
 
 export interface TokenElementPropsType {
   token: PartialTokenType;
@@ -79,7 +79,7 @@ export const TokenElement = ({
   if (isEgld) {
     tokenIcon = (
       <div className={classNames(styles.tokenElementEGLD)}>
-        <ElrondSymbol
+        <EgldSymbol
           is='x3d' // fixes jest Warning: The tag <default> is unrecognized in this browser.
           height={avatarDropdownSize}
         />

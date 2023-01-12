@@ -1,4 +1,4 @@
-import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
+import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 
 import { ZERO } from 'constants/index';

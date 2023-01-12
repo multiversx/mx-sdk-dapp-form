@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmount';
+import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 
 import { ZERO } from 'constants/index';
 import { calculateFeeInFiat } from 'operations';

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { MAINNET_CHAIN_ID } from '@elrondnetwork/dapp-core/constants/index';
-import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
+import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/constants/index';
+import { isContract } from '@multiversx/sdk-dapp/utils/smartContracts';
 import { useFormikContext } from 'formik';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { useAccountContext } from 'contexts/AccountContext';

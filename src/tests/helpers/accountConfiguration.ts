@@ -2,8 +2,8 @@ import {
   fallbackNetworkConfigurations,
   TESTNET_EGLD_LABEL,
   TESTNET_CHAIN_ID
-} from '@elrondnetwork/dapp-core/constants/index';
-import { EnvironmentsEnum } from '@elrondnetwork/dapp-core/types/enums.types';
+} from '@multiversx/sdk-dapp/constants/index';
+import { EnvironmentsEnum } from '@multiversx/sdk-dapp/types/enums.types';
 import { testAddress } from '__mocks__';
 
 const activeNetwork = fallbackNetworkConfigurations[EnvironmentsEnum.testnet];

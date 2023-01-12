@@ -1,45 +1,45 @@
 
-# dapp-core-form
+# sdk-dapp-form
 
-> A library that holds the core functional logic of a dapp on the Elrond Network
+> A library that holds the core functional logic of a dapp on the MultiversX blockchain
 
-[![NPM](https://img.shields.io/npm/v/dapp-core-form.svg)](https://www.npmjs.com/package/@elrondnetwork/dapp-core-form) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/sdk-dapp-form.svg)](https://www.npmjs.com/package/@multiversx/sdk-dapp-form) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 # Installation
 
 The library can be installed via npm or yarn.
 
 ```bash
-npm install @elrondnetwork/dapp-core-form
+npm install @multiversx/sdk-dapp-form
 ```
 
 or
 
 ```bash
-yarn add @elrondnetwork/dapp-core-form
+yarn add @multiversx/sdk-dapp-form
 ```
 
-If you need only the dapp-core-form basic logic, without the additional UI, consider using the `--no-optional` flag.
+If you need only the sdk-dapp-form basic logic, without the additional UI, consider using the `--no-optional` flag.
 This will not install the packages needed for the optional UI components.
 
 ```bash
-npm install @elrondnetwork/dapp-core-form --no-optional
+npm install @multiversx/sdk-dapp-form --no-optional
 ```
 
 or
 
 ```bash
-yarn add @elrondnetwork/dapp-core-form --no-optional
+yarn add @multiversx/sdk-dapp-form --no-optional
 ```
 
 # Usage
 
-dapp-core-form aims to abstract and simplify the process of formulating and validating transactions on the Elrond Network.
+sdk-dapp-form aims to abstract and simplify the process of formulating and validating transactions on the MultiversX blockchain.
 
 
 ## Roadmap
 
-See the [open issues](https://github.com/ElrondNetwork/dapp-core-form/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/@multiversx/sdk-dapp-form/issues) for a list of proposed features (and known issues).
 
 ## Contributing
 
@@ -55,7 +55,7 @@ One can contribute by creating _pull requests_, or by opening _issues_ for disco
 
 ## Developers
 
-The [Elrond Team](https://elrond.com/team/).
+The [MultiversX Team](https://multiversx.com/team/).
 
 ## License
 

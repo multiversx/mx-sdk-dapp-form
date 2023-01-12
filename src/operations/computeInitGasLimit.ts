@@ -1,6 +1,6 @@
-import { GAS_LIMIT } from '@elrondnetwork/dapp-core/constants/index';
-import { isContract } from '@elrondnetwork/dapp-core/utils/smartContracts';
-import { getIdentifierType } from '@elrondnetwork/dapp-core/utils/validation/getIdentifierType';
+import { GAS_LIMIT } from '@multiversx/sdk-dapp/constants/index';
+import { isContract } from '@multiversx/sdk-dapp/utils/smartContracts';
+import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 
 import BigNumber from 'bignumber.js';
 import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DIGITS } from '@elrondnetwork/dapp-core/constants/index';
+import { DIGITS } from '@multiversx/sdk-dapp/constants/index';
 import { getEconomicsInfo } from 'apiCalls';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 

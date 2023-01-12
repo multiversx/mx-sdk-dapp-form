@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getTransactions } from '@elrondnetwork/dapp-core/apiCalls/transactions/getTransactions';
-import { ServerTransactionType } from '@elrondnetwork/dapp-core/types';
+import { getTransactions } from '@multiversx/sdk-dapp/apiCalls/transactions/getTransactions';
+import { ServerTransactionType } from '@multiversx/sdk-dapp/types';
 import uniq from 'lodash/uniq';
 import { getApiConfig } from 'apiCalls';
 import { useAccountContext } from '../../AccountContext';

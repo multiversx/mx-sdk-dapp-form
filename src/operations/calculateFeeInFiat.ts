@@ -1,4 +1,4 @@
-import { DECIMALS, DIGITS } from '@elrondnetwork/dapp-core/constants/index';
+import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp/constants/index';
 import { formatAmount, usdValue } from 'helpers';
 
 export function calculateFeeInFiat({

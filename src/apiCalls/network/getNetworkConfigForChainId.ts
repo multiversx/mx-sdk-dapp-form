@@ -1,5 +1,5 @@
-import { getServerConfiguration } from '@elrondnetwork/dapp-core/apiCalls/configuration/getServerConfiguration';
-import { NetworkType } from '@elrondnetwork/dapp-core/types/network.types';
+import { getServerConfiguration } from '@multiversx/sdk-dapp/apiCalls/configuration/getServerConfiguration';
+import { NetworkType } from '@multiversx/sdk-dapp/types/network.types';
 import { getApiAddressForChainID } from 'apiCalls/network/getApiAddressForChainID';
 
 export async function getNetworkConfigForChainId(

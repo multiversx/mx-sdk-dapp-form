@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmount';
-import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
+import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import {
   faAngleDown,
   faAngleRight,

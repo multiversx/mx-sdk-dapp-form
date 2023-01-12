@@ -1,8 +1,8 @@
 # @elrondnetwork/dapp-template
-The __Elrond dApp Template__, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
-It's a basic implementation of [@elrondnetwork/dapp-core](https://www.npmjs.com/package/@elrondnetwork/dapp-core), providing the basics for Elrond authentication and TX signing.
+The __MultiversX Dapp Template__, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
+It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for MultiversX authentication and TX signing.
 
-See [Dapp template](https://dapp-template.elrond.com/) for live demo.
+See [Dapp template](https://dapp-template.multiversx.com/) for live demo.
 
 ## Requirements
 
@@ -29,11 +29,11 @@ Go to `App.tsx` and edit the `environment` variable according to the environment
 Valid values are `testnet`, `devnet` or `mainnet`
 
 If you need to edit the network configuration, you can pass in a `customNetworkConfig` object.
-More info about this can be found in [dapp-core documentation](https://github.com/ElrondNetwork/dapp-core)
+More info about this can be found in [dapp-core documentation](https://github.com/multiversx/sdk-dapp)
 
 ### Step 3. Running in development mode
 
-In order to develop `dapp-core-form` you need to do a series of steps for the first time. This is due to a [limitation](https://stackoverflow.com/questions/59056714/react-scripts-parent-folder-node-modules-error-when-running-in-child-location) of react-scripts.
+In order to develop `sdk-dapp-form` you need to do a series of steps for the first time. This is due to a [limitation](https://stackoverflow.com/questions/59056714/react-scripts-parent-folder-node-modules-error-when-running-in-child-location) of react-scripts.
 First make sure the parent dependencies are installed. 
 Then run:
 ```bash
@@ -73,7 +73,7 @@ npm run build
 
 ## Roadmap
 
-See the [open issues](https://github.com/ElrondNetwork/dapp-template/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/multiversx/template-dapp/issues) for a list of proposed features (and known issues).
 
 ## Contributing
 
@@ -89,4 +89,4 @@ One can contribute by creating _pull requests_, or by opening _issues_ for disco
 
 ## Developers
 
-The [Elrond Team](https://elrond.com/team/).
+The [MultiversX Team](https://multiversx.com/team/).

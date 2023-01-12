@@ -1,7 +1,7 @@
 import React from 'react';
-import { DECIMALS, DIGITS } from '@elrondnetwork/dapp-core/constants/index';
-import { FormatAmount } from '@elrondnetwork/dapp-core/UI/FormatAmount/FormatAmount';
-import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue/index';
+import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp/constants/index';
+import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
+import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue/index';
 
 import { parseAmount } from 'helpers';
 import { PartialNftType, TransactionTypeEnum } from 'types';

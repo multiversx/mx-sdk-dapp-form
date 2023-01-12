@@ -1,7 +1,7 @@
-import { addressIsValid } from '@elrondnetwork/dapp-core/utils/account/addressIsValid';
-import { decodePart } from '@elrondnetwork/dapp-core/utils/decoders/decodePart';
+import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
+import { decodePart } from '@multiversx/sdk-dapp/utils/decoders/decodePart';
 
-import { Address } from '@elrondnetwork/erdjs';
+import { Address } from '@multiversx/sdk-core';
 
 interface ExistingNftType {
   collection: string;

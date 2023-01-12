@@ -1,5 +1,5 @@
 import React from 'react';
-import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import BigNumber from 'bignumber.js';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';

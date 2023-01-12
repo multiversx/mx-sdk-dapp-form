@@ -1,6 +1,6 @@
 import React from 'react';
-import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
-import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue/index';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
+import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue/index';
 import classNames from 'classnames';
 
 import { ZERO } from 'constants/index';

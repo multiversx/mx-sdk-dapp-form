@@ -1,5 +1,5 @@
 import React from 'react';
-import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { Token, TokenPropsType } from 'UI/Confirm/Token';
 

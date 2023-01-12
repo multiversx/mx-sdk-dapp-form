@@ -1,6 +1,6 @@
-import { maxDecimals } from '@elrondnetwork/dapp-core/utils/validation/maxDecimals';
-import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
-import { stringIsInteger } from '@elrondnetwork/dapp-core/utils/validation/stringIsInteger';
+import { maxDecimals } from '@multiversx/sdk-dapp/utils/validation/maxDecimals';
+import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
+import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { ZERO } from 'constants/index';
