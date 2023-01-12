@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
 import styles from './styles.module.scss';

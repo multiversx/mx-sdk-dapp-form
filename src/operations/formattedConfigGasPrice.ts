@@ -2,7 +2,7 @@ import {
   DIGITS,
   DECIMALS,
   GAS_PRICE
-} from '@elrondnetwork/dapp-core/constants/index';
+} from '@multiversx/sdk-dapp/constants/index';
 import { formatAmount } from 'helpers';
 
 export const formattedConfigGasPrice = formatAmount({

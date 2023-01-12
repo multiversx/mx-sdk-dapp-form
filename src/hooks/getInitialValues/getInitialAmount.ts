@@ -1,4 +1,4 @@
-import { DIGITS } from '@elrondnetwork/dapp-core/constants/index';
+import { DIGITS } from '@multiversx/sdk-dapp/constants/index';
 import { formatAmount } from 'helpers';
 import { NftEnumType } from 'types';
 import { ComputedNftType } from './types';

@@ -5,7 +5,7 @@ import { ExtendedValuesType } from 'types';
 
 const ledgerDataActive = string().test(
   'ledgerDataActive',
-  'Data option is disabled in the Ledger Elrond app',
+  'Data option is disabled in the Ledger MultiversX app',
   function ledgerDataActiveCheck(value) {
     const { ledger } = this.parent as ExtendedValuesType;
     if (ledger) {
@@ -26,7 +26,7 @@ const hashSign = string().test({
       const { ledgerWithHashSign } = getLedgerVersionOptions(ledger.version);
       if (value && value.length > 300 && !ledgerWithHashSign) {
         return this.createError({
-          message: `Data too long. You need at least Elrond app version ${LEDGER_HASH_SIGN_MINIMUM_VERSION}. Update Elrond app to continue`,
+          message: `Data too long. You need at least MultiversX app version ${LEDGER_HASH_SIGN_MINIMUM_VERSION}. Update MultiversX app to continue`,
           path: 'data'
         });
       }

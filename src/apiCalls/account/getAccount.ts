@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { AccountContextPropsType } from '../../contexts';
 
-export async function getElrondAccount(address: string, apiAddress: string) {
+export async function getMultiversxAccount(
+  address: string,
+  apiAddress: string
+) {
   try {
     const { data } = await axios.get<AccountContextPropsType>(
       `${apiAddress}/accounts/${address}`

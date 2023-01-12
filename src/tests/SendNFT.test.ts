@@ -20,16 +20,14 @@ const nftToken = {
   uris: [
     'aHR0cHM6Ly9pcGZzLmlvL2lwZnMvUW1aaHlUVjVLZTdFQ0VMOWVwc0RtNXpSdG5nQ2ZSMWk4em9adkJQM29RRHFOeg=='
   ],
-  url:
-    'https://testnet-media.elrond.com/nfts/asset/QmZhyTV5Ke7ECEL9epsDm5zRtngCfR1i8zoZvBP3oQDqNz',
+  url: 'https://testnet-media.multiversx.com/nfts/asset/QmZhyTV5Ke7ECEL9epsDm5zRtngCfR1i8zoZvBP3oQDqNz',
   media: [
     {
-      url:
-        'https://testnet-media.elrond.com/nfts/asset/QmZhyTV5Ke7ECEL9epsDm5zRtngCfR1i8zoZvBP3oQDqNz',
+      url: 'https://testnet-media.multiversx.com/nfts/asset/QmZhyTV5Ke7ECEL9epsDm5zRtngCfR1i8zoZvBP3oQDqNz',
       originalUrl:
         'https://ipfs.io/ipfs/QmZhyTV5Ke7ECEL9epsDm5zRtngCfR1i8zoZvBP3oQDqNz',
       thumbnailUrl:
-        'https://testnet-media.elrond.com/nfts/thumbnail/NFT-f0806e-c432eb5a',
+        'https://testnet-media.multiversx.com/nfts/thumbnail/NFT-f0806e-c432eb5a',
       fileType: 'image/png',
       fileSize: 64286
     }

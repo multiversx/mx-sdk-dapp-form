@@ -1,4 +1,4 @@
-import { fallbackNetworkConfigurations } from '@elrondnetwork/dapp-core/constants/index';
+import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/index';
 import { getEnvironmentForChainId } from 'apiCalls/network/getEnvironmentForChainId';
 
 export function getApiAddressForChainID(chainId: string) {

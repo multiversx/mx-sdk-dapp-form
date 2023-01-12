@@ -2,7 +2,7 @@ import {
   MultiEsdtTransactionType,
   MultiSignTransactionType,
   TransactionsDataTokensType
-} from '@elrondnetwork/dapp-core/types/transactions.types';
+} from '@multiversx/sdk-dapp/types/transactions.types';
 import { ApiConfigType } from 'apiCalls';
 import { ExtendedValuesType } from 'types';
 
