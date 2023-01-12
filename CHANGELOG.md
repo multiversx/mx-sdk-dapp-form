@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.3.9](https://github.com/multiversx/mx-sdk-dapp-form/pull/99)] - 2023-01-12
+- [Changed references from elrond to multiversx](https://github.com/multiversx/mx-sdk-dapp-form/pull/102)
+
+
 ## [[0.3.8](https://github.com/multiversx/mx-sdk-dapp-form/pull/99)] - 2022-12-21
 
 - [Added className to form component, added `!default` to variables, and changed `selectToken` class name](https://github.com/multiversx/mx-sdk-dapp-form/pull/98)
