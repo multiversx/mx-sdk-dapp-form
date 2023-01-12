@@ -2,7 +2,7 @@
 The __MultiversX Dapp Template__, built using [React.js](https://reactjs.org/) and [Typescript](https://www.typescriptlang.org/).
 It's a basic implementation of [@multiversx/sdk-dapp](https://www.npmjs.com/package/@multiversx/sdk-dapp), providing the basics for MultiversX authentication and TX signing.
 
-See [Dapp template](https://dapp-template.multiversx.com/) for live demo.
+See [Dapp template](https://template-dapp.multiversx.com/) for live demo.
 
 ## Requirements
 
