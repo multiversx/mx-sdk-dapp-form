@@ -6,11 +6,16 @@ import React, {
   useState
 } from 'react';
 import BigNumber from 'bignumber.js';
-import { maxAcceptedAmount } from 'config';
-import NumberFormat from 'react-number-format';
-import { removeCommas, roundAmount, isStringFloat } from 'utils';
-import { useImprovedDebounce } from 'hooks';
-import { ImprovedDebounceValueType } from 'types';
+import { NumericFormat } from 'react-number-format';
+import {
+  removeCommas,
+  roundAmount,
+  ImprovedDebounceValueType,
+  useImprovedDebounce
+} from './helpers';
+import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
+
+export const maxAcceptedAmount = 10000000000000; // 10 trillions TODO: remove
 
 interface AmountInputType {
   readonly?: boolean;
@@ -30,7 +35,7 @@ interface AmountInputType {
 
 const fiveHundredMs = 500;
 
-const AmountInput = ({
+export const AmountInput = ({
   readonly,
   required,
   name,
@@ -57,7 +62,7 @@ const AmountInput = ({
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = removeCommas(e.target.value);
     const isBelowMax =
-      isStringFloat(newValue) && parseFloat(newValue) <= maxAcceptedAmount;
+      stringIsFloat(newValue) && parseFloat(newValue) <= maxAcceptedAmount;
 
     if (newValue === '' || isBelowMax) {
       e.target.value = newValue;
@@ -78,7 +83,7 @@ const AmountInput = ({
     }
 
     const amount = removeCommas(value);
-    const isValid = value !== '' && isStringFloat(amount);
+    const isValid = value !== '' && stringIsFloat(amount);
 
     if (!isValid || amount === '') {
       setUsdValue(undefined);
@@ -108,12 +113,11 @@ const AmountInput = ({
       className={`amount-holder w-100 ${usdValue ? 'show-usd-value' : ''} `}
       ref={ref}
     >
-      <NumberFormat
+      <NumericFormat
         thousandSeparator={','}
         decimalSeparator={'.'}
         allowedDecimalSeparators={['.', ',']}
         inputMode='decimal'
-        isNumericString={true}
         isAllowed={({ floatValue }) =>
           !floatValue || floatValue <= maxAcceptedAmount
         }
@@ -145,5 +149,3 @@ const AmountInput = ({
     </div>
   );
 };
-
-export default AmountInput;
