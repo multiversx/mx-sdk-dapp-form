@@ -48,7 +48,7 @@ describe('Data field tests', () => {
 
     const dataError = await methods.findByTestId('dataError');
     expect(dataError.textContent).toBe(
-      'Data too long. You need at least Elrond app version 1.0.11. Update Elrond app to continue'
+      'Data too long. You need at least MultiversX app version 1.0.11. Update MultiversX app to continue'
     );
   });
 });

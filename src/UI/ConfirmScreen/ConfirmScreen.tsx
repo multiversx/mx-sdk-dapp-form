@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { LoginMethodsEnum } from '@elrondnetwork/dapp-core/types/enums.types';
-import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
+import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';

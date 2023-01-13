@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { SendFormContainer } from '@elrondnetwork/dapp-core-form';
-import { Form } from '@elrondnetwork/dapp-core-form/UI';
+import { SendFormContainer } from '@multiversx/sdk-dapp-form';
+import { Form } from '@multiversx/sdk-dapp-form/UI';
 
 import { useFormProps } from 'pages/Dashboard/context';
 

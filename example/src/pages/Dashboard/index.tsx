@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Loader } from '@elrondnetwork/dapp-core-form/UI/Loader';
+import { Loader } from '@multiversx/sdk-dapp-form/UI/Loader';
 import classNames from 'classnames';
 
 import { DashboardContextProvider, useFormProps } from './context';

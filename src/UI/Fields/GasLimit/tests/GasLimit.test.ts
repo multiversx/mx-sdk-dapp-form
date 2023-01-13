@@ -1,4 +1,4 @@
-import { GAS_LIMIT } from '@elrondnetwork/dapp-core/constants/index';
+import { GAS_LIMIT } from '@multiversx/sdk-dapp/constants/index';
 import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress } from '__mocks__';
 import { formattedAmountSelector } from 'tests/helpers';

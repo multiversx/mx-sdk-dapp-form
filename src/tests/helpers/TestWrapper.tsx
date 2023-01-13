@@ -1,11 +1,11 @@
 import React from 'react';
-import { fallbackNetworkConfigurations } from '@elrondnetwork/dapp-core/constants/network';
+import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/network';
 
 import {
   EnvironmentsEnum,
   LoginMethodsEnum
-} from '@elrondnetwork/dapp-core/types/enums.types';
-import { Loader } from '@elrondnetwork/dapp-core/UI/Loader';
+} from '@multiversx/sdk-dapp/types/enums.types';
+import { Loader } from '@multiversx/sdk-dapp/UI/Loader';
 import { SendFormContainer, SendFormContainerPropsType } from 'containers';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import {

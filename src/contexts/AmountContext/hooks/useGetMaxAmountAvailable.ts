@@ -1,4 +1,4 @@
-import { DIGITS, DECIMALS } from '@elrondnetwork/dapp-core/constants/index';
+import { DIGITS, DECIMALS } from '@multiversx/sdk-dapp/constants/index';
 import { useFormikContext } from 'formik';
 import { ZERO } from 'constants/index';
 import { useAccountContext } from 'contexts/AccountContext';

@@ -1,11 +1,12 @@
 import React from 'react';
-import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
-import { UsdValue } from '@elrondnetwork/dapp-core/UI/UsdValue/index';
-
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
+import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue/index';
 import classNames from 'classnames';
+
 import { ZERO } from 'constants/index';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { InfoDust } from 'UI/InfoDust';
+
 import { SharedAmount } from './components';
 
 import styles from './styles.module.scss';

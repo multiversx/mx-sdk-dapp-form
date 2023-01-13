@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { WithClassnameType } from '@elrondnetwork/dapp-core/UI/types';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import globals from 'assets/sass/globals.module.scss';
 import { ZERO } from 'constants/index';
 import { PartialNftType } from 'types';
@@ -53,7 +53,7 @@ export const Token = ({
           <TokenElement
             inDropdown
             token={{
-              name: isEsdtTransaction ? tokenLabel : 'Elrond eGold',
+              name: isEsdtTransaction ? tokenLabel : 'MultiversX eGold',
               identifier: isEsdtTransaction ? tokenId : egldLabel,
               decimals: 0,
               balance: ZERO,

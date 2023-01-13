@@ -2,9 +2,9 @@ import {
   DIGITS,
   DECIMALS,
   GAS_PRICE
-} from '@elrondnetwork/dapp-core/constants/index';
-import { MultiSignTransactionType } from '@elrondnetwork/dapp-core/types/transactions.types';
-import { isTokenTransfer } from '@elrondnetwork/dapp-core/utils/transactions/isTokenTransfer';
+} from '@multiversx/sdk-dapp/constants/index';
+import { MultiSignTransactionType } from '@multiversx/sdk-dapp/types/transactions.types';
+import { isTokenTransfer } from '@multiversx/sdk-dapp/utils/transactions/isTokenTransfer';
 
 import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
 import { formatAmount } from 'helpers';

@@ -4,8 +4,8 @@ import {
   SendFormContainer,
   SendFormContainerPropsType,
   formattedConfigGasPrice
-} from '@elrondnetwork/dapp-core-form';
-import { ConfirmScreen } from '@elrondnetwork/dapp-core-form/UI';
+} from '@multiversx/sdk-dapp-form';
+import { ConfirmScreen } from '@multiversx/sdk-dapp-form/UI';
 
 import { useFormProps } from 'pages/Dashboard/context';
 import styles from './styles.module.scss';

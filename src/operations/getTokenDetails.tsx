@@ -1,4 +1,4 @@
-import { DECIMALS } from '@elrondnetwork/dapp-core/constants/index';
+import { DECIMALS } from '@multiversx/sdk-dapp/constants/index';
 import { ZERO } from 'constants/index';
 import { PartialTokenType } from 'types';
 

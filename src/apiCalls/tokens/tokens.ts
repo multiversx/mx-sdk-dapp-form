@@ -1,7 +1,7 @@
 import {
   TOKENS_ENDPOINT,
   ACCOUNTS_ENDPOINT
-} from '@elrondnetwork/dapp-core/apiCalls/endpoints';
+} from '@multiversx/sdk-dapp/apiCalls/endpoints';
 import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';

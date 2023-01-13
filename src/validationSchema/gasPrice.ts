@@ -1,6 +1,6 @@
-import { DECIMALS } from '@elrondnetwork/dapp-core/constants/index';
-import { maxDecimals } from '@elrondnetwork/dapp-core/utils/validation/maxDecimals';
-import { stringIsFloat } from '@elrondnetwork/dapp-core/utils/validation/stringIsFloat';
+import { DECIMALS } from '@multiversx/sdk-dapp/constants/index';
+import { maxDecimals } from '@multiversx/sdk-dapp/utils/validation/maxDecimals';
+import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { formattedConfigGasPrice } from 'operations/formattedConfigGasPrice';

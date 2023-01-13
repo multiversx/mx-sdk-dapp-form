@@ -136,7 +136,7 @@ export function TokensContextProvider({
 
   const allAvailableTokens: PartialTokenType[] = [
     {
-      name: 'Elrond eGold',
+      name: 'MultiversX eGold',
       identifier: egldLabel,
       balance: balance,
       decimals: Number(decimals),

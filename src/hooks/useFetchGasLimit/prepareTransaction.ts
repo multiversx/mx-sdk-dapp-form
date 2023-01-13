@@ -1,11 +1,11 @@
-import { VERSION } from '@elrondnetwork/dapp-core/constants/index';
+import { VERSION } from '@multiversx/sdk-dapp/constants/index';
 import {
   Transaction,
   TransactionPayload,
   TransactionVersion,
   Address,
   TokenPayment
-} from '@elrondnetwork/erdjs';
+} from '@multiversx/sdk-core';
 import BigNumber from 'bignumber.js';
 import { parseAmount } from 'helpers';
 

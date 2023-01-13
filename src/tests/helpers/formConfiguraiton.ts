@@ -1,7 +1,7 @@
 import {
   GAS_LIMIT,
   TESTNET_EGLD_LABEL
-} from '@elrondnetwork/dapp-core/constants/index';
+} from '@multiversx/sdk-dapp/constants/index';
 
 import { FormConfigType } from 'types/form';
 
