@@ -11,6 +11,7 @@ import { getIsDisabled, selectCustomStyles } from 'helpers';
 import { PartialTokenType, TokenAssetsType, ValuesEnum } from 'types';
 
 import styles from './amountSelect.module.scss';
+import './formComponents.scss';
 import { ListOption, TokenElement } from './components';
 
 interface OptionType {
@@ -132,26 +133,31 @@ export const AmountSelect = ({ className, label }: AmountSelectPropsType) => {
               </label>
             )}
 
-            <Select
-              className='selectToken'
-              classNamePrefix='selectToken'
-              components={{ Option: ListOption }}
-              filterOption={filterOptions}
-              formatOptionLabel={FormatOptionLabel}
-              inputId={ValuesEnum.tokenId}
-              isDisabled={getIsDisabled(ValuesEnum.tokenId, readonly)}
-              isLoading={areTokensLoading}
-              name={ValuesEnum.tokenId}
-              onChange={onChange}
-              onMenuOpen={onMenuOpen}
-              openMenuOnFocus
-              options={options}
-              styles={className ? {} : selectStyle}
-              value={
-                options.find(({ value }: OptionType) => value === tokenId) ||
-                undefined
-              }
-            />
+            <div
+              className={`token-amount-input-select-max ${
+                amountError ? 'is-invalid' : ''
+              }`}
+            >
+              <AmountInput
+                name='amount'
+                required={true}
+                value={amount}
+                placeholder='Amount'
+                handleBlur={handleBlur}
+                data-testid='amountInput'
+                handleChange={handleChange}
+              />
+
+              <div className='badge-holder d-flex align-content-center justify-content-end'>
+                <MaxButton
+                  token={token}
+                  inputAmount={amount}
+                  onMaxClick={(maxBalance: string) =>
+                    setFieldValue('amount', maxBalance, true)
+                  }
+                />
+              </div>
+            </div>
 
             {isTokenIdInvalid && (
               <div className={globals.error} data-testid='tokenIdError'>

@@ -5,7 +5,9 @@ $border-transparent: transparent;
 $border-radius: 0.45rem;
 $danger: red;
 $body: #1f2021;
+$mex-gray: #18191a;
 $mex-gray-light: #242526;
+$mex-gray-dark: #131313;
 $mex-text-main: #ffffff;
 $mex-text-secondary: #9ba5b4;
 $input-placeholder-color: $mex-text-secondary;
@@ -14,6 +16,7 @@ $card-bg: #fff;
 $select-bg: #fff;
 $border-color: #4a4b4d;
 $btn-secondary: #393b3c;
+
 
 
 $border-light-color: #343439;
@@ -31,6 +34,10 @@ $input-height-border:                   $input-border-width * 2 !default;
 $input-height-sm:                       add($input-line-height-sm * 1em, add($input-padding-y-sm * 2, $input-height-border, false)) !default;
 
 $input-bg:                              $white !default;
+
+.scroll-bar-thin {
+  scrollbar-width: thin;
+}
 
 .token-amount-input,
 .token-amount-input-max,
