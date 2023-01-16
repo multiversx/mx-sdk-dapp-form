@@ -24,12 +24,8 @@ import { CanTransferNftWarning, WegldWarning } from 'UI/Warnings';
 import styles from './form.module.scss';
 
 export const Form = ({ className }: WithClassnameType) => {
-  const {
-    formInfo,
-    receiverInfo,
-    accountInfo,
-    amountInfo
-  } = useSendFormContext();
+  const { formInfo, receiverInfo, accountInfo, amountInfo } =
+    useSendFormContext();
   const {
     values: { txType, tokenId }
   } = useFormikContext<ExtendedValuesType>();

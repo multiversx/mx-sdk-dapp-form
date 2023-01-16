@@ -4,14 +4,21 @@ import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { ValuesEnum } from 'types';
+import { PartialTokenType, ValuesEnum, TokenAssetsType } from 'types';
 
-import styles from './amountSelect.module.scss';
-import './formComponents.scss';
-import { AmountInput, MaxButton } from './components';
+import styles from './amountSelect.styles.scss';
+import { AmountInput, MaxButton, TokenSelect } from './components';
+import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 
 export interface AmountSelectPropsType extends WithClassnameType {
   label?: string;
+}
+
+interface OptionType {
+  value: string;
+  label: string;
+  assets?: TokenAssetsType;
+  token: PartialTokenType;
 }
 
 const generatedClasses = {
@@ -20,8 +27,8 @@ const generatedClasses = {
   small: 'd-flex flex-column flex-sm-row my-2',
   error: 'invalid-feedback d-flex mt-0 mb-2 mb-sm-0',
   balance: 'd-flex ml-0 ml-sm-auto line-height-1 balance',
-  maxBtn: 'badge-holder d-flex align-content-center justify-content-end',
-  wrapper: classNames('token-amount-input-select-max', {
+  maxBtn: `${styles.badgeHolder} d-flex align-content-center justify-content-end`,
+  wrapper: classNames(styles.tokenAmountInputSelectMax, {
     'is-invalid': false
   })
 };
@@ -33,6 +40,35 @@ export const AmountSelect = ({ className, label }: AmountSelectPropsType) => {
 
   const { isInvalid, amount, onBlur, onChange, onMaxClicked } = amountInfo;
 
+  const { accountInfo } = useSendFormContext();
+
+  const { balance } = accountInfo;
+  const { tokens, egldLabel, areTokensLoading, tokenId } = tokensInfo;
+
+  const allTokens: PartialTokenType[] = [
+    {
+      name: 'MultiversX eGold',
+      identifier: egldLabel,
+      balance,
+      decimals: DECIMALS,
+      ticker: ''
+    },
+    ...tokens
+  ];
+
+  const options: Array<OptionType> = allTokens.map(
+    (token: PartialTokenType): OptionType => ({
+      value: token.identifier,
+      label: token.name,
+      assets: token.assets,
+      token
+    })
+  );
+
+  const value = options.find(({ value }: OptionType) => value === tokenId);
+
+  console.log(11, styles.tokenAmountInputSelectMax, value, isInvalid);
+
   return (
     <div className={generatedClasses.group}>
       <label
@@ -43,48 +79,61 @@ export const AmountSelect = ({ className, label }: AmountSelectPropsType) => {
       </label>
 
       <div className={generatedClasses.wrapper}>
-        <div className='amount-holder w-100'>
-          <div className={classNames(styles.selectTokenContainer, className)}>
-            {label && (
-              <label
-                htmlFor={ValuesEnum.tokenId}
-                data-testid='tokenIdLabel'
-                className={styles.selectTokenLabel}
-              >
-                {label}
-              </label>
-            )}
-
-            <div
-              className={`token-amount-input-select-max ${
-                isInvalid ? 'is-invalid' : ''
-              }`}
+        <div className={classNames(styles.selectTokenContainer, className)}>
+          {label && (
+            <label
+              htmlFor={ValuesEnum.tokenId}
+              data-testid='tokenIdLabel'
+              className={styles.selectTokenLabel}
             >
-              <AmountInput
-                name='amount'
-                required={true}
-                value={amount}
-                placeholder='Amount'
-                handleBlur={onBlur}
-                data-testid='amountInput'
-                handleChange={onChange}
-              />
+              {label}
+            </label>
+          )}
 
-              <div className='badge-holder d-flex align-content-center justify-content-end'>
-                <MaxButton
-                  token={tokenDetails}
-                  inputAmount={amount}
-                  onMaxClick={onMaxClicked}
-                />
-              </div>
+          <div className={generatedClasses.wrapper}>
+            <AmountInput
+              name='amount'
+              required={true}
+              value={amount}
+              placeholder='Amount'
+              handleBlur={onBlur}
+              data-testid='amountInput'
+              handleChange={onChange}
+            />
+
+            <div className={generatedClasses.maxBtn}>
+              <MaxButton
+                token={tokenDetails}
+                inputAmount={amount}
+                onMaxClick={onMaxClicked}
+              />
             </div>
 
-            {isTokenIdInvalid && (
-              <div className={globals.error} data-testid='tokenIdError'>
-                <small>{tokenIdError}</small>
-              </div>
-            )}
+            <TokenSelect
+              // id={name}
+              // name={name}
+              name={ValuesEnum.tokenId}
+              // value={token}
+              value={
+                options.find(({ value }: OptionType) => value === tokenId) ||
+                undefined
+              }
+              isSearchable
+              options={options}
+              // onFocus={onFocus}
+              onChange={onChange}
+              // onBlur={handleBlurSelect}
+              isLoading={areTokensLoading}
+              // disabledOption={disabledOption}
+              // handleDisabledOptionClick={handleDisabledOptionClick}
+            />
           </div>
+
+          {isTokenIdInvalid && (
+            <div className={globals.error} data-testid='tokenIdError'>
+              <small>{tokenIdError}</small>
+            </div>
+          )}
         </div>
       </div>
     </div>
