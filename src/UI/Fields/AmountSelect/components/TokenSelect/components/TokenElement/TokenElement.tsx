@@ -1,9 +1,9 @@
 import React from 'react';
-import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp/constants';
+import { DIGITS } from '@multiversx/sdk-dapp/constants';
 import { formatAmount } from '@multiversx/sdk-dapp/utils/operations/formatAmount';
-import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { TokenIcon } from './TokenIcon';
 import { TokenSymbol } from './TokenSymbol';
+import { PartialTokenType } from 'types/tokens';
 
 export function TokenElement({
   inDropdown = false,
@@ -12,7 +12,7 @@ export function TokenElement({
   'data-testid': dataTestId
 }: {
   inDropdown?: boolean;
-  token: any;
+  token: PartialTokenType;
   isDisabled: boolean;
   handleDisabledOptionClick?: any;
   'data-testid'?: string;
@@ -20,18 +20,9 @@ export function TokenElement({
   const disabledClass = isDisabled ? 'token-option-disabled' : '';
   const inDropdownClass = inDropdown ? 'in-dropdown' : 'd-none d-md-flex';
 
-  const {
-    tokensInfo,
-    amountInfo: { amount }
-  } = useSendFormContext();
-
-  const { tokenDetails } = tokensInfo;
-
-  const { decimals } = tokenDetails;
-
   const formattedAmount = formatAmount({
-    input: amount,
-    decimals: decimals ?? DECIMALS,
+    input: token.balance,
+    decimals: token.decimals,
     showLastNonZeroDecimal: true,
     addCommas: false,
     digits: DIGITS
@@ -48,8 +39,8 @@ export function TokenElement({
         </div>
 
         <div className='d-flex flex-column mex-text-main'>
-          <TokenSymbol />
-          <small className='mex-text-secondary'>{token.usdPrice}</small>
+          <TokenSymbol token={token} />
+          {/* <small className='mex-text-secondary'>{token.usdPrice}</small> */}
         </div>
       </div>
 
@@ -57,12 +48,12 @@ export function TokenElement({
         <div className='d-flex flex-column ml-spacer ml-lg-5 mex-text-main align-items-end'>
           {formattedAmount}
 
-          {token.totalUsdPrice && (
+          {/* {token.totalUsdPrice && (
             <small className='mex-text-secondary'>
               {token.totalUsdPrice !== '$0' ? <>≈&nbsp;</> : <></>}
               {token.totalUsdPrice}
             </small>
-          )}
+          )} */}
         </div>
       )}
     </div>

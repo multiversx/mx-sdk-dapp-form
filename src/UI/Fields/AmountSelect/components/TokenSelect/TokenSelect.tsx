@@ -37,7 +37,7 @@ export const TokenSelect = ({
   id,
   name,
   value,
-  defaultValue,
+  // defaultValue,
   options,
   isSearchable,
   className = '',
@@ -101,21 +101,13 @@ export const TokenSelect = ({
       }
 
       return <TokenElement {...args} />;
-    };
 
-  console.log({
-    id,
-    value,
-    defaultValue,
-    isSearchable,
-    onChange,
-    onBlur,
-    onFocus,
-    disabled,
-    noOptionsMessage,
-    FormatOptionLabel,
-    selectStyle
-  });
+      // return hasLockedMEX || hasLockedTokens ? ( // TODO ?
+      //   <LockedTokenElement {...args} />
+      // ) : (
+      //   <TokenElement {...args} />
+      // );
+    };
 
   const disableOption = (option: any) => {
     const isSameAsOtherSelectToken = option.value === disabledOption?.value;
@@ -138,10 +130,6 @@ export const TokenSelect = ({
 
   const optionsWithLoader = isLoading ? [loaderOption, ...options] : options;
 
-  const colourOptions = [
-    { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true }
-  ];
-
   return (
     <div
       className={`${styles.selectHolder} ${
@@ -156,39 +144,39 @@ export const TokenSelect = ({
         className={` ${styles.largeStyledSelectContainer} ${
           fullSize ? 'fullsize' : ''
         } ${className}`}
-        defaultValue={colourOptions[0]}
         options={optionsWithLoader}
         placeholder='Select token'
         classNamePrefix='styled-select'
         value={value}
+        isDisabled={disabled}
+        isOptionDisabled={(option) => {
+          const isLoader = option.value === loaderOption.value;
+          const isDisabled = disableOption(option);
+          return isLoader || isDisabled;
+        }}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        onChange={(e) => {
+          onChange(e);
+          if (ref && ref.current !== null) {
+            (ref.current as any).blur();
+          }
+        }}
+        styles={selectStyle}
+        isSearchable={isSearchable}
+        maxMenuHeight={260}
+        noOptionsMessage={() => noOptionsMessage || 'No options'}
+        formatOptionLabel={FormatOptionLabel(id)}
       />
 
       {/* <Select
      
         // onMenuOpen={onMenuOpen}
-        isOptionDisabled={(option) => {
-          const isLoader = option.value === loaderOption.value;
-          const isDisabled = disableOption(option);
-
-          return isLoader || isDisabled;
-        }}
-        isDisabled={disabled}
+      
         // isLoading={isLoading}
-        styles={selectStyle}
-        noOptionsMessage={() => noOptionsMessage || 'No options'}
-        maxMenuHeight={260}
-        onChange={(e) => {
-          onChange(e);
-
-          if (ref && ref.current !== null) {
-            (ref.current as any).blur();
-          }
-        }}
-        onBlur={onBlur}
-        onFocus={onFocus}
-        isSearchable={isSearchable}
-        defaultValue={defaultValue}
-        formatOptionLabel={FormatOptionLabel(id)}
+    
+  
+     
       /> */}
     </div>
   );

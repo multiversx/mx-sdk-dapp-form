@@ -9,6 +9,7 @@ import { PartialTokenType, ValuesEnum, TokenAssetsType } from 'types';
 import styles from './amountSelect.styles.scss';
 import { AmountInput, MaxButton, TokenSelect } from './components';
 import { DECIMALS } from '@multiversx/sdk-dapp/constants';
+import { SingleValue } from 'react-select';
 
 export interface AmountSelectPropsType extends WithClassnameType {
   label?: string;
@@ -38,12 +39,13 @@ export const AmountSelect = ({ className, label }: AmountSelectPropsType) => {
 
   const { tokenDetails, tokenIdError, isTokenIdInvalid } = tokensInfo;
 
-  const { isInvalid, amount, onBlur, onChange, onMaxClicked } = amountInfo;
+  const { amount, onBlur, onChange, onFocus, onMaxClicked } = amountInfo;
 
   const { accountInfo } = useSendFormContext();
 
   const { balance } = accountInfo;
-  const { tokens, egldLabel, areTokensLoading, tokenId } = tokensInfo;
+  const { tokens, egldLabel, areTokensLoading, tokenId, onChangeTokenId } =
+    tokensInfo;
 
   const allTokens: PartialTokenType[] = [
     {
@@ -66,8 +68,6 @@ export const AmountSelect = ({ className, label }: AmountSelectPropsType) => {
   );
 
   const value = options.find(({ value }: OptionType) => value === tokenId);
-
-  console.log(11, styles.tokenAmountInputSelectMax, value, isInvalid);
 
   return (
     <div className={generatedClasses.group}>
@@ -110,19 +110,18 @@ export const AmountSelect = ({ className, label }: AmountSelectPropsType) => {
             </div>
 
             <TokenSelect
-              // id={name}
-              // name={name}
-              name={ValuesEnum.tokenId}
-              // value={token}
-              value={
-                options.find(({ value }: OptionType) => value === tokenId) ||
-                undefined
-              }
+              id={ValuesEnum.tokenId} // TODO: change
+              name={ValuesEnum.tokenId} // TODO: change
+              value={value}
               isSearchable
               options={options}
-              // onFocus={onFocus}
-              onChange={onChange}
-              // onBlur={handleBlurSelect}
+              onFocus={onFocus}
+              onChange={(props: SingleValue<OptionType>) => {
+                if (props) {
+                  onChangeTokenId(props.value);
+                }
+              }}
+              onBlur={onBlur}
               isLoading={areTokensLoading}
               // disabledOption={disabledOption}
               // handleDisabledOptionClick={handleDisabledOptionClick}
