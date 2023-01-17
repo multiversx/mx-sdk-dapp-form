@@ -6,7 +6,11 @@ import React, {
   useState
 } from 'react';
 import BigNumber from 'bignumber.js';
-import { NumericFormat } from 'react-number-format';
+import {
+  NumberFormatValues,
+  NumericFormat,
+  OnValueChange
+} from 'react-number-format';
 import {
   removeCommas,
   roundAmount,
@@ -14,8 +18,6 @@ import {
   useImprovedDebounce
 } from './helpers';
 import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
-
-export const maxAcceptedAmount = 10000000000000; // 10 trillions TODO: remove
 
 export interface AmountInputPropsType {
   readonly?: boolean;
@@ -53,20 +55,21 @@ export const AmountInput = ({
   onDebounceChange
 }: AmountInputPropsType) => {
   const ref = useRef(null);
+  const secondRef = useRef(null);
 
   const [debounceValue, setDebounceValue] = useState<ImprovedDebounceValueType>(
     { value, count: 0 }
   );
+  const [formattedValue, setFormattedValue] = useState(value);
+  const [values, setValues] = useState<NumberFormatValues>();
   const [usdValue, setUsdValue] = useState<string>();
 
   const debounceAmount = useImprovedDebounce(debounceValue, fiveHundredMs);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = removeCommas(e.target.value);
-    const isBelowMax =
-      stringIsFloat(newValue) && parseFloat(newValue) <= maxAcceptedAmount;
 
-    if (newValue === '' || isBelowMax) {
+    if (newValue === '' || stringIsFloat(newValue)) {
       e.target.value = newValue;
       handleChange(e);
 
@@ -102,6 +105,10 @@ export const AmountInput = ({
     setUsdValue(`$${newUsdValue}`);
   };
 
+  const onValueChange: OnValueChange = (newValues) => {
+    setValues(newValues);
+  };
+
   useEffect(() => {
     if (onDebounceChange) {
       onDebounceChange(debounceAmount.value);
@@ -110,19 +117,25 @@ export const AmountInput = ({
 
   useEffect(updateUsdValue, [value, tokenUsdPrice]);
 
+  useEffect(() => {
+    const newFormattedValue = values?.formattedValue ?? '';
+    if (removeCommas(newFormattedValue) === value) {
+      setFormattedValue(newFormattedValue);
+    } else {
+      setFormattedValue((secondRef.current as any)?.value ?? value);
+    }
+  }, [values, value]);
+
   return (
-    <div
-      className={`amount-holder w-100 ${usdValue ? 'show-usd-value' : ''} `}
-      ref={ref}
-    >
+    <div className={`amount-holder w-100 ${usdValue ? 'show-usd-value' : ''} `}>
       <NumericFormat
-        thousandSeparator={','}
-        decimalSeparator={'.'}
+        getInputRef={ref}
+        thousandSeparator=','
+        thousandsGroupStyle='thousand'
+        decimalSeparator='.'
         allowedDecimalSeparators={['.', ',']}
         inputMode='decimal'
-        isAllowed={({ floatValue }) =>
-          !floatValue || floatValue <= maxAcceptedAmount
-        }
+        onValueChange={onValueChange}
         required={required}
         className='amount-input form-control'
         style={{ fontSize: '16px' }}
@@ -130,7 +143,7 @@ export const AmountInput = ({
         id={name}
         name={name}
         placeholder={placeholder}
-        value={value}
+        value={formattedValue}
         onKeyDown={onKeyDown}
         onChange={onChange}
         onBlur={handleBlur}
@@ -139,6 +152,18 @@ export const AmountInput = ({
         readOnly={readonly ?? false}
         onFocus={onFocus}
       />
+
+      {/* fallback for when onValueChange fails on large numbers */}
+      <div className='d-none'>
+        <NumericFormat
+          thousandSeparator=','
+          thousandsGroupStyle='thousand'
+          decimalSeparator='.'
+          allowedDecimalSeparators={['.', ',']}
+          getInputRef={secondRef}
+          value={value}
+        />
+      </div>
 
       {usdValue && (
         <span className='amount-holder-usd d-flex text-secondary'>
