@@ -26,7 +26,7 @@ export const DappFormAmountSelect = () => {
 
   const { tokenDetails, tokenIdError, isTokenIdInvalid } = tokensInfo;
 
-  const { amount, onBlur, onChange, onMaxClicked, error, isInvalid } =
+  const { amount, onBlur, onChange, onMaxClicked, error, isInvalid, onFocus } =
     amountInfo;
 
   const { accountInfo } = useSendFormContext();
@@ -80,6 +80,7 @@ export const DappFormAmountSelect = () => {
     handleBlur: onBlur,
     'data-testid': 'amountInput',
     handleChange: onChange,
+    onFocus,
     error,
     isInvalid
   };

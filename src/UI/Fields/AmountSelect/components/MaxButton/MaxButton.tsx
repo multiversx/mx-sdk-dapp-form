@@ -1,7 +1,7 @@
 import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
 import React from 'react';
 import { PartialTokenType } from 'types/tokens';
-import { formatAmount } from './formatAmount';
+import { progressiveFormatAmount } from './progressiveFormatAmount';
 import { getBalanceMinusDust } from './getBalanceMinusDust';
 
 export interface MaxButtonPropsType {
@@ -24,7 +24,7 @@ export const MaxButton = ({
     return null;
   }
 
-  const formattedBalance = formatAmount({
+  const formattedBalance = progressiveFormatAmount({
     amount: isEgld ? getBalanceMinusDust(balance) : balance,
     decimals: token?.decimals
   });

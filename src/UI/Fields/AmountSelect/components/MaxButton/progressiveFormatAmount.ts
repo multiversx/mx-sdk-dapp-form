@@ -2,7 +2,7 @@ import { DIGITS as configDigits } from '@multiversx/sdk-dapp/constants';
 import { formatAmount as dappCoreFormatAmount } from '@multiversx/sdk-dapp/utils/operations/formatAmount';
 import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsInteger';
 
-export const formatAmount = ({
+export const progressiveFormatAmount = ({
   amount = '0',
   decimals = 0,
   digits = configDigits,
