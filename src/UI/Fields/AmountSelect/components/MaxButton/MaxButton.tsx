@@ -1,23 +1,20 @@
 import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
 import React from 'react';
+import { PartialTokenType } from 'types/tokens';
 import { formatAmount } from './formatAmount';
 import { getBalanceMinusDust } from './getBalanceMinusDust';
 
-interface MaxButtonTokenType {
-  identifier: string;
-  balance: string | null;
-  decimals: number;
+export interface MaxButtonPropsType {
+  inputAmount: string;
+  token?: PartialTokenType;
+  onMaxClick?: (maxAmount: string) => void;
 }
 
 export const MaxButton = ({
   token,
   inputAmount,
   onMaxClick
-}: {
-  inputAmount: string;
-  token?: MaxButtonTokenType;
-  onMaxClick?: (maxAmount: string) => void;
-}) => {
+}: MaxButtonPropsType) => {
   const { egldLabel } = useGetEconomicsInfo();
 
   const isEgld = token?.identifier === egldLabel;

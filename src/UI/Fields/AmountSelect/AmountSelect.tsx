@@ -4,23 +4,21 @@ import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { PartialTokenType, ValuesEnum, TokenAssetsType } from 'types';
+import { PartialTokenType, ValuesEnum } from 'types';
 
 import styles from './amountSelect.styles.scss';
-import { AmountInput, MaxButton, TokenSelect } from './components';
+import {
+  AmountInput,
+  AmountInputPropsType,
+  MaxButton,
+  MaxButtonPropsType,
+  OptionType,
+  TokenSelect,
+  TokenSelectType
+} from './components';
 import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { SingleValue } from 'react-select';
-
-export interface AmountSelectPropsType extends WithClassnameType {
-  label?: string;
-}
-
-interface OptionType {
-  value: string;
-  label: string;
-  assets?: TokenAssetsType;
-  token: PartialTokenType;
-}
+import { getIsDisabled } from 'helpers';
 
 const generatedClasses = {
   group: 'form-group text-left mb-0',
@@ -34,12 +32,13 @@ const generatedClasses = {
   })
 };
 
-export const AmountSelect = ({ className, label }: AmountSelectPropsType) => {
-  const { tokensInfo, amountInfo } = useSendFormContext();
+export const DappFormAmountSelect = () => {
+  const { tokensInfo, amountInfo, formInfo } = useSendFormContext();
+  const { readonly } = formInfo;
 
-  const { tokenDetails, tokenIdError, isTokenIdInvalid } = tokensInfo;
+  const { tokenDetails, tokenIdError } = tokensInfo;
 
-  const { amount, onBlur, onChange, onFocus, onMaxClicked } = amountInfo;
+  const { amount, onBlur, onChange, onMaxClicked, error } = amountInfo;
 
   const { accountInfo } = useSendFormContext();
 
@@ -58,79 +57,106 @@ export const AmountSelect = ({ className, label }: AmountSelectPropsType) => {
     ...tokens
   ];
 
-  const options: Array<OptionType> = allTokens.map(
-    (token: PartialTokenType): OptionType => ({
-      value: token.identifier,
-      label: token.name,
-      assets: token.assets,
-      token
-    })
-  );
+  const options: OptionType[] = allTokens.map((token: PartialTokenType) => ({
+    value: token.identifier,
+    label: token.name,
+    assets: token.assets,
+    token
+  }));
 
   const value = options.find(({ value }: OptionType) => value === tokenId);
 
+  const tokenSelectProps: TokenSelectType = {
+    id: ValuesEnum.tokenId,
+    value,
+    name: ValuesEnum.tokenId,
+    isLoading: areTokensLoading,
+    options,
+    isSearchable: true,
+    onChange: (props: SingleValue<OptionType>) => {
+      if (props) {
+        onChangeTokenId(props.value);
+      }
+    },
+    disabled: getIsDisabled(ValuesEnum.tokenId, readonly),
+    error: tokenIdError
+  };
+
+  const amountInputProps: AmountInputPropsType = {
+    name: ValuesEnum.amount,
+    required: true,
+    value: amount,
+    placeholder: 'Amount',
+    handleBlur: onBlur,
+    'data-testid': 'amountInput',
+    handleChange: onChange,
+    error
+  };
+
+  const maxButtonProps: MaxButtonPropsType = {
+    token: tokenDetails,
+    inputAmount: amount,
+    onMaxClick: onMaxClicked
+  };
+
+  return (
+    <AmountSelect
+      name={ValuesEnum.tokenId}
+      tokenSelectProps={tokenSelectProps}
+      amountInputProps={amountInputProps}
+      maxButtonProps={maxButtonProps}
+      label='Amount Select'
+    />
+  );
+};
+
+export interface AmountSelectPropsType extends WithClassnameType {
+  label?: string;
+  name: string;
+  tokenSelectProps: TokenSelectType;
+  amountInputProps: AmountInputPropsType;
+  maxButtonProps: MaxButtonPropsType;
+}
+
+export const AmountSelect = ({
+  className,
+  label,
+  name,
+  tokenSelectProps,
+  amountInputProps,
+  maxButtonProps
+}: AmountSelectPropsType) => {
+  const error = amountInputProps.error || tokenSelectProps.error;
+  const errorDataTestId = amountInputProps.error
+    ? `${amountInputProps.name}Error`
+    : `${tokenSelectProps.name}Error`;
+
   return (
     <div className={generatedClasses.group}>
-      <label
-        // htmlFor={name}
-        className={`${generatedClasses.label} text-secondary`}
-      >
-        Amount Select 1
-      </label>
+      {label && (
+        <label
+          htmlFor={name}
+          className={`${generatedClasses.label} text-secondary`}
+        >
+          {label}
+        </label>
+      )}
 
       <div className={generatedClasses.wrapper}>
         <div className={classNames(styles.selectTokenContainer, className)}>
-          {label && (
-            <label
-              htmlFor={ValuesEnum.tokenId}
-              data-testid='tokenIdLabel'
-              className={styles.selectTokenLabel}
-            >
-              {label}
-            </label>
-          )}
-
           <div className={generatedClasses.wrapper}>
-            <AmountInput
-              name='amount'
-              required={true}
-              value={amount}
-              placeholder='Amount'
-              handleBlur={onBlur}
-              data-testid='amountInput'
-              handleChange={onChange}
-            />
+            <AmountInput {...amountInputProps} />
 
             <div className={generatedClasses.maxBtn}>
-              <MaxButton
-                token={tokenDetails}
-                inputAmount={amount}
-                onMaxClick={onMaxClicked}
-              />
+              <MaxButton {...maxButtonProps} />
             </div>
 
-            <TokenSelect
-              id={ValuesEnum.tokenId} // TODO: change
-              name={ValuesEnum.tokenId} // TODO: change
-              value={value}
-              isSearchable
-              options={options}
-              onFocus={onFocus}
-              onChange={(props: SingleValue<OptionType>) => {
-                if (props) {
-                  onChangeTokenId(props.value);
-                }
-              }}
-              onBlur={onBlur}
-              isLoading={areTokensLoading}
-              // disabledOption={disabledOption}
-              // handleDisabledOptionClick={handleDisabledOptionClick}
-            />
+            <TokenSelect {...tokenSelectProps} />
           </div>
 
-          {isTokenIdInvalid && (
-            <div className={globals.error} data-testid='tokenIdError'>
-              <small>{tokenIdError}</small>
+          {error && (
+            <div className={globals.error} data-testid={errorDataTestId}>
+              <small>{error}</small>
             </div>
           )}
         </div>

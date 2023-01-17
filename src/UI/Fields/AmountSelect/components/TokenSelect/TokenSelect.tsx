@@ -4,27 +4,35 @@ import React from 'react';
 import Select from 'react-select';
 import { SmallLoader, TokenElement } from './components';
 import { customStyles } from './helpers';
+import { PartialTokenType, TokenAssetsType } from 'types';
 import styles from './../../amountSelect.styles.scss';
 
 export interface SelectOptionType {
   label: string;
   value: string;
-  token: any;
+}
+
+export interface OptionType {
+  value: string;
+  label: string;
+  assets?: TokenAssetsType;
+  token: PartialTokenType;
 }
 
 export interface TokenSelectType {
   id?: string;
-  value?: any;
+  value?: OptionType;
   name: string;
   isLoading?: boolean;
-  defaultValue?: any;
-  options: any;
+  options: OptionType[];
   isSearchable?: boolean;
   className?: string;
   onChange: (option: any) => void;
   onBlur?: (option: any) => void;
   fullSize?: boolean;
   disabled?: boolean;
+  error?: string;
+  isInvalid?: boolean;
   noOptionsMessage?: string;
   hasLockedMEX?: boolean;
   hasLockedTokens?: boolean;
@@ -37,7 +45,6 @@ export const TokenSelect = ({
   id,
   name,
   value,
-  // defaultValue,
   options,
   isSearchable,
   className = '',
@@ -123,9 +130,10 @@ export const TokenSelect = ({
     return isSameAsOtherSelectToken || isEgldFamily;
   };
 
-  const loaderOption = {
+  const loaderOption: OptionType = {
     label: 'loader',
-    value: 'loader'
+    value: 'loader',
+    token: {} as any
   };
 
   const optionsWithLoader = isLoading ? [loaderOption, ...options] : options;
@@ -165,19 +173,10 @@ export const TokenSelect = ({
         styles={selectStyle}
         isSearchable={isSearchable}
         maxMenuHeight={260}
+        // onMenuOpen={onMenuOpen}
         noOptionsMessage={() => noOptionsMessage || 'No options'}
         formatOptionLabel={FormatOptionLabel(id)}
       />
-
-      {/* <Select
-     
-        // onMenuOpen={onMenuOpen}
-      
-        // isLoading={isLoading}
-    
-  
-     
-      /> */}
     </div>
   );
 };

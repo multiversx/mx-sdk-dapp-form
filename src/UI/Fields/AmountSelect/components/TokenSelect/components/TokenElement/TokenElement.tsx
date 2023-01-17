@@ -5,18 +5,20 @@ import { TokenIcon } from './TokenIcon';
 import { TokenSymbol } from './TokenSymbol';
 import { PartialTokenType } from 'types/tokens';
 
-export function TokenElement({
-  inDropdown = false,
-  token,
-  isDisabled,
-  'data-testid': dataTestId
-}: {
+interface TokenElementPropsType {
   inDropdown?: boolean;
   token: PartialTokenType;
   isDisabled: boolean;
   handleDisabledOptionClick?: any;
   'data-testid'?: string;
-}) {
+}
+
+export function TokenElement({
+  inDropdown = false,
+  token,
+  isDisabled,
+  'data-testid': dataTestId
+}: TokenElementPropsType) {
   const disabledClass = isDisabled ? 'token-option-disabled' : '';
   const inDropdownClass = inDropdown ? 'in-dropdown' : 'd-none d-md-flex';
 

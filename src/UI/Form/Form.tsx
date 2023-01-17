@@ -17,7 +17,7 @@ import {
   SelectToken,
   Receiver,
   AmountSlider,
-  AmountSelect
+  DappFormAmountSelect
 } from 'UI/Fields';
 
 import { CanTransferNftWarning, WegldWarning } from 'UI/Warnings';
@@ -68,7 +68,7 @@ export const Form = ({ className }: WithClassnameType) => {
 
         {isNFTTransaction ? <NftSftToken /> : <SelectToken label='Token' />}
 
-        <AmountSelect />
+        <DappFormAmountSelect />
 
         <Amount />
 

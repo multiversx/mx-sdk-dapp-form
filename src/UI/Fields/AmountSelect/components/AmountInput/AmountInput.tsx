@@ -17,13 +17,15 @@ import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
 
 export const maxAcceptedAmount = 10000000000000; // 10 trillions TODO: remove
 
-interface AmountInputType {
+export interface AmountInputPropsType {
   readonly?: boolean;
   required: boolean;
   name: string;
   placeholder: string;
   'data-testid'?: string;
   value: string;
+  error?: string;
+  isInvalid?: boolean;
   disabled?: boolean;
   tokenUsdPrice?: string;
   handleChange: (e: ChangeEvent<any>) => void;
@@ -49,7 +51,7 @@ export const AmountInput = ({
   onKeyDown,
   onFocus,
   onDebounceChange
-}: AmountInputType) => {
+}: AmountInputPropsType) => {
   const ref = useRef(null);
 
   const [debounceValue, setDebounceValue] = useState<ImprovedDebounceValueType>(

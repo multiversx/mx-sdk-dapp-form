@@ -9,12 +9,16 @@ export const SmallLoader = ({
   show: boolean;
   color?: string;
 }) => {
-  return show ? (
+  if (!show) {
+    return null;
+  }
+
+  return (
     <div className='d-flex'>
       <FontAwesomeIcon
         icon={faSpinner}
         className={`fa-spin fast-spin ${color ? color : 'text-primary'}`}
       />
     </div>
-  ) : null;
+  );
 };
