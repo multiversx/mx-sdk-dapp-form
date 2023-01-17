@@ -20,25 +20,14 @@ import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { SingleValue } from 'react-select';
 import { getIsDisabled } from 'helpers';
 
-const generatedClasses = {
-  group: 'form-group text-left mb-0',
-  label: 'mb-2 line-height-1 text-secondary',
-  small: 'd-flex flex-column flex-sm-row my-2',
-  error: 'invalid-feedback d-flex mt-0 mb-2 mb-sm-0',
-  balance: 'd-flex ml-0 ml-sm-auto line-height-1 balance',
-  maxBtn: `${styles.badgeHolder} d-flex align-content-center justify-content-end`,
-  wrapper: classNames(styles.tokenAmountInputSelectMax, {
-    'is-invalid': false
-  })
-};
-
 export const DappFormAmountSelect = () => {
   const { tokensInfo, amountInfo, formInfo } = useSendFormContext();
   const { readonly } = formInfo;
 
-  const { tokenDetails, tokenIdError } = tokensInfo;
+  const { tokenDetails, tokenIdError, isTokenIdInvalid } = tokensInfo;
 
-  const { amount, onBlur, onChange, onMaxClicked, error } = amountInfo;
+  const { amount, onBlur, onChange, onMaxClicked, error, isInvalid } =
+    amountInfo;
 
   const { accountInfo } = useSendFormContext();
 
@@ -79,7 +68,8 @@ export const DappFormAmountSelect = () => {
       }
     },
     disabled: getIsDisabled(ValuesEnum.tokenId, readonly),
-    error: tokenIdError
+    error: tokenIdError,
+    isInvalid: isTokenIdInvalid
   };
 
   const amountInputProps: AmountInputPropsType = {
@@ -90,7 +80,8 @@ export const DappFormAmountSelect = () => {
     handleBlur: onBlur,
     'data-testid': 'amountInput',
     handleChange: onChange,
-    error
+    error,
+    isInvalid
   };
 
   const maxButtonProps: MaxButtonPropsType = {
@@ -126,10 +117,24 @@ export const AmountSelect = ({
   amountInputProps,
   maxButtonProps
 }: AmountSelectPropsType) => {
+  const isInvalid = amountInputProps.isInvalid || tokenSelectProps.isInvalid;
   const error = amountInputProps.error || tokenSelectProps.error;
   const errorDataTestId = amountInputProps.error
     ? `${amountInputProps.name}Error`
     : `${tokenSelectProps.name}Error`;
+
+  // TODO: remove BS classes or pass from above?
+  const generatedClasses = {
+    group: 'form-group text-left mb-0',
+    label: 'mb-2 line-height-1 text-secondary',
+    small: 'd-flex flex-column flex-sm-row my-2',
+    error: 'invalid-feedback d-flex mt-0 mb-2 mb-sm-0',
+    balance: 'd-flex ml-0 ml-sm-auto line-height-1 balance',
+    maxBtn: `${styles.badgeHolder} d-flex align-content-center justify-content-end`,
+    wrapper: classNames(styles.tokenAmountInputSelectMax, {
+      'is-invalid': isInvalid
+    })
+  };
 
   return (
     <div className={generatedClasses.group}>
@@ -154,7 +159,7 @@ export const AmountSelect = ({
             <TokenSelect {...tokenSelectProps} />
           </div>
 
-          {error && (
+          {isInvalid && (
             <div className={globals.error} data-testid={errorDataTestId}>
               <small>{error}</small>
             </div>
