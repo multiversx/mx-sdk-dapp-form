@@ -106,12 +106,8 @@ describe('GasLimit field', () => {
     });
   });
   it('setting Gas limit + amount > balance should trigger error', async () => {
-    const {
-      getByLabelText,
-      getByTestId,
-      queryByText,
-      findByTestId
-    } = renderForm();
+    const { getByLabelText, getByTestId, queryByText, findByTestId } =
+      renderForm();
     const input: any = await findByTestId('amount');
     const value = '0.8123';
     const data = { target: { value } };
@@ -161,7 +157,7 @@ describe('GasLimit field', () => {
   });
   it('should show error when not enough balance for zero transaction with large gas', async () => {
     const methods = renderForm({
-      balance: '1_000_000_000_000_000'.replace('_', '') // 0.001
+      balance: '1_000_000_000_000_000'.replaceAll('_', '') // 0.001
     });
 
     const receiver: any = await methods.findByTestId('receiver');
@@ -191,7 +187,7 @@ describe('GasLimit field', () => {
     }
 
     const methods = renderForm({
-      balance: '1_000_000_000_000_000'.replace('_', '') // 0.001
+      balance: '1_000_000_000_000_000'.replaceAll('_', '') // 0.001
     });
 
     const receiver: any = await methods.findByTestId('receiver');

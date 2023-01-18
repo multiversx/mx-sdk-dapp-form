@@ -16,16 +16,13 @@ describe('EGLD Amount field', () => {
     });
   });
   it('should be numeric', async () => {
-    const { queryByText, findByTestId } = renderForm();
+    const { findByTestId } = renderForm();
     const input: any = await findByTestId('amount');
     const value = 'asd';
     const data = { target: { value } };
     fireEvent.change(input, data);
     fireEvent.blur(input);
-    await waitFor(() => {
-      const req = queryByText('Invalid number');
-      expect(req!.innerHTML).toBe('Invalid number');
-    });
+    expect(input.value).toBe('');
   });
   it('should not be negative', async () => {
     const { queryByText, findByTestId } = renderForm();
@@ -52,40 +49,22 @@ describe('EGLD Amount field', () => {
     });
   });
   it('should not allow exponential', async () => {
-    const { queryByText, findByTestId } = renderForm();
+    const { findByTestId } = renderForm();
     const input: any = await findByTestId('amount');
     const value = '1e2';
     const data = { target: { value } };
     fireEvent.change(input, data);
     fireEvent.blur(input);
-    await waitFor(() => {
-      const req = queryByText('Invalid number');
-      expect(req!.innerHTML).toBe('Invalid number');
-    });
+    expect(input.value).toBe('12');
   });
   it('should not allow hexadecimal', async () => {
-    const { queryByText, findByTestId } = renderForm();
+    const { findByTestId } = renderForm();
     const input: any = await findByTestId('amount');
     const value = '0x1';
     const data = { target: { value } };
     fireEvent.change(input, data);
     fireEvent.blur(input);
-    await waitFor(() => {
-      const req = queryByText('Invalid number');
-      expect(req!.innerHTML).toBe('Invalid number');
-    });
-  });
-  it('should not allow comma , ', async () => {
-    const { queryByText, findByTestId } = renderForm();
-    const input: any = await findByTestId('amount');
-    const value = '1,2';
-    const data = { target: { value } };
-    fireEvent.change(input, data);
-    fireEvent.blur(input);
-    await waitFor(() => {
-      const req = queryByText('Invalid number');
-      expect(req!.innerHTML).toBe('Invalid number');
-    });
+    expect(input.value).toBe('1');
   });
   it('should allow only max number of decimals configured by config', async () => {
     const { queryByText, findByTestId } = renderForm();
@@ -103,7 +82,7 @@ describe('EGLD Amount field', () => {
   it('should be =< than balance - transaction fee', async () => {
     const { queryByText, findByTestId, getByTestId } = renderForm();
     const input: any = await findByTestId('amount');
-    const value = '9999979.9998';
+    const value = '9,999,979.9998';
 
     const fullBalance = { target: { value } };
     fireEvent.change(input, fullBalance);
