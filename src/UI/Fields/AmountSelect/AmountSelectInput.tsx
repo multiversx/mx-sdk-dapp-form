@@ -11,11 +11,13 @@ import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { SingleValue } from 'react-select';
 import { getIsDisabled } from 'helpers';
 import { AmountSelect } from './AmountSelect';
+import { NftAmount } from '../Amount/NftAmount';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 
 /**
  * Gets form state and renders a connected `AmountSelect` component
  */
-export const AmountSelectInput = () => {
+export const AmountSelectInput = ({ className }: WithClassnameType) => {
   const { tokensInfo, amountInfo, formInfo } = useSendFormContext();
   const { readonly } = formInfo;
 
@@ -85,6 +87,12 @@ export const AmountSelectInput = () => {
     inputAmount: amount,
     onMaxClick: onMaxClicked
   };
+
+  const { isNftTransaction } = formInfo;
+
+  if (isNftTransaction) {
+    return <NftAmount className={className} />;
+  }
 
   return (
     <AmountSelect

@@ -59,24 +59,24 @@ export const AmountSelect = ({
       )}
 
       <div className={generatedClasses.wrapper}>
+        <AmountInput {...amountInputProps} />
+
+        <div className={generatedClasses.maxBtn}>
+          <MaxButton {...maxButtonProps} />
+        </div>
+
         <div className={classNames(styles.selectTokenContainer, className)}>
-          <div className={generatedClasses.wrapper}>
-            <AmountInput {...amountInputProps} />
-
-            <div className={generatedClasses.maxBtn}>
-              <MaxButton {...maxButtonProps} />
-            </div>
-
-            <TokenSelect {...tokenSelectProps} />
-          </div>
-
-          {isInvalid && (
-            <div className={globals.error} data-testid={errorDataTestId}>
-              <small>{error}</small>
-            </div>
-          )}
+          <TokenSelect {...tokenSelectProps} />
         </div>
       </div>
+
+      <small className={generatedClasses.small}>
+        {isInvalid && (
+          <div className={globals.error} data-testid={errorDataTestId}>
+            <small>{error}</small>
+          </div>
+        )}
+      </small>
     </div>
   );
 };
