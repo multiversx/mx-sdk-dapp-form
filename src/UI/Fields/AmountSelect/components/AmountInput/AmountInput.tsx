@@ -55,7 +55,7 @@ export const AmountInput = ({
   onDebounceChange
 }: AmountInputPropsType) => {
   const ref = useRef(null);
-  const secondRef = useRef(null);
+  const fallbackRef = useRef(null);
 
   const [debounceValue, setDebounceValue] = useState<ImprovedDebounceValueType>(
     { value, count: 0 }
@@ -122,7 +122,7 @@ export const AmountInput = ({
     if (removeCommas(newFormattedValue) === value) {
       setFormattedValue(newFormattedValue);
     } else {
-      setFormattedValue((secondRef.current as any)?.value ?? value);
+      setFormattedValue((fallbackRef.current as any)?.value ?? value);
     }
   }, [values, value]);
 
@@ -148,19 +148,19 @@ export const AmountInput = ({
         onChange={onChange}
         onBlur={handleBlur}
         autoComplete='off'
-        disabled={disabled ?? false}
-        readOnly={readonly ?? false}
+        disabled={Boolean(disabled)}
+        readOnly={Boolean(readonly)}
         onFocus={onFocus}
       />
 
-      {/* fallback for when onValueChange fails on large numbers */}
+      {/* fallback for when onValueChange does not retrigger on large numbers */}
       <div className='d-none'>
         <NumericFormat
           thousandSeparator=','
           thousandsGroupStyle='thousand'
           decimalSeparator='.'
           allowedDecimalSeparators={['.', ',']}
-          getInputRef={secondRef}
+          getInputRef={fallbackRef}
           value={value}
         />
       </div>
