@@ -1,9 +1,10 @@
 import React from 'react';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
-import globals from 'assets/sass/globals.module.scss';
 import styles from './amountSelect.styles.scss';
 import {
+  AmountError,
+  AmountErrorPropsType,
   AmountInput,
   AmountInputPropsType,
   MaxButton,
@@ -15,6 +16,7 @@ import {
 export interface AmountSelectPropsType extends WithClassnameType {
   label?: string;
   name: string;
+  amountErrorProps: AmountErrorPropsType;
   tokenSelectProps: TokenSelectType;
   amountInputProps: AmountInputPropsType;
   maxButtonProps: MaxButtonPropsType;
@@ -26,14 +28,9 @@ export const AmountSelect = ({
   name,
   tokenSelectProps,
   amountInputProps,
+  amountErrorProps,
   maxButtonProps
 }: AmountSelectPropsType) => {
-  const isInvalid = amountInputProps.isInvalid || tokenSelectProps.isInvalid;
-  const error = amountInputProps.error || tokenSelectProps.error;
-  const errorDataTestId = amountInputProps.error
-    ? `${amountInputProps.name}Error`
-    : `${tokenSelectProps.name}Error`;
-
   // TODO: remove BS classes or pass from above?
   const generatedClasses = {
     group: 'form-group text-left mb-0',
@@ -43,7 +40,7 @@ export const AmountSelect = ({
     balance: 'd-flex ml-0 ml-sm-auto line-height-1 balance',
     maxBtn: `${styles.badgeHolder} d-flex align-content-center justify-content-end`,
     wrapper: classNames(styles.tokenAmountInputSelectMax, {
-      'is-invalid': isInvalid
+      'is-invalid': amountErrorProps.hasErrors
     })
   };
 
@@ -71,11 +68,7 @@ export const AmountSelect = ({
       </div>
 
       <small className={generatedClasses.small}>
-        {isInvalid && (
-          <div className={globals.error} data-testid={errorDataTestId}>
-            <small>{error}</small>
-          </div>
-        )}
+        <AmountError {...amountErrorProps} />
       </small>
     </div>
   );

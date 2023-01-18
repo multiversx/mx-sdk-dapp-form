@@ -1,7 +1,9 @@
 import React from 'react';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { PartialTokenType, ValuesEnum } from 'types';
+import globals from 'assets/sass/globals.module.scss';
+import { NftEnumType, PartialTokenType, ValuesEnum } from 'types';
 import {
+  AmountErrorPropsType,
   AmountInputPropsType,
   MaxButtonPropsType,
   OptionType,
@@ -11,13 +13,11 @@ import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { SingleValue } from 'react-select';
 import { getIsDisabled } from 'helpers';
 import { AmountSelect } from './AmountSelect';
-import { NftAmount } from '../Amount/NftAmount';
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 
 /**
  * Gets form state and renders a connected `AmountSelect` component
  */
-export const AmountSelectInput = ({ className }: WithClassnameType) => {
+export const AmountSelectInput = () => {
   const { tokensInfo, amountInfo, formInfo } = useSendFormContext();
   const { readonly } = formInfo;
 
@@ -29,7 +29,7 @@ export const AmountSelectInput = ({ className }: WithClassnameType) => {
   const { accountInfo } = useSendFormContext();
 
   const { balance } = accountInfo;
-  const { tokens, egldLabel, areTokensLoading, tokenId, onChangeTokenId } =
+  const { tokens, egldLabel, areTokensLoading, tokenId, onChangeTokenId, nft } =
     tokensInfo;
 
   const allTokens: PartialTokenType[] = [
@@ -88,15 +88,23 @@ export const AmountSelectInput = ({ className }: WithClassnameType) => {
     onMaxClick: onMaxClicked
   };
 
-  const { isNftTransaction } = formInfo;
+  const amountErrorProps: AmountErrorPropsType = {
+    hasErrors: amountInputProps.isInvalid || tokenSelectProps.isInvalid,
+    error: amountInputProps.error || tokenSelectProps.error,
+    className: globals.error,
+    'data-testid': amountInputProps.error
+      ? `${amountInputProps.name}Error`
+      : `${tokenSelectProps.name}Error`
+  };
 
-  if (isNftTransaction) {
-    return <NftAmount className={className} />;
+  if (nft?.type === NftEnumType.NonFungibleESDT) {
+    return null;
   }
 
   return (
     <AmountSelect
       name={ValuesEnum.tokenId}
+      amountErrorProps={amountErrorProps}
       tokenSelectProps={tokenSelectProps}
       amountInputProps={amountInputProps}
       maxButtonProps={maxButtonProps}
