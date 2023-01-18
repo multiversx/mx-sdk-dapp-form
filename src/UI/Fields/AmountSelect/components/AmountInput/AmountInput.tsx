@@ -168,7 +168,7 @@ export const AmountInput = ({
       {usdValue && (
         <span className='amount-holder-usd d-flex text-secondary'>
           <small>
-            {usdValue !== '$0' ? <>≈&nbsp;</> : <></>}
+            {usdValue !== '$0' ? <>≈ </> : <></>}
             {usdValue}
           </small>
         </span>
