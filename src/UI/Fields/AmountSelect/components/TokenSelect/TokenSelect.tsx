@@ -2,7 +2,7 @@ import { getWegldIdForChainId } from 'apiCalls/network/getEnvironmentForChainId'
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
 import React from 'react';
 import Select from 'react-select';
-import { SmallLoader, TokenElement } from './components';
+import { SmallLoader, TokenElement as DefaultTokenElement } from './components';
 import { customStyles } from './helpers';
 import { PartialTokenType, TokenAssetsType } from 'types';
 import styles from './../../amountSelect.styles.scss';
@@ -39,6 +39,12 @@ export interface TokenSelectPropsType {
   onFocus?: (props: any) => void;
   disabledOption?: SelectOptionType;
   handleDisabledOptionClick?: any;
+  /**
+   * Allow passing a custom TokenElement
+   * @example
+   * TokenElement = hasLockedMEX || hasLockedTokens ? LockedTokenElement : TokenElement;
+   */
+  TokenElement?: typeof DefaultTokenElement;
 }
 
 export const TokenSelect = ({
@@ -58,7 +64,8 @@ export const TokenSelect = ({
   isLoading = false,
   noOptionsMessage = 'No Tokens',
   disabledOption,
-  handleDisabledOptionClick
+  handleDisabledOptionClick,
+  TokenElement = DefaultTokenElement
 }: TokenSelectPropsType) => {
   const ref = React.useRef(null);
   const docStyle = window.getComputedStyle(document.documentElement);
@@ -108,12 +115,6 @@ export const TokenSelect = ({
       }
 
       return <TokenElement {...args} />;
-
-      // return hasLockedMEX || hasLockedTokens ? ( // TODO ?
-      //   <LockedTokenElement {...args} />
-      // ) : (
-      //   <TokenElement {...args} />
-      // );
     };
 
   const disableOption = (option: any) => {
