@@ -7,6 +7,7 @@ import {
   AmountInputPropsType,
   MaxButtonPropsType,
   OptionType,
+  TokenBalancePropsType,
   TokenSelectType
 } from './components';
 import { DECIMALS } from '@multiversx/sdk-dapp/constants';
@@ -23,8 +24,16 @@ export const AmountSelectInput = () => {
 
   const { tokenDetails, tokenIdError, isTokenIdInvalid } = tokensInfo;
 
-  const { amount, onBlur, onChange, onMaxClicked, error, isInvalid, onFocus } =
-    amountInfo;
+  const {
+    amount,
+    onBlur,
+    onChange,
+    onMaxClicked,
+    error,
+    isInvalid,
+    onFocus,
+    maxAmountAvailable
+  } = amountInfo;
 
   const { accountInfo } = useSendFormContext();
 
@@ -97,6 +106,13 @@ export const AmountSelectInput = () => {
       : `${tokenSelectProps.name}Error`
   };
 
+  const tokenBalanceProps: TokenBalancePropsType = {
+    label: 'Available',
+    value: maxAmountAvailable,
+    'data-testid': `available${nft?.identifier ?? tokenId}`,
+    'data-value': `${maxAmountAvailable} ${nft?.identifier ?? tokenId}`
+  };
+
   if (nft?.type === NftEnumType.NonFungibleESDT) {
     return null;
   }
@@ -107,6 +123,7 @@ export const AmountSelectInput = () => {
       amountErrorProps={amountErrorProps}
       tokenSelectProps={tokenSelectProps}
       amountInputProps={amountInputProps}
+      tokenBalanceProps={tokenBalanceProps}
       maxButtonProps={maxButtonProps}
       label='Amount Select'
     />

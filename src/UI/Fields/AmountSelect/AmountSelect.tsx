@@ -9,6 +9,8 @@ import {
   AmountInputPropsType,
   MaxButton,
   MaxButtonPropsType,
+  TokenBalance,
+  TokenBalancePropsType,
   TokenSelect,
   TokenSelectType
 } from './components';
@@ -17,6 +19,7 @@ export interface AmountSelectPropsType extends WithClassnameType {
   label?: string;
   name: string;
   amountErrorProps: AmountErrorPropsType;
+  tokenBalanceProps: TokenBalancePropsType;
   tokenSelectProps: TokenSelectType;
   amountInputProps: AmountInputPropsType;
   maxButtonProps: MaxButtonPropsType;
@@ -27,6 +30,7 @@ export const AmountSelect = ({
   label,
   name,
   tokenSelectProps,
+  tokenBalanceProps,
   amountInputProps,
   amountErrorProps,
   maxButtonProps
@@ -70,6 +74,10 @@ export const AmountSelect = ({
       <small className={generatedClasses.small}>
         <AmountError {...amountErrorProps} />
       </small>
+
+      <div className={generatedClasses.balance}>
+        <TokenBalance {...tokenBalanceProps} />
+      </div>
     </div>
   );
 };

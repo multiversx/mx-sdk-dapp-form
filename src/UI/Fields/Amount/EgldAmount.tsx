@@ -14,13 +14,9 @@ import styles from './styles.module.scss';
 export const EgldAmount = ({ className }: WithClassnameType) => {
   const { tokensInfo, amountInfo } = useSendFormContext();
 
-  const { egldLabel, egldPriceInUsd } = tokensInfo;
-  const {
-    isMaxClicked,
-    isInvalid,
-    maxAmountAvailable,
-    maxAmountMinusDust
-  } = amountInfo;
+  const { egldLabel, egldPriceInUsd, tokenId } = tokensInfo;
+  const { isMaxClicked, isInvalid, maxAmountAvailable, maxAmountMinusDust } =
+    amountInfo;
 
   function AvailableAmountElement() {
     if (!isInvalid && amountInfo.amount) {
@@ -45,7 +41,7 @@ export const EgldAmount = ({ className }: WithClassnameType) => {
       return (
         <small
           className={classNames(styles.small, className)}
-          data-testid={`available${egldLabel}`}
+          data-testid={`available${tokenId}`}
           data-value={`${maxAmountAvailable} ${egldLabel}`}
         >
           Available {maxAmountAvailable}
