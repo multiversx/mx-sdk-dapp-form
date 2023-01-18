@@ -1,7 +1,8 @@
 import React, {
   ChangeEvent,
   FocusEvent,
-  useEffect, useMemo,
+  useEffect,
+  useMemo,
   useRef,
   useState
 } from 'react';
@@ -70,7 +71,7 @@ export const AmountInput = ({
       return newFormattedValue;
     }
     return value;
-  }, [values, value])
+  }, [values, value]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = removeCommas(e.target.value);

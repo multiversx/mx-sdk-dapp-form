@@ -84,7 +84,7 @@ export const AmountSelectInput = () => {
     value: amount,
     placeholder: 'Amount',
     handleBlur: onBlur,
-    'data-testid': 'amountInput',
+    'data-testid': ValuesEnum.amount,
     handleChange: onChange,
     onFocus,
     error,
@@ -102,8 +102,8 @@ export const AmountSelectInput = () => {
     error: amountInputProps.error || tokenSelectProps.error,
     className: globals.error,
     'data-testid': amountInputProps.error
-      ? `${amountInputProps.name}Error`
-      : `${tokenSelectProps.name}Error`
+      ? `${ValuesEnum.amount}Error`
+      : `${ValuesEnum.tokenId}Error`
   };
 
   const tokenBalanceProps: TokenBalancePropsType = {

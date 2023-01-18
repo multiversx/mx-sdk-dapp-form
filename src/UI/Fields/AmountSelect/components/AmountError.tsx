@@ -17,7 +17,7 @@ export const AmountError = ({
   }
   return (
     <div className={className} data-testid={dataTestId}>
-      <small>{error}</small>
+      {error}
     </div>
   );
 };

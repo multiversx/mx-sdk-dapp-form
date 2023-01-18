@@ -123,7 +123,7 @@ describe('EGLD Amount field', () => {
   });
   it('should show error when not enough balance for non-zero transaction with large gas', async () => {
     const render = renderForm({
-      balance: '1_000_000_000_000_000'.replace('_', '') // 0.001
+      balance: '1_000_000_000_000_000'.replaceAll('_', '') // 0.001
     });
 
     const receiver: any = await render.findByTestId('receiver');
