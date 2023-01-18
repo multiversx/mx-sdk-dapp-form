@@ -19,7 +19,7 @@ export interface OptionType {
   token: PartialTokenType;
 }
 
-export interface TokenSelectType {
+export interface TokenSelectPropsType {
   id?: string;
   value?: OptionType;
   name: string;
@@ -59,7 +59,7 @@ export const TokenSelect = ({
   noOptionsMessage = 'No Tokens',
   disabledOption,
   handleDisabledOptionClick
-}: TokenSelectType) => {
+}: TokenSelectPropsType) => {
   const ref = React.useRef(null);
   const docStyle = window.getComputedStyle(document.documentElement);
   const customProps = {

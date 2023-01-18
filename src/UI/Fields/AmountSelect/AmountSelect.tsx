@@ -12,7 +12,7 @@ import {
   TokenBalance,
   TokenBalancePropsType,
   TokenSelect,
-  TokenSelectType
+  TokenSelectPropsType
 } from './components';
 
 export interface AmountSelectPropsType extends WithClassnameType {
@@ -20,7 +20,7 @@ export interface AmountSelectPropsType extends WithClassnameType {
   name: string;
   amountErrorProps: AmountErrorPropsType;
   tokenBalanceProps: TokenBalancePropsType;
-  tokenSelectProps: TokenSelectType;
+  tokenSelectProps: TokenSelectPropsType;
   amountInputProps: AmountInputPropsType;
   maxButtonProps: MaxButtonPropsType;
 }

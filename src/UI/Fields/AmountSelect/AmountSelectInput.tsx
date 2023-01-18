@@ -8,7 +8,7 @@ import {
   MaxButtonPropsType,
   OptionType,
   TokenBalancePropsType,
-  TokenSelectType
+  TokenSelectPropsType
 } from './components';
 import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { SingleValue } from 'react-select';
@@ -61,7 +61,7 @@ export const AmountSelectInput = () => {
 
   const value = options.find(({ value }: OptionType) => value === tokenId);
 
-  const tokenSelectProps: TokenSelectType = {
+  const tokenSelectProps: TokenSelectPropsType = {
     id: ValuesEnum.tokenId,
     value,
     name: ValuesEnum.tokenId,
