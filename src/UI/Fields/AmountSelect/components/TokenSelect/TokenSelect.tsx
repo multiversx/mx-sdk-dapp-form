@@ -1,11 +1,27 @@
+import React from 'react';
+import Select, {
+  ControlProps,
+  IndicatorsContainerProps,
+  InputProps,
+  MenuListProps,
+  MenuProps,
+  PlaceholderProps,
+  SingleValueProps,
+  components
+} from 'react-select';
+import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { formatTokenAmount } from './helpers/formatTokenAmount';
+import { faDiamond } from '@fortawesome/free-solid-svg-icons';
+
 import { getWegldIdForChainId } from 'apiCalls/network/getEnvironmentForChainId';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
-import React from 'react';
-import Select from 'react-select';
+
 import { SmallLoader, TokenElement as DefaultTokenElement } from './components';
 import { customStyles } from './helpers';
 import { PartialTokenType, TokenAssetsType } from 'types';
-import styles from './../../amountSelect.styles.scss';
+// import styles from './../../amountSelect.styles.scss';
+import styles from './styles.module.scss';
 
 export interface SelectOptionType {
   label: string;
@@ -46,6 +62,108 @@ export interface TokenSelectPropsType {
    */
   TokenElement?: typeof DefaultTokenElement;
 }
+
+// To be moved
+const customComponents = {
+  IndicatorSeparator: null,
+  Menu: (props: any) => <components.Menu {...props} className={styles.menu} />,
+  Control: (props: any) => (
+    <components.Control {...props} className={styles.control} />
+  ),
+  Input: (props: any) => (
+    <components.Input {...props} className={styles.input} />
+  ),
+  MenuList: (props: any) => (
+    <components.MenuList {...props} className={styles.list} />
+  ),
+  SingleValue: (props: any) => (
+    <components.SingleValue {...props} className={styles.single} />
+  ),
+  Placeholder: (props: any) => (
+    <components.Placeholder
+      {...props}
+      className={classNames(styles.placeholder, {
+        [styles.focused]: props.isFocused
+      })}
+    />
+  ),
+  IndicatorsContainer: (props: any) => (
+    <components.IndicatorsContainer
+      {...props}
+      className={classNames(styles.indicator, {
+        [styles.expanded]: props.selectProps.menuIsOpen
+      })}
+    />
+  ),
+  ValueContainer: (props: any) => {
+    const { selectProps } = props;
+
+    const price = '$0';
+    const icon =
+      selectProps.value && selectProps.value.assets
+        ? selectProps.value.assets.svgUrl
+        : null;
+
+    return (
+      <div className={styles.container}>
+        <div className={styles.icon}>
+          {icon ? (
+            <img src={icon} className={styles.asset} />
+          ) : (
+            <span className={styles.asset}>
+              <FontAwesomeIcon icon={faDiamond} className={styles.diamond} />
+            </span>
+          )}
+        </div>
+
+        <div className={styles.data}>
+          <components.ValueContainer {...props} className={styles.value} />
+          <small className={styles.price}>{price}</small>
+        </div>
+      </div>
+    );
+  },
+  Option: (props: any) => {
+    const { data, isSelected, isFocused } = props;
+
+    const icon = data.assets ? data.assets.svgUrl : null;
+    const amount = formatTokenAmount({
+      amount: data.token.balance,
+      decimals: data.token.decimals,
+      addCommas: true
+    });
+
+    return (
+      <components.Option
+        {...props}
+        className={classNames(styles.option, {
+          [styles.selected]: isSelected || isFocused
+        })}
+      >
+        <div className={styles.image}>
+          {icon ? (
+            <img src={icon} className={styles.icon} />
+          ) : (
+            <span className={styles.icon}>
+              <FontAwesomeIcon icon={faDiamond} className={styles.diamond} />
+            </span>
+          )}
+        </div>
+
+        <div className={styles.info}>
+          <div className={styles.left}>
+            <span className={styles.value}>{data.token.ticker}</span>
+            <small className={styles.price}>$0</small>
+          </div>
+          <div className={styles.right}>
+            <span className={styles.value}>{amount}</span>
+            <small className={styles.price}>≈ $0</small>
+          </div>
+        </div>
+      </components.Option>
+    );
+  }
+};
 
 export const TokenSelect = ({
   id,
@@ -89,34 +207,6 @@ export const TokenSelect = ({
   const isTokenFromEgldFamily = (identifier: string) =>
     egldFamily.includes(identifier);
 
-  const FormatOptionLabel =
-    (testId?: string) =>
-    (option: any, { context }: { context: any }) => {
-      const { label, value: val, token } = option;
-      const inDropdown = context === 'menu' ? true : false;
-      const isDisabled = disableOption(option);
-
-      const args = {
-        inDropdown,
-        label,
-        value: val,
-        token,
-        isDisabled,
-        handleDisabledOptionClick,
-        'data-testid': `${testId}-${context}-${val}`
-      };
-
-      if (option.value === 'loader') {
-        return (
-          <div className='d-flex justify-content-center py-5'>
-            <SmallLoader show />
-          </div>
-        );
-      }
-
-      return <TokenElement {...args} />;
-    };
-
   const disableOption = (option: any) => {
     const isSameAsOtherSelectToken = option.value === disabledOption?.value;
 
@@ -140,22 +230,13 @@ export const TokenSelect = ({
   const optionsWithLoader = isLoading ? [loaderOption, ...options] : options;
 
   return (
-    <div
-      className={`${styles.selectHolder} ${
-        isLoading ? styles.selectHolderLoading : ''
-      }`}
-      data-testid={`${name}Select`}
-    >
+    <div data-testid={`${name}Select`}>
       <Select
         ref={ref}
         id={id}
         name={name}
-        className={` ${styles.largeStyledSelectContainer} ${
-          fullSize ? 'fullsize' : ''
-        } ${className}`}
+        className={classNames(styles.select, className)}
         options={optionsWithLoader}
-        placeholder='Select token'
-        classNamePrefix='styled-select'
         value={value}
         isDisabled={disabled}
         isOptionDisabled={(option) => {
@@ -171,12 +252,12 @@ export const TokenSelect = ({
             (ref.current as any).blur();
           }
         }}
-        styles={selectStyle}
         isSearchable={isSearchable}
         maxMenuHeight={260}
         // onMenuOpen={onMenuOpen}
         noOptionsMessage={() => noOptionsMessage || 'No options'}
-        formatOptionLabel={FormatOptionLabel(id)}
+        formatOptionLabel={(value) => value.token.ticker || 'Select...'}
+        components={customComponents}
       />
     </div>
   );
