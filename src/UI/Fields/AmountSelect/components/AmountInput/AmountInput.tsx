@@ -1,7 +1,7 @@
 import React, {
   ChangeEvent,
   FocusEvent,
-  useEffect,
+  useEffect, useMemo,
   useRef,
   useState
 } from 'react';
@@ -55,16 +55,22 @@ export const AmountInput = ({
   onDebounceChange
 }: AmountInputPropsType) => {
   const ref = useRef(null);
-  const fallbackRef = useRef(null);
 
   const [debounceValue, setDebounceValue] = useState<ImprovedDebounceValueType>(
     { value, count: 0 }
   );
-  const [formattedValue, setFormattedValue] = useState(value);
   const [values, setValues] = useState<NumberFormatValues>();
   const [usdValue, setUsdValue] = useState<string>();
 
   const debounceAmount = useImprovedDebounce(debounceValue, fiveHundredMs);
+
+  const formattedValue = useMemo(() => {
+    const newFormattedValue = values?.formattedValue ?? '';
+    if (removeCommas(newFormattedValue) === value) {
+      return newFormattedValue;
+    }
+    return value;
+  }, [values, value])
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = removeCommas(e.target.value);
@@ -106,6 +112,7 @@ export const AmountInput = ({
   };
 
   const onValueChange: OnValueChange = (newValues) => {
+    console.log(newValues);
     setValues(newValues);
   };
 
@@ -116,15 +123,6 @@ export const AmountInput = ({
   }, [debounceAmount]);
 
   useEffect(updateUsdValue, [value, tokenUsdPrice]);
-
-  useEffect(() => {
-    const newFormattedValue = values?.formattedValue ?? '';
-    if (removeCommas(newFormattedValue) === value) {
-      setFormattedValue(newFormattedValue);
-    } else {
-      setFormattedValue((fallbackRef.current as any)?.value ?? value);
-    }
-  }, [values, value]);
 
   return (
     <div className={`amount-holder w-100 ${usdValue ? 'show-usd-value' : ''} `}>
@@ -152,18 +150,6 @@ export const AmountInput = ({
         readOnly={Boolean(readonly)}
         onFocus={onFocus}
       />
-
-      {/* fallback for when onValueChange does not retrigger on large numbers */}
-      <div className='d-none'>
-        <NumericFormat
-          thousandSeparator=','
-          thousandsGroupStyle='thousand'
-          decimalSeparator='.'
-          allowedDecimalSeparators={['.', ',']}
-          getInputRef={fallbackRef}
-          value={value}
-        />
-      </div>
 
       {usdValue && (
         <span className='amount-holder-usd d-flex text-secondary'>
