@@ -7,6 +7,7 @@ import {
   renderForm as beginAll,
   sendAndConfirmTest
 } from 'tests/helpers';
+import { ValuesEnum } from 'types';
 
 const beforAllTokens = (balance?: string) =>
   beginAll({
@@ -87,8 +88,12 @@ describe('Send Meta ESDT', () => {
   test('MetaEsdt send', async () => {
     const methods = beforAllTokens();
 
+    const receiver = await methods.findByTestId('receiver');
+
     // confirm metaEsdt token is in list
-    const selectInput = await methods.findByLabelText('Token');
+    const selectInput: any = methods.container.querySelector(
+      `input[name="${ValuesEnum.tokenId}"]`
+    );
     selectEvent.openMenu(selectInput);
     const metaTokenOption = await methods.findByTestId(
       `${metaToken.identifier}-option`
@@ -99,7 +104,7 @@ describe('Send Meta ESDT', () => {
     selectEvent.select(selectInput, metaToken.name);
 
     const tokenId: any = methods.container.querySelector(
-      'input[name="tokenId"]'
+      `input[name="${ValuesEnum.tokenId}"]`
     );
 
     await waitFor(() => {
@@ -108,9 +113,6 @@ describe('Send Meta ESDT', () => {
 
     const canTransferWarning = await methods.findByTestId('canTransferWarning');
     expect(canTransferWarning.textContent).toContain('Warning');
-
-    // fill in receiver
-    const receiver = await methods.findByTestId('receiver');
 
     // expect receiver to be forbidden
     fireEvent.change(receiver, { target: { value: fakeReceiver } });
