@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Select, { components } from 'react-select';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { formatTokenAmount } from './helpers/formatTokenAmount';
-import { faDiamond } from '@fortawesome/free-solid-svg-icons';
+import { faCircleNotch, faDiamond } from '@fortawesome/free-solid-svg-icons';
 
 import { getWegldIdForChainId } from 'apiCalls/network/getEnvironmentForChainId';
 // import { SmallLoader } from './components';
@@ -38,7 +38,6 @@ export interface TokenSelectPropsType {
   onChange: (option: any) => void;
   onBlur?: (option: any) => void;
   onMenuOpen?: () => void;
-  fullSize?: boolean;
   disabled?: boolean;
   error?: string;
   egldLabel: string;
@@ -58,24 +57,59 @@ export interface TokenSelectPropsType {
   TokenElement?: typeof DefaultTokenElement;
 }
 
-const Input: typeof components.Input = (props) => {
-  return <components.Input {...props} className={styles.input} />;
-};
+const Input: typeof components.Input = (props) => (
+  <components.Input {...props} className={styles.input} />
+);
+
+const Menu: typeof components.Menu = (props) => (
+  <components.Menu {...props} className={styles.menu} />
+);
+
+const MenuList: typeof components.MenuList = (props) => (
+  <components.MenuList {...props} className={styles.list} />
+);
+
+const SingleValue: typeof components.SingleValue = (props) => (
+  <components.SingleValue {...props} className={styles.single} />
+);
+
+const Control: typeof components.Control = (props) => (
+  <components.Control {...props} className={styles.control} />
+);
+
+const Placeholder: typeof components.Placeholder = (props) => (
+  <components.Placeholder
+    {...props}
+    className={classNames(styles.placeholder, {
+      [styles.focused]: props.isFocused
+    })}
+  />
+);
+
+const IndicatorsContainer: typeof components.IndicatorsContainer = (props) => (
+  <components.IndicatorsContainer
+    {...props}
+    className={classNames(styles.indicator, {
+      [styles.expanded]: props.selectProps.menuIsOpen
+    })}
+  />
+);
 
 const Option: typeof components.Option = (props) => {
-  const { data: token, isSelected, isFocused } = props;
-  const data = token as any;
+  const { data, isSelected, isFocused } = props;
+  const option = data as OptionType;
 
-  const icon = data.assets ? data.assets.svgUrl : null;
+  const icon = option.assets ? option.assets.svgUrl : null;
   const amount = formatTokenAmount({
-    amount: data.token.balance,
-    decimals: data.token.decimals,
+    amount: option.token.balance,
+    decimals: option.token.decimals,
     addCommas: true
   });
 
   return (
     <components.Option
       {...props}
+      data-testid={`${(props as any).value}-option`}
       className={classNames(styles.option, {
         [styles.selected]: isSelected || isFocused
       })}
@@ -92,7 +126,7 @@ const Option: typeof components.Option = (props) => {
 
       <div className={styles.info}>
         <div className={styles.left}>
-          <span className={styles.value}>{data.token.ticker}</span>
+          <span className={styles.value}>{option.token.ticker}</span>
           <small className={styles.price}>$0</small>
         </div>
         <div className={styles.right}>
@@ -104,65 +138,43 @@ const Option: typeof components.Option = (props) => {
   );
 };
 
-// To be moved
-const customComponents = {
-  IndicatorSeparator: null,
-  Menu: (props: any) => <components.Menu {...props} className={styles.menu} />,
-  Control: (props: any) => (
-    <components.Control {...props} className={styles.control} />
-  ),
-  Input,
-  MenuList: (props: any) => (
-    <components.MenuList {...props} className={styles.list} />
-  ),
-  SingleValue: (props: any) => (
-    <components.SingleValue {...props} className={styles.single} />
-  ),
-  Placeholder: (props: any) => (
-    <components.Placeholder
-      {...props}
-      className={classNames(styles.placeholder, {
-        [styles.focused]: props.isFocused
-      })}
-    />
-  ),
-  IndicatorsContainer: (props: any) => (
-    <components.IndicatorsContainer
-      {...props}
-      className={classNames(styles.indicator, {
-        [styles.expanded]: props.selectProps.menuIsOpen
-      })}
-    />
-  ),
-  ValueContainer: (props: any) => {
-    const { selectProps } = props;
+const ValueContainer: typeof components.ValueContainer = (props) => {
+  const { selectProps, isDisabled } = props;
 
-    const price = '$0';
-    const icon =
-      selectProps.value && selectProps.value.assets
-        ? selectProps.value.assets.svgUrl
-        : null;
+  const price = '$0';
+  const token = selectProps.value as OptionType;
+  const icon = token.assets ? token.assets.svgUrl : null;
 
-    return (
-      <div className={styles.container}>
-        <div className={styles.icon}>
-          {icon ? (
-            <img src={icon} className={styles.asset} />
-          ) : (
-            <span className={styles.asset}>
-              <FontAwesomeIcon icon={faDiamond} className={styles.diamond} />
-            </span>
-          )}
-        </div>
+  return (
+    <div className={styles.container}>
+      <div className={styles.icon}>
+        {/* <components.Placeholder {...props} isFocused={true}>
+          {selectProps.placeholder}
+        </components.Placeholder> */}
 
-        <div className={styles.data}>
-          <components.ValueContainer {...props} className={styles.value} />
-          <small className={styles.price}>{price}</small>
-        </div>
+        {isDisabled ? (
+          <span className={styles.asset}>
+            <FontAwesomeIcon
+              icon={faCircleNotch}
+              className={styles.diamond}
+              spin={true}
+            />
+          </span>
+        ) : icon ? (
+          <img src={icon} className={styles.asset} />
+        ) : (
+          <span className={styles.asset}>
+            <FontAwesomeIcon icon={faDiamond} className={styles.diamond} />
+          </span>
+        )}
       </div>
-    );
-  },
-  Option
+
+      <div className={styles.data}>
+        <components.ValueContainer {...props} className={styles.value} />
+        <small className={styles.price}>{price}</small>
+      </div>
+    </div>
+  );
 };
 
 export const TokenSelect = (
@@ -173,27 +185,15 @@ export const TokenSelect = (
     id,
     name,
     options,
-    className = '',
-    // fullSize,
     isLoading = false,
+    className = '',
     noOptionsMessage = 'No Tokens',
     disabledOption,
     egldLabel,
     chainId
     // handleDisabledOptionClick,
   } = props;
-  const ref = React.useRef(null);
-  // const docStyle = window.getComputedStyle(document.documentElement);
-  // const customProps = {
-  //   hoverColor: docStyle.getPropertyValue('--light'),
-  //   primaryColor: docStyle.getPropertyValue('--primary'),
-  //   bgColor: docStyle.getPropertyValue('--card-bg'),
-  //   textColor: docStyle.getPropertyValue('--dark'),
-  //   borderColor: docStyle.getPropertyValue('--border-color'),
-  //   shadowColor: docStyle.getPropertyValue('--shadow-color'),
-  //   fullSize
-  // };
-
+  const ref = useRef(null);
   const egldFamily = [egldLabel, getWegldIdForChainId(chainId)];
 
   const isTokenFromEgldFamily = (identifier: string) =>
@@ -228,7 +228,7 @@ export const TokenSelect = (
   //     return <TokenElement {...args} />;
   //   };
 
-  const disableOption = (option: any) => {
+  const disableOption = (option: OptionType) => {
     const isSameAsOtherSelectToken = option.value === disabledOption?.value;
 
     const isCurrentOptionEgldFamily = isTokenFromEgldFamily(option.value);
@@ -242,29 +242,16 @@ export const TokenSelect = (
     return isSameAsOtherSelectToken || isEgldFamily;
   };
 
-  const loaderOption: OptionType = {
-    label: 'loader',
-    value: 'loader',
-    token: {} as any
-  };
-
-  const optionsWithLoader = isLoading ? [loaderOption, ...options] : options;
-
   return (
     <div data-testid={`${name}Select`}>
       <Select
         ref={ref}
         id={id}
         name={name}
-        className={classNames(styles.select, className)}
-        options={optionsWithLoader}
+        options={options}
+        isDisabled={props.disabled || isLoading}
         value={props.value}
-        isDisabled={props.disabled}
-        isOptionDisabled={(option) => {
-          const isLoader = option.value === loaderOption.value;
-          const isDisabled = disableOption(option);
-          return isLoader || isDisabled;
-        }}
+        isOptionDisabled={disableOption}
         onBlur={props.onBlur}
         onFocus={props.onFocus}
         onChange={(e) => {
@@ -277,8 +264,24 @@ export const TokenSelect = (
         maxMenuHeight={260}
         onMenuOpen={props?.onMenuOpen}
         noOptionsMessage={() => noOptionsMessage}
-        formatOptionLabel={(value) => value.token.ticker || 'Select...'}
-        components={customComponents}
+        formatOptionLabel={(value) =>
+          isLoading ? 'Loading...' : value.token.ticker || 'Select...'
+        }
+        className={classNames(styles.select, className, {
+          [styles.disabled]: props.disabled || isLoading
+        })}
+        components={{
+          IndicatorSeparator: null,
+          Menu,
+          Control,
+          Input,
+          MenuList,
+          IndicatorsContainer,
+          ValueContainer,
+          Placeholder,
+          Option,
+          SingleValue
+        }}
       />
     </div>
   );

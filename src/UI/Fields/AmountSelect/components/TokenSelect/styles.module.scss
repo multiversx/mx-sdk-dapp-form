@@ -2,6 +2,12 @@
   width: 176px;
   margin-left: auto;
 
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
   .control {
     background-color: #242526;
     border: transparent;
