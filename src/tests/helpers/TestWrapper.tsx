@@ -91,7 +91,12 @@ export const TestWrapper = ({
     },
     tokensInfo: {
       initialNft,
-      initialTokens: []
+      initialTokens:
+        initValues?.computedTokens.map((token) => ({
+          ...token,
+          ledgerSignature: (token as any).assets?.ledgerSignature || '',
+          decimals: token.decimals
+        })) ?? []
     }
   };
   return (
