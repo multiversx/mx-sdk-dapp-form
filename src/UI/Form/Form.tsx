@@ -15,7 +15,6 @@ import {
   FeeAccordion,
   NftSftToken,
   Receiver,
-  SelectToken,
   AmountSlider,
   AmountSelectInput
 } from 'UI/Fields';
@@ -72,10 +71,8 @@ export const Form = ({ className }: WithClassnameType) => {
             <Amount />
           </>
         ) : (
-          <>{false ? <AmountSelectInput /> : null}</>
+          <AmountSelectInput />
         )}
-
-        <SelectToken label='Token' />
 
         {uiOptions?.showAmountSlider && !isNFTTransaction && (
           <AmountSlider

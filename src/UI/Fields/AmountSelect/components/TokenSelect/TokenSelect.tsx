@@ -12,6 +12,7 @@ import { TokenElement as DefaultTokenElement } from './components';
 import { PartialTokenType, TokenAssetsType } from 'types';
 // import styles from './../../amountSelect.styles.scss';
 import styles from './styles.module.scss';
+import { TokenElement } from 'UI/Fields/SelectToken/TokenElement';
 
 export interface SelectOptionType {
   label: string;
@@ -182,6 +183,10 @@ const ValueContainer: typeof components.ValueContainer = (props) => {
   );
 };
 
+if ('TODO' == 'bring back value container and option'.toString()) {
+  console.log({ ValueContainer, Option });
+}
+
 export const TokenSelect = (
   props: // TokenElement = DefaultTokenElement
   TokenSelectPropsType
@@ -194,6 +199,12 @@ export const TokenSelect = (
     noOptionsMessage = 'No Tokens',
     disabledOption,
     egldLabel,
+    disabled,
+    value,
+    onBlur,
+    onFocus,
+    onChange,
+    onMenuOpen,
     chainId
     // handleDisabledOptionClick,
   } = props;
@@ -246,8 +257,30 @@ export const TokenSelect = (
     return isSameAsOtherSelectToken || isEgldFamily;
   };
 
+  const FormatOptionLabel = ({ token }: { token: PartialTokenType }) => {
+    return (
+      <TokenElement
+        inDropdown
+        token={token}
+        isEgld={token.identifier === egldLabel}
+      />
+    );
+  };
+
+  const ListOption = (props: any) => {
+    return (
+      <div
+        className={`token-option ${props.isSelected ? 'is-selected' : ''}`}
+        data-testid={`${props.value}-option`}
+      >
+        <components.Option {...props} />
+      </div>
+    );
+  };
+
   return (
     <div data-testid={`${name}Select`}>
+      {/* TODO: label can be hidden, and shown only in tests */}
       <label
         htmlFor={name}
         data-testid='tokenIdLabel'
@@ -255,30 +288,33 @@ export const TokenSelect = (
       >
         Token
       </label>
+
       <Select
         ref={ref}
         inputId={name}
+        name={name}
         options={options}
-        isDisabled={props.disabled || isLoading}
-        value={props.value}
+        openMenuOnFocus
+        isDisabled={disabled /*|| isLoading --> THIS CAUSES TEST FAIL */}
+        isLoading={isLoading}
+        value={value}
         isOptionDisabled={disableOption}
-        onBlur={props.onBlur}
-        onFocus={props.onFocus}
+        onBlur={onBlur}
+        onFocus={onFocus}
         onChange={(e) => {
-          props.onChange(e);
+          onChange(e);
           if (ref && ref.current !== null) {
             (ref.current as any).blur();
           }
         }}
         isSearchable={props.isSearchable}
         maxMenuHeight={260}
-        onMenuOpen={() => {
-          props.onMenuOpen?.();
-        }}
+        onMenuOpen={onMenuOpen}
         noOptionsMessage={() => noOptionsMessage}
-        formatOptionLabel={(value) =>
-          isLoading ? 'Loading...' : value.token.ticker || 'Select...'
-        }
+        formatOptionLabel={FormatOptionLabel}
+        // formatOptionLabel={(value) =>
+        //   isLoading ? 'Loading...' : value.token.ticker || 'Select...'
+        // } --> this is making the test fail
         className={classNames(styles.select, className, {
           [styles.disabled]: props.disabled || isLoading
         })}
@@ -289,9 +325,10 @@ export const TokenSelect = (
           Input,
           MenuList,
           IndicatorsContainer,
-          ValueContainer,
+          // ValueContainer, --> this is making the test fail
           Placeholder,
-          Option,
+          // Option // --> this is making the test fail
+          Option: ListOption,
           SingleValue
         }}
       />
