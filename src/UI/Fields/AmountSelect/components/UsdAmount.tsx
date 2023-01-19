@@ -15,7 +15,7 @@ export const UsdAmount = ({ amount, token, egldLabel }: UsdAmountPropsType) => {
     return null;
   }
 
-  const { identifier, totalUsdPrice } = token;
+  const { identifier, tokenUsdPrice: totalUsdPrice } = token;
   const showInfoDust = identifier === egldLabel;
 
   return (

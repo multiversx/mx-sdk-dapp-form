@@ -6,8 +6,9 @@ import { formatTokenAmount } from './helpers/formatTokenAmount';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 
 import { getWegldIdForChainId } from 'apiCalls/network/getEnvironmentForChainId';
-import { SmallLoader, TokenElement as DefaultTokenElement } from './components';
-import { customStyles } from './helpers';
+// import { SmallLoader } from './components';
+import { TokenElement as DefaultTokenElement } from './components';
+// import { customStyles } from './helpers';
 import { PartialTokenType, TokenAssetsType } from 'types';
 // import styles from './../../amountSelect.styles.scss';
 import styles from './styles.module.scss';
@@ -22,7 +23,7 @@ export interface OptionType {
   label: string;
   assets?: TokenAssetsType;
   token: PartialTokenType & {
-    totalUsdPrice?: number;
+    tokenUsdPrice?: number;
   };
 }
 
@@ -56,6 +57,52 @@ export interface TokenSelectPropsType {
   TokenElement?: typeof DefaultTokenElement;
 }
 
+const Input: typeof components.Input = (props) => {
+  return <components.Input {...props} className={styles.input} />;
+};
+
+const Option: typeof components.Option = (props) => {
+  const { data: token, isSelected, isFocused } = props;
+  const data = token as any;
+
+  const icon = data.assets ? data.assets.svgUrl : null;
+  const amount = formatTokenAmount({
+    amount: data.token.balance,
+    decimals: data.token.decimals,
+    addCommas: true
+  });
+
+  return (
+    <components.Option
+      {...props}
+      className={classNames(styles.option, {
+        [styles.selected]: isSelected || isFocused
+      })}
+    >
+      <div className={styles.image}>
+        {icon ? (
+          <img src={icon} className={styles.icon} />
+        ) : (
+          <span className={styles.icon}>
+            <FontAwesomeIcon icon={faDiamond} className={styles.diamond} />
+          </span>
+        )}
+      </div>
+
+      <div className={styles.info}>
+        <div className={styles.left}>
+          <span className={styles.value}>{data.token.ticker}</span>
+          <small className={styles.price}>$0</small>
+        </div>
+        <div className={styles.right}>
+          <span className={styles.value}>{amount}</span>
+          <small className={styles.price}>≈ $0</small>
+        </div>
+      </div>
+    </components.Option>
+  );
+};
+
 // To be moved
 const customComponents = {
   IndicatorSeparator: null,
@@ -63,9 +110,7 @@ const customComponents = {
   Control: (props: any) => (
     <components.Control {...props} className={styles.control} />
   ),
-  Input: (props: any) => (
-    <components.Input {...props} className={styles.input} />
-  ),
+  Input,
   MenuList: (props: any) => (
     <components.MenuList {...props} className={styles.list} />
   ),
@@ -116,46 +161,7 @@ const customComponents = {
       </div>
     );
   },
-  Option: (props: any) => {
-    const { data, isSelected, isFocused } = props;
-
-    const icon = data.assets ? data.assets.svgUrl : null;
-    const amount = formatTokenAmount({
-      amount: data.token.balance,
-      decimals: data.token.decimals,
-      addCommas: true
-    });
-
-    return (
-      <components.Option
-        {...props}
-        className={classNames(styles.option, {
-          [styles.selected]: isSelected || isFocused
-        })}
-      >
-        <div className={styles.image}>
-          {icon ? (
-            <img src={icon} className={styles.icon} />
-          ) : (
-            <span className={styles.icon}>
-              <FontAwesomeIcon icon={faDiamond} className={styles.diamond} />
-            </span>
-          )}
-        </div>
-
-        <div className={styles.info}>
-          <div className={styles.left}>
-            <span className={styles.value}>{data.token.ticker}</span>
-            <small className={styles.price}>$0</small>
-          </div>
-          <div className={styles.right}>
-            <span className={styles.value}>{amount}</span>
-            <small className={styles.price}>≈ $0</small>
-          </div>
-        </div>
-      </components.Option>
-    );
-  }
+  Option
 };
 
 export const TokenSelect = ({
@@ -168,7 +174,7 @@ export const TokenSelect = ({
   onChange,
   onBlur,
   onFocus,
-  fullSize,
+  // fullSize,
   // hasLockedMEX,
   // hasLockedTokens,
   disabled = false,
@@ -176,56 +182,55 @@ export const TokenSelect = ({
   noOptionsMessage = 'No Tokens',
   disabledOption,
   egldLabel,
-  chainId,
-  handleDisabledOptionClick,
-  TokenElement = DefaultTokenElement
-}: TokenSelectPropsType) => {
+  chainId
+}: // handleDisabledOptionClick,
+// TokenElement = DefaultTokenElement
+TokenSelectPropsType) => {
   const ref = React.useRef(null);
-  const docStyle = window.getComputedStyle(document.documentElement);
-  const customProps = {
-    hoverColor: docStyle.getPropertyValue('--light'),
-    primaryColor: docStyle.getPropertyValue('--primary'),
-    bgColor: docStyle.getPropertyValue('--card-bg'),
-    textColor: docStyle.getPropertyValue('--dark'),
-    borderColor: docStyle.getPropertyValue('--border-color'),
-    shadowColor: docStyle.getPropertyValue('--shadow-color'),
-    fullSize
-  };
-  const selectStyle = customStyles({ customProps });
+  // const docStyle = window.getComputedStyle(document.documentElement);
+  // const customProps = {
+  //   hoverColor: docStyle.getPropertyValue('--light'),
+  //   primaryColor: docStyle.getPropertyValue('--primary'),
+  //   bgColor: docStyle.getPropertyValue('--card-bg'),
+  //   textColor: docStyle.getPropertyValue('--dark'),
+  //   borderColor: docStyle.getPropertyValue('--border-color'),
+  //   shadowColor: docStyle.getPropertyValue('--shadow-color'),
+  //   fullSize
+  // };
 
   const egldFamily = [egldLabel, getWegldIdForChainId(chainId)];
 
   const isTokenFromEgldFamily = (identifier: string) =>
     egldFamily.includes(identifier);
 
-  const FormatOptionLabel =
-    (testId?: string) =>
-    (option: any, { context }: { context: any }) => {
-      const { label, value: val, token } = option;
-      const inDropdown = context === 'menu' ? true : false;
-      const isDisabled = disableOption(option);
+  // const FormatOptionLabel =
+  //   (testId?: string) =>
+  //   (option: any, { context }: { context: any }) => {
+  //     const { label, value: val, token } = option;
+  //     const inDropdown = context === 'menu' ? true : false;
+  //     const isDisabled = disableOption(option);
 
-      const args = {
-        inDropdown,
-        label,
-        value: val,
-        egldLabel,
-        token,
-        isDisabled,
-        handleDisabledOptionClick,
-        'data-testid': `${testId}-${context}-${val}`
-      };
+  //     const args = {
+  //       inDropdown,
+  //       label,
+  //       value: val,
+  //       egldLabel,
+  //       token,
+  //       isDisabled,
+  //       handleDisabledOptionClick,
+  //       'data-testid': `${testId}-${context}-${val}`
+  //     };
 
-      if (option.value === 'loader') {
-        return (
-          <div className='d-flex justify-content-center py-5'>
-            <SmallLoader show />
-          </div>
-        );
-      }
+  //     if (option.value === 'loader') {
+  //       return (
+  //         <div className='d-flex justify-content-center py-5'>
+  //           <SmallLoader show />
+  //         </div>
+  //       );
+  //     }
 
-      return <TokenElement {...args} />;
-    };
+  //     return <TokenElement {...args} />;
+  //   };
 
   const disableOption = (option: any) => {
     const isSameAsOtherSelectToken = option.value === disabledOption?.value;

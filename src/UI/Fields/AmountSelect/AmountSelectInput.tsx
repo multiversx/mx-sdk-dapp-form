@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import globals from 'assets/sass/globals.module.scss';
-import { NftEnumType, PartialTokenType, ValuesEnum } from 'types';
+import { NftEnumType, ValuesEnum } from 'types';
 import {
   AmountErrorPropsType,
   AmountInputPropsType,
@@ -15,6 +15,7 @@ import { SingleValue } from 'react-select';
 import { getIsDisabled } from 'helpers';
 import { AmountSelect } from './AmountSelect';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
+import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
 
 /**
  * Gets form state and renders a connected `AmountSelect` component
@@ -22,6 +23,7 @@ import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext'
 export const AmountSelectInput = () => {
   const { tokensInfo, amountInfo, formInfo } = useSendFormContext();
   const { readonly } = formInfo;
+  const { egldPriceInUsd } = useGetEconomicsInfo();
 
   const {
     networkConfig: { egldLabel, chainId }
@@ -46,18 +48,19 @@ export const AmountSelectInput = () => {
   const { tokens, areTokensLoading, tokenId, onChangeTokenId, nft } =
     tokensInfo;
 
-  const allTokens: PartialTokenType[] = [
+  const allTokens: Array<OptionType['token']> = [
     {
       name: 'MultiversX eGold',
       identifier: egldLabel,
       balance,
       decimals: DECIMALS,
-      ticker: ''
+      ticker: '',
+      tokenUsdPrice: egldPriceInUsd
     },
     ...tokens
   ];
 
-  const options: OptionType[] = allTokens.map((token: PartialTokenType) => ({
+  const options: OptionType[] = allTokens.map((token) => ({
     value: token.identifier,
     label: token.name,
     assets: token.assets,

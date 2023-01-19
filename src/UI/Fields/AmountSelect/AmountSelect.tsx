@@ -52,7 +52,7 @@ export const AmountSelect = ({
   const showUsdValue =
     !amountErrorProps.hasErrors &&
     amountInputProps.value &&
-    tokenSelectProps.value?.token.totalUsdPrice;
+    tokenSelectProps.value?.token.tokenUsdPrice;
 
   return (
     <div className={generatedClasses.group}>

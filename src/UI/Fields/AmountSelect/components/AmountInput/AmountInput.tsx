@@ -113,7 +113,6 @@ export const AmountInput = ({
   };
 
   const onValueChange: OnValueChange = (newValues) => {
-    console.log(newValues);
     setValues(newValues);
   };
 
