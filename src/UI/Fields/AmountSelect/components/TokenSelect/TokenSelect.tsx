@@ -37,6 +37,7 @@ export interface TokenSelectPropsType {
   className?: string;
   onChange: (option: any) => void;
   onBlur?: (option: any) => void;
+  onMenuOpen?: () => void;
   fullSize?: boolean;
   disabled?: boolean;
   error?: string;
@@ -164,28 +165,23 @@ const customComponents = {
   Option
 };
 
-export const TokenSelect = ({
-  id,
-  name,
-  value,
-  options,
-  isSearchable,
-  className = '',
-  onChange,
-  onBlur,
-  onFocus,
-  // fullSize,
-  // hasLockedMEX,
-  // hasLockedTokens,
-  disabled = false,
-  isLoading = false,
-  noOptionsMessage = 'No Tokens',
-  disabledOption,
-  egldLabel,
-  chainId
-}: // handleDisabledOptionClick,
-// TokenElement = DefaultTokenElement
-TokenSelectPropsType) => {
+export const TokenSelect = (
+  props: // TokenElement = DefaultTokenElement
+  TokenSelectPropsType
+) => {
+  const {
+    id,
+    name,
+    options,
+    className = '',
+    // fullSize,
+    isLoading = false,
+    noOptionsMessage = 'No Tokens',
+    disabledOption,
+    egldLabel,
+    chainId
+    // handleDisabledOptionClick,
+  } = props;
   const ref = React.useRef(null);
   // const docStyle = window.getComputedStyle(document.documentElement);
   // const customProps = {
@@ -262,25 +258,25 @@ TokenSelectPropsType) => {
         name={name}
         className={classNames(styles.select, className)}
         options={optionsWithLoader}
-        value={value}
-        isDisabled={disabled}
+        value={props.value}
+        isDisabled={props.disabled}
         isOptionDisabled={(option) => {
           const isLoader = option.value === loaderOption.value;
           const isDisabled = disableOption(option);
           return isLoader || isDisabled;
         }}
-        onBlur={onBlur}
-        onFocus={onFocus}
+        onBlur={props.onBlur}
+        onFocus={props.onFocus}
         onChange={(e) => {
-          onChange(e);
+          props.onChange(e);
           if (ref && ref.current !== null) {
             (ref.current as any).blur();
           }
         }}
-        isSearchable={isSearchable}
+        isSearchable={props.isSearchable}
         maxMenuHeight={260}
-        // onMenuOpen={onMenuOpen}
-        noOptionsMessage={() => noOptionsMessage || 'No options'}
+        onMenuOpen={props?.onMenuOpen}
+        noOptionsMessage={() => noOptionsMessage}
         formatOptionLabel={(value) => value.token.ticker || 'Select...'}
         components={customComponents}
       />

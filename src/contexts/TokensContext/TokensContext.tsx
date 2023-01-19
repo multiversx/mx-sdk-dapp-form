@@ -78,6 +78,7 @@ export function TokensContextProvider({
 
   const handleGetTokens = useCallback(async () => {
     setAreTokensLoading(true);
+
     const newTokensAndMetaESDTs = await fetchAllTokens(address);
     const currentTokens = tokens ?? [];
     const tokensFromServer = uniqBy(

@@ -23,15 +23,14 @@ const twoToken = {
   balance: '100000'
 };
 
-const useInput = (field: ValuesEnum) => (methods: RenderResult) => async (
-  value: string
-) => {
-  const input: any = await methods.findByTestId(field);
-  const data = { target: { value } };
-  fireEvent.change(input, data);
-  fireEvent.blur(input);
-  return input;
-};
+const useInput =
+  (field: ValuesEnum) => (methods: RenderResult) => async (value: string) => {
+    const input: any = await methods.findByTestId(field);
+    const data = { target: { value } };
+    fireEvent.change(input, data);
+    fireEvent.blur(input);
+    return input;
+  };
 
 const useAmountInput = useInput(ValuesEnum.amount);
 const useGasLimitInput = useInput(ValuesEnum.gasLimit);
@@ -116,7 +115,7 @@ describe('Send tokens', () => {
 
       const input: any = await methods.findByTestId('amount');
 
-      expect(input.value).toBe('1000');
+      expect(input.value).toBe('1,000');
       const data: any = await methods.findByTestId('data');
       // await act(async () => {
       await waitFor(() => {

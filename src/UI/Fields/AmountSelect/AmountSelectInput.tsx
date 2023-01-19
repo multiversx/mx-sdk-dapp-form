@@ -45,7 +45,7 @@ export const AmountSelectInput = () => {
   const { accountInfo } = useSendFormContext();
 
   const { balance } = accountInfo;
-  const { tokens, areTokensLoading, tokenId, onChangeTokenId, nft } =
+  const { tokens, areTokensLoading, tokenId, onChangeTokenId, nft, getTokens } =
     tokensInfo;
 
   const allTokens: Array<OptionType['token']> = [
@@ -81,6 +81,7 @@ export const AmountSelectInput = () => {
         onChangeTokenId(props.value);
       }
     },
+    onMenuOpen: getTokens,
     disabled: getIsDisabled(ValuesEnum.tokenId, readonly),
     error: tokenIdError,
     isInvalid: isTokenIdInvalid,

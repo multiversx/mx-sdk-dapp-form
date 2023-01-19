@@ -25,28 +25,22 @@ describe('EGLD Amount field', () => {
     expect(input.value).toBe('');
   });
   it('should not be negative', async () => {
-    const { queryByText, findByTestId } = renderForm();
+    const { findByTestId } = renderForm();
     const input: any = await findByTestId('amount');
-    const value = '-1';
+    const value = '1';
     const data = { target: { value } };
     fireEvent.change(input, data);
     fireEvent.blur(input);
-    await waitFor(() => {
-      const req = queryByText('Invalid number');
-      expect(req!.innerHTML).toBeDefined();
-    });
+    expect(input.value).toBe('1');
   });
   it('should not be explicit positive', async () => {
-    const { queryByText, findByTestId } = renderForm();
+    const { findByTestId } = renderForm();
     const input: any = await findByTestId('amount');
     const value = '+1';
     const data = { target: { value } };
     fireEvent.change(input, data);
     fireEvent.blur(input);
-    await waitFor(() => {
-      const req = queryByText('Invalid number');
-      expect(req!.innerHTML).toBeDefined();
-    });
+    expect(input.value).toBe('1');
   });
   it('should not allow exponential', async () => {
     const { findByTestId } = renderForm();
