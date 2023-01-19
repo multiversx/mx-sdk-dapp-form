@@ -58,7 +58,11 @@ export interface TokenSelectPropsType {
 }
 
 const Input: typeof components.Input = (props) => (
-  <components.Input {...props} className={styles.input} />
+  <components.Input
+    {...props}
+    className={styles.input}
+    data-testid='tokenSelectInput'
+  />
 );
 
 const Menu: typeof components.Menu = (props) => (
@@ -97,7 +101,7 @@ const IndicatorsContainer: typeof components.IndicatorsContainer = (props) => (
 
 const Option: typeof components.Option = (props) => {
   const { data, isSelected, isFocused } = props;
-  const option = data as OptionType;
+  const option = data as unknown as OptionType;
 
   const icon = option.assets ? option.assets.svgUrl : null;
   const amount = formatTokenAmount({
@@ -107,34 +111,35 @@ const Option: typeof components.Option = (props) => {
   });
 
   return (
-    <components.Option
-      {...props}
-      data-testid={`${(props as any).value}-option`}
-      className={classNames(styles.option, {
-        [styles.selected]: isSelected || isFocused
-      })}
-    >
-      <div className={styles.image}>
-        {icon ? (
-          <img src={icon} className={styles.icon} />
-        ) : (
-          <span className={styles.icon}>
-            <FontAwesomeIcon icon={faDiamond} className={styles.diamond} />
-          </span>
-        )}
-      </div>
+    <div data-testid={`${(props as any).value}-option`}>
+      <components.Option
+        {...props}
+        className={classNames(styles.option, {
+          [styles.selected]: isSelected || isFocused
+        })}
+      >
+        <div className={styles.image}>
+          {icon ? (
+            <img src={icon} className={styles.icon} />
+          ) : (
+            <span className={styles.icon}>
+              <FontAwesomeIcon icon={faDiamond} className={styles.diamond} />
+            </span>
+          )}
+        </div>
 
-      <div className={styles.info}>
-        <div className={styles.left}>
-          <span className={styles.value}>{option.token.ticker}</span>
-          <small className={styles.price}>$0</small>
+        <div className={styles.info}>
+          <div className={styles.left}>
+            <span className={styles.value}>{option.token.ticker}</span>
+            <small className={styles.price}>$0</small>
+          </div>
+          <div className={styles.right}>
+            <span className={styles.value}>{amount}</span>
+            <small className={styles.price}>≈ $0</small>
+          </div>
         </div>
-        <div className={styles.right}>
-          <span className={styles.value}>{amount}</span>
-          <small className={styles.price}>≈ $0</small>
-        </div>
-      </div>
-    </components.Option>
+      </components.Option>
+    </div>
   );
 };
 
@@ -142,7 +147,7 @@ const ValueContainer: typeof components.ValueContainer = (props) => {
   const { selectProps, isDisabled } = props;
 
   const price = '$0';
-  const token = selectProps.value as OptionType;
+  const token = selectProps.value as unknown as OptionType;
   const icon = token.assets ? token.assets.svgUrl : null;
 
   return (
@@ -182,7 +187,6 @@ export const TokenSelect = (
   TokenSelectPropsType
 ) => {
   const {
-    id,
     name,
     options,
     isLoading = false,
@@ -244,10 +248,16 @@ export const TokenSelect = (
 
   return (
     <div data-testid={`${name}Select`}>
+      <label
+        htmlFor={name}
+        data-testid='tokenIdLabel'
+        className={styles.selectTokenLabel}
+      >
+        Token
+      </label>
       <Select
         ref={ref}
-        id={id}
-        name={name}
+        inputId={name}
         options={options}
         isDisabled={props.disabled || isLoading}
         value={props.value}
@@ -262,7 +272,9 @@ export const TokenSelect = (
         }}
         isSearchable={props.isSearchable}
         maxMenuHeight={260}
-        onMenuOpen={props?.onMenuOpen}
+        onMenuOpen={() => {
+          props.onMenuOpen?.();
+        }}
         noOptionsMessage={() => noOptionsMessage}
         formatOptionLabel={(value) =>
           isLoading ? 'Loading...' : value.token.ticker || 'Select...'
