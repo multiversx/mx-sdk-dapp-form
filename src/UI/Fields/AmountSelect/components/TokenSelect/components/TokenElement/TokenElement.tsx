@@ -8,6 +8,7 @@ import { PartialTokenType } from 'types/tokens';
 interface TokenElementPropsType {
   inDropdown?: boolean;
   token: PartialTokenType;
+  egldLabel: string;
   isDisabled: boolean;
   handleDisabledOptionClick?: any;
   'data-testid'?: string;
@@ -16,6 +17,7 @@ interface TokenElementPropsType {
 export function TokenElement({
   inDropdown = false,
   token,
+  egldLabel,
   isDisabled,
   'data-testid': dataTestId
 }: TokenElementPropsType) {
@@ -37,7 +39,7 @@ export function TokenElement({
     >
       <div className='d-flex flex-row align-items-center'>
         <div className={`token-image mr-2 ${inDropdownClass}`}>
-          <TokenIcon />
+          <TokenIcon token={token} egldLabel={egldLabel} />
         </div>
 
         <div className='d-flex flex-column mex-text-main'>

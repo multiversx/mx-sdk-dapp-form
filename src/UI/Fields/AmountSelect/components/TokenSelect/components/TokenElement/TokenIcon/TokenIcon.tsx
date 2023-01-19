@@ -1,19 +1,17 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
-import { useNetworkConfigContext, useSendFormContext } from 'contexts';
+import { OptionType } from '../../../TokenSelect';
 const EgldIcon = require('./symbol.svg').default;
 
-export const TokenIcon = () => {
-  const { tokensInfo } = useSendFormContext();
-
-  const { tokenDetails } = tokensInfo;
-
-  const { assets, identifier } = tokenDetails;
-
-  const {
-    networkConfig: { egldLabel }
-  } = useNetworkConfigContext();
+export const TokenIcon = ({
+  token,
+  egldLabel
+}: {
+  token: OptionType['token'];
+  egldLabel: string;
+}) => {
+  const { assets, identifier } = token;
 
   return process.env.NODE_ENV !== 'test' ? (
     <>

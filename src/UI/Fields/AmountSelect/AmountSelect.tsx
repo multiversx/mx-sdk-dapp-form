@@ -12,7 +12,8 @@ import {
   TokenBalance,
   TokenBalancePropsType,
   TokenSelect,
-  TokenSelectPropsType
+  TokenSelectPropsType,
+  UsdAmount
 } from './components';
 
 export interface AmountSelectPropsType extends WithClassnameType {
@@ -48,6 +49,11 @@ export const AmountSelect = ({
     })
   };
 
+  const showUsdValue =
+    !amountErrorProps.hasErrors &&
+    amountInputProps.value &&
+    tokenSelectProps.value?.token.totalUsdPrice;
+
   return (
     <div className={generatedClasses.group}>
       {label && (
@@ -71,9 +77,17 @@ export const AmountSelect = ({
         </div>
       </div>
 
-      <small className={generatedClasses.small}>
-        <AmountError {...amountErrorProps} />
-      </small>
+      {showUsdValue ? (
+        <UsdAmount
+          amount={amountInputProps.value}
+          token={tokenSelectProps.value?.token}
+          egldLabel={tokenSelectProps.egldLabel}
+        />
+      ) : (
+        <small className={generatedClasses.small}>
+          <AmountError {...amountErrorProps} />
+        </small>
+      )}
 
       <div className={generatedClasses.balance}>
         <TokenBalance {...tokenBalanceProps} />

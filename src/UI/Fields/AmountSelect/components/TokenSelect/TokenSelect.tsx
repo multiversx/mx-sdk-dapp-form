@@ -1,22 +1,11 @@
 import React from 'react';
-import Select, {
-  ControlProps,
-  IndicatorsContainerProps,
-  InputProps,
-  MenuListProps,
-  MenuProps,
-  PlaceholderProps,
-  SingleValueProps,
-  components
-} from 'react-select';
+import Select, { components } from 'react-select';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { formatTokenAmount } from './helpers/formatTokenAmount';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 
 import { getWegldIdForChainId } from 'apiCalls/network/getEnvironmentForChainId';
-import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
-
 import { SmallLoader, TokenElement as DefaultTokenElement } from './components';
 import { customStyles } from './helpers';
 import { PartialTokenType, TokenAssetsType } from 'types';
@@ -32,7 +21,9 @@ export interface OptionType {
   value: string;
   label: string;
   assets?: TokenAssetsType;
-  token: PartialTokenType;
+  token: PartialTokenType & {
+    totalUsdPrice?: number;
+  };
 }
 
 export interface TokenSelectPropsType {
@@ -48,6 +39,8 @@ export interface TokenSelectPropsType {
   fullSize?: boolean;
   disabled?: boolean;
   error?: string;
+  egldLabel: string;
+  chainId: string;
   isInvalid?: boolean;
   noOptionsMessage?: string;
   hasLockedMEX?: boolean;
@@ -182,6 +175,8 @@ export const TokenSelect = ({
   isLoading = false,
   noOptionsMessage = 'No Tokens',
   disabledOption,
+  egldLabel,
+  chainId,
   handleDisabledOptionClick,
   TokenElement = DefaultTokenElement
 }: TokenSelectPropsType) => {
@@ -198,14 +193,39 @@ export const TokenSelect = ({
   };
   const selectStyle = customStyles({ customProps });
 
-  const {
-    networkConfig: { chainId, egldLabel }
-  } = useNetworkConfigContext();
-
   const egldFamily = [egldLabel, getWegldIdForChainId(chainId)];
 
   const isTokenFromEgldFamily = (identifier: string) =>
     egldFamily.includes(identifier);
+
+  const FormatOptionLabel =
+    (testId?: string) =>
+    (option: any, { context }: { context: any }) => {
+      const { label, value: val, token } = option;
+      const inDropdown = context === 'menu' ? true : false;
+      const isDisabled = disableOption(option);
+
+      const args = {
+        inDropdown,
+        label,
+        value: val,
+        egldLabel,
+        token,
+        isDisabled,
+        handleDisabledOptionClick,
+        'data-testid': `${testId}-${context}-${val}`
+      };
+
+      if (option.value === 'loader') {
+        return (
+          <div className='d-flex justify-content-center py-5'>
+            <SmallLoader show />
+          </div>
+        );
+      }
+
+      return <TokenElement {...args} />;
+    };
 
   const disableOption = (option: any) => {
     const isSameAsOtherSelectToken = option.value === disabledOption?.value;

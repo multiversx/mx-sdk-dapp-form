@@ -1,7 +1,9 @@
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
-export interface AmountErrorPropsType extends WithClassnameType {
+export interface AmountErrorPropsType
+  extends WithClassnameType,
+    PropsWithChildren {
   hasErrors?: boolean;
   error?: string;
 }

@@ -14,6 +14,7 @@ import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { SingleValue } from 'react-select';
 import { getIsDisabled } from 'helpers';
 import { AmountSelect } from './AmountSelect';
+import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
 
 /**
  * Gets form state and renders a connected `AmountSelect` component
@@ -21,6 +22,10 @@ import { AmountSelect } from './AmountSelect';
 export const AmountSelectInput = () => {
   const { tokensInfo, amountInfo, formInfo } = useSendFormContext();
   const { readonly } = formInfo;
+
+  const {
+    networkConfig: { egldLabel, chainId }
+  } = useNetworkConfigContext();
 
   const { tokenDetails, tokenIdError, isTokenIdInvalid } = tokensInfo;
 
@@ -38,7 +43,7 @@ export const AmountSelectInput = () => {
   const { accountInfo } = useSendFormContext();
 
   const { balance } = accountInfo;
-  const { tokens, egldLabel, areTokensLoading, tokenId, onChangeTokenId, nft } =
+  const { tokens, areTokensLoading, tokenId, onChangeTokenId, nft } =
     tokensInfo;
 
   const allTokens: PartialTokenType[] = [
@@ -75,7 +80,9 @@ export const AmountSelectInput = () => {
     },
     disabled: getIsDisabled(ValuesEnum.tokenId, readonly),
     error: tokenIdError,
-    isInvalid: isTokenIdInvalid
+    isInvalid: isTokenIdInvalid,
+    egldLabel,
+    chainId
   };
 
   const amountInputProps: AmountInputPropsType = {
