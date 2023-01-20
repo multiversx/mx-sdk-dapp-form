@@ -22,8 +22,6 @@ export const EgldInfoDust = ({
     isMaxClicked &&
     token?.identifier === egldLabel;
 
-  console.log({ amount, maxAmountMinusDust, isMaxClicked }, token?.identifier);
-
   if (!showInfoDust) {
     return null;
   }
