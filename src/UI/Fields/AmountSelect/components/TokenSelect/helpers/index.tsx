@@ -1,1 +1,2 @@
-export * from './customStyles';
+export * from './formatTokenAmount';
+export * from './highlightText';

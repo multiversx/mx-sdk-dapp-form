@@ -54,7 +54,7 @@ export const AmountSelectInput = () => {
       identifier: egldLabel,
       balance,
       decimals: DECIMALS,
-      ticker: '',
+      ticker: egldLabel,
       tokenUsdPrice: egldPriceInUsd
     },
     ...tokens

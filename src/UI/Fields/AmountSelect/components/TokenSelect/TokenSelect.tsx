@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { formatTokenAmount } from './helpers/formatTokenAmount';
 import { faCircleNotch, faDiamond } from '@fortawesome/free-solid-svg-icons';
 
+import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
+
 import { getWegldIdForChainId } from 'apiCalls/network/getEnvironmentForChainId';
 // import { SmallLoader } from './components';
 import { TokenElement as DefaultTokenElement } from './components';
@@ -12,6 +14,9 @@ import { TokenElement as DefaultTokenElement } from './components';
 import { PartialTokenType, TokenAssetsType } from 'types';
 // import styles from './../../amountSelect.styles.scss';
 import styles from './styles.module.scss';
+import { highlightText } from './helpers/highlightText';
+import { useNetworkConfigContext } from 'contexts';
+const MultiversXIcon = require('./mx-icon.svg').default;
 
 export interface SelectOptionType {
   label: string;
@@ -96,15 +101,23 @@ const IndicatorsContainer: typeof components.IndicatorsContainer = (props) => (
 );
 
 const Option: typeof components.Option = (props) => {
-  const { data, isSelected, isFocused } = props;
-  const option = data as OptionType;
+  const { data, isSelected, isFocused, selectProps } = props;
 
+  const {
+    networkConfig: { egldLabel }
+  } = useNetworkConfigContext();
+
+  const option = data as OptionType;
   const icon = option.assets ? option.assets.svgUrl : null;
   const amount = formatTokenAmount({
     amount: option.token.balance,
     decimals: option.token.decimals,
     addCommas: true
   });
+
+  const ticker = Boolean(selectProps.inputValue)
+    ? highlightText(option.token.ticker, selectProps.inputValue)
+    : option.token.ticker;
 
   return (
     <components.Option
@@ -115,7 +128,11 @@ const Option: typeof components.Option = (props) => {
       })}
     >
       <div className={styles.image}>
-        {icon ? (
+        {ticker === egldLabel ? (
+          <span className={styles.icon}>
+            <MultiversXIcon />
+          </span>
+        ) : icon ? (
           <img src={icon} className={styles.icon} />
         ) : (
           <span className={styles.icon}>
@@ -126,7 +143,7 @@ const Option: typeof components.Option = (props) => {
 
       <div className={styles.info}>
         <div className={styles.left}>
-          <span className={styles.value}>{option.token.ticker}</span>
+          <span className={styles.value}>{ticker}</span>
           <small className={styles.price}>$0</small>
         </div>
         <div className={styles.right}>
@@ -145,13 +162,11 @@ const ValueContainer: typeof components.ValueContainer = (props) => {
   const token = selectProps.value as OptionType;
   const icon = token.assets ? token.assets.svgUrl : null;
 
+  console.log(token, props);
+
   return (
     <div className={styles.container}>
       <div className={styles.icon}>
-        {/* <components.Placeholder {...props} isFocused={true}>
-          {selectProps.placeholder}
-        </components.Placeholder> */}
-
         {isDisabled ? (
           <span className={styles.asset}>
             <FontAwesomeIcon
@@ -164,7 +179,7 @@ const ValueContainer: typeof components.ValueContainer = (props) => {
           <img src={icon} className={styles.asset} />
         ) : (
           <span className={styles.asset}>
-            <FontAwesomeIcon icon={faDiamond} className={styles.diamond} />
+            <MultiversXIcon className={styles.diamond} />
           </span>
         )}
       </div>
@@ -242,6 +257,14 @@ export const TokenSelect = (
     return isSameAsOtherSelectToken || isEgldFamily;
   };
 
+  const filterOption = (
+    option: FilterOptionOption<OptionType>,
+    search: string
+  ) =>
+    option.data.token.ticker && Boolean(search)
+      ? option.data.token.ticker.toLowerCase().includes(search.toLowerCase())
+      : true;
+
   return (
     <div data-testid={`${name}Select`}>
       <Select
@@ -254,6 +277,7 @@ export const TokenSelect = (
         isOptionDisabled={disableOption}
         onBlur={props.onBlur}
         onFocus={props.onFocus}
+        filterOption={filterOption}
         onChange={(e) => {
           props.onChange(e);
           if (ref && ref.current !== null) {
@@ -265,11 +289,12 @@ export const TokenSelect = (
         onMenuOpen={props?.onMenuOpen}
         noOptionsMessage={() => noOptionsMessage}
         formatOptionLabel={(value) =>
-          isLoading ? 'Loading...' : value.token.ticker || 'Select...'
+          isLoading ? 'Loading...' : value.token.ticker
         }
         className={classNames(styles.select, className, {
           [styles.disabled]: props.disabled || isLoading
         })}
+        menuIsOpen
         components={{
           IndicatorSeparator: null,
           Menu,
