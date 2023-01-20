@@ -80,15 +80,12 @@ describe('Send tokens', () => {
       const methods = beforAllTokens();
       const setInput = useAmountInput(methods);
 
-      const input: any = await setInput('1.123456789012345678');
-      expect(input.value).toBe('1.123456789012345678');
+      const input: any = await setInput('1.12');
+      expect(input.value).toBe('1.12');
       const data: any = await methods.findByTestId('data');
 
       await act(async () => {
-        expect(data.value).toBe(
-          'ESDTTransfer@54574f2d383234653730@0f9751ff4d94f34e'
-        );
-
+        expect(data.value).toBe('ESDTTransfer@54574f2d383234653730@70');
         expect(data.disabled).toBeTruthy(); // check disabled
       });
     });
