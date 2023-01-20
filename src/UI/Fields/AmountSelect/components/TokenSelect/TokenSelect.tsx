@@ -3,18 +3,15 @@ import Select, { components } from 'react-select';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { formatTokenAmount } from './helpers/formatTokenAmount';
-import { faCircleNotch, faDiamond } from '@fortawesome/free-solid-svg-icons';
+import { faDiamond, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
 import { getWegldIdForChainId } from 'apiCalls/network/getEnvironmentForChainId';
-// import { SmallLoader } from './components';
 import { TokenElement as DefaultTokenElement } from './components';
-// import { customStyles } from './helpers';
 import { PartialTokenType, TokenAssetsType } from 'types';
-// import styles from './../../amountSelect.styles.scss';
 import styles from './styles.module.scss';
-import { TokenElement } from 'UI/Fields/SelectToken/TokenElement';
+// import { TokenElement } from 'UI/Fields/SelectToken/TokenElement';
 import { highlightText } from './helpers/highlightText';
 import { useNetworkConfigContext } from 'contexts';
 const MultiversXIcon = require('./mx-icon.svg').default;
@@ -125,7 +122,7 @@ const Option: typeof components.Option = (props) => {
     : option.token.ticker;
 
   return (
-    <div data-testid={`${(props as any).value}-option`}>
+    <div data-testid={`${(props as any).value}-option`} {...props}>
       <components.Option
         {...props}
         className={classNames(styles.option, {
@@ -148,7 +145,7 @@ const Option: typeof components.Option = (props) => {
 
         <div className={styles.info}>
           <div className={styles.left}>
-            <span className={styles.value}>{option.token.ticker}</span>
+            <span className={styles.value}>{ticker}</span>
             <small className={styles.price}>$0</small>
           </div>
           <div className={styles.right}>
@@ -156,22 +153,22 @@ const Option: typeof components.Option = (props) => {
             <small className={styles.price}>≈ $0</small>
           </div>
         </div>
+
+        <div style={{ display: 'none' }}>{props.children}</div>
       </components.Option>
     </div>
   );
 };
 
 const ValueContainer: typeof components.ValueContainer = (props) => {
-  const { selectProps, isDisabled } = props;
+  const { selectProps, isDisabled, children } = props;
 
   const price = '$0';
   const token = selectProps.value as unknown as OptionType;
   const icon = token.assets ? token.assets.svgUrl : null;
 
-  console.log(token, props);
-
   return (
-    <div className={styles.container}>
+    <components.ValueContainer {...props} className={styles.container}>
       <div className={styles.icon}>
         {isDisabled ? (
           <span className={styles.asset}>
@@ -191,10 +188,10 @@ const ValueContainer: typeof components.ValueContainer = (props) => {
       </div>
 
       <div className={styles.data}>
-        <components.ValueContainer {...props} className={styles.value} />
+        {children}
         <small className={styles.price}>{price}</small>
       </div>
-    </div>
+    </components.ValueContainer>
   );
 };
 
@@ -229,35 +226,6 @@ export const TokenSelect = (
   const isTokenFromEgldFamily = (identifier: string) =>
     egldFamily.includes(identifier);
 
-  // const FormatOptionLabel =
-  //   (testId?: string) =>
-  //   (option: any, { context }: { context: any }) => {
-  //     const { label, value: val, token } = option;
-  //     const inDropdown = context === 'menu' ? true : false;
-  //     const isDisabled = disableOption(option);
-
-  //     const args = {
-  //       inDropdown,
-  //       label,
-  //       value: val,
-  //       egldLabel,
-  //       token,
-  //       isDisabled,
-  //       handleDisabledOptionClick,
-  //       'data-testid': `${testId}-${context}-${val}`
-  //     };
-
-  //     if (option.value === 'loader') {
-  //       return (
-  //         <div className='d-flex justify-content-center py-5'>
-  //           <SmallLoader show />
-  //         </div>
-  //       );
-  //     }
-
-  //     return <TokenElement {...args} />;
-  //   };
-
   const disableOption = (option: OptionType) => {
     const isSameAsOtherSelectToken = option.value === disabledOption?.value;
 
@@ -272,34 +240,15 @@ export const TokenSelect = (
     return isSameAsOtherSelectToken || isEgldFamily;
   };
 
-  // const filterOption = (
-  //   option: FilterOptionOption<OptionType>,
-  //   search: string
-  // ) =>
-  //   option.data.token.ticker && Boolean(search)
-  //     ? option.data.token.ticker.toLowerCase().includes(search.toLowerCase())
-  //     : true;
-
-  const FormatOptionLabel = ({ token }: { token: PartialTokenType }) => {
-    return (
-      <TokenElement
-        inDropdown
-        token={token}
-        isEgld={token.identifier === egldLabel}
-      />
-    );
-  };
-
-  const ListOption = (props: any) => {
-    return (
-      <div
-        className={`token-option ${props.isSelected ? 'is-selected' : ''}`}
-        data-testid={`${props.value}-option`}
-      >
-        <components.Option {...props} />
-      </div>
-    );
-  };
+  // const FormatOptionLabel = ({ token }: { token: PartialTokenType }) => {
+  //   return (
+  //     <TokenElement
+  //       inDropdown
+  //       token={token}
+  //       isEgld={token.identifier === egldLabel}
+  //     />
+  //   );
+  // };
 
   const filterOption = (
     option: FilterOptionOption<OptionType>,
@@ -326,7 +275,7 @@ export const TokenSelect = (
         name={name}
         options={options}
         openMenuOnFocus
-        isDisabled={disabled /*|| isLoading --> THIS CAUSES TEST FAIL */}
+        isDisabled={disabled || isLoading}
         isLoading={isLoading}
         value={value}
         isOptionDisabled={disableOption}
@@ -343,14 +292,14 @@ export const TokenSelect = (
         maxMenuHeight={260}
         onMenuOpen={onMenuOpen}
         noOptionsMessage={() => noOptionsMessage}
-        formatOptionLabel={FormatOptionLabel}
+        // formatOptionLabel={FormatOptionLabel}
         // formatOptionLabel={(value) =>
-        //    isLoading ? 'Loading...' : value.token.ticker
-        // } --> this is making the test fail
+        //   isLoading ? 'Loading...' : value.token.ticker
+        // }
         className={classNames(styles.select, className, {
           [styles.disabled]: props.disabled || isLoading
         })}
-        // menuIsOpen
+        menuIsOpen
         components={{
           IndicatorSeparator: null,
           Menu,
@@ -358,10 +307,9 @@ export const TokenSelect = (
           Input,
           MenuList,
           IndicatorsContainer,
-          // ValueContainer, --> this is making the test fail
+          ValueContainer,
           Placeholder,
-          // Option,
-          Option: ListOption,
+          Option,
           SingleValue
         }}
       />

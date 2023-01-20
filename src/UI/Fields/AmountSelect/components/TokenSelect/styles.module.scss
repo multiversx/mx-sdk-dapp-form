@@ -20,6 +20,7 @@
       padding-right: 0;
       flex: 1;
       cursor: pointer;
+      display: flex;
 
       &:hover + .indicator svg,
       &:hover .data .value .placeholder,
@@ -56,71 +57,79 @@
 
       .data {
         flex: 1;
+        position: relative;
+
+        .single {
+          color: #fff;
+          font-size: 16px;
+          margin: 0;
+          transition: all 200ms ease;
+          font-weight: 300;
+          white-space: normal;
+          left: 0;
+          right: 0;
+          line-height: 1.25;
+          position: absolute;
+          pointer-events: none;
+          white-space: nowrap;
+        }
+
+        .placeholder {
+          line-height: 1;
+          margin: 0;
+          color: #fff;
+          font-size: 16px;
+          font-weight: 300;
+          transition: all 200ms ease;
+
+          &.focused {
+            color: #9ba5b4;
+          }
+        }
+
+        .input {
+          padding: 0;
+          margin: 0;
+          display: flex;
+          line-height: 1;
+
+          input {
+            margin: 0 !important;
+            height: 20px !important;
+            background-color: transparent !important;
+            font-size: 16px !important;
+            border: none !important;
+            color: #fff !important;
+            line-height: 1.25 !important;
+            border-radius: 0 !important;
+            font-weight: 300 !important;
+
+            &:after {
+              content: none;
+            }
+
+            &:focus,
+            &:hover {
+              opacity: 1 !important;
+            }
+          }
+        }
+
+        // .value {
+        //   padding: 0;
+
+        //   &:hover {
+        //     .placeholder,
+        //     .single {
+        //       color: #9ba5b4;
+        //     }
+        //   }
+        // }
 
         .price {
           margin-top: 6px;
           line-height: 1;
           color: #9ba5b4;
-        }
-
-        .value {
-          padding: 0;
-
-          &:hover {
-            .placeholder,
-            .single {
-              color: #9ba5b4;
-            }
-          }
-
-          .single {
-            color: #fff;
-            font-size: 16px;
-            margin: 0;
-            transition: all 200ms ease;
-            font-weight: 300;
-          }
-
-          .placeholder {
-            line-height: 1;
-            margin: 0;
-            color: #fff;
-            font-size: 16px;
-            font-weight: 300;
-            transition: all 200ms ease;
-
-            &.focused {
-              color: #9ba5b4;
-            }
-          }
-
-          .input {
-            padding: 0;
-            margin: 0;
-            display: flex;
-            line-height: 1;
-
-            input {
-              margin: 0 !important;
-              height: 16px;
-              background-color: transparent !important;
-              font-size: 16px !important;
-              border: none !important;
-              color: #fff !important;
-              line-height: 1 !important;
-              border-radius: 0 !important;
-              font-weight: 300 !important;
-
-              &:after {
-                content: none;
-              }
-
-              &:focus,
-              &:hover {
-                opacity: 1 !important;
-              }
-            }
-          }
         }
       }
     }
