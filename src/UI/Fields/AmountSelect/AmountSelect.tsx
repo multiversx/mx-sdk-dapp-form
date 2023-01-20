@@ -69,9 +69,11 @@ export const AmountSelect = ({
       <div className={generatedClasses.wrapper}>
         <AmountInput {...amountInputProps} />
 
-        <div className={generatedClasses.maxBtn}>
-          <MaxButton {...maxButtonProps} />
-        </div>
+        {maxButtonProps.isMaxButtonVisible !== false && (
+          <div className={generatedClasses.maxBtn}>
+            <MaxButton {...maxButtonProps} />
+          </div>
+        )}
 
         <div className={classNames(styles.selectTokenContainer, className)}>
           <TokenSelect {...tokenSelectProps} />

@@ -8,6 +8,7 @@ export interface MaxButtonPropsType {
   inputAmount: string;
   token?: PartialTokenType;
   isMaxClicked?: boolean;
+  isMaxButtonVisible?: boolean;
   onMaxClick?: (maxAmount: string) => void;
 }
 

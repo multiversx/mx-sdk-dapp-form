@@ -38,6 +38,7 @@ export const AmountSelectInput = () => {
     onFocus,
     maxAmountAvailable,
     isMaxClicked,
+    isMaxButtonVisible,
     maxAmountMinusDust
   } = amountInfo;
 
@@ -97,7 +98,8 @@ export const AmountSelectInput = () => {
     token: tokenDetails,
     inputAmount: amount,
     onMaxClick: onMaxClicked,
-    isMaxClicked
+    isMaxClicked,
+    isMaxButtonVisible
   };
 
   const amountErrorProps: AmountErrorPropsType = {
