@@ -10,12 +10,10 @@ import {
   TokenBalancePropsType,
   TokenSelectPropsType
 } from './components';
-import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { SingleValue } from 'react-select';
 import { getIsDisabled } from 'helpers';
 import { AmountSelect } from './AmountSelect';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
-import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
 
 /**
  * Gets form state and renders a connected `AmountSelect` component
@@ -23,7 +21,6 @@ import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomic
 export const AmountSelectInput = () => {
   const { tokensInfo, amountInfo, formInfo } = useSendFormContext();
   const { readonly } = formInfo;
-  const { egldPriceInUsd } = useGetEconomicsInfo();
 
   const {
     networkConfig: { egldLabel, chainId }
@@ -44,25 +41,16 @@ export const AmountSelectInput = () => {
     maxAmountMinusDust
   } = amountInfo;
 
-  const { accountInfo } = useSendFormContext();
+  const {
+    allAvailableTokens,
+    areTokensLoading,
+    tokenId,
+    onChangeTokenId,
+    nft,
+    getTokens
+  } = tokensInfo;
 
-  const { balance } = accountInfo;
-  const { tokens, areTokensLoading, tokenId, onChangeTokenId, nft, getTokens } =
-    tokensInfo;
-
-  const allTokens: Array<OptionType['token']> = [
-    {
-      name: 'MultiversX eGold',
-      identifier: egldLabel,
-      balance,
-      decimals: DECIMALS,
-      ticker: egldLabel,
-      tokenUsdPrice: egldPriceInUsd
-    },
-    ...tokens
-  ];
-
-  const options: OptionType[] = allTokens.map((token) => ({
+  const options: OptionType[] = allAvailableTokens.map((token) => ({
     value: token.identifier,
     label: token.name,
     assets: token.assets,

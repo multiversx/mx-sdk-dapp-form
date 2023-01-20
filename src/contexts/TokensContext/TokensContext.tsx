@@ -63,7 +63,7 @@ export function TokensContextProvider({
 }: TokensContextProviderPropsType) {
   const [areTokensLoading, setAreTokensLoading] = useState(true);
   const {
-    values: { tokenId, tokens, nft },
+    values: { tokenId, tokens: formikTokens, nft },
     errors: { tokenId: tokenIdError },
     setFieldValue
   } = useFormikContext<ExtendedValuesType>();
@@ -73,6 +73,17 @@ export function TokensContextProvider({
     networkConfig: { decimals }
   } = useNetworkConfigContext();
   const { egldPriceInUsd, digits, egldLabel } = useGetEconomicsInfo();
+
+  const tokens = [
+    ...(formikTokens || [])
+    // {
+    //   identifier: 'TWO-824e70',
+    //   name: 'TwoTToken',
+    //   ticker: 'Two',
+    //   decimals: 20,
+    //   balance: '10000000000000000000000000000000000000000000'
+    // }
+  ];
 
   const esdtTokens = tokens || previouslyFetchedTokens;
 
@@ -135,13 +146,18 @@ export function TokensContextProvider({
 
   const isTokenIdInvalid = checkInvalid(tokenIdField);
 
-  const allAvailableTokens: PartialTokenType[] = [
+  const allAvailableTokens: Array<
+    PartialTokenType & {
+      tokenUsdPrice?: number;
+    }
+  > = [
     {
       name: 'MultiversX eGold',
       identifier: egldLabel,
       balance: balance,
       decimals: Number(decimals),
-      ticker: egldLabel
+      ticker: egldLabel,
+      tokenUsdPrice: egldPriceInUsd
     },
     ...esdtTokens
   ];
