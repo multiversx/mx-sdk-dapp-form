@@ -39,7 +39,9 @@ export const AmountSelectInput = () => {
     error,
     isInvalid,
     onFocus,
-    maxAmountAvailable
+    maxAmountAvailable,
+    isMaxClicked,
+    maxAmountMinusDust
   } = amountInfo;
 
   const { accountInfo } = useSendFormContext();
@@ -99,13 +101,15 @@ export const AmountSelectInput = () => {
     handleChange: onChange,
     onFocus,
     error,
-    isInvalid
+    isInvalid,
+    maxAmountMinusDust
   };
 
   const maxButtonProps: MaxButtonPropsType = {
     token: tokenDetails,
     inputAmount: amount,
-    onMaxClick: onMaxClicked
+    onMaxClick: onMaxClicked,
+    isMaxClicked
   };
 
   const amountErrorProps: AmountErrorPropsType = {

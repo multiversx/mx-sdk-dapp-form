@@ -7,6 +7,7 @@ import {
   AmountErrorPropsType,
   AmountInput,
   AmountInputPropsType,
+  EgldInfoDust,
   MaxButton,
   MaxButtonPropsType,
   TokenBalance,
@@ -78,11 +79,19 @@ export const AmountSelect = ({
       </div>
 
       {showUsdValue ? (
-        <UsdAmount
-          amount={amountInputProps.value}
-          token={tokenSelectProps.value?.token}
-          egldLabel={tokenSelectProps.egldLabel}
-        />
+        <>
+          <UsdAmount
+            amount={amountInputProps.value}
+            token={tokenSelectProps.value?.token}
+          />
+          <EgldInfoDust
+            amount={amountInputProps.value}
+            egldLabel={tokenSelectProps.egldLabel}
+            maxAmountMinusDust={amountInputProps.maxAmountMinusDust}
+            token={tokenSelectProps.value?.token}
+            isMaxClicked={maxButtonProps.isMaxClicked}
+          />
+        </>
       ) : (
         <small className={generatedClasses.small}>
           <AmountError {...amountErrorProps} />
