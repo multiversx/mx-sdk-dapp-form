@@ -272,13 +272,13 @@ export const TokenSelect = (
     return isSameAsOtherSelectToken || isEgldFamily;
   };
 
-  const filterOption = (
-    option: FilterOptionOption<OptionType>,
-    search: string
-  ) =>
-    option.data.token.ticker && Boolean(search)
-      ? option.data.token.ticker.toLowerCase().includes(search.toLowerCase())
-      : true;
+  // const filterOption = (
+  //   option: FilterOptionOption<OptionType>,
+  //   search: string
+  // ) =>
+  //   option.data.token.ticker && Boolean(search)
+  //     ? option.data.token.ticker.toLowerCase().includes(search.toLowerCase())
+  //     : true;
 
   const FormatOptionLabel = ({ token }: { token: PartialTokenType }) => {
     return (
