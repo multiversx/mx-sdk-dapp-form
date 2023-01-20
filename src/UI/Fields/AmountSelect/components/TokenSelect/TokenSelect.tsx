@@ -350,7 +350,7 @@ export const TokenSelect = (
         className={classNames(styles.select, className, {
           [styles.disabled]: props.disabled || isLoading
         })}
-        menuIsOpen
+        // menuIsOpen
         components={{
           IndicatorSeparator: null,
           Menu,
@@ -360,7 +360,7 @@ export const TokenSelect = (
           IndicatorsContainer,
           // ValueContainer, --> this is making the test fail
           Placeholder,
-          // Option // --> this is making the test fail
+          // Option,
           Option: ListOption,
           SingleValue
         }}
