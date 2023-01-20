@@ -31,6 +31,7 @@ export interface AmountInputPropsType {
   isInvalid?: boolean;
   disabled?: boolean;
   tokenUsdPrice?: string;
+  maxAmountMinusDust?: string;
   handleChange: (e: ChangeEvent<any>) => void;
   handleBlur: (e: FocusEvent<any>) => void;
   onKeyDown?: () => void;

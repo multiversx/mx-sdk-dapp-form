@@ -7,6 +7,7 @@ import { getBalanceMinusDust } from './getBalanceMinusDust';
 export interface MaxButtonPropsType {
   inputAmount: string;
   token?: PartialTokenType;
+  isMaxClicked?: boolean;
   onMaxClick?: (maxAmount: string) => void;
 }
 
@@ -41,9 +42,11 @@ export const MaxButton = ({
     return null;
   }
 
+  // TODO: why not button?
   return (
     <a
       href='/'
+      data-testid='maxBtn'
       className='badge badge-pill badge-primary text-uppercase mex-text-main mex-bg-gray-light'
       onClick={handleOnMaxBtnClick}
       onMouseDown={(event) => {
