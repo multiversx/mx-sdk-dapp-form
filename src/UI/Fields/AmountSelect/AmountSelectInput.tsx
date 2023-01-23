@@ -14,7 +14,7 @@ import { SingleValue } from 'react-select';
 import { getIsDisabled } from 'helpers';
 import { AmountSelect } from './AmountSelect';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
-import { formatTokenAmount } from './helpers/formatTokenAmount';
+import { progressiveFormatAmount } from './components/MaxButton/progressiveFormatAmount';
 
 /**
  * Gets form state and renders a connected `AmountSelect` component
@@ -116,7 +116,7 @@ export const AmountSelectInput = () => {
     'data-testid': `available${nft?.identifier ?? tokenId}`,
     'data-value': `${maxAmountAvailable} ${nft?.identifier ?? tokenId}`,
     label: 'Balance',
-    value: formatTokenAmount({
+    value: progressiveFormatAmount({
       amount: tokenDetails.balance,
       decimals: tokenDetails.decimals,
       addCommas: true
