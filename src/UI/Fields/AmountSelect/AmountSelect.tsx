@@ -1,7 +1,10 @@
 import React from 'react';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
-import styles from './amountSelect.styles.scss';
+
+import styles from './styles.module.scss';
+import globals from 'assets/sass/globals.module.scss';
+
 import {
   AmountError,
   AmountErrorPropsType,
@@ -37,70 +40,54 @@ export const AmountSelect = ({
   amountErrorProps,
   maxButtonProps
 }: AmountSelectPropsType) => {
-  // TODO: remove BS classes or pass from above?
-  const generatedClasses = {
-    group: 'form-group text-left mb-0',
-    label: 'mb-2 line-height-1 text-secondary',
-    small: 'd-flex flex-column flex-sm-row my-2',
-    error: 'invalid-feedback d-flex mt-0 mb-2 mb-sm-0',
-    balance: 'd-flex ml-0 ml-sm-auto line-height-1 balance',
-    maxBtn: `${styles.badgeHolder} d-flex align-content-center justify-content-end`,
-    wrapper: classNames(styles.tokenAmountInputSelectMax, {
-      'is-invalid': amountErrorProps.hasErrors
-    })
-  };
-
   const showUsdValue =
     !amountErrorProps.hasErrors &&
     amountInputProps.value &&
     tokenSelectProps.value?.token.tokenUsdPrice;
 
   return (
-    <div className={generatedClasses.group}>
+    <div className={classNames(styles.amount, className)}>
       {label && (
-        <label
-          htmlFor={name}
-          className={`${generatedClasses.label} text-secondary`}
-        >
+        <label htmlFor={name} className={globals.label}>
           {label}
         </label>
       )}
 
-      <div className={generatedClasses.wrapper}>
+      <div className={styles.wrapper}>
         <AmountInput {...amountInputProps} />
 
-        {maxButtonProps.isMaxButtonVisible !== false && (
-          <div className={generatedClasses.maxBtn}>
+        <div className={styles.interaction}>
+          {maxButtonProps.isMaxButtonVisible !== false && (
             <MaxButton {...maxButtonProps} />
-          </div>
-        )}
+          )}
 
-        <div className={classNames(styles.selectTokenContainer, className)}>
-          <TokenSelect {...tokenSelectProps} />
+          <div className={styles.select}>
+            <TokenSelect {...tokenSelectProps} />
+          </div>
         </div>
       </div>
 
-      {showUsdValue ? (
-        <>
-          <UsdAmount
-            amount={amountInputProps.value}
-            token={tokenSelectProps.value?.token}
-          />
-          <EgldInfoDust
-            amount={amountInputProps.value}
-            egldLabel={tokenSelectProps.egldLabel}
-            maxAmountMinusDust={amountInputProps.maxAmountMinusDust}
-            token={tokenSelectProps.value?.token}
-            isMaxClicked={maxButtonProps.isMaxClicked}
-          />
-        </>
-      ) : (
-        <small className={generatedClasses.small}>
-          <AmountError {...amountErrorProps} />
-        </small>
-      )}
+      <div className={styles.footer}>
+        <div>
+          {showUsdValue ? (
+            <>
+              <UsdAmount
+                amount={amountInputProps.value}
+                token={tokenSelectProps.value?.token}
+              />
+              <EgldInfoDust
+                amount={amountInputProps.value}
+                egldLabel={tokenSelectProps.egldLabel}
+                maxAmountMinusDust={amountInputProps.maxAmountMinusDust}
+                token={tokenSelectProps.value?.token}
+                isMaxClicked={maxButtonProps.isMaxClicked}
+              />
+            </>
+          ) : (
+            <AmountError {...amountErrorProps} />
+          )}
+        </div>
 
-      <div className={generatedClasses.balance}>
         <TokenBalance {...tokenBalanceProps} />
       </div>
     </div>

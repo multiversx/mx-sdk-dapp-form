@@ -1,8 +1,12 @@
 import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
-import React from 'react';
+import React, { MouseEvent } from 'react';
+
 import { PartialTokenType } from 'types/tokens';
+
 import { progressiveFormatAmount } from './progressiveFormatAmount';
 import { getBalanceMinusDust } from './getBalanceMinusDust';
+
+import styles from './styles.module.scss';
 
 export interface MaxButtonPropsType {
   inputAmount: string;
@@ -34,8 +38,8 @@ export const MaxButton = ({
   const isInputAmountMaxAmount =
     parseFloat(inputAmount) === parseFloat(formattedBalance);
 
-  const handleOnMaxBtnClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleOnMaxBtnClick = (event: MouseEvent) => {
+    event.preventDefault();
     onMaxClick?.(formattedBalance);
   };
 
@@ -48,7 +52,7 @@ export const MaxButton = ({
     <a
       href='/'
       data-testid='maxBtn'
-      className='badge badge-pill badge-primary text-uppercase mex-text-main mex-bg-gray-light'
+      className={styles.max}
       onClick={handleOnMaxBtnClick}
       onMouseDown={(event) => {
         event.preventDefault();

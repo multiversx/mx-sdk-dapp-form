@@ -1,20 +1,16 @@
 @import 'assets/sass/variables/_variables.scss';
 
-.receiverField {
-  margin-bottom: 1.5rem;
+.receiver {
+  margin-bottom: 16px;
 
-  .receiverFieldLabel {
-    margin-bottom: 0.5rem;
-  }
-
-  .receiverFieldAutocomplete {
+  .autocomplete {
     position: relative;
 
     input[aria-hidden='true'] {
       display: none;
     }
 
-    .receiverFieldMenu {
+    .menu {
       left: 0px;
       top: 0px;
       float: left;
@@ -34,7 +30,7 @@
       transform: none;
       overflow-x: scroll;
 
-      .receiverFieldItem {
+      .item {
         display: inline-block;
         line-height: 1.5;
         padding: 0.25rem 1.5rem;
@@ -63,15 +59,6 @@
           margin-bottom: 0.675rem;
         }
       }
-    }
-  }
-
-  .receiverFieldScam {
-    line-height: 1.5;
-    color: $warning;
-
-    svg {
-      margin-right: 0.25rem;
     }
   }
 }

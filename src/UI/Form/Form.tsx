@@ -86,9 +86,9 @@ export const Form = ({ className }: WithClassnameType) => {
 
         <CanTransferNftWarning />
 
-        <FeeAccordion />
-
         <Data />
+
+        <FeeAccordion />
       </fieldset>
 
       <div className={styles.formButtons}>

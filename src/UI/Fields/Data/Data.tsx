@@ -1,7 +1,5 @@
 import React from 'react';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
-import { faExclamation } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
@@ -27,14 +25,14 @@ export const Data = ({ className }: WithClassnameType) => {
     !isEgldTransaction || getIsDisabled(ValuesEnum.data, readonly);
 
   return (
-    <div className={classNames(styles.fieldData, className)}>
+    <div className={classNames(styles.data, className)}>
       {label != null && (
-        <label htmlFor={ValuesEnum.data} className={styles.fieldDataLabel}>
+        <label htmlFor={ValuesEnum.data} className={globals.label}>
           {label}
         </label>
       )}
 
-      <div className={styles.fieldDataWrapper}>
+      <div className={styles.wrapper}>
         <textarea
           id={ValuesEnum.data}
           name={ValuesEnum.data}
@@ -44,15 +42,10 @@ export const Data = ({ className }: WithClassnameType) => {
           onBlur={onBlur}
           onChange={onChange}
           className={classNames(globals.textarea, {
-            [globals.invalid]: isDataInvalid
+            [globals.error]: isDataInvalid,
+            [globals.disabled]: isDisabled
           })}
         />
-
-        {isDataInvalid && (
-          <span className={globals.errorExclamation}>
-            <FontAwesomeIcon icon={faExclamation} size='xs' />
-          </span>
-        )}
       </div>
 
       {isDataInvalid && (

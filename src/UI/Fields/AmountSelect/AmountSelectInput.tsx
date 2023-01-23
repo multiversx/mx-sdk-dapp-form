@@ -14,6 +14,7 @@ import { SingleValue } from 'react-select';
 import { getIsDisabled } from 'helpers';
 import { AmountSelect } from './AmountSelect';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
+import { formatTokenAmount } from './helpers/formatTokenAmount';
 
 /**
  * Gets form state and renders a connected `AmountSelect` component
@@ -112,10 +113,14 @@ export const AmountSelectInput = () => {
   };
 
   const tokenBalanceProps: TokenBalancePropsType = {
-    label: 'Available',
-    value: maxAmountAvailable,
     'data-testid': `available${nft?.identifier ?? tokenId}`,
-    'data-value': `${maxAmountAvailable} ${nft?.identifier ?? tokenId}`
+    'data-value': `${maxAmountAvailable} ${nft?.identifier ?? tokenId}`,
+    label: 'Balance',
+    value: formatTokenAmount({
+      amount: tokenDetails.balance,
+      decimals: tokenDetails.decimals,
+      addCommas: true
+    })
   };
 
   if (nft?.type === NftEnumType.NonFungibleESDT) {
@@ -130,7 +135,7 @@ export const AmountSelectInput = () => {
       amountInputProps={amountInputProps}
       tokenBalanceProps={tokenBalanceProps}
       maxButtonProps={maxButtonProps}
-      label='Amount Select'
+      label='Amount'
     />
   );
 };

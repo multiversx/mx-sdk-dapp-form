@@ -1,0 +1,11 @@
+.balance {
+  line-height: 1;
+  margin: 8px 0;
+  font-size: 12px;
+  color: var(--dapp-form-input-color);
+
+  span {
+    margin-right: 8px;
+    color: var(--dapp-form-label-color);
+  }
+}

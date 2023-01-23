@@ -12,6 +12,8 @@ import {
   NumericFormat,
   OnValueChange
 } from 'react-number-format';
+import classNames from 'classnames';
+
 import {
   removeCommas,
   roundAmount,
@@ -19,6 +21,9 @@ import {
   useImprovedDebounce
 } from './helpers';
 import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
+
+import globals from 'assets/sass/globals.module.scss';
+import styles from './styles.module.scss';
 
 export interface AmountInputPropsType {
   readonly?: boolean;
@@ -74,12 +79,12 @@ export const AmountInput = ({
     return value;
   }, [values, value]);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = removeCommas(e.target.value);
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const newValue = removeCommas(event.target.value);
 
     if (newValue === '' || stringIsFloat(newValue)) {
-      e.target.value = newValue;
-      handleChange(e);
+      event.target.value = newValue;
+      handleChange(event);
 
       const newDebounceValue = {
         value: newValue,
@@ -126,7 +131,7 @@ export const AmountInput = ({
   useEffect(updateUsdValue, [value, tokenUsdPrice]);
 
   return (
-    <div className={`amount-holder w-100 ${usdValue ? 'show-usd-value' : ''} `}>
+    <>
       <NumericFormat
         getInputRef={ref}
         thousandSeparator=','
@@ -136,8 +141,9 @@ export const AmountInput = ({
         inputMode='decimal'
         onValueChange={onValueChange}
         required={required}
-        className='amount-input form-control'
-        style={{ fontSize: '16px' }}
+        className={classNames(globals.input, styles.input, {
+          [globals.disabled]: Boolean(disabled)
+        })}
         data-testid={dataTestId || name}
         id={name}
         name={name}
@@ -160,6 +166,6 @@ export const AmountInput = ({
           </small>
         </span>
       )}
-    </div>
+    </>
   );
 };

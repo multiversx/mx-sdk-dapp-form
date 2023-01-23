@@ -25,6 +25,16 @@ $input-border-focus: #7191eb !default;
   --border-color: #dee2e6;
   --card-bg: white;
   --black: black;
+
+  --dapp-form-bg: #242526;
+  --dapp-form-label-color: #9ba5b4;
+  --dapp-form-input-bg: #131313;
+  --dapp-form-placeholder-color: #9ba5b4;
+  --dapp-form-input-color: #ffffff;
+  --dapp-form-error-color: #ff4f8a;
+  --dapp-form-max-btn-bg: #242526;
+  --dapp-form-max-hover-btn-bg: #3066ff;
+  --dapp-form-max-btn-color: #ffffff;
 }
 
 @mixin media-breakpoint-up($breakpoint) {

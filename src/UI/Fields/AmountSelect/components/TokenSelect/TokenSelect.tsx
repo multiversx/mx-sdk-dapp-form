@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import Select, { components } from 'react-select';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { formatTokenAmount } from './helpers/formatTokenAmount';
+import { formatTokenAmount } from '../../helpers/formatTokenAmount';
 import { faDiamond, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
@@ -63,7 +63,7 @@ export interface TokenSelectPropsType {
 const Input: typeof components.Input = (props) => (
   <components.Input
     {...props}
-    className={styles.input}
+    className={styles.dropdown}
     data-testid='tokenSelectInput'
   />
 );
@@ -187,17 +187,13 @@ const ValueContainer: typeof components.ValueContainer = (props) => {
         )}
       </div>
 
-      <div className={styles.data}>
+      <div className={styles.payload}>
         {children}
         <small className={styles.price}>{price}</small>
       </div>
     </components.ValueContainer>
   );
 };
-
-if ('TODO' == 'bring back value container and option'.toString()) {
-  console.log({ ValueContainer, Option });
-}
 
 export const TokenSelect = (
   props: // TokenElement = DefaultTokenElement
@@ -261,11 +257,7 @@ export const TokenSelect = (
   return (
     <div data-testid={`${name}Select`}>
       {/* TODO: label can be hidden, and shown only in tests */}
-      <label
-        htmlFor={name}
-        data-testid='tokenIdLabel'
-        className={styles.selectTokenLabel}
-      >
+      <label htmlFor={name} data-testid='tokenIdLabel' className={styles.label}>
         Token
       </label>
 
@@ -299,7 +291,6 @@ export const TokenSelect = (
         className={classNames(styles.select, className, {
           [styles.disabled]: props.disabled || isLoading
         })}
-        menuIsOpen
         components={{
           IndicatorSeparator: null,
           Menu,

@@ -1,0 +1,28 @@
+@import 'assets/sass/variables/variables';
+
+.amount {
+  margin-bottom: 16px;
+  display: block;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .interaction {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
