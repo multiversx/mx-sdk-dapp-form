@@ -5,6 +5,7 @@ import { PartialTokenType } from 'types/tokens';
 
 import { progressiveFormatAmount } from './progressiveFormatAmount';
 import { getBalanceMinusDust } from './getBalanceMinusDust';
+import BigNumber from 'bignumber.js';
 
 import styles from './styles.module.scss';
 
@@ -35,8 +36,9 @@ export const MaxButton = ({
     decimals: token?.decimals
   });
 
-  const isInputAmountMaxAmount =
-    parseFloat(inputAmount) === parseFloat(formattedBalance);
+  const isInputAmountMaxAmount = new BigNumber(inputAmount).isEqualTo(
+    new BigNumber(formattedBalance)
+  );
 
   const handleOnMaxBtnClick = (event: MouseEvent) => {
     event.preventDefault();

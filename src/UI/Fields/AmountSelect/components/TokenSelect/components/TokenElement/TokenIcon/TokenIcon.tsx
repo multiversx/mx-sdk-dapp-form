@@ -13,19 +13,23 @@ export const TokenIcon = ({
 }) => {
   const { assets, identifier } = token;
 
-  return process.env.NODE_ENV !== 'test' ? (
-    <>
-      {assets?.svgUrl ? (
-        <img src={assets?.svgUrl} alt={identifier} className='token-symbol' />
+  if (process.env.NODE_ENV !== 'test') {
+    return null;
+  }
+
+  if (assets?.svgUrl) {
+    return (
+      <img src={assets?.svgUrl} alt={identifier} className='token-symbol' />
+    );
+  }
+
+  return (
+    <div className='token-symbol'>
+      {identifier === egldLabel ? (
+        <EgldIcon />
       ) : (
-        <div className='token-symbol'>
-          {identifier === egldLabel ? (
-            <EgldIcon />
-          ) : (
-            <FontAwesomeIcon icon={faDiamond} />
-          )}
-        </div>
+        <FontAwesomeIcon icon={faDiamond} />
       )}
-    </>
-  ) : null;
+    </div>
+  );
 };
