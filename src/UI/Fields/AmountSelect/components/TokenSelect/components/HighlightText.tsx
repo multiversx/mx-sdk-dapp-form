@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
-export const highlightText = (text: string = '', highlight: string) => {
+export const HighlightText = (text: string = '', highlight: string) => {
   const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
   const word = highlight.toLowerCase();
 
   return (
-    <Fragment>
+    <>
       {parts.map((part, index) =>
         part.toLowerCase() === word ? (
           <strong key={`${part}-${index}`}>{part}</strong>
@@ -13,6 +13,6 @@ export const highlightText = (text: string = '', highlight: string) => {
           <span key={`${part}-${index}`}>{part}</span>
         )
       )}
-    </Fragment>
+    </>
   );
 };

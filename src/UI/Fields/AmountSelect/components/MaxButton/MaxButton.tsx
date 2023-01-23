@@ -3,6 +3,7 @@ import React from 'react';
 import { PartialTokenType } from 'types/tokens';
 import { progressiveFormatAmount } from './progressiveFormatAmount';
 import { getBalanceMinusDust } from './getBalanceMinusDust';
+import BigNumber from 'bignumber.js';
 
 export interface MaxButtonPropsType {
   inputAmount: string;
@@ -31,8 +32,9 @@ export const MaxButton = ({
     decimals: token?.decimals
   });
 
-  const isInputAmountMaxAmount =
-    parseFloat(inputAmount) === parseFloat(formattedBalance);
+  const isInputAmountMaxAmount = new BigNumber(inputAmount).isEqualTo(
+    new BigNumber(formattedBalance)
+  );
 
   const handleOnMaxBtnClick = (e: React.MouseEvent) => {
     e.preventDefault();

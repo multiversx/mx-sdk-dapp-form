@@ -2,18 +2,20 @@ import React, { useRef } from 'react';
 import Select, { components } from 'react-select';
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { formatTokenAmount } from './helpers/formatTokenAmount';
 import { faDiamond, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
 
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
 import { getWegldIdForChainId } from 'apiCalls/network/getEnvironmentForChainId';
-import { TokenElement as DefaultTokenElement } from './components';
+import {
+  TokenElement as DefaultTokenElement,
+  HighlightText
+} from './components';
 import { PartialTokenType, TokenAssetsType } from 'types';
 import styles from './styles.module.scss';
 // import { TokenElement } from 'UI/Fields/SelectToken/TokenElement';
-import { highlightText } from './helpers/highlightText';
 import { useNetworkConfigContext } from 'contexts';
+import { progressiveFormatAmount } from '../MaxButton/progressiveFormatAmount';
 const MultiversXIcon = require('./mx-icon.svg').default;
 
 export interface SelectOptionType {
@@ -111,14 +113,14 @@ const Option: typeof components.Option = (props) => {
   } = useNetworkConfigContext();
 
   const icon = option.assets ? option.assets.svgUrl : null;
-  const amount = formatTokenAmount({
+  const amount = progressiveFormatAmount({
     amount: option.token.balance,
     decimals: option.token.decimals,
     addCommas: true
   });
 
   const ticker = Boolean(selectProps.inputValue)
-    ? highlightText(option.token.ticker, selectProps.inputValue)
+    ? HighlightText(option.token.ticker, selectProps.inputValue)
     : option.token.ticker;
 
   return (
