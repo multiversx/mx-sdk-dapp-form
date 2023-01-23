@@ -1,6 +1,6 @@
 import React, { JSXElementConstructor } from 'react';
-import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/index';
 import { Transaction } from '@multiversx/sdk-core';
+import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/index';
 import { Formik } from 'formik';
 
 import { ZERO } from 'constants/index';

@@ -69,7 +69,7 @@ describe('Entire balance button', () => {
 
     await waitFor(() => {
       const req = methods.queryByText('Insufficient funds');
-      expect(req!.innerHTML).toBe('Insufficient funds');
+      expect(req?.innerHTML).toBe('Insufficient funds');
     });
   });
 });

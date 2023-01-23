@@ -19,7 +19,7 @@ describe('GasLimit field', () => {
     fireEvent.change(input, data);
     fireEvent.blur(input);
     const req = await findByText('Invalid number');
-    expect(req!.innerHTML).toBe('Invalid number');
+    expect(req?.innerHTML).toBe('Invalid number');
   });
   it('should be integer', async () => {
     const { findByLabelText, queryByText } = await renderForm();
@@ -30,7 +30,7 @@ describe('GasLimit field', () => {
     fireEvent.blur(input);
     await waitFor(() => {
       const req = queryByText('Invalid number');
-      expect(req!.innerHTML).toBe('Invalid number');
+      expect(req?.innerHTML).toBe('Invalid number');
     });
   });
   it('should not allow exponential gasLimit', async () => {
@@ -42,7 +42,7 @@ describe('GasLimit field', () => {
     fireEvent.blur(input);
     await waitFor(() => {
       const req = queryByText('Invalid number');
-      expect(req!.innerHTML).toBe('Invalid number');
+      expect(req?.innerHTML).toBe('Invalid number');
     });
   });
   it('should not allow negative gasLimit', async () => {
@@ -54,7 +54,7 @@ describe('GasLimit field', () => {
     fireEvent.blur(input);
     await waitFor(() => {
       const req = queryByText('Invalid number');
-      expect(req!.innerHTML).toBeDefined();
+      expect(req?.innerHTML).toBeDefined();
     });
   });
   it('should not allow explicit positive gasLimit', async () => {
@@ -66,7 +66,7 @@ describe('GasLimit field', () => {
     fireEvent.blur(input);
     await waitFor(() => {
       const req = queryByText('Invalid number');
-      expect(req!.innerHTML).toBeDefined();
+      expect(req?.innerHTML).toBeDefined();
     });
   });
   it('should >= than the one set by config', async () => {
@@ -79,7 +79,7 @@ describe('GasLimit field', () => {
 
     await waitFor(() => {
       const req = queryByText(/^Gas limit must be greater/);
-      expect(req!.innerHTML).toBe(
+      expect(req?.innerHTML).toBe(
         `Gas limit must be greater or equal to ${GAS_LIMIT}`
       );
     });
@@ -100,7 +100,7 @@ describe('GasLimit field', () => {
 
     await waitFor(() => {
       const req = methods.queryByText(/^Gas limit must be greater/);
-      expect(req!.innerHTML).toBe(
+      expect(req?.innerHTML).toBe(
         'Gas limit must be greater or equal to 56000'
       );
     });
@@ -121,7 +121,7 @@ describe('GasLimit field', () => {
     fireEvent.click(sendButton);
     await waitFor(() => {
       const req = queryByText('Insufficient funds');
-      expect(req!.innerHTML).toBe('Insufficient funds');
+      expect(req?.innerHTML).toBe('Insufficient funds');
     });
   });
   it('should not show error when writing in data', async () => {

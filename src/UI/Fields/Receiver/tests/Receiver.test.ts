@@ -13,7 +13,7 @@ describe('Receiver field', () => {
     await waitFor(() => {
       expect(input.value).toBe('');
       const req = queryByText('Required');
-      expect(req!.innerHTML).toBe('Required');
+      expect(req?.innerHTML).toBe('Required');
     });
   });
   it('should validate address', async () => {
@@ -25,7 +25,7 @@ describe('Receiver field', () => {
     fireEvent.blur(input);
     await waitFor(() => {
       const req = queryByText('Invalid address');
-      expect(req!.innerHTML).toBe('Invalid address');
+      expect(req?.innerHTML).toBe('Invalid address');
     });
   });
 });

@@ -1,7 +1,11 @@
 import React from 'react';
-import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { SingleValue } from 'react-select';
 import globals from 'assets/sass/globals.module.scss';
+import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
+import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { getIsDisabled } from 'helpers';
 import { NftEnumType, ValuesEnum } from 'types';
+import { AmountSelect } from './AmountSelect';
 import {
   AmountErrorPropsType,
   AmountInputPropsType,
@@ -10,10 +14,6 @@ import {
   TokenBalancePropsType,
   TokenSelectPropsType
 } from './components';
-import { SingleValue } from 'react-select';
-import { getIsDisabled } from 'helpers';
-import { AmountSelect } from './AmountSelect';
-import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
 import { progressiveFormatAmount } from './components/MaxButton/progressiveFormatAmount';
 
 /**

@@ -6,23 +6,23 @@ import React, {
   useRef,
   useState
 } from 'react';
+import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
 import BigNumber from 'bignumber.js';
+import classNames from 'classnames';
 import {
   NumberFormatValues,
   NumericFormat,
   OnValueChange
 } from 'react-number-format';
-import classNames from 'classnames';
 
+import globals from 'assets/sass/globals.module.scss';
 import {
   removeCommas,
   roundAmount,
   ImprovedDebounceValueType,
   useImprovedDebounce
 } from './helpers';
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
 
-import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 export interface AmountInputPropsType {

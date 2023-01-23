@@ -1,10 +1,10 @@
 import React, { useRef, useState } from 'react';
-import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { faAngleDown, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useCollapse from 'react-collapsed';
+import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
+import useCollapse from 'react-collapsed';
 
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { GasLimit } from '../GasLimit/GasLimit';

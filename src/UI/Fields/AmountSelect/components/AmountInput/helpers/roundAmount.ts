@@ -1,6 +1,6 @@
-import BigNumber from 'bignumber.js';
 import { DIGITS } from '@multiversx/sdk-dapp/constants/index';
 import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
+import BigNumber from 'bignumber.js';
 
 export const roundAmount = (amount: string, digits?: number) => {
   const digitsToUse = digits ?? DIGITS;

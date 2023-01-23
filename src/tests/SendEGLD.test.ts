@@ -12,7 +12,7 @@ describe('EGLD Amount field', () => {
     await waitFor(() => {
       expect(input.value).toBe('');
       const req = queryByText('Required');
-      expect(req!.innerHTML).toBe('Required');
+      expect(req?.innerHTML).toBe('Required');
     });
   });
   it('should be numeric', async () => {
@@ -70,7 +70,7 @@ describe('EGLD Amount field', () => {
     await waitFor(() => {
       expect(input.value).toBe(value);
       const req = queryByText(/^Maximum/);
-      expect(req!.innerHTML).toBe('Maximum 18 decimals allowed');
+      expect(req?.innerHTML).toBe('Maximum 18 decimals allowed');
     });
   });
   it('should be =< than balance - transaction fee', async () => {
@@ -91,7 +91,7 @@ describe('EGLD Amount field', () => {
 
     await waitFor(() => {
       const req = queryByText('Insufficient funds');
-      expect(req!.innerHTML).toBe('Insufficient funds');
+      expect(req?.innerHTML).toBe('Insufficient funds');
     });
   });
   it('should show error when not enough balance for non-zero transaction with large gas', async () => {

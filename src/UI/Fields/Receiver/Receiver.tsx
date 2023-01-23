@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
+import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import classNames from 'classnames';
 
 import { Typeahead, Menu, MenuItem, Hint } from 'react-bootstrap-typeahead';
@@ -14,13 +14,13 @@ import {
   TypeaheadManagerChildProps
 } from 'react-bootstrap-typeahead/types/types';
 
+import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
 
-import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 const CustomMenu = (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const HighlightText = (text: string = '', highlight: string) => {
+export const HighlightText = (text = '', highlight: string) => {
   const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
   const word = highlight.toLowerCase();
 

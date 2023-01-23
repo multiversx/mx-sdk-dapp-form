@@ -1,7 +1,7 @@
 import React from 'react';
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import { getWegldIdForChainId } from 'apiCalls';
 import { WEGLD_MESSAGE } from 'constants/index';

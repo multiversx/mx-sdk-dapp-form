@@ -1,7 +1,7 @@
 import React from 'react';
-import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 import ReactTooltip from 'react-tooltip';
 
 import { MIN_DUST } from 'constants/index';

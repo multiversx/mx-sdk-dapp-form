@@ -1,1 +1,1 @@
-export * from "./MaxButton";
+export * from './MaxButton';

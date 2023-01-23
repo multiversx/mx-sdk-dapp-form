@@ -1,7 +1,7 @@
 import React from 'react';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
-import { Token, TokenPropsType } from 'UI/Confirm/Token';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { Token, TokenPropsType } from 'UI/Confirm/Token';
 
 export const NftSftToken = ({ className }: WithClassnameType) => {
   const { formInfo, tokensInfo } = useSendFormContext();

@@ -21,6 +21,7 @@
     "publish-yalc": "yarn build && cd dist && yalc publish",
     "watch": "yarn node esbuild-watch.js && yarn build:types -- --watch",
     "test": "jest",
+    "lint": "eslint --fix --ext js,ts,tsx src",
     "test:watch": "jest --watch"
   },
   "devDependencies": {

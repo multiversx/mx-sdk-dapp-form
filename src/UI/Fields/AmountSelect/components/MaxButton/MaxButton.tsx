@@ -1,13 +1,12 @@
-import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
 import React, { MouseEvent } from 'react';
+import BigNumber from 'bignumber.js';
+import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
 
 import { PartialTokenType } from 'types/tokens';
 
-import { progressiveFormatAmount } from './progressiveFormatAmount';
 import { getBalanceMinusDust } from './getBalanceMinusDust';
-import BigNumber from 'bignumber.js';
-
 import styles from './maxButton.module.scss';
+import { progressiveFormatAmount } from './progressiveFormatAmount';
 
 export interface MaxButtonPropsType {
   inputAmount: string;
