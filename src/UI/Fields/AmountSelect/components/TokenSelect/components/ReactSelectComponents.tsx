@@ -1,13 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
 import { components } from 'react-select';
-import styles from './../styles.module.scss';
 import { progressiveFormatAmount } from '../../MaxButton/progressiveFormatAmount';
 import { HighlightText } from './HighlightText';
-import { OptionType } from '../tokenSelect.types';
-const MultiversXIcon = require('./mx-icon.svg').default;
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+const MultiversXIcon = require('./mx-icon.svg').default;
 import { faDiamond, faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import styles from './../tokenSelect.module.scss';
+import { OptionType } from '../tokenSelect.types';
 
 export const Input: typeof components.Input = (props) => (
   <components.Input

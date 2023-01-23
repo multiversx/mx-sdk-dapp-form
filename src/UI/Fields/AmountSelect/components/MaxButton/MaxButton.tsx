@@ -7,7 +7,7 @@ import { progressiveFormatAmount } from './progressiveFormatAmount';
 import { getBalanceMinusDust } from './getBalanceMinusDust';
 import BigNumber from 'bignumber.js';
 
-import styles from './styles.module.scss';
+import styles from './maxButton.module.scss';
 
 export interface MaxButtonPropsType {
   inputAmount: string;

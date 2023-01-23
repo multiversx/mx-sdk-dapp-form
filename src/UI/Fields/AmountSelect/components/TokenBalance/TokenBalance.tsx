@@ -2,7 +2,7 @@ import React from 'react';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
-import styles from './styles.module.scss';
+import styles from './tokenBalance.module.scss';
 
 export interface TokenBalancePropsType extends WithClassnameType {
   label?: string;

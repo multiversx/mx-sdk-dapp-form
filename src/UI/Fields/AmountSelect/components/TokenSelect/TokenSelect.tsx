@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
-import Select from 'react-select';
 import classNames from 'classnames';
+import Select from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 import { getWegldIdForChainId } from 'apiCalls/network/getEnvironmentForChainId';
 import * as components from './components';
+import styles from './tokenSelect.module.scss';
 import { OptionType, TokenSelectPropsType } from './tokenSelect.types';
-import styles from './styles.module.scss';
 
 const {
   Menu,
