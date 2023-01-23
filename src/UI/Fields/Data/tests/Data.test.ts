@@ -25,7 +25,7 @@ describe('Data field tests', () => {
     // prevent async effects error logging
     const feeInFiat = await methods.findByTestId('feeInFiat');
     await waitFor(() => {
-      expect(feeInFiat.textContent).toBe('≈ $0.0029');
+      expect(feeInFiat.textContent).toBe('(≈ $0.0029)');
     });
   });
   test('data field over 300 character error for ledger app version 1.0.10', async () => {

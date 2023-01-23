@@ -1,5 +1,8 @@
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import React from 'react';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
+import classNames from 'classnames';
+
+import styles from './styles.module.scss';
 
 export interface TokenBalancePropsType extends WithClassnameType {
   label?: string;
@@ -15,8 +18,12 @@ export const TokenBalance = ({
   'data-value': dataValue
 }: TokenBalancePropsType) => {
   return (
-    <div data-testid={dataTestId} data-value={dataValue} className={className}>
-      <span className='mex-text-secondary mr-2'>{label}</span>
+    <div
+      data-testid={dataTestId}
+      data-value={dataValue}
+      className={classNames(styles.balance, className)}
+    >
+      <span>{label}:</span>
       {value}
     </div>
   );

@@ -40,13 +40,13 @@ const CustomMenu = (
   } = props as any;
 
   return (
-    <Menu {...menuProps} className={styles.receiverFieldMenu}>
+    <Menu {...menuProps} className={styles.menu}>
       {results.map((option, position) => (
         <MenuItem
           key={option.toString()}
           option={option}
           position={position}
-          className={classNames(styles.receiverFieldItem, {
+          className={classNames(styles.item, {
             [styles.highlighted]: position === state.activeIndex
           })}
         >
@@ -143,10 +143,10 @@ export const Receiver = ({ className }: WithClassnameType) => {
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
   return (
-    <div className={classNames(styles.receiverField, className)}>
+    <div className={classNames(styles.receiver, className)}>
       {label !== null && (
         <div
-          className={styles.receiverFieldLabel}
+          className={globals.label}
           data-testid='receiverLabel'
           data-loading={fetchingScamAddress}
         >
@@ -154,7 +154,7 @@ export const Receiver = ({ className }: WithClassnameType) => {
         </div>
       )}
 
-      <div className={styles.receiverFieldAutocomplete}>
+      <div className={styles.autocomplete}>
         <Typeahead
           id='receiverWrapper'
           filterBy={filterBy}
@@ -170,7 +170,12 @@ export const Receiver = ({ className }: WithClassnameType) => {
           renderInput={renderInput}
           onInputChange={onInputChange}
           renderMenu={CustomMenu}
-          inputProps={{ className: globals.input }}
+          inputProps={{
+            className: classNames(globals.input, {
+              [globals.error]: isReceiverInvalid || scamError,
+              [globals.disabled]: getIsDisabled(ValuesEnum.receiver, readonly)
+            })
+          }}
         />
       </div>
 
@@ -181,7 +186,10 @@ export const Receiver = ({ className }: WithClassnameType) => {
       )}
 
       {scamError && (
-        <div data-testid='receiverScam' className={styles.receiverFieldScam}>
+        <div
+          data-testid='receiverScam'
+          className={classNames(globals.error, globals.scam)}
+        >
           <span>
             <FontAwesomeIcon icon={faExclamationTriangle} />
             <small>{scamError}</small>
