@@ -291,7 +291,6 @@ export const TokenSelect = (
         className={classNames(styles.select, className, {
           [styles.disabled]: props.disabled || isLoading
         })}
-        menuIsOpen
         components={{
           IndicatorSeparator: null,
           Menu,

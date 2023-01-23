@@ -89,6 +89,7 @@ describe('Send Meta ESDT', () => {
 
     // confirm metaEsdt token is in list
     const selectInput = await methods.findByLabelText('Token');
+    fireEvent.focus(selectInput);
     selectEvent.openMenu(selectInput);
     const metaTokenOption = await methods.findByTestId(
       `${metaToken.identifier}-option`
