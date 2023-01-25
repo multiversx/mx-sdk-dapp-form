@@ -22,9 +22,13 @@ export const Menu: typeof components.Menu = (props) => (
   <components.Menu {...props} className={styles.menu} />
 );
 
-export const MenuList: typeof components.MenuList = (props) => (
-  <components.MenuList {...props} className={styles.list} />
-);
+export const MenuList: typeof components.MenuList = (props) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { rx, ...rest } = props;
+  return <components.MenuList {...rest} className={styles.list} />;
+};
 
 export const SingleValue: typeof components.SingleValue = (props) => (
   <components.SingleValue {...props} className={styles.single} />
