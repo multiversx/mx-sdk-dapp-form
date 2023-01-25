@@ -37,7 +37,7 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
   } = props;
   const ref = useRef(null);
   const egldFamily = [egldLabel, getWegldIdForChainId(chainId)];
-  const Option = useMemo(() => components.optionGeneragtor(egldLabel), []);
+  const Option = useMemo(() => components.getOption(egldLabel), []);
   const ValueContainer = useMemo(
     () => components.getValueContainer(egldLabel),
     []

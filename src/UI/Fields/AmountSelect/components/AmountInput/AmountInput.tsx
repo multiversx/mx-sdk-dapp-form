@@ -16,8 +16,8 @@ import {
 } from 'react-number-format';
 
 import globals from 'assets/sass/globals.module.scss';
-import { EgldInfoDust } from '../EgldInfoDust';
 import styles from './amountInput.module.scss';
+import { EgldInfoDust } from './components';
 import {
   removeCommas,
   roundAmount,

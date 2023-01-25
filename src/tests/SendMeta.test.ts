@@ -97,7 +97,7 @@ describe('Send Meta ESDT', () => {
     expect(metaTokenOption.innerHTML).toBeDefined();
 
     // select metaEsdt token
-    selectEvent.select(selectInput, metaToken.name);
+    selectEvent.select(selectInput, metaToken.ticker);
 
     const tokenId: any = methods.container.querySelector(
       'input[name="tokenId"]'
