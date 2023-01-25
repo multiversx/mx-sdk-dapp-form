@@ -10,14 +10,12 @@ import {
   AmountErrorPropsType,
   AmountInput,
   AmountInputPropsType,
-  EgldInfoDust,
   MaxButton,
   MaxButtonPropsType,
   TokenBalance,
   TokenBalancePropsType,
   TokenSelect,
-  TokenSelectPropsType,
-  UsdAmount
+  TokenSelectPropsType
 } from './components';
 
 export interface AmountSelectPropsType extends WithClassnameType {
@@ -40,18 +38,17 @@ export const AmountSelect = ({
   amountErrorProps,
   maxButtonProps
 }: AmountSelectPropsType) => {
-  const showUsdValue =
-    !amountErrorProps.hasErrors &&
-    amountInputProps.value &&
-    tokenSelectProps.value?.token.tokenUsdPrice;
-
   return (
     <div className={classNames(styles.amount, className)}>
-      {label && (
-        <label htmlFor={name} className={globals.label}>
-          {label}
-        </label>
-      )}
+      <div className={styles.label}>
+        {label && (
+          <label htmlFor={name} className={globals.label}>
+            {label}
+          </label>
+        )}
+
+        <TokenBalance {...tokenBalanceProps} />
+      </div>
 
       <div className={styles.wrapper}>
         <AmountInput {...amountInputProps} />
@@ -68,27 +65,7 @@ export const AmountSelect = ({
       </div>
 
       <div className={styles.footer}>
-        <div>
-          {showUsdValue ? (
-            <>
-              <UsdAmount
-                amount={amountInputProps.value}
-                token={tokenSelectProps.value?.token}
-              />
-              <EgldInfoDust
-                amount={amountInputProps.value}
-                egldLabel={tokenSelectProps.egldLabel}
-                maxAmountMinusDust={amountInputProps.maxAmountMinusDust}
-                token={tokenSelectProps.value?.token}
-                isMaxClicked={maxButtonProps.isMaxClicked}
-              />
-            </>
-          ) : (
-            <AmountError {...amountErrorProps} />
-          )}
-        </div>
-
-        <TokenBalance {...tokenBalanceProps} />
+        <AmountError {...amountErrorProps} />
       </div>
     </div>
   );

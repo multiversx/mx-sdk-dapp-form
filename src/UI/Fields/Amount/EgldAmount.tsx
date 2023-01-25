@@ -25,7 +25,7 @@ export const EgldAmount = ({ className }: WithClassnameType) => {
           <UsdValue
             amount={amountInfo.amount}
             usd={egldPriceInUsd}
-            data-testid={`egldPrice_${egldPriceInUsd}`}
+            data-testid={`tokenPrice_${egldPriceInUsd}`}
           />
 
           {amountInfo.amount === maxAmountMinusDust && isMaxClicked && (

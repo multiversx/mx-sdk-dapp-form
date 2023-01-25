@@ -16,14 +16,14 @@ import {
 } from 'react-number-format';
 
 import globals from 'assets/sass/globals.module.scss';
+import { EgldInfoDust } from '../EgldInfoDust';
+import styles from './amountInput.module.scss';
 import {
   removeCommas,
   roundAmount,
   ImprovedDebounceValueType,
   useImprovedDebounce
 } from './helpers';
-
-import styles from './styles.module.scss';
 
 export interface AmountInputPropsType {
   readonly?: boolean;
@@ -33,9 +33,12 @@ export interface AmountInputPropsType {
   'data-testid'?: string;
   value: string;
   error?: string;
+  tokenId: string;
   isInvalid?: boolean;
   disabled?: boolean;
-  tokenUsdPrice?: string;
+  isMaxClicked?: boolean;
+  tokenUsdPrice?: number;
+  egldLabel: string;
   maxAmountMinusDust?: string;
   handleChange: (e: ChangeEvent<any>) => void;
   handleBlur: (e: FocusEvent<any>) => void;
@@ -53,9 +56,13 @@ export const AmountInput = ({
   placeholder,
   value,
   disabled,
+  tokenId,
   tokenUsdPrice,
+  egldLabel,
+  isMaxClicked,
   'data-testid': dataTestId,
   handleChange,
+  maxAmountMinusDust,
   handleBlur,
   onKeyDown,
   onFocus,
@@ -109,9 +116,7 @@ export const AmountInput = ({
     }
 
     const newUsdValue = roundAmount(
-      new BigNumber(
-        parseFloat(amount) * parseFloat(tokenUsdPrice ?? '0')
-      ).toString(10),
+      new BigNumber(parseFloat(amount) * (tokenUsdPrice ?? 0)).toString(10),
       2
     );
 
@@ -129,9 +134,12 @@ export const AmountInput = ({
   }, [debounceAmount]);
 
   useEffect(updateUsdValue, [value, tokenUsdPrice]);
-
   return (
-    <>
+    <div
+      className={classNames(`${styles.amountHolder}`, {
+        [`${styles.showUsdValue}`]: Boolean(usdValue)
+      })}
+    >
       <NumericFormat
         getInputRef={ref}
         thousandSeparator=','
@@ -141,7 +149,7 @@ export const AmountInput = ({
         inputMode='decimal'
         onValueChange={onValueChange}
         required={required}
-        className={classNames(globals.input, styles.input, {
+        className={classNames(globals.input, styles.amountInput, {
           [globals.disabled]: Boolean(disabled)
         })}
         data-testid={dataTestId || name}
@@ -159,13 +167,20 @@ export const AmountInput = ({
       />
 
       {usdValue && (
-        <span className='amount-holder-usd d-flex text-secondary'>
-          <small>
+        <span className={styles.amountHolderUsd}>
+          <small data-testid={`tokenPrice_${tokenUsdPrice}`}>
             {usdValue !== '$0' ? <>≈ </> : <></>}
             {usdValue}
           </small>
+          <EgldInfoDust
+            amount={value}
+            egldLabel={egldLabel}
+            maxAmountMinusDust={maxAmountMinusDust}
+            tokenId={tokenId}
+            isMaxClicked={isMaxClicked}
+          />
         </span>
       )}
-    </>
+    </div>
   );
 };

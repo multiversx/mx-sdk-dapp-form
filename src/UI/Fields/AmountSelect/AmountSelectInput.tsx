@@ -1,8 +1,10 @@
 import React from 'react';
+import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { SingleValue } from 'react-select';
 import globals from 'assets/sass/globals.module.scss';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
 import { getIsDisabled } from 'helpers';
 import { NftEnumType, ValuesEnum } from 'types';
 import { AmountSelect } from './AmountSelect';
@@ -26,6 +28,7 @@ export const AmountSelectInput = () => {
   const {
     networkConfig: { egldLabel, chainId }
   } = useNetworkConfigContext();
+  const { egldPriceInUsd } = useGetEconomicsInfo();
 
   const { tokenDetails, tokenIdError, isTokenIdInvalid } = tokensInfo;
 
@@ -59,6 +62,8 @@ export const AmountSelectInput = () => {
     token
   }));
 
+  const { isEgld } = getIdentifierType(tokenId);
+
   const value = options.find(({ value }: OptionType) => value === tokenId);
 
   const tokenSelectProps: TokenSelectPropsType = {
@@ -89,7 +94,11 @@ export const AmountSelectInput = () => {
     handleBlur: onBlur,
     'data-testid': ValuesEnum.amount,
     handleChange: onChange,
+    isMaxClicked,
+    tokenId,
     onFocus,
+    egldLabel,
+    tokenUsdPrice: isEgld ? egldPriceInUsd : undefined,
     error,
     isInvalid,
     maxAmountMinusDust
@@ -115,7 +124,7 @@ export const AmountSelectInput = () => {
   const tokenBalanceProps: TokenBalancePropsType = {
     'data-testid': `available${nft?.identifier ?? tokenId}`,
     'data-value': `${maxAmountAvailable} ${nft?.identifier ?? tokenId}`,
-    label: 'Balance',
+    label: 'Available',
     value: progressiveFormatAmount({
       amount: tokenDetails.balance,
       decimals: tokenDetails.decimals,

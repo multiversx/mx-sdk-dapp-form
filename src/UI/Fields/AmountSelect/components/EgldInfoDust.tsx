@@ -1,13 +1,12 @@
 import React from 'react';
 import { InfoDust } from 'UI/InfoDust';
-import { OptionType } from './TokenSelect';
 
 interface InfoDustPropsType {
   egldLabel: string;
   amount: string;
   maxAmountMinusDust?: string;
   isMaxClicked?: boolean;
-  token?: OptionType['token'];
+  tokenId?: string;
 }
 
 export const EgldInfoDust = ({
@@ -15,12 +14,10 @@ export const EgldInfoDust = ({
   amount,
   maxAmountMinusDust,
   isMaxClicked,
-  token
+  tokenId
 }: InfoDustPropsType) => {
   const showInfoDust =
-    amount === maxAmountMinusDust &&
-    isMaxClicked &&
-    token?.identifier === egldLabel;
+    amount === maxAmountMinusDust && isMaxClicked && tokenId === egldLabel;
 
   if (!showInfoDust) {
     return null;

@@ -151,7 +151,7 @@ describe('GasLimit field', () => {
       expect(req).toBe(null);
     });
 
-    const usdValue = await findByTestId('egldPrice_58.14');
+    const usdValue = await findByTestId('tokenPrice_58.14');
 
     expect(usdValue).toBeDefined();
   });
