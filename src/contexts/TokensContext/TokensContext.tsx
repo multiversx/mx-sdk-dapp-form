@@ -3,6 +3,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState
 } from 'react';
 import { useFormikContext } from 'formik';
@@ -72,12 +73,19 @@ export function TokensContextProvider({
   const {
     networkConfig: { decimals }
   } = useNetworkConfigContext();
+  const fetchigRef = useRef(false);
   const { egldPriceInUsd, digits, egldLabel } = useGetEconomicsInfo();
 
   const esdtTokens = tokens || previouslyFetchedTokens;
 
   const handleGetTokens = useCallback(
     async (showLoading = true) => {
+      // fetching in progress
+      if (fetchigRef.current) {
+        return;
+      }
+
+      fetchigRef.current = true;
       setAreTokensLoading(showLoading);
 
       const newTokensAndMetaESDTs = await fetchAllTokens(address);
@@ -89,6 +97,7 @@ export function TokensContextProvider({
 
       setFieldValue(tokensField, tokensFromServer);
       previouslyFetchedTokens = tokensFromServer;
+      fetchigRef.current = false;
       setAreTokensLoading(false);
     },
     [address]
