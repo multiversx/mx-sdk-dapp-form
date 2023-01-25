@@ -124,7 +124,7 @@ export const AmountSelectInput = () => {
   };
 
   const tokenBalanceProps: TokenBalancePropsType = {
-    'data-testid': `available${nft?.identifier ?? tokenId}`,
+    'data-testid': `available-${nft?.identifier ?? tokenId}`,
     'data-value': `${maxAmountAvailable} ${nft?.identifier ?? tokenId}`,
     label: 'Available',
     token: selectValue?.token,

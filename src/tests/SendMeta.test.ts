@@ -4,8 +4,8 @@ import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
 import {
   formConfiguration,
-  renderForm as beginAll
-  // sendAndConfirmTest
+  renderForm as beginAll,
+  sendAndConfirmTest
 } from 'tests/helpers';
 
 const beforAllTokens = (balance?: string) =>
@@ -122,34 +122,33 @@ describe('Send Meta ESDT', () => {
     // fill in allowed receiver
     fireEvent.change(receiver, { target: { value: testReceiver } });
 
-    // TODO: bring back
     // check available
-    // const available = methods.getByTestId(`available-${metaToken.identifier}`);
-    // expect(available.innerHTML).toBe('Available 10000');
+    const available = methods.getByTestId(`available-${metaToken.identifier}`);
+    expect(available.textContent).toBe('Available: 10,000 MT1-ff89d3');
 
-    // // fill in amount
-    // const amount: any = await methods.findByTestId('amount');
-    // fireEvent.change(amount, { target: { value: '10' } });
-    // fireEvent.blur(amount, { target: { value: '10' } });
+    // fill in amount
+    const amount: any = await methods.findByTestId('amount');
+    fireEvent.change(amount, { target: { value: '10' } });
+    fireEvent.blur(amount, { target: { value: '10' } });
 
-    // const dataInput: any = methods.getByTestId('data');
+    const dataInput: any = methods.getByTestId('data');
 
-    // // check data input disabled
-    // expect(dataInput.disabled).toBeTruthy();
+    // check data input disabled
+    expect(dataInput.disabled).toBeTruthy();
 
-    // const dataString =
-    //   'ESDTNFTTransfer@4d54312d666638396433@01@8ac7230489e80000@000000000000000005000e8a594d1c9b52073fcd3c856c87986045c85f568b98';
+    const dataString =
+      'ESDTNFTTransfer@4d54312d666638396433@01@8ac7230489e80000@000000000000000005000e8a594d1c9b52073fcd3c856c87986045c85f568b98';
 
-    // await waitFor(() => {
-    //   expect(dataInput.value).toBe(dataString);
-    // });
+    await waitFor(() => {
+      expect(dataInput.value).toBe(dataString);
+    });
 
-    // const gasLimit: any = methods.getByTestId('gasLimit');
-    // expect(gasLimit.value).toBe('1000000');
+    const gasLimit: any = methods.getByTestId('gasLimit');
+    expect(gasLimit.value).toBe('1000000');
 
-    // await sendAndConfirmTest({ methods })({
-    //   amount: '10.0000',
-    //   fee: '0.0000595'
-    // });
+    await sendAndConfirmTest({ methods })({
+      amount: '10.0000',
+      fee: '0.0000595'
+    });
   });
 });
