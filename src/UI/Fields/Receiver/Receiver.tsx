@@ -41,18 +41,22 @@ const CustomMenu = (
 
   return (
     <Menu {...menuProps} className={styles.menu}>
-      {results.map((option, position) => (
-        <MenuItem
-          key={option.toString()}
-          option={option}
-          position={position}
-          className={classNames(styles.item, {
-            [styles.highlighted]: position === state.activeIndex
-          })}
-        >
-          {option.toString()}
-        </MenuItem>
-      ))}
+      {results
+        .filter((result) => typeof result === 'string')
+        .map((option, position) => {
+          return (
+            <MenuItem
+              key={option.toString()}
+              option={option}
+              position={position}
+              className={classNames(styles.item, {
+                [styles.highlighted]: position === state.activeIndex
+              })}
+            >
+              {option.toString()}
+            </MenuItem>
+          );
+        })}
     </Menu>
   );
 };
@@ -130,14 +134,14 @@ export const Receiver = ({ className }: WithClassnameType) => {
    * Filter the addresses based on input. Should be more than three characters.
    */
   const filterBy: FilterByCallback = (option, props) => {
-    const needle = props.text.toLowerCase();
-    const haystack = option.toLowerCase();
+    const searchString = props.text.toLowerCase();
+    const currentOption = option.toLowerCase();
 
-    if (needle.length < 3) {
+    if (searchString.length < 3) {
       return true;
     }
 
-    return haystack.includes(needle);
+    return currentOption.includes(searchString);
   };
 
   useEffect(triggerRerenderOnceOnHook, [receiver]);
