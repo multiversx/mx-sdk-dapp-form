@@ -78,7 +78,7 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
         name={name}
         options={options}
         openMenuOnFocus
-        isDisabled={disabled || isLoading}
+        isDisabled={disabled}
         isLoading={isLoading}
         value={value}
         isOptionDisabled={disableOption}

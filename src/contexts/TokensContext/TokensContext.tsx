@@ -76,27 +76,34 @@ export function TokensContextProvider({
 
   const esdtTokens = tokens || previouslyFetchedTokens;
 
-  const handleGetTokens = useCallback(async () => {
-    setAreTokensLoading(true);
+  const handleGetTokens = useCallback(
+    async (showLoading = true) => {
+      setAreTokensLoading(showLoading);
 
-    const newTokensAndMetaESDTs = await fetchAllTokens(address);
-    const currentTokens = tokens ?? [];
-    const tokensFromServer = uniqBy(
-      [...currentTokens, ...newTokensAndMetaESDTs],
-      (token) => token.identifier
-    );
+      const newTokensAndMetaESDTs = await fetchAllTokens(address);
+      const currentTokens = tokens ?? [];
+      const tokensFromServer = uniqBy(
+        [...currentTokens, ...newTokensAndMetaESDTs],
+        (token) => token.identifier
+      );
 
-    setFieldValue(tokensField, tokensFromServer);
-    previouslyFetchedTokens = tokensFromServer;
-    setAreTokensLoading(false);
-  }, [address]);
+      setFieldValue(tokensField, tokensFromServer);
+      previouslyFetchedTokens = tokensFromServer;
+      setAreTokensLoading(false);
+    },
+    [address]
+  );
 
   const handleChangeTokenId = useCallback((newValue: string) => {
     setFieldValue(tokenIdField, newValue, false);
   }, []);
 
   useEffect(() => {
-    handleGetTokens();
+    const showLoading = false;
+    handleGetTokens(showLoading);
+    return () => {
+      previouslyFetchedTokens = [];
+    };
   }, []);
 
   const setNftField = async () => {
