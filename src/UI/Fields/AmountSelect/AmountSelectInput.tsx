@@ -57,18 +57,20 @@ export const AmountSelectInput = () => {
 
   const options: OptionType[] = allAvailableTokens.map((token) => ({
     value: token.identifier,
-    label: token.name,
+    label: String(token.ticker),
     assets: token.assets,
     token
   }));
 
   const { isEgld } = getIdentifierType(tokenId);
 
-  const value = options.find(({ value }: OptionType) => value === tokenId);
+  const selectValue = options.find(
+    ({ value }: OptionType) => value === tokenId
+  );
 
   const tokenSelectProps: TokenSelectPropsType = {
     id: ValuesEnum.tokenId,
-    value,
+    value: selectValue,
     name: ValuesEnum.tokenId,
     isLoading: areTokensLoading,
     options,
@@ -125,6 +127,7 @@ export const AmountSelectInput = () => {
     'data-testid': `available${nft?.identifier ?? tokenId}`,
     'data-value': `${maxAmountAvailable} ${nft?.identifier ?? tokenId}`,
     label: 'Available',
+    token: selectValue?.token,
     value: progressiveFormatAmount({
       amount: tokenDetails.balance,
       decimals: tokenDetails.decimals,

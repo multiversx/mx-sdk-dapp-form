@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import classNames from 'classnames';
 import Select from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
@@ -13,7 +13,6 @@ const {
   Input,
   MenuList,
   IndicatorsContainer,
-  ValueContainer,
   Placeholder,
   SingleValue
 } = components;
@@ -38,7 +37,11 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
   } = props;
   const ref = useRef(null);
   const egldFamily = [egldLabel, getWegldIdForChainId(chainId)];
-  const Option = components.optionGeneragtor(egldLabel);
+  const Option = useMemo(() => components.optionGeneragtor(egldLabel), []);
+  const ValueContainer = useMemo(
+    () => components.getValueContainer(egldLabel),
+    []
+  );
 
   const isTokenFromEgldFamily = (identifier: string) =>
     egldFamily.includes(identifier);
