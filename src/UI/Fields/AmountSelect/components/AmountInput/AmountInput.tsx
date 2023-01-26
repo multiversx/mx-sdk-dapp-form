@@ -33,12 +33,12 @@ export interface AmountInputPropsType {
   'data-testid'?: string;
   value: string;
   error?: string;
-  tokenId: string;
+  tokenId?: string;
   isInvalid?: boolean;
   disabled?: boolean;
   isMaxClicked?: boolean;
   tokenUsdPrice?: number;
-  egldLabel: string;
+  egldLabel?: string;
   maxAmountMinusDust?: string;
   handleChange: (e: ChangeEvent<any>) => void;
   handleBlur: (e: FocusEvent<any>) => void;
@@ -172,13 +172,15 @@ export const AmountInput = ({
             {usdValue !== '$0' ? <>≈ </> : <></>}
             {usdValue}
           </small>
-          <EgldInfoDust
-            amount={value}
-            egldLabel={egldLabel}
-            maxAmountMinusDust={maxAmountMinusDust}
-            tokenId={tokenId}
-            isMaxClicked={isMaxClicked}
-          />
+          {tokenId && egldLabel && (
+            <EgldInfoDust
+              amount={value}
+              egldLabel={egldLabel}
+              maxAmountMinusDust={maxAmountMinusDust}
+              tokenId={tokenId}
+              isMaxClicked={isMaxClicked}
+            />
+          )}
         </span>
       )}
     </div>
