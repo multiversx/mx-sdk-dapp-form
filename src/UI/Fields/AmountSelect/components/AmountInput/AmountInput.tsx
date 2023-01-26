@@ -17,7 +17,6 @@ import {
 
 import globals from 'assets/sass/globals.module.scss';
 import styles from './amountInput.module.scss';
-import { EgldInfoDust } from './components';
 import {
   removeCommas,
   roundAmount,
@@ -33,18 +32,15 @@ export interface AmountInputPropsType {
   'data-testid'?: string;
   value: string;
   error?: string;
-  tokenId?: string;
   isInvalid?: boolean;
   disabled?: boolean;
-  isMaxClicked?: boolean;
   tokenUsdPrice?: number;
-  egldLabel?: string;
-  maxAmountMinusDust?: string;
   handleChange: (e: ChangeEvent<any>) => void;
   handleBlur: (e: FocusEvent<any>) => void;
   onKeyDown?: () => void;
   onFocus?: () => void;
   onDebounceChange?: (amount: string) => void;
+  infoDustComponent?: JSX.Element | React.ReactNode;
 }
 
 const fiveHundredMs = 500;
@@ -56,17 +52,14 @@ export const AmountInput = ({
   placeholder,
   value,
   disabled,
-  tokenId,
   tokenUsdPrice,
-  egldLabel,
-  isMaxClicked,
   'data-testid': dataTestId,
   handleChange,
-  maxAmountMinusDust,
   handleBlur,
   onKeyDown,
   onFocus,
-  onDebounceChange
+  onDebounceChange,
+  infoDustComponent
 }: AmountInputPropsType) => {
   const ref = useRef(null);
 
@@ -172,15 +165,7 @@ export const AmountInput = ({
             {usdValue !== '$0' ? <>≈ </> : <></>}
             {usdValue}
           </small>
-          {tokenId && egldLabel && (
-            <EgldInfoDust
-              amount={value}
-              egldLabel={egldLabel}
-              maxAmountMinusDust={maxAmountMinusDust}
-              tokenId={tokenId}
-              isMaxClicked={isMaxClicked}
-            />
-          )}
+          {infoDustComponent}
         </span>
       )}
     </div>
