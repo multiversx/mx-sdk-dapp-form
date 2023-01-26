@@ -42,7 +42,11 @@ export const AmountSelect = ({
     <div className={classNames(styles.amount, className)}>
       <div className={styles.label}>
         {label && (
-          <label htmlFor={name} className={globals.label}>
+          <label
+            htmlFor={name}
+            className={globals.label}
+            data-testid='amountLabel'
+          >
             {label}
           </label>
         )}
