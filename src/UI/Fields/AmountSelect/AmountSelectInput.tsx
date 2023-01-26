@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { SingleValue } from 'react-select';
 import globals from 'assets/sass/globals.module.scss';
@@ -11,6 +11,7 @@ import { AmountSelect } from './AmountSelect';
 import {
   AmountErrorPropsType,
   AmountInputPropsType,
+  EgldInfoDust,
   MaxButtonPropsType,
   OptionType,
   TokenBalancePropsType,
@@ -88,6 +89,19 @@ export const AmountSelectInput = () => {
     chainId
   };
 
+  const InfoDustComponent = useMemo(
+    () => (
+      <EgldInfoDust
+        amount={amount}
+        egldLabel={egldLabel}
+        maxAmountMinusDust={maxAmountMinusDust}
+        tokenId={tokenId}
+        isMaxClicked={isMaxClicked}
+      />
+    ),
+    [amount, egldLabel, maxAmountMinusDust, tokenId, isMaxClicked]
+  );
+
   const amountInputProps: AmountInputPropsType = {
     name: ValuesEnum.amount,
     required: true,
@@ -96,14 +110,11 @@ export const AmountSelectInput = () => {
     handleBlur: onBlur,
     'data-testid': ValuesEnum.amount,
     handleChange: onChange,
-    isMaxClicked,
-    tokenId,
     onFocus,
-    egldLabel,
     tokenUsdPrice: isEgld ? egldPriceInUsd : undefined,
     error,
     isInvalid,
-    maxAmountMinusDust
+    InfoDustComponent
   };
 
   const maxButtonProps: MaxButtonPropsType = {
