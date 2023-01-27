@@ -53,11 +53,10 @@ describe('Send tokens', () => {
   test('Tokens labels and values', async () => {
     const { getByTestId, findByTestId } = beforAllTokens();
 
-    // TODO: bring back
-    // const amountLabel = await findByTestId('amountLabel');
-    // expect(amountLabel.textContent).toBe('Amount');
+    const amountLabel = await findByTestId('amountLabel');
+    expect(amountLabel.textContent).toBe('Amount');
 
-    const availableTokens = await findByTestId('availableTWO-824e70');
+    const availableTokens = await findByTestId('available-TWO-824e70');
     expect(availableTokens.getAttribute('data-value')).toBe('1000 TWO-824e70');
 
     const gasLimit: any = getByTestId('gasLimit');

@@ -89,7 +89,7 @@ export const AmountSelectInput = () => {
     chainId
   };
 
-  const infoDustComponent = useMemo(
+  const InfoDustComponent = useMemo(
     () => (
       <EgldInfoDust
         amount={amount}
@@ -99,7 +99,7 @@ export const AmountSelectInput = () => {
         isMaxClicked={isMaxClicked}
       />
     ),
-    []
+    [amount, egldLabel, maxAmountMinusDust, tokenId, isMaxClicked]
   );
 
   const amountInputProps: AmountInputPropsType = {
@@ -114,7 +114,7 @@ export const AmountSelectInput = () => {
     tokenUsdPrice: isEgld ? egldPriceInUsd : undefined,
     error,
     isInvalid,
-    infoDustComponent
+    InfoDustComponent
   };
 
   const maxButtonProps: MaxButtonPropsType = {

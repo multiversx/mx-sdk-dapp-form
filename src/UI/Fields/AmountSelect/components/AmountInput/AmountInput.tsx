@@ -40,7 +40,7 @@ export interface AmountInputPropsType {
   onKeyDown?: () => void;
   onFocus?: () => void;
   onDebounceChange?: (amount: string) => void;
-  infoDustComponent?: JSX.Element | React.ReactNode;
+  InfoDustComponent?: JSX.Element;
 }
 
 const fiveHundredMs = 500;
@@ -59,7 +59,7 @@ export const AmountInput = ({
   onKeyDown,
   onFocus,
   onDebounceChange,
-  infoDustComponent
+  InfoDustComponent
 }: AmountInputPropsType) => {
   const ref = useRef(null);
 
@@ -100,7 +100,6 @@ export const AmountInput = ({
       return;
     }
 
-    console.log('updateUsdValue - value = ', value);
     const amount = removeCommas(value);
     const isValid = value !== '' && stringIsFloat(amount);
 
@@ -166,7 +165,7 @@ export const AmountInput = ({
             {usdValue !== '$0' ? <>≈ </> : <></>}
             {usdValue}
           </small>
-          {infoDustComponent}
+          {InfoDustComponent}
         </span>
       )}
     </div>
