@@ -13,7 +13,7 @@ export interface MaxButtonPropsType {
   inputAmount: string;
   isMaxClicked?: boolean;
   isMaxButtonVisible?: boolean;
-  onMaxClick: (amount: string) => void;
+  onMaxClick?: (maxAmount: string) => void;
 }
 
 export const MaxButton = ({
@@ -47,6 +47,7 @@ export const MaxButton = ({
     return null;
   }
 
+  // TODO: why not button?
   return (
     <a
       href='/'
