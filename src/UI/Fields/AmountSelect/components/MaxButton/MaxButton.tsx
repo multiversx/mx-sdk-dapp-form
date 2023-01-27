@@ -1,6 +1,5 @@
 import React, { MouseEvent } from 'react';
 import BigNumber from 'bignumber.js';
-import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
 
 import { PartialTokenType } from 'types/tokens';
 
@@ -9,20 +8,20 @@ import styles from './maxButton.module.scss';
 import { progressiveFormatAmount } from './progressiveFormatAmount';
 
 export interface MaxButtonPropsType {
-  inputAmount: string;
   token?: PartialTokenType;
+  egldLabel?: string;
+  inputAmount: string;
   isMaxClicked?: boolean;
   isMaxButtonVisible?: boolean;
-  onMaxClick?: (maxAmount: string) => void;
+  onMaxClick: (amount: string) => void;
 }
 
 export const MaxButton = ({
   token,
+  egldLabel,
   inputAmount,
   onMaxClick
 }: MaxButtonPropsType) => {
-  const { egldLabel } = useGetEconomicsInfo();
-
   const isEgld = token?.identifier === egldLabel;
   const balance = token?.balance ?? '0';
 
@@ -48,7 +47,6 @@ export const MaxButton = ({
     return null;
   }
 
-  // TODO: why not button?
   return (
     <a
       href='/'

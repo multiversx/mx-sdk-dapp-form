@@ -95,11 +95,12 @@ export const AmountInput = ({
   };
 
   const updateUsdValue = () => {
-    if (!tokenUsdPrice) {
+    if (!tokenUsdPrice || !value) {
       setUsdValue(undefined);
       return;
     }
 
+    console.log('updateUsdValue - value = ', value);
     const amount = removeCommas(value);
     const isValid = value !== '' && stringIsFloat(amount);
 

@@ -54,7 +54,7 @@ export const AmountSelect = ({
         <AmountInput {...amountInputProps} />
 
         <div className={styles.interaction}>
-          {maxButtonProps.isMaxButtonVisible !== false && (
+          {maxButtonProps.isMaxButtonVisible && (
             <MaxButton {...maxButtonProps} />
           )}
 
