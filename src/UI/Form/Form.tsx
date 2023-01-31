@@ -93,7 +93,7 @@ export const Form = ({ className }: WithClassnameType) => {
 
       <div className={styles.formButtons}>
         <button
-          className={classNames(globals.btn, globals.btnPrimary, {
+          className={classNames('my-3', globals.btn, globals.btnPrimary, {
             [globals.btnWarning]: scamError
           })}
           type='button'
@@ -105,7 +105,7 @@ export const Form = ({ className }: WithClassnameType) => {
         </button>
 
         <button
-          className={classNames(globals.btn, globals.btnLink, {
+          className={classNames('mb-3', globals.btn, globals.btnLink, {
             [globals.btnWarning]: scamError
           })}
           type='button'

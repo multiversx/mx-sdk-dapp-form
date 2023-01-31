@@ -22,7 +22,7 @@
     transition: transform 0.3s ease-in-out;
     transform: translateX(120%);
     background-color: #fff;
-    border-radius: 0.25rem;
+    border-radius: var(--dapp-form-input-border-radius);
     border-color: $border-color;
 
     &.clickable {

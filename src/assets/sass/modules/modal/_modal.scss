@@ -29,7 +29,7 @@
 
     .modal-card {
       .modal-card-body {
-        border-radius: $card-border-radius;
+        border-radius: var(--dapp-form-input-border-radius);
       }
 
       @include media-breakpoint-up(sm) {

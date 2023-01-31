@@ -17,20 +17,27 @@
 .label {
   margin-bottom: 8px;
   color: var(--dapp-form-label-color);
-  font-size: 16px;
+  font-size: 1rem;
   line-height: 1;
+}
+
+.input {
+  padding: 0 1rem;
+}
+
+.textarea {
+  padding: 1rem;
 }
 
 .input,
 .textarea {
-  padding: 16px;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1;
   color: var(--dapp-form-input-color) !important;
   background-clip: padding-box;
   border: 1px solid var(--dapp-form-input-bg) !important;
-  border-radius: 8px;
+  border-radius: var(--dapp-form-input-border-radius);
   width: 100%;
   box-sizing: border-box;
   background-color: var(--dapp-form-input-bg) !important;
@@ -53,7 +60,7 @@
   &.error {
     margin: 0;
     border-color: var(--dapp-form-error-color) !important;
-    font-size: 16px;
+    font-size: 1rem;
   }
 }
 
@@ -62,7 +69,7 @@
   margin: 0 !important;
   font-size: 1rem;
   line-height: 1.5;
-  border-radius: 0.25rem;
+  border-radius: var(--dapp-form-input-border-radius);
   cursor: pointer;
   border: none;
   margin-bottom: 1rem;

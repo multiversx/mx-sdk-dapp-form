@@ -5,18 +5,21 @@
   display: block;
 
   .wrapper {
-    display: flex;
     align-items: center;
+    background: var(--dapp-form-input-bg);
+    border-radius: var(--dapp-form-input-border-radius);
+    display: flex;
+    padding: 0.1rem;
     position: relative;
 
     .interaction {
+      align-items: center;
+      bottom: 0;
+      display: flex;
+      padding-right: 0.1rem;
       position: absolute;
       right: 0;
       top: 0;
-      bottom: 0;
-      padding: 4px;
-      display: flex;
-      align-items: center;
     }
   }
 
