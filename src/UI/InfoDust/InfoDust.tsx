@@ -26,6 +26,7 @@ export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
 
     <div
       data-tip
+      id='info-dust'
       data-for='info-dust'
       data-testid='infoDust'
       className={styles.infoDustTrigger}
