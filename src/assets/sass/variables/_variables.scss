@@ -32,6 +32,20 @@ $btn-blue: #163aa0 !default;
   --dapp-form-input-border-radius: 8px;
   --dapp-form-input-border-color: #ced4da;
   --dapp-form-input-border-focus: #7191eb;
+  --dapp-form-select-bg: #242526;
+  --dapp-form-select-input-color: #ffffff;
+  --dapp-form-select-input-color-hover: #9ba5b4;
+  --dapp-form-select-icon-border: #49494d;
+  --dapp-form-select-icon-bg: #2c2d2f;
+  --dapp-form-select-indicator-fill: #ffffff;
+  --dapp-form-select-indicator-fill-hover: #9ba5b4;
+  --dapp-form-select-menu-bg: #18191a;
+  --dapp-form-select-menu-border: #49494d;
+  --dapp-form-select-menu-scroll-track: transparent;
+  --dapp-form-seleet-menu-scroll-thumb: #4a4b4d;
+  --dapp-form-select-option-bg: #18191a;
+  --dapp-form-select-option-bg-hover: #393b3c;
+  --dapp-form-select-option-color: #ffffff;
 }
 
 $input-border-radius: var(--dapp-form-border-input-radius);

@@ -51,15 +51,13 @@ export const getOption =
           <div className={styles.info}>
             <div className={styles.left}>
               <span className={styles.value}>{ticker}</span>
-              <small className={styles.price}>$0</small>
             </div>
             <div className={styles.right}>
               <span className={styles.value}>{amount}</span>
-              <small className={styles.price}>≈ $0</small>
             </div>
           </div>
 
-          <div style={{ display: 'none' }}>{props.children}</div>
+          <div className={styles.children}>{props.children}</div>
         </components.Option>
       </div>
     );

@@ -7,10 +7,15 @@
   .wrapper {
     align-items: center;
     background: var(--dapp-form-input-bg);
+    border: 1px solid var(--dapp-form-input-bg);
     border-radius: var(--dapp-form-input-border-radius);
     display: flex;
     padding: 0.1rem;
     position: relative;
+
+    &.error {
+      border-color: var(--dapp-form-error-color);
+    }
 
     .interaction {
       align-items: center;
@@ -31,6 +36,12 @@
 
   .label {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    margin-bottom: 8px;
+
+    label {
+      margin: 0;
+    }
   }
 }

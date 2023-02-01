@@ -54,7 +54,12 @@ export const AmountSelect = ({
         <TokenBalance {...tokenBalanceProps} />
       </div>
 
-      <div className={styles.wrapper}>
+      <div
+        className={classNames(styles.wrapper, {
+          [styles.error]:
+            amountInputProps.isInvalid || tokenSelectProps.isInvalid
+        })}
+      >
         <AmountInput {...amountInputProps} />
 
         <div className={styles.interaction}>

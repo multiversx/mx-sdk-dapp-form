@@ -3,7 +3,7 @@
 }
 
 .select {
-  width: 176px;
+  width: 140px;
   margin-left: auto;
 
   &.disabled {
@@ -19,6 +19,16 @@
     border-bottom-left-radius: 30px;
     border-top-left-radius: 30px;
 
+    &:hover {
+      .indicator svg {
+        fill: var(--dapp-form-select-indicator-fill-hover) !important;
+      }
+
+      .payload .single {
+        color: var(--dapp-form-select-input-color-hover) !important;
+      }
+    }
+
     .container {
       padding: 4px;
       padding-right: 0;
@@ -26,24 +36,19 @@
       cursor: pointer;
       display: flex;
 
-      &:hover + .indicator svg,
-      &:hover .payload .value .placeholder,
-      &:hover .payload .value .single {
-        fill: #9ba5b4;
-        color: #9ba5b4;
-      }
-
       .icon {
-        width: 32px;
-        height: 32px;
-        max-width: 32px;
+        width: 36px;
+        height: 36px;
+        max-width: 36px;
+        min-width: 36px;
+        flex-basis: 36px;
         margin-right: 8px;
         flex: 1;
-        background-color: #2c2d2f;
+        background-color: var(--dapp-form-select-icon-bg);
         border-radius: 50%;
         display: flex;
         align-items: center;
-        border: 1px solid #49494d;
+        border: 1px solid var(--dapp-form-select-icon-border);
         box-shadow: 0 1px 2px rgb(0 0 0 / 8%);
         justify-content: center;
         overflow: hidden;
@@ -60,11 +65,12 @@
       }
 
       .payload {
+        min-width: 0;
         flex: 1;
         position: relative;
 
         .single {
-          color: #fff;
+          color: var(--dapp-form-select-input-color);
           font-size: 16px;
           margin: 0;
           transition: all 200ms ease;
@@ -76,19 +82,6 @@
           position: absolute;
           pointer-events: none;
           white-space: nowrap;
-        }
-
-        .placeholder {
-          line-height: 1;
-          margin: 0;
-          color: #fff;
-          font-size: 16px;
-          font-weight: 300;
-          transition: all 200ms ease;
-
-          &.focused {
-            color: #9ba5b4;
-          }
         }
 
         .dropdown {
@@ -103,9 +96,10 @@
             background-color: transparent !important;
             font-size: 16px !important;
             border: none !important;
-            color: #fff !important;
+            color: var(--dapp-form-select-input-color) !important;
             line-height: 1.25 !important;
             border-radius: 0 !important;
+            min-width: 100% !important;
             font-weight: 300 !important;
 
             &:after {
@@ -119,21 +113,10 @@
           }
         }
 
-        // .value {
-        //   padding: 0;
-
-        //   &:hover {
-        //     .placeholder,
-        //     .single {
-        //       color: #9ba5b4;
-        //     }
-        //   }
-        // }
-
         .price {
           margin-top: 6px;
           line-height: 1;
-          color: #9ba5b4;
+          color: var(--dapp-form-label-color);
         }
       }
     }
@@ -143,7 +126,7 @@
 
       svg {
         transition: all 200ms ease;
-        fill: #fff;
+        fill: var(--dapp-form-select-indicator-fill);
       }
 
       &.expanded svg {
@@ -151,13 +134,13 @@
       }
 
       &:hover svg {
-        fill: #9ba5b4;
+        fill: var(--dapp-form-select-indicator-fill-hover);
       }
     }
   }
 
   .menu {
-    border: 1px solid #49494d;
+    border: 1px solid var(--dapp-form-select-menu-border);
     border-radius: 6px;
     width: auto;
     right: -1px;
@@ -165,15 +148,15 @@
     overflow: hidden;
 
     .list {
-      background-color: #18191a;
-      height: 260px;
+      background-color: var(--dapp-form-select-menu-bg);
+      max-height: 260px;
       padding: 0;
 
       &::-webkit-scrollbar,
       &::-webkit-scrollbar-track,
       &::-webkit-scrollbar-track:hover,
       &::-webkit-scrollbar-corner {
-        background-color: transparent;
+        background-color: var(--dapp-form-select-menu-scroll-track);
       }
 
       &::-webkit-scrollbar {
@@ -188,12 +171,12 @@
       &::-webkit-scrollbar-thumb,
       &::-webkit-scrollbar-thumb:horizontal {
         border-radius: var(--dapp-form-input-border-radius);
-        background-color: #4a4b4d;
+        background-color: var(--dapp-form-seleet-menu-scroll-thumb);
         border: 2.5px solid transparent;
       }
 
       &::-webkit-scrollbar-thumb:hover {
-        background-color: #9ba5b4;
+        background-color: var(--dapp-form-seleet-menu-scroll-thumb);
         border: 2px solid transparent;
       }
 
@@ -212,10 +195,11 @@
         align-items: center;
         justify-content: flex-start;
         border-radius: 0;
+        background-color: var(--dapp-form-select-option-bg);
 
         &:hover,
         &.selected {
-          background-color: #393b3c !important;
+          background-color: var(--dapp-form-select-option-bg-hover) !important;
         }
 
         .icon {
@@ -224,9 +208,9 @@
           justify-content: center;
           width: 40px;
           height: 40px;
-          background-color: #2c2d2f;
+          background-color: var(--dapp-form-select-icon-bg);
           border-radius: 50%;
-          border: 1px solid #49494d;
+          border: 1px solid var(--dapp-form-select-icon-border);
           box-shadow: 0 1px 2px rgb(0 0 0 / 8%);
           margin-right: 8px;
 
@@ -250,20 +234,14 @@
             display: inline-flex;
             flex-direction: column;
             line-height: 1;
-            color: #9ba5b4;
 
             .value {
-              color: #fff;
+              color: --dapp-form-select-option-color;
               font-weight: 300;
               font-size: 16px;
-              margin-bottom: 6px;
 
               strong {
-                font-weight: 700;
-              }
-
-              span {
-                color: #9ba5b4;
+                font-weight: 900;
               }
             }
           }
@@ -271,6 +249,10 @@
           .right {
             text-align: right;
           }
+        }
+
+        .children {
+          display: none;
         }
       }
     }

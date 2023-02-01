@@ -40,6 +40,7 @@ const ValueComponent = ({
   if (icon) {
     return <img src={icon} className={styles.asset} />;
   }
+
   return <FontAwesomeIcon icon={faDiamond} className={styles.asset} />;
 };
 
