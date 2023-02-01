@@ -24,7 +24,7 @@ export const EgldInfoDust = ({
   }
 
   return (
-    <span>
+    <span style={{ marginLeft: '0.2rem' }}>
       <InfoDust egldLabel={egldLabel} />
     </span>
   );
