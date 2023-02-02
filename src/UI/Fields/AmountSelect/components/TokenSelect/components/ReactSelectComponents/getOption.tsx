@@ -1,19 +1,19 @@
 import React from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { components } from 'react-select';
-import classNames from 'classnames';
-
-import { default as MultiversXIcon } from 'assets/icons/mx-icon.svg';
-
-import type { OptionType } from '../../tokenSelect.types';
-
-import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
-import { HighlightText } from './HighlightText';
-
-import styles from './../../tokenSelect.module.scss';
 import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
+import classNames from 'classnames';
+import { components } from 'react-select';
+
+import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
+import type { OptionType } from '../../tokenSelect.types';
+
+import styles from './../../tokenSelect.module.scss';
+import { HighlightText } from './HighlightText';
+
+const MultiversXIcon =
+  require('../../../../../../../assets/mx-icon.svg').default;
 
 export const getOption =
   ({
@@ -54,7 +54,9 @@ export const getOption =
           <div className={styles.image}>
             {isEgld ? (
               <span className={styles.icon}>
-                <MultiversXIcon />
+                <MultiversXIcon
+                  is='x3d' // fixes jest Warning: The tag <default> is unrecognized in this browser.
+                />
               </span>
             ) : icon ? (
               <img src={icon} className={styles.icon} />

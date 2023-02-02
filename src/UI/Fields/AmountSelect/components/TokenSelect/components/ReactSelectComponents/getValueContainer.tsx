@@ -1,16 +1,16 @@
 import React from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue';
+import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { components } from 'react-select';
 
-import { default as MultiversXIcon } from 'assets/icons/mx-icon.svg';
-
+import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
 import type { OptionType } from '../../tokenSelect.types';
 
 import styles from './../../tokenSelect.module.scss';
-import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue';
-import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
-import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
+const MultiversXIcon =
+  require('../../../../../../../assets/mx-icon.svg').default;
 
 interface ValueComponentPropsType {
   isDisabled?: boolean;
@@ -25,7 +25,10 @@ export const ValueComponent = ({ tokenId, icon }: ValueComponentPropsType) => {
   if (isEgld) {
     return (
       <span className={styles.asset}>
-        <MultiversXIcon className={styles.diamond} />
+        <MultiversXIcon
+          is='x3d' // fixes jest Warning: The tag <default> is unrecognized in this browser.
+          className={styles.diamond}
+        />
       </span>
     );
   }
