@@ -27,7 +27,7 @@ export const getOption =
       : option.token.ticker;
 
     return (
-      <div data-testid={`${(props as any).value}-option`} {...props}>
+      <div data-testid={`${(props as any).value}-option`}>
         <components.Option
           {...props}
           className={classNames(styles.option, {

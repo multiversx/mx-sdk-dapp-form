@@ -104,7 +104,7 @@ export const Form = ({ className }: WithClassnameType) => {
         </button>
 
         <button
-          className={classNames('mb-3', globals.btn, globals.btnLink, {
+          className={classNames(globals.btn, globals.btnLink, {
             [globals.btnWarning]: receiverInfo?.scamError
           })}
           type='button'

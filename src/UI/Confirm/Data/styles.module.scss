@@ -5,12 +5,12 @@
   display: flex;
   flex-direction: column;
 
-  .label {
-    color: $secondary;
-    display: block;
-  }
-
   .secondary {
     color: $secondary;
+  }
+
+  .textarea {
+    margin-top: 8px;
+    font-weight: 700;
   }
 }

@@ -3,6 +3,7 @@ import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as constants from '@multiversx/sdk-dapp/constants/index';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
+import globals from 'assets/sass/globals.module.scss';
 import classNames from 'classnames';
 
 import { ZERO } from 'constants/index';
@@ -10,7 +11,7 @@ import { scamFlag } from 'helpers';
 import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
 
 import styles from './styles.module.scss';
-const EgldSymbol = require('./symbol.svg').default;
+const MultiversXIcon = require('./mx-icon.svg').default;
 
 export interface TokenElementPropsType {
   token: PartialTokenType;
@@ -63,12 +64,12 @@ export const TokenElement = ({
   const showFormattedValue =
     !inDropdown && nftType !== NftEnumType.NonFungibleESDT;
 
-  let tokenIcon = <div className={styles.tokenElementSymbol}>{symbol}</div>;
+  let tokenIcon = <div className={styles.tokenElementCircle}>{symbol}</div>;
 
   if (avatar) {
     tokenIcon = (
       <img
-        className={classNames(styles.tokenElementCircle)}
+        className={styles.tokenElementCircle}
         src={avatar}
         alt={name}
         height={avatarDropdownSize}
@@ -78,17 +79,17 @@ export const TokenElement = ({
 
   if (isEgld) {
     tokenIcon = (
-      <div className={classNames(styles.tokenElementEGLD)}>
-        <EgldSymbol
+      <div className={styles.tokenElementCircle}>
+        <MultiversXIcon
           is='x3d' // fixes jest Warning: The tag <default> is unrecognized in this browser.
-          height={avatarDropdownSize}
+          height={36}
         />
       </div>
     );
   }
 
   return (
-    <div className={styles.tokenElement}>
+    <div className={classNames(globals.value, styles.tokenElement)}>
       <div className={styles.tokenElementWrapper}>{tokenIcon}</div>
 
       <div data-testid='tokenName'>

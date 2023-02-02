@@ -1,11 +1,17 @@
 @import 'assets/sass/variables/_variables.scss';
 
 .fee {
-  margin-bottom: 1rem;
-  line-height: 1.5;
+  margin-bottom: 16px;
 
-  .text {
-    display: block;
-    color: $secondary;
+  .value {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .text {
+      display: block;
+      color: var(--dapp-form-label-color);
+      font-weight: 400;
+    }
   }
 }

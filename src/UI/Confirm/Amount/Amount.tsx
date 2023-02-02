@@ -2,11 +2,13 @@ import React from 'react';
 import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp/constants/index';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue/index';
+import classNames from 'classnames';
 
 import { parseAmount } from 'helpers';
 import { PartialNftType, TransactionTypeEnum } from 'types';
 import { Token } from '../Token';
 
+import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 export interface AmountPropsType {
@@ -74,11 +76,13 @@ export const Amount = ({
       />
 
       {!isEsdtTransaction && (
-        <UsdValue
-          amount={amount}
-          usd={egldPriceInUsd}
-          data-testid='confirmUsdValue'
-        />
+        <div className={styles.price}>
+          <UsdValue
+            amount={amount}
+            usd={egldPriceInUsd}
+            data-testid='confirmUsdValue'
+          />
+        </div>
       )}
     </>
   );
@@ -87,9 +91,10 @@ export const Amount = ({
     <div className={styles.amount}>
       {txType !== TransactionTypeEnum.NonFungibleESDT && (
         <div className={styles.left}>
-          <span className={styles.label}>{label}</span>
-
-          {amountRenderer}
+          <span className={globals.label}>{label}</span>
+          <span className={classNames(globals.value, styles.value)}>
+            {amountRenderer}
+          </span>
         </div>
       )}
 

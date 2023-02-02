@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 export interface ReceiverPropsType {
@@ -16,8 +17,8 @@ export const Receiver = ({
   scamReport
 }: ReceiverPropsType) => (
   <div className={styles.receiver}>
-    <span className={styles.label}>{label}</span>
-    {receiver && <span>{receiver}</span>}
+    <span className={globals.label}>{label}</span>
+    {receiver && <span className={globals.value}>{receiver}</span>}
 
     {scamReport && (
       <div className={styles.scam}>

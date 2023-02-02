@@ -15,10 +15,20 @@
 }
 
 .label {
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   color: var(--dapp-form-label-color);
   font-size: 1rem;
   line-height: 1;
+}
+
+.value {
+  color: var(--dapp-form-input-color);
+  display: block;
+  background: var(--dapp-form-input-bg) !important;
+  border-radius: var(--dapp-form-input-border-radius);
+  padding: 12px;
+  margin-top: 4px;
+  font-size: 1rem;
 }
 
 .input {

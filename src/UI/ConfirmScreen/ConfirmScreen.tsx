@@ -88,13 +88,14 @@ export const ConfirmScreen = ({
         egldPriceInUsd={egldPriceInUsd}
         feeLimit={feeLimit}
       />
+
       <Confirm.Data data={data} />
 
       <div className={styles.buttons}>
         {gasCostError && <p className={globals.error}>{gasCostError}</p>}
 
         <button
-          className={classNames(globals.btn, globals.btnPrimary, {
+          className={classNames('my-3', globals.btn, globals.btnPrimary, {
             [globals.btnWarning]: scamError
           })}
           type='button'
