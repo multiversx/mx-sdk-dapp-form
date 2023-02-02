@@ -2,28 +2,22 @@
 
 .tokenElement {
   height: 100%;
-  display: flex;
+  display: flex !important;
   align-items: center;
 
   .tokenElementWrapper {
-    margin-right: 0.25rem;
     display: flex;
 
     .tokenElementCircle {
       border-radius: 50%;
-    }
-
-    .tokenElementSpaced {
-      margin-right: 0.25rem;
-    }
-
-    .tokenElementEGLD {
-      margin-right: 0.25rem;
-      margin-left: 0.25rem;
-    }
-
-    .tokenElementSymbol {
-      padding: 0 0.5rem;
+      border: 1px solid var(--dapp-form-select-icon-border);
+      background-color: var(--dapp-form-select-icon-bg);
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 8px;
     }
   }
 

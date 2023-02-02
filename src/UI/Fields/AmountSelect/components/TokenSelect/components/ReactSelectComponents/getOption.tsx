@@ -1,13 +1,17 @@
 import React from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import { components } from 'react-select';
+import classNames from 'classnames';
+
+import { default as MultiversXIcon } from 'assets/icons/mx-icon.svg';
+
+import type { OptionType } from '../../tokenSelect.types';
+
 import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
-import { OptionType } from '../../tokenSelect.types';
-import styles from './../../tokenSelect.module.scss';
 import { HighlightText } from './HighlightText';
-const MultiversXIcon = require('./mx-icon.svg').default;
+
+import styles from './../../tokenSelect.module.scss';
 
 export const getOption =
   (egldLabel: string): typeof components.Option =>
@@ -27,7 +31,7 @@ export const getOption =
       : option.token.ticker;
 
     return (
-      <div data-testid={`${(props as any).value}-option`} {...props}>
+      <div data-testid={`${(props as any).value}-option`}>
         <components.Option
           {...props}
           className={classNames(styles.option, {
@@ -51,15 +55,13 @@ export const getOption =
           <div className={styles.info}>
             <div className={styles.left}>
               <span className={styles.value}>{ticker}</span>
-              <small className={styles.price}>$0</small>
             </div>
             <div className={styles.right}>
               <span className={styles.value}>{amount}</span>
-              <small className={styles.price}>≈ $0</small>
             </div>
           </div>
 
-          <div style={{ display: 'none' }}>{props.children}</div>
+          <div className={styles.children}>{props.children}</div>
         </components.Option>
       </div>
     );

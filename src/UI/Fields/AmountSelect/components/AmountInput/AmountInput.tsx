@@ -46,7 +46,6 @@ export interface AmountInputPropsType {
 const fiveHundredMs = 500;
 
 export const AmountInput = ({
-  readonly,
   required,
   name,
   placeholder,
@@ -127,10 +126,11 @@ export const AmountInput = ({
   }, [debounceAmount]);
 
   useEffect(updateUsdValue, [value, tokenUsdPrice]);
+
   return (
     <div
-      className={classNames(`${styles.amountHolder}`, {
-        [`${styles.showUsdValue}`]: Boolean(usdValue)
+      className={classNames(styles.amountHolder, {
+        [styles.showUsdValue]: Boolean(usdValue)
       })}
     >
       <NumericFormat
@@ -142,9 +142,6 @@ export const AmountInput = ({
         inputMode='decimal'
         onValueChange={onValueChange}
         required={required}
-        className={classNames(globals.input, styles.amountInput, {
-          [globals.disabled]: Boolean(disabled)
-        })}
         data-testid={dataTestId || name}
         id={name}
         name={name}
@@ -155,8 +152,10 @@ export const AmountInput = ({
         onBlur={handleBlur}
         autoComplete='off'
         disabled={Boolean(disabled)}
-        readOnly={Boolean(readonly)}
         onFocus={onFocus}
+        className={classNames(globals.input, styles.amountInput, {
+          [globals.disabled]: Boolean(disabled)
+        })}
       />
 
       {usdValue && (
@@ -165,6 +164,7 @@ export const AmountInput = ({
             {usdValue !== '$0' ? <>≈ </> : <></>}
             {usdValue}
           </small>
+
           {InfoDustComponent}
         </span>
       )}

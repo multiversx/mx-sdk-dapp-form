@@ -14,15 +14,6 @@ export interface OptionType {
   };
 }
 
-export interface OptionType {
-  value: string;
-  label: string;
-  assets?: TokenAssetsType;
-  token: PartialTokenType & {
-    tokenUsdPrice?: number;
-  };
-}
-
 export interface TokenSelectPropsType {
   id?: string;
   value?: OptionType;

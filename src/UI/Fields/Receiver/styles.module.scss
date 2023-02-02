@@ -16,13 +16,13 @@
       float: left;
       min-width: 10rem;
       font-size: 1rem;
-      color: $brown;
+      color: var(--brown);
       text-align: left;
       list-style: none;
-      background-color: $white;
+      background-color: var(--white);
       background-clip: padding-box;
-      border: 1px solid rgba($black, 0.15);
-      border-radius: $card-border-radius;
+      border: 1px solid rgba(#000000, 0.15);
+      border-radius: var(--dapp-form-input-border-radius);
       z-index: 1000;
       inset: unset;
       max-height: 300px;
@@ -36,7 +36,7 @@
         padding: 0.25rem 1.5rem;
         clear: both;
         font-weight: 400;
-        color: $brown;
+        color: var(--brown);
         text-align: inherit;
         white-space: nowrap;
         background-color: transparent;

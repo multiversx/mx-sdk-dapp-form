@@ -1,10 +1,13 @@
 import React from 'react';
-import { faCircleNotch, faDiamond } from '@fortawesome/free-solid-svg-icons';
+import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { components } from 'react-select';
-import { OptionType } from '../../tokenSelect.types';
+
+import { default as MultiversXIcon } from 'assets/icons/mx-icon.svg';
+
+import type { OptionType } from '../../tokenSelect.types';
+
 import styles from './../../tokenSelect.module.scss';
-const MultiversXIcon = require('./mx-icon.svg').default;
 
 interface ValueComponentPropsType {
   isDisabled?: boolean;
@@ -14,22 +17,10 @@ interface ValueComponentPropsType {
 }
 
 const ValueComponent = ({
-  isDisabled,
   tokenId,
   icon,
   egldLabel
 }: ValueComponentPropsType) => {
-  if (isDisabled) {
-    return (
-      <span className={styles.asset}>
-        <FontAwesomeIcon
-          icon={faCircleNotch}
-          className={styles.diamond}
-          spin={true}
-        />
-      </span>
-    );
-  }
   if (tokenId === egldLabel) {
     return (
       <span className={styles.asset}>
@@ -40,6 +31,7 @@ const ValueComponent = ({
   if (icon) {
     return <img src={icon} className={styles.asset} />;
   }
+
   return <FontAwesomeIcon icon={faDiamond} className={styles.asset} />;
 };
 

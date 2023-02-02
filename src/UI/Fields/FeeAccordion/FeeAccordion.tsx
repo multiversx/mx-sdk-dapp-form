@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { faAngleDown, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
@@ -30,37 +30,34 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
 
   return (
     <div className={classNames(styles.fee, className)}>
-      <span
+      <label className={styles.label}>Fee:</label>
+      <div
         className={styles.trigger}
         {...getToggleProps({ onClick: toggleAccordion })}
       >
-        <span>
-          <span className={styles.label}>Fee:</span>
-
-          <span className={styles.limit} data-testid='feeLimit'>
-            <FormatAmount
-              value={feeLimit}
-              showLastNonZeroDecimal={true}
-              egldLabel={egldLabel}
-            />
-          </span>
-
-          {gasCostLoading && (
-            <FontAwesomeIcon
-              icon={faSpinner}
-              className='fa-spin fast-spin'
-              data-testid='gasCostLoadingSpinner'
-            />
-          )}
+        <span className={styles.limit} data-testid='feeLimit'>
+          <FormatAmount
+            value={feeLimit}
+            showLastNonZeroDecimal={true}
+            egldLabel={egldLabel}
+          />
         </span>
+
+        {gasCostLoading && (
+          <FontAwesomeIcon
+            icon={faSpinner}
+            className='fa-spin fast-spin'
+            data-testid='gasCostLoadingSpinner'
+          />
+        )}
 
         <FeeInFiat egldPriceInUsd={egldPriceInUsd} feeLimit={feeLimit} />
 
         <FontAwesomeIcon
-          icon={faAngleDown}
+          icon={faChevronRight}
           className={classNames(styles.arrow, { [styles.active]: active })}
         />
-      </span>
+      </div>
 
       <div
         ref={accordion}

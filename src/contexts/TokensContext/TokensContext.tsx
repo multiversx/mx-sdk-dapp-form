@@ -40,7 +40,7 @@ export interface TokensContextPropsType {
   tokens: PartialTokenType[];
   allAvailableTokens: PartialTokenType[];
   nft?: PartialNftType;
-  getTokens: () => void;
+  getTokens: (showLoading?: boolean) => void;
   onChangeTokenId: (value: string) => void;
 }
 
@@ -80,13 +80,14 @@ export function TokensContextProvider({
 
   const handleGetTokens = useCallback(
     async (showLoading = true) => {
+      setAreTokensLoading(showLoading);
+
       // fetching in progress
       if (fetchigRef.current) {
         return;
       }
 
       fetchigRef.current = true;
-      setAreTokensLoading(showLoading);
 
       const newTokensAndMetaESDTs = await fetchAllTokens(address);
       const currentTokens = tokens ?? [];

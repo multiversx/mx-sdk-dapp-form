@@ -14,32 +14,21 @@ Override Bootstrap variables only above.
 html {
   min-height: 100%;
   font-size: 14px;
-  background-color: blue;
 }
 
-// .h1,
-// h2,
-// h3,
-// h4,
-// p,
-// span,
-// a,
-// div {
-//   font-family: $open-sans;
-// }
 a,
 .link-style {
-  color: $primary-light;
+  color: var(--primary-light);
 }
 
 .link-second-style {
-  color: #9dabbd;
+  color: var(--secondary);
 
   &:hover {
-    color: $primary-light;
+    color: var(--primary-light);
 
     svg {
-      color: $primary-light;
+      color: var(--primary-light);
     }
   }
 }
@@ -55,7 +44,7 @@ a,
 .dapp-icon {
   padding: 5px;
   border-radius: 50%;
-  background-color: $light;
+  background-color: var(--light);
   width: toRem(65);
   height: toRem(65);
   display: flex;
@@ -107,20 +96,20 @@ a,
     justify-content: center;
     align-items: center;
     color: #fff;
-    background-color: $primary-light;
+    background-color: var(--primary-light);
     padding: 15px 20px 15px 16px;
     border-radius: 6px;
     gap: 8px;
 
     &:hover,
     &:active {
-      background-color: $primary-light;
+      background-color: var(--primary-light);
       background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
     }
   }
 
   .info {
-    color: $primary-light;
+    color: var(--primary-light);
     margin-left: 48px;
   }
 }
@@ -163,14 +152,14 @@ a,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: $white;
+  color: var(--white);
   margin: 0 7px;
 
   button {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    background-color: $white;
+    background-color: var(--white);
 
     &:hover {
       opacity: 0.9;
@@ -193,7 +182,7 @@ a,
 
     tr:last-of-type {
       td {
-        border-bottom: 1px solid $border-color;
+        border-bottom: 1px solid var(--border-color);
       }
     }
   }

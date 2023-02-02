@@ -39,6 +39,10 @@ const CustomMenu = (
     ...menuProps
   } = props as any;
 
+  if (results.length === 0) {
+    return <></>;
+  }
+
   return (
     <Menu {...menuProps} className={styles.menu}>
       {results
@@ -133,6 +137,7 @@ export const Receiver = ({ className }: WithClassnameType) => {
   /*
    * Filter the addresses based on input. Should be more than three characters.
    */
+
   const filterBy: FilterByCallback = (option, props) => {
     const searchString = props.text.toLowerCase();
     const currentOption = option.toLowerCase();

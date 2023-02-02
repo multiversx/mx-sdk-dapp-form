@@ -1,6 +1,7 @@
 import React from 'react';
-
 import { decodePart } from '@multiversx/sdk-dapp/utils/decoders/decodePart';
+import classNames from 'classnames';
+
 import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
@@ -69,18 +70,24 @@ export const Data = ({
     <>
       {encodedScCall && (
         <div className={styles.data}>
-          <span className={styles.label}>{scCallLabel}</span>
+          <span className={globals.label}>{scCallLabel}</span>
 
-          <div data-testid='confirmScCall' className={globals.textarea}>
+          <div
+            data-testid='confirmScCall'
+            className={classNames(globals.textarea, styles.textarea)}
+          >
             {[decodePart(encodedScCall), ...remainingDataFields].join('@')}
           </div>
         </div>
       )}
 
       <div className={styles.data}>
-        <span className={styles.label}>{label}</span>
+        <span className={globals.label}>{label}</span>
 
-        <div data-testid='confirmData' className={globals.textarea}>
+        <div
+          data-testid='confirmData'
+          className={classNames(globals.textarea, globals.value)}
+        >
           {data ? output : 'N/A'}
         </div>
       </div>

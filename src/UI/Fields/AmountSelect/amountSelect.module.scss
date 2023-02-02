@@ -5,18 +5,31 @@
   display: block;
 
   .wrapper {
-    display: flex;
     align-items: center;
+    background: var(--dapp-form-input-bg);
+    border: 1px solid var(--dapp-form-input-bg);
+    border-radius: var(--dapp-form-input-border-radius);
+    display: flex;
     position: relative;
+    padding: 4px;
+
+    &.error {
+      border-color: var(--dapp-form-error-color);
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
 
     .interaction {
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      padding: 4px;
-      display: flex;
       align-items: center;
+      bottom: 0;
+      display: flex;
+      position: absolute;
+      right: 4px;
+      top: 0;
     }
   }
 
@@ -28,6 +41,12 @@
 
   .label {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    margin-bottom: 8px;
+
+    label {
+      margin: 0;
+    }
   }
 }

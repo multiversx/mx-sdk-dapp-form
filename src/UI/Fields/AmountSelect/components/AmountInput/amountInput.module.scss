@@ -1,22 +1,25 @@
 @import 'assets/sass/variables/variables';
 
 .amount-input {
-  font-variant-numeric: tabular-nums;
-  padding: 1rem;
-  border: none;
-  height: 100%;
-  font-size: 1.4rem;
   background-color: transparent;
-  color: $black;
-  font-weight: 500;
+  border: none;
   box-shadow: none;
+  color: var(--black);
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  height: 100%;
+  padding: 1rem;
+  width: 100%;
+
   &::focused,
   &::active {
     box-shadow: none;
   }
+
   &::placeholder {
     font-weight: 300;
   }
+
   @include media-breakpoint-down(sm) {
     &::placeholder {
       font-size: 1rem;
@@ -25,11 +28,9 @@
 }
 
 .amount-holder {
+  max-width: 50%;
   position: relative;
-
-  @include media-breakpoint-up(sm) {
-    width: 12.25rem;
-  }
+  width: 100%;
 
   &.show-usd-value {
     .amount-input {
@@ -40,15 +41,22 @@
 
   .amount-holder-usd {
     display: flex;
-    position: absolute;
     font-size: 1rem !important;
-    padding-left: 1rem;
     line-height: 1;
+    padding: 0 1rem;
+    position: absolute;
+    color: var(--dapp-form-label-color);
     top: 1.875rem;
+    width: 100%;
+
+    small {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
+
   .input {
     height: 70px;
   }
 }
-
-
