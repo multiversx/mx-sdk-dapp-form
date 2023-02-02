@@ -31,6 +31,7 @@ export interface TokenSelectPropsType {
   options: OptionType[];
   isSearchable?: boolean;
   className?: string;
+  wrapperClassName?: string;
   onChange: (option: any) => void;
   onBlur?: (option: any) => void;
   onMenuOpen?: () => void;

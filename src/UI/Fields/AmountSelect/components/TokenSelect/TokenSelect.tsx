@@ -32,8 +32,9 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     onFocus,
     onChange,
     onMenuOpen,
-    chainId
+    chainId,
     // handleDisabledOptionClick,
+    wrapperClassName = ''
   } = props;
   const ref = useRef(null);
   const egldFamily = [egldLabel, getWegldIdForChainId(chainId)];
@@ -68,8 +69,15 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
       ? option.data.token.ticker.toLowerCase().includes(search.toLowerCase())
       : true;
 
+  console.log('tokenSelectValue = ', value);
+
   return (
-    <div data-testid={`${name}Select`}>
+    <div
+      data-testid={`${name}Select`}
+      className={`${wrapperClassName} ${
+        isLoading ? 'select-holder-loading' : ''
+      }`}
+    >
       {/* Label is only used in testing */}
       <label htmlFor={name} data-testid='tokenIdLabel' className={styles.label}>
         Token

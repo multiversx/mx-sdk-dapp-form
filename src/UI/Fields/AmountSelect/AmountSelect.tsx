@@ -21,6 +21,7 @@ import {
 export interface AmountSelectPropsType extends WithClassnameType {
   label?: string;
   name: string;
+  wrapperControlsClassName?: string;
   amountErrorProps: AmountErrorPropsType;
   tokenBalanceProps: TokenBalancePropsType;
   tokenSelectProps: TokenSelectPropsType;
@@ -32,6 +33,7 @@ export const AmountSelect = ({
   className,
   label,
   name,
+  wrapperControlsClassName,
   tokenSelectProps,
   tokenBalanceProps,
   amountInputProps,
@@ -54,10 +56,15 @@ export const AmountSelect = ({
         <TokenBalance {...tokenBalanceProps} />
       </div>
 
-      <div className={styles.wrapper}>
+      <div className={classNames(styles.wrapper, wrapperControlsClassName)}>
         <AmountInput {...amountInputProps} />
 
-        <div className={styles.interaction}>
+        <div
+          className={classNames(
+            styles.interaction,
+            maxButtonProps.wrapperClassName
+          )}
+        >
           {maxButtonProps.isMaxButtonVisible && (
             <MaxButton {...maxButtonProps} />
           )}

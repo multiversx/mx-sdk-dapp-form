@@ -6,6 +6,7 @@ import { PartialTokenType } from 'types/tokens';
 import { getBalanceMinusDust } from './getBalanceMinusDust';
 import styles from './maxButton.module.scss';
 import { progressiveFormatAmount } from './progressiveFormatAmount';
+import classNames from 'classnames';
 
 export interface MaxButtonPropsType {
   token?: PartialTokenType;
@@ -14,12 +15,15 @@ export interface MaxButtonPropsType {
   isMaxClicked?: boolean;
   isMaxButtonVisible?: boolean;
   onMaxClick?: (maxAmount: string) => void;
+  className?: string;
+  wrapperClassName?: string;
 }
 
 export const MaxButton = ({
   token,
   egldLabel,
   inputAmount,
+  className,
   onMaxClick
 }: MaxButtonPropsType) => {
   const isEgld = token?.identifier === egldLabel;
@@ -52,7 +56,7 @@ export const MaxButton = ({
     <a
       href='/'
       data-testid='maxBtn'
-      className={styles.max}
+      className={classNames(styles.max, className)}
       onClick={handleOnMaxBtnClick}
       onMouseDown={(event) => {
         event.preventDefault();
