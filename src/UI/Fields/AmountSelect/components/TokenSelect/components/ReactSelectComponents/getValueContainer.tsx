@@ -10,6 +10,7 @@ import type { OptionType } from '../../tokenSelect.types';
 import styles from './../../tokenSelect.module.scss';
 import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue';
 import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
+import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 
 interface ValueComponentPropsType {
   isDisabled?: boolean;
@@ -18,18 +19,17 @@ interface ValueComponentPropsType {
   icon?: string | null;
 }
 
-const ValueComponent = ({
-  tokenId,
-  icon,
-  egldLabel
-}: ValueComponentPropsType) => {
-  if (tokenId === egldLabel) {
+const ValueComponent = ({ tokenId, icon }: ValueComponentPropsType) => {
+  const { isEgld } = getIdentifierType(tokenId);
+
+  if (isEgld) {
     return (
       <span className={styles.asset}>
         <MultiversXIcon className={styles.diamond} />
       </span>
     );
   }
+
   if (icon) {
     return <img src={icon} className={styles.asset} />;
   }
@@ -43,6 +43,9 @@ export const getValueContainer =
     const { selectProps, isDisabled, children } = props;
 
     const token = selectProps.value as unknown as OptionType;
+
+    console.log('token', token);
+
     const icon = token.assets ? token.assets.svgUrl : null;
     const price = progressiveFormatAmount({
       amount: token?.token.balance,
