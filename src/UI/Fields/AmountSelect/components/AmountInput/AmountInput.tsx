@@ -34,7 +34,7 @@ export interface AmountInputPropsType {
   error?: string;
   isInvalid?: boolean;
   disabled?: boolean;
-  tokenUsdPrice?: number;
+  usdPrice?: number;
   handleChange: (e: ChangeEvent<any>) => void;
   handleBlur: (e: FocusEvent<any>) => void;
   onKeyDown?: () => void;
@@ -51,7 +51,7 @@ export const AmountInput = ({
   placeholder,
   value,
   disabled,
-  tokenUsdPrice,
+  usdPrice,
   'data-testid': dataTestId,
   handleChange,
   handleBlur,
@@ -94,7 +94,7 @@ export const AmountInput = ({
   };
 
   const updateUsdValue = () => {
-    if (!tokenUsdPrice || !value) {
+    if (!usdPrice || !value) {
       setUsdValue(undefined);
       return;
     }
@@ -108,7 +108,7 @@ export const AmountInput = ({
     }
 
     const newUsdValue = roundAmount(
-      new BigNumber(parseFloat(amount) * (tokenUsdPrice ?? 0)).toString(10),
+      new BigNumber(parseFloat(amount) * (usdPrice ?? 0)).toString(10),
       2
     );
 
@@ -125,7 +125,7 @@ export const AmountInput = ({
     }
   }, [debounceAmount]);
 
-  useEffect(updateUsdValue, [value, tokenUsdPrice]);
+  useEffect(updateUsdValue, [value, usdPrice]);
 
   return (
     <div
@@ -160,7 +160,7 @@ export const AmountInput = ({
 
       {usdValue && (
         <span className={styles.amountHolderUsd}>
-          <small data-testid={`tokenPrice_${tokenUsdPrice}`}>
+          <small data-testid={`tokenPrice_${usdPrice}`}>
             {usdValue !== '$0' ? <>≈ </> : <></>}
             {usdValue}
           </small>

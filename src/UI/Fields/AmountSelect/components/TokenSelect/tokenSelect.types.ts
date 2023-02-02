@@ -10,7 +10,7 @@ export interface OptionType {
   label: string;
   assets?: TokenAssetsType;
   token: PartialTokenType & {
-    tokenUsdPrice?: number;
+    usdPrice?: number;
   };
 }
 
@@ -37,4 +37,6 @@ export interface TokenSelectPropsType {
   onFocus?: (props: any) => void;
   disabledOption?: SelectOptionType;
   handleDisabledOptionClick?: any;
+  showTokenPrice?: boolean;
+  showBalanceUsdValue?: boolean;
 }

@@ -154,7 +154,7 @@ export function TokensContextProvider({
 
   const allAvailableTokens: Array<
     PartialTokenType & {
-      tokenUsdPrice?: number;
+      usdPrice?: number;
     }
   > = [
     {
@@ -163,7 +163,7 @@ export function TokensContextProvider({
       balance: balance,
       decimals: Number(decimals),
       ticker: egldLabel,
-      tokenUsdPrice: egldPriceInUsd
+      usdPrice: egldPriceInUsd
     },
     ...esdtTokens
   ];

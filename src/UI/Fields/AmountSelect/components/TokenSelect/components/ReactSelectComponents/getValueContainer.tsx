@@ -8,6 +8,8 @@ import { default as MultiversXIcon } from 'assets/icons/mx-icon.svg';
 import type { OptionType } from '../../tokenSelect.types';
 
 import styles from './../../tokenSelect.module.scss';
+import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue';
+import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
 
 interface ValueComponentPropsType {
   isDisabled?: boolean;
@@ -40,9 +42,13 @@ export const getValueContainer =
   (props) => {
     const { selectProps, isDisabled, children } = props;
 
-    const price = '$0';
     const token = selectProps.value as unknown as OptionType;
     const icon = token.assets ? token.assets.svgUrl : null;
+    const price = progressiveFormatAmount({
+      amount: token?.token.balance,
+      decimals: token?.token.decimals,
+      addCommas: true
+    });
 
     return (
       <components.ValueContainer {...props} className={styles.container}>
@@ -57,7 +63,14 @@ export const getValueContainer =
 
         <div className={styles.payload}>
           {children}
-          <small className={styles.price}>{price}</small>
+          <small className={styles.price}>
+            <UsdValue
+              amount={price}
+              usd={1}
+              data-testid='usdValue'
+              className='d-flex flex-column mex-text-main'
+            />
+          </small>
         </div>
       </components.ValueContainer>
     );

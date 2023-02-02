@@ -34,11 +34,25 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     onMenuOpen,
     chainId,
     // handleDisabledOptionClick,
-    wrapperClassName = ''
+    wrapperClassName = '',
+    showTokenPrice = false,
+    showBalanceUsdValue = false
   } = props;
+
+  console.log('tokenSelect', props);
+
   const ref = useRef(null);
   const egldFamily = [egldLabel, getWegldIdForChainId(chainId)];
-  const Option = useMemo(() => components.getOption(egldLabel), []);
+
+  const Option = useMemo(
+    () =>
+      components.getOption({
+        egldLabel,
+        showTokenPrice,
+        showBalanceUsdValue
+      }),
+    []
+  );
   const ValueContainer = useMemo(
     () => components.getValueContainer(egldLabel),
     []
