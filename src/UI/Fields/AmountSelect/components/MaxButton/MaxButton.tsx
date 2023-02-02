@@ -1,28 +1,31 @@
 import React, { MouseEvent } from 'react';
 import BigNumber from 'bignumber.js';
-import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
 
 import { PartialTokenType } from 'types/tokens';
 
 import { getBalanceMinusDust } from './getBalanceMinusDust';
 import styles from './maxButton.module.scss';
 import { progressiveFormatAmount } from './progressiveFormatAmount';
+import classNames from 'classnames';
 
 export interface MaxButtonPropsType {
-  inputAmount: string;
   token?: PartialTokenType;
+  egldLabel?: string;
+  inputAmount: string;
   isMaxClicked?: boolean;
   isMaxButtonVisible?: boolean;
   onMaxClick?: (maxAmount: string) => void;
+  className?: string;
+  wrapperClassName?: string;
 }
 
 export const MaxButton = ({
   token,
+  egldLabel,
   inputAmount,
+  className,
   onMaxClick
 }: MaxButtonPropsType) => {
-  const { egldLabel } = useGetEconomicsInfo();
-
   const isEgld = token?.identifier === egldLabel;
   const balance = token?.balance ?? '0';
 
@@ -53,7 +56,7 @@ export const MaxButton = ({
     <a
       href='/'
       data-testid='maxBtn'
-      className={styles.max}
+      className={classNames(styles.max, className)}
       onClick={handleOnMaxBtnClick}
       onMouseDown={(event) => {
         event.preventDefault();

@@ -32,12 +32,25 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     onFocus,
     onChange,
     onMenuOpen,
-    chainId
+    chainId,
     // handleDisabledOptionClick,
+    wrapperClassName = '',
+    showTokenPrice = false,
+    showBalanceUsdValue = false
   } = props;
+
   const ref = useRef(null);
   const egldFamily = [egldLabel, getWegldIdForChainId(chainId)];
-  const Option = useMemo(() => components.getOption(egldLabel), []);
+
+  const Option = useMemo(
+    () =>
+      components.getOption({
+        egldLabel,
+        showTokenPrice,
+        showBalanceUsdValue
+      }),
+    []
+  );
   const ValueContainer = useMemo(
     () => components.getValueContainer(egldLabel),
     []
@@ -69,7 +82,12 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
       : true;
 
   return (
-    <div data-testid={`${name}Select`}>
+    <div
+      data-testid={`${name}Select`}
+      className={`${wrapperClassName} ${
+        isLoading ? 'select-holder-loading' : ''
+      }`}
+    >
       {/* Label is only used in testing */}
       <label htmlFor={name} data-testid='tokenIdLabel' className={styles.label}>
         Token

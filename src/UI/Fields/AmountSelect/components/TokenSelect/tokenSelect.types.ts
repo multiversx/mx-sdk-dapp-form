@@ -10,7 +10,7 @@ export interface OptionType {
   label: string;
   assets?: TokenAssetsType;
   token: PartialTokenType & {
-    tokenUsdPrice?: number;
+    usdPrice?: number;
   };
 }
 
@@ -22,6 +22,7 @@ export interface TokenSelectPropsType {
   options: OptionType[];
   isSearchable?: boolean;
   className?: string;
+  wrapperClassName?: string;
   onChange: (option: any) => void;
   onBlur?: (option: any) => void;
   onMenuOpen?: () => void;
@@ -36,4 +37,6 @@ export interface TokenSelectPropsType {
   onFocus?: (props: any) => void;
   disabledOption?: SelectOptionType;
   handleDisabledOptionClick?: any;
+  showTokenPrice?: boolean;
+  showBalanceUsdValue?: boolean;
 }

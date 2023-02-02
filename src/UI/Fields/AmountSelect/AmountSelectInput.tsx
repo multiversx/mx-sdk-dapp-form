@@ -111,7 +111,7 @@ export const AmountSelectInput = () => {
     'data-testid': ValuesEnum.amount,
     handleChange: onChange,
     onFocus,
-    tokenUsdPrice: isEgld ? egldPriceInUsd : undefined,
+    usdPrice: isEgld ? egldPriceInUsd : undefined,
     error,
     isInvalid,
     InfoDustComponent
@@ -159,6 +159,7 @@ export const AmountSelectInput = () => {
       tokenBalanceProps={tokenBalanceProps}
       maxButtonProps={maxButtonProps}
       label='Amount'
+      readonly={readonly}
     />
   );
 };

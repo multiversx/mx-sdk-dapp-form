@@ -12,23 +12,36 @@ import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmo
 import { HighlightText } from './HighlightText';
 
 import styles from './../../tokenSelect.module.scss';
+import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue';
+import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 
 export const getOption =
-  (egldLabel: string): typeof components.Option =>
+  ({
+    showTokenPrice,
+    showBalanceUsdValue
+  }: {
+    egldLabel: string;
+    showTokenPrice?: boolean;
+    showBalanceUsdValue?: boolean;
+  }): typeof components.Option =>
   (props) => {
     const { data, isSelected, isFocused, selectProps } = props;
     const option = data as unknown as OptionType;
 
-    const icon = option.assets ? option.assets.svgUrl : null;
+    const icon = option.token.assets ? option.token.assets.svgUrl : null;
     const amount = progressiveFormatAmount({
       amount: option.token.balance,
       decimals: option.token.decimals,
       addCommas: true
     });
 
+    const tokenPrice = option.token?.usdPrice?.toString();
+
     const ticker = Boolean(selectProps.inputValue)
       ? HighlightText(option.token.ticker, selectProps.inputValue)
       : option.token.ticker;
+
+    const { isEgld } = getIdentifierType(option.value);
 
     return (
       <div data-testid={`${(props as any).value}-option`}>
@@ -39,7 +52,7 @@ export const getOption =
           })}
         >
           <div className={styles.image}>
-            {ticker === egldLabel ? (
+            {isEgld ? (
               <span className={styles.icon}>
                 <MultiversXIcon />
               </span>
@@ -55,9 +68,22 @@ export const getOption =
           <div className={styles.info}>
             <div className={styles.left}>
               <span className={styles.value}>{ticker}</span>
+              {showTokenPrice && (
+                <small className={styles.price}>
+                  <small className={styles.price}>{tokenPrice}</small>
+                </small>
+              )}
             </div>
             <div className={styles.right}>
               <span className={styles.value}>{amount}</span>
+              {showBalanceUsdValue && (
+                <UsdValue
+                  amount={amount}
+                  usd={1}
+                  data-testid='token-price-usd-value'
+                  className='d-flex flex-column mex-text-main'
+                />
+              )}
             </div>
           </div>
 
