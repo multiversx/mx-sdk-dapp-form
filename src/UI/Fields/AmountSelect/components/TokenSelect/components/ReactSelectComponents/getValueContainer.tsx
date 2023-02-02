@@ -19,7 +19,7 @@ interface ValueComponentPropsType {
   icon?: string | null;
 }
 
-const ValueComponent = ({ tokenId, icon }: ValueComponentPropsType) => {
+export const ValueComponent = ({ tokenId, icon }: ValueComponentPropsType) => {
   const { isEgld } = getIdentifierType(tokenId);
 
   if (isEgld) {
@@ -43,8 +43,6 @@ export const getValueContainer =
     const { selectProps, isDisabled, children } = props;
 
     const token = selectProps.value as unknown as OptionType;
-
-    console.log('token', token);
 
     const icon = token.assets ? token.assets.svgUrl : null;
     const price = progressiveFormatAmount({

@@ -13,10 +13,10 @@ import { HighlightText } from './HighlightText';
 
 import styles from './../../tokenSelect.module.scss';
 import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue';
+import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 
 export const getOption =
   ({
-    egldLabel,
     showTokenPrice,
     showBalanceUsdValue
   }: {
@@ -28,7 +28,7 @@ export const getOption =
     const { data, isSelected, isFocused, selectProps } = props;
     const option = data as unknown as OptionType;
 
-    const icon = option.assets ? option.assets.svgUrl : null;
+    const icon = option.token.assets ? option.token.assets.svgUrl : null;
     const amount = progressiveFormatAmount({
       amount: option.token.balance,
       decimals: option.token.decimals,
@@ -41,6 +41,8 @@ export const getOption =
       ? HighlightText(option.token.ticker, selectProps.inputValue)
       : option.token.ticker;
 
+    const { isEgld } = getIdentifierType(option.value);
+
     return (
       <div data-testid={`${(props as any).value}-option`}>
         <components.Option
@@ -50,7 +52,7 @@ export const getOption =
           })}
         >
           <div className={styles.image}>
-            {ticker === egldLabel ? (
+            {isEgld ? (
               <span className={styles.icon}>
                 <MultiversXIcon />
               </span>

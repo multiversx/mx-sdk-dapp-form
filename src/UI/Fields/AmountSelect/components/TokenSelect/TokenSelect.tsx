@@ -39,8 +39,6 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     showBalanceUsdValue = false
   } = props;
 
-  console.log('tokenSelect', props);
-
   const ref = useRef(null);
   const egldFamily = [egldLabel, getWegldIdForChainId(chainId)];
 
@@ -82,8 +80,6 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     option.data.token.ticker && Boolean(search)
       ? option.data.token.ticker.toLowerCase().includes(search.toLowerCase())
       : true;
-
-  console.log('tokenSelectValue = ', value);
 
   return (
     <div
