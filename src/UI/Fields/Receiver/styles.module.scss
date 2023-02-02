@@ -19,9 +19,9 @@
       color: $brown;
       text-align: left;
       list-style: none;
-      background-color: $white;
+      background-color: var(--white);
       background-clip: padding-box;
-      border: 1px solid rgba($black, 0.15);
+      border: 1px solid rgba(#000000, 0.15);
       border-radius: var(--dapp-form-input-border-radius);
       z-index: 1000;
       inset: unset;

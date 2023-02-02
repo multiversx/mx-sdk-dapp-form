@@ -1,13 +1,17 @@
 import React from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import { components } from 'react-select';
+import classNames from 'classnames';
+
+import { default as MultiversXIcon } from 'assets/icons/mx-icon.svg';
+
+import type { OptionType } from '../../tokenSelect.types';
+
 import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
-import { OptionType } from '../../tokenSelect.types';
-import styles from './../../tokenSelect.module.scss';
 import { HighlightText } from './HighlightText';
-const MultiversXIcon = require('./mx-icon.svg').default;
+
+import styles from './../../tokenSelect.module.scss';
 
 export const getOption =
   (egldLabel: string): typeof components.Option =>

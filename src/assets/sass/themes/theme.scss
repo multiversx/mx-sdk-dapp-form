@@ -14,7 +14,6 @@ Override Bootstrap variables only above.
 html {
   min-height: 100%;
   font-size: 14px;
-  background-color: blue;
 }
 
 // .h1,
@@ -163,14 +162,14 @@ a,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: $white;
+  color: var(--white);
   margin: 0 7px;
 
   button {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    background-color: $white;
+    background-color: var(--white);
 
     &:hover {
       opacity: 0.9;

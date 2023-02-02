@@ -2,9 +2,12 @@ import React from 'react';
 import { faCircleNotch, faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { components } from 'react-select';
-import { OptionType } from '../../tokenSelect.types';
+
+import { default as MultiversXIcon } from 'assets/icons/mx-icon.svg';
+
+import type { OptionType } from '../../tokenSelect.types';
+
 import styles from './../../tokenSelect.module.scss';
-const MultiversXIcon = require('./mx-icon.svg').default;
 
 interface ValueComponentPropsType {
   isDisabled?: boolean;
