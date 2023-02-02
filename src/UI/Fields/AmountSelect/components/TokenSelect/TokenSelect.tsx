@@ -99,10 +99,11 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
         onMenuOpen={onMenuOpen}
         noOptionsMessage={() => noOptionsMessage}
         className={classNames(styles.select, className, {
-          [styles.disabled]: props.disabled || isLoading
+          [styles.disabled]: props.disabled
         })}
         components={{
-          IndicatorSeparator: null,
+          IndicatorSeparator: () => null,
+          LoadingIndicator: () => null,
           Menu,
           Control,
           Input,

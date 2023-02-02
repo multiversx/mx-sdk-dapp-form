@@ -10,8 +10,8 @@
     border: 1px solid var(--dapp-form-input-bg);
     border-radius: var(--dapp-form-input-border-radius);
     display: flex;
-    padding: 0.1rem;
     position: relative;
+    padding: 4px;
 
     &.error {
       border-color: var(--dapp-form-error-color);
@@ -21,9 +21,8 @@
       align-items: center;
       bottom: 0;
       display: flex;
-      padding-right: 0.1rem;
       position: absolute;
-      right: 0;
+      right: 4px;
       top: 0;
     }
   }

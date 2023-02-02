@@ -82,6 +82,10 @@
           position: absolute;
           pointer-events: none;
           white-space: nowrap;
+
+          &.focused {
+            color: var(--dapp-form-select-input-color-hover) !important;
+          }
         }
 
         .dropdown {
@@ -139,13 +143,21 @@
     }
   }
 
+  .loading {
+    height: 150px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .menu {
     border: 1px solid var(--dapp-form-select-menu-border);
     border-radius: 6px;
     width: auto;
     right: -1px;
-    min-width: 256px;
     overflow: hidden;
+    background-color: var(--dapp-form-select-option-bg);
 
     .list {
       background-color: var(--dapp-form-select-menu-bg);
@@ -248,6 +260,7 @@
 
           .right {
             text-align: right;
+            margin-left: 16px;
           }
         }
 

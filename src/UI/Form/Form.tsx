@@ -29,7 +29,6 @@ export const Form = ({ className }: WithClassnameType) => {
     values: { txType, tokenId }
   } = useFormikContext<ExtendedValuesType>();
 
-  const { scamError } = receiverInfo;
   const { amountRange, onSetAmountPercentage } = amountInfo;
 
   const {
@@ -94,7 +93,7 @@ export const Form = ({ className }: WithClassnameType) => {
       <div className={styles.formButtons}>
         <button
           className={classNames('my-3', globals.btn, globals.btnPrimary, {
-            [globals.btnWarning]: scamError
+            [globals.btnWarning]: receiverInfo?.scamError
           })}
           type='button'
           id='sendBtn'
@@ -106,7 +105,7 @@ export const Form = ({ className }: WithClassnameType) => {
 
         <button
           className={classNames('mb-3', globals.btn, globals.btnLink, {
-            [globals.btnWarning]: scamError
+            [globals.btnWarning]: receiverInfo?.scamError
           })}
           type='button'
           id='closeButton'
