@@ -1,7 +1,6 @@
 * {
   $headings-font-weight: 300;
-  $primary: #1b46c2;
-  $light: #fafafa;
+  $light: var(--light);
 
   @import './themes/theme.scss';
 

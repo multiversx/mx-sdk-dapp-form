@@ -2,6 +2,8 @@ import React from 'react';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
+import { useSendFormContext } from 'contexts';
+
 import globals from 'assets/sass/globals.module.scss';
 import styles from './amountSelect.module.scss';
 
@@ -38,6 +40,10 @@ export const AmountSelect = ({
   amountErrorProps,
   maxButtonProps
 }: AmountSelectPropsType) => {
+  const {
+    formInfo: { readonly }
+  } = useSendFormContext();
+
   return (
     <div className={classNames(styles.amount, className)}>
       <div className={styles.label}>
@@ -57,7 +63,8 @@ export const AmountSelect = ({
       <div
         className={classNames(styles.wrapper, {
           [styles.error]:
-            amountInputProps.isInvalid || tokenSelectProps.isInvalid
+            amountInputProps.isInvalid || tokenSelectProps.isInvalid,
+          [styles.disabled]: readonly
         })}
       >
         <AmountInput {...amountInputProps} />

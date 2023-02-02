@@ -17,6 +17,12 @@
       border-color: var(--dapp-form-error-color);
     }
 
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
     .interaction {
       align-items: center;
       bottom: 0;

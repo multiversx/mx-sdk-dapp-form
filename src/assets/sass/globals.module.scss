@@ -87,21 +87,21 @@
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
   &.btnPrimary {
-    background-color: $primary;
+    background-color: var(--primary);
     color: var(--white);
 
     &:hover {
-      background-color: $btn-blue;
+      background-color: var(--btn-blue);
     }
   }
 
   &.btnWarning {
-    background-color: $warning;
-    color: $brown;
+    background-color: var(--warning);
+    color: var(--brown);
   }
 
   &.btnLink {
-    color: $primary-light;
+    color: var(--primary-light);
     background: none;
     padding: 0;
 

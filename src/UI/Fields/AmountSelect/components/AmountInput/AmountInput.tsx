@@ -46,7 +46,6 @@ export interface AmountInputPropsType {
 const fiveHundredMs = 500;
 
 export const AmountInput = ({
-  readonly,
   required,
   name,
   placeholder,
@@ -153,7 +152,6 @@ export const AmountInput = ({
         onBlur={handleBlur}
         autoComplete='off'
         disabled={Boolean(disabled)}
-        readOnly={Boolean(readonly)}
         onFocus={onFocus}
         className={classNames(globals.input, styles.amountInput, {
           [globals.disabled]: Boolean(disabled)

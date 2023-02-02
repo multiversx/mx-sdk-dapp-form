@@ -16,7 +16,7 @@
       float: left;
       min-width: 10rem;
       font-size: 1rem;
-      color: $brown;
+      color: var(--brown);
       text-align: left;
       list-style: none;
       background-color: var(--white);
@@ -36,7 +36,7 @@
         padding: 0.25rem 1.5rem;
         clear: both;
         font-weight: 400;
-        color: $brown;
+        color: var(--brown);
         text-align: inherit;
         white-space: nowrap;
         background-color: transparent;

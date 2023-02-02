@@ -13,7 +13,7 @@
       transform: translateY(-50%);
       content: '';
       position: absolute;
-      background: $border-color;
+      background: var(--border-color);
       height: 4px;
     }
 
@@ -47,7 +47,7 @@
       z-index: 5;
 
       &.disabled {
-        background-color: $secondary;
+        background-color: var(--secondary);
       }
 
       .amountSliderThumbPercentage {
@@ -69,7 +69,7 @@
 
     .amountSliderCompletion {
       height: 4px;
-      background: $primary;
+      background: var(--primary);
       position: absolute;
       top: 50%;
       left: 0;
@@ -78,7 +78,7 @@
       margin-left: 2px;
 
       &.disabled {
-        background: $secondary;
+        background: var(--secondary);
       }
     }
 
@@ -95,7 +95,7 @@
         height: 12px;
         border-radius: 50%;
         background-color: var(--white);
-        border: 2px solid $primary;
+        border: 2px solid var(--primary);
         width: 12px;
         top: 50%;
         left: 50%;
@@ -103,15 +103,15 @@
       }
 
       &.completed:after {
-        background-color: $primary;
+        background-color: var(--primary);
 
         &.disabled:after {
-          background-color: $secondary;
+          background-color: var(--secondary);
         }
       }
 
       &.disabled:after {
-        border-color: $secondary;
+        border-color: var(--secondary);
       }
     }
 

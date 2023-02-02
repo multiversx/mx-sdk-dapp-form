@@ -23,7 +23,7 @@
     transform: translateX(120%);
     background-color: #fff;
     border-radius: var(--dapp-form-input-border-radius);
-    border-color: $border-color;
+    border-color: var(--border-color);
 
     &.clickable {
       cursor: pointer;
@@ -37,7 +37,7 @@
         font-size: inherit;
         line-height: inherit;
         .progress-bar {
-          background-color: rgba($secondary, 0.2);
+          background-color: rgba(#6c757d, 0.2);
           .content-height {
             z-index: -1;
             visibility: hidden;
@@ -68,7 +68,7 @@
   .close {
     opacity: 1;
     svg {
-      color: $secondary;
+      color: var(--secondary);
     }
   }
 }

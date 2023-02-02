@@ -6,10 +6,10 @@
 
   .infoDustTrigger {
     cursor: pointer;
-    color: $primary-light;
+    color: var(--primary-light);
 
     &:hover {
-      color: $link-hover-color;
+      color: var(--link-hover-color);
     }
   }
 

@@ -6,7 +6,7 @@
   flex-direction: column;
 
   .secondary {
-    color: $secondary;
+    color: var(--secondary);
   }
 
   .textarea {

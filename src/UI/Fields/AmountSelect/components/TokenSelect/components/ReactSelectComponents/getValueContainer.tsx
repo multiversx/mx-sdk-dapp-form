@@ -1,5 +1,5 @@
 import React from 'react';
-import { faCircleNotch, faDiamond } from '@fortawesome/free-solid-svg-icons';
+import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { components } from 'react-select';
 
@@ -17,22 +17,10 @@ interface ValueComponentPropsType {
 }
 
 const ValueComponent = ({
-  isDisabled,
   tokenId,
   icon,
   egldLabel
 }: ValueComponentPropsType) => {
-  if (isDisabled) {
-    return (
-      <span className={styles.asset}>
-        <FontAwesomeIcon
-          icon={faCircleNotch}
-          className={styles.diamond}
-          spin={true}
-        />
-      </span>
-    );
-  }
   if (tokenId === egldLabel) {
     return (
       <span className={styles.asset}>

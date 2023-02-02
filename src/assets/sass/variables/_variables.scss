@@ -7,7 +7,7 @@ $brown: #212529 !default;
 $primary: #1b46c2 !default;
 $secondary: #6c757d !default;
 $primary-light: #1392ff !default;
-$card-bg: $white !default;
+$card-bg: #ffffff !default;
 $border-color: #dee2e6 !default;
 $link-hover-color: #122e7f !default;
 $error: #dc3545 !default;
@@ -16,9 +16,18 @@ $btn-blue: #163aa0 !default;
 
 :root {
   --primary: #1b46c2;
+  --primary-light: #1392ff;
   --border-color: #dee2e6;
   --card-bg: white;
   --black: black;
+  --light: #fafafa;
+  --secondary: #6c757d;
+  --card-bg: #ffffff;
+  --border-color: #dee2e6;
+  --warning: #ffc107;
+  --btn-blue: #163aa0;
+  --brown: #212529;
+  --link-hover-color: #122e7f;
 
   --dapp-form-bg: #242526;
   --dapp-form-label-color: #9ba5b4;
