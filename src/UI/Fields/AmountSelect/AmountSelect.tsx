@@ -1,9 +1,6 @@
 import React from 'react';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
-
-import { useSendFormContext } from 'contexts';
-
 import globals from 'assets/sass/globals.module.scss';
 import styles from './amountSelect.module.scss';
 
@@ -19,10 +16,12 @@ import {
   TokenSelect,
   TokenSelectPropsType
 } from './components';
+import { ExtendedValuesType } from '../../../types';
 
 export interface AmountSelectPropsType extends WithClassnameType {
   label?: string;
   name: string;
+  readonly?: ExtendedValuesType['readonly'];
   wrapperControlsClassName?: string;
   amountErrorProps: AmountErrorPropsType;
   tokenBalanceProps: TokenBalancePropsType;
@@ -40,12 +39,9 @@ export const AmountSelect = ({
   tokenBalanceProps,
   amountInputProps,
   amountErrorProps,
-  maxButtonProps
+  maxButtonProps,
+  readonly
 }: AmountSelectPropsType) => {
-  const {
-    formInfo: { readonly }
-  } = useSendFormContext();
-
   return (
     <div className={classNames(styles.amount, className)}>
       <div className={styles.label}>

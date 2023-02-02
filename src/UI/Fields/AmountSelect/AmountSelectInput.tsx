@@ -159,6 +159,7 @@ export const AmountSelectInput = () => {
       tokenBalanceProps={tokenBalanceProps}
       maxButtonProps={maxButtonProps}
       label='Amount'
+      readonly={readonly}
     />
   );
 };
