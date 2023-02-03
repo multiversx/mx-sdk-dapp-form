@@ -13,7 +13,7 @@ import styles from './../../tokenSelect.module.scss';
 import { HighlightText } from './HighlightText';
 
 const MultiversXIcon =
-  require('../../../../../../../assets/mx-icon.svg').default;
+  require('../../../../../../../assets/icons/mx-icon.svg').default;
 
 export const getOption =
   ({

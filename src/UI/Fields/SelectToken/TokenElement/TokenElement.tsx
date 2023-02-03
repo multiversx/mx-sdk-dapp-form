@@ -11,7 +11,7 @@ import { scamFlag } from 'helpers';
 import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
 
 import styles from './styles.module.scss';
-const MultiversXIcon = require('../../../../assets/mx-icon.svg').default;
+const MultiversXIcon = require('../../../../assets/icons/mx-icon.svg').default;
 
 export interface TokenElementPropsType {
   token: PartialTokenType;

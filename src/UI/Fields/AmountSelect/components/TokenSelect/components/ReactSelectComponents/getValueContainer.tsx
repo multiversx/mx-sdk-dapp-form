@@ -10,7 +10,7 @@ import type { OptionType } from '../../tokenSelect.types';
 
 import styles from './../../tokenSelect.module.scss';
 const MultiversXIcon =
-  require('../../../../../../../assets/mx-icon.svg').default;
+  require('../../../../../../../assets/icons/mx-icon.svg').default;
 
 interface ValueComponentPropsType {
   isDisabled?: boolean;
