@@ -1,11 +1,8 @@
 import React from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { components } from 'react-select';
-
-import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
 import type { OptionType } from '../../tokenSelect.types';
 
 import styles from './../../tokenSelect.module.scss';
@@ -43,13 +40,7 @@ export const getValueContainer =
     const { selectProps, isDisabled, children } = props;
 
     const token = selectProps.value as unknown as OptionType;
-
     const icon = token.assets ? token.assets.svgUrl : null;
-    const price = progressiveFormatAmount({
-      amount: token?.token.balance,
-      decimals: token?.token.decimals,
-      addCommas: true
-    });
 
     return (
       <components.ValueContainer {...props} className={styles.container}>
@@ -64,14 +55,9 @@ export const getValueContainer =
 
         <div className={styles.payload}>
           {children}
-          <small className={styles.price}>
-            <UsdValue
-              amount={price}
-              usd={1}
-              data-testid='usdValue'
-              className='d-flex flex-column mex-text-main'
-            />
-          </small>
+          {token?.token.usdPrice && (
+            <small className={styles.price}>{token?.token.usdPrice}</small>
+          )}
         </div>
       </components.ValueContainer>
     );
