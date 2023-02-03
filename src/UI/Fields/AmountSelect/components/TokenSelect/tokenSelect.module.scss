@@ -3,8 +3,9 @@
 }
 
 .select {
-  width: 140px;
+  width: auto;
   margin-left: auto;
+  position: relative;
 
   &.disabled {
     opacity: 0.5;
@@ -19,6 +20,11 @@
     border-bottom-left-radius: 30px;
     border-top-left-radius: 30px;
 
+    @media (min-width: 768px) {
+      margin-left: 0.2rem;
+      width: 11rem;
+    }
+
     &:hover {
       .indicator svg {
         fill: var(--dapp-form-select-indicator-fill-hover) !important;
@@ -32,16 +38,20 @@
     .container {
       padding: 4px;
       padding-right: 0;
+
+      line-height: 1.5;
+      font-size: 1rem;
+      height: 3.5rem;
+
       flex: 1;
       cursor: pointer;
       display: flex;
 
       .icon {
-        width: 36px;
-        height: 36px;
-        max-width: 36px;
-        min-width: 36px;
-        flex-basis: 36px;
+        width: 50px;
+        height: 50px;
+        max-width: 50px;
+        min-width: 50px;
         margin-right: 8px;
         flex: 1;
         background-color: var(--dapp-form-select-icon-bg);
@@ -54,13 +64,17 @@
         overflow: hidden;
 
         img {
-          max-width: 100%;
-          max-height: 100%;
+          width: 3rem;
+          height: 3rem;
         }
 
         .asset .diamond {
           width: 32px;
           height: 32px;
+        }
+
+        @media (max-width: 768px) {
+          display: none;
         }
       }
 
@@ -158,6 +172,7 @@
     right: -1px;
     overflow: hidden;
     background-color: var(--dapp-form-select-option-bg);
+    z-index: 99999;
 
     .list {
       background-color: var(--dapp-form-select-menu-bg);
@@ -251,6 +266,7 @@
               color: --dapp-form-select-option-color;
               font-weight: 300;
               font-size: 16px;
+              text-align: left;
 
               strong {
                 font-weight: 900;
