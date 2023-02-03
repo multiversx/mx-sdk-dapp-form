@@ -97,5 +97,5 @@ export const getDataField = ({
     });
   }
 
-  return '';
+  return values.data;
 };
