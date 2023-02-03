@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/network';
 
 import {
@@ -42,6 +42,10 @@ export const TestWrapper = ({
     balance,
     address
   });
+
+  const [isFormSubmitted, setIsFormSubmitted] = useState(
+    Boolean(formConfigValues.skipToConfirm)
+  );
 
   if (!initValues) {
     return <Loader dataTestId='loader' />;
@@ -87,6 +91,8 @@ export const TestWrapper = ({
       prefilledForm: false,
       skipToConfirm: false,
       readonly: false,
+      isFormSubmitted,
+      setIsFormSubmitted,
       onCloseForm: () => 'this is close form'
     },
     tokensInfo: {

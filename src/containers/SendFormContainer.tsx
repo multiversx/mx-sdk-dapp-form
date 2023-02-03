@@ -1,4 +1,4 @@
-import React, { JSXElementConstructor } from 'react';
+import React, { JSXElementConstructor, useState } from 'react';
 import { Transaction } from '@multiversx/sdk-core';
 import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/index';
 import { Formik } from 'formik';
@@ -27,7 +27,14 @@ export interface SendFormContainerPropsType {
   initialValues?: ExtendedValuesType;
   enableReinitialize?: boolean;
   initGasLimitError?: string;
-  onFormSubmit: (values: ValuesType, transaction: Transaction | null) => void;
+  onFormSubmit: (
+    values: ValuesType,
+    transaction: Transaction | null,
+    /**
+     * control isFormSubmitted from outside
+     */
+    setIsFormSubmitted?: React.Dispatch<React.SetStateAction<boolean>>
+  ) => void;
   accountInfo: AccountContextPropsType;
   formInfo: Omit<FormContextBasePropsType, 'txType' | 'setTxType'>;
   tokensInfo?: TokensContextInitializationPropsType;
@@ -56,6 +63,9 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
 
   const { address, balance } = accountInfo;
   const { chainId } = networkConfig;
+  const [isFormSubmitted, setIsFormSubmitted] = useState(
+    Boolean(props.formInfo.skipToConfirm)
+  );
 
   //this is updated from within the main context with updated values
 
@@ -79,7 +89,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
         })
       : null;
 
-    return onFormSubmit(parsedValues, transaction);
+    return onFormSubmit(parsedValues, transaction, setIsFormSubmitted);
   }
 
   const tokenId =
@@ -122,7 +132,11 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
       <AppInfoContextProvider
         initGasLimitError={initGasLimitError}
         accountInfo={accountInfo}
-        formInfo={formInfo}
+        formInfo={{
+          ...formInfo,
+          isFormSubmitted,
+          setIsFormSubmitted
+        }}
         networkConfig={networkConfig}
         tokensInfo={tokensInfo}
         Loader={Loader}
