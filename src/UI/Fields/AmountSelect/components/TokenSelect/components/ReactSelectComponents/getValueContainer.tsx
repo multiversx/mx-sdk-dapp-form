@@ -25,10 +25,7 @@ export const ValueComponent = ({ tokenId, icon }: ValueComponentPropsType) => {
   if (isEgld) {
     return (
       <span className={styles.asset}>
-        <MultiversXIcon
-          is='x3d' // fixes jest Warning: The tag <default> is unrecognized in this browser.
-          className={styles.diamond}
-        />
+        <MultiversXIcon className={styles.diamond} />
       </span>
     );
   }
