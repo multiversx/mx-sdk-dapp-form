@@ -13,7 +13,7 @@ import styles from './../../tokenSelect.module.scss';
 import { HighlightText } from './HighlightText';
 
 const MultiversXIcon =
-  require('../../../../../../../assets/icons/mx-icon.svg').default;
+  require('./../../../../../../../assets/icons/mx-icon.svg').default;
 
 export const getOption =
   ({
@@ -54,9 +54,7 @@ export const getOption =
           <div className={styles.image}>
             {isEgld ? (
               <span className={styles.icon}>
-                <MultiversXIcon
-                  is='x3d' // fixes jest Warning: The tag <default> is unrecognized in this browser.
-                />
+                <MultiversXIcon />
               </span>
             ) : icon ? (
               <img src={icon} className={styles.icon} />
