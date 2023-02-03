@@ -10,7 +10,7 @@ export interface OptionType {
   label: string;
   assets?: TokenAssetsType;
   token: PartialTokenType & {
-    usdPrice?: number;
+    usdPrice?: string;
   };
 }
 
