@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
@@ -41,6 +41,13 @@ export const getValueContainer =
 
     const token = selectProps.value as unknown as OptionType;
     const icon = token.assets ? token.assets.svgUrl : null;
+    const price = useMemo(() => {
+      const strPrice = String(token?.token.usdPrice);
+      if (strPrice?.includes('$')) {
+        return token?.token.usdPrice;
+      }
+      return `$${token?.token.usdPrice}`;
+    }, [token?.token.usdPrice]);
 
     return (
       <components.ValueContainer {...props} className={styles.container}>
@@ -56,7 +63,7 @@ export const getValueContainer =
         <div className={styles.payload}>
           {children}
           {token?.token.usdPrice && (
-            <small className={styles.price}>{token?.token.usdPrice}</small>
+            <small className={styles.price}>{price}</small>
           )}
         </div>
       </components.ValueContainer>
