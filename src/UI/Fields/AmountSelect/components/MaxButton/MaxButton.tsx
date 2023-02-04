@@ -51,7 +51,6 @@ export const MaxButton = ({
     return null;
   }
 
-  // TODO: why not button?
   return (
     <a
       href='/'

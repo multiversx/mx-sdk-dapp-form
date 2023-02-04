@@ -39,4 +39,5 @@ export interface TokenSelectPropsType {
   handleDisabledOptionClick?: any;
   showTokenPrice?: boolean;
   showBalanceUsdValue?: boolean;
+  selectedTokenIconClassName?: string;
 }

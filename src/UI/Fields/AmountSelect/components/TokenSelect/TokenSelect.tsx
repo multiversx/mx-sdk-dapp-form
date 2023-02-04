@@ -36,7 +36,8 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     // handleDisabledOptionClick,
     wrapperClassName = '',
     showTokenPrice = false,
-    showBalanceUsdValue = false
+    showBalanceUsdValue = false,
+    selectedTokenIconClassName
   } = props;
 
   const ref = useRef(null);
@@ -52,7 +53,7 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     []
   );
   const ValueContainer = useMemo(
-    () => components.getValueContainer(egldLabel),
+    () => components.getValueContainer(egldLabel, selectedTokenIconClassName),
     []
   );
 

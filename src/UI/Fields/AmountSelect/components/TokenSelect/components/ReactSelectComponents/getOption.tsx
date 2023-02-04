@@ -69,9 +69,7 @@ export const getOption =
             <div className={styles.left}>
               <span className={styles.value}>{ticker}</span>
               {showTokenPrice && (
-                <small className={styles.price}>
-                  <small className={styles.price}>{tokenPrice}</small>
-                </small>
+                <small className={styles.price}>{tokenPrice}</small>
               )}
             </div>
             <div className={styles.right}>
@@ -81,7 +79,8 @@ export const getOption =
                   amount={amount}
                   usd={1}
                   data-testid='token-price-usd-value'
-                  className='d-flex flex-column mex-text-main'
+                  className={styles.price}
+                  addEqualSign={false}
                 />
               )}
             </div>
