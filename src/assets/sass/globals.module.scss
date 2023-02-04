@@ -31,14 +31,6 @@
   font-size: 1rem;
 }
 
-.input {
-  padding: 0 1rem;
-}
-
-.textarea {
-  padding: 1rem;
-}
-
 .input,
 .textarea {
   font-size: 1rem;
@@ -52,6 +44,8 @@
   box-sizing: border-box;
   background-color: var(--dapp-form-input-bg) !important;
   transition: all 200ms ease;
+  min-height: auto;
+  padding: 12px;
 
   &:focus {
     outline: 0;

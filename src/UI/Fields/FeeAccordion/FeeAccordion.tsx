@@ -11,6 +11,7 @@ import { GasLimit } from '../GasLimit/GasLimit';
 import { GasPrice } from '../GasPrice';
 import { FeeInFiat } from './FeeInFiat';
 
+import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 export const FeeAccordion = ({ className }: WithClassnameType) => {
@@ -30,7 +31,7 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
 
   return (
     <div className={classNames(styles.fee, className)}>
-      <label className={styles.label}>Fee:</label>
+      <label className={globals.label}>Fee:</label>
       <div
         className={styles.trigger}
         {...getToggleProps({ onClick: toggleAccordion })}
