@@ -42,7 +42,7 @@ export const getValueContainer =
     const token = selectProps.value as unknown as OptionType;
     const icon = token.assets ? token.assets.svgUrl : null;
     const price = useMemo(() => {
-      const strPrice = token?.token.usdPrice;
+      const strPrice = String(token?.token.usdPrice);
       if (strPrice?.includes('$')) {
         return token?.token.usdPrice;
       }
