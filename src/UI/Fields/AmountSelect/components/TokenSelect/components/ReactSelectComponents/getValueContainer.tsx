@@ -2,8 +2,8 @@ import React, { PropsWithChildren, useMemo } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
-import { components } from 'react-select';
 import classNames from 'classnames';
+import { components } from 'react-select';
 
 import type { OptionType } from '../../tokenSelect.types';
 
@@ -53,7 +53,7 @@ export const getValueContainer =
     const { selectProps, isDisabled, children } = props;
 
     const token = selectProps.value as unknown as OptionType;
-    const icon = token.assets ? token.assets.svgUrl : null;
+    const icon = token?.assets?.svgUrl ?? null;
     const price = useMemo(() => {
       const strPrice = String(token?.token.usdPrice);
       if (strPrice?.includes('$')) {

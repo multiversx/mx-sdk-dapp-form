@@ -5,7 +5,9 @@ All notable changes will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [[0.4.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/111)] - 2023-01-12
+## [[0.4.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/112)] - 2023-02-04
+- [Fixed token assets access](https://github.com/multiversx/mx-sdk-dapp-form/pull/112)
+## [[0.4.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/111)] - 2023-02-04
 - [Added `AmountSelect` component, fixed `data` reset on amount change and allowed control of `isFormSubmitted` from outside.](https://github.com/multiversx/mx-sdk-dapp-form/pull/110)
 ## [[0.3.9](https://github.com/multiversx/mx-sdk-dapp-form/pull/99)] - 2023-01-12
 - [Changed references from elrond to multiversx](https://github.com/multiversx/mx-sdk-dapp-form/pull/102)
