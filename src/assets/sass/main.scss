@@ -1,7 +1,6 @@
 * {
   $headings-font-weight: 300;
-  $primary: #1b46c2;
-  $light: #fafafa;
+  $light: var(--light);
 
   @import './themes/theme.scss';
 
@@ -14,5 +13,4 @@
   @import './modules/toast-messages/toast-messages';
   @import './modules/tx-details-text/tx-details-text';
   @import './modules/token-symbol/tokenSymbol';
-  @import './modules/data/data';
 }

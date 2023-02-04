@@ -2,71 +2,78 @@
 
 .error {
   width: 100%;
-  font-size: 80%;
   display: block;
-  color: $error;
-  margin-top: 0.25rem;
-  line-height: 1.5;
+  color: var(--dapp-form-error-color);
+  line-height: 1;
+  margin: 8px 0;
+  font-size: 12px;
+
+  &.scam svg {
+    margin-right: 4px;
+    color: var(--dapp-form-error-color) !important;
+  }
+}
+
+.label {
+  margin-bottom: 4px;
+  color: var(--dapp-form-label-color);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.value {
+  color: var(--dapp-form-input-color);
+  display: block;
+  background: var(--dapp-form-input-bg) !important;
+  border-radius: var(--dapp-form-input-border-radius);
+  padding: 12px;
+  margin-top: 4px;
+  font-size: 1rem;
 }
 
 .input,
 .textarea {
-  padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.5;
-  color: $input-color;
+  line-height: 1;
+  color: var(--dapp-form-input-color) !important;
   background-clip: padding-box;
-  border: 1px solid $input-border-color;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  border: 1px solid var(--dapp-form-input-bg) !important;
+  border-radius: var(--dapp-form-input-border-radius);
   width: 100%;
   box-sizing: border-box;
-  background-color: $white;
+  background-color: var(--dapp-form-input-bg) !important;
+  transition: all 200ms ease;
+  min-height: auto;
+  padding: 12px;
 
   &:focus {
-    color: $input-color;
-    background-color: $white;
-    border-color: $input-border-focus;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgb(27 70 194 / 25%);
+    color: var(--dapp-form-input-color) !important;
   }
 
-  &:disabled {
-    background-color: #e9ecef;
+  &::placeholder {
+    color: var(--dapp-form-placeholder-color) !important;
   }
 
-  &.invalid {
-    border-color: $error;
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
   }
-}
 
-.errorExclamation {
-  position: absolute;
-  width: calc(1.5em + 0.75rem);
-  top: 50%;
-  transform: translateY(-50%);
-  border-radius: 50%;
-  border: 1px solid $error;
-  width: 1rem;
-  height: 1rem;
-  right: 0.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  svg {
-    path {
-      fill: $error;
-    }
+  &.error {
+    margin: 0;
+    border-color: var(--dapp-form-error-color) !important;
+    font-size: 1rem;
   }
 }
 
 .btn {
   padding: 0.375rem 0.75rem;
+  margin: 0 !important;
   font-size: 1rem;
   line-height: 1.5;
-  border-radius: 0.25rem;
+  border-radius: var(--dapp-form-input-border-radius);
   cursor: pointer;
   border: none;
   margin-bottom: 1rem;
@@ -74,21 +81,21 @@
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
   &.btnPrimary {
-    background-color: $primary;
-    color: $white;
+    background-color: var(--primary);
+    color: var(--white);
 
     &:hover {
-      background-color: $btn-blue;
+      background-color: var(--btn-blue);
     }
   }
 
   &.btnWarning {
-    background-color: $warning;
-    color: $brown;
+    background-color: var(--warning);
+    color: var(--brown);
   }
 
   &.btnLink {
-    color: $primary-light;
+    color: var(--primary-light);
     background: none;
     padding: 0;
 

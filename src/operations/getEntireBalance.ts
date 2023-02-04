@@ -55,17 +55,16 @@ export function getEntireBalance({
       })
     : ZERO;
 
-  const entireBalanceMinusDust = bNentireBalanceMinusDust.isGreaterThanOrEqualTo(
-    0
-  )
-    ? formatAmount({
-        input: bNentireBalanceMinusDust.toString(10),
-        decimals,
-        digits,
-        showLastNonZeroDecimal: true,
-        addCommas: false
-      })
-    : entireBalance;
+  const entireBalanceMinusDust =
+    bNentireBalanceMinusDust.isGreaterThanOrEqualTo(0)
+      ? formatAmount({
+          input: bNentireBalanceMinusDust.toString(10),
+          decimals,
+          digits,
+          showLastNonZeroDecimal: true,
+          addCommas: false
+        })
+      : entireBalance;
 
   return {
     entireBalance,

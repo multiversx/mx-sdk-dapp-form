@@ -22,60 +22,50 @@ export const GasPrice = () => {
     onResetGasPrice
   } = gasInfo;
   const { readonly } = formInfo;
+
   const showUndoButton = gasPrice !== formattedConfigGasPrice && !readonly;
+  const isDisabled = true;
 
   return (
-    <div className={classNames(styles.gas, styles.gasPrice)}>
-      <label className={styles.gasLeft} htmlFor={ValuesEnum.gasPrice}>
+    <div className={styles.gas}>
+      <label className={globals.label} htmlFor={ValuesEnum.gasPrice}>
         Gas Price
       </label>
 
-      <div className={styles.gasRight}>
-        <div
-          className={classNames(styles.gasForm, {
-            [styles.gasInvalid]: isGasPriceInvalid
+      <div className={styles.wrapper}>
+        <input
+          type='text'
+          id={ValuesEnum.gasPrice}
+          name={ValuesEnum.gasPrice}
+          data-testid={ValuesEnum.gasPrice}
+          required={true}
+          disabled={isDisabled}
+          value={gasPrice}
+          onChange={onChangeGasPrice}
+          onBlur={onBlurGasPrice}
+          autoComplete='off'
+          className={classNames(globals.input, {
+            [globals.error]: isGasPriceInvalid,
+            [globals.disabled]: isDisabled
           })}
-        >
-          <div className={styles.gasWrapper}>
-            <input
-              type='text'
-              id={ValuesEnum.gasPrice}
-              name={ValuesEnum.gasPrice}
-              data-testid={ValuesEnum.gasPrice}
-              required
-              disabled
-              value={gasPrice}
-              onChange={onChangeGasPrice}
-              onBlur={onBlurGasPrice}
-              autoComplete='off'
-              className={classNames(globals.input, {
-                [globals.invalid]: isGasPriceInvalid
-              })}
-            />
-          </div>
+        />
 
-          {showUndoButton && (
-            <span className={styles.gasUndo}>
-              <button
-                onClick={onResetGasPrice}
-                className={classNames(styles.gasReset, styles.default, {
-                  [styles.invalid]: isGasPriceInvalid
-                })}
-              >
-                <i>
-                  <FontAwesomeIcon icon={faUndo} />
-                </i>
-              </button>
-            </span>
-          )}
-        </div>
-
-        {isGasPriceInvalid && (
-          <div className={classNames(globals.error, styles.gasError)}>
-            {gasPriceError}
-          </div>
+        {showUndoButton && (
+          <span
+            className={classNames(styles.undo, {
+              [styles.disabled]: isDisabled
+            })}
+          >
+            <button onClick={onResetGasPrice} className={styles.reset}>
+              <FontAwesomeIcon icon={faUndo} />
+            </button>
+          </span>
         )}
       </div>
+
+      {isGasPriceInvalid && (
+        <div className={globals.error}>{gasPriceError}</div>
+      )}
     </div>
   );
 };

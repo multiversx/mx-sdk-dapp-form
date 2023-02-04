@@ -89,6 +89,7 @@ describe('Send Meta ESDT', () => {
 
     // confirm metaEsdt token is in list
     const selectInput = await methods.findByLabelText('Token');
+    fireEvent.focus(selectInput);
     selectEvent.openMenu(selectInput);
     const metaTokenOption = await methods.findByTestId(
       `${metaToken.identifier}-option`
@@ -96,7 +97,7 @@ describe('Send Meta ESDT', () => {
     expect(metaTokenOption.innerHTML).toBeDefined();
 
     // select metaEsdt token
-    selectEvent.select(selectInput, metaToken.name);
+    selectEvent.select(selectInput, metaToken.ticker);
 
     const tokenId: any = methods.container.querySelector(
       'input[name="tokenId"]'
@@ -123,7 +124,7 @@ describe('Send Meta ESDT', () => {
 
     // check available
     const available = methods.getByTestId(`available-${metaToken.identifier}`);
-    expect(available.innerHTML).toBe('Available 10000');
+    expect(available.textContent).toBe('Available: 10,000 MT1-ff89d3');
 
     // fill in amount
     const amount: any = await methods.findByTestId('amount');

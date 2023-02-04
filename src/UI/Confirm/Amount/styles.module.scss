@@ -1,19 +1,19 @@
 @import 'assets/sass/variables/_variables.scss';
 
 .amount {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  line-height: 1.5;
+  margin-bottom: 16px;
 
-  .left,
-  .right {
-    width: calc(50% - 15px);
+  .left {
+    margin-bottom: 16px;
 
-    .label {
-      color: $secondary;
-      display: block;
+    .value {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .price {
+      font-weight: 400;
+      color: var(--dapp-form-label-color);
     }
   }
 }

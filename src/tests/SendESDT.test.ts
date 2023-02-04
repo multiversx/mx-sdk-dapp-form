@@ -23,15 +23,14 @@ const twoToken = {
   balance: '100000'
 };
 
-const useInput = (field: ValuesEnum) => (methods: RenderResult) => async (
-  value: string
-) => {
-  const input: any = await methods.findByTestId(field);
-  const data = { target: { value } };
-  fireEvent.change(input, data);
-  fireEvent.blur(input);
-  return input;
-};
+const useInput =
+  (field: ValuesEnum) => (methods: RenderResult) => async (value: string) => {
+    const input: any = await methods.findByTestId(field);
+    const data = { target: { value } };
+    fireEvent.change(input, data);
+    fireEvent.blur(input);
+    return input;
+  };
 
 const useAmountInput = useInput(ValuesEnum.amount);
 const useGasLimitInput = useInput(ValuesEnum.gasLimit);
@@ -54,11 +53,10 @@ describe('Send tokens', () => {
   test('Tokens labels and values', async () => {
     const { getByTestId, findByTestId } = beforAllTokens();
 
-    // TODO: bring back
-    // const amountLabel = await findByTestId('amountLabel');
-    // expect(amountLabel.textContent).toBe('Amount');
+    const amountLabel = await findByTestId('amountLabel');
+    expect(amountLabel.textContent).toBe('Amount');
 
-    const availableTokens = await findByTestId('availableTWO-824e70');
+    const availableTokens = await findByTestId('available-TWO-824e70');
     expect(availableTokens.getAttribute('data-value')).toBe('1000 TWO-824e70');
 
     const gasLimit: any = getByTestId('gasLimit');
@@ -81,15 +79,12 @@ describe('Send tokens', () => {
       const methods = beforAllTokens();
       const setInput = useAmountInput(methods);
 
-      const input: any = await setInput('1.123456789012345678');
-      expect(input.value).toBe('1.123456789012345678');
+      const input: any = await setInput('1.12');
+      expect(input.value).toBe('1.12');
       const data: any = await methods.findByTestId('data');
 
       await act(async () => {
-        expect(data.value).toBe(
-          'ESDTTransfer@54574f2d383234653730@0f9751ff4d94f34e'
-        );
-
+        expect(data.value).toBe('ESDTTransfer@54574f2d383234653730@70');
         expect(data.disabled).toBeTruthy(); // check disabled
       });
     });
@@ -116,7 +111,7 @@ describe('Send tokens', () => {
 
       const input: any = await methods.findByTestId('amount');
 
-      expect(input.value).toBe('1000');
+      expect(input.value).toBe('1,000');
       const data: any = await methods.findByTestId('data');
       // await act(async () => {
       await waitFor(() => {

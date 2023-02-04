@@ -3,6 +3,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState
 } from 'react';
 import { useFormikContext } from 'formik';
@@ -39,7 +40,7 @@ export interface TokensContextPropsType {
   tokens: PartialTokenType[];
   allAvailableTokens: PartialTokenType[];
   nft?: PartialNftType;
-  getTokens: () => void;
+  getTokens: (showLoading?: boolean) => void;
   onChangeTokenId: (value: string) => void;
 }
 
@@ -72,30 +73,47 @@ export function TokensContextProvider({
   const {
     networkConfig: { decimals }
   } = useNetworkConfigContext();
+  const fetchigRef = useRef(false);
   const { egldPriceInUsd, digits, egldLabel } = useGetEconomicsInfo();
 
   const esdtTokens = tokens || previouslyFetchedTokens;
 
-  const handleGetTokens = useCallback(async () => {
-    setAreTokensLoading(true);
-    const newTokensAndMetaESDTs = await fetchAllTokens(address);
-    const currentTokens = tokens ?? [];
-    const tokensFromServer = uniqBy(
-      [...currentTokens, ...newTokensAndMetaESDTs],
-      (token) => token.identifier
-    );
+  const handleGetTokens = useCallback(
+    async (showLoading = true) => {
+      setAreTokensLoading(showLoading);
 
-    setFieldValue(tokensField, tokensFromServer);
-    previouslyFetchedTokens = tokensFromServer;
-    setAreTokensLoading(false);
-  }, [address]);
+      // fetching in progress
+      if (fetchigRef.current) {
+        return;
+      }
+
+      fetchigRef.current = true;
+
+      const newTokensAndMetaESDTs = await fetchAllTokens(address);
+      const currentTokens = tokens ?? [];
+      const tokensFromServer = uniqBy(
+        [...currentTokens, ...newTokensAndMetaESDTs],
+        (token) => token.identifier
+      );
+
+      setFieldValue(tokensField, tokensFromServer);
+      previouslyFetchedTokens = tokensFromServer;
+      fetchigRef.current = false;
+      setAreTokensLoading(false);
+    },
+    [address]
+  );
 
   const handleChangeTokenId = useCallback((newValue: string) => {
     setFieldValue(tokenIdField, newValue, false);
   }, []);
 
   useEffect(() => {
-    handleGetTokens();
+    const showLoading = false;
+    handleGetTokens(showLoading);
+    return () => {
+      previouslyFetchedTokens = [];
+    };
   }, []);
 
   const setNftField = async () => {
@@ -134,13 +152,18 @@ export function TokensContextProvider({
 
   const isTokenIdInvalid = checkInvalid(tokenIdField);
 
-  const allAvailableTokens: PartialTokenType[] = [
+  const allAvailableTokens: Array<
+    PartialTokenType & {
+      usdPrice?: number;
+    }
+  > = [
     {
       name: 'MultiversX eGold',
       identifier: egldLabel,
       balance: balance,
       decimals: Number(decimals),
-      ticker: egldLabel
+      ticker: egldLabel,
+      usdPrice: egldPriceInUsd
     },
     ...esdtTokens
   ];

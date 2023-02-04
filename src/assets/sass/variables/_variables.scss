@@ -7,25 +7,62 @@ $brown: #212529 !default;
 $primary: #1b46c2 !default;
 $secondary: #6c757d !default;
 $primary-light: #1392ff !default;
-$input-border-radius: 0.25rem !default;
-$card-border-radius: 0.25rem !default;
-$card-bg: $white !default;
+$card-bg: #ffffff !default;
 $border-color: #dee2e6 !default;
 $link-hover-color: #122e7f !default;
 $error: #dc3545 !default;
 $warning: #ffc107 !default;
 $btn-blue: #163aa0 !default;
 
-$input-color: #495057 !default;
-$input-border-color: #ced4da !default;
-$input-border-focus: #7191eb !default;
-
 :root {
   --primary: #1b46c2;
+  --primary-light: #1392ff;
   --border-color: #dee2e6;
   --card-bg: white;
   --black: black;
+  --light: #fafafa;
+  --secondary: #6c757d;
+  --card-bg: #ffffff;
+  --border-color: #dee2e6;
+  --warning: #ffc107;
+  --btn-blue: #163aa0;
+  --brown: #212529;
+  --link-hover-color: #122e7f;
+
+  --dapp-form-bg: #242526;
+  --dapp-form-label-color: #9ba5b4;
+  --dapp-form-input-bg: #131313;
+  --dapp-form-placeholder-color: #9ba5b4;
+  --dapp-form-input-color: #ffffff;
+  --dapp-form-error-color: #ff4f8a;
+  --dapp-form-max-btn-bg: #242526;
+  --dapp-form-max-hover-btn-bg: #3066ff;
+  --dapp-form-max-btn-color: #ffffff;
+  --dapp-form-input-border-radius: 8px;
+  --dapp-form-input-border-color: #ced4da;
+  --dapp-form-input-border-focus: #7191eb;
+  --dapp-form-select-bg: #242526;
+  --dapp-form-select-input-color: #ffffff;
+  --dapp-form-select-input-color-hover: #9ba5b4;
+  --dapp-form-select-icon-border: #49494d;
+  --dapp-form-select-icon-bg: #2c2d2f;
+  --dapp-form-select-indicator-fill: #ffffff;
+  --dapp-form-select-indicator-fill-hover: #9ba5b4;
+  --dapp-form-select-menu-bg: #18191a;
+  --dapp-form-select-menu-border: #49494d;
+  --dapp-form-select-menu-scroll-track: transparent;
+  --dapp-form-seleet-menu-scroll-thumb: #4a4b4d;
+  --dapp-form-select-option-bg: #18191a;
+  --dapp-form-select-option-bg-hover: #393b3c;
+  --dapp-form-select-option-color: #ffffff;
 }
+
+$input-border-radius: var(--dapp-form-border-input-radius);
+$card-border-radius: var(--dapp-form-border-input-radius);
+
+$input-color: var(--dapp-form-input-color);
+$input-border-color: var(--dapp-form-input-border-color);
+$input-border-focus: var(--dapp-form-input-border-focus);
 
 @mixin media-breakpoint-up($breakpoint) {
   @if $breakpoint == sm {

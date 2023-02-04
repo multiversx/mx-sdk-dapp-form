@@ -2,6 +2,7 @@ export * from './Receiver';
 export * from './Amount';
 export * from './FeeAccordion';
 export * from './SelectToken';
+export * from './AmountSelect';
 export * from './Data';
 export * from './GasLimit/GasLimit';
 export * from './GasPrice';

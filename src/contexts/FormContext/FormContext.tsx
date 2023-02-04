@@ -11,6 +11,8 @@ export interface FormContextBasePropsType {
   hiddenFields?: ExtendedValuesType['hiddenFields'];
   uiOptions?: ExtendedValuesType['uiOptions'];
   onCloseForm: () => void;
+  isFormSubmitted: boolean;
+  setIsFormSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface FormContextPropsType extends FormContextBasePropsType {
@@ -43,9 +45,6 @@ export function FormContextProvider({
   const [shouldValidateForm, setShouldValidateForm] = useState(
     Boolean(skipToConfirm)
   );
-  const [isFormSubmitted, setIsFormSubmitted] = useState(
-    Boolean(skipToConfirm)
-  );
 
   const [renderKey, setRenderKey] = useState(Date.now());
   const {
@@ -75,7 +74,7 @@ export function FormContextProvider({
     const newErrors = await validateForm();
 
     if (Object.keys(newErrors).length === 0) {
-      setIsFormSubmitted(true);
+      value.setIsFormSubmitted(true);
       return;
     }
 
@@ -88,7 +87,7 @@ export function FormContextProvider({
   }, [errors, validateForm]);
 
   const handleInvalidateForm = useCallback(() => {
-    setIsFormSubmitted(false);
+    value.setIsFormSubmitted(false);
   }, []);
 
   const contextValue: FormContextPropsType = {
@@ -99,7 +98,7 @@ export function FormContextProvider({
     isNftTransaction: isNft,
     shouldValidateForm,
     areValidatedValuesReady:
-      Boolean(isFormSubmitted || skipToConfirm) && isFormValid,
+      Boolean(value.isFormSubmitted || skipToConfirm) && isFormValid,
     isFormValid,
     renderKey,
     txType: values.txType,

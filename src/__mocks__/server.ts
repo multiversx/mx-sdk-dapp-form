@@ -9,13 +9,15 @@ import {
 import { setupServer } from 'msw/node';
 import { testAddress, testNetwork, testReceiver } from './accountConfig';
 
-export const mockResponse = <T extends DefaultBodyType>(body: T) => (
-  _req: RestRequest<never, PathParams<string>>,
-  res: ResponseComposition<DefaultBodyType>,
-  ctx: RestContext
-) => {
-  return res(ctx.status(200), ctx.json(body));
-};
+export const mockResponse =
+  <T extends DefaultBodyType>(body: T) =>
+  (
+    _req: RestRequest<never, PathParams<string>>,
+    res: ResponseComposition<DefaultBodyType>,
+    ctx: RestContext
+  ) => {
+    return res(ctx.status(200), ctx.json(body));
+  };
 
 const handlers = [
   ...['tokens', 'nfts', 'sfts'].map((el) => {

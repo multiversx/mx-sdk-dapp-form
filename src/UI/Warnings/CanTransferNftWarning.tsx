@@ -1,8 +1,8 @@
 import React from 'react';
-import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 import { CAN_TRANSFER_MESSAGE } from 'constants/index';

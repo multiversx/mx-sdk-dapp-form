@@ -37,7 +37,7 @@ describe('Entire balance button', () => {
     const decreasedValue: any = render.getByTestId('amount');
     expect(decreasedValue.value).toBe('0.8073');
 
-    const infoDust = render.getByTestId('infoDust');
+    const infoDust = await render.findByTestId('infoDust');
     expect(infoDust).toBeDefined();
 
     const amount = render.getByTestId('amount');
@@ -69,7 +69,7 @@ describe('Entire balance button', () => {
 
     await waitFor(() => {
       const req = methods.queryByText('Insufficient funds');
-      expect(req!.innerHTML).toBe('Insufficient funds');
+      expect(req?.innerHTML).toBe('Insufficient funds');
     });
   });
 });

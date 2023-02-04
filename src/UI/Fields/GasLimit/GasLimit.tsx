@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
@@ -23,69 +23,65 @@ export const GasLimit = () => {
     isGasLimitInvalid
   } = gasInfo;
 
-  const onResetClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const onResetGasPrice = (event: MouseEvent) => {
+    event.preventDefault();
     onResetGasLimit();
   };
 
-  const showResetButton = gasLimit !== defaultGasLimit && !readonly;
+  const showUndoButton = gasLimit !== defaultGasLimit && !readonly;
+  const isDisabled = getIsDisabled(ValuesEnum.gasLimit, readonly);
 
   return (
     <div className={styles.gas}>
-      <label className={styles.gasLeft} htmlFor={ValuesEnum.gasLimit}>
+      <label className={globals.label} htmlFor={ValuesEnum.gasLimit}>
         Gas Limit
       </label>
 
-      <div className={styles.gasRight}>
-        <div
-          className={classNames(styles.gasForm, {
-            [styles.gasInvalid]: isGasLimitInvalid
+      <div className={styles.wrapper}>
+        <input
+          type='text'
+          id={ValuesEnum.gasLimit}
+          name={ValuesEnum.gasLimit}
+          data-testid={ValuesEnum.gasLimit}
+          disabled={isDisabled}
+          required={true}
+          value={gasLimit}
+          onChange={onChangeGasLimit}
+          onBlur={onBlurGasLimit}
+          autoComplete='off'
+          className={classNames(globals.input, {
+            [globals.disabled]: isDisabled,
+            [globals.error]: isGasLimitInvalid
           })}
-        >
-          <div className={styles.gasWrapper}>
-            <input
-              type='text'
-              id={ValuesEnum.gasLimit}
-              name={ValuesEnum.gasLimit}
-              data-testid={ValuesEnum.gasLimit}
-              disabled={getIsDisabled(ValuesEnum.gasLimit, readonly)}
-              required
-              value={gasLimit}
-              onChange={onChangeGasLimit}
-              onBlur={onBlurGasLimit}
-              autoComplete='off'
-              className={classNames(globals.input, {
-                [globals.invalid]: isGasLimitInvalid
-              })}
-            />
+        />
 
-            {showResetButton && (
-              <span className={styles.gasUndo}>
-                <button
-                  onClick={onResetClick}
-                  data-testid='gasLimitResetBtn'
-                  className={classNames(styles.gasReset, {
-                    [styles.invalid]: isGasLimitInvalid
-                  })}
-                >
-                  <i>
-                    <FontAwesomeIcon icon={faUndo} />
-                  </i>
-                </button>
-              </span>
-            )}
-          </div>
-        </div>
+        <strong />
 
-        {isGasLimitInvalid && (
-          <div
-            className={classNames(globals.error, styles.gasError)}
-            data-testid={`${ValuesEnum.gasLimit}Error`}
+        {showUndoButton && (
+          <span
+            className={classNames(styles.undo, {
+              [styles.disabled]: isDisabled
+            })}
           >
-            {gasLimitError}
-          </div>
+            <button
+              onClick={onResetGasPrice}
+              data-testid='gasLimitResetBtn'
+              className={styles.reset}
+            >
+              <FontAwesomeIcon icon={faUndo} />
+            </button>
+          </span>
         )}
       </div>
+
+      {isGasLimitInvalid && (
+        <div
+          className={globals.error}
+          data-testid={`${ValuesEnum.gasLimit}Error`}
+        >
+          {gasLimitError}
+        </div>
+      )}
     </div>
   );
 };
