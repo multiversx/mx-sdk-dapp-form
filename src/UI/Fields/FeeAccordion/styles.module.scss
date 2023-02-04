@@ -1,45 +1,52 @@
 @import 'assets/sass/variables/_variables.scss';
 
-.feeInFiat {
-  color: $secondary;
-  line-height: 1;
-}
+.fee {
+  margin-bottom: 16px;
+  color: var(--dapp-form-input-color);
+  width: 100%;
 
-.feeAccordion {
-  margin: 15px 0 1.5rem;
-
-  &.feeAccordionSpaced {
-    margin-top: 45px;
-  }
-
-  .feeAccordionTrigger {
-    line-height: 1.5;
+  .trigger {
+    align-items: center;
+    background: var(--dapp-form-input-bg);
+    border-radius: var(--border-radius-low);
+    cursor: pointer;
     display: flex;
-    flex-direction: column;
+    flex-flow: row nowrap;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1;
+    padding: 1rem;
 
-    .feeAccordionIcon {
-      margin-left: -0.28rem;
+    &:hover .label,
+    &:hover .fiat,
+    &:hover .arrow {
+      color: var(--dapp-form-input-color);
     }
 
-    .feeAccordionLabel {
-      margin-right: 0.5rem;
+    .fiat {
+      font-size: 12px;
+      margin-left: 0.25rem;
+      transition: all 200ms ease;
+      color: var(--dapp-form-label-color);
     }
 
-    .feeAccordionLimit {
-      margin-right: 0.5rem;
+    .arrow {
+      transition: all 200ms ease;
+      color: var(--dapp-form-label-color);
+      margin-left: auto;
+
+      &.active {
+        transform: rotateZ(90deg);
+      }
     }
   }
 
-  .feeAccordionExpandable {
+  .expandable {
     overflow: hidden;
     transition: height 0.2s ease;
 
-    .feeAccordionContent {
-      border-radius: 0.25rem;
-      background-color: $light;
-      border: 1px solid $border-color;
-      margin-top: 0.5rem;
-      padding: 2rem 0;
+    .content {
+      margin-top: 16px;
     }
   }
 }

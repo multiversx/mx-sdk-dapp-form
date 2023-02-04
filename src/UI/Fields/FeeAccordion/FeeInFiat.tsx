@@ -12,10 +12,12 @@ interface FeeInFiatType {
 
 export const FeeInFiat = ({ feeLimit, egldPriceInUsd }: FeeInFiatType) =>
   feeLimit !== ZERO ? (
-    <small className={styles.feeInFiat} data-testid='feeInFiat'>
+    <span className={styles.fiat} data-testid='feeInFiat'>
+      (
       {calculateFeeInFiat({
         feeLimit,
         egldPriceInUsd
       })}
-    </small>
+      )
+    </span>
   ) : null;

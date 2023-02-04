@@ -1,0 +1,23 @@
+@import 'assets/sass/variables/variables';
+
+.max {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  border-radius: 16px;
+  margin-right: 8px;
+  background-color: var(--dapp-form-max-btn-bg);
+  color: var(--dapp-form-max-btn-color);
+  text-transform: uppercase;
+  width: 48px;
+  padding: 6px 0;
+  font-size: 12px;
+  transition: all 200ms ease;
+
+  &:hover {
+    color: var(--dapp-form-max-btn-color);
+    background-color: var(--dapp-form-max-hover-btn-bg);
+    text-decoration: none;
+  }
+}

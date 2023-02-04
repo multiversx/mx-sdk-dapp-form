@@ -28,11 +28,8 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
   } = useNetworkConfigContext();
 
   const { nft, tokens } = useTokensContext();
-  const {
-    isEsdtTransaction,
-    isNftTransaction,
-    isEgldTransaction
-  } = useFormContext();
+  const { isEsdtTransaction, isNftTransaction, isEgldTransaction } =
+    useFormContext();
   const { gasLimit, gasPrice } = useGasContext();
   const { tokenId } = values;
 
@@ -64,17 +61,15 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
   let formattedEgldBalance = ZERO;
   let balanceMinusDust = balance;
   if (balance && isEgldTransaction) {
-    const {
-      entireBalance: formattedBalance,
-      entireBalanceMinusDust
-    } = getEntireBalance({
-      balance,
-      gasPrice: parseAmount(gasPrice),
-      gasLimit: gasLimit,
-      decimals: DECIMALS,
-      digits: DIGITS,
-      chainId
-    });
+    const { entireBalance: formattedBalance, entireBalanceMinusDust } =
+      getEntireBalance({
+        balance,
+        gasPrice: parseAmount(gasPrice),
+        gasLimit: gasLimit,
+        decimals: DECIMALS,
+        digits: DIGITS,
+        chainId
+      });
     formattedEgldBalance = formattedBalance;
     balanceMinusDust = entireBalanceMinusDust;
   }

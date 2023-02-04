@@ -28,13 +28,8 @@ export const ConfirmScreen = ({
     gasInfo
   } = useSendFormContext();
   const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
-  const {
-    readonly,
-    onCloseForm,
-    onInvalidateForm,
-    onSubmitForm,
-    txType
-  } = formInfo;
+  const { readonly, onCloseForm, onInvalidateForm, onSubmitForm, txType } =
+    formInfo;
   const { data } = dataFieldInfo;
   const { receiver, scamError } = receiverInfo;
   const { feeLimit, gasCostError } = gasInfo;
@@ -93,13 +88,14 @@ export const ConfirmScreen = ({
         egldPriceInUsd={egldPriceInUsd}
         feeLimit={feeLimit}
       />
+
       <Confirm.Data data={data} />
 
       <div className={styles.buttons}>
         {gasCostError && <p className={globals.error}>{gasCostError}</p>}
 
         <button
-          className={classNames(globals.btn, globals.btnPrimary, {
+          className={classNames('my-3', globals.btn, globals.btnPrimary, {
             [globals.btnWarning]: scamError
           })}
           type='button'

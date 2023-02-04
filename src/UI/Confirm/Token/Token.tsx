@@ -29,7 +29,7 @@ export const Token = ({
 
   return (
     <div className={styles.token}>
-      <span className={styles.label}>
+      <span className={globals.label}>
         {nft ? <span>{nft?.name} </span> : ''}
         Token
       </span>

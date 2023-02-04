@@ -1,32 +1,28 @@
 @import 'assets/sass/variables/_variables.scss';
 
-.receiverField {
-  margin-bottom: 1.5rem;
+.receiver {
+  margin-bottom: 16px;
 
-  .receiverFieldLabel {
-    margin-bottom: 0.5rem;
-  }
-
-  .receiverFieldAutocomplete {
+  .autocomplete {
     position: relative;
 
     input[aria-hidden='true'] {
       display: none;
     }
 
-    .receiverFieldMenu {
+    .menu {
       left: 0px;
       top: 0px;
       float: left;
       min-width: 10rem;
       font-size: 1rem;
-      color: $brown;
+      color: var(--brown);
       text-align: left;
       list-style: none;
-      background-color: $white;
+      background-color: var(--white);
       background-clip: padding-box;
-      border: 1px solid rgba($black, 0.15);
-      border-radius: $card-border-radius;
+      border: 1px solid rgba(#000000, 0.15);
+      border-radius: var(--dapp-form-input-border-radius);
       z-index: 1000;
       inset: unset;
       max-height: 300px;
@@ -34,13 +30,13 @@
       transform: none;
       overflow-x: scroll;
 
-      .receiverFieldItem {
+      .item {
         display: inline-block;
         line-height: 1.5;
         padding: 0.25rem 1.5rem;
         clear: both;
         font-weight: 400;
-        color: $brown;
+        color: var(--brown);
         text-align: inherit;
         white-space: nowrap;
         background-color: transparent;
@@ -63,15 +59,6 @@
           margin-bottom: 0.675rem;
         }
       }
-    }
-  }
-
-  .receiverFieldScam {
-    line-height: 1.5;
-    color: $warning;
-
-    svg {
-      margin-right: 0.25rem;
     }
   }
 }

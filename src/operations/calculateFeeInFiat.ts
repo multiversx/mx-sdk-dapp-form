@@ -15,11 +15,13 @@ export function calculateFeeInFiat({
     showLastNonZeroDecimal: true
   });
 
-  return `≈ ${usdValue({
+  const feeInFiat = `≈ ${usdValue({
     amount,
     usd: egldPriceInUsd,
     decimals: DIGITS
   })}`;
+
+  return feeInFiat;
 }
 
 export default calculateFeeInFiat;

@@ -15,30 +15,32 @@ export const validationSchema = object().shape({
   tokenId: string().required('Required'),
   gasPrice,
   data,
-  amount: string().when(['txType'], function amountValidation(
-    txType: TransactionTypeEnum
-  ) {
-    switch (txType) {
-      case TransactionTypeEnum.ESDT:
-        return esdtAmount;
-      case TransactionTypeEnum.EGLD:
-        return egldAmount;
-      default:
-        return nftAmount;
+  amount: string().when(
+    ['txType'],
+    function amountValidation(txType: TransactionTypeEnum) {
+      switch (txType) {
+        case TransactionTypeEnum.ESDT:
+          return esdtAmount;
+        case TransactionTypeEnum.EGLD:
+          return egldAmount;
+        default:
+          return nftAmount;
+      }
     }
-  }),
-  gasLimit: string().when(['txType'], function amountValidation(
-    txType: TransactionTypeEnum
-  ) {
-    switch (txType) {
-      case TransactionTypeEnum.ESDT:
-        return esdtGasLimit;
-      case TransactionTypeEnum.EGLD:
-        return egldGasLimit;
-      default:
-        return nftGasLimit;
+  ),
+  gasLimit: string().when(
+    ['txType'],
+    function amountValidation(txType: TransactionTypeEnum) {
+      switch (txType) {
+        case TransactionTypeEnum.ESDT:
+          return esdtGasLimit;
+        case TransactionTypeEnum.EGLD:
+          return egldGasLimit;
+        default:
+          return nftGasLimit;
+      }
     }
-  })
+  )
 });
 
 export default validationSchema;

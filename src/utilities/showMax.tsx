@@ -17,9 +17,8 @@ export function showMax({
 }) {
   const bNamount = new BigNumber(amount);
   const bNentireBalanceMinusDust = new BigNumber(entireBalanceMinusDust);
-  const amountSmallerThanAvailable = bNentireBalanceMinusDust.isGreaterThan(
-    bNamount
-  );
+  const amountSmallerThanAvailable =
+    bNentireBalanceMinusDust.isGreaterThan(bNamount);
   const valueIsUndefined = !amount;
 
   const isDisabled = getIsDisabled(ValuesEnum.amount, readonly);

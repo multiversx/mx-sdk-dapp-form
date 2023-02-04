@@ -7,9 +7,8 @@ interface VerifiedAddressesType {
 }
 
 export function useVerifyScamAddress(apiConfig?: ApiConfigType) {
-  const [verifiedAddresses, setVerifiedAddresses] = useState<
-    VerifiedAddressesType
-  >({});
+  const [verifiedAddresses, setVerifiedAddresses] =
+    useState<VerifiedAddressesType>({});
   const [fetching, setFetching] = useState(false);
 
   const verifyScamAddress = async ({

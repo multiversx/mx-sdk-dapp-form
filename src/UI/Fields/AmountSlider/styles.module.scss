@@ -13,7 +13,7 @@
       transform: translateY(-50%);
       content: '';
       position: absolute;
-      background: $border-color;
+      background: var(--border-color);
       height: 4px;
     }
 
@@ -43,24 +43,24 @@
       top: 50%;
       transform: translateY(-50%);
       border-radius: 50%;
-      background-color: $black;
+      background-color: var(--black);
       z-index: 5;
 
       &.disabled {
-        background-color: $secondary;
+        background-color: var(--secondary);
       }
 
       .amountSliderThumbPercentage {
         line-height: 1;
         opacity: 0;
         transition: all 400ms ease;
-        color: $white;
+        color: var(--white);
         font-weight: 500;
         position: absolute;
         left: 50%;
         padding: 0.25rem 0.35rem;
-        background: $black;
-        border-radius: 0.25rem;
+        background: var(--black);
+        border-radius: var(--dapp-form-input-border-radius);
         font-size: 11px;
         transform: translateX(-50%);
         bottom: calc(100% + 0.25rem);
@@ -69,7 +69,7 @@
 
     .amountSliderCompletion {
       height: 4px;
-      background: $primary;
+      background: var(--primary);
       position: absolute;
       top: 50%;
       left: 0;
@@ -78,7 +78,7 @@
       margin-left: 2px;
 
       &.disabled {
-        background: $secondary;
+        background: var(--secondary);
       }
     }
 
@@ -94,8 +94,8 @@
         position: absolute;
         height: 12px;
         border-radius: 50%;
-        background-color: $white;
-        border: 2px solid $primary;
+        background-color: var(--white);
+        border: 2px solid var(--primary);
         width: 12px;
         top: 50%;
         left: 50%;
@@ -103,15 +103,15 @@
       }
 
       &.completed:after {
-        background-color: $primary;
+        background-color: var(--primary);
 
         &.disabled:after {
-          background-color: $secondary;
+          background-color: var(--secondary);
         }
       }
 
       &.disabled:after {
-        border-color: $secondary;
+        border-color: var(--secondary);
       }
     }
 
@@ -122,7 +122,7 @@
       z-index: 7;
       padding: 1.5rem 0 0;
       line-height: 1;
-      color: $black;
+      color: var(--black);
       font-size: 12px;
       cursor: pointer;
 

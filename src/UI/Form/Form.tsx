@@ -14,26 +14,21 @@ import {
   Data,
   FeeAccordion,
   NftSftToken,
-  SelectToken,
   Receiver,
-  AmountSlider
+  AmountSlider,
+  AmountSelectInput
 } from 'UI/Fields';
 
 import { CanTransferNftWarning, WegldWarning } from 'UI/Warnings';
 import styles from './form.module.scss';
 
 export const Form = ({ className }: WithClassnameType) => {
-  const {
-    formInfo,
-    receiverInfo,
-    accountInfo,
-    amountInfo
-  } = useSendFormContext();
+  const { formInfo, receiverInfo, accountInfo, amountInfo, tokensInfo } =
+    useSendFormContext();
   const {
     values: { txType, tokenId }
   } = useFormikContext<ExtendedValuesType>();
 
-  const { scamError } = receiverInfo;
   const { amountRange, onSetAmountPercentage } = amountInfo;
 
   const {
@@ -69,9 +64,14 @@ export const Form = ({ className }: WithClassnameType) => {
       <fieldset className={styles.formFieldset}>
         <Receiver />
 
-        {isNFTTransaction ? <NftSftToken /> : <SelectToken label='Token' />}
-
-        <Amount />
+        {isNFTTransaction ? (
+          <>
+            <NftSftToken />
+            <Amount />
+          </>
+        ) : (
+          <AmountSelectInput />
+        )}
 
         {uiOptions?.showAmountSlider && !isNFTTransaction && (
           <AmountSlider
@@ -92,20 +92,20 @@ export const Form = ({ className }: WithClassnameType) => {
 
       <div className={styles.formButtons}>
         <button
-          className={classNames(globals.btn, globals.btnPrimary, {
-            [globals.btnWarning]: scamError
+          className={classNames('my-3', globals.btn, globals.btnPrimary, {
+            [globals.btnWarning]: receiverInfo?.scamError
           })}
           type='button'
           id='sendBtn'
           data-testid='sendBtn'
           onClick={onValidateForm}
         >
-          Send
+          Send {tokensInfo.tokenDetails.ticker}
         </button>
 
         <button
           className={classNames(globals.btn, globals.btnLink, {
-            [globals.btnWarning]: scamError
+            [globals.btnWarning]: receiverInfo?.scamError
           })}
           type='button'
           id='closeButton'

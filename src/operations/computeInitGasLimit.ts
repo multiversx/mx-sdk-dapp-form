@@ -26,9 +26,7 @@ export interface ComputeInitGasLimitType {
   egldLabel: string;
 }
 
-export const computeInitGasLimit: (
-  props: ComputeInitGasLimitType
-) => Promise<{
+export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
   initGasLimit: string;
   initGasLimitError?: SendFormContainerPropsType['initGasLimitError'];
 }> = async ({
@@ -46,22 +44,20 @@ export const computeInitGasLimit: (
   chainId
 }) => {
   if (isContract(receiver) && !isInternal) {
-    const {
-      gasLimit: resultedGasLimit,
-      gasLimitCostError
-    } = await fetchGasLimit({
-      balance,
-      address,
-      nonce,
-      values: {
-        amount,
-        receiver,
-        data,
-        gasLimit,
-        gasPrice
-      },
-      chainId
-    });
+    const { gasLimit: resultedGasLimit, gasLimitCostError } =
+      await fetchGasLimit({
+        balance,
+        address,
+        nonce,
+        values: {
+          amount,
+          receiver,
+          data,
+          gasLimit,
+          gasPrice
+        },
+        chainId
+      });
 
     const initGasLimit =
       receiver === delegationContract

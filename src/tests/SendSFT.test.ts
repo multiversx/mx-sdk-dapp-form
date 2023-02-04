@@ -102,7 +102,7 @@ describe('Send SFT tokens', () => {
 
     await waitFor(() => {
       const req = methods.queryByText('Invalid number');
-      expect(req!.innerHTML).toBe('Invalid number');
+      expect(req?.innerHTML).toBe('Invalid number');
     });
 
     // test funds
@@ -111,7 +111,7 @@ describe('Send SFT tokens', () => {
 
     await waitFor(() => {
       const req = methods.queryByText('Insufficient funds');
-      expect(req!.innerHTML).toBe('Insufficient funds');
+      expect(req?.innerHTML).toBe('Insufficient funds');
     });
 
     fireEvent.change(amountInput, { target: { value: '1' } });

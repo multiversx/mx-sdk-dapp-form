@@ -1,0 +1,316 @@
+.label {
+  display: none;
+}
+
+.select {
+  width: auto;
+  margin-left: auto;
+  position: relative;
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  .control {
+    background-color: var(--dapp-form-bg);
+    border: transparent;
+    border-radius: var(--dapp-form-input-border-radius);
+    width: 8rem;
+
+    @media (min-width: 768px) {
+      margin-left: 0.2rem;
+      width: 11rem;
+      border-bottom-left-radius: 30px;
+      border-top-left-radius: 30px;
+    }
+
+    &:hover {
+      .indicator svg {
+        fill: var(--dapp-form-select-indicator-fill-hover) !important;
+      }
+
+      .payload .single {
+        color: var(--dapp-form-select-input-color-hover) !important;
+      }
+    }
+
+    .container {
+      line-height: 1.5;
+      font-size: 1rem;
+      height: 3.625rem;
+      padding: 4px 0 4px 10px;
+      flex: 1;
+      cursor: pointer;
+      display: flex;
+
+      @media (min-width: 768px) {
+        padding-left: 4px;
+      }
+
+      .icon {
+        width: 40px;
+        height: 40px;
+        max-width: 40px;
+        min-width: 40px;
+        margin-right: 8px;
+        flex: 1;
+        background-color: var(--dapp-form-select-icon-bg);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--dapp-form-select-icon-border);
+        box-shadow: 0 1px 2px rgb(0 0 0 / 8%);
+        justify-content: center;
+        overflow: hidden;
+
+        img {
+          width: 3rem;
+          height: 3rem;
+        }
+
+        .asset .diamond {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+
+      .payload {
+        min-width: 0;
+        flex: 1;
+        position: relative;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        width: 100%;
+
+        .wrapper {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+
+          .single {
+            color: var(--dapp-form-select-input-color);
+            font-size: 16px;
+            margin: 0;
+            transition: all 200ms ease;
+            font-weight: 300;
+            white-space: normal;
+            left: 0;
+            right: 0;
+            line-height: 1.25;
+            position: absolute;
+            pointer-events: none;
+            white-space: nowrap;
+
+            &.focused {
+              color: var(--dapp-form-select-input-color-hover) !important;
+            }
+          }
+
+          .dropdown {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            line-height: 1;
+
+            input {
+              margin: 0 !important;
+              min-height: 20px !important;
+              background-color: transparent !important;
+              font-size: 16px !important;
+              border: none !important;
+              color: var(--dapp-form-select-input-color) !important;
+              line-height: 1.25 !important;
+              border-radius: 0 !important;
+              min-width: 100% !important;
+              font-weight: 300 !important;
+
+              &:after {
+                content: none;
+              }
+
+              &:focus,
+              &:hover {
+                opacity: 1 !important;
+              }
+            }
+          }
+
+          .price {
+            line-height: 1.25;
+            color: var(--dapp-form-label-color);
+            font-size: 12px;
+            margin-top: 4px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 100%;
+            display: block;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+
+    .indicator {
+      cursor: pointer;
+
+      svg {
+        transition: all 200ms ease;
+        fill: var(--dapp-form-select-indicator-fill);
+      }
+
+      &.expanded svg {
+        transform: rotateZ(180deg);
+      }
+
+      &:hover svg {
+        fill: var(--dapp-form-select-indicator-fill-hover);
+      }
+    }
+  }
+
+  .loading {
+    height: 150px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu {
+    border: 1px solid var(--dapp-form-select-menu-border);
+    border-radius: 6px;
+    width: auto;
+    right: -1px;
+    overflow: hidden;
+    background-color: var(--dapp-form-select-option-bg);
+    z-index: 99999;
+
+    .list {
+      background-color: var(--dapp-form-select-menu-bg);
+      max-height: 260px;
+      padding: 0;
+
+      &::-webkit-scrollbar,
+      &::-webkit-scrollbar-track,
+      &::-webkit-scrollbar-track:hover,
+      &::-webkit-scrollbar-corner {
+        background-color: var(--dapp-form-select-menu-scroll-track);
+      }
+
+      &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+
+        &:horizontal {
+          height: 8px;
+        }
+      }
+
+      &::-webkit-scrollbar-thumb,
+      &::-webkit-scrollbar-thumb:horizontal {
+        border-radius: var(--dapp-form-input-border-radius);
+        background-color: var(--dapp-form-seleet-menu-scroll-thumb);
+        border: 2.5px solid transparent;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--dapp-form-seleet-menu-scroll-thumb);
+        border: 2px solid transparent;
+      }
+
+      &::-webkit-scrollbar-button {
+        display: none;
+      }
+
+      &::-webkit-resizer {
+        background-color: transparent;
+      }
+
+      .option {
+        padding: 8px 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        border-radius: 0;
+        background-color: var(--dapp-form-select-option-bg);
+
+        &:hover,
+        &.selected {
+          background-color: var(--dapp-form-select-option-bg-hover) !important;
+        }
+
+        .icon {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          background-color: var(--dapp-form-select-icon-bg);
+          border-radius: 50%;
+          border: 1px solid var(--dapp-form-select-icon-border);
+          box-shadow: 0 1px 2px rgb(0 0 0 / 8%);
+          margin-right: 8px;
+
+          .diamond {
+            font-size: 24px;
+
+            path {
+              fill: #fff;
+            }
+          }
+        }
+
+        .info {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex: 1;
+
+          .left,
+          .right {
+            display: inline-flex;
+            flex-direction: column;
+            line-height: 1;
+            text-align: left;
+
+            .value {
+              color: var(--dapp-form-select-option-color);
+              font-weight: 300;
+              font-size: 16px;
+              line-height: 1.25;
+
+              strong {
+                font-weight: 900;
+              }
+            }
+
+            .price {
+              line-height: 1.25;
+              font-size: 12px;
+              color: var(--dapp-form-label-color);
+              margin-top: 4px;
+            }
+          }
+
+          .right {
+            text-align: right;
+            margin-left: 16px;
+          }
+        }
+
+        .children {
+          display: none;
+        }
+      }
+    }
+  }
+}

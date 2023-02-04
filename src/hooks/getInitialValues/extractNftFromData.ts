@@ -1,7 +1,6 @@
+import { Address } from '@multiversx/sdk-core';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import { decodePart } from '@multiversx/sdk-dapp/utils/decoders/decodePart';
-
-import { Address } from '@multiversx/sdk-core';
 
 interface ExistingNftType {
   collection: string;

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
+import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import classNames from 'classnames';
 
 import { Typeahead, Menu, MenuItem, Hint } from 'react-bootstrap-typeahead';
@@ -14,13 +14,13 @@ import {
   TypeaheadManagerChildProps
 } from 'react-bootstrap-typeahead/types/types';
 
+import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
 
-import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 const CustomMenu = (
@@ -39,20 +39,28 @@ const CustomMenu = (
     ...menuProps
   } = props as any;
 
+  if (results.length === 0) {
+    return <></>;
+  }
+
   return (
-    <Menu {...menuProps} className={styles.receiverFieldMenu}>
-      {results.map((option, position) => (
-        <MenuItem
-          key={option.toString()}
-          option={option}
-          position={position}
-          className={classNames(styles.receiverFieldItem, {
-            [styles.highlighted]: position === state.activeIndex
-          })}
-        >
-          {option.toString()}
-        </MenuItem>
-      ))}
+    <Menu {...menuProps} className={styles.menu}>
+      {results
+        .filter((result) => typeof result === 'string')
+        .map((option, position) => {
+          return (
+            <MenuItem
+              key={option.toString()}
+              option={option}
+              position={position}
+              className={classNames(styles.item, {
+                [styles.highlighted]: position === state.activeIndex
+              })}
+            >
+              {option.toString()}
+            </MenuItem>
+          );
+        })}
     </Menu>
   );
 };
@@ -129,24 +137,25 @@ export const Receiver = ({ className }: WithClassnameType) => {
   /*
    * Filter the addresses based on input. Should be more than three characters.
    */
-  const filterBy: FilterByCallback = (option, props) => {
-    const needle = props.text.toLowerCase();
-    const haystack = option.toLowerCase();
 
-    if (needle.length < 3) {
+  const filterBy: FilterByCallback = (option, props) => {
+    const searchString = props.text.toLowerCase();
+    const currentOption = option.toLowerCase();
+
+    if (searchString.length < 3) {
       return true;
     }
 
-    return haystack.includes(needle);
+    return currentOption.includes(searchString);
   };
 
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
   return (
-    <div className={classNames(styles.receiverField, className)}>
+    <div className={classNames(styles.receiver, className)}>
       {label !== null && (
         <div
-          className={styles.receiverFieldLabel}
+          className={globals.label}
           data-testid='receiverLabel'
           data-loading={fetchingScamAddress}
         >
@@ -154,7 +163,7 @@ export const Receiver = ({ className }: WithClassnameType) => {
         </div>
       )}
 
-      <div className={styles.receiverFieldAutocomplete}>
+      <div className={styles.autocomplete}>
         <Typeahead
           id='receiverWrapper'
           filterBy={filterBy}
@@ -170,7 +179,12 @@ export const Receiver = ({ className }: WithClassnameType) => {
           renderInput={renderInput}
           onInputChange={onInputChange}
           renderMenu={CustomMenu}
-          inputProps={{ className: globals.input }}
+          inputProps={{
+            className: classNames(globals.input, {
+              [globals.error]: isReceiverInvalid || scamError,
+              [globals.disabled]: getIsDisabled(ValuesEnum.receiver, readonly)
+            })
+          }}
         />
       </div>
 
@@ -181,7 +195,10 @@ export const Receiver = ({ className }: WithClassnameType) => {
       )}
 
       {scamError && (
-        <div data-testid='receiverScam' className={styles.receiverFieldScam}>
+        <div
+          data-testid='receiverScam'
+          className={classNames(globals.error, globals.scam)}
+        >
           <span>
             <FontAwesomeIcon icon={faExclamationTriangle} />
             <small>{scamError}</small>

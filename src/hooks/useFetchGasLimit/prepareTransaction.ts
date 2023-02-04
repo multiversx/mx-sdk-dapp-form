@@ -1,4 +1,3 @@
-import { VERSION } from '@multiversx/sdk-dapp/constants/index';
 import {
   Transaction,
   TransactionPayload,
@@ -6,6 +5,7 @@ import {
   Address,
   TokenPayment
 } from '@multiversx/sdk-core';
+import { VERSION } from '@multiversx/sdk-dapp/constants/index';
 import BigNumber from 'bignumber.js';
 import { parseAmount } from 'helpers';
 

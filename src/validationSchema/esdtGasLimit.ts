@@ -20,24 +20,26 @@ const minValue = string().test(
   }
 );
 
-const funds = string().test('funds', 'Insufficient funds', function fundsCheck(
-  value
-) {
-  const { data, gasPrice, ignoreTokenBalance, balance, chainId } = this
-    .parent as ExtendedValuesType;
-  if (value && !ignoreTokenBalance) {
-    const valid = validateGasLimitAmount({
-      amount: ZERO,
-      balance,
-      gasLimit: value,
-      gasPrice,
-      data,
-      chainId
-    });
-    return valid;
+const funds = string().test(
+  'funds',
+  'Insufficient funds',
+  function fundsCheck(value) {
+    const { data, gasPrice, ignoreTokenBalance, balance, chainId } = this
+      .parent as ExtendedValuesType;
+    if (value && !ignoreTokenBalance) {
+      const valid = validateGasLimitAmount({
+        amount: ZERO,
+        balance,
+        gasLimit: value,
+        gasPrice,
+        data,
+        chainId
+      });
+      return valid;
+    }
+    return true;
   }
-  return true;
-});
+);
 
 const validations = [...sharedGaslimit(), required, minValue, funds];
 
