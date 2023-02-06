@@ -43,7 +43,13 @@ export const computeNftDataField = ({
   receiver: string;
   errors: boolean;
 }) => {
-  if (nft && amount && receiver && !errors) {
+  const isNoErrorNft = nft && amount && receiver && !errors;
+
+  if (!isNoErrorNft) {
+    return '';
+  }
+
+  try {
     let dataStr = 'ESDTNFTTransfer';
     const quantity =
       nft?.type === NftEnumType.MetaESDT
@@ -56,7 +62,7 @@ export const computeNftDataField = ({
     dataStr += `@${evenLengthValue(new BigNumber(quantity).toString(16))}`;
     dataStr += `@${bech32.decode(receiver)}`;
     return dataStr;
-  } else {
+  } catch (err) {
     return '';
   }
 };
