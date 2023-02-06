@@ -58,6 +58,11 @@
         &:last-child {
           margin-bottom: 0.675rem;
         }
+
+        .trim {
+          display: flex;
+          align-items: flex-end;
+        }
       }
     }
   }

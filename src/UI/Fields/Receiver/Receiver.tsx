@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import classNames from 'classnames';
-
+import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import { Typeahead, Menu, MenuItem, Hint } from 'react-bootstrap-typeahead';
 import { MenuProps } from 'react-bootstrap-typeahead/types/components/Menu';
 import {
@@ -47,20 +47,18 @@ const CustomMenu = (
     <Menu {...menuProps} className={styles.menu}>
       {results
         .filter((result) => typeof result === 'string')
-        .map((option, position) => {
-          return (
-            <MenuItem
-              key={option.toString()}
-              option={option}
-              position={position}
-              className={classNames(styles.item, {
-                [styles.highlighted]: position === state.activeIndex
-              })}
-            >
-              {option.toString()}
-            </MenuItem>
-          );
-        })}
+        .map((option, position) => (
+          <MenuItem
+            key={option.toString()}
+            option={option}
+            position={position}
+            className={classNames(styles.item, {
+              [styles.highlighted]: position === state.activeIndex
+            })}
+          >
+            <Trim text={option.toString()} className={styles.trim} />
+          </MenuItem>
+        ))}
     </Menu>
   );
 };
