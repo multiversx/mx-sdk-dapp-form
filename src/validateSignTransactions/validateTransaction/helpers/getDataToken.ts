@@ -2,6 +2,12 @@ import { ApiConfigType, getToken } from 'apiCalls';
 import { ZERO } from 'constants/index';
 import { formatAmount } from 'helpers';
 
+export const emptyToken = {
+  tokenData: null,
+  tokenAmount: ZERO,
+  tokenFound: false
+};
+
 export async function getDataToken(
   {
     tokenId,
@@ -12,6 +18,10 @@ export async function getDataToken(
   },
   apiConfig: ApiConfigType
 ) {
+  if (!tokenId) {
+    return emptyToken;
+  }
+
   try {
     const { data } = await getToken(tokenId, apiConfig);
     const { decimals } = data;
@@ -29,11 +39,7 @@ export async function getDataToken(
       tokenFound: true
     };
   } catch (e) {
-    return {
-      tokenData: null,
-      tokenAmount: ZERO,
-      tokenFound: false
-    };
+    return emptyToken;
   }
 }
 export default getDataToken;
