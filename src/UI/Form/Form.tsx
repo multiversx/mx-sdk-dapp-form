@@ -21,7 +21,7 @@ import {
 
 import { CanTransferNftWarning, WegldWarning } from 'UI/Warnings';
 import styles from './form.module.scss';
-import { getSendLabel } from './helpers/getSendLabel';
+import { getSendLabel } from './helpers';
 
 export const Form = ({ className }: WithClassnameType) => {
   const { formInfo, receiverInfo, accountInfo, amountInfo, tokensInfo } =
