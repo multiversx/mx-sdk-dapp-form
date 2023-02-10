@@ -59,6 +59,20 @@ const balance = string().test(
   }
 );
 
+const nonZero = string().test(
+  'nonZero',
+  'Cannot be zero',
+  function balanceCheck(amount: any) {
+    if (!amount) {
+      return true;
+    }
+
+    const isZero = new BigNumber(amount).isZero();
+
+    return !isZero;
+  }
+);
+
 const isValidNumber = string().test(
   'isValidNumber',
   'Invalid number',
@@ -72,7 +86,13 @@ const isValidNumber = string().test(
   }
 );
 
-const validations = [required, isValidNumber, balance, metaFormattedAmount];
+const validations = [
+  required,
+  isValidNumber,
+  balance,
+  metaFormattedAmount,
+  nonZero
+];
 
 export const nftAmount = validations.reduce(
   (previousValue, currentValue) => previousValue.concat(currentValue),
