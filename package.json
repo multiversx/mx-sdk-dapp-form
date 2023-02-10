@@ -104,8 +104,7 @@
     "@fortawesome/react-fontawesome": "0.1.18",
     "classnames": "2.3.1",
     "react-bootstrap-typeahead": "6.0.0-rc.3",
-    "react-select": "5.4.0",
-    "react-tooltip": "5.7.2"
+    "react-select": "5.4.0"
   },
   "dependencies": {
     "anchorme": "2.1.2",
@@ -113,6 +112,7 @@
     "bech32": "2.0.0",
     "bignumber.js": "9.x",
     "formik": "2.2.9",
+    "react-tooltip": "5.7.2",
     "lodash": "4.17.21",
     "react-collapsed": "3.6.0",
     "react-number-format": "5.1.3",
