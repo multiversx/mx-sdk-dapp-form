@@ -242,12 +242,15 @@
         justify-content: flex-start;
         border-radius: 0;
         background-color: var(--dapp-form-select-option-bg);
-
-        &:hover,
-        &.selected {
-          background-color: var(--dapp-form-select-option-bg-hover) !important;
+        &:hover {
+          background-color: var(--dapp-form-select-option-bg-hover);
         }
-
+        &.selected {
+          background-color: var(--dapp-form-select-option-bg-selected);
+          &:hover {
+            background-color: var(--dapp-form-select-option-bg-hover);
+          }
+        }
         .icon {
           display: flex;
           align-items: center;
