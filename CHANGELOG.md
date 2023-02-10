@@ -7,24 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Uniform field labels](https://github.com/multiversx/mx-sdk-dapp-form/pull/123)
+
 ## [[0.4.5](https://github.com/multiversx/mx-sdk-dapp-form/pull/119)] - 2023-02-10
+
 - [Fixed set value flow on AmountInput component](https://github.com/multiversx/mx-sdk-dapp-form/pull/120)
 - [Added Send NFT/SFT label](https://github.com/multiversx/mx-sdk-dapp-form/pull/121)
+
 ## [[0.4.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/119)] - 2023-02-10
+
 - [Fixed sending zero NFTs validation](https://github.com/multiversx/mx-sdk-dapp-form/pull/118)
+
 ## [[0.4.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/117)] - 2023-02-09
+
 - [Fixed getting tokens when no ID is provided](https://github.com/multiversx/mx-sdk-dapp-form/pull/116)
+
 ## [[0.4.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/112)] - 2023-02-06
+
 - [Fixed crashing app on NFT invalid receiver address](https://github.com/multiversx/mx-sdk-dapp-form/pull/113)
 - [Added Trim to receiver addresses in dropdown](https://github.com/multiversx/mx-sdk-dapp-form/pull/114)
 
 ## [[0.4.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/112)] - 2023-02-04
-- [Fixed token assets access](https://github.com/multiversx/mx-sdk-dapp-form/pull/112)
-## [[0.4.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/111)] - 2023-02-04
-- [Added `AmountSelect` component, fixed `data` reset on amount change and allowed control of `isFormSubmitted` from outside.](https://github.com/multiversx/mx-sdk-dapp-form/pull/110)
-## [[0.3.9](https://github.com/multiversx/mx-sdk-dapp-form/pull/99)] - 2023-01-12
-- [Changed references from elrond to multiversx](https://github.com/multiversx/mx-sdk-dapp-form/pull/102)
 
+- [Fixed token assets access](https://github.com/multiversx/mx-sdk-dapp-form/pull/112)
+
+## [[0.4.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/111)] - 2023-02-04
+
+- [Added `AmountSelect` component, fixed `data` reset on amount change and allowed control of `isFormSubmitted` from outside.](https://github.com/multiversx/mx-sdk-dapp-form/pull/110)
+
+## [[0.3.9](https://github.com/multiversx/mx-sdk-dapp-form/pull/99)] - 2023-01-12
+
+- [Changed references from elrond to multiversx](https://github.com/multiversx/mx-sdk-dapp-form/pull/102)
 
 ## [[0.3.8](https://github.com/multiversx/mx-sdk-dapp-form/pull/99)] - 2022-12-21
 
