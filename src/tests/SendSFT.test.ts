@@ -114,6 +114,15 @@ describe('Send SFT tokens', () => {
       expect(req?.innerHTML).toBe('Insufficient funds');
     });
 
+    // test zero
+    fireEvent.change(amountInput, { target: { value: '0' } });
+    fireEvent.blur(amountInput);
+
+    await waitFor(() => {
+      const req = methods.queryByText('Cannot be zero');
+      expect(req?.innerHTML).toBe('Cannot be zero');
+    });
+
     fireEvent.change(amountInput, { target: { value: '1' } });
     fireEvent.blur(amountInput);
 
