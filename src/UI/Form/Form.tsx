@@ -21,6 +21,7 @@ import {
 
 import { CanTransferNftWarning, WegldWarning } from 'UI/Warnings';
 import styles from './form.module.scss';
+import { getSendLabel } from './helpers';
 
 export const Form = ({ className }: WithClassnameType) => {
   const { formInfo, receiverInfo, accountInfo, amountInfo, tokensInfo } =
@@ -100,7 +101,7 @@ export const Form = ({ className }: WithClassnameType) => {
           data-testid='sendBtn'
           onClick={onValidateForm}
         >
-          Send {tokensInfo.tokenDetails.ticker}
+          Send {getSendLabel(tokensInfo)}
         </button>
 
         <button
