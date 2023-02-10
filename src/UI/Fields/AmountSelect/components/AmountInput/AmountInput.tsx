@@ -8,7 +8,7 @@ import React, {
 import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
-import { NumericFormat } from 'react-number-format';
+import { NumberFormatValues, NumericFormat } from 'react-number-format';
 
 import globals from 'assets/sass/globals.module.scss';
 import styles from './amountInput.module.scss';
@@ -68,7 +68,8 @@ export const AmountInput = ({
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = removeCommas(event.target.value);
     const isBelowMax =
-      stringIsFloat(newValue) && parseFloat(newValue) <= maxAcceptedAmount;
+      stringIsFloat(newValue) &&
+      BigNumber(parseFloat(newValue)).isLessThanOrEqualTo(maxAcceptedAmount);
 
     if (newValue === '' || isBelowMax) {
       event.target.value = newValue;
@@ -104,6 +105,13 @@ export const AmountInput = ({
     setUsdValue(`$${newUsdValue}`);
   };
 
+  const isAllowed = ({ floatValue }: NumberFormatValues) => {
+    return (
+      !floatValue ||
+      BigNumber(floatValue).isLessThanOrEqualTo(maxAcceptedAmount)
+    );
+  };
+
   useEffect(() => {
     if (onDebounceChange) {
       onDebounceChange(debounceAmount.value);
@@ -126,9 +134,7 @@ export const AmountInput = ({
         allowedDecimalSeparators={['.', ',']}
         inputMode='decimal'
         valueIsNumericString={true}
-        isAllowed={({ floatValue }) =>
-          !floatValue || floatValue <= maxAcceptedAmount
-        }
+        isAllowed={isAllowed}
         required={required}
         data-testid={dataTestId || name}
         id={name}
