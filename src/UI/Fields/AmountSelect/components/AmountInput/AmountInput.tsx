@@ -2,18 +2,13 @@ import React, {
   ChangeEvent,
   FocusEvent,
   useEffect,
-  useMemo,
   useRef,
   useState
 } from 'react';
 import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
-import {
-  NumberFormatValues,
-  NumericFormat,
-  OnValueChange
-} from 'react-number-format';
+import { NumericFormat } from 'react-number-format';
 
 import globals from 'assets/sass/globals.module.scss';
 import styles from './amountInput.module.scss';
@@ -44,6 +39,7 @@ export interface AmountInputPropsType {
 }
 
 const fiveHundredMs = 500;
+const maxAcceptedAmount = 10000000000000; // 10 trillions
 
 export const AmountInput = ({
   required,
@@ -65,23 +61,16 @@ export const AmountInput = ({
   const [debounceValue, setDebounceValue] = useState<ImprovedDebounceValueType>(
     { value, count: 0 }
   );
-  const [values, setValues] = useState<NumberFormatValues>();
   const [usdValue, setUsdValue] = useState<string>();
 
   const debounceAmount = useImprovedDebounce(debounceValue, fiveHundredMs);
 
-  const formattedValue = useMemo(() => {
-    const newFormattedValue = values?.formattedValue ?? '';
-    if (removeCommas(newFormattedValue) === value) {
-      return newFormattedValue;
-    }
-    return value;
-  }, [values, value]);
-
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = removeCommas(event.target.value);
+    const isBelowMax =
+      stringIsFloat(newValue) && parseFloat(newValue) <= maxAcceptedAmount;
 
-    if (newValue === '' || stringIsFloat(newValue)) {
+    if (newValue === '' || isBelowMax) {
       event.target.value = newValue;
       handleChange(event);
 
@@ -115,10 +104,6 @@ export const AmountInput = ({
     setUsdValue(`$${newUsdValue}`);
   };
 
-  const onValueChange: OnValueChange = (newValues) => {
-    setValues(newValues);
-  };
-
   useEffect(() => {
     if (onDebounceChange) {
       onDebounceChange(debounceAmount.value);
@@ -140,13 +125,16 @@ export const AmountInput = ({
         decimalSeparator='.'
         allowedDecimalSeparators={['.', ',']}
         inputMode='decimal'
-        onValueChange={onValueChange}
+        valueIsNumericString={true}
+        isAllowed={({ floatValue }) =>
+          !floatValue || floatValue <= maxAcceptedAmount
+        }
         required={required}
         data-testid={dataTestId || name}
         id={name}
         name={name}
         placeholder={placeholder}
-        value={formattedValue}
+        value={value}
         onKeyDown={onKeyDown}
         onChange={onChange}
         onBlur={handleBlur}
