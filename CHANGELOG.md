@@ -6,9 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- [Fix set value flow on AmountInput component](https://github.com/multiversx/mx-sdk-dapp-form/pull/120)
 
 ## [[0.4.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/119)] - 2023-02-10
+- [Fix set value flow on AmountInput component](https://github.com/multiversx/mx-sdk-dapp-form/pull/120)
 - [Fixed sending zero NFTs validation](https://github.com/multiversx/mx-sdk-dapp-form/pull/118)
 ## [[0.4.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/117)] - 2023-02-09
 - [Fixed getting tokens when no ID is provided](https://github.com/multiversx/mx-sdk-dapp-form/pull/116)
