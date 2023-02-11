@@ -6,8 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-## [[0.4.5](https://github.com/multiversx/mx-sdk-dapp-form/pull/123)] - 2023-02-11
-- [Fixed fetching tokens validation loop](https://github.com/multiversx/mx-sdk-dapp-form/pull/122)
+## [[0.4.5](https://github.com/multiversx/mx-sdk-dapp-form/pull/125)] - 2023-02-11
+- [Fixed fetching tokens validation loop](https://github.com/multiversx/mx-sdk-dapp-form/pull/124)
 
 - [Uniform field labels](https://github.com/multiversx/mx-sdk-dapp-form/pull/123)
 
