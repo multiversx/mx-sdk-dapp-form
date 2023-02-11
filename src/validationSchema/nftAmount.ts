@@ -63,7 +63,10 @@ const nonZero = string().test(
   'nonZero',
   'Cannot be zero',
   function balanceCheck(amount: any) {
-    if (!amount) {
+    const parent: ExtendedValuesType = this.parent;
+    const { ignoreTokenBalance } = parent;
+
+    if (!amount || ignoreTokenBalance) {
       return true;
     }
 
