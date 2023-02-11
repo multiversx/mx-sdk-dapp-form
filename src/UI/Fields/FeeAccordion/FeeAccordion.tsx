@@ -31,7 +31,7 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
 
   return (
     <div className={classNames(styles.fee, className)}>
-      <label className={globals.label}>Fee:</label>
+      <label className={globals.label}>Fee</label>
       <div
         className={styles.trigger}
         {...getToggleProps({ onClick: toggleAccordion })}
