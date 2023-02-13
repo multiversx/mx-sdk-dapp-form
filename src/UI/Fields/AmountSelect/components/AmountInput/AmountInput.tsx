@@ -58,6 +58,9 @@ export const AmountInput = ({
 }: AmountInputPropsType) => {
   const ref = useRef(null);
 
+  const [inputValue, setInputValue] = useState<string>();
+  const [edited, setEdited] = useState(false);
+
   const [debounceValue, setDebounceValue] = useState<ImprovedDebounceValueType>(
     { value, count: 0 }
   );
@@ -65,7 +68,9 @@ export const AmountInput = ({
 
   const debounceAmount = useImprovedDebounce(debounceValue, fiveHundredMs);
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
+    event.stopPropagation();
+
     const newValue = removeCommas(event.target.value);
     const isBelowMax =
       stringIsFloat(newValue) &&
@@ -73,6 +78,7 @@ export const AmountInput = ({
 
     if (newValue === '' || isBelowMax) {
       event.target.value = newValue;
+      setInputValue(event.target.value);
       handleChange(event);
 
       const newDebounceValue = {
@@ -81,6 +87,11 @@ export const AmountInput = ({
       };
       setDebounceValue(newDebounceValue);
     }
+  };
+
+  const handleOnKeyDown = () => {
+    setEdited(true);
+    onKeyDown?.();
   };
 
   const updateUsdValue = () => {
@@ -113,21 +124,28 @@ export const AmountInput = ({
   };
 
   useEffect(() => {
-    if (onDebounceChange) {
+    if (onDebounceChange && edited) {
+      setEdited(false);
       onDebounceChange(debounceAmount.value);
     }
   }, [debounceAmount]);
 
   useEffect(updateUsdValue, [value, usdPrice]);
 
+  useEffect(() => {
+    if (value !== inputValue) {
+      setInputValue(value);
+    }
+  }, [value]);
+
   return (
     <div
+      ref={ref}
       className={classNames(styles.amountHolder, {
         [styles.showUsdValue]: Boolean(usdValue)
       })}
     >
       <NumericFormat
-        getInputRef={ref}
         thousandSeparator=','
         thousandsGroupStyle='thousand'
         decimalSeparator='.'
@@ -140,9 +158,9 @@ export const AmountInput = ({
         id={name}
         name={name}
         placeholder={placeholder}
-        value={value}
-        onKeyDown={onKeyDown}
-        onChange={onChange}
+        value={inputValue}
+        onKeyDown={handleOnKeyDown}
+        onChange={handleOnChange}
         onBlur={handleBlur}
         autoComplete='off'
         disabled={Boolean(disabled)}
