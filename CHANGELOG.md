@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [[0.4.10](https://github.com/multiversx/mx-sdk-dapp-form/pull/133)] - 2023-02-13
-- [Prevent multiple onChange events wrongly triggered](https://github.com/multiversx/mx-sdk-dapp-form/pull/132)
+- [Fixed multiple `onChange` events wrongly triggered](https://github.com/multiversx/mx-sdk-dapp-form/pull/132)
 
 ## [[0.4.9](https://github.com/multiversx/mx-sdk-dapp-form/pull/131)] - 2023-02-13
 
