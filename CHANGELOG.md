@@ -7,10 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Remove !important from styles](https://github.com/multiversx/mx-sdk-dapp-form/pull/130)
+
 ## [[0.4.8](https://github.com/multiversx/mx-sdk-dapp-form/pull/129)] - 2023-02-13
 
 - [Consistent context labels](https://github.com/multiversx/mx-sdk-dapp-form/pull/127)
 - [Fixed available token balance balance](https://github.com/multiversx/mx-sdk-dapp-form/pull/128)
+
 ## [[0.4.7](https://github.com/multiversx/mx-sdk-dapp-form/pull/126)] - 2023-02-11
 
 - [Fixed NFT sign with zero balance](https://github.com/multiversx/mx-sdk-dapp-form/pull/126)
