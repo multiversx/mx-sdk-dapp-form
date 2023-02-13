@@ -3,6 +3,7 @@ import { decodePart } from '@multiversx/sdk-dapp/utils/decoders/decodePart';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
+import { useUICustomizationContext } from 'contexts/UICustomization';
 import styles from './styles.module.scss';
 
 const allOccurences = (sourceStr: string, searchStr: string) =>
@@ -23,6 +24,12 @@ export const Data = ({
   highlight,
   isScCall
 }: DataPropsType) => {
+  const {
+    fields: {
+      data: { label: contextLabel }
+    }
+  } = useUICustomizationContext();
+
   let output = <>{data}</>;
 
   const [encodedScCall, ...remainingDataFields] =
@@ -82,7 +89,7 @@ export const Data = ({
       )}
 
       <div className={styles.data}>
-        <span className={globals.label}>{label}</span>
+        <span className={globals.label}>{contextLabel || label}</span>
 
         <div
           data-testid='confirmData'
