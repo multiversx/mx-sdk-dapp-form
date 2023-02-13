@@ -142,7 +142,8 @@ export const AmountSelectInput = () => {
     value: progressiveFormatAmount({
       amount: tokenDetails.balance,
       decimals: tokenDetails.decimals,
-      addCommas: true
+      addCommas: true,
+      showLastNonZeroDecimal: true
     })
   };
 
