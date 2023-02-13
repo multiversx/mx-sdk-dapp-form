@@ -58,7 +58,8 @@ describe('EGLD Amount field', () => {
     const data = { target: { value } };
     fireEvent.change(input, data);
     fireEvent.blur(input);
-    expect(input.value).toBe('1');
+
+    expect(input.value).toBe('');
   });
   it('should allow only max number of decimals configured by config', async () => {
     const { queryByText, findByTestId } = renderForm();
