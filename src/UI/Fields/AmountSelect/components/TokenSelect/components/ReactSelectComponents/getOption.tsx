@@ -25,7 +25,7 @@ export const getOption =
     showBalanceUsdValue?: boolean;
   }): typeof components.Option =>
   (props) => {
-    const { data, isSelected, isFocused, selectProps } = props;
+    const { data, isSelected, isFocused, isDisabled, selectProps } = props;
     const option = data as unknown as OptionType;
 
     const icon = option.token.assets ? option.token.assets.svgUrl : null;
@@ -48,7 +48,8 @@ export const getOption =
         <components.Option
           {...props}
           className={classNames(styles.option, {
-            [styles.selected]: isSelected || isFocused
+            [styles.selected]: isSelected || isFocused,
+            [styles.disabled]: isDisabled
           })}
         >
           <div className={styles.image}>

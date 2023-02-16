@@ -8,7 +8,7 @@ const chainIDToEnvironment: Record<string, string> = {
 
 const chainIDToWegldId: Record<string, string> = {
   D: 'WEGLD-d7c6bb',
-  T: 'WEGLD-7fbb90',
+  T: 'WEGLD-71e90a',
   '1': 'WEGLD-bd4d79'
 };
 
