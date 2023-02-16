@@ -245,12 +245,21 @@
         &:hover {
           background-color: var(--dapp-form-select-option-bg-hover);
         }
+
         &.selected {
           background-color: var(--dapp-form-select-option-bg-selected);
           &:hover {
             background-color: var(--dapp-form-select-option-bg-hover);
           }
         }
+
+        &.disabled {
+          opacity: 0.5;
+          pointer-events: none;
+          cursor: not-allowed;
+          background-color: transparent;
+        }
+
         .icon {
           display: flex;
           align-items: center;
