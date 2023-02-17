@@ -34,7 +34,8 @@ export const Amount = ({
   tokenIdError,
   egldLabel,
   egldPriceInUsd,
-  nft
+  nft,
+  tokenAvatar
 }: AmountPropsType) => {
   const nftDecimals = nft?.decimals || 0;
   const isEsdtTransaction = txType === TransactionTypeEnum.ESDT;
@@ -48,7 +49,8 @@ export const Amount = ({
     isEsdtTransaction,
     tokenId,
     egldLabel,
-    tokenIdError
+    tokenIdError,
+    tokenAvatar
   };
 
   const decimals = isEsdtTransaction ? tokenDecimals : DECIMALS;
