@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- [Fix missing token icon in selected token field form confirm form](https://github.com/multiversx/mx-sdk-dapp-form/pull/138)
+- [Fixed textarea spellcheck](https://github.com/multiversx/mx-sdk-dapp-form/pull/139)
 
 ## [[0.4.11](https://github.com/multiversx/mx-sdk-dapp-form/pull/137)] - 2023-02-16
 - [Fix token select options - disabled state](https://github.com/multiversx/mx-sdk-dapp-form/pull/136)
