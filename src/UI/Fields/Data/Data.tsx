@@ -41,6 +41,7 @@ export const Data = ({ className }: WithClassnameType) => {
           value={data}
           onBlur={onBlur}
           onChange={onChange}
+          spellCheck='false'
           className={classNames(globals.textarea, {
             [globals.error]: isDataInvalid,
             [globals.disabled]: isDisabled
