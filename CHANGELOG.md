@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.4.12](https://github.com/multiversx/mx-sdk-dapp-form/pull/141)] - 2023-02-22
+
 - [Adds valueUSD to token select](https://github.com/multiversx/mx-sdk-dapp-form/pull/140)
 - [Fixed textarea spellcheck](https://github.com/multiversx/mx-sdk-dapp-form/pull/139)
 
