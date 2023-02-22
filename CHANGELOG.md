@@ -6,12 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+- [Adds valueUSD to token select](https://github.com/multiversx/mx-sdk-dapp-form/pull/140)
 - [Fixed textarea spellcheck](https://github.com/multiversx/mx-sdk-dapp-form/pull/139)
 
 ## [[0.4.11](https://github.com/multiversx/mx-sdk-dapp-form/pull/137)] - 2023-02-16
+
 - [Fix token select options - disabled state](https://github.com/multiversx/mx-sdk-dapp-form/pull/136)
 -
+
 ## [[0.4.10](https://github.com/multiversx/mx-sdk-dapp-form/pull/133)] - 2023-02-13
+
 - [Fixed multiple `onChange` events wrongly triggered](https://github.com/multiversx/mx-sdk-dapp-form/pull/132)
 
 ## [[0.4.9](https://github.com/multiversx/mx-sdk-dapp-form/pull/131)] - 2023-02-13
