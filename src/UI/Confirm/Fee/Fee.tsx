@@ -2,10 +2,10 @@ import React from 'react';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 import classNames from 'classnames';
 
+import globals from 'assets/sass/globals.module.scss';
 import { ZERO } from 'constants/index';
 import { calculateFeeInFiat } from 'operations';
 
-import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 export interface FeePropsType {

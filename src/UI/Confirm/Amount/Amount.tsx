@@ -1,14 +1,14 @@
 import React from 'react';
-import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp/constants/index';
+import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp/constants';
+import { UsdValue } from '@multiversx/sdk-dapp/UI';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
-import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue/index';
 import classNames from 'classnames';
 
+import globals from 'assets/sass/globals.module.scss';
 import { parseAmount } from 'helpers';
 import { PartialNftType, TransactionTypeEnum } from 'types';
 import { Token } from '../Token';
 
-import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 export interface AmountPropsType {
