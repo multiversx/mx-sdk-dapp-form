@@ -36,6 +36,7 @@ export const getOption =
     });
 
     const tokenPrice = option.token?.usdPrice?.toString();
+    const balanceUsdValue = option.token?.valueUSD?.toString();
 
     const ticker = Boolean(selectProps.inputValue)
       ? HighlightText(option.token.ticker, selectProps.inputValue)
@@ -75,10 +76,11 @@ export const getOption =
             </div>
             <div className={styles.right}>
               <span className={styles.value}>{amount}</span>
-              {showBalanceUsdValue && (
+              {showBalanceUsdValue && balanceUsdValue && (
                 <UsdValue
-                  amount={amount}
                   usd={1}
+                  decimals={4}
+                  amount={balanceUsdValue}
                   data-testid='token-price-usd-value'
                   className={styles.price}
                   addEqualSign={false}

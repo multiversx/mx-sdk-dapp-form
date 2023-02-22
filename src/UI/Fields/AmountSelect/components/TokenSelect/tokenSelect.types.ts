@@ -11,6 +11,7 @@ export interface OptionType {
   assets?: TokenAssetsType;
   token: PartialTokenType & {
     usdPrice?: string;
+    valueUSD?: string;
   };
 }
 
