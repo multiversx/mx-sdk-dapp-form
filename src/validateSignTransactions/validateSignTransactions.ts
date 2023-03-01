@@ -78,7 +78,7 @@ function extractAllTransactions(props: ValidateSignTransactionsType) {
       allTransactions.push({
         ...transaction,
         transactionIndex: transactionIndex,
-        transaction: newTransaction({ ...transaction, chainId })
+        transaction: newTransaction({ ...transaction, chainID: chainId })
       });
     }
   });
