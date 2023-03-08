@@ -1,4 +1,4 @@
-import { fireEvent } from '@testing-library/react';
+import { RenderResult, fireEvent, queries } from '@testing-library/react';
 import { testNetwork, testReceiver } from '__mocks__';
 import { server, rest } from '__mocks__/server';
 import { renderForm } from '../helpers';
@@ -9,7 +9,9 @@ function* generator(arr: any[]) {
 
 export const finalFee = '0.000057937 xEGLD';
 
-export const fillInForm = async () => {
+export const fillInForm: () => Promise<{
+  render: RenderResult<typeof queries, HTMLElement, HTMLElement>;
+}> = async () => {
   const render = renderForm({
     balance: '7600000000000000000000'
   });

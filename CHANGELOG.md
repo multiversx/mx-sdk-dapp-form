@@ -6,18 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- [Upgraded `sdk-dapp` and `sdk-core`](https://github.com/multiversx/mx-sdk-dapp-form/pull/145)
 
 ## [[0.4.13](https://github.com/multiversx/mx-sdk-dapp-form/pull/144)] - 2023-03-01
-- [Fix `newTransaction` chainID parameter typo](https://github.com/multiversx/mx-sdk-dapp-form/pull/143)
+- [Fixed `newTransaction` chainID parameter typo](https://github.com/multiversx/mx-sdk-dapp-form/pull/143)
 
 ## [[0.4.12](https://github.com/multiversx/mx-sdk-dapp-form/pull/141)] - 2023-02-22
 
-- [Adds valueUSD to token select](https://github.com/multiversx/mx-sdk-dapp-form/pull/140)
+- [Added valueUSD to token select](https://github.com/multiversx/mx-sdk-dapp-form/pull/140)
 - [Fixed textarea spellcheck](https://github.com/multiversx/mx-sdk-dapp-form/pull/139)
 
 ## [[0.4.11](https://github.com/multiversx/mx-sdk-dapp-form/pull/137)] - 2023-02-16
 
-- [Fix token select options - disabled state](https://github.com/multiversx/mx-sdk-dapp-form/pull/136)
+- [Fixed token select options - disabled state](https://github.com/multiversx/mx-sdk-dapp-form/pull/136)
 -
 
 ## [[0.4.10](https://github.com/multiversx/mx-sdk-dapp-form/pull/133)] - 2023-02-13
@@ -26,7 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [[0.4.9](https://github.com/multiversx/mx-sdk-dapp-form/pull/131)] - 2023-02-13
 
-- [Remove !important from styles](https://github.com/multiversx/mx-sdk-dapp-form/pull/130)
+- [Removed !important from styles](https://github.com/multiversx/mx-sdk-dapp-form/pull/130)
 
 ## [[0.4.8](https://github.com/multiversx/mx-sdk-dapp-form/pull/129)] - 2023-02-13
 
