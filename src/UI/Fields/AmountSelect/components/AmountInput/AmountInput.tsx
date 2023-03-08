@@ -71,14 +71,15 @@ export const AmountInput = ({
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation();
 
+    setEdited(true);
     const newValue = removeCommas(event.target.value);
     const isBelowMax =
       stringIsFloat(newValue) &&
       BigNumber(parseFloat(newValue)).isLessThanOrEqualTo(maxAcceptedAmount);
 
     if (newValue === '' || isBelowMax) {
+      setInputValue(newValue);
       event.target.value = newValue;
-      setInputValue(event.target.value);
       handleChange(event);
 
       const newDebounceValue = {
@@ -87,11 +88,6 @@ export const AmountInput = ({
       };
       setDebounceValue(newDebounceValue);
     }
-  };
-
-  const handleOnKeyDown = () => {
-    setEdited(true);
-    onKeyDown?.();
   };
 
   const updateUsdValue = () => {
@@ -159,7 +155,7 @@ export const AmountInput = ({
         name={name}
         placeholder={placeholder}
         value={inputValue}
-        onKeyDown={handleOnKeyDown}
+        onKeyDown={onKeyDown}
         onChange={handleOnChange}
         onBlur={handleBlur}
         autoComplete='off'
