@@ -1,60 +1,61 @@
 import React, {
   ChangeEvent,
   FocusEvent,
+  memo,
   useEffect,
   useRef,
   useState
 } from 'react';
 import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
+
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import { NumberFormatValues, NumericFormat } from 'react-number-format';
-
 import globals from 'assets/sass/globals.module.scss';
 import styles from './amountInput.module.scss';
 import {
+  ImprovedDebounceValueType,
   removeCommas,
   roundAmount,
-  ImprovedDebounceValueType,
   useImprovedDebounce
 } from './helpers';
 
 export interface AmountInputPropsType {
+  'data-testid'?: string;
+  InfoDustComponent?: JSX.Element;
+  disabled?: boolean;
+  error?: string;
+  handleBlur: (e: FocusEvent<any>) => void;
+  handleChange: (e: ChangeEvent<any>) => void;
+  isInvalid?: boolean;
+  name: string;
+  onDebounceChange?: (amount: string) => void;
+  onFocus?: () => void;
+  onKeyDown?: () => void;
+  placeholder: string;
   readonly?: boolean;
   required: boolean;
-  name: string;
-  placeholder: string;
-  'data-testid'?: string;
-  value: string;
-  error?: string;
-  isInvalid?: boolean;
-  disabled?: boolean;
   usdPrice?: number;
-  handleChange: (e: ChangeEvent<any>) => void;
-  handleBlur: (e: FocusEvent<any>) => void;
-  onKeyDown?: () => void;
-  onFocus?: () => void;
-  onDebounceChange?: (amount: string) => void;
-  InfoDustComponent?: JSX.Element;
+  value: string;
 }
 
 const fiveHundredMs = 500;
 const maxAcceptedAmount = 10000000000000; // 10 trillions
 
-export const AmountInput = ({
-  required,
-  name,
-  placeholder,
-  value,
-  disabled,
-  usdPrice,
+const AmountComponent = ({
   'data-testid': dataTestId,
-  handleChange,
+  InfoDustComponent,
+  disabled,
   handleBlur,
-  onKeyDown,
-  onFocus,
+  handleChange,
+  name,
   onDebounceChange,
-  InfoDustComponent
+  onFocus,
+  onKeyDown,
+  placeholder,
+  required,
+  usdPrice,
+  value
 }: AmountInputPropsType) => {
   const ref = useRef(null);
 
@@ -82,11 +83,13 @@ export const AmountInput = ({
       event.target.value = newValue;
       handleChange(event);
 
-      const newDebounceValue = {
-        value: newValue,
-        count: debounceValue.count + 1
-      };
-      setDebounceValue(newDebounceValue);
+      if (onDebounceChange) {
+        const newDebounceValue = {
+          value: newValue,
+          count: debounceValue.count + 1
+        };
+        setDebounceValue(newDebounceValue);
+      }
     }
   };
 
@@ -142,28 +145,28 @@ export const AmountInput = ({
       })}
     >
       <NumericFormat
-        thousandSeparator=','
-        thousandsGroupStyle='thousand'
-        decimalSeparator='.'
         allowedDecimalSeparators={['.', ',']}
-        inputMode='decimal'
-        valueIsNumericString={true}
-        isAllowed={isAllowed}
-        required={required}
-        data-testid={dataTestId || name}
-        id={name}
-        name={name}
-        placeholder={placeholder}
-        value={inputValue}
-        onKeyDown={onKeyDown}
-        onChange={handleOnChange}
-        onBlur={handleBlur}
         autoComplete='off'
-        disabled={Boolean(disabled)}
-        onFocus={onFocus}
         className={classNames(globals.input, styles.amountInput, {
           [globals.disabled]: Boolean(disabled)
         })}
+        data-testid={dataTestId || name}
+        decimalSeparator='.'
+        disabled={Boolean(disabled)}
+        id={name}
+        inputMode='decimal'
+        isAllowed={isAllowed}
+        name={name}
+        onBlur={handleBlur}
+        onChange={handleOnChange}
+        onFocus={onFocus}
+        onKeyDown={onKeyDown}
+        placeholder={placeholder}
+        required={required}
+        thousandSeparator=','
+        thousandsGroupStyle='thousand'
+        value={inputValue}
+        valueIsNumericString={true}
       />
 
       {usdValue && (
@@ -179,3 +182,10 @@ export const AmountInput = ({
     </div>
   );
 };
+
+export const AmountInput = memo(
+  AmountComponent,
+  (prevProps, nextProps) =>
+    prevProps.value === nextProps.value &&
+    prevProps.usdPrice === nextProps.usdPrice
+);
