@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [[0.4.15](https://github.com/multiversx/mx-sdk-dapp-form/pull/148)] - 2023-03-09
+- [Fixed editing decimals in `AmountInput` not replacing selected value](https://github.com/multiversx/mx-sdk-dapp-form/pull/147)
+-
 ## [[0.4.14](https://github.com/multiversx/mx-sdk-dapp-form/pull/146)] - 2023-03-08
 - [Upgraded `sdk-dapp` and `sdk-core`](https://github.com/multiversx/mx-sdk-dapp-form/pull/145)
 
