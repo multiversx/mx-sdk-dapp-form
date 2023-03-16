@@ -26,7 +26,11 @@ export const Receiver = ({
   return (
     <div className={styles.receiver}>
       <span className={globals.label}>{contextLabel || label}</span>
-      {receiver && <span className={globals.value}>{receiver}</span>}
+      {receiver && (
+        <span className={globals.value} data-testid='confirmReceiver'>
+          {receiver}
+        </span>
+      )}
 
       {scamReport && (
         <div className={styles.scam}>
@@ -35,7 +39,7 @@ export const Receiver = ({
               icon={faExclamationTriangle}
               className={styles.icon}
             />
-            <small>{scamReport}</small>
+            <small data-testid='confirmScamReport'>{scamReport}</small>
           </span>
         </div>
       )}
