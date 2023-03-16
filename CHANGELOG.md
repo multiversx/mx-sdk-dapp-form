@@ -6,7 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- [Fixed `Receiver` field missing `data-testid`](https://github.com/multiversx/mx-sdk-dapp-form/pull/149)
+## [[0.4.17](https://github.com/multiversx/mx-sdk-dapp-form/pull/152)] - 2023-03-16
+- [Fixed `Receiver` field missing `data-testid`](https://github.com/multiversx/mx-sdk-dapp-form/pull/151)
 
 ## [[0.4.16](https://github.com/multiversx/mx-sdk-dapp-form/pull/150)] - 2023-03-09
 - [Fixed `AmountInput` rerender on unused data change](https://github.com/multiversx/mx-sdk-dapp-form/pull/149)
