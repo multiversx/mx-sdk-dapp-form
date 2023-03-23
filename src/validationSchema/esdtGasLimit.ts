@@ -11,6 +11,14 @@ const minValue = string().test(
   'minValue',
   `Gas limit must be greater or equal to ${TOKEN_GAS_LIMIT}`,
   function minGasValue(value: any) {
+    const parent: ExtendedValuesType = this.parent;
+    const { ignoreTokenBalance } = parent;
+
+    // allow signing with 0 gasLimit
+    if (ignoreTokenBalance) {
+      return true;
+    }
+
     const bNgasLimit = new BigNumber(value);
     const bNcalculatedGasLimit = new BigNumber(TOKEN_GAS_LIMIT);
     const isValid =

@@ -12,7 +12,12 @@ const minValueData = string().test({
   name: 'minValueData',
   test: function (value) {
     const parent: ExtendedValuesType = this.parent;
-    const { data } = parent;
+    const { data, ignoreTokenBalance } = parent;
+
+    // allow signing with 0 gasLimit
+    if (ignoreTokenBalance) {
+      return true;
+    }
 
     const calculatedGasLimit = calculateNftGasLimit(data ? data.trim() : '');
 
