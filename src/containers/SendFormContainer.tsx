@@ -1,6 +1,7 @@
 import React, { JSXElementConstructor, useState } from 'react';
 import { Transaction } from '@multiversx/sdk-core';
 import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/index';
+import { GuardianProvider } from '@multiversx/sdk-dapp/services/transactions/GuardianProvider';
 import { Formik } from 'formik';
 
 import { ZERO } from 'constants/index';
@@ -89,6 +90,15 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
         })
       : null;
 
+    if (accountInfo.isGuardedAccount && values.code && transaction) {
+      const provider = GuardianProvider.getInstance();
+      await provider.init(
+        accountInfo.address,
+        String(networkConfig.apiAddress)
+      );
+      provider.applyGuardianSignature([transaction], values.code);
+    }
+
     return onFormSubmit(parsedValues, transaction, setIsFormSubmitted);
   }
 
@@ -118,7 +128,8 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     balance: initialValues?.balance || balance,
     chainId: initialValues?.chainId || networkConfig.chainId,
     tokens: tokensInfo?.initialTokens,
-    ledger: initialValues?.ledger
+    ledger: initialValues?.ledger,
+    code: ''
   };
 
   return (

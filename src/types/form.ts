@@ -7,7 +7,8 @@ export enum ValuesEnum {
   data = 'data',
   tokenId = 'tokenId',
   amount = 'amount',
-  gasLimit = 'gasLimit'
+  gasLimit = 'gasLimit',
+  code = 'code' // optional guardian code
 }
 
 export type ValueKeyType = keyof typeof ValuesEnum;

@@ -1,8 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
+import { useFormikContext } from 'formik';
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
+import { ExtendedValuesType, ValuesEnum } from 'types';
 import styles from 'UI/Fields/styles.module.scss';
 import { useGuardianScren } from './useGuardianScren';
 
@@ -11,6 +13,13 @@ const GUARDIAN_FIELD = 'guardian';
 export const GuardianScreen = ({ onBack }: { onBack: () => void }) => {
   const { formInfo } = useSendFormContext();
   const { onSubmitForm } = formInfo;
+
+  const { setFieldValue } = useFormikContext<ExtendedValuesType>();
+
+  const onSubmit = (code: string) => {
+    setFieldValue(ValuesEnum.code, code);
+    onSubmitForm();
+  };
 
   const {
     isValid,
@@ -21,7 +30,7 @@ export const GuardianScreen = ({ onBack }: { onBack: () => void }) => {
     handleClose,
     value
   } = useGuardianScren({
-    onSubmit: onSubmitForm,
+    onSubmit,
     onCancel: onBack
   });
 
