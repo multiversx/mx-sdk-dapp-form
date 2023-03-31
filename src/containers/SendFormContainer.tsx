@@ -1,5 +1,9 @@
 import React, { JSXElementConstructor, useState } from 'react';
-import { Transaction } from '@multiversx/sdk-core';
+import {
+  Transaction,
+  TransactionOptions,
+  TransactionVersion
+} from '@multiversx/sdk-core';
 import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/index';
 import { GuardianProvider } from '@multiversx/sdk-dapp/services/transactions/GuardianProvider';
 import { Formik } from 'formik';
@@ -80,7 +84,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
       values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
     const parsedValues = { ...values, amount: actualTransactionAmount };
 
-    const transaction = shouldGenerateTransactionOnSubmit
+    let transaction = shouldGenerateTransactionOnSubmit
       ? await generateTransaction({
           address,
           balance,
@@ -96,7 +100,14 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
         accountInfo.address,
         String(networkConfig.apiAddress)
       );
-      provider.applyGuardianSignature([transaction], values.code);
+      transaction.version = TransactionVersion.withTxOptions();
+      transaction.options = TransactionOptions.withTxGuardedOptions();
+      const [guardedTransaction] = await provider.applyGuardianSignature(
+        [transaction],
+        values.code
+      );
+      transaction = guardedTransaction;
+      console.log('guardedTransaction', guardedTransaction);
     }
 
     return onFormSubmit(parsedValues, transaction, setIsFormSubmitted);

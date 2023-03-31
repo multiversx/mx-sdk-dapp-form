@@ -4,7 +4,7 @@ import { useFormikContext } from 'formik';
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
-import { ExtendedValuesType, ValuesEnum } from 'types';
+import { ExtendedValuesType } from 'types';
 import styles from 'UI/Fields/styles.module.scss';
 import { useGuardianScren } from './useGuardianScren';
 
@@ -17,7 +17,7 @@ export const GuardianScreen = ({ onBack }: { onBack: () => void }) => {
   const { setFieldValue } = useFormikContext<ExtendedValuesType>();
 
   const onSubmit = (code: string) => {
-    setFieldValue(ValuesEnum.code, code);
+    setFieldValue('code', code);
     onSubmitForm();
   };
 

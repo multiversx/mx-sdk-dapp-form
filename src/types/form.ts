@@ -7,8 +7,7 @@ export enum ValuesEnum {
   data = 'data',
   tokenId = 'tokenId',
   amount = 'amount',
-  gasLimit = 'gasLimit',
-  code = 'code' // optional guardian code
+  gasLimit = 'gasLimit'
 }
 
 export type ValueKeyType = keyof typeof ValuesEnum;
@@ -36,6 +35,7 @@ export interface ExtendedValuesType extends ValuesType {
     ledgerDataActive: boolean;
     version: string;
   };
+  code?: string; // guardian code
   uiOptions?: {
     showAmountSlider: boolean;
   };
