@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 import globals from 'assets/sass/globals.module.scss';
@@ -14,16 +14,23 @@ export const GuardianScreen = ({ onBack }: { onBack: () => void }) => {
   const { formInfo } = useSendFormContext();
   const { onSubmitForm } = formInfo;
 
-  const { setFieldValue } = useFormikContext<ExtendedValuesType>();
+  const { setFieldValue, values, isSubmitting } =
+    useFormikContext<ExtendedValuesType>();
 
   const onSubmit = (code: string) => {
     setFieldValue('code', code);
     onSubmitForm();
   };
 
+  useEffect(() => {
+    setError(values.codeError ?? '');
+  }, [values]);
+
   const {
     isValid,
     isTouched,
+    error,
+    setError,
     onChange,
     onBlur,
     hadleSubmit,
@@ -58,7 +65,9 @@ export const GuardianScreen = ({ onBack }: { onBack: () => void }) => {
           />
         </div>
 
-        {!isValid && isTouched && <div className={globals.error}>Required</div>}
+        {!isValid && (isTouched || isSubmitting) && (
+          <div className={globals.error}>{error}</div>
+        )}
       </div>
       <button
         className={classNames('my-3', globals.btn, globals.btnPrimary)}

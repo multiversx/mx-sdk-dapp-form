@@ -35,7 +35,11 @@ export interface ExtendedValuesType extends ValuesType {
     ledgerDataActive: boolean;
     version: string;
   };
-  code?: string; // guardian code
+  code?: string;
+  /**
+   * `codeError` is used to bypass formik validation mechanism since `code` is not part of the form
+   */
+  codeError?: string;
   uiOptions?: {
     showAmountSlider: boolean;
   };

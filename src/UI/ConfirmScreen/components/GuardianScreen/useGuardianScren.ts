@@ -7,46 +7,50 @@ export const useGuardianScren = ({
   onSubmit: (code: string) => void;
   onCancel: () => void;
 }) => {
-  const [isValid, setIsValid] = useState(true);
+  const [error, setError] = useState('');
   const [isTouched, setIsTouched] = useState(true);
   const [value, setValue] = useState('');
 
-  const checkValid = (value: string) => value?.length > 0;
+  const checkValid = (value: string) => (value?.length > 0 ? '' : 'Required');
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const code = e.target.value;
     setValue(code);
     setIsTouched(true);
-    setIsValid(checkValid(code));
+    setError(checkValid(code));
   };
 
   const onBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     const code = e.target.value;
     setValue(code);
-    setIsValid(checkValid(code));
+    setError(checkValid(code));
   };
 
   const hadleSubmit = () => {
-    const valid = checkValid(value);
-    setIsValid(valid);
+    const error = checkValid(value);
+    setError(error);
     setIsTouched(true);
-    if (!valid) {
+    if (error) {
       return;
     }
+
     onSubmit(value);
   };
 
   const handleClose = () => {
     setValue('');
-    setIsValid(true);
+    setError('');
     setIsTouched(false);
     onCancel();
   };
 
   return {
     value,
-    isValid,
+    isValid: !error,
+    error,
+    setError,
     isTouched,
+    setIsTouched,
     onChange,
     onBlur,
     hadleSubmit,

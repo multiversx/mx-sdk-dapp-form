@@ -6,7 +6,7 @@ import {
 } from '@multiversx/sdk-core';
 import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/index';
 import { GuardianProvider } from '@multiversx/sdk-dapp/services/transactions/GuardianProvider';
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 
 import { ZERO } from 'constants/index';
 import {
@@ -79,7 +79,10 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     prefilledForm: formInfo.prefilledForm
   });
 
-  async function handleOnSubmit(values: ExtendedValuesType) {
+  async function handleOnSubmit(
+    values: ExtendedValuesType,
+    { setFieldValue }: FormikHelpers<ExtendedValuesType>
+  ) {
     const actualTransactionAmount =
       values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
     const parsedValues = { ...values, amount: actualTransactionAmount };
@@ -94,20 +97,25 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
         })
       : null;
 
-    if (accountInfo.isGuardedAccount && values.code && transaction) {
-      const provider = GuardianProvider.getInstance();
-      await provider.init(
-        accountInfo.address,
-        String(networkConfig.apiAddress)
-      );
-      transaction.version = TransactionVersion.withTxOptions();
-      transaction.options = TransactionOptions.withTxGuardedOptions();
-      const [guardedTransaction] = await provider.applyGuardianSignature(
-        [transaction],
-        values.code
-      );
-      transaction = guardedTransaction;
-      console.log('guardedTransaction', guardedTransaction);
+    try {
+      if (accountInfo.isGuardedAccount && values.code && transaction) {
+        const provider = GuardianProvider.getInstance();
+        await provider.init(
+          accountInfo.address,
+          String(networkConfig.apiAddress)
+        );
+
+        // TODO: to be removed when included in provider
+        transaction.version = TransactionVersion.withTxOptions();
+        transaction.options = TransactionOptions.withTxGuardedOptions();
+        const [guardedTransaction] = await provider.applyGuardianSignature(
+          [transaction],
+          values.code
+        );
+        transaction = guardedTransaction;
+      }
+    } catch {
+      return setFieldValue('codeError', 'Invalid code');
     }
 
     return onFormSubmit(parsedValues, transaction, setIsFormSubmitted);
