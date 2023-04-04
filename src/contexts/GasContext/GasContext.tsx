@@ -5,6 +5,7 @@ import {
   GAS_PRICE_MODIFIER
 } from '@multiversx/sdk-dapp/constants/index';
 import { calculateFeeLimit } from '@multiversx/sdk-dapp/utils/operations/calculateFeeLimit';
+import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 import { ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
@@ -15,7 +16,8 @@ import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
   calculateNftGasLimit,
   formattedConfigGasPrice,
-  getGasLimit
+  getGasLimit,
+  getGuardedAccountGasLimit
 } from 'operations';
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
@@ -74,7 +76,9 @@ export function GasContextProvider({
     setFieldTouched
   } = formikContext;
 
-  const { gasPrice, gasLimit, data, tokenId, txType } = values;
+  const { gasPrice, gasLimit, data, tokenId, txType, isGuarded } = values;
+
+  const guardedAccountGasLimit = getGuardedAccountGasLimit(isGuarded);
 
   const {
     checkInvalid,
@@ -177,13 +181,17 @@ export function GasContextProvider({
 
   useEffect(() => {
     if (!prefilledForm && isNftTransaction && !touched.gasLimit) {
-      handleUpdateGasLimit(calculateNftGasLimit());
+      handleUpdateGasLimit(
+        new BigNumber(calculateNftGasLimit())
+          .plus(guardedAccountGasLimit)
+          .toString()
+      );
     }
   }, [isNftTransaction, touched]);
 
   useEffect(() => {
     if (!prefilledForm) {
-      handleUpdateGasLimit(getGasLimit({ txType, data }), true);
+      handleUpdateGasLimit(getGasLimit({ txType, data, isGuarded }), true);
     }
   }, [tokenId, txType]);
 

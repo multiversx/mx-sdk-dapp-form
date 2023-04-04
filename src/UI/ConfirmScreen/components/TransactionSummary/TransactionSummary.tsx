@@ -24,7 +24,7 @@ export const TransactionSummary = ({
     receiverInfo: { scamError, receiver },
     formInfo,
     gasInfo: { gasCostError, feeLimit },
-    accountInfo: { isGuardedAccount },
+    accountInfo: { isGuarded },
     dataFieldInfo: { data },
     amountInfo,
     tokensInfo
@@ -59,7 +59,7 @@ export const TransactionSummary = ({
   };
 
   const onConfirmClick = () => {
-    if (isGuardedAccount) {
+    if (isGuarded) {
       return onNext();
     }
     setIsSubmitting(true);

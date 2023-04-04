@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect } from 'react';
 import { useFormikContext } from 'formik';
 
+import { useAccountContext } from 'contexts/AccountContext';
 import { calculateGasLimit, getDataField } from 'operations';
 import { ExtendedValuesType, TransactionTypeEnum, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
@@ -40,6 +41,7 @@ export function DataContextProvider({
   const { nft } = useTokensContext();
   const { receiver, txType, amount, tokenId } = values;
   const { onChangeGasLimit } = useGasContext();
+  const { isGuarded } = useAccountContext();
 
   const isDataInvalid = checkInvalid(ValuesEnum.data);
 
@@ -52,7 +54,8 @@ export function DataContextProvider({
     setFieldValue(ValuesEnum.data, value, shouldValidate);
     if (!prefilledForm && !touched.gasLimit && isEgldTransaction) {
       const newGasLimit = calculateGasLimit({
-        data: value
+        data: value,
+        isGuarded
       });
       onChangeGasLimit(newGasLimit);
     }

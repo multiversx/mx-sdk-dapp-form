@@ -20,6 +20,7 @@ export interface ExtendedValuesType extends ValuesType {
   // validationSchema
   txType: TransactionTypeEnum;
   address: string;
+  isGuarded?: boolean;
   balance: string;
   chainId: string;
   ignoreTokenBalance?: boolean;
