@@ -5,7 +5,7 @@ export interface AccountContextPropsType {
   address: string;
   nonce: number;
   balance: string;
-  isGuardedAccount?: boolean;
+  isGuarded?: boolean;
   providerType: LoginMethodsEnum;
 }
 

@@ -98,7 +98,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
       : null;
 
     try {
-      if (accountInfo.isGuardedAccount && values.code && transaction) {
+      if (accountInfo.isGuarded && values.code && transaction) {
         const provider = GuardianProvider.getInstance();
         await provider.init(
           accountInfo.address,
@@ -132,7 +132,9 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     initialValues?.txType ??
     getTxType({ nft: tokensInfo?.initialNft, tokenId });
 
-  const gasLimit = initialValues?.gasLimit ?? getGasLimit({ txType, data });
+  const gasLimit =
+    initialValues?.gasLimit ??
+    getGasLimit({ txType, data, isGuarded: accountInfo.isGuarded });
 
   const formikInitialValues = {
     tokenId,
@@ -145,6 +147,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     address: initialValues?.address ?? address,
     nft: tokensInfo?.initialNft,
     balance: initialValues?.balance || balance,
+    isGuarded: initialValues?.isGuarded ?? accountInfo.isGuarded,
     chainId: initialValues?.chainId || networkConfig.chainId,
     tokens: tokensInfo?.initialTokens,
     ledger: initialValues?.ledger,
