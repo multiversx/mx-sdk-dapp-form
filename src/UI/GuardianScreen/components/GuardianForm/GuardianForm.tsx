@@ -6,11 +6,11 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import { ExtendedValuesType } from 'types';
 import styles from 'UI/Fields/styles.module.scss';
-import { useGuardianScren } from './useGuardianScren';
+import { useGuardianScren } from './useGuardianForm';
 
 const GUARDIAN_FIELD = 'guardian';
 
-export const GuardianScreen = ({ onBack }: { onBack: () => void }) => {
+export const GuardianForm = ({ onBack }: { onBack: () => void }) => {
   const { formInfo } = useSendFormContext();
   const { onSubmitForm } = formInfo;
 

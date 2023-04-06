@@ -19,6 +19,7 @@ import {
   AmountSelectInput
 } from 'UI/Fields';
 
+import { GuardianScreen } from 'UI/GuardianScreen/GuardianScreen';
 import { CanTransferNftWarning, WegldWarning } from 'UI/Warnings';
 import styles from './form.module.scss';
 import { getSendLabel } from './helpers';
@@ -37,6 +38,7 @@ export const Form = ({ className }: WithClassnameType) => {
     onValidateForm,
     onCloseForm,
     areValidatedValuesReady,
+    isGuardianScreenVisible,
     uiOptions,
     readonly
   } = formInfo;
@@ -51,6 +53,10 @@ export const Form = ({ className }: WithClassnameType) => {
     TransactionTypeEnum.ESDT,
     TransactionTypeEnum.MetaESDT
   ].includes(txType);
+
+  if (isGuardianScreenVisible) {
+    return <GuardianScreen />;
+  }
 
   if (areValidatedValuesReady) {
     return <ConfirmScreen providerType={accountInfo.providerType} />;

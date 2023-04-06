@@ -3,6 +3,7 @@ import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
+import { useFormContext } from 'contexts';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import Confirm from 'UI/Confirm';
 
@@ -15,11 +16,10 @@ export interface TransactionSummaryPropsType {
 
 export const TransactionSummary = ({
   isConfirmCloseBtnVisible = true,
-  providerType,
-  onNext
-}: TransactionSummaryPropsType & {
-  onNext: () => void;
-}) => {
+  providerType
+}: TransactionSummaryPropsType) => {
+  const { setIsGuardianScreenVisible } = useFormContext();
+
   const {
     receiverInfo: { scamError, receiver },
     formInfo,
@@ -32,6 +32,11 @@ export const TransactionSummary = ({
   const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
   const { readonly, onCloseForm, onInvalidateForm, onSubmitForm, txType } =
     formInfo;
+
+  const onNext = () => {
+    setIsGuardianScreenVisible(true);
+  };
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   let confirmText: string;

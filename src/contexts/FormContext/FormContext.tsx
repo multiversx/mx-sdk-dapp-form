@@ -28,6 +28,8 @@ export interface FormContextPropsType extends FormContextBasePropsType {
   onValidateForm: () => void;
   onInvalidateForm: () => void;
   onSubmitForm: () => void;
+  isGuardianScreenVisible: boolean;
+  setIsGuardianScreenVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface FormContextProviderPropsType {
@@ -45,6 +47,7 @@ export function FormContextProvider({
   const [shouldValidateForm, setShouldValidateForm] = useState(
     Boolean(skipToConfirm)
   );
+  const [isGuardianScreenVisible, setIsGuardianScreenVisible] = useState(false);
 
   const [renderKey, setRenderKey] = useState(Date.now());
   const {
@@ -99,6 +102,8 @@ export function FormContextProvider({
     shouldValidateForm,
     areValidatedValuesReady:
       Boolean(value.isFormSubmitted || skipToConfirm) && isFormValid,
+    isGuardianScreenVisible,
+    setIsGuardianScreenVisible,
     isFormValid,
     renderKey,
     txType: values.txType,
