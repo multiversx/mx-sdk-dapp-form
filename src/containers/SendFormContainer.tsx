@@ -99,10 +99,10 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
 
     try {
       if (accountInfo.isGuarded && values.code && transaction) {
-        const provider = GuardianProvider.getInstance();
-        await provider.init(
-          accountInfo.address,
-          String(networkConfig.apiAddress)
+        const provider = await GuardianProvider.createProvider(
+          address,
+          String(networkConfig.apiAddress),
+          { getNativeAuthToken: () => 'add native auth token here!!!!' }
         );
 
         // TODO: to be removed when included in provider
