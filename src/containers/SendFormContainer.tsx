@@ -1,12 +1,7 @@
 import React, { JSXElementConstructor, useState } from 'react';
-import {
-  Transaction,
-  TransactionOptions,
-  TransactionVersion
-} from '@multiversx/sdk-core';
+import { Transaction } from '@multiversx/sdk-core';
 import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/index';
-import { GuardianProvider } from '@multiversx/sdk-dapp/services/transactions/GuardianProvider';
-import { Formik, FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 
 import { ZERO } from 'constants/index';
 import {
@@ -71,6 +66,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   const [isFormSubmitted, setIsFormSubmitted] = useState(
     Boolean(props.formInfo.skipToConfirm)
   );
+  const [guardedTransaction, setGuardedTransaction] = useState<Transaction>();
 
   //this is updated from within the main context with updated values
 
@@ -79,44 +75,21 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     prefilledForm: formInfo.prefilledForm
   });
 
-  async function handleOnSubmit(
-    values: ExtendedValuesType,
-    { setFieldValue }: FormikHelpers<ExtendedValuesType>
-  ) {
+  async function handleOnSubmit(values: ExtendedValuesType) {
     const actualTransactionAmount =
       values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
     const parsedValues = { ...values, amount: actualTransactionAmount };
 
-    let transaction = shouldGenerateTransactionOnSubmit
-      ? await generateTransaction({
+    const transaction = shouldGenerateTransactionOnSubmit
+      ? guardedTransaction ??
+        (await generateTransaction({
           address,
           balance,
           chainId,
           nonce: accountInfo.nonce,
           values: parsedValues
-        })
+        }))
       : null;
-
-    try {
-      if (accountInfo.isGuarded && values.code && transaction) {
-        const provider = await GuardianProvider.createProvider(
-          address,
-          String(networkConfig.apiAddress),
-          { getNativeAuthToken: () => 'add native auth token here!!!!' }
-        );
-
-        // TODO: to be removed when included in provider
-        transaction.version = TransactionVersion.withTxOptions();
-        transaction.options = TransactionOptions.withTxGuardedOptions();
-        const [guardedTransaction] = await provider.applyGuardianSignature(
-          [transaction],
-          values.code
-        );
-        transaction = guardedTransaction;
-      }
-    } catch {
-      return setFieldValue('codeError', 'Invalid code');
-    }
 
     return onFormSubmit(parsedValues, transaction, setIsFormSubmitted);
   }
@@ -168,7 +141,8 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
         formInfo={{
           ...formInfo,
           isFormSubmitted,
-          setIsFormSubmitted
+          setIsFormSubmitted,
+          setGuardedTransaction
         }}
         networkConfig={networkConfig}
         tokensInfo={tokensInfo}

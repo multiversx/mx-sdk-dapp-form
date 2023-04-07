@@ -1,3 +1,4 @@
+import { Transaction } from '@multiversx/sdk-core/out';
 import { TransactionTypeEnum } from 'types/enums';
 import { PartialNftType, PartialTokenType } from 'types/tokens';
 
@@ -36,11 +37,7 @@ export interface ExtendedValuesType extends ValuesType {
     ledgerDataActive: boolean;
     version: string;
   };
-  code?: string;
-  /**
-   * `codeError` is used to bypass formik validation mechanism since `code` is not part of the form
-   */
-  codeError?: string;
+  transaction?: Transaction;
   uiOptions?: {
     showAmountSlider: boolean;
   };
@@ -57,7 +54,6 @@ export interface ValidationSchemaType {
    * sign transactions, when some tokens will be available only after execution.
    */
   ignoreTokenBalance?: boolean;
-
   readonly?: ExtendedValuesType['readonly'];
   tokenId: string;
   nft?: PartialNftType;

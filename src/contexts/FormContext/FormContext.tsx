@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useState } from 'react';
+import { Transaction } from '@multiversx/sdk-core/out';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { useFormikContext } from 'formik';
 import { ExtendedValuesType, TransactionTypeEnum } from 'types';
@@ -13,6 +14,7 @@ export interface FormContextBasePropsType {
   onCloseForm: () => void;
   isFormSubmitted: boolean;
   setIsFormSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+  setGuardedTransaction: (transaction: Transaction) => void;
 }
 
 export interface FormContextPropsType extends FormContextBasePropsType {

@@ -107,15 +107,16 @@
     "react-select": "5.4.0"
   },
   "dependencies": {
+    "@multiversx/sdk-guardians-provider": "0.0.1-alpha.1",
     "anchorme": "2.1.2",
     "axios": "0.24.0",
     "bech32": "2.0.0",
     "bignumber.js": "9.x",
     "formik": "2.2.9",
-    "react-tooltip": "5.7.2",
     "lodash": "4.17.21",
     "react-collapsed": "3.6.0",
     "react-number-format": "5.1.3",
+    "react-tooltip": "5.7.2",
     "yup": "0.32.11"
   }
 }

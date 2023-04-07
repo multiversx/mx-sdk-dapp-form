@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
+import GenericGuardianProvider from '@multiversx/sdk-guardians-provider/out/genericGuardianProvider';
 
 export interface AccountContextPropsType {
   address: string;
   nonce: number;
   balance: string;
   isGuarded?: boolean;
+  guardianProvider?: GenericGuardianProvider;
   providerType: LoginMethodsEnum;
 }
 

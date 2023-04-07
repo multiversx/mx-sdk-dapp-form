@@ -1,11 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
+import {
+  Transaction,
+  TransactionOptions,
+  TransactionVersion
+} from '@multiversx/sdk-core/out';
+import { ZERO } from '@multiversx/sdk-dapp/constants';
+import {
+  GuardianScreen,
+  GuardianScreenType
+} from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/components/GuardianScreen/GuardianScreen';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { generateTransaction } from 'operations/generateTransaction';
 import { ExtendedValuesType, TransactionTypeEnum } from 'types';
 
 import { ConfirmScreen } from 'UI/ConfirmScreen';
@@ -19,7 +30,6 @@ import {
   AmountSelectInput
 } from 'UI/Fields';
 
-import { GuardianScreen } from 'UI/GuardianScreen/GuardianScreen';
 import { CanTransferNftWarning, WegldWarning } from 'UI/Warnings';
 import styles from './form.module.scss';
 import { getSendLabel } from './helpers';
@@ -27,21 +37,58 @@ import { getSendLabel } from './helpers';
 export const Form = ({ className }: WithClassnameType) => {
   const { formInfo, receiverInfo, accountInfo, amountInfo, tokensInfo } =
     useSendFormContext();
-  const {
-    values: { txType, tokenId }
-  } = useFormikContext<ExtendedValuesType>();
+  const { values } = useFormikContext<ExtendedValuesType>();
+  const { txType, tokenId, address, balance, chainId } = values;
+
+  const [signedTransactions, setSignedTransactions] = useState<
+    Record<number, Transaction>
+  >({});
 
   const { amountRange, onSetAmountPercentage } = amountInfo;
 
   const {
     renderKey,
     onValidateForm,
+    onInvalidateForm,
     onCloseForm,
+    onSubmitForm,
     areValidatedValuesReady,
     isGuardianScreenVisible,
     uiOptions,
-    readonly
+    readonly,
+    setGuardedTransaction
   } = formInfo;
+
+  // TODO: move outside of render
+  const createTransaction = async () => {
+    const actualTransactionAmount =
+      values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
+    const parsedValues = { ...values, amount: actualTransactionAmount };
+
+    const transaction = await generateTransaction({
+      address,
+      balance,
+      chainId,
+      nonce: accountInfo.nonce,
+      values: parsedValues
+    });
+
+    transaction.version = TransactionVersion.withTxOptions();
+    transaction.options = TransactionOptions.withTxGuardedOptions();
+
+    setSignedTransactions({ 0: transaction });
+  };
+
+  useEffect(() => {
+    createTransaction();
+  }, [values]);
+
+  useEffect(() => {
+    const transaction = signedTransactions[0];
+    if (transaction) {
+      setGuardedTransaction(transaction);
+    }
+  }, [signedTransactions]);
 
   function handleCloseClick(e: any) {
     e.preventDefault();
@@ -54,8 +101,26 @@ export const Form = ({ className }: WithClassnameType) => {
     TransactionTypeEnum.MetaESDT
   ].includes(txType);
 
+  const onConfirmClick = () => {
+    // allow setting guarded transaction then submit form
+    setTimeout(() => {
+      onSubmitForm();
+    });
+  };
+
+  const props: GuardianScreenType = {
+    onSignTransaction: onConfirmClick,
+    onPrev: onInvalidateForm,
+    guardianProvider: accountInfo.guardianProvider,
+    title: '',
+    className,
+    signedTransactions,
+    setSignedTransactions,
+    signStepInnerClasses: {}
+  };
+
   if (isGuardianScreenVisible) {
-    return <GuardianScreen />;
+    return <GuardianScreen {...props} />;
   }
 
   if (areValidatedValuesReady) {
