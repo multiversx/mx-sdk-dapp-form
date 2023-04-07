@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
 import {
-  Transaction,
   TransactionOptions,
   TransactionVersion
 } from '@multiversx/sdk-core/out';
 import { ZERO } from '@multiversx/sdk-dapp/constants';
+import { GuardianScreen } from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/components/GuardianScreen/GuardianScreen';
 import {
-  GuardianScreen,
-  GuardianScreenType
-} from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/components/GuardianScreen/GuardianScreen';
+  GuardianScreenType,
+  DeviceSignedTransactions
+} from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/signWithDeviceModal.types';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
@@ -40,9 +40,8 @@ export const Form = ({ className }: WithClassnameType) => {
   const { values } = useFormikContext<ExtendedValuesType>();
   const { txType, tokenId, address, balance, chainId } = values;
 
-  const [signedTransactions, setSignedTransactions] = useState<
-    Record<number, Transaction>
-  >({});
+  const [signedTransactions, setSignedTransactions] =
+    useState<DeviceSignedTransactions>();
 
   const { amountRange, onSetAmountPercentage } = amountInfo;
 
@@ -84,6 +83,9 @@ export const Form = ({ className }: WithClassnameType) => {
   }, [values]);
 
   useEffect(() => {
+    if (!signedTransactions) {
+      return;
+    }
     const transaction = signedTransactions[0];
     if (transaction) {
       setGuardedTransaction(transaction);
