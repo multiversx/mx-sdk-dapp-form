@@ -60,27 +60,35 @@ export const Form = ({ className }: WithClassnameType) => {
 
   // TODO: move outside of render
   const createTransaction = async () => {
+    if (!areValidatedValuesReady) {
+      return;
+    }
     const actualTransactionAmount =
       values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
     const parsedValues = { ...values, amount: actualTransactionAmount };
 
-    const transaction = await generateTransaction({
-      address,
-      balance,
-      chainId,
-      nonce: accountInfo.nonce,
-      values: parsedValues
-    });
+    try {
+      const transaction = await generateTransaction({
+        address,
+        balance,
+        chainId,
+        nonce: accountInfo.nonce,
+        values: parsedValues
+      });
 
-    transaction.version = TransactionVersion.withTxOptions();
-    transaction.options = TransactionOptions.withTxGuardedOptions();
+      transaction.version = TransactionVersion.withTxOptions();
+      transaction.options = TransactionOptions.withTxGuardedOptions();
 
-    setSignedTransactions({ 0: transaction });
+      setSignedTransactions({ 0: transaction });
+    } catch {
+      // no need to handle error, since values may be invalid
+      setSignedTransactions({});
+    }
   };
 
   useEffect(() => {
     createTransaction();
-  }, [values]);
+  }, [values, areValidatedValuesReady]);
 
   useEffect(() => {
     if (!signedTransactions) {
@@ -105,6 +113,7 @@ export const Form = ({ className }: WithClassnameType) => {
 
   const onConfirmClick = () => {
     // allow setting guarded transaction then submit form
+
     setTimeout(() => {
       onSubmitForm();
     });
