@@ -107,7 +107,7 @@
     "react-select": "5.4.0"
   },
   "dependencies": {
-    "@multiversx/sdk-guardians-provider": "0.0.1-alpha.1",
+    "@multiversx/sdk-guardians-provider": "0.0.1-alpha.2",
     "anchorme": "2.1.2",
     "axios": "0.24.0",
     "bech32": "2.0.0",
