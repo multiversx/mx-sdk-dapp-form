@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
+import { UseSignMultipleTransactionsPropsType } from '@multiversx/sdk-dapp/hooks/transactions/useSignMultipleTransactions';
 import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
-import GenericGuardianProvider from '@multiversx/sdk-guardians-provider/out/genericGuardianProvider';
 
 export interface AccountContextPropsType {
   address: string;
   nonce: number;
   balance: string;
   isGuarded?: boolean;
-  guardianProvider?: GenericGuardianProvider;
+  guardianProvider?: UseSignMultipleTransactionsPropsType['guardianProvider'];
   providerType: LoginMethodsEnum;
 }
 

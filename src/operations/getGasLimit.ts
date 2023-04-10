@@ -25,5 +25,9 @@ export function getGasLimit({ txType, data = '', isGuarded }: GetGasLimitType) {
     });
   }
 
-  return new BigNumber(gasLimit).plus(guardedAccountGasLimit).toString(10);
+  const finalGasLimit = new BigNumber(gasLimit)
+    .plus(guardedAccountGasLimit)
+    .toString(10);
+
+  return finalGasLimit;
 }

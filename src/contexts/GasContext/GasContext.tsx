@@ -96,7 +96,8 @@ export function GasContextProvider({
   const defaultGasLimit = getDefaultGasLimit({
     isNftTransaction,
     isEsdtTransaction,
-    data
+    data,
+    isGuarded
   });
 
   const isAmountInvalid = getIsAmountInvalid({
