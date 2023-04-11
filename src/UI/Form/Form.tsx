@@ -76,8 +76,8 @@ export const Form = ({ className }: WithClassnameType) => {
         values: parsedValues
       });
 
-      transaction.version = TransactionVersion.withTxOptions();
-      transaction.options = TransactionOptions.withTxGuardedOptions();
+      transaction.setVersion(TransactionVersion.withTxOptions());
+      transaction.setOptions(TransactionOptions.withOptions({ guarded: true }));
 
       setSignedTransactions({ 0: transaction });
     } catch {
