@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, MouseEvent } from 'react';
 import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
-import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useFormContext } from 'contexts';
@@ -54,8 +53,9 @@ export const TransactionSummary = ({
       break;
   }
 
-  const onCloseClick = (e: React.MouseEvent) => {
-    e.preventDefault();
+  const onCloseClick = (event: MouseEvent) => {
+    event.preventDefault();
+
     if (readonly) {
       onCloseForm();
     } else {
@@ -95,13 +95,11 @@ export const TransactionSummary = ({
 
       <Confirm.Data data={data} />
 
-      <div className={styles.buttons}>
-        {gasCostError && <p className={globals.error}>{gasCostError}</p>}
+      {gasCostError && <p className={globals.error}>{gasCostError}</p>}
 
+      <div className={styles.buttons}>
         <button
-          className={classNames('my-3', globals.btn, globals.btnPrimary, {
-            [globals.btnWarning]: scamError
-          })}
+          className={globals.buttonSend}
           type='button'
           id='sendTrxBtn'
           data-testid='sendTrxBtn'
@@ -113,9 +111,7 @@ export const TransactionSummary = ({
 
         {isConfirmCloseBtnVisible && (
           <button
-            className={classNames(globals.btn, globals.btnLink, {
-              [globals.btnWarning]: scamError
-            })}
+            className={globals.buttonText}
             type='button'
             id='cancelTrxBtn'
             data-testid='cancelTrxBtn'

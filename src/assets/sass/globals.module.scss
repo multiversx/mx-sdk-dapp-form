@@ -5,7 +5,10 @@
   display: block;
   color: var(--dapp-form-error-color);
   line-height: 1;
-  margin: 8px 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding-top: 8px;
   font-size: 12px;
 
   &.scam svg {
@@ -15,10 +18,11 @@
 }
 
 .label {
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   color: var(--dapp-form-label-color);
-  font-size: 1rem;
+  font-size: 12px;
   line-height: 1;
+  font-weight: 400;
 }
 
 .value {
@@ -33,24 +37,18 @@
 
 .input,
 .textarea {
-  font-size: 1rem;
   font-weight: 400;
   line-height: 1;
   color: var(--dapp-form-input-color) !important;
   background-clip: padding-box;
-  border: 1px solid var(--dapp-form-input-bg) !important;
+  border: 1px solid var(--dapp-form-input-bg);
   border-radius: var(--dapp-form-input-border-radius);
   width: 100%;
   box-sizing: border-box;
   background-color: var(--dapp-form-input-bg) !important;
   transition: all 200ms ease;
-  min-height: auto;
   padding: 12px;
-
-  &:focus {
-    outline: 0;
-    color: var(--dapp-form-input-color) !important;
-  }
+  font-size: 14px;
 
   &::placeholder {
     color: var(--dapp-form-placeholder-color) !important;
@@ -61,10 +59,66 @@
     opacity: 0.5;
   }
 
-  &.error {
+  &.invalid {
     margin: 0;
-    border-color: var(--dapp-form-error-color) !important;
+    border-color: var(--dapp-form-error-color);
     font-size: 1rem;
+  }
+
+  &:focus {
+    outline: 0;
+    color: var(--dapp-form-input-color) !important;
+    border-color: var(--dapp-form-input-border-focus);
+  }
+}
+
+.textarea {
+  line-height: 1.25;
+  min-height: 44px !important;
+}
+
+.button-send {
+  margin: 0 auto;
+  align-self: center;
+  line-height: 1;
+  font-family: 'Inter';
+  transition: all 200ms ease;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 16px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  border: none;
+  box-shadow: none;
+  background-color: var(--dapp-form-btn-bg);
+
+  &:hover {
+    background-color: var(--dapp-form-btn-bg-hover);
+  }
+}
+
+.button-text {
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 200ms ease;
+  color: var(--dapp-form-btn-bg);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+
+  @media (min-width: 768px) {
+    margin-top: 32px;
+  }
+
+  &:hover {
+    color: var(--dapp-form-btn-bg-hover);
   }
 }
 

@@ -1,4 +1,11 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+  createContext
+} from 'react';
 import { Transaction } from '@multiversx/sdk-core/out';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { useFormikContext } from 'formik';
@@ -13,7 +20,7 @@ export interface FormContextBasePropsType {
   uiOptions?: ExtendedValuesType['uiOptions'];
   onCloseForm: () => void;
   isFormSubmitted: boolean;
-  setIsFormSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsFormSubmitted: Dispatch<SetStateAction<boolean>>;
   setGuardedTransaction: (transaction: Transaction) => void;
 }
 
@@ -31,7 +38,7 @@ export interface FormContextPropsType extends FormContextBasePropsType {
   onInvalidateForm: () => void;
   onSubmitForm: () => void;
   isGuardianScreenVisible: boolean;
-  setIsGuardianScreenVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsGuardianScreenVisible: Dispatch<SetStateAction<boolean>>;
 }
 
 interface FormContextProviderPropsType {
@@ -39,7 +46,7 @@ interface FormContextProviderPropsType {
   value: FormContextBasePropsType;
 }
 
-export const FormContext = React.createContext({} as FormContextPropsType);
+export const FormContext = createContext({} as FormContextPropsType);
 
 export function FormContextProvider({
   children,
@@ -93,6 +100,7 @@ export function FormContextProvider({
 
   const handleInvalidateForm = useCallback(() => {
     value.setIsFormSubmitted(false);
+    setIsGuardianScreenVisible(false);
   }, []);
 
   const contextValue: FormContextPropsType = {

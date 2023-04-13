@@ -35,7 +35,7 @@ import styles from './form.module.scss';
 import { getSendLabel } from './helpers';
 
 export const Form = ({ className }: WithClassnameType) => {
-  const { formInfo, receiverInfo, accountInfo, amountInfo, tokensInfo } =
+  const { formInfo, accountInfo, amountInfo, tokensInfo } =
     useSendFormContext();
   const { values } = useFormikContext<ExtendedValuesType>();
   const { txType, tokenId, address, balance, chainId } = values;
@@ -175,25 +175,21 @@ export const Form = ({ className }: WithClassnameType) => {
 
       <div className={styles.formButtons}>
         <button
-          className={classNames('my-3', globals.btn, globals.btnPrimary, {
-            [globals.btnWarning]: receiverInfo?.scamError
-          })}
           type='button'
           id='sendBtn'
           data-testid='sendBtn'
           onClick={onValidateForm}
+          className={globals.buttonSend}
         >
           Send {getSendLabel(tokensInfo)}
         </button>
 
         <button
-          className={classNames(globals.btn, globals.btnLink, {
-            [globals.btnWarning]: receiverInfo?.scamError
-          })}
           type='button'
           id='closeButton'
           data-testid='returnToWalletBtn'
           onClick={handleCloseClick}
+          className={globals.buttonText}
         >
           Cancel
         </button>

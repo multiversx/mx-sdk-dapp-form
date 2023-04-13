@@ -179,7 +179,7 @@ export const Receiver = ({ className }: WithClassnameType) => {
           renderMenu={CustomMenu}
           inputProps={{
             className: classNames(globals.input, {
-              [globals.error]: isReceiverInvalid || scamError,
+              [globals.invalid]: isReceiverInvalid || scamError,
               [globals.disabled]: getIsDisabled(ValuesEnum.receiver, readonly)
             })
           }}

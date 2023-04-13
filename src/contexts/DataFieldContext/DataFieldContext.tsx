@@ -1,4 +1,11 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, {
+  useCallback,
+  ChangeEvent,
+  ReactNode,
+  createContext,
+  useContext,
+  useEffect
+} from 'react';
 import { useFormikContext } from 'formik';
 
 import { useAccountContext } from 'contexts/AccountContext';
@@ -13,7 +20,7 @@ export interface DataContextPropsType {
   dataError?: string;
   isDataInvalid: boolean;
   onChange: (
-    newValue: string | React.ChangeEvent<any>,
+    newValue: string | ChangeEvent<any>,
     shouldValidate?: boolean
   ) => void;
   onBlur: () => void;
@@ -21,10 +28,10 @@ export interface DataContextPropsType {
 }
 
 interface DataContextProviderPropsType {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export const DataFieldContext = React.createContext({} as DataContextPropsType);
+export const DataFieldContext = createContext({} as DataContextPropsType);
 
 export function DataContextProvider({
   children
@@ -46,7 +53,7 @@ export function DataContextProvider({
   const isDataInvalid = checkInvalid(ValuesEnum.data);
 
   const handleUpdateData = (
-    newValue: React.ChangeEvent<any> | string,
+    newValue: ChangeEvent<any> | string,
     shouldValidate = false
   ) => {
     const value =

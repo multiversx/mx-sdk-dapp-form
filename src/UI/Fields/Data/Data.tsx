@@ -34,6 +34,7 @@ export const Data = ({ className }: WithClassnameType) => {
 
       <div className={styles.wrapper}>
         <textarea
+          rows={1}
           id={ValuesEnum.data}
           name={ValuesEnum.data}
           disabled={isDisabled}
