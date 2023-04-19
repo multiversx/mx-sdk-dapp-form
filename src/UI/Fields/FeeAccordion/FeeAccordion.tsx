@@ -6,12 +6,12 @@ import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import useCollapse from 'react-collapsed';
 
+import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { GasLimit } from '../GasLimit/GasLimit';
 import { GasPrice } from '../GasPrice';
 import { FeeInFiat } from './FeeInFiat';
 
-import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 export const FeeAccordion = ({ className }: WithClassnameType) => {

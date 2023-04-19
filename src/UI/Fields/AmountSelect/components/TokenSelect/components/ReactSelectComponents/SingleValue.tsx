@@ -1,6 +1,6 @@
 import React from 'react';
-import { components } from 'react-select';
 import classNames from 'classnames';
+import { components } from 'react-select';
 
 import styles from './../../tokenSelect.module.scss';
 

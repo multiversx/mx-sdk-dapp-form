@@ -1,7 +1,7 @@
 import React from 'react';
-import { components } from 'react-select';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleNotch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { components } from 'react-select';
 
 import styles from './../../tokenSelect.module.scss';
 

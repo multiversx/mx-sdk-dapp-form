@@ -1,11 +1,13 @@
 import React from 'react';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
-import classNames from 'classnames';
 
+import globals from 'assets/sass/globals.module.scss';
 import { ZERO } from 'constants/index';
 import { calculateFeeInFiat } from 'operations';
 
-import globals from 'assets/sass/globals.module.scss';
+import { TransactionTypeEnum } from 'types';
+import { TokenAvatar } from '../TokenAvatar';
+
 import styles from './styles.module.scss';
 
 export interface FeePropsType {
@@ -24,22 +26,26 @@ export const Fee = ({
   <div className={styles.fee}>
     <span className={globals.label}>{label}</span>
 
-    <div className={classNames(globals.value, styles.value)}>
-      <FormatAmount
-        egldLabel={egldLabel}
-        value={feeLimit}
-        showLastNonZeroDecimal
-        data-testid='confirmFee'
-      />
+    <div className={styles.token}>
+      <TokenAvatar type={TransactionTypeEnum.EGLD} />
 
-      {feeLimit !== ZERO && (
-        <small className={styles.text}>
-          {calculateFeeInFiat({
-            feeLimit,
-            egldPriceInUsd
-          })}
-        </small>
-      )}
+      <div className={styles.value}>
+        <FormatAmount
+          egldLabel={egldLabel}
+          value={feeLimit}
+          showLastNonZeroDecimal={true}
+          data-testid='confirmFee'
+        />
+      </div>
     </div>
+
+    {feeLimit !== ZERO && (
+      <span className={styles.price}>
+        {calculateFeeInFiat({
+          feeLimit,
+          egldPriceInUsd
+        })}
+      </span>
+    )}
   </div>
 );

@@ -1,11 +1,27 @@
 @import 'assets/sass/variables/variables';
 
-.confirm {
-  background-color: var(--dapp-form-bg);
-  border-radius: 12px;
-  padding: 32px;
+.summary {
   display: flex;
   flex-direction: column;
+
+  .fields {
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+
+    .columns {
+      display: flex;
+      column-gap: 16px;
+      row-gap: 32px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+
+      .column {
+        min-width: calc(50% - 8px);
+        text-align: left;
+      }
+    }
+  }
 
   .buttons {
     display: flex;

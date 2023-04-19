@@ -1,15 +1,23 @@
 @import 'assets/sass/variables/_variables.scss';
 
 .fee {
-  .value {
+  display: flex;
+  flex-direction: column;
+
+  .token {
     display: flex;
     align-items: center;
-    justify-content: space-between;
 
-    .text {
-      display: block;
-      color: var(--dapp-form-label-color);
-      font-weight: 400;
+    .value {
+      font-size: 14px;
+      font-weight: 500;
     }
+  }
+
+  .price {
+    font-size: 12px;
+    color: var(--dapp-form-placeholder-color);
+    line-height: 1;
+    margin-top: 8px;
   }
 }

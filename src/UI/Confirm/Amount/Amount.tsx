@@ -2,13 +2,13 @@ import React from 'react';
 import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp/constants/index';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue/index';
-import classNames from 'classnames';
-
-import { parseAmount } from 'helpers';
-import { PartialNftType, TransactionTypeEnum } from 'types';
-import { Token } from '../Token';
 
 import globals from 'assets/sass/globals.module.scss';
+import { parseAmount } from 'helpers';
+import { PartialNftType, TransactionTypeEnum } from 'types';
+
+import { TokenAvatar } from '../TokenAvatar';
+
 import styles from './styles.module.scss';
 
 export interface AmountPropsType {
@@ -31,7 +31,6 @@ export const Amount = ({
   txType,
   tokenDecimals,
   tokenId,
-  tokenIdError,
   egldLabel,
   egldPriceInUsd,
   nft,
@@ -40,18 +39,11 @@ export const Amount = ({
   const nftDecimals = nft?.decimals || 0;
   const isEsdtTransaction = txType === TransactionTypeEnum.ESDT;
   const isMetaEsdt = txType === TransactionTypeEnum.MetaESDT;
+  const isNFT = txType === TransactionTypeEnum.NonFungibleESDT;
 
   const value = isMetaEsdt ? parseAmount(amount, nft?.decimals) : amount;
   const showNftAmount = Boolean(nft && amount);
   const tokenLabel = tokenId.split('-')[0];
-  const tokenProps = {
-    nft,
-    isEsdtTransaction,
-    tokenId,
-    egldLabel,
-    tokenIdError,
-    tokenAvatar
-  };
 
   const decimals = isEsdtTransaction ? tokenDecimals : DECIMALS;
 
@@ -61,48 +53,45 @@ export const Amount = ({
       value={value}
       decimals={nftDecimals}
       digits={txType === TransactionTypeEnum.MetaESDT ? DIGITS : 0}
-      showLastNonZeroDecimal
       showLabel={false}
+      showLastNonZeroDecimal={true}
       data-testid='confirmAmount'
     />
   ) : (
-    <>
-      <FormatAmount
-        egldLabel={egldLabel}
-        value={parseAmount(amount, decimals)}
-        decimals={decimals}
-        showLastNonZeroDecimal
-        showLabel={false}
-        token={isEsdtTransaction ? tokenLabel : egldLabel}
-        data-testid='confirmAmount'
-      />
-
-      {!isEsdtTransaction && (
-        <div className={styles.price}>
-          <UsdValue
-            amount={amount}
-            usd={egldPriceInUsd}
-            data-testid='confirmUsdValue'
-          />
-        </div>
-      )}
-    </>
+    <FormatAmount
+      egldLabel={egldLabel}
+      value={parseAmount(amount, decimals)}
+      showLabel={false}
+      decimals={decimals}
+      showLastNonZeroDecimal={true}
+      token={isEsdtTransaction ? tokenLabel : egldLabel}
+      data-testid='confirmAmount'
+    />
   );
+
+  if (isNFT) {
+    return null;
+  }
 
   return (
     <div className={styles.amount}>
-      {txType !== TransactionTypeEnum.NonFungibleESDT && (
-        <div className={styles.left}>
-          <span className={globals.label}>{label}</span>
-          <span className={classNames(globals.value, styles.value)}>
-            {amountRenderer}
-          </span>
-        </div>
-      )}
+      <span className={globals.label}>{label}</span>
 
-      <div className={styles.right}>
-        <Token {...tokenProps} />
+      <div className={styles.token}>
+        <TokenAvatar type={txType} avatar={tokenAvatar} />
+        <div className={styles.value}>
+          {amountRenderer} {tokenLabel}
+        </div>
       </div>
+
+      {!isEsdtTransaction && (
+        <UsdValue
+          amount={amount}
+          usd={egldPriceInUsd}
+          data-testid='confirmUsdValue'
+          className={styles.price}
+        />
+      )}
     </div>
   );
 };

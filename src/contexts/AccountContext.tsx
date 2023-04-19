@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, ReactNode, createContext } from 'react';
 import { UseSignMultipleTransactionsPropsType } from '@multiversx/sdk-dapp/hooks/transactions/useSignMultipleTransactions';
 import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
 
@@ -12,13 +12,11 @@ export interface AccountContextPropsType {
 }
 
 interface AccountContextProviderPropsType {
-  children: React.ReactNode;
+  children: ReactNode;
   value: AccountContextPropsType;
 }
 
-export const AccountContext = React.createContext(
-  {} as AccountContextPropsType
-);
+export const AccountContext = createContext({} as AccountContextPropsType);
 
 export function AccountContextProvider({
   children,

@@ -30,7 +30,9 @@ import {
   AmountSelectInput
 } from 'UI/Fields';
 
+import { NFTSFTPreview } from 'UI/NFTSFTPreview';
 import { CanTransferNftWarning, WegldWarning } from 'UI/Warnings';
+
 import styles from './form.module.scss';
 import { getSendLabel } from './helpers';
 
@@ -39,6 +41,7 @@ export const Form = ({ className }: WithClassnameType) => {
     useSendFormContext();
   const { values } = useFormikContext<ExtendedValuesType>();
   const { txType, tokenId, address, balance, chainId } = values;
+  const { nft } = tokensInfo;
 
   const [signedTransactions, setSignedTransactions] =
     useState<DeviceSignedTransactions>();
@@ -100,8 +103,8 @@ export const Form = ({ className }: WithClassnameType) => {
     }
   }, [signedTransactions]);
 
-  function handleCloseClick(e: any) {
-    e.preventDefault();
+  function handleCloseClick(event: any) {
+    event.preventDefault();
     onCloseForm();
   }
 
@@ -145,6 +148,8 @@ export const Form = ({ className }: WithClassnameType) => {
       className={classNames(styles.form, className)}
     >
       <fieldset className={styles.formFieldset}>
+        {isNFTTransaction && nft && <NFTSFTPreview txType={txType} {...nft} />}
+
         <Receiver />
 
         {isNFTTransaction ? (

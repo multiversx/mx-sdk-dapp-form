@@ -26,8 +26,9 @@ export const Receiver = ({
   return (
     <div className={styles.receiver}>
       <span className={globals.label}>{contextLabel || label}</span>
+
       {receiver && (
-        <span className={globals.value} data-testid='confirmReceiver'>
+        <span className={styles.value} data-testid='confirmReceiver'>
           {receiver}
         </span>
       )}

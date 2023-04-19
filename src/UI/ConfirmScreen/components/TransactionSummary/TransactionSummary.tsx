@@ -72,30 +72,38 @@ export const TransactionSummary = ({
   };
 
   return (
-    <>
-      <Confirm.Receiver receiver={receiver} scamReport={scamError} />
+    <div className={styles.summary}>
+      <div className={styles.fields}>
+        <Confirm.Receiver receiver={receiver} scamReport={scamError} />
 
-      <Confirm.Amount
-        txType={txType}
-        tokenId={tokenId}
-        tokenDecimals={tokenDetails.decimals}
-        amount={String(amountInfo.amount)}
-        nft={nft}
-        egldPriceInUsd={egldPriceInUsd}
-        egldLabel={egldLabel}
-        tokenLabel={tokenDetails.name}
-        tokenAvatar={tokenDetails.assets?.svgUrl || ''}
-      />
+        <div className={styles.columns}>
+          <div className={styles.column}>
+            <Confirm.Amount
+              txType={txType}
+              tokenId={tokenId}
+              tokenDecimals={tokenDetails.decimals}
+              amount={String(amountInfo.amount)}
+              nft={nft}
+              egldPriceInUsd={egldPriceInUsd}
+              egldLabel={egldLabel}
+              tokenLabel={tokenDetails.name}
+              tokenAvatar={tokenDetails.assets?.svgUrl || ''}
+            />
+          </div>
 
-      <Confirm.Fee
-        egldLabel={egldLabel}
-        egldPriceInUsd={egldPriceInUsd}
-        feeLimit={feeLimit}
-      />
+          <div className={styles.column}>
+            <Confirm.Fee
+              egldLabel={egldLabel}
+              egldPriceInUsd={egldPriceInUsd}
+              feeLimit={feeLimit}
+            />
+          </div>
+        </div>
 
-      <Confirm.Data data={data} />
+        <Confirm.Data data={data} />
 
-      {gasCostError && <p className={globals.error}>{gasCostError}</p>}
+        {gasCostError && <p className={globals.error}>{gasCostError}</p>}
+      </div>
 
       <div className={styles.buttons}>
         <button
@@ -121,6 +129,6 @@ export const TransactionSummary = ({
           </button>
         )}
       </div>
-    </>
+    </div>
   );
 };
