@@ -25,7 +25,7 @@ export const TransactionSummary = ({
     receiverInfo: { scamError, receiver },
     formInfo,
     gasInfo: { gasCostError, feeLimit },
-    accountInfo: { isGuarded, guardianProvider },
+    accountInfo: { isGuarded },
     dataFieldInfo: { data },
     amountInfo,
     tokensInfo
@@ -73,7 +73,7 @@ export const TransactionSummary = ({
   };
 
   const onConfirmClick = () => {
-    if (isGuarded && guardianProvider) {
+    if (isGuarded) {
       return onNext();
     }
 

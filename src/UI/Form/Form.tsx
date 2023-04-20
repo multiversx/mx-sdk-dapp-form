@@ -5,11 +5,10 @@ import {
   TransactionVersion
 } from '@multiversx/sdk-core/out';
 import { ZERO } from '@multiversx/sdk-dapp/constants';
-import { GuardianScreen } from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/components/GuardianScreen/GuardianScreen';
 import {
-  GuardianScreenType,
-  DeviceSignedTransactions
-} from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/signWithDeviceModal.types';
+  DeviceSignedTransactions,
+  GuardianScreenType
+} from '@multiversx/sdk-dapp/types/transactions.types';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
@@ -36,7 +35,11 @@ import { CanTransferNftWarning, WegldWarning } from 'UI/Warnings';
 import styles from './form.module.scss';
 import { getSendLabel } from './helpers';
 
-export const Form = ({ className }: WithClassnameType) => {
+interface FormPropsType extends WithClassnameType {
+  GuardianScreen?: (props: GuardianScreenType) => JSX.Element;
+}
+
+export const Form = ({ className, GuardianScreen }: FormPropsType) => {
   const { formInfo, accountInfo, amountInfo, tokensInfo } =
     useSendFormContext();
   const { values } = useFormikContext<ExtendedValuesType>();
@@ -126,7 +129,6 @@ export const Form = ({ className }: WithClassnameType) => {
   const props: GuardianScreenType = {
     onSignTransaction: onConfirmClick,
     onPrev: onInvalidateForm,
-    guardianProvider: accountInfo.guardianProvider,
     title: '',
     className,
     signedTransactions,
@@ -134,7 +136,7 @@ export const Form = ({ className }: WithClassnameType) => {
     signStepInnerClasses: {}
   };
 
-  if (isGuardianScreenVisible) {
+  if (GuardianScreen && isGuardianScreenVisible) {
     return <GuardianScreen {...props} />;
   }
 
