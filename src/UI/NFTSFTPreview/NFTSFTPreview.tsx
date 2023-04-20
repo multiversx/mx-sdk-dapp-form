@@ -1,6 +1,7 @@
 import React, { MouseEvent } from 'react';
 import classNames from 'classnames';
 
+import type { FormContextPropsType } from 'contexts';
 import { processScamNft } from 'helpers';
 import { PartialNftType, TransactionTypeEnum } from 'types';
 
@@ -8,7 +9,7 @@ import styles from './styles.module.scss';
 
 export interface NFTSFTPreviewPropsType extends PartialNftType {
   txType: TransactionTypeEnum;
-  onClick?: (event: MouseEvent) => void;
+  onClick?: FormContextPropsType['onPreviewClick'];
 }
 
 export const NFTSFTPreview = (props: NFTSFTPreviewPropsType) => {
@@ -18,10 +19,17 @@ export const NFTSFTPreview = (props: NFTSFTPreviewPropsType) => {
   });
 
   const badge = txType === TransactionTypeEnum.NonFungibleESDT ? 'NFT' : 'SFT';
+  const onPreviewClick = (event: MouseEvent) => {
+    event.preventDefault();
+
+    if (onClick) {
+      onClick(event, Object.assign(nft, { collection }));
+    }
+  };
 
   return (
     <div
-      onClick={onClick}
+      onClick={onPreviewClick}
       className={classNames(styles.preview, {
         [styles.clickable]: Boolean(onClick)
       })}

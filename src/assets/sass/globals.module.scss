@@ -57,7 +57,11 @@
 
   &.disabled {
     pointer-events: none;
-    opacity: 0.5;
+    color: var(--dapp-form-input-color-disabled) !important;
+
+    &::placeholder {
+      color: var(--dapp-form-input-color-disabled) !important;
+    }
   }
 
   &.invalid {
@@ -75,7 +79,7 @@
 
 .textarea {
   line-height: 1.25;
-  min-height: 44px !important;
+  min-height: 80px;
 }
 
 .button-send {

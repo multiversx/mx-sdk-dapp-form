@@ -79,6 +79,7 @@ export const Amount = ({
 
       <div className={styles.token}>
         <TokenAvatar type={txType} avatar={tokenAvatar} />
+
         <div className={styles.value}>
           {amountRenderer} {tokenLabel}
         </div>

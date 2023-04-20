@@ -1,4 +1,12 @@
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React, {
+  useCallback,
+  createContext,
+  ChangeEvent,
+  useContext,
+  ReactNode,
+  useEffect,
+  useMemo
+} from 'react';
 
 import {
   GAS_PER_DATA_BYTE,
@@ -36,11 +44,11 @@ export interface GasContextPropsType {
   defaultGasLimit: string;
   feeLimit: string;
   onChangeGasPrice: (
-    newValue: string | React.ChangeEvent<any>,
+    newValue: string | ChangeEvent<any>,
     shouldValidate?: boolean
   ) => void;
   onChangeGasLimit: (
-    newValue: string | React.ChangeEvent<any>,
+    newValue: string | ChangeEvent<any>,
     shouldValidate?: boolean
   ) => void;
   onBlurGasPrice: () => void;
@@ -50,11 +58,11 @@ export interface GasContextPropsType {
 }
 
 interface GasContextProviderPropsType {
-  children: React.ReactNode;
+  children: ReactNode;
   initGasLimitError?: SendFormContainerPropsType['initGasLimitError'];
 }
 
-export const GasContext = React.createContext({} as GasContextPropsType);
+export const GasContext = createContext({} as GasContextPropsType);
 
 /**
  * **initGasLimitError**: Value coming from an intial compute of gasLimit in case the form is configured for a smart contract transaction
@@ -113,19 +121,21 @@ export function GasContextProvider({
   const isGasPriceInvalid = checkInvalid(ValuesEnum.gasPrice);
 
   const handleUpdateGasPrice = useCallback(
-    (newValue: string | React.ChangeEvent<any>, shouldValidate = false) => {
+    (newValue: string | ChangeEvent<any>, shouldValidate = false) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
+
       if (isNaN(Number(value))) {
         return;
       }
+
       setFieldValue(ValuesEnum.gasPrice, value, shouldValidate);
     },
     []
   );
 
   const handleUpdateGasLimit = useCallback(
-    (newValue: string | React.ChangeEvent<any>, shouldValidate = false) => {
+    (newValue: string | ChangeEvent<any>, shouldValidate = false) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
 

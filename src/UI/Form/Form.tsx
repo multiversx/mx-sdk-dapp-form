@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, MouseEvent, useState } from 'react';
 
 import {
   TransactionOptions,
@@ -24,10 +24,10 @@ import {
   Amount,
   Data,
   FeeAccordion,
-  NftSftToken,
   Receiver,
   AmountSlider,
-  AmountSelectInput
+  AmountSelectInput,
+  NftSftToken
 } from 'UI/Fields';
 
 import { NFTSFTPreview } from 'UI/NFTSFTPreview';
@@ -54,6 +54,7 @@ export const Form = ({ className }: WithClassnameType) => {
     onInvalidateForm,
     onCloseForm,
     onSubmitForm,
+    onPreviewClick,
     areValidatedValuesReady,
     isGuardianScreenVisible,
     uiOptions,
@@ -103,10 +104,10 @@ export const Form = ({ className }: WithClassnameType) => {
     }
   }, [signedTransactions]);
 
-  function handleCloseClick(event: any) {
+  const handleCloseClick = (event: MouseEvent) => {
     event.preventDefault();
     onCloseForm();
-  }
+  };
 
   const isNFTTransaction = ![
     TransactionTypeEnum.EGLD,
@@ -148,7 +149,9 @@ export const Form = ({ className }: WithClassnameType) => {
       className={classNames(styles.form, className)}
     >
       <fieldset className={styles.formFieldset}>
-        {isNFTTransaction && nft && <NFTSFTPreview txType={txType} {...nft} />}
+        {isNFTTransaction && nft && (
+          <NFTSFTPreview onClick={onPreviewClick} txType={txType} {...nft} />
+        )}
 
         <Receiver />
 

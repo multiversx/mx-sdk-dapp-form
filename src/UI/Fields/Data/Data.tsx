@@ -43,6 +43,7 @@ export const Data = ({ className }: WithClassnameType) => {
           onBlur={onBlur}
           onChange={onChange}
           spellCheck='false'
+          placeholder='Add transaction data'
           className={classNames(globals.textarea, {
             [globals.error]: isDataInvalid,
             [globals.disabled]: isDisabled

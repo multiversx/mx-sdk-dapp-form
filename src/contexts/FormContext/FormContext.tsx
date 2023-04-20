@@ -4,12 +4,13 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
-  createContext
+  createContext,
+  MouseEvent
 } from 'react';
 import { Transaction } from '@multiversx/sdk-core/out';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { useFormikContext } from 'formik';
-import { ExtendedValuesType, TransactionTypeEnum } from 'types';
+import { ExtendedValuesType, PartialNftType, TransactionTypeEnum } from 'types';
 import { verifyInvalid } from 'validation';
 
 export interface FormContextBasePropsType {
@@ -36,6 +37,7 @@ export interface FormContextPropsType extends FormContextBasePropsType {
   checkInvalid: (value: keyof ExtendedValuesType) => boolean;
   onValidateForm: () => void;
   onInvalidateForm: () => void;
+  onPreviewClick?: (event: MouseEvent, data: PartialNftType) => void;
   onSubmitForm: () => void;
   isGuardianScreenVisible: boolean;
   setIsGuardianScreenVisible: Dispatch<SetStateAction<boolean>>;

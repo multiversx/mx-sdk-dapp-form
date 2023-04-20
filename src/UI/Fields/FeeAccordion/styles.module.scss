@@ -41,11 +41,11 @@
   }
 
   .expandable {
-    overflow: hidden;
-    transition: height 0.2s ease;
-
     .content {
-      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-top: 32px;
     }
   }
 }

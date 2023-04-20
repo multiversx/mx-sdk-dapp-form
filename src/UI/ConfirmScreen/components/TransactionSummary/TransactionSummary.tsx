@@ -4,7 +4,9 @@ import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
 import globals from 'assets/sass/globals.module.scss';
 import { useFormContext } from 'contexts';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { TransactionTypeEnum } from 'types';
 import Confirm from 'UI/Confirm';
+import { NFTSFTPreview } from 'UI/NFTSFTPreview';
 
 import styles from './../confirmScreen.module.scss';
 
@@ -29,8 +31,14 @@ export const TransactionSummary = ({
     tokensInfo
   } = useSendFormContext();
   const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
-  const { readonly, onCloseForm, onInvalidateForm, onSubmitForm, txType } =
-    formInfo;
+  const {
+    readonly,
+    onCloseForm,
+    onInvalidateForm,
+    onPreviewClick,
+    onSubmitForm,
+    txType
+  } = formInfo;
 
   const onNext = () => {
     setIsGuardianScreenVisible(true);
@@ -38,6 +46,7 @@ export const TransactionSummary = ({
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const isNFT = txType === TransactionTypeEnum.NonFungibleESDT;
   let confirmText: string;
 
   switch (providerType) {
@@ -67,29 +76,42 @@ export const TransactionSummary = ({
     if (isGuarded && guardianProvider) {
       return onNext();
     }
+
     setIsSubmitting(true);
     onSubmitForm();
   };
 
+  const isNFTTransaction = ![
+    TransactionTypeEnum.EGLD,
+    TransactionTypeEnum.ESDT,
+    TransactionTypeEnum.MetaESDT
+  ].includes(txType);
+
   return (
     <div className={styles.summary}>
       <div className={styles.fields}>
+        {isNFTTransaction && nft && (
+          <NFTSFTPreview onClick={onPreviewClick} txType={txType} {...nft} />
+        )}
+
         <Confirm.Receiver receiver={receiver} scamReport={scamError} />
 
         <div className={styles.columns}>
-          <div className={styles.column}>
-            <Confirm.Amount
-              txType={txType}
-              tokenId={tokenId}
-              tokenDecimals={tokenDetails.decimals}
-              amount={String(amountInfo.amount)}
-              nft={nft}
-              egldPriceInUsd={egldPriceInUsd}
-              egldLabel={egldLabel}
-              tokenLabel={tokenDetails.name}
-              tokenAvatar={tokenDetails.assets?.svgUrl || ''}
-            />
-          </div>
+          {!isNFT && (
+            <div className={styles.column}>
+              <Confirm.Amount
+                txType={txType}
+                tokenId={tokenId}
+                tokenDecimals={tokenDetails.decimals}
+                amount={String(amountInfo.amount)}
+                nft={nft}
+                egldPriceInUsd={egldPriceInUsd}
+                egldLabel={egldLabel}
+                tokenLabel={tokenDetails.name}
+                tokenAvatar={tokenDetails.assets?.svgUrl || ''}
+              />
+            </div>
+          )}
 
           <div className={styles.column}>
             <Confirm.Fee

@@ -83,9 +83,7 @@ export const AmountSelect = ({
         </div>
       </div>
 
-      <div className={styles.footer}>
-        <AmountError {...amountErrorProps} />
-      </div>
+      <AmountError {...amountErrorProps} />
     </div>
   );
 };
