@@ -96,7 +96,11 @@ export const TestWrapper = ({
       onCloseForm: () => 'this is close form',
       setGuardedTransaction: (transaction) => {
         console.log(transaction);
-      }
+      },
+      setHasGuardianScreen: () => {
+        return false;
+      },
+      hasGuardianScreen: false
     },
     tokensInfo: {
       initialNft,
