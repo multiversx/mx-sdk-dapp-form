@@ -54,7 +54,7 @@ export const Amount = ({
       decimals={nftDecimals}
       digits={txType === TransactionTypeEnum.MetaESDT ? DIGITS : 0}
       showLabel={false}
-      showLastNonZeroDecimal={true}
+      showLastNonZeroDecimal
       data-testid='confirmAmount'
     />
   ) : (
@@ -63,7 +63,7 @@ export const Amount = ({
       value={parseAmount(amount, decimals)}
       showLabel={false}
       decimals={decimals}
-      showLastNonZeroDecimal={true}
+      showLastNonZeroDecimal
       token={isEsdtTransaction ? tokenLabel : egldLabel}
       data-testid='confirmAmount'
     />

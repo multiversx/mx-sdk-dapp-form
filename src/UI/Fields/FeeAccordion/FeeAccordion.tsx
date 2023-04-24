@@ -38,7 +38,7 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
         <span className={styles.limit} data-testid='feeLimit'>
           <FormatAmount
             value={feeLimit}
-            showLastNonZeroDecimal={true}
+            showLastNonZeroDecimal
             egldLabel={egldLabel}
           />
         </span>
