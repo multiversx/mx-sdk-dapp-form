@@ -37,7 +37,8 @@ export const TransactionSummary = ({
     onInvalidateForm,
     onPreviewClick,
     onSubmitForm,
-    txType
+    txType,
+    hasGuardianScreen
   } = formInfo;
 
   const onNext = () => {
@@ -73,7 +74,7 @@ export const TransactionSummary = ({
   };
 
   const onConfirmClick = () => {
-    if (isGuarded) {
+    if (isGuarded && hasGuardianScreen) {
       return onNext();
     }
 

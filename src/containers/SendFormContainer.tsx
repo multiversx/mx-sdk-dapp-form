@@ -67,6 +67,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     Boolean(props.formInfo.skipToConfirm)
   );
   const [guardedTransaction, setGuardedTransaction] = useState<Transaction>();
+  const [hasGuardianScreen, setHasGuardianScreen] = useState(false);
 
   //this is updated from within the main context with updated values
 
@@ -142,7 +143,9 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
           ...formInfo,
           isFormSubmitted,
           setIsFormSubmitted,
-          setGuardedTransaction
+          setGuardedTransaction,
+          hasGuardianScreen,
+          setHasGuardianScreen
         }}
         networkConfig={networkConfig}
         tokensInfo={tokensInfo}

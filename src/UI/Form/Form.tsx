@@ -62,7 +62,8 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
     isGuardianScreenVisible,
     uiOptions,
     readonly,
-    setGuardedTransaction
+    setGuardedTransaction,
+    setHasGuardianScreen
   } = formInfo;
 
   // TODO: move outside of render
@@ -96,6 +97,11 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
   useEffect(() => {
     createTransaction();
   }, [values, areValidatedValuesReady]);
+
+  useEffect(() => {
+    // account may be guarded, but 2FA will be provided in provider
+    setHasGuardianScreen(Boolean(GuardianScreen));
+  }, []);
 
   useEffect(() => {
     if (!signedTransactions) {

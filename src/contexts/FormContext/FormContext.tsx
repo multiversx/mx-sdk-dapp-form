@@ -23,6 +23,8 @@ export interface FormContextBasePropsType {
   isFormSubmitted: boolean;
   setIsFormSubmitted: Dispatch<SetStateAction<boolean>>;
   setGuardedTransaction: (transaction: Transaction) => void;
+  hasGuardianScreen: boolean;
+  setHasGuardianScreen: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface FormContextPropsType extends FormContextBasePropsType {
