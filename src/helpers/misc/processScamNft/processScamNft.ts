@@ -1,7 +1,8 @@
 import { getScamFlag } from '@multiversx/sdk-dapp/utils';
 
 import type { ProcessScamNftType } from './types';
-// import placeholder from 'assets/img/nft-image-placeholder.png';
+
+const placeholder = require('assets/icons/nft-placeholder.svg');
 
 export const processScamNft = ({
   nft,
@@ -20,9 +21,7 @@ export const processScamNft = ({
   });
 
   if (!metadata?.description || skipDescription) {
-    const thumbnail = isSuspiciousName
-      ? 'placeholder'
-      : media?.[0]?.thumbnailUrl;
+    const thumbnail = isSuspiciousName ? placeholder : media?.[0]?.thumbnailUrl;
 
     return {
       isSuspicious: isSuspiciousName,
@@ -41,7 +40,7 @@ export const processScamNft = ({
     });
 
   const isSuspicious = isSuspiciousName || isSuspiciousMetadata;
-  const thumbnail = isSuspicious ? 'placeholder' : media?.[0]?.thumbnailUrl;
+  const thumbnail = isSuspicious ? placeholder : media?.[0]?.thumbnailUrl;
 
   return {
     isSuspicious,
