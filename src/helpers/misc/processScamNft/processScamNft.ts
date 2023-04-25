@@ -1,7 +1,6 @@
 import { getScamFlag } from '@multiversx/sdk-dapp/utils';
 
 import { ProcessScamNftType } from './types';
-// import placeholder from 'assets/img/nft-image-placeholder.png';
 
 export const processScamNft = ({
   nft,
