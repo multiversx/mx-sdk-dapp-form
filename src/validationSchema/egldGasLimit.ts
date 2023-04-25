@@ -37,7 +37,7 @@ const minValueData = string().test({
   name: 'minValueData',
   test: function (value) {
     const parent: ExtendedValuesType = this.parent;
-    const { data, ignoreTokenBalance } = parent;
+    const { data, ignoreTokenBalance, isGuarded } = parent;
 
     // allow signing with 0 gasLimit
     if (ignoreTokenBalance) {
@@ -45,7 +45,8 @@ const minValueData = string().test({
     }
 
     const calculatedGasLimit = calculateGasLimit({
-      data: data ? data.trim() : ''
+      data: data ? data.trim() : '',
+      isGuarded
     });
 
     if (value) {

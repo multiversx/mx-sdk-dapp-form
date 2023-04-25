@@ -1,12 +1,12 @@
 import React, { MouseEvent } from 'react';
 import BigNumber from 'bignumber.js';
 
+import classNames from 'classnames';
 import { PartialTokenType } from 'types/tokens';
 
 import { getBalanceMinusDust } from './getBalanceMinusDust';
 import styles from './maxButton.module.scss';
 import { progressiveFormatAmount } from './progressiveFormatAmount';
-import classNames from 'classnames';
 
 export interface MaxButtonPropsType {
   token?: PartialTokenType;

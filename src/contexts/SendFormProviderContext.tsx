@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, createContext, ReactNode } from 'react';
+
 import { AccountContextPropsType, useAccountContext } from './AccountContext';
 import { AmountContextPropsType, useAmountContext } from './AmountContext';
 import { DataContextPropsType, useDataContext } from './DataFieldContext';
-
 import { FormContextPropsType, useFormContext } from './FormContext';
 import { GasContextPropsType, useGasContext } from './GasContext';
 import {
@@ -22,12 +22,10 @@ export interface SendFormContextPropsType {
 }
 
 interface SendFormContextProviderPropsType {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export const SendFormContext = React.createContext(
-  {} as SendFormContextPropsType
-);
+export const SendFormContext = createContext({} as SendFormContextPropsType);
 
 export function SendFormContextProvider({
   children
@@ -39,6 +37,7 @@ export function SendFormContextProvider({
   const gasInfo = useGasContext();
   const dataFieldInfo = useDataContext();
   const receiverInfo = useReceiverContext();
+
   return (
     <SendFormContext.Provider
       value={{

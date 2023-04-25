@@ -5,6 +5,9 @@
 node_modules
 temp_node_modules
 
+.yalc
+yalc.lock
+
 # builds
 build
 dist

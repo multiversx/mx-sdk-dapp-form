@@ -1,21 +1,20 @@
-import React, { useContext } from 'react';
+import React, { useContext, ReactNode, createContext } from 'react';
 import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
 
 export interface AccountContextPropsType {
   address: string;
   nonce: number;
   balance: string;
+  isGuarded?: boolean;
   providerType: LoginMethodsEnum;
 }
 
 interface AccountContextProviderPropsType {
-  children: React.ReactNode;
+  children: ReactNode;
   value: AccountContextPropsType;
 }
 
-export const AccountContext = React.createContext(
-  {} as AccountContextPropsType
-);
+export const AccountContext = createContext({} as AccountContextPropsType);
 
 export function AccountContextProvider({
   children,

@@ -2,10 +2,10 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import classNames from 'classnames';
-import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import { Typeahead, Menu, MenuItem, Hint } from 'react-bootstrap-typeahead';
 import { MenuProps } from 'react-bootstrap-typeahead/types/components/Menu';
 import {
@@ -179,7 +179,7 @@ export const Receiver = ({ className }: WithClassnameType) => {
           renderMenu={CustomMenu}
           inputProps={{
             className: classNames(globals.input, {
-              [globals.error]: isReceiverInvalid || scamError,
+              [globals.invalid]: isReceiverInvalid || scamError,
               [globals.disabled]: getIsDisabled(ValuesEnum.receiver, readonly)
             })
           }}

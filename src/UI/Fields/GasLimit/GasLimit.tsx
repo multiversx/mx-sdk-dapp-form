@@ -51,11 +51,9 @@ export const GasLimit = () => {
           autoComplete='off'
           className={classNames(globals.input, {
             [globals.disabled]: isDisabled,
-            [globals.error]: isGasLimitInvalid
+            [globals.invalid]: isGasLimitInvalid
           })}
         />
-
-        <strong />
 
         {showUndoButton && (
           <span
@@ -72,16 +70,16 @@ export const GasLimit = () => {
             </button>
           </span>
         )}
-      </div>
 
-      {isGasLimitInvalid && (
-        <div
-          className={globals.error}
-          data-testid={`${ValuesEnum.gasLimit}Error`}
-        >
-          {gasLimitError}
-        </div>
-      )}
+        {isGasLimitInvalid && (
+          <div
+            className={globals.error}
+            data-testid={`${ValuesEnum.gasLimit}Error`}
+          >
+            {gasLimitError}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

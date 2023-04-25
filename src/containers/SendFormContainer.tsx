@@ -66,6 +66,8 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   const [isFormSubmitted, setIsFormSubmitted] = useState(
     Boolean(props.formInfo.skipToConfirm)
   );
+  const [guardedTransaction, setGuardedTransaction] = useState<Transaction>();
+  const [hasGuardianScreen, setHasGuardianScreen] = useState(false);
 
   //this is updated from within the main context with updated values
 
@@ -80,13 +82,14 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     const parsedValues = { ...values, amount: actualTransactionAmount };
 
     const transaction = shouldGenerateTransactionOnSubmit
-      ? await generateTransaction({
+      ? guardedTransaction ??
+        (await generateTransaction({
           address,
           balance,
           chainId,
           nonce: accountInfo.nonce,
           values: parsedValues
-        })
+        }))
       : null;
 
     return onFormSubmit(parsedValues, transaction, setIsFormSubmitted);
@@ -103,7 +106,9 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     initialValues?.txType ??
     getTxType({ nft: tokensInfo?.initialNft, tokenId });
 
-  const gasLimit = initialValues?.gasLimit ?? getGasLimit({ txType, data });
+  const gasLimit =
+    initialValues?.gasLimit ??
+    getGasLimit({ txType, data, isGuarded: accountInfo.isGuarded });
 
   const formikInitialValues = {
     tokenId,
@@ -116,9 +121,11 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     address: initialValues?.address ?? address,
     nft: tokensInfo?.initialNft,
     balance: initialValues?.balance || balance,
+    isGuarded: initialValues?.isGuarded ?? accountInfo.isGuarded,
     chainId: initialValues?.chainId || networkConfig.chainId,
     tokens: tokensInfo?.initialTokens,
-    ledger: initialValues?.ledger
+    ledger: initialValues?.ledger,
+    code: ''
   };
 
   return (
@@ -135,7 +142,10 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
         formInfo={{
           ...formInfo,
           isFormSubmitted,
-          setIsFormSubmitted
+          setIsFormSubmitted,
+          setGuardedTransaction,
+          hasGuardianScreen,
+          setHasGuardianScreen
         }}
         networkConfig={networkConfig}
         tokensInfo={tokensInfo}
