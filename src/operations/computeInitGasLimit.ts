@@ -1,7 +1,6 @@
 import { GAS_LIMIT } from '@multiversx/sdk-dapp/constants/index';
 import { isContract } from '@multiversx/sdk-dapp/utils/smartContracts';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
-
 import BigNumber from 'bignumber.js';
 import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
@@ -9,6 +8,7 @@ import { DelegationContractDataType } from 'types';
 import fetchGasLimit from '../hooks/useFetchGasLimit/fetchGasLimit';
 import calculateGasLimit from './calculateGasLimit';
 import { calculateNftGasLimit } from './calculateNftGasLimit';
+import { getGuardedAccountGasLimit } from './getGuardedAccountGasLimit';
 
 export interface ComputeInitGasLimitType {
   computedTokenId: string;
@@ -16,6 +16,7 @@ export interface ComputeInitGasLimitType {
   isInternal: boolean;
   balance: string;
   address: string;
+  isGuarded?: boolean;
   nonce: number;
   amount: string;
   data: string;
@@ -35,6 +36,7 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
   isInternal,
   balance,
   address,
+  isGuarded,
   nonce,
   amount,
   data,
@@ -43,6 +45,8 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
   delegationContractData: { delegationContractData, delegationContract },
   chainId
 }) => {
+  const guardedAccountGasLimit = getGuardedAccountGasLimit(isGuarded);
+
   if (isContract(receiver) && !isInternal) {
     const { gasLimit: resultedGasLimit, gasLimitCostError } =
       await fetchGasLimit({
@@ -63,6 +67,7 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
       receiver === delegationContract
         ? new BigNumber(resultedGasLimit)
             .plus(delegationContractData.minGasLimit)
+            .plus(guardedAccountGasLimit)
             .toString()
         : resultedGasLimit;
 
@@ -78,7 +83,8 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
 
   if (data.length > 0) {
     const initGasLimit = calculateGasLimit({
-      data: data.trim()
+      data: data.trim(),
+      isGuarded
     });
     return { initGasLimit };
   }
@@ -86,11 +92,23 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
   const { isEsdt, isNft } = getIdentifierType(computedTokenId);
 
   if (isEsdt) {
-    return { initGasLimit: TOKEN_GAS_LIMIT };
+    return {
+      initGasLimit: new BigNumber(TOKEN_GAS_LIMIT)
+        .plus(guardedAccountGasLimit)
+        .toString()
+    };
   }
 
   if (isNft) {
-    return { initGasLimit: calculateNftGasLimit() };
+    return {
+      initGasLimit: new BigNumber(calculateNftGasLimit())
+        .plus(guardedAccountGasLimit)
+        .toString()
+    };
   }
-  return { initGasLimit: String(GAS_LIMIT) };
+  return {
+    initGasLimit: new BigNumber(GAS_LIMIT)
+      .plus(guardedAccountGasLimit)
+      .toString()
+  };
 };

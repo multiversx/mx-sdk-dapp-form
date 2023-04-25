@@ -1,21 +1,33 @@
+import BigNumber from 'bignumber.js';
 import { TOKEN_GAS_LIMIT } from 'constants/index';
 import { TransactionTypeEnum } from 'types/enums';
 import { calculateGasLimit } from './calculateGasLimit';
 import { calculateNftGasLimit } from './calculateNftGasLimit';
+import { getGuardedAccountGasLimit } from './getGuardedAccountGasLimit';
 
 export interface GetGasLimitType {
   txType: TransactionTypeEnum;
   data?: string;
+  isGuarded?: boolean;
 }
-export function getGasLimit({ txType, data = '' }: GetGasLimitType) {
-  switch (txType) {
-    case TransactionTypeEnum.ESDT:
-      return TOKEN_GAS_LIMIT;
-    case TransactionTypeEnum.EGLD:
-      return calculateGasLimit({
-        data: data.trim()
-      });
-    default:
-      return calculateNftGasLimit();
+export function getGasLimit({ txType, data = '', isGuarded }: GetGasLimitType) {
+  const guardedAccountGasLimit = getGuardedAccountGasLimit(isGuarded);
+
+  let gasLimit = calculateNftGasLimit();
+
+  if (txType === TransactionTypeEnum.ESDT) {
+    gasLimit = TOKEN_GAS_LIMIT;
   }
+
+  if (txType === TransactionTypeEnum.EGLD) {
+    gasLimit = calculateGasLimit({
+      data: data.trim()
+    });
+  }
+
+  const finalGasLimit = new BigNumber(gasLimit)
+    .plus(guardedAccountGasLimit)
+    .toString(10);
+
+  return finalGasLimit;
 }

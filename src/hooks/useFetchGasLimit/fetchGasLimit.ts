@@ -9,6 +9,7 @@ import { prepareTransaction } from './prepareTransaction';
 interface FetchGasLimitType {
   balance: string;
   address: string;
+  isGuarded?: boolean;
   nonce: number;
   values: Omit<ValuesType, 'tokenId'>;
   chainId: string;
@@ -17,6 +18,7 @@ interface FetchGasLimitType {
 export const fetchGasLimit = async ({
   balance,
   address,
+  isGuarded,
   nonce,
   values,
   chainId
@@ -70,7 +72,8 @@ export const fetchGasLimit = async ({
   }
 
   const calculatedGasLimit = calculateGasLimit({
-    data: values.data ? values.data.trim() : ''
+    data: values.data ? values.data.trim() : '',
+    isGuarded
   });
 
   const newGasLimit: string =

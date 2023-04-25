@@ -2,6 +2,7 @@ import React from 'react';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import globals from 'assets/sass/globals.module.scss';
+import { ExtendedValuesType } from 'types';
 import styles from './amountSelect.module.scss';
 
 import {
@@ -16,7 +17,6 @@ import {
   TokenSelect,
   TokenSelectPropsType
 } from './components';
-import { ExtendedValuesType } from '../../../types';
 
 export interface AmountSelectPropsType extends WithClassnameType {
   label?: string;
@@ -83,9 +83,7 @@ export const AmountSelect = ({
         </div>
       </div>
 
-      <div className={styles.footer}>
-        <AmountError {...amountErrorProps} />
-      </div>
+      <AmountError {...amountErrorProps} />
     </div>
   );
 };

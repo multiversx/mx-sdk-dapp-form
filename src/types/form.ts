@@ -1,3 +1,4 @@
+import { Transaction } from '@multiversx/sdk-core/out';
 import { TransactionTypeEnum } from 'types/enums';
 import { PartialNftType, PartialTokenType } from 'types/tokens';
 
@@ -20,6 +21,7 @@ export interface ExtendedValuesType extends ValuesType {
   // validationSchema
   txType: TransactionTypeEnum;
   address: string;
+  isGuarded?: boolean;
   balance: string;
   chainId: string;
   ignoreTokenBalance?: boolean;
@@ -35,6 +37,7 @@ export interface ExtendedValuesType extends ValuesType {
     ledgerDataActive: boolean;
     version: string;
   };
+  transaction?: Transaction;
   uiOptions?: {
     showAmountSlider: boolean;
   };
@@ -51,7 +54,6 @@ export interface ValidationSchemaType {
    * sign transactions, when some tokens will be available only after execution.
    */
   ignoreTokenBalance?: boolean;
-
   readonly?: ExtendedValuesType['readonly'];
   tokenId: string;
   nft?: PartialNftType;

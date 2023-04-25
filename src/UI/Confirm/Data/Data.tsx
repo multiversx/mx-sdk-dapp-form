@@ -1,9 +1,9 @@
 import React from 'react';
 import { decodePart } from '@multiversx/sdk-dapp/utils/decoders/decodePart';
-import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useUICustomizationContext } from 'contexts/UICustomization';
+
 import styles from './styles.module.scss';
 
 const allOccurences = (sourceStr: string, searchStr: string) =>
@@ -42,7 +42,7 @@ export const Data = ({
         output = (
           <>
             {highlight}
-            <span className={styles.secondary}>{rest}</span>
+            <span>{rest}</span>
           </>
         );
         break;
@@ -51,7 +51,7 @@ export const Data = ({
         const [rest] = data.split(highlight);
         output = (
           <>
-            <span className={styles.secondary}>{rest}</span>
+            <span>{rest}</span>
             {highlight}
           </>
         );
@@ -63,9 +63,9 @@ export const Data = ({
 
         output = (
           <>
-            <span className={styles.secondary}>{start}</span>
+            <span>{start}</span>
             {highlight}
-            <span className={styles.secondary}>{end}</span>
+            <span>{end}</span>
           </>
         );
         break;
@@ -79,10 +79,7 @@ export const Data = ({
         <div className={styles.data}>
           <span className={globals.label}>{scCallLabel}</span>
 
-          <div
-            data-testid='confirmScCall'
-            className={classNames(globals.textarea, styles.textarea)}
-          >
+          <div data-testid='confirmScCall' className={styles.value}>
             {[decodePart(encodedScCall), ...remainingDataFields].join('@')}
           </div>
         </div>
@@ -91,10 +88,7 @@ export const Data = ({
       <div className={styles.data}>
         <span className={globals.label}>{contextLabel || label}</span>
 
-        <div
-          data-testid='confirmData'
-          className={classNames(globals.textarea, globals.value)}
-        >
+        <div data-testid='confirmData' className={styles.value}>
           {data ? output : 'N/A'}
         </div>
       </div>

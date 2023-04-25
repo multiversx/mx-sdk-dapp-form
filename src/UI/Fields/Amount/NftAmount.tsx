@@ -17,6 +17,7 @@ export const NftAmount = ({ className }: WithClassnameType) => {
     const hasPositiveBalance = new BigNumber(nft?.balance || 0).isGreaterThan(
       0
     );
+
     return hasPositiveBalance && !isMaxClicked ? (
       <small
         className={styles.small}

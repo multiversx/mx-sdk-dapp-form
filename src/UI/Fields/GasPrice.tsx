@@ -45,7 +45,7 @@ export const GasPrice = () => {
           onBlur={onBlurGasPrice}
           autoComplete='off'
           className={classNames(globals.input, {
-            [globals.error]: isGasPriceInvalid,
+            [globals.invalid]: isGasPriceInvalid,
             [globals.disabled]: isDisabled
           })}
         />

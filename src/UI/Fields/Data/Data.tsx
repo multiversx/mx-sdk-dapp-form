@@ -34,6 +34,7 @@ export const Data = ({ className }: WithClassnameType) => {
 
       <div className={styles.wrapper}>
         <textarea
+          rows={1}
           id={ValuesEnum.data}
           name={ValuesEnum.data}
           disabled={isDisabled}
@@ -42,6 +43,7 @@ export const Data = ({ className }: WithClassnameType) => {
           onBlur={onBlur}
           onChange={onChange}
           spellCheck='false'
+          placeholder='Add transaction data'
           className={classNames(globals.textarea, {
             [globals.error]: isDataInvalid,
             [globals.disabled]: isDisabled

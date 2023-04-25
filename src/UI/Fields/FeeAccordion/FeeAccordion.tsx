@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { faChevronRight, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
@@ -6,12 +6,12 @@ import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import useCollapse from 'react-collapsed';
 
+import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { GasLimit } from '../GasLimit/GasLimit';
 import { GasPrice } from '../GasPrice';
 import { FeeInFiat } from './FeeInFiat';
 
-import globals from 'assets/sass/globals.module.scss';
 import styles from './styles.module.scss';
 
 export const FeeAccordion = ({ className }: WithClassnameType) => {
@@ -19,7 +19,6 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
   const { feeLimit, gasCostLoading, gasPriceError, gasLimitError } = gasInfo;
   const { egldPriceInUsd, egldLabel } = tokensInfo;
 
-  const accordion = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(Boolean(gasPriceError || gasLimitError));
   const { getCollapseProps, getToggleProps } = useCollapse({
     isExpanded: active
@@ -39,7 +38,7 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
         <span className={styles.limit} data-testid='feeLimit'>
           <FormatAmount
             value={feeLimit}
-            showLastNonZeroDecimal={true}
+            showLastNonZeroDecimal
             egldLabel={egldLabel}
           />
         </span>
@@ -60,11 +59,7 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
         />
       </div>
 
-      <div
-        ref={accordion}
-        className={styles.expandable}
-        {...getCollapseProps()}
-      >
+      <div className={styles.expandable} {...getCollapseProps()}>
         <div className={styles.content}>
           <GasPrice />
           <GasLimit />

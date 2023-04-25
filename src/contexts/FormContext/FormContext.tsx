@@ -1,7 +1,16 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useState,
+  Dispatch,
+  SetStateAction,
+  createContext,
+  MouseEvent
+} from 'react';
+import { Transaction } from '@multiversx/sdk-core/out';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { useFormikContext } from 'formik';
-import { ExtendedValuesType, TransactionTypeEnum } from 'types';
+import { ExtendedValuesType, PartialNftType, TransactionTypeEnum } from 'types';
 import { verifyInvalid } from 'validation';
 
 export interface FormContextBasePropsType {
@@ -12,7 +21,10 @@ export interface FormContextBasePropsType {
   uiOptions?: ExtendedValuesType['uiOptions'];
   onCloseForm: () => void;
   isFormSubmitted: boolean;
-  setIsFormSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsFormSubmitted: Dispatch<SetStateAction<boolean>>;
+  setGuardedTransaction: (transaction: Transaction) => void;
+  hasGuardianScreen: boolean;
+  setHasGuardianScreen: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface FormContextPropsType extends FormContextBasePropsType {
@@ -27,7 +39,10 @@ export interface FormContextPropsType extends FormContextBasePropsType {
   checkInvalid: (value: keyof ExtendedValuesType) => boolean;
   onValidateForm: () => void;
   onInvalidateForm: () => void;
+  onPreviewClick?: (event: MouseEvent, data: PartialNftType) => void;
   onSubmitForm: () => void;
+  isGuardianScreenVisible: boolean;
+  setIsGuardianScreenVisible: Dispatch<SetStateAction<boolean>>;
 }
 
 interface FormContextProviderPropsType {
@@ -35,7 +50,7 @@ interface FormContextProviderPropsType {
   value: FormContextBasePropsType;
 }
 
-export const FormContext = React.createContext({} as FormContextPropsType);
+export const FormContext = createContext({} as FormContextPropsType);
 
 export function FormContextProvider({
   children,
@@ -45,6 +60,7 @@ export function FormContextProvider({
   const [shouldValidateForm, setShouldValidateForm] = useState(
     Boolean(skipToConfirm)
   );
+  const [isGuardianScreenVisible, setIsGuardianScreenVisible] = useState(false);
 
   const [renderKey, setRenderKey] = useState(Date.now());
   const {
@@ -88,6 +104,7 @@ export function FormContextProvider({
 
   const handleInvalidateForm = useCallback(() => {
     value.setIsFormSubmitted(false);
+    setIsGuardianScreenVisible(false);
   }, []);
 
   const contextValue: FormContextPropsType = {
@@ -99,6 +116,8 @@ export function FormContextProvider({
     shouldValidateForm,
     areValidatedValuesReady:
       Boolean(value.isFormSubmitted || skipToConfirm) && isFormValid,
+    isGuardianScreenVisible,
+    setIsGuardianScreenVisible,
     isFormValid,
     renderKey,
     txType: values.txType,
