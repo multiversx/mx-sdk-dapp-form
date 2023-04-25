@@ -1,5 +1,5 @@
-import type { SuspiciousLinkPropsType } from '@multiversx/sdk-dapp/types';
-import type { PartialNftType } from 'types';
+import { SuspiciousLinkPropsType } from '@multiversx/sdk-dapp/types';
+import { PartialNftType } from 'types';
 
 export interface KeyValueType {
   key: string;
