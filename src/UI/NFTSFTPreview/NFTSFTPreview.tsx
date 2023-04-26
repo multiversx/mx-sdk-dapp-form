@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react';
 import classNames from 'classnames';
 
-import type { FormContextPropsType } from 'contexts';
+import { FormContextPropsType } from 'contexts';
 import { processScamNft } from 'helpers';
 import { PartialNftType, TransactionTypeEnum } from 'types';
 
