@@ -6,5 +6,4 @@ export * from './AmountSelect';
 export * from './Data';
 export * from './GasLimit/GasLimit';
 export * from './GasPrice';
-export * from './NftSftToken';
 export * from './AmountSlider';
