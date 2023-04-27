@@ -7,14 +7,15 @@ import styles from '../../styles.module.scss';
 export const DropdownIndicator: typeof components.DropdownIndicator = (
   props
 ) => {
-  const { selectProps } = props;
+  const { selectProps, isDisabled } = props;
   const { menuIsOpen } = selectProps;
 
   return (
     <components.DropdownIndicator
       {...props}
       className={classNames(styles.receiverSelectIndicator, {
-        [styles.expanded]: menuIsOpen
+        [styles.expanded]: menuIsOpen,
+        [styles.hidden]: isDisabled
       })}
     />
   );

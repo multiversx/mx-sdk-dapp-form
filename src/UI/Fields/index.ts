@@ -1,4 +1,4 @@
-export * from './Receiver';
+export * from './Receiver2';
 export * from './Amount';
 export * from './FeeAccordion';
 export * from './SelectToken';
