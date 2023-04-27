@@ -102,10 +102,19 @@ export function FormContextProvider({
     }
   }, [errors, validateForm]);
 
+  /**
+   * Invalidate form based on the current step. The "value.setIsFormSubmitted" will toggle between fields and summary.
+   */
+
   const handleInvalidateForm = useCallback(() => {
-    value.setIsFormSubmitted(false);
-    setIsGuardianScreenVisible(false);
-  }, []);
+    if (!isGuardianScreenVisible) {
+      value.setIsFormSubmitted(false);
+    }
+
+    if (isGuardianScreenVisible) {
+      setIsGuardianScreenVisible(false);
+    }
+  }, [isGuardianScreenVisible]);
 
   const contextValue: FormContextPropsType = {
     ...value,
