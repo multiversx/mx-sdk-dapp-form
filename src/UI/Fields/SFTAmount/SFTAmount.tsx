@@ -31,8 +31,9 @@ export const SFTAmount = (props: WithClassnameType) => {
 
   const { nft } = tokensInfo;
 
-  const hasPositiveBalance =
-    nft && nft.balance ? new BigNumber(nft.balance).isGreaterThan(0) : false;
+  const hasPositiveBalance = nft?.balance
+    ? new BigNumber(nft.balance).isGreaterThan(0)
+    : false;
 
   const onMaxAmount = (event: MouseEvent) => {
     event.preventDefault();
