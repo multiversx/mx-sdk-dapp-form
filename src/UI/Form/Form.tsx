@@ -28,8 +28,8 @@ import {
   AmountSelectInput
 } from 'UI/Fields';
 
+import { NFTCanTransferWarning } from 'UI/NFTCanTransferWarning';
 import { NFTSFTPreview } from 'UI/NFTSFTPreview';
-import { NFTTransferWarning } from 'UI/NFTTransferWarning';
 import { WEGLDWarning } from 'UI/WEGLDWarning';
 
 import styles from './form.module.scss';
@@ -174,7 +174,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
         )}
 
         <WEGLDWarning tokenId={tokenId} />
-        <NFTTransferWarning />
+        <NFTCanTransferWarning />
 
         <FeeAccordion />
 
