@@ -77,10 +77,16 @@ describe('Send SFT tokens', () => {
     fireEvent.change(receiver, { target: { value: testReceiver } });
     fireEvent.blur(receiver);
 
-    const tokenName = methods.getByTestId('tokenName');
+    const tokenPreview = methods.getByTestId('token-preview');
+    const tokenPreviewName = methods.getByTestId('token-preview-name');
+    const tokenPreviewIdentifier = methods.getByTestId(
+      'token-preview-identifier'
+    );
 
     await waitFor(() => {
-      expect(tokenName.textContent).toBe('Confirmed Won CNTMBLT-efb397-01');
+      expect(tokenPreview).toBeInTheDocument();
+      expect(tokenPreviewName.textContent).toBe('Confirmed Won');
+      expect(tokenPreviewIdentifier.textContent).toBe('CNTMBLT-efb397-01');
     });
 
     // check available

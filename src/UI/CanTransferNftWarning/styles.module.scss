@@ -1,0 +1,79 @@
+@import 'assets/sass/variables/_variables.scss';
+
+.can-transfer-warning {
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid var(--action-bg);
+
+  .can-transfer-warning-heading {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    color: var(--dapp-form-label-color);
+
+    .can-transfer-warning-icon {
+      margin-right: 12px;
+      color: $warning;
+      font-size: 24px;
+    }
+
+    .can-transfer-warning-label {
+      color: $warning;
+    }
+  }
+
+  .can-transfer-warning-addresses {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .can-transfer-warning-address {
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding-left: 12px;
+      color: var(--dapp-form-label-color);
+      gap: 8px;
+
+      &:before {
+        position: absolute;
+        content: '';
+        left: 0;
+        width: 0;
+        height: 0;
+        border-top: 4px solid transparent;
+        border-bottom: 4px solid transparent;
+        border-left: 6px solid var(--dapp-form-placeholder-color);
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      [class*='ellipsis'] {
+        display: flex;
+        align-items: flex-end;
+      }
+
+      [class*='left'],
+      [class*='right'],
+      [class*='ellipsis'] {
+        line-height: 1.25;
+        color: var(--dapp-form-placeholder-color);
+
+        * {
+          color: var(--dapp-form-placeholder-color);
+          line-height: 1.25;
+        }
+      }
+
+      .can-transfer-warning-address-explorer,
+      .can-transfer-warning-address-copy {
+        color: var(--dapp-form-placeholder-color) !important;
+        margin: 0;
+
+        svg path {
+          fill: var(--dapp-form-placeholder-color);
+        }
+      }
+    }
+  }
+}
