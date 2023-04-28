@@ -10,11 +10,11 @@ import { useNetworkConfigContext } from 'contexts';
 
 import styles from './styles.module.scss';
 
-export interface WegldWarningPropsType extends WithClassnameType {
+export interface WEGLDWarningPropsType extends WithClassnameType {
   tokenId: string;
 }
 
-export const WegldWarning = (props: WegldWarningPropsType) => {
+export const WEGLDWarning = (props: WEGLDWarningPropsType) => {
   const { tokenId, className } = props;
   const {
     networkConfig: { chainId }
