@@ -4,5 +4,5 @@ export * from './Form';
 export * from './Fields';
 export * from './Confirm';
 export * from './ConfirmScreen';
-export * from './NFTTransferWarning';
+export * from './NFTCanTransferWarning';
 export * from './WEGLDWarning';
