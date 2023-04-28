@@ -18,7 +18,6 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { generateTransaction } from 'operations/generateTransaction';
 import { ExtendedValuesType, TransactionTypeEnum } from 'types';
 
-import { CanTransferNFTWarning } from 'UI/CanTransferNFTWarning';
 import { ConfirmScreen } from 'UI/ConfirmScreen';
 import {
   Amount,
@@ -29,8 +28,9 @@ import {
   AmountSelectInput
 } from 'UI/Fields';
 
+import { NFTCanTransferWarning } from 'UI/NFTCanTransferWarning';
 import { NFTSFTPreview } from 'UI/NFTSFTPreview';
-import { WegldWarning } from 'UI/WEGLDWarning';
+import { WEGLDWarning } from 'UI/WEGLDWarning';
 
 import styles from './form.module.scss';
 import { getSendLabel } from './helpers';
@@ -173,8 +173,8 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
           />
         )}
 
-        <WegldWarning tokenId={tokenId} />
-        <CanTransferNFTWarning />
+        <WEGLDWarning tokenId={tokenId} />
+        <NFTCanTransferWarning />
 
         <FeeAccordion />
 

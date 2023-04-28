@@ -14,7 +14,7 @@ import { CAN_TRANSFER_MESSAGE } from 'constants/index';
 import { ExtendedValuesType } from 'types';
 import styles from './styles.module.scss';
 
-export const CanTransferNFTWarning = (props: WithClassnameType) => {
+export const NFTCanTransferWarning = (props: WithClassnameType) => {
   const { className } = props;
   const {
     values: { nft }
