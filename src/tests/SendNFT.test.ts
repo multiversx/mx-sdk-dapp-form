@@ -86,10 +86,16 @@ describe('Send NFT tokens', () => {
     fireEvent.change(receiver, { target: { value: testReceiver } });
     fireEvent.blur(receiver);
 
-    const tokenName = methods.getByTestId('tokenName');
+    const tokenPreview = methods.getByTestId('token-preview');
+    const tokenPreviewName = methods.getByTestId('token-preview-name');
+    const tokenPreviewIdentifier = methods.getByTestId(
+      'token-preview-identifier'
+    );
 
     await waitFor(() => {
-      expect(tokenName.textContent).toBe('NFT NFT-f0806e-01');
+      expect(tokenPreview).toBeInTheDocument();
+      expect(tokenPreviewName.textContent).toBe('NFT');
+      expect(tokenPreviewIdentifier.textContent).toBe('NFT-f0806e-01');
     });
 
     const data: any = await methods.findByTestId('data');
