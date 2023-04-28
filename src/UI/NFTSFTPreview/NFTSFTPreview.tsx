@@ -18,6 +18,11 @@ export const NFTSFTPreview = (props: NFTSFTPreviewPropsType) => {
     nft
   });
 
+  const isNFTorSFT = [
+    TransactionTypeEnum.NonFungibleESDT,
+    TransactionTypeEnum.SemiFungibleESDT
+  ].includes(txType);
+
   const badge = txType === TransactionTypeEnum.NonFungibleESDT ? 'NFT' : 'SFT';
   const onPreviewClick = (event: MouseEvent) => {
     event.preventDefault();
@@ -26,6 +31,10 @@ export const NFTSFTPreview = (props: NFTSFTPreviewPropsType) => {
       onClick(event, Object.assign(nft, { identifier }));
     }
   };
+
+  if (!isNFTorSFT) {
+    return null;
+  }
 
   return (
     <div

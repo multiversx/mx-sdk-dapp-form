@@ -1,0 +1,23 @@
+@import 'assets/sass/variables/_variables.scss';
+
+.wegld-warning {
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid var(--action-bg);
+
+  .wegld-warning-heading {
+    display: flex;
+    align-items: center;
+    color: var(--dapp-form-label-color);
+
+    .wegld-warning-icon {
+      margin-right: 12px;
+      color: $warning;
+      font-size: 24px;
+    }
+
+    .wegld-warning-label {
+      color: $warning;
+    }
+  }
+}
