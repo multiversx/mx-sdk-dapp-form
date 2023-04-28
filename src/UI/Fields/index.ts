@@ -1,5 +1,5 @@
-export * from './Receiver2';
-export * from './Amount';
+export * from './Receiver';
+export * from './SFTAmount';
 export * from './FeeAccordion';
 export * from './SelectToken';
 export * from './AmountSelect';
