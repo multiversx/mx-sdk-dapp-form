@@ -30,7 +30,7 @@ import {
 
 import { NFTSFTPreview } from 'UI/NFTSFTPreview';
 import { NFTTransferWarning } from 'UI/NFTTransferWarning';
-import { WegldWarning } from 'UI/WEGLDWarning';
+import { WEGLDWarning } from 'UI/WEGLDWarning';
 
 import styles from './form.module.scss';
 import { getSendLabel } from './helpers';
@@ -173,7 +173,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
           />
         )}
 
-        <WegldWarning tokenId={tokenId} />
+        <WEGLDWarning tokenId={tokenId} />
         <NFTTransferWarning />
 
         <FeeAccordion />
