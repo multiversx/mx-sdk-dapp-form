@@ -14,15 +14,15 @@ import { CAN_TRANSFER_MESSAGE } from 'constants/index';
 import { ExtendedValuesType } from 'types';
 import styles from './styles.module.scss';
 
-export const CanTransferNftWarning = (props: WithClassnameType) => {
+export const CanTransferNFTWarning = (props: WithClassnameType) => {
   const { className } = props;
   const {
     values: { nft }
   } = useFormikContext<ExtendedValuesType>();
 
-  //   if (!nft || !nft.allowedReceivers) {
-  //     return null;
-  //   }
+  if (!nft || !nft.allowedReceivers) {
+    return null;
+  }
 
   return (
     <div
@@ -45,19 +45,7 @@ export const CanTransferNftWarning = (props: WithClassnameType) => {
       </div>
 
       <div className={styles.canTransferWarningAddresses}>
-        {(
-          nft?.allowedReceivers || [
-            'erd1qqqqqqqqqqqqqpgqd77fnev2sthnczp2lnfx0y5jdycynjfhzzgq6p3rax',
-            'erd1qqqqqqqqqqqqqpgqd77fnev2sthnczp2lnfx0y5jdycynjfhzzgq6p3rax',
-            'erd1qqqqqqqqqqqqqpgqd77fnev2sthnczp2lnfx0y5jdycynjfhzzgq6p3rax',
-            'erd1qqqqqqqqqqqqqpgqd77fnev2sthnczp2lnfx0y5jdycynjfhzzgq6p3rax',
-            'erd1qqqqqqqqqqqqqpgqd77fnev2sthnczp2lnfx0y5jdycynjfhzzgq6p3rax',
-            'erd1qqqqqqqqqqqqqpgqd77fnev2sthnczp2lnfx0y5jdycynjfhzzgq6p3rax',
-            'erd1qqqqqqqqqqqqqpgqd77fnev2sthnczp2lnfx0y5jdycynjfhzzgq6p3rax',
-            'erd1qqqqqqqqqqqqqpgqd77fnev2sthnczp2lnfx0y5jdycynjfhzzgq6p3rax',
-            'erd1qqqqqqqqqqqqqpgqd77fnev2sthnczp2lnfx0y5jdycynjfhzzgq6p3rax'
-          ]
-        ).map((receiver) => (
+        {nft.allowedReceivers.map((receiver) => (
           <div className={styles.canTransferWarningAddress} key={receiver}>
             <Trim
               text={receiver}

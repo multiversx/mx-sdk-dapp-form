@@ -1,1 +1,1 @@
-export * from './CanTransferNftWarning';
+export * from './CanTransferNFTWarning';

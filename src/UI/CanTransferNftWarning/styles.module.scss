@@ -12,8 +12,9 @@
     color: var(--dapp-form-label-color);
 
     .can-transfer-warning-icon {
-      margin-right: 8px;
+      margin-right: 12px;
       color: $warning;
+      font-size: 24px;
     }
 
     .can-transfer-warning-label {
@@ -47,18 +48,30 @@
         transform: translateY(-50%);
       }
 
-      [class*='left'] *,
-      [class*='right'] * {
+      [class*='ellipsis'] {
+        display: flex;
+        align-items: flex-end;
+      }
+
+      [class*='left'],
+      [class*='right'],
+      [class*='ellipsis'] {
+        line-height: 1.25;
         color: var(--dapp-form-placeholder-color);
 
-        .can-transfer-warning-address-explorer,
-        .can-transfer-warning-address-copy {
-          color: var(--dapp-form-placeholder-color) !important;
-          margin: 0;
+        * {
+          color: var(--dapp-form-placeholder-color);
+          line-height: 1.25;
+        }
+      }
 
-          svg path {
-            fill: var(--dapp-form-placeholder-color);
-          }
+      .can-transfer-warning-address-explorer,
+      .can-transfer-warning-address-copy {
+        color: var(--dapp-form-placeholder-color) !important;
+        margin: 0;
+
+        svg path {
+          fill: var(--dapp-form-placeholder-color);
         }
       }
     }
