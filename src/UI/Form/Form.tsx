@@ -118,11 +118,8 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
     onCloseForm();
   };
 
-  const isNFTTransaction = ![
-    TransactionTypeEnum.EGLD,
-    TransactionTypeEnum.ESDT,
-    TransactionTypeEnum.MetaESDT
-  ].includes(txType);
+  const isNFTTransaction = txType === TransactionTypeEnum.NonFungibleESDT;
+  const isSFTTransaction = txType === TransactionTypeEnum.SemiFungibleESDT;
 
   const onConfirmClick = () => {
     // allow setting guarded transaction then submit form
@@ -157,13 +154,13 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
       className={classNames(styles.form, className)}
     >
       <fieldset className={styles.formFieldset}>
-        {isNFTTransaction && nft && (
+        {(isNFTTransaction || isSFTTransaction) && nft && (
           <NFTSFTPreview onClick={onPreviewClick} txType={txType} {...nft} />
         )}
 
         <Receiver />
 
-        {isNFTTransaction ? <SFTAmount /> : <AmountSelectInput />}
+        {isSFTTransaction ? <SFTAmount /> : <AmountSelectInput />}
 
         {uiOptions?.showAmountSlider && !isNFTTransaction && (
           <AmountSlider
