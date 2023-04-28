@@ -10,7 +10,7 @@ import { ValuesEnum } from 'types';
 
 import styles from './styles.module.scss';
 
-export const Amount = (props: WithClassnameType) => {
+export const SFTAmount = (props: WithClassnameType) => {
   const { className } = props;
   const {
     formInfo: { readonly },

@@ -21,7 +21,7 @@ import { ExtendedValuesType, TransactionTypeEnum } from 'types';
 import { CanTransferNFTWarning } from 'UI/CanTransferNFTWarning';
 import { ConfirmScreen } from 'UI/ConfirmScreen';
 import {
-  Amount,
+  SFTAmount,
   Data,
   FeeAccordion,
   Receiver,
@@ -163,7 +163,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
 
         <Receiver />
 
-        {isNFTTransaction ? <Amount /> : <AmountSelectInput />}
+        {isNFTTransaction ? <SFTAmount /> : <AmountSelectInput />}
 
         {uiOptions?.showAmountSlider && !isNFTTransaction && (
           <AmountSlider
