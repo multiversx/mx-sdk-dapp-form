@@ -1,63 +1,117 @@
 @import 'assets/sass/variables/_variables.scss';
 
-.sharedAmount {
-  display: flex;
-  flex-direction: column;
+// .sharedAmount {
+//   display: flex;
+//   flex-direction: column;
 
-  .sharedAmountLabel {
-    margin-bottom: 0.5rem;
+//   .sharedAmountLabel {
+//     margin-bottom: 0.5rem;
+//   }
+
+//   .sharedAmountWrapper {
+//     position: relative;
+//     display: flex;
+
+//     .invalid {
+//       padding-right: calc(1.5em + 0.75rem);
+//     }
+
+//     .max {
+//       justify-content: flex-end;
+//       display: flex;
+//       position: absolute;
+//       right: 0;
+//       top: 50%;
+//       transform: translateY(-50%);
+//       align-items: center;
+
+//       &.maxOffset {
+//         right: 1.75rem;
+//       }
+
+//       .button {
+//         background: none;
+//         border: 1px solid transparent;
+//         color: var(--primary);
+//         padding: 0.375rem 0.75rem;
+//         font-size: 1rem;
+//         line-height: 1.5;
+//         cursor: pointer;
+
+//         &:hover {
+//           text-decoration: underline;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// .small {
+//   color: var(--secondary);
+//   margin-top: 0.25rem;
+//   font-size: 0.875rem;
+// }
+
+// .container {
+//   display: flex;
+//   align-items: center;
+// }
+
+// .amountInfo {
+//   margin-top: 0.25rem;
+//   margin-left: 0.5rem;
+// }
+
+.amount {
+  position: relative;
+
+  .label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+
+    label {
+      margin: 0;
+    }
+
+    .balance {
+      line-height: 1;
+      font-size: 12px;
+      color: var(--dapp-form-label-color);
+
+      .available {
+        color: var(--dapp-form-input-color);
+      }
+    }
   }
 
-  .sharedAmountWrapper {
+  .wrapper {
     position: relative;
-    display: flex;
-
-    .invalid {
-      padding-right: calc(1.5em + 0.75rem);
-    }
 
     .max {
-      justify-content: flex-end;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      border-radius: 16px;
+      margin-right: 8px;
+      background-color: var(--dapp-form-max-btn-bg);
+      color: var(--dapp-form-max-btn-color);
+      text-transform: uppercase;
+      padding: 6px 0;
+      font-size: 12px;
+      transition: all 200ms ease;
       position: absolute;
-      right: 0;
+      right: 12px;
       top: 50%;
       transform: translateY(-50%);
-      align-items: center;
 
-      &.maxOffset {
-        right: 1.75rem;
-      }
-
-      .button {
-        background: none;
-        border: 1px solid transparent;
-        color: var(--primary);
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        cursor: pointer;
-
-        &:hover {
-          text-decoration: underline;
-        }
+      &:hover {
+        color: var(--dapp-form-max-btn-color);
+        background-color: var(--dapp-form-max-hover-btn-bg);
+        text-decoration: none;
       }
     }
   }
-}
-
-.small {
-  color: var(--secondary);
-  margin-top: 0.25rem;
-  font-size: 0.875rem;
-}
-
-.container {
-  display: flex;
-  align-items: center;
-}
-
-.amountInfo {
-  margin-top: 0.25rem;
-  margin-left: 0.5rem;
 }

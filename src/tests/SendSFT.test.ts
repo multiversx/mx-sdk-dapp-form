@@ -91,7 +91,7 @@ describe('Send SFT tokens', () => {
 
     // check available
     const available = methods.getByTestId(`available-${sftToken.identifier}`);
-    expect(available.innerHTML).toBe('Available 1');
+    expect(available.innerHTML).toBe('1 CNTMBLT-efb397');
 
     const entireTokenBalaceButton = await methods.findByText('Max');
     fireEvent.click(entireTokenBalaceButton);
