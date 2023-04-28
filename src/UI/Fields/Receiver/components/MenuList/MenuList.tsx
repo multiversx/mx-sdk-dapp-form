@@ -7,6 +7,10 @@ import styles from '../../styles.module.scss';
 
 import type { GenericOptionType } from '../../types';
 
+/*
+ * Handle the component declaration.
+ */
+
 export const MenuList: typeof components.MenuList = (props) => {
   const { selectProps, focusedOption } = props;
   const { value, inputValue } = selectProps;
@@ -32,6 +36,10 @@ export const MenuList: typeof components.MenuList = (props) => {
     trimSuggestion &&
     Boolean(inputValue) &&
     inputValue.length < trimSuggestion.length / 2;
+
+  /*
+   * Return the component.
+   */
 
   return (
     <Fragment>

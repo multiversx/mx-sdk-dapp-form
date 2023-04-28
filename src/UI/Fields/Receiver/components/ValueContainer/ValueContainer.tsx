@@ -7,10 +7,18 @@ import styles from '../../styles.module.scss';
 
 import { GenericOptionType } from '../../types';
 
+/*
+ * Handle the component declaration.
+ */
+
 export const ValueContainer: typeof components.ValueContainer = (props) => {
   const { selectProps, isDisabled } = props;
   const { value, menuIsOpen } = selectProps;
   const option = value as GenericOptionType;
+
+  /*
+   * Return the component.
+   */
 
   return (
     <components.ValueContainer
