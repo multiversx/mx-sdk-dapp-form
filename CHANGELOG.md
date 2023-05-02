@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [[0.5.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/165)] - 2023-05-02
 - [Fix ledger signing with guardian](https://github.com/multiversx/mx-sdk-dapp-form/pull/164)
 ## [[0.5.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/156)] - 2023-04-25
 - [Guardian screen support and visual updates](https://github.com/multiversx/mx-sdk-dapp-form/pull/155)
