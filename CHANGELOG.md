@@ -6,24 +6,41 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [[0.5.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/165)] - 2023-05-02
+
+- [Fix ledger signing with guardian](https://github.com/multiversx/mx-sdk-dapp-form/pull/164)
+- [Removed 'SharedAmount' component and created 'SFTAmount'](https://github.com/multiversx/mx-sdk-dapp-form/pull/161)
+- [Updated 'NFTCanTransferWarning' and 'WEGLDWarning' warning layouts.](https://github.com/multiversx/mx-sdk-dapp-form/pull/160)
+- [Removed unused 'NftSftToken' component](https://github.com/multiversx/mx-sdk-dapp-form/pull/159)
+
 ## [[0.5.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/156)] - 2023-04-25
+
 - [Guardian screen support and visual updates](https://github.com/multiversx/mx-sdk-dapp-form/pull/155)
 
 ## [[0.4.18](https://github.com/multiversx/mx-sdk-dapp-form/pull/154)] - 2023-03-23
+
 - [Fixed signing with zero gasLimit for ESDT and NFT](https://github.com/multiversx/mx-sdk-dapp-form/pull/153)
+
 ## [[0.4.17](https://github.com/multiversx/mx-sdk-dapp-form/pull/152)] - 2023-03-16
+
 - [Fixed `Receiver` field missing `data-testid`](https://github.com/multiversx/mx-sdk-dapp-form/pull/151)
 
 ## [[0.4.16](https://github.com/multiversx/mx-sdk-dapp-form/pull/150)] - 2023-03-09
+
 - [Fixed `AmountInput` rerender on unused data change](https://github.com/multiversx/mx-sdk-dapp-form/pull/149)
 
 ## [[0.4.15](https://github.com/multiversx/mx-sdk-dapp-form/pull/148)] - 2023-03-09
+
 - [Fixed editing decimals in `AmountInput` not replacing selected value](https://github.com/multiversx/mx-sdk-dapp-form/pull/147)
 -
+
 ## [[0.4.14](https://github.com/multiversx/mx-sdk-dapp-form/pull/146)] - 2023-03-08
+
 - [Upgraded `sdk-dapp` and `sdk-core`](https://github.com/multiversx/mx-sdk-dapp-form/pull/145)
 
 ## [[0.4.13](https://github.com/multiversx/mx-sdk-dapp-form/pull/144)] - 2023-03-01
+
 - [Fixed `newTransaction` chainID parameter typo](https://github.com/multiversx/mx-sdk-dapp-form/pull/143)
 
 ## [[0.4.12](https://github.com/multiversx/mx-sdk-dapp-form/pull/141)] - 2023-02-22

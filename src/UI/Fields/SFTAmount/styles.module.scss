@@ -1,0 +1,55 @@
+@import 'assets/sass/variables/_variables.scss';
+
+.amount {
+  position: relative;
+
+  .label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+
+    label {
+      margin: 0;
+    }
+
+    .balance {
+      line-height: 1;
+      font-size: 12px;
+      color: var(--dapp-form-label-color);
+
+      .available {
+        color: var(--dapp-form-input-color);
+      }
+    }
+  }
+
+  .wrapper {
+    position: relative;
+
+    .max {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      border-radius: 16px;
+      margin-right: 8px;
+      background-color: var(--dapp-form-max-btn-bg);
+      color: var(--dapp-form-max-btn-color);
+      text-transform: uppercase;
+      padding: 6px 0;
+      font-size: 12px;
+      transition: all 200ms ease;
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+
+      &:hover {
+        color: var(--dapp-form-max-btn-color);
+        background-color: var(--dapp-form-max-hover-btn-bg);
+        text-decoration: none;
+      }
+    }
+  }
+}

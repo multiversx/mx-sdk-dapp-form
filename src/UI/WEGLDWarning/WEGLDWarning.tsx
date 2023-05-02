@@ -2,17 +2,20 @@ import React from 'react';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
+
 import classNames from 'classnames';
 import { getWegldIdForChainId } from 'apiCalls';
 import { WEGLD_MESSAGE } from 'constants/index';
-import { useNetworkConfigContext } from 'contexts/NetworkContext';
+import { useNetworkConfigContext } from 'contexts';
+
 import styles from './styles.module.scss';
 
-export interface WegldWarningPropsType extends WithClassnameType {
+export interface WEGLDWarningPropsType extends WithClassnameType {
   tokenId: string;
 }
 
-export const WegldWarning = ({ className, tokenId }: WegldWarningPropsType) => {
+export const WEGLDWarning = (props: WEGLDWarningPropsType) => {
+  const { tokenId, className } = props;
   const {
     networkConfig: { chainId }
   } = useNetworkConfigContext();
@@ -24,21 +27,19 @@ export const WegldWarning = ({ className, tokenId }: WegldWarningPropsType) => {
   }
 
   return (
-    <div className={classNames(styles.canTransferWarning, className)}>
-      <small role='alert' className={styles.wegldAlertWarning}>
+    <div className={classNames(styles.wegldWarning, className)}>
+      <div className={styles.wegldWarningHeading}>
         <FontAwesomeIcon
           icon={faExclamationTriangle}
-          className={styles.wegldAlertIcon}
+          className={styles.wegldWarningIcon}
           size='lg'
         />
 
-        <div className={styles.canTransferWarningWrapper}>
-          <div className={styles.canTransferWarningLabel}>Warning</div>
-          <div className={styles.canTransferWarningMessage}>
-            {WEGLD_MESSAGE}
-          </div>
+        <div className={styles.wegldWarningTitle}>
+          <div className={styles.wegldWarningLabel}>Warning!</div>
+          <div className={styles.wegldWarningMessage}>{WEGLD_MESSAGE}</div>
         </div>
-      </small>
+      </div>
     </div>
   );
 };
