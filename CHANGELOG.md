@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.5.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/165)] - 2023-05-02
+
 - [Fix ledger signing with guardian](https://github.com/multiversx/mx-sdk-dapp-form/pull/164)
 - [Removed 'SharedAmount' component and created 'SFTAmount'](https://github.com/multiversx/mx-sdk-dapp-form/pull/161)
 - [Updated 'NFTCanTransferWarning' and 'WEGLDWarning' warning layouts.](https://github.com/multiversx/mx-sdk-dapp-form/pull/160)
