@@ -13,6 +13,7 @@ import { getConfirmButtonLabel } from './helpers';
 export interface TransactionSummaryPropsType {
   isConfirmCloseBtnVisible?: boolean;
   providerType: string;
+  hasGuardianScreen?: boolean;
 }
 
 export const TransactionSummary = ({
