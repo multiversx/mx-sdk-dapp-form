@@ -2038,13 +2038,13 @@
     keccak "3.0.2"
     protobufjs "6.11.3"
 
-"@multiversx/sdk-dapp@^2.12.2":
-  version "2.12.2"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.12.2.tgz#11d1dd7faeb5017c0e9e1e44e927b9df5ec164f0"
-  integrity sha512-LlVRVB5iB42QDZx5dV7aYkAeUSxUDmO2pl9DnMBaNC/tU5EX30sCnE4f5VbGE0lVWui3G91WYNUXZRKQDdlOhA==
+"@multiversx/sdk-dapp@^2.13.1":
+  version "2.13.1"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.13.1.tgz#3fc02e508f61273dfaa98a9094b11b6de0376fdd"
+  integrity sha512-A1J2KXhhbpoHPvMTBk1wU4MoLZq9B5vlBdJtkUHuV4oeVLMlYUK5UnLbrTlskV7sHt5l9zu8KXJFtUst20MtgA==
   dependencies:
     "@multiversx/sdk-core" "12.1.0"
-    "@multiversx/sdk-extension-provider" "2.0.7"
+    "@multiversx/sdk-extension-provider" "3.0.0-alpha.1"
     "@multiversx/sdk-hw-provider" "4.0.0"
     "@multiversx/sdk-network-providers" "1.2.1"
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
@@ -2077,10 +2077,10 @@
     qrcode "1.5.0"
     swr "1.1.2"
 
-"@multiversx/sdk-extension-provider@2.0.7":
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-extension-provider/-/sdk-extension-provider-2.0.7.tgz#8f854053d2b56adc278afbb597375b34a043a906"
-  integrity sha512-t7CabgUk/hPhMYVpqGPMdEVDqOo6RrRKmru6nXKpWZHdeQZZV52zeVVC8VRgqwG5mNwAkCrALLvz7UiV/ZLfIg==
+"@multiversx/sdk-extension-provider@3.0.0-alpha.1":
+  version "3.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-extension-provider/-/sdk-extension-provider-3.0.0-alpha.1.tgz#52b788a4a1f5df4094dbb230e6d6f545de4a13d3"
+  integrity sha512-4/yxx2B8cE3k41m4ssoAAnYmz2ni66ydn4CglqfhXBk8mmatFwvvcW62Wb6GGKztvmvUeUOeN39g2VWlag78yA==
 
 "@multiversx/sdk-hw-provider@4.0.0":
   version "4.0.0"
