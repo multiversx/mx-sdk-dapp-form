@@ -109,9 +109,7 @@ export function FormContextProvider({
   const handleInvalidateForm = useCallback(() => {
     if (!isGuardianScreenVisible) {
       value.setIsFormSubmitted(false);
-    }
-
-    if (isGuardianScreenVisible) {
+    } else {
       setIsGuardianScreenVisible(false);
     }
   }, [isGuardianScreenVisible]);
