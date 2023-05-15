@@ -5,7 +5,7 @@ describe('validateSignTransactions tests', () => {
     const data = {
       extractedTxs: [
         {
-          nonce: '2587',
+          nonce: 2587,
           value: '0',
           receiver:
             'erd1wh9c0sjr2xn8hzf02lwwcr4jk2s84tat9ud2kaq6zr7xzpvl9l5q8awmex',

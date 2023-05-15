@@ -7,7 +7,7 @@ import { ApiConfigType } from 'apiCalls';
 import { ExtendedValuesType } from 'types';
 
 export type SignTxType = {
-  nonce?: string;
+  nonce?: number;
   data: any;
   token?: string;
   gasLimit?: string;
