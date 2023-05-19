@@ -1,6 +1,6 @@
 {
   "name": "@multiversx/sdk-dapp-form",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "A library to hold the main logic for a validating a form for transactions on the MultiversX blockchain",
   "author": "MultiversX",
   "license": "GPL-3.0-or-later",
@@ -104,7 +104,6 @@
     "@fortawesome/free-solid-svg-icons": "6.1.0",
     "@fortawesome/react-fontawesome": "0.1.18",
     "classnames": "2.3.1",
-    "react-bootstrap-typeahead": "6.0.0-rc.3",
     "react-select": "5.4.0"
   },
   "dependencies": {
