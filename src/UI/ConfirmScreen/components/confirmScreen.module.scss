@@ -2,12 +2,14 @@
 
 .summary {
   display: flex;
+  flex: 1;
   flex-direction: column;
 
   .fields {
     gap: 32px;
     display: flex;
     flex-direction: column;
+    flex: 1;
 
     .columns {
       display: flex;
@@ -27,10 +29,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 72px;
+    padding-top: 72px;
 
     @media (min-width: 768px) {
-      margin-top: 80px;
+      padding-top: 80px;
     }
   }
 }

@@ -4,15 +4,20 @@
   background-color: var(--dapp-form-bg);
   border-radius: 12px;
   padding: 32px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 
   .formFieldset {
     padding: 0;
     margin: 0;
     border: none;
-    display: flex;
-    flex-direction: column;
     width: 100%;
     gap: 32px;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .formWrapper {
@@ -23,10 +28,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 72px;
+    padding-top: 72px;
 
     @media (min-width: 768px) {
-      margin-top: 80px;
+      padding-top: 80px;
     }
   }
 }
