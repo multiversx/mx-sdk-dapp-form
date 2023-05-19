@@ -166,7 +166,7 @@ const AmountComponent = ({
         thousandSeparator=','
         thousandsGroupStyle='thousand'
         value={inputValue}
-        valueIsNumericString={true}
+        valueIsNumericString
       />
 
       {usdValue && (

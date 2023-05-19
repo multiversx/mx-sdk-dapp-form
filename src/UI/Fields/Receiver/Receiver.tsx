@@ -120,7 +120,7 @@ export const Receiver = (props: WithClassnameType) => {
         onInputChange={onInputChange}
         inputId='receiverWrapper'
         maxMenuHeight={160}
-        openMenuOnFocus={true}
+        openMenuOnFocus
         isDisabled={getIsDisabled(ValuesEnum.receiver, readonly)}
         options={options}
         filterOption={filterOptions}
