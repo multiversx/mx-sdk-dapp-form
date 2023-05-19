@@ -2,6 +2,7 @@ import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { ZERO } from 'constants/index';
 import { calculateNftGasLimit } from 'operations/calculateNftGasLimit';
+import { getGuardedAccountGasLimit } from 'operations/getGuardedAccountGasLimit';
 import { ExtendedValuesType } from 'types';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 import { sharedGaslimit } from './sharedGaslimit';
@@ -12,7 +13,7 @@ const minValueData = string().test({
   name: 'minValueData',
   test: function (value) {
     const parent: ExtendedValuesType = this.parent;
-    const { data, ignoreTokenBalance } = parent;
+    const { data, ignoreTokenBalance, isGuarded } = parent;
 
     // allow signing with 0 gasLimit
     if (ignoreTokenBalance) {
@@ -23,7 +24,9 @@ const minValueData = string().test({
 
     if (value) {
       const bNgasLimit = new BigNumber(value);
-      const bNcalculatedGasLimit = new BigNumber(calculatedGasLimit);
+      const bNcalculatedGasLimit = new BigNumber(calculatedGasLimit).plus(
+        getGuardedAccountGasLimit(isGuarded)
+      );
       const valid =
         value && bNgasLimit.isGreaterThanOrEqualTo(bNcalculatedGasLimit);
 

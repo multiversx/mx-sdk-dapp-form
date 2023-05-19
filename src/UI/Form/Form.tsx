@@ -43,7 +43,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
   const { formInfo, accountInfo, amountInfo, tokensInfo } =
     useSendFormContext();
   const { values } = useFormikContext<ExtendedValuesType>();
-  const { txType, tokenId, address, balance, chainId } = values;
+  const { txType, tokenId, address, balance, chainId, ledger } = values;
   const { nft } = tokensInfo;
 
   const [signedTransactions, setSignedTransactions] =
@@ -85,7 +85,11 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
       });
 
       transaction.setVersion(TransactionVersion.withTxOptions());
-      transaction.setOptions(TransactionOptions.withOptions({ guarded: true }));
+      const options = {
+        guarded: true,
+        ...(ledger ? { hashSign: true } : {})
+      };
+      transaction.setOptions(TransactionOptions.withOptions(options));
 
       setSignedTransactions({ 0: transaction });
     } catch {
@@ -132,6 +136,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
   const props: GuardianScreenType = {
     onSignTransaction: onConfirmClick,
     onPrev: onInvalidateForm,
+    address,
     title: '',
     className,
     signedTransactions,

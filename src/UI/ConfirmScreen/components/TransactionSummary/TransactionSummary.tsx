@@ -1,5 +1,4 @@
 import React, { useState, MouseEvent } from 'react';
-import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useFormContext } from 'contexts';
@@ -9,10 +8,12 @@ import Confirm from 'UI/Confirm';
 import { NFTSFTPreview } from 'UI/NFTSFTPreview';
 
 import styles from './../confirmScreen.module.scss';
+import { getConfirmButtonLabel } from './helpers';
 
 export interface TransactionSummaryPropsType {
   isConfirmCloseBtnVisible?: boolean;
   providerType: string;
+  hasGuardianScreen?: boolean;
 }
 
 export const TransactionSummary = ({
@@ -48,20 +49,10 @@ export const TransactionSummary = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const isNFT = txType === TransactionTypeEnum.NonFungibleESDT;
-  let confirmText: string;
-
-  switch (providerType) {
-    case LoginMethodsEnum.walletconnect:
-    case LoginMethodsEnum.extension:
-      confirmText = 'Confirm & Check your App';
-      break;
-    case LoginMethodsEnum.ledger:
-      confirmText = 'Confirm & Check your Ledger';
-      break;
-    default:
-      confirmText = 'Confirm';
-      break;
-  }
+  const confirmButtonLabel = getConfirmButtonLabel({
+    providerType,
+    hasGuardianScreen
+  });
 
   const onCloseClick = (event: MouseEvent) => {
     event.preventDefault();
@@ -137,7 +128,7 @@ export const TransactionSummary = ({
           disabled={isSubmitting}
           onClick={onConfirmClick}
         >
-          {confirmText}
+          {confirmButtonLabel}
         </button>
 
         {isConfirmCloseBtnVisible && (

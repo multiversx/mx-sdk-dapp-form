@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
+import { getGuardedAccountGasLimit } from 'operations';
 import { ExtendedValuesType } from 'types';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 import { sharedGaslimit } from './sharedGaslimit';
@@ -12,7 +13,7 @@ const minValue = string().test(
   `Gas limit must be greater or equal to ${TOKEN_GAS_LIMIT}`,
   function minGasValue(value: any) {
     const parent: ExtendedValuesType = this.parent;
-    const { ignoreTokenBalance } = parent;
+    const { ignoreTokenBalance, isGuarded } = parent;
 
     // allow signing with 0 gasLimit
     if (ignoreTokenBalance) {
@@ -20,7 +21,9 @@ const minValue = string().test(
     }
 
     const bNgasLimit = new BigNumber(value);
-    const bNcalculatedGasLimit = new BigNumber(TOKEN_GAS_LIMIT);
+    const bNcalculatedGasLimit = new BigNumber(TOKEN_GAS_LIMIT).plus(
+      getGuardedAccountGasLimit(isGuarded)
+    );
     const isValid =
       value && bNgasLimit.isGreaterThanOrEqualTo(bNcalculatedGasLimit);
 

@@ -1,6 +1,6 @@
 {
   "name": "@multiversx/sdk-dapp-form",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "A library to hold the main logic for a validating a form for transactions on the MultiversX blockchain",
   "author": "MultiversX",
   "license": "GPL-3.0-or-later",
@@ -14,8 +14,9 @@
   },
   "scripts": {
     "start": "yarn watch",
-    "build:types": "tsc --project tsconfig.json",
-    "build": "rimraf dist && node esbuild.js && yarn build:types && cp package.json dist && cp README.md dist",
+    "build:esm-types": "tsc --project tsconfig.json",
+    "build:cjs-types": "tsc --build tsconfig.cjs.json",
+    "build": "rimraf dist && node esbuild.js && yarn build:esm-types && yarn build:cjs-types && cp package.json dist && cp README.md dist",
     "publish-package": "yarn test && yarn build && cd dist && npm publish",
     "publish-package-next": "yarn test && yarn test && yarn build && cd dist && npm publish --tag next",
     "publish-yalc": "yarn build && cd dist && yalc publish --push",
@@ -25,7 +26,7 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@multiversx/sdk-dapp": "^2.12.0",
+    "@multiversx/sdk-dapp": "^2.13.1",
     "@size-limit/preset-small-lib": "7.0.8",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
@@ -88,12 +89,12 @@
   ],
   "peerDependencies": {
     "@multiversx/sdk-core": "^12.1.0",
-    "@multiversx/sdk-dapp": "^2.12.0",
+    "@multiversx/sdk-dapp": "^2.13.1",
     "react": ">=18",
     "react-dom": ">=18"
   },
   "resolutions": {
-    "@multiversx/sdk-dapp": "^2.12.0",
+    "@multiversx/sdk-dapp": "^2.13.1",
     "@multiversx/sdk-core": "12.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
