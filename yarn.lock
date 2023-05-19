@@ -11375,24 +11375,6 @@
     "regenerator-runtime" "^0.13.9"
     "whatwg-fetch" "^3.6.2"
 
-"react-bootstrap-typeahead@6.0.0-rc.3":
-  "integrity" "sha512-vVAlloSJQbBpAfBHNRIeecJ91vN10/71cdHGuXBrqrIe7axCzxTzi+FjBt1qfgW2YFNFeGdYIe2IvSOMOEtPaA=="
-  "resolved" "https://registry.npmjs.org/react-bootstrap-typeahead/-/react-bootstrap-typeahead-6.0.0-rc.3.tgz"
-  "version" "6.0.0-rc.3"
-  dependencies:
-    "@babel/runtime" "^7.14.6"
-    "@popperjs/core" "^2.10.2"
-    "@restart/hooks" "^0.4.0"
-    "classnames" "^2.2.0"
-    "fast-deep-equal" "^3.1.1"
-    "invariant" "^2.2.1"
-    "lodash.debounce" "^4.0.8"
-    "prop-types" "^15.5.8"
-    "react-overlays" "^5.2.0"
-    "react-popper" "^2.2.5"
-    "scroll-into-view-if-needed" "^2.2.20"
-    "warning" "^4.0.1"
-
 "react-collapsed@3.6.0":
   "integrity" "sha512-QqtogOGl5hM9L7j7rlMCYxm4jD8Ovr8voqyYS1g5ltADhUNvxbbgtJ5MwRiajJ0DmYFOZHShpnSPz4wvJaOiKA=="
   "resolved" "https://registry.npmjs.org/react-collapsed/-/react-collapsed-3.6.0.tgz"
