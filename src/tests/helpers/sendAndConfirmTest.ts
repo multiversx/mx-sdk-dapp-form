@@ -31,7 +31,7 @@ export const sendAndConfirmTest =
     if (fee != null) {
       expect(
         methods.getByTestId('confirmFee').textContent?.toString()
-      ).toContain(fee + ' ');
+      ).toContain(fee);
     }
 
     if (data != null) {

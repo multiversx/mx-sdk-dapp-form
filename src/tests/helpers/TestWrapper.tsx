@@ -5,6 +5,7 @@ import {
   EnvironmentsEnum,
   LoginMethodsEnum
 } from '@multiversx/sdk-dapp/types/enums.types';
+import { GuardianScreenType } from '@multiversx/sdk-dapp/types/transactions.types';
 import { Loader } from '@multiversx/sdk-dapp/UI/Loader';
 import { SendFormContainer, SendFormContainerPropsType } from 'containers';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
@@ -26,6 +27,7 @@ export interface TestWrapperType {
   balance?: string;
   address?: string;
   chainId?: string;
+  GuardianScreen?: (props: GuardianScreenType) => JSX.Element;
   ledger?: ExtendedValuesType['ledger'];
 }
 
@@ -34,7 +36,8 @@ export const TestWrapper = ({
   balance = accountConfiguration.balance,
   address = accountConfiguration.address,
   chainId = accountConfiguration.chainId,
-  ledger
+  ledger,
+  GuardianScreen
 }: TestWrapperType) => {
   const initValues = useGetInitialValues({
     configValues: formConfigValues,
@@ -83,6 +86,7 @@ export const TestWrapper = ({
     onFormSubmit: () => 'log submit',
     accountInfo: {
       address,
+      isGuarded: Boolean(GuardianScreen),
       nonce: accountConfiguration.nonce,
       balance,
       providerType: LoginMethodsEnum.extra
@@ -114,12 +118,16 @@ export const TestWrapper = ({
   };
   return (
     <SendFormContainer {...containerProps}>
-      <FormContent />
+      <FormContent GuardianScreen={GuardianScreen} />
     </SendFormContainer>
   );
 };
 
-function FormContent() {
+const FormContent = ({
+  GuardianScreen
+}: {
+  GuardianScreen?: TestWrapperType['GuardianScreen'];
+}) => {
   const {
     formInfo: { areValidatedValuesReady }
   } = useSendFormContext();
@@ -127,6 +135,6 @@ function FormContent() {
   return areValidatedValuesReady ? (
     <ConfirmScreen providerType={LoginMethodsEnum.extra} />
   ) : (
-    <Form />
+    <Form GuardianScreen={GuardianScreen} />
   );
-}
+};
