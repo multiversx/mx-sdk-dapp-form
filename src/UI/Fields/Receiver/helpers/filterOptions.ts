@@ -5,7 +5,7 @@ export const filterOptions = (
   option: FilterOptionOption<GenericOptionType>,
   search: string
 ) => {
-  const needle = search.toLowerCase();
+  const receiverUserInput = search.toLowerCase();
   const label = option.label.toLowerCase();
   const value = option.value.toLowerCase();
 
@@ -13,5 +13,5 @@ export const filterOptions = (
     return true;
   }
 
-  return label.includes(needle) || value.includes(needle);
+  return label.includes(receiverUserInput) || value.includes(receiverUserInput);
 };
