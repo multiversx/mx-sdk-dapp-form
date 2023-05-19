@@ -5,7 +5,7 @@ describe('Data ledger field tests', () => {
   test('data field over 300 character error for ledger app version 1.0.10', async () => {
     const data = {
       target: {
-        value: new Array(300 + 2).join('0') // creates a 301 characters long string
+        value: new Array(300 + 2).join('0') // creates a 302 characters long string
       }
     };
 

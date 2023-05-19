@@ -5,9 +5,8 @@ import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
 import { filterOptions } from '../../helpers';
 
+import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
-
-import { GenericOptionType } from '../../types';
 
 export const DropdownIndicator: typeof components.DropdownIndicator = (
   props
@@ -25,7 +24,7 @@ export const DropdownIndicator: typeof components.DropdownIndicator = (
         const option = item as FilterOptionOption<GenericOptionType>;
         const search = value as GenericOptionType;
 
-        if (!Boolean(search)) {
+        if (!search) {
           return null;
         }
 
@@ -38,7 +37,7 @@ export const DropdownIndicator: typeof components.DropdownIndicator = (
    * Hide the indicator if the field is disabled, or if there's a search query but without results.
    */
 
-  const isHidden = isDisabled || (Boolean(value) && !Boolean(optionsAvailable));
+  const isHidden = isDisabled || (Boolean(value) && !optionsAvailable);
 
   return (
     <components.DropdownIndicator

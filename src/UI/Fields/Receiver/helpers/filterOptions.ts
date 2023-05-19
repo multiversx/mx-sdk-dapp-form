@@ -1,5 +1,5 @@
 import type { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
-import type { GenericOptionType } from '../types';
+import type { GenericOptionType } from '../Receiver.types';
 
 export const filterOptions = (
   option: FilterOptionOption<GenericOptionType>,
@@ -9,7 +9,7 @@ export const filterOptions = (
   const label = option.label.toLowerCase();
   const value = option.value.toLowerCase();
 
-  if (!Boolean(search)) {
+  if (!search) {
     return true;
   }
 

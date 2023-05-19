@@ -3,9 +3,8 @@ import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import classNames from 'classnames';
 import { components } from 'react-select';
 
+import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
-
-import { GenericOptionType } from '../../types';
 
 export const ValueContainer: typeof components.ValueContainer = (props) => {
   const { selectProps, isDisabled } = props;

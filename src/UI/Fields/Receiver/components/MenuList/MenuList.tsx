@@ -3,20 +3,20 @@ import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import classNames from 'classnames';
 import { components } from 'react-select';
 
+import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
-
-import type { GenericOptionType } from '../../types';
 
 export const MenuList: typeof components.MenuList = (props) => {
   const { selectProps, focusedOption } = props;
   const { value, inputValue } = selectProps;
 
   const focused = focusedOption as GenericOptionType;
-  const haystack = focused ? focused.label.toLowerCase() : null;
+  const searchableLabel = focused ? focused.label.toLowerCase() : null;
 
+  const hasInputValue = !value || (value && inputValue);
   const showSuggestion =
-    haystack && (!value || (value && inputValue))
-      ? haystack.startsWith(inputValue.toLowerCase())
+    searchableLabel && hasInputValue
+      ? searchableLabel.startsWith(inputValue.toLowerCase())
       : false;
 
   const trimSuggestion =
@@ -27,7 +27,7 @@ export const MenuList: typeof components.MenuList = (props) => {
         )
       : null;
 
-  const showTrimmedAutocomplete = trimSuggestion && !Boolean(inputValue);
+  const showTrimmedAutocomplete = trimSuggestion && !inputValue;
   const showUntrimmedAutocomplete =
     trimSuggestion &&
     Boolean(inputValue) &&

@@ -23,9 +23,8 @@ import { SelectContainer } from './components/SelectContainer';
 import { ValueContainer } from './components/ValueContainer';
 
 import { filterOptions } from './helpers';
+import { GenericOptionType } from './Receiver.types';
 import styles from './styles.module.scss';
-
-import { GenericOptionType } from './types';
 
 export const Receiver = (props: WithClassnameType) => {
   const { className } = props;
@@ -73,7 +72,7 @@ export const Receiver = (props: WithClassnameType) => {
           label: inputValue
         });
 
-        if (!Boolean(inputValue)) {
+        if (!inputValue) {
           setOption(null);
         }
       }
