@@ -27,10 +27,6 @@ import styles from './styles.module.scss';
 
 import { GenericOptionType } from './types';
 
-/*
- * Handle the component declaration.
- */
-
 export const Receiver = (props: WithClassnameType) => {
   const { className } = props;
   const {
@@ -107,10 +103,6 @@ export const Receiver = (props: WithClassnameType) => {
     // pushing the action at the end of the event loop through setTimeout function.
     setTimeout(onBlur);
   }, []);
-
-  /*
-   * Return the component.
-   */
 
   return (
     <div className={classNames(styles.receiver, className)}>

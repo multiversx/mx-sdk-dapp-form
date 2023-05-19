@@ -9,10 +9,6 @@ import styles from '../../styles.module.scss';
 
 import { GenericOptionType } from '../../types';
 
-/*
- * Handle the component declaration.
- */
-
 export const DropdownIndicator: typeof components.DropdownIndicator = (
   props
 ) => {
@@ -43,10 +39,6 @@ export const DropdownIndicator: typeof components.DropdownIndicator = (
    */
 
   const isHidden = isDisabled || (Boolean(value) && !Boolean(optionsAvailable));
-
-  /*
-   * Return the component.
-   */
 
   return (
     <components.DropdownIndicator
