@@ -42,15 +42,16 @@ describe('Guardian screen tests', () => {
       fee: '0.0000505 xEGLD'
     });
 
+    // account is guarded and has GuardianComponent
+    // after pressing send, GuardianScreen should be visible
     const sendTransactionBtn = methods.getByTestId('sendTrxBtn');
     fireEvent.click(sendTransactionBtn);
-
     const guardianScreen = await methods.findByTestId('guardianScreen');
     expect(guardianScreen).toBeDefined();
 
+    // on Guardian screen back, Confirm Screen should be visible
     const guardianBackButton = methods.getByTestId('guardianBackButton');
     fireEvent.click(guardianBackButton);
-
     const confirmScreen = await methods.findByTestId('confirmScreen');
     expect(confirmScreen).toBeDefined();
   });
