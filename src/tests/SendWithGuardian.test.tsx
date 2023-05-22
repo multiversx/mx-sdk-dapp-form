@@ -8,7 +8,9 @@ import { formConfiguration, sendAndConfirmTest } from './helpers';
 const GuardianScreen = (props: GuardianScreenType) => {
   return (
     <div data-testid='guardianScreen'>
-      <button onClick={props.onPrev}>Back</button>
+      <button onClick={props.onPrev} data-testid='guardianBackButton'>
+        Back
+      </button>
     </div>
   );
 };
@@ -45,5 +47,11 @@ describe('Guardian screen tests', () => {
 
     const guardianScreen = await methods.findByTestId('guardianScreen');
     expect(guardianScreen).toBeDefined();
+
+    const guardianBackButton = methods.getByTestId('guardianBackButton');
+    fireEvent.click(guardianBackButton);
+
+    const confirmScreen = await methods.findByTestId('confirmScreen');
+    expect(confirmScreen).toBeDefined();
   });
 });
