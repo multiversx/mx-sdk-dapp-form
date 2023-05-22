@@ -8,14 +8,14 @@ import {
 import { GuardianScreenType } from '@multiversx/sdk-dapp/types/transactions.types';
 import { Loader } from '@multiversx/sdk-dapp/UI/Loader';
 import { SendFormContainer, SendFormContainerPropsType } from 'containers';
-import { useSendFormContext } from 'contexts/SendFormProviderContext';
+// import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import {
   useGetInitialValues,
   GetInitialValuesReturnType
 } from 'hooks/useGetInitialValues';
 import getTxType from 'operations/getTxType';
 import { ExtendedValuesType, FormConfigType } from 'types/form';
-import { ConfirmScreen } from 'UI/ConfirmScreen';
+// import { ConfirmScreen } from 'UI/ConfirmScreen';
 import { Form } from 'UI/Form';
 import { accountConfiguration } from './accountConfiguration';
 import { formConfiguration } from './formConfiguraiton';
@@ -28,6 +28,7 @@ export interface TestWrapperType {
   address?: string;
   chainId?: string;
   GuardianScreen?: (props: GuardianScreenType) => JSX.Element;
+  isGuarded?: boolean;
   ledger?: ExtendedValuesType['ledger'];
 }
 
@@ -37,6 +38,7 @@ export const TestWrapper = ({
   address = accountConfiguration.address,
   chainId = accountConfiguration.chainId,
   ledger,
+  isGuarded,
   GuardianScreen
 }: TestWrapperType) => {
   const initValues = useGetInitialValues({
@@ -45,6 +47,10 @@ export const TestWrapper = ({
     balance,
     address
   });
+
+  const [hasGuardianScreen, setHasGuardianScreen] = useState(
+    Boolean(GuardianScreen)
+  );
 
   const [isFormSubmitted, setIsFormSubmitted] = useState(
     Boolean(formConfigValues.skipToConfirm)
@@ -86,7 +92,7 @@ export const TestWrapper = ({
     onFormSubmit: () => 'log submit',
     accountInfo: {
       address,
-      isGuarded: Boolean(GuardianScreen),
+      isGuarded,
       nonce: accountConfiguration.nonce,
       balance,
       providerType: LoginMethodsEnum.extra
@@ -101,10 +107,8 @@ export const TestWrapper = ({
       setGuardedTransaction: (transaction) => {
         console.log(transaction);
       },
-      setHasGuardianScreen: () => {
-        return false;
-      },
-      hasGuardianScreen: false
+      setHasGuardianScreen,
+      hasGuardianScreen
     },
     tokensInfo: {
       initialNft,
@@ -116,25 +120,10 @@ export const TestWrapper = ({
         })) ?? []
     }
   };
+
   return (
     <SendFormContainer {...containerProps}>
-      <FormContent GuardianScreen={GuardianScreen} />
+      <Form GuardianScreen={GuardianScreen} />
     </SendFormContainer>
-  );
-};
-
-const FormContent = ({
-  GuardianScreen
-}: {
-  GuardianScreen?: TestWrapperType['GuardianScreen'];
-}) => {
-  const {
-    formInfo: { areValidatedValuesReady }
-  } = useSendFormContext();
-
-  return areValidatedValuesReady ? (
-    <ConfirmScreen providerType={LoginMethodsEnum.extra} />
-  ) : (
-    <Form GuardianScreen={GuardianScreen} />
   );
 };

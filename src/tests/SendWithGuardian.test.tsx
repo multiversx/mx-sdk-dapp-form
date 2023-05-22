@@ -7,9 +7,9 @@ import { formConfiguration, sendAndConfirmTest } from './helpers';
 
 const GuardianScreen = (props: GuardianScreenType) => {
   return (
-    <>
+    <div data-testid='guardianScreen'>
       <button onClick={props.onPrev}>Back</button>
-    </>
+    </div>
   );
 };
 
@@ -17,6 +17,7 @@ describe('Guardian screen tests', () => {
   it.only('Should go to Guardian Screen', async () => {
     const methods = renderForm({
       balance: '1_000_000_000_000_000'.replaceAll('_', ''), // 0.001,
+      isGuarded: true,
       GuardianScreen,
       formConfigValues: {
         ...formConfiguration
@@ -38,5 +39,11 @@ describe('Guardian screen tests', () => {
       amount: '0.00001',
       fee: '0.0000505 xEGLD'
     });
+
+    const sendTransactionBtn = methods.getByTestId('sendTrxBtn');
+    fireEvent.click(sendTransactionBtn);
+
+    const guardianScreen = await methods.findByTestId('guardianScreen');
+    expect(guardianScreen).toBeDefined();
   });
 });
