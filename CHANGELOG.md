@@ -7,15 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.6.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/174)] - 2023-05-19
+
+- [Added a new Receiver component with autocomplete support](https://github.com/multiversx/mx-sdk-dapp-form/pull/163)
+
 ## [[0.6.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/172)] - 2023-05-09
+
 - [Verify ledger version for guarded transactions](https://github.com/multiversx/mx-sdk-dapp-form/pull/171)
 - [Extend guarded account gasLimit validation for ESDT and NFT](https://github.com/multiversx/mx-sdk-dapp-form/pull/170)
 
-
 ## [[0.5.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/169)] - 2023-05-03
+
 - [Fixed setting Guardian screen for prefilled transactions](https://github.com/multiversx/mx-sdk-dapp-form/pull/168)
 
 ## [[0.5.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/167)] - 2023-05-03
+
 - [Added build types](https://github.com/multiversx/mx-sdk-dapp-form/pull/166)
 
 ## [[0.5.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/165)] - 2023-05-02

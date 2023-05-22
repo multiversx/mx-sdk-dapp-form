@@ -69,7 +69,7 @@ export const SFTAmount = (props: WithClassnameType) => {
           id={ValuesEnum.amount}
           name={ValuesEnum.amount}
           data-testid={ValuesEnum.amount}
-          required={true}
+          required
           value={amount}
           disabled={getIsDisabled(ValuesEnum.amount, readonly)}
           onFocus={onFocus}

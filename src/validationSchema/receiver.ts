@@ -21,6 +21,7 @@ const sameAddress = string().test(
       TransactionTypeEnum.ESDT
     ].includes(txType);
     const signContext = ignoreTokenBalance;
+
     if (isNftTransaction && !signContext && !readonly) {
       return address !== value;
     }
