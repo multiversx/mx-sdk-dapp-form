@@ -16,7 +16,7 @@ const GuardianScreen = (props: GuardianScreenType) => {
 };
 
 describe('Guardian screen tests', () => {
-  it.only('Should go to Guardian Screen', async () => {
+  it('Should go to Guardian Screen', async () => {
     const methods = renderForm({
       balance: '1_000_000_000_000_000'.replaceAll('_', ''), // 0.001,
       isGuarded: true,
