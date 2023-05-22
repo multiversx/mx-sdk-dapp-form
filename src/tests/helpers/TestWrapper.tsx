@@ -8,14 +8,12 @@ import {
 import { GuardianScreenType } from '@multiversx/sdk-dapp/types/transactions.types';
 import { Loader } from '@multiversx/sdk-dapp/UI/Loader';
 import { SendFormContainer, SendFormContainerPropsType } from 'containers';
-// import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import {
   useGetInitialValues,
   GetInitialValuesReturnType
 } from 'hooks/useGetInitialValues';
 import getTxType from 'operations/getTxType';
 import { ExtendedValuesType, FormConfigType } from 'types/form';
-// import { ConfirmScreen } from 'UI/ConfirmScreen';
 import { Form } from 'UI/Form';
 import { accountConfiguration } from './accountConfiguration';
 import { formConfiguration } from './formConfiguraiton';
