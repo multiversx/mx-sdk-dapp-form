@@ -48,12 +48,7 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     []
   );
   const ValueContainer = useMemo(
-    () =>
-      components.getValueContainer(
-        egldLabel,
-        selectedTokenIconClassName,
-        TokenTickerIcon
-      ),
+    () => components.getValueContainer(egldLabel, selectedTokenIconClassName),
     []
   );
 

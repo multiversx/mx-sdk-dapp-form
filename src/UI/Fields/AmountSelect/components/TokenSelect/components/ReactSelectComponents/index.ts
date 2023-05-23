@@ -1,7 +1,6 @@
 export * from './Input';
 export * from './MenuList';
 export * from './Menu';
-export * from './SingleValue';
 export * from './Control';
 export * from './Placeholder';
 export * from './IndicatorContainer';
