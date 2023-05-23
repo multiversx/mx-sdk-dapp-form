@@ -8,7 +8,7 @@ export interface ReceiverContextPropsType {
   receiver: string;
   receiverError?: string;
   isReceiverInvalid: boolean;
-  knownAddresses: string[];
+  knownAddresses: string[] | null;
   scamError?: string;
   fetchingScamAddress: boolean;
   onChangeReceiver: (newReceiver: string, shouldValidate?: boolean) => void;

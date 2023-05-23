@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Loading state support when no known addresses for the Receiver](https://github.com/multiversx/mx-sdk-dapp-form/pull/177)
 - [Added TokenTickerIcon optional param to TokenSelect](https://github.com/multiversx/mx-sdk-dapp-form/pull/176)
 
 ## [[0.6.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/174)] - 2023-05-19
