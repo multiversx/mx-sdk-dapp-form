@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
@@ -82,12 +82,16 @@ export const Receiver = (props: WithClassnameType) => {
 
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
-  const options: GenericOptionType[] = knownAddresses
-    ? knownAddresses.map((address) => ({
-        value: address,
-        label: address
-      }))
-    : [];
+  const options: GenericOptionType[] = useMemo(
+    () =>
+      knownAddresses
+        ? knownAddresses.map((address) => ({
+            value: address,
+            label: address
+          }))
+        : [],
+    [knownAddresses]
+  );
 
   const onChange = (option: SingleValue<GenericOptionType>) => {
     if (option) {
