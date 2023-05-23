@@ -7,15 +7,8 @@ import * as components from './components';
 import styles from './tokenSelect.module.scss';
 import { OptionType, TokenSelectPropsType } from './tokenSelect.types';
 
-const {
-  Menu,
-  Control,
-  Input,
-  MenuList,
-  IndicatorsContainer,
-  Placeholder,
-  SingleValue
-} = components;
+const { Menu, Control, Input, MenuList, IndicatorsContainer, Placeholder } =
+  components;
 
 export const TokenSelect = (props: TokenSelectPropsType) => {
   const {
@@ -37,7 +30,8 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     wrapperClassName = '',
     showTokenPrice = false,
     showBalanceUsdValue = false,
-    selectedTokenIconClassName
+    selectedTokenIconClassName,
+    TokenTickerIcon
   } = props;
 
   const ref = useRef(null);
@@ -48,12 +42,23 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
       components.getOption({
         egldLabel,
         showTokenPrice,
-        showBalanceUsdValue
+        showBalanceUsdValue,
+        TokenTickerIcon
       }),
     []
   );
   const ValueContainer = useMemo(
-    () => components.getValueContainer(egldLabel, selectedTokenIconClassName),
+    () =>
+      components.getValueContainer(
+        egldLabel,
+        selectedTokenIconClassName,
+        TokenTickerIcon
+      ),
+    []
+  );
+
+  const SingleValue = useMemo(
+    () => components.getSingleValue(TokenTickerIcon),
     []
   );
 

@@ -7,7 +7,7 @@ import classNames from 'classnames';
 import { components } from 'react-select';
 
 import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
-import type { OptionType } from '../../tokenSelect.types';
+import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
 
 import styles from './../../tokenSelect.module.scss';
 import { HighlightText } from './HighlightText';
@@ -18,11 +18,13 @@ const MultiversXIcon =
 export const getOption =
   ({
     showTokenPrice,
-    showBalanceUsdValue
+    showBalanceUsdValue,
+    TokenTickerIcon
   }: {
     egldLabel: string;
     showTokenPrice?: boolean;
     showBalanceUsdValue?: boolean;
+    TokenTickerIcon?: TokenSelectPropsType['TokenTickerIcon'];
   }): typeof components.Option =>
   (props) => {
     const { data, isSelected, isFocused, isDisabled, selectProps } = props;
@@ -69,7 +71,11 @@ export const getOption =
 
           <div className={styles.info}>
             <div className={styles.left}>
-              <span className={styles.value}>{ticker}</span>
+              <div className={styles.ticker}>
+                <span className={styles.value}>{ticker}</span>
+                {TokenTickerIcon && <TokenTickerIcon token={option.token} />}
+              </div>
+
               {showTokenPrice && (
                 <small className={styles.price}>{tokenPrice}</small>
               )}

@@ -7,3 +7,4 @@ export * from './Placeholder';
 export * from './IndicatorContainer';
 export * from './getValueContainer';
 export * from './getOption';
+export * from './getSingleValue';
