@@ -8,7 +8,7 @@ import { useAccountContext } from '../../AccountContext';
 export function useFetchKnownAddresses() {
   const { address } = useAccountContext();
 
-  const [knownAddresses, setKnownAddresses] = useState<string[]>([]);
+  const [knownAddresses, setKnownAddresses] = useState<string[] | null>(null);
 
   async function getKnownAddresses() {
     try {

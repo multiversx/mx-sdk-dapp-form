@@ -82,10 +82,12 @@ export const Receiver = (props: WithClassnameType) => {
 
   useEffect(triggerRerenderOnceOnHook, [receiver]);
 
-  const options: GenericOptionType[] = knownAddresses.map((address) => ({
-    value: address,
-    label: address
-  }));
+  const options: GenericOptionType[] = knownAddresses
+    ? knownAddresses.map((address) => ({
+        value: address,
+        label: address
+      }))
+    : [];
 
   const onChange = (option: SingleValue<GenericOptionType>) => {
     if (option) {
@@ -127,6 +129,7 @@ export const Receiver = (props: WithClassnameType) => {
         noOptionsMessage={() => null}
         onChange={onChange}
         onBlur={onBlur}
+        isLoading={knownAddresses === null}
         isMulti={false}
         inputValue={inputValue}
         className={classNames(styles.receiverSelectContainer, {
@@ -143,7 +146,8 @@ export const Receiver = (props: WithClassnameType) => {
           Option,
           Placeholder: () => null,
           SingleValue: () => null,
-          IndicatorSeparator: () => null
+          IndicatorSeparator: () => null,
+          LoadingIndicator: () => null
         }}
       />
 
