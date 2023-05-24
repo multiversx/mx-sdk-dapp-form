@@ -38,7 +38,7 @@ export const GasPrice = () => {
           id={ValuesEnum.gasPrice}
           name={ValuesEnum.gasPrice}
           data-testid={ValuesEnum.gasPrice}
-          required={true}
+          required
           disabled={isDisabled}
           value={gasPrice}
           onChange={onChangeGasPrice}

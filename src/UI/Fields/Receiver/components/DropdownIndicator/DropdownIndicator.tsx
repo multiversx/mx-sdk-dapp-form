@@ -1,4 +1,6 @@
 import React, { useMemo } from 'react';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { components } from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
@@ -12,7 +14,7 @@ export const DropdownIndicator: typeof components.DropdownIndicator = (
   props
 ) => {
   const { selectProps, isDisabled, options } = props;
-  const { menuIsOpen, value } = selectProps;
+  const { menuIsOpen, value, isLoading } = selectProps;
 
   /*
    * Check if the running search query is returning any options.
@@ -37,7 +39,19 @@ export const DropdownIndicator: typeof components.DropdownIndicator = (
    * Hide the indicator if the field is disabled, or if there's a search query but without results.
    */
 
-  const isHidden = isDisabled || (Boolean(value) && !optionsAvailable);
+  const noOptionsAvailable = options.length === 0 && !isLoading;
+  const noOptionsFound = Boolean(value) && !optionsAvailable;
+  const isHidden = isDisabled || noOptionsAvailable || noOptionsFound;
+
+  if (isLoading) {
+    return (
+      <FontAwesomeIcon
+        icon={faSpinner}
+        spin={true}
+        className={styles.receiverSelectSpinner}
+      />
+    );
+  }
 
   return (
     <components.DropdownIndicator
