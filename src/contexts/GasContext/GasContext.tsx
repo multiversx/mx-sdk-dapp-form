@@ -163,7 +163,9 @@ export function GasContextProvider({
   const hasErrors = Boolean(gasPriceError) || Boolean(gasLimitError);
 
   const feeLimit = useMemo(() => {
-    if (hasErrors) {
+    const isInvalidGasLimit = isNaN(Number(gasLimit));
+    const isInvalidGasPrice = isNaN(Number(gasPrice));
+    if (isInvalidGasLimit || isInvalidGasPrice) {
       return ZERO;
     }
 
@@ -172,7 +174,7 @@ export function GasContextProvider({
 
     const dataField = isInitialGasLimit ? data.trim() : '';
 
-    return calculateFeeLimit({
+    const newFeeLimit =  calculateFeeLimit({
       gasLimit,
       gasPrice: parseAmount(gasPrice),
       data: dataField,
@@ -180,6 +182,7 @@ export function GasContextProvider({
       gasPerDataByte: String(GAS_PER_DATA_BYTE),
       gasPriceModifier: String(GAS_PRICE_MODIFIER)
     });
+    return isNaN(Number(newFeeLimit)) ? ZERO : newFeeLimit;
   }, [
     hasErrors,
     gasPrice,
