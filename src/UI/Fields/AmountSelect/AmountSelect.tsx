@@ -41,49 +41,47 @@ export const AmountSelect = ({
   amountErrorProps,
   maxButtonProps,
   readonly
-}: AmountSelectPropsType) => {
-  return (
-    <div className={classNames(styles.amount, className)}>
-      <div className={styles.label}>
-        {label && (
-          <label
-            htmlFor={name}
-            className={globals.label}
-            data-testid='amountLabel'
-          >
-            {label}
-          </label>
-        )}
+}: AmountSelectPropsType) => (
+  <div className={classNames(styles.amount, className)}>
+    <div className={styles.label}>
+      {label && (
+        <label
+          htmlFor={name}
+          className={globals.label}
+          data-testid='amountLabel'
+        >
+          {label}
+        </label>
+      )}
 
-        <TokenBalance {...tokenBalanceProps} />
-      </div>
+      <TokenBalance {...tokenBalanceProps} />
+    </div>
+
+    <div
+      className={classNames(styles.wrapper, wrapperControlsClassName, {
+        [styles.error]:
+          amountInputProps.isInvalid ||
+          tokenSelectProps.isInvalid ||
+          amountErrorProps.hasErrors,
+        [styles.disabled]: readonly
+      })}
+    >
+      <AmountInput {...amountInputProps} />
 
       <div
-        className={classNames(styles.wrapper, wrapperControlsClassName, {
-          [styles.error]:
-            amountInputProps.isInvalid || tokenSelectProps.isInvalid,
-          [styles.disabled]: readonly
-        })}
+        className={classNames(
+          styles.interaction,
+          maxButtonProps.wrapperClassName
+        )}
       >
-        <AmountInput {...amountInputProps} />
+        {maxButtonProps.isMaxButtonVisible && <MaxButton {...maxButtonProps} />}
 
-        <div
-          className={classNames(
-            styles.interaction,
-            maxButtonProps.wrapperClassName
-          )}
-        >
-          {maxButtonProps.isMaxButtonVisible && (
-            <MaxButton {...maxButtonProps} />
-          )}
-
-          <div className={styles.select}>
-            <TokenSelect {...tokenSelectProps} />
-          </div>
+        <div className={styles.select}>
+          <TokenSelect {...tokenSelectProps} />
         </div>
       </div>
-
-      <AmountError {...amountErrorProps} />
     </div>
-  );
-};
+
+    <AmountError {...amountErrorProps} />
+  </div>
+);

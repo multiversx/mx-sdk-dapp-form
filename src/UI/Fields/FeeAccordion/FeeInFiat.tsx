@@ -10,8 +10,12 @@ interface FeeInFiatType {
   egldPriceInUsd: number;
 }
 
-export const FeeInFiat = ({ feeLimit, egldPriceInUsd }: FeeInFiatType) =>
-  feeLimit !== ZERO ? (
+export const FeeInFiat = ({ feeLimit, egldPriceInUsd }: FeeInFiatType) => {
+  if (feeLimit === ZERO) {
+    return null;
+  }
+
+  return (
     <span className={styles.fiat} data-testid='feeInFiat'>
       (
       {calculateFeeInFiat({
@@ -20,4 +24,5 @@ export const FeeInFiat = ({ feeLimit, egldPriceInUsd }: FeeInFiatType) =>
       })}
       )
     </span>
-  ) : null;
+  );
+};
