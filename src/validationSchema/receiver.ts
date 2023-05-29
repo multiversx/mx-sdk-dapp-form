@@ -33,7 +33,7 @@ const canTransfer = string().test(
   'canTransfer',
   'Receiver not allowed',
   function allowedReceivers(value) {
-    const { nft, txType, ignoreTokenBalance } = this
+    const { nft, txType, ignoreTokenBalance, address } = this
       .parent as ExtendedValuesType;
     const isMetaEsdtTransaction = TransactionTypeEnum.MetaESDT === txType;
     const signContext = ignoreTokenBalance;
@@ -43,8 +43,12 @@ const canTransfer = string().test(
       return true;
     }
 
-    const isReceiverNotAllwed =
-      allowedReceivers != null && !allowedReceivers.includes(value);
+    // collection is not restricted or user has colleciton send role
+    if (allowedReceivers == null || allowedReceivers.includes(address)) {
+      return true;
+    }
+
+    const isReceiverNotAllwed = !allowedReceivers.includes(value);
 
     if (isReceiverNotAllwed) {
       return false;
