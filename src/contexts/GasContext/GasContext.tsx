@@ -12,7 +12,9 @@ import {
   GAS_PER_DATA_BYTE,
   GAS_PRICE_MODIFIER
 } from '@multiversx/sdk-dapp/constants/index';
+import { stringIsFloat } from '@multiversx/sdk-dapp/utils';
 import { calculateFeeLimit } from '@multiversx/sdk-dapp/utils/operations/calculateFeeLimit';
+import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 import { ZERO } from 'constants/index';
@@ -163,8 +165,8 @@ export function GasContextProvider({
   const hasErrors = Boolean(gasPriceError) || Boolean(gasLimitError);
 
   const feeLimit = useMemo(() => {
-    const isInvalidGasLimit = isNaN(Number(gasLimit));
-    const isInvalidGasPrice = isNaN(Number(gasPrice));
+    const isInvalidGasLimit = !stringIsInteger(gasLimit);
+    const isInvalidGasPrice = !stringIsFloat(gasPrice);
     if (isInvalidGasLimit || isInvalidGasPrice) {
       return ZERO;
     }
@@ -174,7 +176,7 @@ export function GasContextProvider({
 
     const dataField = isInitialGasLimit ? data.trim() : '';
 
-    const newFeeLimit =  calculateFeeLimit({
+    const newFeeLimit = calculateFeeLimit({
       gasLimit,
       gasPrice: parseAmount(gasPrice),
       data: dataField,
@@ -182,7 +184,7 @@ export function GasContextProvider({
       gasPerDataByte: String(GAS_PER_DATA_BYTE),
       gasPriceModifier: String(GAS_PRICE_MODIFIER)
     });
-    return isNaN(Number(newFeeLimit)) ? ZERO : newFeeLimit;
+    return stringIsInteger(newFeeLimit) ? newFeeLimit : ZERO;
   }, [
     hasErrors,
     gasPrice,
