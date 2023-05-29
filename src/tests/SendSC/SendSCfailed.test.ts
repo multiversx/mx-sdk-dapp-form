@@ -20,7 +20,7 @@ describe('SendForm Smart Contract', () => {
     let fee = await render.findByTestId('feeLimit');
 
     await waitFor(() => {
-      expect(fee.textContent).toBe('0 xEGLD');
+      expect(fee.textContent).toBe('0.0165575575 xEGLD');
     });
 
     let gasLimit = render.getByTestId('gasLimit') as HTMLInputElement;
