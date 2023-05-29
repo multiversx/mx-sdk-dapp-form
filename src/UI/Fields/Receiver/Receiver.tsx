@@ -85,10 +85,12 @@ export const Receiver = (props: WithClassnameType) => {
   const options: GenericOptionType[] = useMemo(
     () =>
       knownAddresses
-        ? knownAddresses.map((address) => ({
-            value: address,
-            label: address
-          }))
+        ? knownAddresses
+            .filter((address) => addressIsValid(address))
+            .map((address) => ({
+              value: address,
+              label: address
+            }))
         : [],
     [knownAddresses]
   );
