@@ -1,6 +1,7 @@
 import React, {
   ChangeEvent,
   FocusEvent,
+  KeyboardEvent,
   memo,
   useEffect,
   useRef,
@@ -31,7 +32,7 @@ export interface AmountInputPropsType {
   name: string;
   onDebounceChange?: (amount: string) => void;
   onFocus?: () => void;
-  onKeyDown?: () => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   placeholder: string;
   readonly?: boolean;
   required: boolean;
@@ -40,7 +41,7 @@ export interface AmountInputPropsType {
 }
 
 const fiveHundredMs = 500;
-const maxAcceptedAmount = 10000000000000; // 10 trillions
+const maxAcceptedAmount = 10_000_000_000_000; // 10 trillions
 
 const AmountComponent = ({
   'data-testid': dataTestId,
@@ -75,8 +76,7 @@ const AmountComponent = ({
     setEdited(true);
     const newValue = removeCommas(event.target.value);
     const isBelowMax =
-      stringIsFloat(newValue) &&
-      BigNumber(parseFloat(newValue)).isLessThanOrEqualTo(maxAcceptedAmount);
+      BigNumber(newValue).isLessThanOrEqualTo(maxAcceptedAmount);
 
     if (newValue === '' || isBelowMax) {
       setInputValue(newValue);
