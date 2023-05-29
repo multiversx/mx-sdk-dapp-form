@@ -9,23 +9,21 @@ export const getConfirmButtonLabel = ({
   providerType,
   hasGuardianScreen
 }: GetConfirmButtonLabelType) => {
-  let confirmText = 'Confirm';
-
   if (hasGuardianScreen) {
-    return confirmText;
+    return 'Confirm Guardian';
   }
 
-  switch (providerType) {
-    case LoginMethodsEnum.walletconnect:
-    case LoginMethodsEnum.extension:
-      confirmText = 'Confirm & Check your App';
-      break;
-    case LoginMethodsEnum.ledger:
-      confirmText = 'Confirm & Check your Ledger';
-      break;
-    default:
-      break;
+  if (providerType === LoginMethodsEnum.walletconnect) {
+    return 'Confirm on xPortal';
   }
 
-  return confirmText;
+  if (providerType === LoginMethodsEnum.extension) {
+    return 'Confirm on DeFi Wallet';
+  }
+
+  if (providerType === LoginMethodsEnum.ledger) {
+    return 'Confirm on Ledger';
+  }
+
+  return 'Confirm';
 };
