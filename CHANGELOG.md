@@ -6,7 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- [Allow users with collection send role to send restricted NFTs](https://github.com/multiversx/mx-sdk-dapp-form/pull/183)
+
+## [[0.6.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/182)] - 2023-05-29
+- [Allow users with colection send role to send restricted NFTs](https://github.com/multiversx/mx-sdk-dapp-form/pull/183)
+
 
 - [Fixed metachain selection on receiver dropdown](https://github.com/multiversx/mx-sdk-dapp-form/pull/181)
 
