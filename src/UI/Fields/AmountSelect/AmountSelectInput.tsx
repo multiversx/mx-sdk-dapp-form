@@ -127,13 +127,15 @@ export const AmountSelectInput = () => {
     isMaxButtonVisible
   };
 
-  // Only show the "Required" error if no input exists (filter out cases like insufficient funds coming from gas)
-  const noInputError =
+  // Only show the "Required" error if user has not filled in any value (filter out insufficient funds error triggered by gas validation)
+  const isValueMissing =
     checkInvalid(ValuesEnum.amount) && !amountInputProps.value;
 
   const amountErrorProps: AmountErrorPropsType = {
     hasErrors:
-      amountInputProps.isInvalid || tokenSelectProps.isInvalid || noInputError,
+      amountInputProps.isInvalid ||
+      tokenSelectProps.isInvalid ||
+      isValueMissing,
     error: amountInputProps.error || tokenSelectProps.error,
     className: globals.error,
     'data-testid': amountInputProps.error
