@@ -20,7 +20,7 @@ export const NFTCanTransferWarning = (props: WithClassnameType) => {
     values: { nft, address }
   } = useFormikContext<ExtendedValuesType>();
 
-  if (!nft || !nft.allowedReceivers || nft.allowedReceivers.includes(address)) {
+  if (!nft?.allowedReceivers || nft.allowedReceivers.includes(address)) {
     return null;
   }
 
