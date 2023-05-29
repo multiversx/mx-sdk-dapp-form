@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { SingleValue } from 'react-select';
 import globals from 'assets/sass/globals.module.scss';
+import { useFormContext } from 'contexts';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
@@ -23,6 +24,7 @@ import { progressiveFormatAmount } from './components/MaxButton/progressiveForma
  * Gets form state and renders a connected `AmountSelect` component
  */
 export const AmountSelectInput = () => {
+  const { checkInvalid } = useFormContext();
   const { tokensInfo, amountInfo, formInfo } = useSendFormContext();
   const { readonly } = formInfo;
 
@@ -125,8 +127,15 @@ export const AmountSelectInput = () => {
     isMaxButtonVisible
   };
 
+  // Only show the "Required" error if user has not filled in any value (filter out insufficient funds error triggered by gas validation)
+  const isValueMissing =
+    checkInvalid(ValuesEnum.amount) && !amountInputProps.value;
+
   const amountErrorProps: AmountErrorPropsType = {
-    hasErrors: amountInputProps.isInvalid || tokenSelectProps.isInvalid,
+    hasErrors:
+      amountInputProps.isInvalid ||
+      tokenSelectProps.isInvalid ||
+      isValueMissing,
     error: amountInputProps.error || tokenSelectProps.error,
     className: globals.error,
     'data-testid': amountInputProps.error

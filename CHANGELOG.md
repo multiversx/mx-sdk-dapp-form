@@ -8,9 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ## [[0.6.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/182)] - 2023-05-29
+- [Fixed amount input error not showing on submitting](https://github.com/multiversx/mx-sdk-dapp-form/pull/182)
 - [Allow users with colection send role to send restricted NFTs](https://github.com/multiversx/mx-sdk-dapp-form/pull/183)
-- [Updated to dynamic provider confirm button labels](https://github.com/multiversx/mx-sdk-dapp-form/pull/184)
-- [Allow users with collection send role to send restricted NFTs](https://github.com/multiversx/mx-sdk-dapp-form/pull/183)
+- [Fixed amount input error not showing on submitting](https://github.com/multiversx/mx-sdk-dapp-form/pull/182)
 - [Fixed metachain selection on receiver dropdown](https://github.com/multiversx/mx-sdk-dapp-form/pull/181)
 - [Fix fee limit displaying 0 when the user has insufficient funds](https://github.com/multiversx/mx-sdk-dapp-form/pull/180)
 
