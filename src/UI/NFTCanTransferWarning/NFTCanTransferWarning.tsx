@@ -17,10 +17,10 @@ import styles from './styles.module.scss';
 export const NFTCanTransferWarning = (props: WithClassnameType) => {
   const { className } = props;
   const {
-    values: { nft }
+    values: { nft, address }
   } = useFormikContext<ExtendedValuesType>();
 
-  if (!nft || !nft.allowedReceivers) {
+  if (!nft || !nft.allowedReceivers || nft.allowedReceivers.includes(address)) {
     return null;
   }
 
