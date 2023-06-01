@@ -9,7 +9,6 @@ import Select from 'react-select/creatable';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
@@ -28,11 +27,6 @@ import styles from './styles.module.scss';
 
 export const Receiver = (props: WithClassnameType) => {
   const { className } = props;
-  const {
-    fields: {
-      receiver: { label }
-    }
-  } = useUICustomizationContext();
 
   const {
     receiverInfo: {
@@ -113,15 +107,13 @@ export const Receiver = (props: WithClassnameType) => {
 
   return (
     <div className={classNames(styles.receiver, className)}>
-      {label !== null && (
-        <div
-          className={globals.label}
-          data-testid='receiverLabel'
-          data-loading={fetchingScamAddress}
-        >
-          {label}
-        </div>
-      )}
+      <div
+        className={globals.label}
+        data-testid='receiverLabel'
+        data-loading={fetchingScamAddress}
+      >
+        Receiver
+      </div>
 
       <Select
         value={option}

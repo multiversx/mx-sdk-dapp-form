@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { AuthenticatedRoutesWrapper } from '@multiversx/sdk-dapp/wrappers';
 import { useLocation } from 'react-router-dom';
+
 import routes, { routeNames } from 'routes';
 import Navbar from './Navbar';
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: PropsWithChildren) => {
   const { search } = useLocation();
 
   return (

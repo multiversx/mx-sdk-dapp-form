@@ -4,7 +4,8 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
+  createContext
 } from 'react';
 import { useFormikContext } from 'formik';
 import uniqBy from 'lodash/uniqBy';
@@ -49,7 +50,7 @@ interface TokensContextProviderPropsType {
   value?: TokensContextInitializationPropsType;
 }
 
-export const TokensContext = React.createContext({} as TokensContextPropsType);
+export const TokensContext = createContext({} as TokensContextPropsType);
 
 const tokenIdField = 'tokenId';
 const nftField = 'nft';

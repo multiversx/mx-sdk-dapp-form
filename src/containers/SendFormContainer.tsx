@@ -1,4 +1,10 @@
-import React, { JSXElementConstructor, useState } from 'react';
+import React, {
+  Dispatch,
+  JSXElementConstructor,
+  ReactNode,
+  SetStateAction,
+  useState
+} from 'react';
 import { Transaction } from '@multiversx/sdk-core';
 import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/index';
 import { Formik } from 'formik';
@@ -11,7 +17,6 @@ import {
   TokensContextInitializationPropsType
 } from 'contexts';
 
-import { UICustomizationContextPropsType } from 'contexts/UICustomization';
 import {
   generateTransaction,
   getTxType,
@@ -33,7 +38,7 @@ export interface SendFormContainerPropsType {
     /**
      * control isFormSubmitted from outside
      */
-    setIsFormSubmitted?: React.Dispatch<React.SetStateAction<boolean>>
+    setIsFormSubmitted?: Dispatch<SetStateAction<boolean>>
   ) => void;
   accountInfo: AccountContextPropsType;
   formInfo: Omit<FormContextBasePropsType, 'txType' | 'setTxType'>;
@@ -41,8 +46,7 @@ export interface SendFormContainerPropsType {
   networkConfig: FormNetworkConfigType;
   Loader?: JSXElementConstructor<any> | null;
   shouldGenerateTransactionOnSubmit?: boolean;
-  UICustomization?: UICustomizationContextPropsType;
-  children: React.ReactNode | JSX.Element;
+  children: ReactNode | JSX.Element;
 }
 
 export function SendFormContainer(props: SendFormContainerPropsType) {
@@ -57,7 +61,6 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     networkConfig,
     enableReinitialize = true,
     Loader,
-    UICustomization,
     shouldGenerateTransactionOnSubmit = true
   } = props;
 
@@ -150,7 +153,6 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
         networkConfig={networkConfig}
         tokensInfo={tokensInfo}
         Loader={Loader}
-        UICustomization={UICustomization}
       >
         {children}
       </AppInfoContextProvider>

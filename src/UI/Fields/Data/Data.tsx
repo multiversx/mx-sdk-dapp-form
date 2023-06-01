@@ -4,18 +4,12 @@ import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types/form';
 import styles from './styles.module.scss';
 
 export const Data = ({ className }: WithClassnameType) => {
-  const {
-    fields: {
-      data: { label }
-    }
-  } = useUICustomizationContext();
   const {
     formInfo: { isEgldTransaction, readonly },
     dataFieldInfo: { data, dataError, isDataInvalid, onChange, onBlur }
@@ -26,11 +20,9 @@ export const Data = ({ className }: WithClassnameType) => {
 
   return (
     <div className={classNames(styles.data, className)}>
-      {label != null && (
-        <label htmlFor={ValuesEnum.data} className={globals.label}>
-          {label}
-        </label>
-      )}
+      <label htmlFor={ValuesEnum.data} className={globals.label}>
+        Data
+      </label>
 
       <div className={styles.wrapper}>
         <textarea
