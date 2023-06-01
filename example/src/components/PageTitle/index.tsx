@@ -1,6 +1,6 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect, memo, ComponentType } from 'react';
 
-const withPageTitle = (title: string, Component: React.ComponentType) => () => {
+const withPageTitle = (title: string, Component: ComponentType) => () => {
   const Memoized = memo(Component);
 
   useEffect(() => {

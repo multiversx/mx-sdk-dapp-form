@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useGetLoginInfo } from '@multiversx/sdk-dapp/hooks';
 import {
   ExtensionLoginButton,
@@ -6,12 +6,13 @@ import {
   LedgerLoginButton,
   WalletConnectLoginButton
 } from '@multiversx/sdk-dapp/UI';
+
 import { routeNames } from 'routes';
 
 export const UnlockRoute: () => JSX.Element = () => {
   const { isLoggedIn } = useGetLoginInfo();
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isLoggedIn) {
       window.location.href = routeNames.dashboard;
     }
