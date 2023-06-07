@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.7.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/187)] - 2023-06-07
+
 - [Removed UI Customization options](https://github.com/multiversx/mx-sdk-dapp-form/pull/186)
+- [Fixed unusable TokenTickerIcon because of weak type](https://github.com/multiversx/mx-sdk-dapp-form/pull/179)
 
 ## [[0.6.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/182)] - 2023-05-29
 
