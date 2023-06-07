@@ -2,7 +2,6 @@ import React from 'react';
 import { decodePart } from '@multiversx/sdk-dapp/utils/decoders/decodePart';
 
 import globals from 'assets/sass/globals.module.scss';
-import { useUICustomizationContext } from 'contexts/UICustomization';
 
 import styles from './styles.module.scss';
 
@@ -24,12 +23,6 @@ export const Data = ({
   highlight,
   isScCall
 }: DataPropsType) => {
-  const {
-    fields: {
-      data: { label: contextLabel }
-    }
-  } = useUICustomizationContext();
-
   let output = <>{data}</>;
 
   const [encodedScCall, ...remainingDataFields] =
@@ -86,7 +79,7 @@ export const Data = ({
       )}
 
       <div className={styles.data}>
-        <span className={globals.label}>{contextLabel || label}</span>
+        <span className={globals.label}>{label}</span>
 
         <div data-testid='confirmData' className={styles.value}>
           {data ? output : 'N/A'}

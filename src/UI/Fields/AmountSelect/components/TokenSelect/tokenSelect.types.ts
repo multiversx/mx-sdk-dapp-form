@@ -41,5 +41,5 @@ export interface TokenSelectPropsType {
   showTokenPrice?: boolean;
   showBalanceUsdValue?: boolean;
   selectedTokenIconClassName?: string;
-  TokenTickerIcon?: <T>(props: T) => JSX.Element;
+  TokenTickerIcon?: ({ token }: { token?: PartialTokenType }) => JSX.Element;
 }

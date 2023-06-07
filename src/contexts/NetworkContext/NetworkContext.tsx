@@ -1,5 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  useContext,
+  ReactNode,
+  useEffect,
+  useState,
+  createContext
+} from 'react';
 import { NetworkType } from '@multiversx/sdk-dapp/types/network.types';
+
 import {
   delegationContractDataByEnvironment,
   getDelegationDataForChainId
@@ -16,13 +23,11 @@ interface NetworkContextProviderValueType {
 }
 
 interface NetworkContextProviderPropsType {
-  children: React.ReactNode;
+  children: ReactNode;
   value: NetworkContextProviderValueType;
 }
 
-export const NetworkContext = React.createContext(
-  {} as NetworkContextPropsType
-);
+export const NetworkContext = createContext({} as NetworkContextPropsType);
 
 export function NetworkContextProvider({
   children,

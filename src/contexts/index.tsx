@@ -1,4 +1,9 @@
-import React, { JSXElementConstructor, useEffect, useState } from 'react';
+import React, {
+  JSXElementConstructor,
+  useEffect,
+  ReactNode,
+  useState
+} from 'react';
 import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/index';
 import { NetworkType } from '@multiversx/sdk-dapp/types/network.types';
 
@@ -24,20 +29,15 @@ import {
   TokensContextInitializationPropsType,
   TokensContextProvider
 } from './TokensContext';
-import {
-  UICustomizationContextPropsType,
-  UICustomizationContextProvider
-} from './UICustomization';
 
 interface AppInfoContextProviderPropsType {
   accountInfo: AccountContextPropsType;
   formInfo: FormContextBasePropsType;
   tokensInfo?: TokensContextInitializationPropsType;
   networkConfig: FormNetworkConfigType;
-  children: React.ReactNode;
+  children: ReactNode;
   Loader?: JSXElementConstructor<any> | null;
   initGasLimitError?: SendFormContainerPropsType['initGasLimitError'];
-  UICustomization?: UICustomizationContextPropsType;
 }
 export function AppInfoContextProvider({
   accountInfo,
@@ -46,8 +46,7 @@ export function AppInfoContextProvider({
   networkConfig: formNetworkConfig,
   children,
   Loader,
-  initGasLimitError,
-  UICustomization
+  initGasLimitError
 }: AppInfoContextProviderPropsType) {
   const [networkConfig, setNetworkConfig] = useState<NetworkType>();
 
@@ -98,9 +97,7 @@ export function AppInfoContextProvider({
                 <DataContextProvider>
                   <AmountContextProvider>
                     <SendFormContextProvider>
-                      <UICustomizationContextProvider value={UICustomization}>
-                        {children}
-                      </UICustomizationContextProvider>
+                      {children}
                     </SendFormContextProvider>
                   </AmountContextProvider>
                 </DataContextProvider>

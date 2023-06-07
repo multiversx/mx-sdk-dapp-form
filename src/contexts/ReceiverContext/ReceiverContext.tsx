@@ -1,5 +1,6 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, createContext } from 'react';
 import { useFormikContext } from 'formik';
+
 import { ExtendedValuesType } from 'types';
 import { useFormContext } from '../FormContext';
 import { useFetchKnownAddresses, useScamError } from './utils';
@@ -12,16 +13,14 @@ export interface ReceiverContextPropsType {
   scamError?: string;
   fetchingScamAddress: boolean;
   onChangeReceiver: (newReceiver: string, shouldValidate?: boolean) => void;
-  onBlurReceiver: (e: Event) => void;
+  onBlurReceiver: (event: Event) => void;
 }
 
 interface ReceiverContextProviderPropsType {
   children: any;
 }
 
-export const ReceiverContext = React.createContext(
-  {} as ReceiverContextPropsType
-);
+export const ReceiverContext = createContext({} as ReceiverContextPropsType);
 
 const receiverField = 'receiver';
 
