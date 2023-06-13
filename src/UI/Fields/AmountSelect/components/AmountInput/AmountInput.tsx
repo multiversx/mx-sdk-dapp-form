@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState
 } from 'react';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
 
 import BigNumber from 'bignumber.js';
@@ -21,19 +22,19 @@ import {
   useImprovedDebounce
 } from './helpers';
 
-export interface AmountInputPropsType {
+export interface AmountInputPropsType extends WithClassnameType {
   'data-testid'?: string;
   InfoDustComponent?: JSX.Element;
   disabled?: boolean;
   error?: string;
-  handleBlur: (e: FocusEvent<any>) => void;
-  handleChange: (e: ChangeEvent<any>) => void;
+  handleBlur?: (event: FocusEvent<HTMLInputElement>) => void;
+  handleChange: (event: ChangeEvent<HTMLInputElement>) => void;
   isInvalid?: boolean;
   name: string;
   onDebounceChange?: (amount: string) => void;
   onFocus?: () => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
-  placeholder: string;
+  placeholder?: string;
   readonly?: boolean;
   required: boolean;
   usdPrice?: number;
@@ -56,7 +57,8 @@ const AmountComponent = ({
   placeholder,
   required,
   usdPrice,
-  value
+  value,
+  className
 }: AmountInputPropsType) => {
   const ref = useRef(null);
 
@@ -140,9 +142,11 @@ const AmountComponent = ({
   return (
     <div
       ref={ref}
-      className={classNames(styles.amountHolder, {
-        [styles.showUsdValue]: Boolean(usdValue)
-      })}
+      className={classNames(
+        styles.amountHolder,
+        { [styles.showUsdValue]: Boolean(usdValue) },
+        className
+      )}
     >
       <NumericFormat
         allowedDecimalSeparators={['.', ',']}
