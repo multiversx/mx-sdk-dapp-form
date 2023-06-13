@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.7.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/189)] - 2023-06-07
+
+- [Added custom class support for the "AmountInput" component](https://github.com/multiversx/mx-sdk-dapp-form/pull/188)
+
 ## [[0.7.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/187)] - 2023-06-07
 
 - [Removed UI Customization options](https://github.com/multiversx/mx-sdk-dapp-form/pull/186)
