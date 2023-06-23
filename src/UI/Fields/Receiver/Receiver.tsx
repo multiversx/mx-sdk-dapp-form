@@ -8,6 +8,7 @@ import { InputActionMeta, SingleValue } from 'react-select';
 import Select from 'react-select/creatable';
 
 import globals from 'assets/sass/globals.module.scss';
+import { useUsernameAddress } from 'contexts/ReceiverContext/utils/useUsernameAddress';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import { getIsDisabled } from 'helpers';
@@ -49,14 +50,16 @@ export const Receiver = (props: WithClassnameType) => {
   const [option, setOption] = useState<GenericOptionType | null>(
     receiver ? { label: receiver, value: receiver } : null
   );
-  const debouncedReceiver = useDebounce(receiver, ms1000);
+  const debouncedReceiver = useDebounce(inputValue, ms1000);
+  const { usernameAddress, fetchingUsernameAddress } =
+    useUsernameAddress(debouncedReceiver);
 
   const onBlur = () => onBlurReceiver(new Event('blur'));
 
   const onInputChange = useCallback(
     (inputValue: string, meta: InputActionMeta) => {
       if (!['input-blur', 'menu-close'].includes(meta.action)) {
-        changeAndBlurInput(inputValue);
+        // changeAndBlurInput(inputValue);
         setInputValue(inputValue);
         setOption({
           value: inputValue,
@@ -99,6 +102,13 @@ export const Receiver = (props: WithClassnameType) => {
     // pushing the action at the end of the event loop through setTimeout function.
     setTimeout(onBlur);
   }, []);
+
+  useEffect(() => {
+    if (fetchingUsernameAddress) {
+      return;
+    }
+    changeAndBlurInput(usernameAddress);
+  }, [usernameAddress, fetchingUsernameAddress]);
 
   return (
     <div className={classNames(styles.receiver, className)}>

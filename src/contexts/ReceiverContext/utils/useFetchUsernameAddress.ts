@@ -6,12 +6,12 @@ interface UsernameAddressesType {
   [username: string]: string;
 }
 
-export function useUsernameAddresses(apiConfig?: ApiConfigType) {
+export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
   const [usernameAddresses, setUsernameAddresses] =
     useState<UsernameAddressesType>({});
   const [fetching, setFetching] = useState(false);
 
-  const fetchUsernameAddress = async (username: string) => {
+  const fetchUsernameAddres = async (username: string) => {
     const notVerified = !(username in usernameAddresses);
     if (notVerified && !fetching) {
       setFetching(true);
@@ -19,10 +19,13 @@ export function useUsernameAddresses(apiConfig?: ApiConfigType) {
         const data = await getAccountByUsername(username, apiConfig);
         setUsernameAddresses((existing) => ({
           ...existing,
-          ...(data ? { [username]: data.address } : {})
+          [username]: data ? data.address : ''
         }));
       } catch (err) {
-        console.info(`Unable to find ${username} address`, err);
+        setUsernameAddresses((existing) => ({
+          ...existing,
+          [username]: ''
+        }));
       }
       setFetching(false);
     }
@@ -30,7 +33,7 @@ export function useUsernameAddresses(apiConfig?: ApiConfigType) {
 
   return {
     usernameAddresses,
-    fetchUsernameAddress,
+    fetchUsernameAddres,
     fetchingUsernameAddress: fetching
   };
 }

@@ -55,7 +55,7 @@ export const TestWrapper = ({
   );
 
   if (!initValues) {
-    return <Loader dataTestId='loader' />;
+    return <Loader data-testid='loader' />;
   }
 
   const initialValues = formConfigValues;
