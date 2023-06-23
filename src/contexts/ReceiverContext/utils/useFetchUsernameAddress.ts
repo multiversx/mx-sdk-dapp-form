@@ -6,21 +6,26 @@ interface UsernameAddressesType {
   [username: string]: string;
 }
 
-export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
-  const [usernameAddresses, setUsernameAddresses] =
-    useState<UsernameAddressesType>({});
-  const [fetching, setFetching] = useState(false);
+let fetchedAddresses: UsernameAddressesType = {};
 
+export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
+  const [fetching, setFetching] = useState(false);
+  const [usernameAddresses, setUsernameAddresses] =
+    useState<UsernameAddressesType>(fetchedAddresses);
   const fetchUsernameAddres = async (username: string) => {
     const notVerified = !(username in usernameAddresses);
     if (notVerified && !fetching) {
       setFetching(true);
       try {
-        const data = await getAccountByUsername(username, apiConfig);
-        setUsernameAddresses((existing) => ({
-          ...existing,
-          [username]: data ? data.address : ''
-        }));
+        const address = await getAccountByUsername(username, apiConfig);
+        setUsernameAddresses((existing) => {
+          const newAddresses = {
+            ...existing,
+            [username]: address
+          };
+          fetchedAddresses = newAddresses;
+          return newAddresses;
+        });
       } catch (err) {
         setUsernameAddresses((existing) => ({
           ...existing,

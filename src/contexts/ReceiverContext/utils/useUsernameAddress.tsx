@@ -25,6 +25,7 @@ export function useUsernameAddress(username: string) {
 
   return {
     usernameAddress: isValidAddress ? username : usernameAddress,
-    fetchingUsernameAddress
+    fetchingUsernameAddress,
+    usernameAddresses
   };
 }

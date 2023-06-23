@@ -51,8 +51,29 @@ export const Receiver = (props: WithClassnameType) => {
     receiver ? { label: receiver, value: receiver } : null
   );
   const debouncedReceiver = useDebounce(inputValue, ms1000);
-  const { usernameAddress, fetchingUsernameAddress } =
+  const { usernameAddress, fetchingUsernameAddress, usernameAddresses } =
     useUsernameAddress(debouncedReceiver);
+
+  useEffect(() => {
+    console.log(
+      11,
+      usernameAddresses,
+      receiver,
+      Object.values(usernameAddresses).includes(receiver)
+    );
+
+    if (receiver && Object.values(usernameAddresses).includes(receiver)) {
+      const username = Object.keys(usernameAddresses).find(
+        (key) => usernameAddresses[key] === receiver
+      );
+      const newInputValue = username ?? receiver;
+      setInputValue(newInputValue);
+      setOption({
+        value: newInputValue,
+        label: newInputValue
+      });
+    }
+  }, [usernameAddresses, receiver]);
 
   const onBlur = () => onBlurReceiver(new Event('blur'));
 
