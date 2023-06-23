@@ -11,6 +11,7 @@ import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import { getIsDisabled } from 'helpers';
+import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
 import { ValuesEnum } from 'types';
 import { Control } from './components/Control';
 import { DropdownIndicator } from './components/DropdownIndicator';
@@ -24,6 +25,8 @@ import { ValueContainer } from './components/ValueContainer';
 import { filterOptions } from './helpers';
 import { GenericOptionType } from './Receiver.types';
 import styles from './styles.module.scss';
+
+const ms1000 = process.env.NODE_ENV !== 'test' ? 1000 : 1;
 
 export const Receiver = (props: WithClassnameType) => {
   const { className } = props;
@@ -42,17 +45,11 @@ export const Receiver = (props: WithClassnameType) => {
     formInfo: { readonly }
   } = useSendFormContext();
 
-  const [key, setKey] = useState('');
   const [inputValue, setInputValue] = useState(receiver);
   const [option, setOption] = useState<GenericOptionType | null>(
     receiver ? { label: receiver, value: receiver } : null
   );
-
-  const triggerRerenderOnceOnHook = () => {
-    if (addressIsValid(receiver) && !key) {
-      setKey(receiver);
-    }
-  };
+  const debouncedReceiver = useDebounce(receiver, ms1000);
 
   const onBlur = () => onBlurReceiver(new Event('blur'));
 
@@ -73,8 +70,6 @@ export const Receiver = (props: WithClassnameType) => {
     },
     []
   );
-
-  useEffect(triggerRerenderOnceOnHook, [receiver]);
 
   const options: GenericOptionType[] = useMemo(
     () =>

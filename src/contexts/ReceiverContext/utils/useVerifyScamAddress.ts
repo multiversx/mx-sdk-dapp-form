@@ -34,7 +34,7 @@ export function useVerifyScamAddress(apiConfig?: ApiConfigType) {
           ...(data.scamInfo ? { [addressToVerify]: data.scamInfo } : {})
         }));
       } catch (err) {
-        console.error('Unable to verify address', err);
+        console.error('Unable to find address', err);
       }
       setFetching(false);
     }
