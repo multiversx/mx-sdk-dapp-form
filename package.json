@@ -89,12 +89,12 @@
   ],
   "peerDependencies": {
     "@multiversx/sdk-core": "^12.4.0",
-    "@multiversx/sdk-dapp": "^2.13.1",
+    "@multiversx/sdk-dapp": "^2.15.0",
     "react": ">=18",
     "react-dom": ">=18"
   },
   "resolutions": {
-    "@multiversx/sdk-dapp": "^2.13.1",
+    "@multiversx/sdk-dapp": "^2.15.0",
     "@multiversx/sdk-core": "^12.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
