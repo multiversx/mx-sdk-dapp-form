@@ -1,4 +1,4 @@
-import { GAS_LIMIT } from '@multiversx/sdk-dapp/constants';
+import { GAS_LIMIT } from '@multiversx/sdk-dapp/constants/index';
 import { formattedConfigGasPrice } from 'operations/formattedConfigGasPrice';
 import { ValidationErrorMessagesType } from '../types/validation';
 
