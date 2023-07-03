@@ -18,15 +18,17 @@ import {
 } from 'contexts';
 
 import {
-  generateTransaction,
-  getTxType,
   formattedConfigGasPrice,
-  getGasLimit
+  generateTransaction,
+  getGasLimit,
+  getTxType
 } from 'operations';
 import { ExtendedValuesType, TransactionTypeEnum, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
+import { ValidationErrorMessagesType } from 'types/validation';
 import { getInitialErrors } from 'validation';
-import validationSchema from 'validationSchema';
+import { getValidationSchema } from 'validationSchema';
+import { defaultErrorMessages } from '../validation/defaultErrorMessages';
 
 export interface SendFormContainerPropsType {
   initialValues?: ExtendedValuesType;
@@ -47,6 +49,7 @@ export interface SendFormContainerPropsType {
   Loader?: JSXElementConstructor<any> | null;
   shouldGenerateTransactionOnSubmit?: boolean;
   children: ReactNode | JSX.Element;
+  errorMessageTranslations?: Partial<ValidationErrorMessagesType>;
 }
 
 export function SendFormContainer(props: SendFormContainerPropsType) {
@@ -61,6 +64,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     networkConfig,
     enableReinitialize = true,
     Loader,
+    errorMessageTranslations = defaultErrorMessages,
     shouldGenerateTransactionOnSubmit = true
   } = props;
 
@@ -76,7 +80,8 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
 
   const initialErrors = getInitialErrors({
     initialValues,
-    prefilledForm: formInfo.prefilledForm
+    prefilledForm: formInfo.prefilledForm,
+    errorMessages: defaultErrorMessages
   });
 
   async function handleOnSubmit(values: ExtendedValuesType) {
@@ -102,6 +107,13 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     initialValues?.tokenId ||
     networkConfig?.egldLabel ||
     fallbackNetworkConfigurations.mainnet.egldLabel;
+
+  const validationSchema = getValidationSchema({
+    ...errorMessageTranslations,
+    //this will make sure that if we add a key in the future, it will not be breaking for current usages
+    //and will allow users to pass their own translations in pieces, not the whole object
+    ...defaultErrorMessages
+  });
 
   const data = initialValues?.data ?? '';
 

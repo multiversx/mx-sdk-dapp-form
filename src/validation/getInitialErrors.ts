@@ -1,21 +1,24 @@
 import { ValuesType } from 'types';
-import validationSchema from '../validationSchema';
+import { ValidationErrorMessagesType } from '../types/validation';
+import { getValidationSchema } from '../validationSchema';
 
 interface GetInitialErrorsType {
   prefilledForm: boolean;
   initialValues?: ValuesType;
+  errorMessages: ValidationErrorMessagesType;
 }
 
 export const getInitialErrors = ({
   prefilledForm,
-  initialValues
+  initialValues,
+  errorMessages
 }: GetInitialErrorsType) => {
   if (!prefilledForm || !initialValues) {
     return {};
   }
 
   try {
-    validationSchema.validateSync(initialValues);
+    getValidationSchema(errorMessages).validateSync(initialValues);
     return {};
   } catch ({ path, message }) {
     return {
