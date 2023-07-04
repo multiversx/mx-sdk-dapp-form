@@ -24,27 +24,25 @@ import { Option } from './components/Option';
 import { SelectContainer } from './components/SelectContainer';
 import { ValueContainer } from './components/ValueContainer';
 
-import { filterOptions } from './helpers';
+import { filterOptions, useReceiverError } from './helpers';
 import { GenericOptionType } from './Receiver.types';
 import styles from './styles.module.scss';
 
 const ms1000 = process.env.NODE_ENV !== 'test' ? 1000 : 1;
-
-console.log(11);
 
 export const Receiver = (props: WithClassnameType) => {
   const { className } = props;
 
   const { setFieldValue } = useFormikContext<ExtendedValuesType>();
 
+  const { isInvalid, receiverErrorDataTestId, error } = useReceiverError();
+
   const {
     receiverInfo: {
       scamError,
       fetchingScamAddress,
       knownAddresses,
-      receiverError,
       receiver,
-      isReceiverInvalid,
       onBlurReceiver,
       onChangeReceiver
     },
@@ -52,6 +50,7 @@ export const Receiver = (props: WithClassnameType) => {
   } = useSendFormContext();
 
   const [inputValue, setInputValue] = useState(receiver);
+  const [isFocued, setIsFocused] = useState(false);
   const [option, setOption] = useState<GenericOptionType | null>(
     receiver ? { label: receiver, value: receiver } : null
   );
@@ -66,7 +65,6 @@ export const Receiver = (props: WithClassnameType) => {
       label: value
     });
     setFieldValue(ValuesEnum.receiverUsername, value);
-    console.log('Setting all values', value);
   }, []);
 
   useEffect(() => {
@@ -79,14 +77,19 @@ export const Receiver = (props: WithClassnameType) => {
     }
   }, [usernameAddresses, receiver]);
 
-  const onBlur = () => onBlurReceiver(new Event('blur'));
+  const handleBlur = () => {
+    onBlurReceiver(new Event('blur'));
+  };
+
+  const onBlur = () => {
+    handleBlur();
+    setIsFocused(false);
+  };
 
   const onInputChange = useCallback(
     (inputValue: string, meta: InputActionMeta) => {
       if (!['input-blur', 'menu-close'].includes(meta.action)) {
         // changeAndBlurInput(inputValue);
-        console.log('ASD', inputValue);
-
         setAllValues(inputValue);
 
         if (!inputValue) {
@@ -118,21 +121,25 @@ export const Receiver = (props: WithClassnameType) => {
     }
   };
 
+  const onFocus = () => setIsFocused(true);
+
   const changeAndBlurInput = useCallback((value: string) => {
     onChangeReceiver(value ? value.trim() : '');
-    console.log({ value });
 
     // Trigger validation after blur, by instantiating a new Event class and
     // pushing the action at the end of the event loop through setTimeout function.
-    setTimeout(onBlur);
+    setTimeout(handleBlur);
   }, []);
 
   useEffect(() => {
-    if (fetchingUsernameAddress) {
+    if (fetchingUsernameAddress || !inputValue) {
       return;
     }
+
     changeAndBlurInput(usernameAddress);
-  }, [usernameAddress, fetchingUsernameAddress]);
+  }, [usernameAddress, fetchingUsernameAddress, inputValue]);
+
+  const showErrors = isInvalid && !isFocued && !fetchingScamAddress;
 
   return (
     <div className={classNames(styles.receiver, className)}>
@@ -156,11 +163,12 @@ export const Receiver = (props: WithClassnameType) => {
         noOptionsMessage={() => null}
         onChange={onChange}
         onBlur={onBlur}
+        onFocus={onFocus}
         isLoading={knownAddresses === null}
         isMulti={false}
         inputValue={inputValue}
         className={classNames(styles.receiverSelectContainer, {
-          [styles.invalid]: isReceiverInvalid || scamError
+          [styles.invalid]: showErrors || scamError
         })}
         components={{
           Menu,
@@ -178,9 +186,9 @@ export const Receiver = (props: WithClassnameType) => {
         }}
       />
 
-      {isReceiverInvalid && (
-        <div data-testid='receiverError' className={globals.error}>
-          {receiverError}
+      {showErrors && (
+        <div data-testid={receiverErrorDataTestId} className={globals.error}>
+          {error}
         </div>
       )}
 

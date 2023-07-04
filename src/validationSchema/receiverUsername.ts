@@ -8,9 +8,10 @@ const validUsername = string().test(
   function checkUsername(value) {
     const { receiver } = this.parent as ExtendedValuesType;
 
-    const userIntendsToUseValidAddress = receiver.startsWith('erd1');
+    const userIntendsToUseValidAddress = receiver?.startsWith('erd1');
+    const receiverIsEmpty = !receiver;
 
-    if (userIntendsToUseValidAddress) {
+    if (userIntendsToUseValidAddress || receiverIsEmpty) {
       return true;
     }
 

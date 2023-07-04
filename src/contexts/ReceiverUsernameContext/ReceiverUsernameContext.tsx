@@ -5,6 +5,7 @@ import { ExtendedValuesType } from 'types';
 export interface ReceiverUsernameContextPropsType {
   receiverUsername?: string;
   receiverUsernameError?: string;
+  isReceiverUsernameInvalid: boolean;
 }
 
 interface ReceiverUsernameContextProviderPropsType {
@@ -27,7 +28,8 @@ export function ReceiverUsernameContextProvider({
     <ReceiverUsernameContext.Provider
       value={{
         receiverUsername,
-        receiverUsernameError
+        receiverUsernameError,
+        isReceiverUsernameInvalid: Boolean(receiverUsernameError)
       }}
     >
       {children}
