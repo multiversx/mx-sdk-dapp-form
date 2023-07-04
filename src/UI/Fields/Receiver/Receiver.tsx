@@ -4,16 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import classNames from 'classnames';
+import { useFormikContext } from 'formik';
 import { InputActionMeta, SingleValue } from 'react-select';
 import Select from 'react-select/creatable';
 
 import globals from 'assets/sass/globals.module.scss';
-import { useUsernameAddress } from 'contexts/ReceiverContext/utils/useUsernameAddress';
+import { useUsernameAddress } from 'contexts/ReceiverUsernameContext/utils';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import { getIsDisabled } from 'helpers';
 import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
-import { ValuesEnum } from 'types';
+import { ExtendedValuesType, ValuesEnum } from 'types';
 import { Control } from './components/Control';
 import { DropdownIndicator } from './components/DropdownIndicator';
 import { Input } from './components/Input';
@@ -29,8 +30,12 @@ import styles from './styles.module.scss';
 
 const ms1000 = process.env.NODE_ENV !== 'test' ? 1000 : 1;
 
+console.log(11);
+
 export const Receiver = (props: WithClassnameType) => {
   const { className } = props;
+
+  const { setFieldValue } = useFormikContext<ExtendedValuesType>();
 
   const {
     receiverInfo: {
@@ -54,24 +59,23 @@ export const Receiver = (props: WithClassnameType) => {
   const { usernameAddress, fetchingUsernameAddress, usernameAddresses } =
     useUsernameAddress(debouncedReceiver);
 
-  useEffect(() => {
-    console.log(
-      11,
-      usernameAddresses,
-      receiver,
-      Object.values(usernameAddresses).includes(receiver)
-    );
+  const setAllValues = useCallback((value: string) => {
+    setInputValue(value);
+    setOption({
+      value,
+      label: value
+    });
+    setFieldValue(ValuesEnum.receiverUsername, value);
+    console.log('Setting all values', value);
+  }, []);
 
+  useEffect(() => {
     if (receiver && Object.values(usernameAddresses).includes(receiver)) {
       const username = Object.keys(usernameAddresses).find(
         (key) => usernameAddresses[key] === receiver
       );
       const newInputValue = username ?? receiver;
-      setInputValue(newInputValue);
-      setOption({
-        value: newInputValue,
-        label: newInputValue
-      });
+      setAllValues(newInputValue);
     }
   }, [usernameAddresses, receiver]);
 
@@ -81,11 +85,9 @@ export const Receiver = (props: WithClassnameType) => {
     (inputValue: string, meta: InputActionMeta) => {
       if (!['input-blur', 'menu-close'].includes(meta.action)) {
         // changeAndBlurInput(inputValue);
-        setInputValue(inputValue);
-        setOption({
-          value: inputValue,
-          label: inputValue
-        });
+        console.log('ASD', inputValue);
+
+        setAllValues(inputValue);
 
         if (!inputValue) {
           setOption(null);
@@ -118,6 +120,7 @@ export const Receiver = (props: WithClassnameType) => {
 
   const changeAndBlurInput = useCallback((value: string) => {
     onChangeReceiver(value ? value.trim() : '');
+    console.log({ value });
 
     // Trigger validation after blur, by instantiating a new Event class and
     // pushing the action at the end of the event loop through setTimeout function.

@@ -19,6 +19,8 @@ export type SignTxType = {
 
 export interface TxSignValuesType {
   receiver: string;
+  receiverUsername?: string;
+  senderUsername?: string;
   amount: string;
   tokenId: string;
   gasLimit: string;

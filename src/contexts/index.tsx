@@ -24,6 +24,7 @@ import { FormContextBasePropsType, FormContextProvider } from './FormContext';
 import { GasContextProvider } from './GasContext';
 import { NetworkContextProvider } from './NetworkContext';
 import { ReceiverContextProvider } from './ReceiverContext';
+import { ReceiverUsernameContextProvider } from './ReceiverUsernameContext';
 import { SendFormContextProvider } from './SendFormProviderContext';
 import {
   TokensContextInitializationPropsType,
@@ -93,15 +94,17 @@ export function AppInfoContextProvider({
           <TokensContextProvider value={tokensInfo}>
             {/*This order is intentional, because each context consumes the data of the context above*/}
             <ReceiverContextProvider>
-              <GasContextProvider initGasLimitError={initGasLimitError}>
-                <DataContextProvider>
-                  <AmountContextProvider>
-                    <SendFormContextProvider>
-                      {children}
-                    </SendFormContextProvider>
-                  </AmountContextProvider>
-                </DataContextProvider>
-              </GasContextProvider>
+              <ReceiverUsernameContextProvider>
+                <GasContextProvider initGasLimitError={initGasLimitError}>
+                  <DataContextProvider>
+                    <AmountContextProvider>
+                      <SendFormContextProvider>
+                        {children}
+                      </SendFormContextProvider>
+                    </AmountContextProvider>
+                  </DataContextProvider>
+                </GasContextProvider>
+              </ReceiverUsernameContextProvider>
             </ReceiverContextProvider>
           </TokensContextProvider>
         </FormContextProvider>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ApiConfigType } from 'apiCalls';
 import { getAccountByUsername } from 'apiCalls/account';
 
-interface UsernameAddressesType {
+export interface UsernameAddressesType {
   [username: string]: string;
 }
 

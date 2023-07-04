@@ -9,11 +9,13 @@ import gasPrice from './gasPrice';
 import nftAmount from './nftAmount';
 import nftGasLimit from './nftGasLimit';
 import receiver from './receiver';
+import receiverUsername from './receiverUsername';
 
 export const validationSchema = object().shape({
   receiver,
   tokenId: string().required('Required'),
   gasPrice,
+  receiverUsername,
   data,
   amount: string().when(
     ['txType'],

@@ -8,14 +8,22 @@ export enum ValuesEnum {
   data = 'data',
   tokenId = 'tokenId',
   amount = 'amount',
-  gasLimit = 'gasLimit'
+  gasLimit = 'gasLimit',
+  receiverUsername = 'receiverUsername',
+  senderUsername = 'senderUsername'
 }
 
 export type ValueKeyType = keyof typeof ValuesEnum;
 
-export type ValuesType = {
+type MandatoryValuesType = {
   [key in ValueKeyType]: string;
 };
+
+export interface ValuesType
+  extends Omit<MandatoryValuesType, 'receiverUsername' | 'senderUsername'> {
+  receiverUsername?: string;
+  senderUsername?: string;
+}
 
 export interface ExtendedValuesType extends ValuesType {
   // validationSchema

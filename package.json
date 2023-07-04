@@ -88,7 +88,7 @@
     "transaction"
   ],
   "peerDependencies": {
-    "@multiversx/sdk-core": "12.4.2",
+    "@multiversx/sdk-core": "^12.4.2",
     "@multiversx/sdk-dapp": "^2.15.0",
     "react": ">=18",
     "react-dom": ">=18"
@@ -107,6 +107,7 @@
     "react-select": "5.4.0"
   },
   "dependencies": {
+    "@multiversx/sdk-core": "12.4.2",
     "anchorme": "2.1.2",
     "axios": "0.24.0",
     "bech32": "2.0.0",

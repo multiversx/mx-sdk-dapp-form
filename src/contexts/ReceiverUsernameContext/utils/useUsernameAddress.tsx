@@ -1,9 +1,20 @@
 import { useEffect } from 'react';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils';
 import { useAccountContext } from '../../AccountContext';
-import { useFetchUsernameAddress } from './useFetchUsernameAddress';
+import {
+  UsernameAddressesType,
+  useFetchUsernameAddress
+} from './useFetchUsernameAddress';
 
-export function useUsernameAddress(username: string) {
+export interface UseUsernameAddressReturnType {
+  usernameAddress: string;
+  fetchingUsernameAddress: boolean;
+  usernameAddresses: UsernameAddressesType;
+}
+
+export const useUsernameAddress = (
+  username: string
+): UseUsernameAddressReturnType => {
   const account = useAccountContext();
 
   const { fetchUsernameAddres, fetchingUsernameAddress, usernameAddresses } =
@@ -28,4 +39,4 @@ export function useUsernameAddress(username: string) {
     fetchingUsernameAddress,
     usernameAddresses
   };
-}
+};
