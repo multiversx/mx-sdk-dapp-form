@@ -14,10 +14,10 @@ export const defaultErrorMessages: ValidationErrorMessagesType = {
   sameAsOwnerAddress: 'Same as owner address',
   receiverNotAllowed: 'Receiver not allowed',
   tooLowGasLimit: (gasLimit = GAS_LIMIT) =>
-    `Gas limit cannot be lower than ${gasLimit}`,
+    `Gas limit must be greater or equal to ${gasLimit}`,
   tooHighGasLimit: (gasLimit = GAS_LIMIT) =>
-    `Gas limit cannot be higher than ${gasLimit}`,
+    `Gas limit must be lower than ${gasLimit}`,
   tooLowGasPrice: (gasPrice = formattedConfigGasPrice) =>
-    `Gas price cannot be higher than ${gasPrice}`,
+    `Gas price must be greater or equal to ${gasPrice}`,
   maxDecimalsAllowed: (decimals) => `Maximum ${decimals} decimals allowed`
 };
