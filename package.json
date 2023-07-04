@@ -107,7 +107,6 @@
     "react-select": "5.4.0"
   },
   "dependencies": {
-    "@multiversx/sdk-dapp-form": "0.3.9",
     "anchorme": "2.1.2",
     "axios": "0.24.0",
     "bech32": "2.0.0",
