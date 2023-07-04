@@ -1,6 +1,7 @@
 import { act, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { MAX_GAS_LIMIT } from 'constants/index';
+import { defaultErrorMessages } from 'validation/defaultErrorMessages';
 import { fillInForm, finalFee, setResponse } from './helpers';
 
 describe('SendForm Smart Contract', () => {
@@ -36,9 +37,11 @@ describe('SendForm Smart Contract', () => {
     });
 
     // first server response fetches a gasLimit value over maxGasLimit
-    const req = await render.findByText(/^Must be lower than/);
+    const req = await render.findByText(/must be lower than/);
     await waitFor(() => {
-      expect(req.innerHTML).toBe(`Must be lower than ${MAX_GAS_LIMIT}`);
+      expect(req.innerHTML).toBe(
+        defaultErrorMessages.tooHighGasLimit(MAX_GAS_LIMIT)
+      );
     });
     // modify data field to get a new gasLimit value from the server
     let dataInput = render.getByTestId('data') as HTMLInputElement;
