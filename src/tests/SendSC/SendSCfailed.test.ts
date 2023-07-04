@@ -38,7 +38,6 @@ describe('SendForm Smart Contract', () => {
 
     // first server response fetches a gasLimit value over maxGasLimit
     const req = await render.findByText(/must be lower than/);
-    render.debug();
     await waitFor(() => {
       expect(req.innerHTML).toBe(
         defaultErrorMessages.tooHighGasLimit(MAX_GAS_LIMIT)
