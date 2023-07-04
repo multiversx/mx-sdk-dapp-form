@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.7.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/191)] - 2023-07-04
+
+- [Add ability to pass in custom validation messages for internationalization](https://github.com/multiversx/mx-sdk-dapp-form/pull/190)
+
 ## [[0.7.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/189)] - 2023-06-07
 
 - [Added custom class support for the "AmountInput" component](https://github.com/multiversx/mx-sdk-dapp-form/pull/188)

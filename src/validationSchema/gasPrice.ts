@@ -4,34 +4,39 @@ import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFlo
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { formattedConfigGasPrice } from 'operations/formattedConfigGasPrice';
+import { ValidationErrorMessagesType } from 'types/validation';
 
-const required = string().required('Required');
+export const gasPrice = (errorMessages: ValidationErrorMessagesType) => {
+  const required = string().required('Required');
 
-const decimalsValidation = string().test(
-  'decimalFormat',
-  `Maximum ${DECIMALS} decimals allowed`,
-  (value) => maxDecimals(String(value))
-);
-const minimum = string().test(
-  'minimum',
-  `Must be higher than ${formattedConfigGasPrice}`,
-  (value) => {
-    const bNgasPrice = new BigNumber(String(value));
-    const bNformattedConfigGasPrice = new BigNumber(formattedConfigGasPrice);
-    const result =
-      value && bNgasPrice.isGreaterThanOrEqualTo(bNformattedConfigGasPrice);
-    return Boolean(result);
-  }
-);
-const validNumber = string().test('isValidNumber', 'Invalid number', (value) =>
-  Boolean(value && stringIsFloat(value))
-);
+  const decimalsValidation = string().test(
+    'decimalFormat',
+    errorMessages.maxDecimalsAllowed(DECIMALS),
+    (value) => maxDecimals(String(value))
+  );
+  const minimum = string().test(
+    'minimum',
+    errorMessages.tooLowGasPrice(formattedConfigGasPrice),
+    (value) => {
+      const bNgasPrice = new BigNumber(String(value));
+      const bNformattedConfigGasPrice = new BigNumber(formattedConfigGasPrice);
+      const result =
+        value && bNgasPrice.isGreaterThanOrEqualTo(bNformattedConfigGasPrice);
+      return Boolean(result);
+    }
+  );
+  const validNumber = string().test(
+    'isValidNumber',
+    errorMessages.invalidNumber,
+    (value) => Boolean(value && stringIsFloat(value))
+  );
 
-const validations = [required, decimalsValidation, minimum, validNumber];
+  const validations = [required, decimalsValidation, minimum, validNumber];
 
-export const gasPrice = validations.reduce(
-  (previousValue, currentValue) => previousValue.concat(currentValue),
-  string()
-);
+  return validations.reduce(
+    (previousValue, currentValue) => previousValue.concat(currentValue),
+    string()
+  );
+};
 
 export default gasPrice;
