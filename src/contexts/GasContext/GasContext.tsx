@@ -12,8 +12,8 @@ import {
   GAS_PER_DATA_BYTE,
   GAS_PRICE_MODIFIER
 } from '@multiversx/sdk-dapp/constants/index';
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils';
 import { calculateFeeLimit } from '@multiversx/sdk-dapp/utils/operations/calculateFeeLimit';
+import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
 import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';

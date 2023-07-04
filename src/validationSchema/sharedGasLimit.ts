@@ -2,13 +2,14 @@ import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsI
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { MAX_GAS_LIMIT } from 'constants/index';
+import { ValidationErrorMessagesType } from 'types/validation';
 
-export const sharedGaslimit = () => {
+export const sharedGasLimit = (errorMessages: ValidationErrorMessagesType) => {
   const required = string().required('Required');
 
   const validInteger = string().test(
     'isValidInteger',
-    'Invalid number',
+    errorMessages.invalidNumber,
     (value) => {
       const result = value && stringIsInteger(value);
       return Boolean(result);
@@ -16,7 +17,7 @@ export const sharedGaslimit = () => {
   );
   const maximum = string().test(
     'maximum',
-    `Must be lower than ${MAX_GAS_LIMIT}`,
+    errorMessages.tooHighGasLimit(MAX_GAS_LIMIT),
     (value) => {
       const bNgasLimit = new BigNumber(String(value));
       const bNmaxGasLimit = new BigNumber(MAX_GAS_LIMIT);
@@ -25,9 +26,5 @@ export const sharedGaslimit = () => {
     }
   );
 
-  const validations = [required, validInteger, maximum];
-
-  return validations;
+  return [required, validInteger, maximum];
 };
-
-export default sharedGaslimit;
