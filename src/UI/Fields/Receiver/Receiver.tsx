@@ -35,8 +35,6 @@ export const Receiver = (props: WithClassnameType) => {
 
   const { setFieldValue } = useFormikContext<ExtendedValuesType>();
 
-  const { isInvalid, receiverErrorDataTestId, error } = useReceiverError();
-
   const {
     receiverInfo: {
       scamError,
@@ -50,13 +48,14 @@ export const Receiver = (props: WithClassnameType) => {
   } = useSendFormContext();
 
   const [inputValue, setInputValue] = useState(receiver);
-  const [isFocued, setIsFocused] = useState(false);
   const [option, setOption] = useState<GenericOptionType | null>(
     receiver ? { label: receiver, value: receiver } : null
   );
-  const debouncedReceiver = useDebounce(inputValue, ms1000);
+  const debouncedUsername = useDebounce(inputValue, ms1000);
+
   const { usernameAddress, fetchingUsernameAddress, usernameAddresses } =
-    useUsernameAddress(debouncedReceiver);
+    useUsernameAddress(debouncedUsername);
+  const { isInvalid, receiverErrorDataTestId, error } = useReceiverError();
 
   const setAllValues = useCallback((value: string) => {
     setInputValue(value);
@@ -77,13 +76,8 @@ export const Receiver = (props: WithClassnameType) => {
     }
   }, [usernameAddresses, receiver]);
 
-  const handleBlur = () => {
-    onBlurReceiver(new Event('blur'));
-  };
-
   const onBlur = () => {
-    handleBlur();
-    setIsFocused(false);
+    onBlurReceiver(new Event('blur'));
   };
 
   const onInputChange = useCallback(
@@ -121,14 +115,12 @@ export const Receiver = (props: WithClassnameType) => {
     }
   };
 
-  const onFocus = () => setIsFocused(true);
-
   const changeAndBlurInput = useCallback((value: string) => {
     onChangeReceiver(value ? value.trim() : '');
 
     // Trigger validation after blur, by instantiating a new Event class and
     // pushing the action at the end of the event loop through setTimeout function.
-    setTimeout(handleBlur);
+    setTimeout(onBlur);
   }, []);
 
   useEffect(() => {
@@ -139,7 +131,15 @@ export const Receiver = (props: WithClassnameType) => {
     changeAndBlurInput(usernameAddress);
   }, [usernameAddress, fetchingUsernameAddress, inputValue]);
 
-  const showErrors = isInvalid && !isFocued && !fetchingScamAddress;
+  const foundReceiver = usernameAddresses[inputValue];
+
+  const dataFetchedForUsername =
+    inputValue?.startsWith('erd1') || inputValue in usernameAddresses;
+
+  const showErrors =
+    !foundReceiver && !addressIsValid(inputValue)
+      ? isInvalid && dataFetchedForUsername
+      : false;
 
   return (
     <div className={classNames(styles.receiver, className)}>
@@ -163,8 +163,7 @@ export const Receiver = (props: WithClassnameType) => {
         noOptionsMessage={() => null}
         onChange={onChange}
         onBlur={onBlur}
-        onFocus={onFocus}
-        isLoading={knownAddresses === null}
+        isLoading={fetchingUsernameAddress || knownAddresses === null}
         isMulti={false}
         inputValue={inputValue}
         className={classNames(styles.receiverSelectContainer, {
@@ -186,11 +185,17 @@ export const Receiver = (props: WithClassnameType) => {
         }}
       />
 
-      {showErrors && (
-        <div data-testid={receiverErrorDataTestId} className={globals.error}>
-          {error}
-        </div>
+      {foundReceiver && (
+        <span data-testid='receiverUsernameAddress'>{foundReceiver}</span>
       )}
+
+      <>
+        {showErrors && (
+          <div data-testid={receiverErrorDataTestId} className={globals.error}>
+            {error}
+          </div>
+        )}
+      </>
 
       {scamError && (
         <div

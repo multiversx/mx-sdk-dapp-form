@@ -9,7 +9,7 @@ const validUsername = string().test(
     const { receiver } = this.parent as ExtendedValuesType;
 
     const userIntendsToUseValidAddress = receiver?.startsWith('erd1');
-    const receiverIsEmpty = !receiver;
+    const receiverIsEmpty = !value && !receiver;
 
     if (userIntendsToUseValidAddress || receiverIsEmpty) {
       return true;

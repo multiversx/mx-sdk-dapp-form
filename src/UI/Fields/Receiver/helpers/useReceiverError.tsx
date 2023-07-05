@@ -5,7 +5,11 @@ import { ExtendedValuesType } from 'types';
 export const useReceiverError = () => {
   const {
     receiverInfo: { receiverError, isReceiverInvalid },
-    receiverUsernameInfo: { receiverUsernameError, isReceiverUsernameInvalid }
+    receiverUsernameInfo: {
+      receiverUsernameError,
+      isReceiverUsernameInvalid,
+      receiverUsername
+    }
   } = useSendFormContext();
   const {
     touched: { receiver: receiverTouched }
@@ -13,6 +17,14 @@ export const useReceiverError = () => {
 
   const isInvalid =
     (isReceiverInvalid && receiverTouched) || isReceiverUsernameInvalid;
+
+  if (receiverUsername?.startsWith('erd1')) {
+    return {
+      isInvalid: isReceiverInvalid,
+      receiverErrorDataTestId: 'receiverError',
+      error: receiverError
+    };
+  }
 
   const receiverErrorDataTestId = isReceiverUsernameInvalid
     ? 'receiverUsernameError'
