@@ -1,6 +1,5 @@
 import { waitFor } from '@testing-library/react';
 import { MAX_GAS_LIMIT, TOKEN_GAS_LIMIT } from 'constants/index';
-import { defaultErrorMessages } from 'validation/defaultErrorMessages';
 
 import { beforAllTokens, setupEsdtServer, useGasLimitInput } from './helpers';
 
@@ -16,7 +15,7 @@ describe('Tokens gasLimit', () => {
 
     let gasLimitError = await methods.findByTestId('gasLimitError');
     expect(gasLimitError.textContent).toBe(
-      defaultErrorMessages.tooLowGasLimit(TOKEN_GAS_LIMIT)
+      `Gas limit must be greater or equal to ${TOKEN_GAS_LIMIT}`
     );
 
     await setInput('5000000000');
@@ -24,7 +23,7 @@ describe('Tokens gasLimit', () => {
 
     await waitFor(() => {
       expect(gasLimitError.textContent).toBe(
-        defaultErrorMessages.tooHighGasLimit(MAX_GAS_LIMIT)
+        `Gas limit must be lower than ${MAX_GAS_LIMIT}`
       );
     });
   });

@@ -39,6 +39,7 @@ export interface AmountInputPropsType extends WithClassnameType {
   required: boolean;
   usdPrice?: number;
   value: string;
+  allowNegative?: boolean;
 }
 
 const fiveHundredMs = 500;
@@ -58,7 +59,8 @@ const AmountComponent = ({
   required,
   usdPrice,
   value,
-  className
+  className,
+  allowNegative = true
 }: AmountInputPropsType) => {
   const ref = useRef(null);
 
@@ -171,6 +173,7 @@ const AmountComponent = ({
         thousandsGroupStyle='thousand'
         value={inputValue}
         valueIsNumericString
+        allowNegative={allowNegative}
       />
 
       {usdValue && (
