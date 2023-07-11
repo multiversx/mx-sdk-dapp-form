@@ -1,11 +1,12 @@
 import { getTxType } from 'operations';
 import { ExtendedValuesType } from 'types';
-import validationSchema from 'validationSchema';
+import { defaultErrorMessages } from 'validation/defaultErrorMessages';
+import { getValidationSchema } from 'validationSchema';
 import {
   extractTokenData,
   fetchNft,
-  getDataTokenId,
   getDataToken,
+  getDataTokenId,
   getValues
 } from './helpers';
 
@@ -74,7 +75,7 @@ export const validateTransaction = async ({
       tokens: tokenData ? [tokenData] : [],
       ledger
     };
-    validationSchema.validateSync(allValues);
+    getValidationSchema(defaultErrorMessages).validateSync(allValues);
   } catch ({ path, message }) {
     errors = {
       [String(path)]: String(message)

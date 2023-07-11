@@ -1,5 +1,4 @@
-import { getScamFlag } from '@multiversx/sdk-dapp/utils';
-
+import { getScamFlag } from '@multiversx/sdk-dapp/utils/transactions/transactionInfoHelpers/getScamFlag';
 import { ProcessScamNftType } from './types';
 
 export const processScamNft = ({
