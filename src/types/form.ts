@@ -74,6 +74,7 @@ export interface ValidationSchemaType {
 
 export interface FormConfigType {
   receiver: string;
+  receiverUsername?: string;
   amount: string;
   tokenId?: string;
   gasLimit: string;
