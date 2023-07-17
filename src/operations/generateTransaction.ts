@@ -12,7 +12,16 @@ interface GenerateTransactionPropsType {
 
 export async function generateTransaction(props: GenerateTransactionPropsType) {
   const { address, balance, chainId, nonce, values } = props;
-  const { amount, receiver, data, gasLimit, gasPrice, nft } = values;
+  const {
+    amount,
+    receiver,
+    data,
+    gasLimit,
+    gasPrice,
+    nft,
+    receiverUsername,
+    senderUsername
+  } = values;
   const transactionReceiver = Boolean(nft) ? address : receiver;
 
   try {
@@ -23,6 +32,8 @@ export async function generateTransaction(props: GenerateTransactionPropsType) {
       gasPrice: parseAmount(gasPrice),
       data: data.trim(),
       receiver: transactionReceiver,
+      receiverUsername,
+      senderUsername,
       sender: address,
       nonce,
       chainId
