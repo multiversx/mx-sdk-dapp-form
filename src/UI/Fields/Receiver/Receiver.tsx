@@ -9,7 +9,7 @@ import { InputActionMeta, SingleValue } from 'react-select';
 import Select from 'react-select/creatable';
 
 import globals from 'assets/sass/globals.module.scss';
-import { useUsernameAddress } from 'contexts/ReceiverUsernameContext/utils';
+import { useUsernameAccount } from 'contexts/ReceiverUsernameContext/utils';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import { getIsDisabled } from 'helpers';
@@ -53,28 +53,37 @@ export const Receiver = (props: WithClassnameType) => {
   );
   const debouncedUsername = useDebounce(inputValue, ms1000);
 
-  const { usernameAddress, fetchingUsernameAddress, usernameAddresses } =
-    useUsernameAddress(debouncedUsername);
+  const { usernameAddress, fetchingUsernameAccount, usernameAccounts } =
+    useUsernameAccount(debouncedUsername);
   const { isInvalid, receiverErrorDataTestId, error } = useReceiverError();
 
-  const setAllValues = useCallback((value: string) => {
-    setInputValue(value);
-    setOption({
-      value,
-      label: value
-    });
-    setFieldValue(ValuesEnum.receiverUsername, value);
-  }, []);
+  const setAllValues = useCallback(
+    (value: string) => {
+      setInputValue(value);
+      setOption({
+        value,
+        label: value
+      });
+
+      setFieldValue(
+        ValuesEnum.receiverUsername,
+        usernameAccounts[value]?.username
+      );
+    },
+    [usernameAccounts]
+  );
 
   useEffect(() => {
-    if (receiver && Object.values(usernameAddresses).includes(receiver)) {
-      const username = Object.keys(usernameAddresses).find(
-        (key) => usernameAddresses[key] === receiver
-      );
-      const newInputValue = username ?? receiver;
-      setAllValues(newInputValue);
-    }
-  }, [usernameAddresses, receiver]);
+    const fetchedUsernameAddress = Object.values(usernameAccounts).find(
+      (account) => receiver && account?.address === receiver
+    );
+
+    const newInputValue = fetchedUsernameAddress
+      ? fetchedUsernameAddress.address
+      : receiver;
+
+    setAllValues(newInputValue);
+  }, [usernameAccounts, receiver]);
 
   const onBlur = () => {
     onBlurReceiver(new Event('blur'));
@@ -124,17 +133,17 @@ export const Receiver = (props: WithClassnameType) => {
   }, []);
 
   useEffect(() => {
-    if (fetchingUsernameAddress || !inputValue) {
+    if (fetchingUsernameAccount || !inputValue) {
       return;
     }
 
     changeAndBlurInput(usernameAddress);
-  }, [usernameAddress, fetchingUsernameAddress, inputValue]);
+  }, [usernameAddress, fetchingUsernameAccount, inputValue]);
 
-  const foundReceiver = usernameAddresses[inputValue];
+  const foundReceiver = usernameAccounts[inputValue]?.address;
 
   const dataFetchedForUsername =
-    inputValue?.startsWith('erd1') || inputValue in usernameAddresses;
+    inputValue?.startsWith('erd1') || inputValue in usernameAccounts;
 
   const showErrors =
     !foundReceiver && !addressIsValid(inputValue)
@@ -163,7 +172,7 @@ export const Receiver = (props: WithClassnameType) => {
         noOptionsMessage={() => null}
         onChange={onChange}
         onBlur={onBlur}
-        isLoading={fetchingUsernameAddress || knownAddresses === null}
+        isLoading={fetchingUsernameAccount || knownAddresses === null}
         isMulti={false}
         inputValue={inputValue}
         className={classNames(styles.receiverSelectContainer, {

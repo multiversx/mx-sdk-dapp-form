@@ -2,26 +2,33 @@ import { useState } from 'react';
 import { ApiConfigType } from 'apiCalls';
 import { getAccountByUsername } from 'apiCalls/account';
 
-export interface UsernameAddressesType {
-  [username: string]: string;
+export interface UsernameAccountsType {
+  [username: string]: {
+    address: string;
+    /**
+     * **username**: Might differ from the original username search string.
+     */
+    username: string;
+  } | null;
 }
 
-let fetchedAddresses: UsernameAddressesType = {};
+let fetchedAddresses: UsernameAccountsType = {};
 
 export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
   const [fetching, setFetching] = useState(false);
-  const [usernameAddresses, setUsernameAddresses] =
-    useState<UsernameAddressesType>(fetchedAddresses);
-  const fetchUsernameAddres = async (username: string) => {
-    const notVerified = !(username in usernameAddresses);
+  const [usernameAccounts, setUsernameAddresses] =
+    useState<UsernameAccountsType>(fetchedAddresses);
+  const fetchUsernameAccount = async (username: string) => {
+    const notVerified = !(username in usernameAccounts);
     if (notVerified && !fetching) {
       setFetching(true);
       try {
-        const address = await getAccountByUsername(username, apiConfig);
-        setUsernameAddresses((existing) => {
+        const account = await getAccountByUsername(username, apiConfig);
+
+        return setUsernameAddresses((existing) => {
           const newAddresses = {
             ...existing,
-            [username]: address
+            [username]: account
           };
           fetchedAddresses = newAddresses;
           return newAddresses;
@@ -29,7 +36,7 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
       } catch (err) {
         setUsernameAddresses((existing) => ({
           ...existing,
-          [username]: ''
+          [username]: null
         }));
       }
       setFetching(false);
@@ -37,8 +44,8 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
   };
 
   return {
-    usernameAddresses,
-    fetchUsernameAddres,
-    fetchingUsernameAddress: fetching
+    usernameAccounts,
+    fetchUsernameAccount,
+    fetchingUsernameAccount: fetching
   };
 }

@@ -2,22 +2,23 @@ import { useEffect } from 'react';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils';
 import { useAccountContext } from '../../AccountContext';
 import {
-  UsernameAddressesType,
+  UsernameAccountsType,
   useFetchUsernameAddress
 } from './useFetchUsernameAddress';
 
 export interface UseUsernameAddressReturnType {
   usernameAddress: string;
-  fetchingUsernameAddress: boolean;
-  usernameAddresses: UsernameAddressesType;
+  usernameApiUsername?: string;
+  fetchingUsernameAccount: boolean;
+  usernameAccounts: UsernameAccountsType;
 }
 
-export const useUsernameAddress = (
+export const useUsernameAccount = (
   username: string
 ): UseUsernameAddressReturnType => {
   const account = useAccountContext();
 
-  const { fetchUsernameAddres, fetchingUsernameAddress, usernameAddresses } =
+  const { fetchUsernameAccount, fetchingUsernameAccount, usernameAccounts } =
     useFetchUsernameAddress();
 
   const isOwnUsername = username && username === account.username;
@@ -27,16 +28,21 @@ export const useUsernameAddress = (
     if (!username || isOwnUsername || isValidAddress) {
       return;
     }
-    fetchUsernameAddres(username);
+    fetchUsernameAccount(username);
   }, [username, isOwnUsername, isValidAddress]);
 
   const usernameAddress = isOwnUsername
     ? account.address
-    : usernameAddresses[username];
+    : usernameAccounts[username]?.address ?? '';
+
+  const usernameApiUsername = isOwnUsername
+    ? account.username
+    : usernameAccounts[username]?.username;
 
   return {
     usernameAddress: isValidAddress ? username : usernameAddress,
-    fetchingUsernameAddress,
-    usernameAddresses
+    usernameApiUsername,
+    fetchingUsernameAccount,
+    usernameAccounts
   };
 };
