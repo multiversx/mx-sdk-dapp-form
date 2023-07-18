@@ -53,34 +53,37 @@ export const Receiver = (props: WithClassnameType) => {
   );
   const debouncedUsername = useDebounce(inputValue, ms1000);
 
-  const { usernameAddress, fetchingUsernameAccount, usernameAccounts } =
+  const { fetchingUsernameAccount, usernameAccounts } =
     useUsernameAccount(debouncedUsername);
   const { isInvalid, receiverErrorDataTestId, error } = useReceiverError();
 
-  const setAllValues = useCallback(
-    (value: string) => {
-      setInputValue(value);
-      setOption({
-        value,
-        label: value
-      });
-
-      setFieldValue(
-        ValuesEnum.receiverUsername,
-        usernameAccounts[value]?.username
-      );
-    },
-    [usernameAccounts]
-  );
-
-  useEffect(() => {
-    const fetchedUsernameAddress = Object.values(usernameAccounts).find(
-      (account) => receiver && account?.address === receiver
+  const setAllValues = (value: string) => {
+    setInputValue(value);
+    setOption({
+      value,
+      label: value
+    });
+    setFieldValue(
+      ValuesEnum.receiver,
+      usernameAccounts[value]?.address ?? value
     );
 
-    const newInputValue = fetchedUsernameAddress
-      ? fetchedUsernameAddress.address
-      : receiver;
+    setFieldValue(
+      ValuesEnum.receiverUsername,
+      usernameAccounts[value]?.username
+    );
+  };
+
+  useEffect(() => {
+    if (!receiver) {
+      return;
+    }
+
+    const username = Object.keys(usernameAccounts).find(
+      (key) => usernameAccounts[key]?.address === receiver
+    );
+
+    const newInputValue = username ? username : receiver;
 
     setAllValues(newInputValue);
   }, [usernameAccounts, receiver]);
@@ -131,14 +134,6 @@ export const Receiver = (props: WithClassnameType) => {
     // pushing the action at the end of the event loop through setTimeout function.
     setTimeout(onBlur);
   }, []);
-
-  useEffect(() => {
-    if (fetchingUsernameAccount || !inputValue) {
-      return;
-    }
-
-    changeAndBlurInput(usernameAddress);
-  }, [usernameAddress, fetchingUsernameAccount, inputValue]);
 
   const foundReceiver = usernameAccounts[inputValue]?.address;
 
