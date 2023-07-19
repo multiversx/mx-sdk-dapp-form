@@ -7,21 +7,27 @@ export async function getAccountByUsername(
   username: string,
   apiConfig?: ApiConfigType
 ) {
-  const config = apiConfig || (await getApiConfig());
-  const { request, data } = await axios.get<AccountContextPropsType>(
-    `usernames/${username}`,
-    config
-  );
+  try {
+    const config = apiConfig || (await getApiConfig());
+    const { request, data } = await axios.get<AccountContextPropsType>(
+      `usernames/${username}`,
+      config
+    );
 
-  // "https://api.multiversx.com/accounts/erd1..."
-  const [, address] = request?.responseURL?.split('/accounts/') ?? [];
+    // "https://api.multiversx.com/accounts/erd1..."
+    const [, redirectAddress] = request?.responseURL?.split('/accounts/') ?? [];
 
-  if (!addressIsValid(address)) {
+    const address = redirectAddress ?? data.address;
+
+    if (!addressIsValid(address)) {
+      return null;
+    }
+
+    return {
+      address,
+      username: String(data.username)
+    };
+  } catch (error) {
     return null;
   }
-
-  return {
-    address: data.address,
-    username: String(data.username)
-  };
 }

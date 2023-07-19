@@ -1,4 +1,6 @@
 import { fireEvent, waitFor } from '@testing-library/react';
+import { testAddress, testNetwork } from '__mocks__';
+import { rest, server, mockResponse } from '__mocks__/server';
 import { renderForm } from 'tests/helpers/renderForm';
 
 describe('Receiver field', () => {
@@ -26,6 +28,37 @@ describe('Receiver field', () => {
     await waitFor(async () => {
       const receiverUsernameError = await findByTestId('receiverUsernameError');
       expect(receiverUsernameError?.innerHTML).toBe('Invalid herotag');
+    });
+  });
+});
+
+describe('Receiver username found', () => {
+  beforeEach(() => {
+    server.use(
+      rest.get(
+        `${testNetwork.apiAddress}/usernames/alice`,
+        mockResponse({
+          address: testAddress,
+          username: 'alice.elrond'
+        })
+      )
+    );
+  });
+  test('Receiver field should fetch address by username', async () => {
+    const { findByTestId } = renderForm();
+
+    const data = { target: { value: 'alice' } };
+    const input: any = await findByTestId('receiver');
+
+    fireEvent.change(input, data);
+    fireEvent.blur(input);
+    expect(input.value).toBe('alice');
+
+    await waitFor(async () => {
+      const receiverUsernameAddress = await findByTestId(
+        'receiverUsernameAddress'
+      );
+      expect(receiverUsernameAddress?.innerHTML).toBeDefined();
     });
   });
 });
