@@ -140,10 +140,12 @@ export const Receiver = (props: WithClassnameType) => {
   const dataFetchedForUsername =
     inputValue?.startsWith('erd1') || inputValue in usernameAccounts;
 
-  const showErrors =
-    !foundReceiver && !addressIsValid(inputValue)
-      ? isInvalid && dataFetchedForUsername
-      : false;
+  const isRandomValueString =
+    inputValue && !foundReceiver && !addressIsValid(inputValue);
+
+  const showErrors = isRandomValueString
+    ? isInvalid && dataFetchedForUsername
+    : isInvalid;
 
   return (
     <div className={classNames(styles.receiver, className)}>
