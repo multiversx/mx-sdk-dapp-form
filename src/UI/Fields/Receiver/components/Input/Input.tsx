@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { components } from 'react-select';
 
+import { ValuesEnum } from 'types';
 import styles from '../../styles.module.scss';
 
 export const Input: typeof components.Input = (props) => {
@@ -11,7 +12,7 @@ export const Input: typeof components.Input = (props) => {
   return (
     <components.Input
       {...props}
-      data-testid='receiver'
+      data-testid={ValuesEnum.receiver}
       className={classNames(styles.receiverSelectInput, {
         [styles.visible]: menuIsOpen
       })}

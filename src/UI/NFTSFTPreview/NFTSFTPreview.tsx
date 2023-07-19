@@ -1,6 +1,7 @@
 import React, { MouseEvent } from 'react';
 import classNames from 'classnames';
 
+import { TestIdsEnum } from 'constants/testIds';
 import { FormContextPropsType } from 'contexts';
 import { processScamNft } from 'helpers';
 import { PartialNftType, TransactionTypeEnum } from 'types';
@@ -39,7 +40,7 @@ export const NFTSFTPreview = (props: NFTSFTPreviewPropsType) => {
   return (
     <div
       onClick={onPreviewClick}
-      data-testid='token-preview'
+      data-testid={TestIdsEnum.tokenPreview}
       className={classNames(styles.preview, {
         [styles.clickable]: Boolean(onClick)
       })}
@@ -48,12 +49,15 @@ export const NFTSFTPreview = (props: NFTSFTPreviewPropsType) => {
 
       <div className={styles.content}>
         <div className={styles.left}>
-          <div data-testid='token-preview-name' className={styles.name}>
+          <div
+            data-testid={TestIdsEnum.tokenPreviewName}
+            className={styles.name}
+          >
             {name}
           </div>
 
           <div
-            data-testid='token-preview-identifier'
+            data-testid={TestIdsEnum.tokenPreviewIdentifier}
             className={styles.identifier}
           >
             {identifier}

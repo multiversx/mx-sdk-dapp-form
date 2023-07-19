@@ -9,7 +9,7 @@ import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
 import { useFormikContext } from 'formik';
-import { CAN_TRANSFER_MESSAGE } from 'constants/index';
+import { CAN_TRANSFER_MESSAGE, TestIdsEnum } from 'constants/index';
 
 import { ExtendedValuesType } from 'types';
 import styles from './styles.module.scss';
@@ -27,7 +27,7 @@ export const NFTCanTransferWarning = (props: WithClassnameType) => {
   return (
     <div
       className={classNames(styles.canTransferWarning, className)}
-      data-testid='canTransferWarning'
+      data-testid={TestIdsEnum.canTransferWarning}
     >
       <div className={styles.canTransferWarningHeading}>
         <FontAwesomeIcon

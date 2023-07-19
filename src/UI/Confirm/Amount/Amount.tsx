@@ -4,6 +4,7 @@ import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount'
 import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue/index';
 
 import globals from 'assets/sass/globals.module.scss';
+import { TestIdsEnum } from 'constants/testIds';
 import { parseAmount } from 'helpers';
 import { PartialNftType, TransactionTypeEnum } from 'types';
 
@@ -55,7 +56,7 @@ export const Amount = ({
       digits={txType === TransactionTypeEnum.MetaESDT ? DIGITS : 0}
       showLabel={false}
       showLastNonZeroDecimal
-      data-testid='confirmAmount'
+      data-testid={TestIdsEnum.confirmAmount}
     />
   ) : (
     <FormatAmount
@@ -65,7 +66,7 @@ export const Amount = ({
       decimals={decimals}
       showLastNonZeroDecimal
       token={isEsdtTransaction ? tokenLabel : egldLabel}
-      data-testid='confirmAmount'
+      data-testid={TestIdsEnum.confirmAmount}
     />
   );
 
@@ -89,7 +90,7 @@ export const Amount = ({
         <UsdValue
           amount={amount}
           usd={egldPriceInUsd}
-          data-testid='confirmUsdValue'
+          data-testid={TestIdsEnum.confirmUsdValue}
           className={styles.price}
         />
       )}

@@ -1,6 +1,7 @@
 import React, { useState, MouseEvent } from 'react';
 
 import globals from 'assets/sass/globals.module.scss';
+import { TestIdsEnum } from 'constants/testIds';
 import { useFormContext } from 'contexts';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { TransactionTypeEnum } from 'types';
@@ -24,6 +25,7 @@ export const TransactionSummary = ({
 
   const {
     receiverInfo: { scamError, receiver },
+    receiverUsernameInfo: { receiverUsername },
     formInfo,
     gasInfo: { gasCostError, feeLimit },
     accountInfo: { isGuarded },
@@ -86,7 +88,11 @@ export const TransactionSummary = ({
           <NFTSFTPreview onClick={onPreviewClick} txType={txType} {...nft} />
         )}
 
-        <Confirm.Receiver receiver={receiver} scamReport={scamError} />
+        <Confirm.Receiver
+          receiver={receiver}
+          receiverUsername={receiverUsername}
+          scamReport={scamError}
+        />
 
         <div className={styles.columns}>
           {!isNFT && (
@@ -124,7 +130,7 @@ export const TransactionSummary = ({
           className={globals.buttonSend}
           type='button'
           id='sendTrxBtn'
-          data-testid='sendTrxBtn'
+          data-testid={TestIdsEnum.sendTrxBtn}
           disabled={isSubmitting}
           onClick={onConfirmClick}
         >
@@ -136,7 +142,7 @@ export const TransactionSummary = ({
             className={globals.buttonText}
             type='button'
             id='cancelTrxBtn'
-            data-testid='cancelTrxBtn'
+            data-testid={TestIdsEnum.cancelTrxBtn}
             onClick={onCloseClick}
           >
             {readonly ? 'Close' : 'Back'}

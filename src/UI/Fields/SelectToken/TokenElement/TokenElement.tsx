@@ -6,7 +6,7 @@ import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount'
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
-import { ZERO } from 'constants/index';
+import { TestIdsEnum, ZERO } from 'constants/index';
 import { scamFlag } from 'helpers';
 import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
 
@@ -90,7 +90,7 @@ export const TokenElement = ({
     <div className={classNames(globals.value, styles.tokenElement)}>
       <div className={styles.tokenElementWrapper}>{tokenIcon}</div>
 
-      <div data-testid='tokenName'>
+      <div data-testid={TestIdsEnum.tokenName}>
         <span data-testid={`${identifier}-element`}>
           <span>{title}</span>{' '}
           <span className={styles.tokenElementIdentifier}>{identifier}</span>

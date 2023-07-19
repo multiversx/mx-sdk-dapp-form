@@ -9,6 +9,7 @@ import { InputActionMeta, SingleValue } from 'react-select';
 import Select from 'react-select/creatable';
 
 import globals from 'assets/sass/globals.module.scss';
+import { TestIdsEnum } from 'constants/testIds';
 import { useUsernameAccount } from 'contexts/ReceiverUsernameContext/utils';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
@@ -192,7 +193,9 @@ export const Receiver = (props: WithClassnameType) => {
       />
 
       {foundReceiver && (
-        <span data-testid='receiverUsernameAddress'>{foundReceiver}</span>
+        <span data-testid={TestIdsEnum.receiverUsernameAddress}>
+          {foundReceiver}
+        </span>
       )}
 
       <>
@@ -205,7 +208,7 @@ export const Receiver = (props: WithClassnameType) => {
 
       {scamError && (
         <div
-          data-testid='receiverScam'
+          data-testid={TestIdsEnum.receiverScam}
           className={classNames(globals.error, globals.scam)}
         >
           <span>
