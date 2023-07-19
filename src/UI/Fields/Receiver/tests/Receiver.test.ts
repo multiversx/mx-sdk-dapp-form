@@ -17,15 +17,15 @@ describe('Receiver field', () => {
     });
   });
   it('should validate address', async () => {
-    const { findByTestId, queryByText } = renderForm();
+    const { findByTestId } = renderForm();
     const input: any = await findByTestId('receiver');
     const value = '123';
     const data = { target: { value } };
     fireEvent.change(input, data);
     fireEvent.blur(input);
-    await waitFor(() => {
-      const req = queryByText('Invalid address');
-      expect(req?.innerHTML).toBe('Invalid address');
+    await waitFor(async () => {
+      const receiverUsernameError = await findByTestId('receiverUsernameError');
+      expect(receiverUsernameError?.innerHTML).toBe('Invalid herotag');
     });
   });
 });

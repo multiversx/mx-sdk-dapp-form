@@ -115,9 +115,12 @@ describe('Send Meta ESDT', () => {
 
     // expect receiver to be forbidden
     fireEvent.change(receiver, { target: { value: fakeReceiver } });
+    fireEvent.blur(receiver, { target: { value: fakeReceiver } });
 
-    const receiverError = await methods.findByTestId('receiverError');
-    expect(receiverError.textContent).toBe('Receiver not allowed');
+    await waitFor(async () => {
+      const receiverError = await methods.findByTestId('receiverError');
+      expect(receiverError.textContent).toBe('Receiver not allowed');
+    });
 
     // fill in allowed receiver
     fireEvent.change(receiver, { target: { value: testReceiver } });
