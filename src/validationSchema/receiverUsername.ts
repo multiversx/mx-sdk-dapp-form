@@ -1,31 +1,36 @@
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import { string } from 'yup';
 import { ExtendedValuesType } from 'types';
+import { ValidationErrorMessagesType } from 'types/validation';
 
-const validUsername = string().test(
-  'addressIsValid',
-  'Invalid herotag',
-  function checkUsername(value) {
-    const { receiver } = this.parent as ExtendedValuesType;
+export const receiverUsername = (
+  errorMessages: ValidationErrorMessagesType
+) => {
+  const validUsername = string().test(
+    'invalidHerotag',
+    errorMessages.invalidHerotag,
+    function checkUsername(value) {
+      const { receiver } = this.parent as ExtendedValuesType;
 
-    const userIntendsToUseValidAddress = receiver?.startsWith('erd1');
-    const receiverIsEmpty = !value && !receiver;
+      const userIntendsToUseValidAddress = receiver?.startsWith('erd1');
+      const receiverIsEmpty = !value && !receiver;
 
-    if (userIntendsToUseValidAddress || receiverIsEmpty) {
-      return true;
+      if (userIntendsToUseValidAddress || receiverIsEmpty) {
+        return true;
+      }
+
+      const hasUsernameAndValidReceiver = value && addressIsValid(receiver);
+
+      return Boolean(hasUsernameAndValidReceiver);
     }
+  );
 
-    const hasUsernameAndValidReceiver = value && addressIsValid(receiver);
+  const validations = [validUsername];
 
-    return Boolean(hasUsernameAndValidReceiver);
-  }
-);
-
-const validations = [validUsername];
-
-export const receiverUsername = validations.reduce(
-  (previousValue, currentValue) => previousValue.concat(currentValue),
-  string()
-);
+  return validations.reduce(
+    (previousValue, currentValue) => previousValue.concat(currentValue),
+    string()
+  );
+};
 
 export default receiverUsername;

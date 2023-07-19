@@ -17,7 +17,7 @@ export const getValidationSchema = (
 ) =>
   object().shape({
     receiver: receiver(errorMessages),
-    receiverUsername,
+    receiverUsername: receiverUsername(errorMessages),
     tokenId: string().required('Required'),
     gasPrice: gasPrice(errorMessages),
     data,
