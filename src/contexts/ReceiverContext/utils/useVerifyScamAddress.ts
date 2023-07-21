@@ -20,6 +20,7 @@ export function useVerifyScamAddress(apiConfig?: ApiConfigType) {
   }) => {
     const notSender = address !== addressToVerify;
     const notVerified = !(addressToVerify in verifiedAddresses);
+
     if (
       notSender &&
       addressIsValid(addressToVerify) &&

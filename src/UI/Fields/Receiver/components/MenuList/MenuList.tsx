@@ -12,6 +12,7 @@ export const MenuList: typeof components.MenuList = (props) => {
 
   const focused = focusedOption as GenericOptionType;
   const searchableLabel = focused ? focused.label.toLowerCase() : null;
+  const hasUsername = focused && focused.label !== focused.value;
 
   const hasInputValue = !value || (value && inputValue);
   const showSuggestion =
@@ -28,14 +29,18 @@ export const MenuList: typeof components.MenuList = (props) => {
       : null;
 
   const showTrimmedAutocomplete = trimSuggestion && !inputValue;
-  const showUntrimmedAutocomplete =
+
+  const showAddressUntrimmedAutocomplete =
     trimSuggestion &&
     Boolean(inputValue) &&
     inputValue.length < trimSuggestion.length / 2;
 
+  const showUsernameUntrimmedAutocomplete =
+    trimSuggestion && Boolean(inputValue);
+
   return (
     <Fragment>
-      {showUntrimmedAutocomplete && (
+      {showAddressUntrimmedAutocomplete && !hasUsername && (
         <div
           className={classNames(
             styles.receiverSelectAutocomplete,
@@ -46,11 +51,28 @@ export const MenuList: typeof components.MenuList = (props) => {
         </div>
       )}
 
+      {showUsernameUntrimmedAutocomplete && hasUsername && (
+        <div className={styles.receiverSelectAutocomplete}>
+          {trimSuggestion}
+
+          <span className={styles.receiverSelectAutocompleteWrapper}>
+            (<Trim text={focused.value} />)
+          </span>
+        </div>
+      )}
+
       {showTrimmedAutocomplete && (
-        <Trim
-          text={trimSuggestion}
-          className={styles.receiverSelectAutocomplete}
-        />
+        <span className={styles.receiverSelectAutocomplete}>
+          {hasUsername && <span>{focused.label}</span>}
+
+          {hasUsername ? (
+            <span className={styles.receiverSelectAutocompleteWrapper}>
+              (<Trim text={focused.value} />)
+            </span>
+          ) : (
+            <Trim text={trimSuggestion} />
+          )}
+        </span>
       )}
 
       <components.MenuList {...props} className={styles.receiverSelectList} />

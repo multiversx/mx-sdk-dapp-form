@@ -22,6 +22,7 @@ export const useUsernameAccount = (
     if (!username || isValidAddress) {
       return;
     }
+
     fetchUsernameAccount(username);
   }, [username, isValidAddress]);
 

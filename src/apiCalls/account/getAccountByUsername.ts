@@ -2,6 +2,7 @@ import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsVali
 import axios from 'axios';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
 import { AccountContextPropsType } from 'contexts/AccountContext';
+import { trimReceiverDomain } from 'contexts/ReceiverContext/helpers';
 
 export async function getAccountByUsername(
   username: string,
@@ -25,7 +26,7 @@ export async function getAccountByUsername(
 
     return {
       address,
-      username: String(data.username)
+      username: trimReceiverDomain(String(data.username)) ?? ''
     };
   } catch (error) {
     return null;

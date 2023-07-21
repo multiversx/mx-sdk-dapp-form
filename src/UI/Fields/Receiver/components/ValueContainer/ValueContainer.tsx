@@ -9,7 +9,9 @@ import styles from '../../styles.module.scss';
 export const ValueContainer: typeof components.ValueContainer = (props) => {
   const { selectProps, isDisabled } = props;
   const { value, menuIsOpen } = selectProps;
+
   const option = value as GenericOptionType;
+  const hasUsername = option && option.label !== option.value;
 
   return (
     <components.ValueContainer
@@ -17,12 +19,29 @@ export const ValueContainer: typeof components.ValueContainer = (props) => {
       className={styles.receiverSelectValue}
     >
       {!menuIsOpen && option && (
-        <Trim
-          text={option.value}
+        <span
           className={classNames(styles.receiverSelectSingle, {
             [styles.disabled]: isDisabled
           })}
-        />
+        >
+          {hasUsername && <span>{option.label}</span>}
+
+          {hasUsername ? (
+            <span className={styles.receiverSelectSingleTrimWrapper}>
+              (
+              <Trim
+                text={option.value}
+                className={styles.receiverSelectSingleTrim}
+              />
+              )
+            </span>
+          ) : (
+            <Trim
+              text={option.value}
+              className={styles.receiverSelectSingleTrimWrapper}
+            />
+          )}
+        </span>
       )}
 
       {props.children}

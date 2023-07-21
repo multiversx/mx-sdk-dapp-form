@@ -102,7 +102,7 @@
         display: flex;
 
         .receiver-select-single {
-          padding: 12px;
+          padding: 12px 0 12px 12px;
           font-size: 14px;
           display: flex;
           align-items: center;
@@ -113,6 +113,7 @@
           bottom: 0;
           color: var(--action-color);
           margin: 0;
+          gap: 4px;
 
           &.disabled {
             color: var(--dapp-form-input-color-disabled);
@@ -123,9 +124,21 @@
             }
           }
 
+          .receiver-select-single-trim-wrapper {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            overflow: hidden;
+
+            .receiver-select-single-trim {
+              align-items: center;
+            }
+          }
+
           .receiver-select-option-name {
             color: var(--action-color);
             margin-right: 4px;
+            font-size: 1rem;
           }
 
           [class*='__left'],
@@ -153,7 +166,7 @@
             opacity: 0 !important;
             min-height: auto;
             border-radius: 8px;
-            padding: 12px !important;
+            padding: 12px 0 12px 12px !important;
             line-height: 17px !important;
             font-size: 14px !important;
             color: var(--action-color) !important;
@@ -209,7 +222,7 @@
 
       .receiver-select-autocomplete {
         font-size: 14px;
-        padding: 12px;
+        padding: 12px 0 12px 12px;
         border: 1px solid transparent;
         bottom: calc(100% + 8px - 1px);
         position: absolute;
@@ -217,7 +230,9 @@
         color: var(--placeholder-color);
         left: -1px;
         right: 36px;
-        align-items: flex-end;
+        align-items: center;
+        display: flex;
+        gap: 4px;
 
         [class*='__left'],
         [class*='__right'],
@@ -228,6 +243,13 @@
           * {
             color: var(--placeholder-color) !important;
           }
+        }
+
+        .receiver-select-autocomplete-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          overflow: hidden;
         }
 
         .receiver-select-autocomplete-collection {
@@ -246,6 +268,9 @@
 
       .receiver-select-list {
         padding: 0;
+        gap: 4px;
+        display: flex;
+        flex-direction: column;
 
         &::-webkit-scrollbar {
           width: 12px;
@@ -274,6 +299,9 @@
           background-color: transparent;
           width: calc(100% - 8px);
           margin: 0 4px;
+          display: flex;
+          align-items: center;
+          gap: 4px;
 
           &:first-child {
             margin-top: 4px;
@@ -296,6 +324,11 @@
               }
             }
 
+            .receiver-select-option-name-wrapper,
+            .receiver-select-option-username {
+              color: var(--action-color);
+            }
+
             .receiver-select-option-collection {
               color: var(--placeholder-color);
             }
@@ -305,8 +338,25 @@
             }
           }
 
+          .receiver-select-option-name-wrapper {
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            color: var(--placeholder-color);
+            font-size: 1rem;
+            gap: 4px;
+
+            * {
+              font-size: 1rem !important;
+            }
+          }
+
+          .receiver-select-option-username {
+            font-size: 1rem;
+            color: var(--placeholder-color);
+          }
+
           .receiver-select-option-name {
-            margin-right: 4px;
             color: var(--placeholder-color);
             align-items: flex-end;
             display: flex;
@@ -327,6 +377,27 @@
           }
         }
       }
+    }
+  }
+
+  .found,
+  .loading {
+    top: 0;
+    font-size: 12px;
+    line-height: 1;
+    position: absolute;
+    right: 0;
+    color: var(--dapp-form-label-color);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    .svg {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 1;
     }
   }
 }

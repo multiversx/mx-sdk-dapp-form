@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheck,
+  faExclamationTriangle
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
@@ -11,9 +14,9 @@ import Select from 'react-select/creatable';
 import globals from 'assets/sass/globals.module.scss';
 import { useUsernameAccount } from 'contexts/ReceiverUsernameContext/utils';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-
 import { getIsDisabled } from 'helpers';
 import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
+
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { Control } from './components/Control';
 import { DropdownIndicator } from './components/DropdownIndicator';
@@ -23,16 +26,15 @@ import { MenuList } from './components/MenuList';
 import { Option } from './components/Option';
 import { SelectContainer } from './components/SelectContainer';
 import { ValueContainer } from './components/ValueContainer';
-
 import { filterOptions, useReceiverError } from './helpers';
 import { GenericOptionType } from './Receiver.types';
+
 import styles from './styles.module.scss';
 
 const ms1000 = process.env.NODE_ENV !== 'test' ? 1000 : 1;
 
 export const Receiver = (props: WithClassnameType) => {
   const { className } = props;
-
   const { setFieldValue } = useFormikContext<ExtendedValuesType>();
 
   const {
@@ -47,22 +49,23 @@ export const Receiver = (props: WithClassnameType) => {
     formInfo: { readonly }
   } = useSendFormContext();
 
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState(receiver);
   const [option, setOption] = useState<GenericOptionType | null>(
     receiver ? { label: receiver, value: receiver } : null
   );
   const debouncedUsername = useDebounce(inputValue, ms1000);
-
-  const { fetchingUsernameAccount, usernameAccounts } =
-    useUsernameAccount(debouncedUsername);
-  const { isInvalid, receiverErrorDataTestId, error } = useReceiverError();
+  const { receiverErrorDataTestId, error } = useReceiverError();
+  const { usernameAccounts } = useUsernameAccount(debouncedUsername);
 
   const setAllValues = (value: string) => {
+    const optionWithUsername = options.find((option) => option.value === value);
+    const optionLabel =
+      usernameAccounts[value]?.username ?? optionWithUsername?.label;
+
     setInputValue(value);
-    setOption({
-      value,
-      label: value
-    });
+    setOption({ value, label: optionLabel ?? value });
+
     setFieldValue(
       ValuesEnum.receiver,
       usernameAccounts[value]?.address ?? value
@@ -83,9 +86,7 @@ export const Receiver = (props: WithClassnameType) => {
       (key) => usernameAccounts[key]?.address === receiver
     );
 
-    const newInputValue = username ? username : receiver;
-
-    setAllValues(newInputValue);
+    setAllValues(username ?? receiver);
   }, [usernameAccounts, receiver]);
 
   const onBlur = () => {
@@ -110,10 +111,10 @@ export const Receiver = (props: WithClassnameType) => {
     () =>
       knownAddresses
         ? knownAddresses
-            .filter((address) => addressIsValid(address))
-            .map((address) => ({
-              value: address,
-              label: address
+            .filter((knownAddress) => addressIsValid(knownAddress.address))
+            .map((knownAddress) => ({
+              value: knownAddress.address,
+              label: knownAddress.username ?? knownAddress.address
             }))
         : [],
     [knownAddresses]
@@ -135,17 +136,52 @@ export const Receiver = (props: WithClassnameType) => {
     setTimeout(onBlur);
   }, []);
 
-  const foundReceiver = usernameAccounts[inputValue]?.address;
+  const foundReceiver = usernameAccounts[inputValue];
+  const foundReceiverAddress = foundReceiver?.address;
 
-  const dataFetchedForUsername =
-    inputValue?.startsWith('erd1') || inputValue in usernameAccounts;
+  const isUsernameDebouncing =
+    inputValue !== debouncedUsername && foundReceiver !== null;
 
-  const isRandomValueString =
-    inputValue && !foundReceiver && !addressIsValid(inputValue);
+  const searchQueryIsAddress = inputValue.startsWith('erd1');
+  const addressIsAmongKnown = Boolean(
+    knownAddresses && inputValue
+      ? knownAddresses.find((account) => account.address.startsWith(inputValue))
+      : false
+  );
 
-  const showErrors = isRandomValueString
-    ? isInvalid && dataFetchedForUsername
-    : isInvalid;
+  const usernameIsAmongKnown = Boolean(
+    knownAddresses && inputValue
+      ? knownAddresses.find((account) =>
+          account.username ? account.username.startsWith(inputValue) : false
+        )
+      : false
+  );
+
+  const isUsernameFetching =
+    !isUsernameDebouncing && foundReceiver === undefined;
+
+  const isAddressError =
+    searchQueryIsAddress &&
+    (!addressIsAmongKnown || !menuIsOpen) &&
+    !addressIsValid(inputValue);
+
+  const isUsernameError = [
+    !inputValue,
+    !debouncedUsername,
+    isUsernameDebouncing,
+    isUsernameFetching,
+    foundReceiver,
+    searchQueryIsAddress,
+    menuIsOpen && addressIsAmongKnown,
+    menuIsOpen && usernameIsAmongKnown
+  ].every((condition) => !condition);
+
+  const isUsernameLoading = Boolean(
+    inputValue &&
+      !searchQueryIsAddress &&
+      isUsernameFetching &&
+      !usernameIsAmongKnown
+  );
 
   return (
     <div className={classNames(styles.receiver, className)}>
@@ -169,12 +205,11 @@ export const Receiver = (props: WithClassnameType) => {
         noOptionsMessage={() => null}
         onChange={onChange}
         onBlur={onBlur}
-        isLoading={fetchingUsernameAccount || knownAddresses === null}
+        isLoading={knownAddresses === null}
         isMulti={false}
         inputValue={inputValue}
-        className={classNames(styles.receiverSelectContainer, {
-          [styles.invalid]: showErrors || scamError
-        })}
+        onMenuClose={() => setMenuIsOpen(false)}
+        onMenuOpen={() => setMenuIsOpen(true)}
         components={{
           Menu,
           Input,
@@ -189,19 +224,25 @@ export const Receiver = (props: WithClassnameType) => {
           IndicatorSeparator: () => null,
           LoadingIndicator: () => null
         }}
+        className={classNames(styles.receiverSelectContainer, {
+          [styles.invalid]: isAddressError || isUsernameError || scamError
+        })}
       />
 
+      {isUsernameLoading && <div className={styles.loading}>Loading...</div>}
+
       {foundReceiver && (
-        <span data-testid='receiverUsernameAddress'>{foundReceiver}</span>
+        <span className={styles.found} data-testid='receiverUsernameAddress'>
+          Account found!{' '}
+          <FontAwesomeIcon icon={faCheck} className={styles.foundIcon} />
+        </span>
       )}
 
-      <>
-        {showErrors && (
-          <div data-testid={receiverErrorDataTestId} className={globals.error}>
-            {error}
-          </div>
-        )}
-      </>
+      {(isAddressError || isUsernameError) && (
+        <div data-testid={receiverErrorDataTestId} className={globals.error}>
+          {error}
+        </div>
+      )}
 
       {scamError && (
         <div
