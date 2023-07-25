@@ -184,10 +184,6 @@
         }
       }
 
-      .receiver-select-indicator-container {
-        margin-left: -12px;
-      }
-
       .receiver-select-spinner {
         margin-right: 12px;
         font-size: 16px;
@@ -195,6 +191,9 @@
 
       .receiver-select-indicator {
         transition: var(--transition);
+        margin-left: -12px;
+        z-index: 1;
+        pointer-events: all;
 
         svg path {
           fill: var(--heading-color);

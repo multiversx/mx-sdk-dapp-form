@@ -23,6 +23,7 @@ export const TransactionSummary = ({
   const { setIsGuardianScreenVisible } = useFormContext();
 
   const {
+    receiverUsernameInfo: { receiverUsername },
     receiverInfo: { scamError, receiver },
     formInfo,
     gasInfo: { gasCostError, feeLimit },
@@ -86,7 +87,11 @@ export const TransactionSummary = ({
           <NFTSFTPreview onClick={onPreviewClick} txType={txType} {...nft} />
         )}
 
-        <Confirm.Receiver receiver={receiver} scamReport={scamError} />
+        <Confirm.Receiver
+          receiver={receiver}
+          scamReport={scamError}
+          receiverUsername={receiverUsername}
+        />
 
         <div className={styles.columns}>
           {!isNFT && (

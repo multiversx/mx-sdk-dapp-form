@@ -20,7 +20,6 @@ import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { Control } from './components/Control';
 import { DropdownIndicator } from './components/DropdownIndicator';
-import { IndicatorsContainer } from './components/IndicatorsContainer';
 import { Input } from './components/Input';
 import { Menu } from './components/Menu';
 import { MenuList } from './components/MenuList';
@@ -64,7 +63,7 @@ export const Receiver = (props: WithClassnameType) => {
     const optionLabel =
       usernameAccounts[value]?.username ?? optionWithUsername?.label;
 
-    setInputValue(value);
+    setInputValue(optionLabel ?? value);
     setOption({ value, label: optionLabel ?? value });
 
     setFieldValue(
@@ -225,7 +224,6 @@ export const Receiver = (props: WithClassnameType) => {
           ValueContainer,
           DropdownIndicator,
           SelectContainer,
-          IndicatorsContainer,
           MenuList,
           Option,
           Placeholder: () => null,
