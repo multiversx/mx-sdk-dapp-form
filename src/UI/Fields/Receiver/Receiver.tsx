@@ -20,6 +20,7 @@ import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { Control } from './components/Control';
 import { DropdownIndicator } from './components/DropdownIndicator';
+import { IndicatorsContainer } from './components/IndicatorsContainer';
 import { Input } from './components/Input';
 import { Menu } from './components/Menu';
 import { MenuList } from './components/MenuList';
@@ -87,6 +88,10 @@ export const Receiver = (props: WithClassnameType) => {
     );
 
     setAllValues(username ?? receiver);
+
+    if (username) {
+      setInputValue(username);
+    }
   }, [usernameAccounts, receiver]);
 
   const onBlur = () => {
@@ -123,8 +128,13 @@ export const Receiver = (props: WithClassnameType) => {
   const onChange = (option: SingleValue<GenericOptionType>) => {
     if (option) {
       setOption(option);
-      setInputValue(option.value);
       changeAndBlurInput(option.value);
+
+      if (option.value !== option.label) {
+        setInputValue(option.label);
+      } else {
+        setInputValue(option.value);
+      }
     }
   };
 
@@ -137,8 +147,6 @@ export const Receiver = (props: WithClassnameType) => {
   }, []);
 
   const foundReceiver = usernameAccounts[inputValue];
-  const foundReceiverAddress = foundReceiver?.address;
-
   const isUsernameDebouncing =
     inputValue !== debouncedUsername && foundReceiver !== null;
 
@@ -217,6 +225,7 @@ export const Receiver = (props: WithClassnameType) => {
           ValueContainer,
           DropdownIndicator,
           SelectContainer,
+          IndicatorsContainer,
           MenuList,
           Option,
           Placeholder: () => null,

@@ -56,7 +56,7 @@ export const DropdownIndicator: typeof components.DropdownIndicator = (
   return (
     <components.DropdownIndicator
       {...props}
-      className={classNames(styles.receiverSelectIndicator, {
+      className={classNames(styles.receiverSelectIndicatorContainer, {
         [styles.expanded]: menuIsOpen,
         [styles.hidden]: isHidden
       })}

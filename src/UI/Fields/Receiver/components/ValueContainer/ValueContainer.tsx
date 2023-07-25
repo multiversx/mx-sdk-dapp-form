@@ -3,6 +3,7 @@ import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import classNames from 'classnames';
 import { components } from 'react-select';
 
+import { useSendFormContext } from 'contexts';
 import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
 
@@ -11,34 +12,48 @@ export const ValueContainer: typeof components.ValueContainer = (props) => {
   const { value, menuIsOpen } = selectProps;
 
   const option = value as GenericOptionType;
-  const hasUsername = option && option.label !== option.value;
+  const {
+    receiverInfo: { receiver },
+    receiverUsernameInfo: { receiverUsername }
+  } = useSendFormContext();
+
+  const hasUsername =
+    receiverUsername ?? (option && option.value !== option.label);
+
+  const superOption = option && {
+    value: receiver ?? option.value,
+    label: receiverUsername ?? option.label
+  };
+
+  const shouldShowPreview =
+    superOption && (hasUsername || (!hasUsername && !menuIsOpen));
 
   return (
     <components.ValueContainer
       {...props}
       className={styles.receiverSelectValue}
     >
-      {!menuIsOpen && option && (
+      {shouldShowPreview && (
         <span
           className={classNames(styles.receiverSelectSingle, {
             [styles.disabled]: isDisabled
           })}
         >
-          {hasUsername && <span>{option.label}</span>}
+          {hasUsername && <span>{superOption.label}</span>}
 
           {hasUsername ? (
             <span className={styles.receiverSelectSingleTrimWrapper}>
               (
               <Trim
-                text={option.value}
+                text={superOption.value}
                 className={styles.receiverSelectSingleTrim}
               />
               )
             </span>
           ) : (
             <Trim
-              text={option.value}
-              className={styles.receiverSelectSingleTrimWrapper}
+              text={superOption.value}
+              className={styles.receiverSelectSingleTrim}
             />
           )}
         </span>

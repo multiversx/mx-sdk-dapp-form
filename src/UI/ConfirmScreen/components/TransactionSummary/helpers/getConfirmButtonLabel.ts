@@ -1,6 +1,6 @@
 import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
 
-interface GetConfirmButtonLabelType {
+export interface GetConfirmButtonLabelType {
   providerType: string;
   hasGuardianScreen: boolean;
 }
@@ -10,10 +10,10 @@ export const getConfirmButtonLabel = ({
   hasGuardianScreen
 }: GetConfirmButtonLabelType) => {
   if (hasGuardianScreen) {
-    return 'Confirm Guardian';
+    return 'Proceed to Guardian';
   }
 
-  if (providerType === LoginMethodsEnum.walletconnect) {
+  if (providerType === LoginMethodsEnum.walletconnectv2) {
     return 'Confirm on xPortal';
   }
 
