@@ -4,8 +4,13 @@ import classNames from 'classnames';
 import { components } from 'react-select';
 
 import { HighlightText } from 'UI/Fields/AmountSelect/components/TokenSelect/components';
+
 import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
+
+export const {
+  default: MultiversXIconSimple
+} = require('../../../../../assets/icons/mx-icon-simple.svg');
 
 export const Option: typeof components.Option = (props) => {
   const { isFocused, data, selectProps } = props;
@@ -23,7 +28,13 @@ export const Option: typeof components.Option = (props) => {
       })}
     >
       {hasUsername && (
-        <span className={styles.receiverSelectOptionUsername}>{username}</span>
+        <span className={styles.receiverSelectOptionUsername}>
+          <MultiversXIconSimple
+            className={styles.receiverSelectOptionUsernameIcon}
+          />
+
+          {username}
+        </span>
       )}
 
       {hasUsername ? (

@@ -4,8 +4,13 @@ import classNames from 'classnames';
 import { components } from 'react-select';
 
 import { useSendFormContext } from 'contexts';
+
 import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
+
+export const {
+  default: MultiversXIconSimple
+} = require('../../../../../assets/icons/mx-icon-simple.svg');
 
 export const ValueContainer: typeof components.ValueContainer = (props) => {
   const { selectProps, isDisabled } = props;
@@ -39,7 +44,15 @@ export const ValueContainer: typeof components.ValueContainer = (props) => {
             [styles.disabled]: isDisabled
           })}
         >
-          {hasUsername && <span>{superOption.label}</span>}
+          {hasUsername && (
+            <span className={styles.receiverSelectSingleUsername}>
+              <MultiversXIconSimple
+                className={styles.receiverSelectSingleUsernameIcon}
+              />
+
+              {superOption.label}
+            </span>
+          )}
 
           {hasUsername ? (
             <span className={styles.receiverSelectSingleTrimWrapper}>

@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef
+} from 'react';
 import {
   faCheck,
   faExclamationTriangle
@@ -20,7 +26,7 @@ import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { Control } from './components/Control';
 import { DropdownIndicator } from './components/DropdownIndicator';
-import { Input } from './components/Input';
+import { renderInput } from './components/Input';
 import { Menu } from './components/Menu';
 import { MenuList } from './components/MenuList';
 import { Option } from './components/Option';
@@ -54,7 +60,10 @@ export const Receiver = (props: WithClassnameType) => {
   const [option, setOption] = useState<GenericOptionType | null>(
     receiver ? { label: receiver, value: receiver } : null
   );
+
+  const receiverSelectReference = useRef(null);
   const debouncedUsername = useDebounce(inputValue, ms1000);
+
   const { receiverErrorDataTestId, error } = useReceiverError();
   const { usernameAccounts } = useUsernameAccount(debouncedUsername);
 
@@ -190,6 +199,11 @@ export const Receiver = (props: WithClassnameType) => {
       !usernameIsAmongKnown
   );
 
+  const Input = useMemo(
+    () => renderInput(receiverSelectReference),
+    [receiverSelectReference]
+  );
+
   return (
     <div className={classNames(styles.receiver, className)}>
       <div
@@ -214,6 +228,7 @@ export const Receiver = (props: WithClassnameType) => {
         onBlur={onBlur}
         isLoading={knownAddresses === null}
         isMulti={false}
+        ref={receiverSelectReference}
         inputValue={inputValue}
         onMenuClose={() => setMenuIsOpen(false)}
         onMenuOpen={() => setMenuIsOpen(true)}

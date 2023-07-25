@@ -124,6 +124,21 @@
             }
           }
 
+          .receiver-select-single-username {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            .receiver-select-single-username-icon {
+              height: 20px;
+              width: 20px;
+              background: var(--black);
+              border-radius: 4px;
+              padding: 3px;
+              padding-bottom: 2px;
+            }
+          }
+
           .receiver-select-single-trim-wrapper {
             display: flex;
             gap: 4px;
@@ -169,6 +184,10 @@
 
           &.visible input {
             opacity: 1 !important;
+          }
+
+          &.spaced input {
+            padding-left: 36px !important;
           }
 
           input {
@@ -245,6 +264,7 @@
         left: -1px;
         right: 24px;
         align-items: center;
+        justify-content: flex-start;
         display: flex;
         gap: 4px;
 
@@ -259,24 +279,53 @@
           }
         }
 
-        .receiver-select-autocomplete-wrapper {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          overflow: hidden;
-        }
-
-        .receiver-select-autocomplete-collection {
-          margin-left: 4px;
-          color: var(--card-subtitle);
-        }
-
         &.receiver-select-autocomplete-untrimmed {
           text-overflow: ellipsis;
           line-height: 17px;
           overflow: hidden;
           white-space: nowrap;
           display: block;
+        }
+
+        &.receiver-select-autocomplete-username {
+          padding-left: 36px;
+        }
+
+        .receiver-select-autocomplete-icon {
+          min-width: 20px;
+          flex: 1;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          left: 12px;
+          height: 20px;
+          width: 20px;
+          background: var(--black);
+          border-radius: 4px;
+          padding: 3px;
+          padding-bottom: 2px;
+
+          &.receiver-select-autocomplete-icon-muted {
+            opacity: 0.75;
+          }
+        }
+
+        .receiver-select-autocomplete-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          overflow: hidden;
+          color: var(--card-subtitle);
+
+          [class*='__left'] *,
+          [class*='__right'] * {
+            color: var(--card-subtitle) !important;
+          }
+        }
+
+        .receiver-select-autocomplete-collection {
+          margin-left: 4px;
+          color: var(--card-subtitle);
         }
       }
 
@@ -338,7 +387,19 @@
               }
             }
 
-            .receiver-select-option-name-wrapper,
+            .receiver-select-option-name-wrapper {
+              color: var(--placeholder-color);
+
+              .receiver-select-option-name {
+                color: var(--placeholder-color);
+
+                [class*='__left'] *,
+                [class*='__right'] * {
+                  color: var(--placeholder-color);
+                }
+              }
+            }
+
             .receiver-select-option-username {
               color: var(--action-color);
             }
@@ -356,18 +417,44 @@
             display: flex;
             align-items: center;
             overflow: hidden;
-            color: var(--placeholder-color);
+            color: var(--card-subtitle);
             font-size: 1rem;
             gap: 4px;
 
             * {
               font-size: 1rem !important;
             }
+
+            .receiver-select-option-name {
+              color: var(--card-subtitle);
+
+              [class*='__left'] *,
+              [class*='__right'] * {
+                color: var(--card-subtitle);
+              }
+            }
           }
 
           .receiver-select-option-username {
             font-size: 1rem;
+            position: relative;
+            padding-left: 28px;
             color: var(--placeholder-color);
+            display: flex;
+            align-items: center;
+
+            .receiver-select-option-username-icon {
+              height: 20px;
+              width: 20px;
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              background: var(--black);
+              border-radius: 4px;
+              left: 0;
+              padding: 3px;
+              padding-bottom: 2px;
+            }
           }
 
           .receiver-select-option-name {

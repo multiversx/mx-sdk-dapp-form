@@ -6,6 +6,10 @@ import { components } from 'react-select';
 import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
 
+export const {
+  default: MultiversXIconSimple
+} = require('../../../../../assets/icons/mx-icon-simple.svg');
+
 export const MenuList: typeof components.MenuList = (props) => {
   const { selectProps, focusedOption } = props;
   const { value, inputValue } = selectProps;
@@ -52,7 +56,16 @@ export const MenuList: typeof components.MenuList = (props) => {
       )}
 
       {showUsernameUntrimmedAutocomplete && hasUsername && (
-        <div className={styles.receiverSelectAutocomplete}>
+        <div
+          className={classNames(
+            styles.receiverSelectAutocomplete,
+            styles.receiverSelectAutocompleteUsername
+          )}
+        >
+          <MultiversXIconSimple
+            className={styles.receiverSelectAutocompleteIcon}
+          />
+
           {trimSuggestion}
 
           <span className={styles.receiverSelectAutocompleteWrapper}>
@@ -62,8 +75,23 @@ export const MenuList: typeof components.MenuList = (props) => {
       )}
 
       {showTrimmedAutocomplete && (
-        <span className={styles.receiverSelectAutocomplete}>
-          {hasUsername && <span>{focused.label}</span>}
+        <span
+          className={classNames(styles.receiverSelectAutocomplete, {
+            [styles.receiverSelectAutocompleteUsername]: hasUsername
+          })}
+        >
+          {hasUsername && (
+            <span>
+              <MultiversXIconSimple
+                className={classNames(
+                  styles.receiverSelectAutocompleteIcon,
+                  styles.receiverSelectAutocompleteIconMuted
+                )}
+              />
+
+              {focused.label}
+            </span>
+          )}
 
           {hasUsername ? (
             <span className={styles.receiverSelectAutocompleteWrapper}>
