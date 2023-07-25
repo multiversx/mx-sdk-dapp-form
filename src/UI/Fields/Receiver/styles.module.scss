@@ -124,6 +124,10 @@
             }
           }
 
+          &.spaced {
+            padding-right: 12px;
+          }
+
           .receiver-select-single-trim-wrapper {
             display: flex;
             gap: 4px;
@@ -131,8 +135,18 @@
             overflow: hidden;
 
             .receiver-select-single-trim {
+              color: var(--placeholder-color);
               align-items: center;
+
+              [class*='__left'] *,
+              [class*='__right'] * {
+                color: var(--placeholder-color);
+              }
             }
+          }
+
+          .receiver-select-single-trim-muted {
+            color: var(--placeholder-color);
           }
 
           .receiver-select-option-name {
