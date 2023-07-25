@@ -5,10 +5,7 @@ import React, {
   useMemo,
   useRef
 } from 'react';
-import {
-  faCheck,
-  faExclamationTriangle
-} from '@fortawesome/free-solid-svg-icons';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
@@ -255,8 +252,7 @@ export const Receiver = (props: WithClassnameType) => {
 
       {foundReceiver && (
         <span className={styles.found} data-testid='receiverUsernameAddress'>
-          Account found!{' '}
-          <FontAwesomeIcon icon={faCheck} className={styles.foundIcon} />
+          Account found!
         </span>
       )}
 
