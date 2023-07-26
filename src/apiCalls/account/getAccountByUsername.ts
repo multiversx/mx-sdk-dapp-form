@@ -17,7 +17,6 @@ export async function getAccountByUsername(
 
     // "https://api.multiversx.com/accounts/erd1..."
     const [, redirectAddress] = request?.responseURL?.split('/accounts/') ?? [];
-
     const address = redirectAddress ?? data.address;
 
     if (!addressIsValid(address)) {

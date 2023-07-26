@@ -5,7 +5,10 @@ import React, {
   useMemo,
   useRef
 } from 'react';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheck,
+  faExclamationTriangle
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
@@ -61,7 +64,7 @@ export const Receiver = (props: WithClassnameType) => {
   const receiverSelectReference = useRef(null);
   const debouncedUsername = useDebounce(inputValue, ms1000);
 
-  const { receiverErrorDataTestId, error } = useReceiverError();
+  const { receiverErrorDataTestId, error, isInvalid } = useReceiverError();
   const { usernameAccounts } = useUsernameAccount(debouncedUsername);
 
   const setAllValues = (value: string) => {
@@ -196,6 +199,13 @@ export const Receiver = (props: WithClassnameType) => {
       !usernameIsAmongKnown
   );
 
+  const isRequiredError = [
+    isInvalid,
+    !isUsernameError,
+    !isAddressError,
+    !menuIsOpen
+  ].every((condition) => condition);
+
   const Input = useMemo(
     () => renderInput(receiverSelectReference),
     [receiverSelectReference]
@@ -244,7 +254,8 @@ export const Receiver = (props: WithClassnameType) => {
           LoadingIndicator: () => null
         }}
         className={classNames(styles.receiverSelectContainer, {
-          [styles.invalid]: isAddressError || isUsernameError || scamError
+          [styles.invalid]:
+            isAddressError || isUsernameError || scamError || isRequiredError
         })}
       />
 
@@ -252,11 +263,12 @@ export const Receiver = (props: WithClassnameType) => {
 
       {foundReceiver && (
         <span className={styles.found} data-testid='receiverUsernameAddress'>
-          Account found!
+          Account found!{' '}
+          <FontAwesomeIcon icon={faCheck} className={styles.foundIcon} />
         </span>
       )}
 
-      {(isAddressError || isUsernameError) && (
+      {(isAddressError || isUsernameError || isRequiredError) && (
         <div data-testid={receiverErrorDataTestId} className={globals.error}>
           {error}
         </div>
