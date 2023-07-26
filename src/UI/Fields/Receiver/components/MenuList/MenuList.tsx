@@ -81,23 +81,23 @@ export const MenuList: typeof components.MenuList = (props) => {
             [styles.receiverSelectAutocompleteUsername]: hasUsername
           })}
         >
-          {hasUsername && (
-            <span>
-              <MultiversXIconSimple
-                className={classNames(
-                  styles.receiverSelectAutocompleteIcon,
-                  styles.receiverSelectAutocompleteIconMuted
-                )}
-              />
-
-              {focused.label}
-            </span>
-          )}
-
           {hasUsername ? (
-            <span className={styles.receiverSelectAutocompleteWrapper}>
-              (<Trim text={focused.value} />)
-            </span>
+            <Fragment>
+              <span>
+                <MultiversXIconSimple
+                  className={classNames(
+                    styles.receiverSelectAutocompleteIcon,
+                    styles.receiverSelectAutocompleteIconMuted
+                  )}
+                />
+
+                {focused.label}
+              </span>
+
+              <span className={styles.receiverSelectAutocompleteWrapper}>
+                (<Trim text={focused.value} />)
+              </span>
+            </Fragment>
           ) : (
             <Trim text={trimSuggestion} />
           )}

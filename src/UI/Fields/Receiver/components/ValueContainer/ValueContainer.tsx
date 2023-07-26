@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import classNames from 'classnames';
 import { components } from 'react-select';
@@ -46,25 +46,25 @@ export const ValueContainer: typeof components.ValueContainer = (props) => {
             [styles.disabled]: isDisabled
           })}
         >
-          {hasUsername && (
-            <span className={styles.receiverSelectSingleUsername}>
-              <MultiversXIconSimple
-                className={styles.receiverSelectSingleUsernameIcon}
-              />
-
-              {superOption.label}
-            </span>
-          )}
-
           {hasUsername ? (
-            <span className={styles.receiverSelectSingleTrimWrapper}>
-              (
-              <Trim
-                text={superOption.value}
-                className={styles.receiverSelectSingleTrim}
-              />
-              )
-            </span>
+            <Fragment>
+              <span className={styles.receiverSelectSingleUsername}>
+                <MultiversXIconSimple
+                  className={styles.receiverSelectSingleUsernameIcon}
+                />
+
+                {superOption.label}
+              </span>
+
+              <span className={styles.receiverSelectSingleTrimWrapper}>
+                (
+                <Trim
+                  text={superOption.value}
+                  className={styles.receiverSelectSingleTrim}
+                />
+                )
+              </span>
+            </Fragment>
           ) : (
             <Trim
               text={superOption.value}

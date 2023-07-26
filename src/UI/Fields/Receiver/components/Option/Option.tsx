@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import classNames from 'classnames';
 import { components } from 'react-select';
@@ -27,25 +27,25 @@ export const Option: typeof components.Option = (props) => {
         [styles.focused]: isFocused
       })}
     >
-      {hasUsername && (
-        <span className={styles.receiverSelectOptionUsername}>
-          <MultiversXIconSimple
-            className={styles.receiverSelectOptionUsernameIcon}
-          />
-
-          {username}
-        </span>
-      )}
-
       {hasUsername ? (
-        <span className={styles.receiverSelectOptionNameWrapper}>
-          (
-          <Trim
-            text={option.value}
-            className={styles.receiverSelectOptionName}
-          />
-          )
-        </span>
+        <Fragment>
+          <span className={styles.receiverSelectOptionUsername}>
+            <MultiversXIconSimple
+              className={styles.receiverSelectOptionUsernameIcon}
+            />
+
+            {username}
+          </span>
+
+          <span className={styles.receiverSelectOptionNameWrapper}>
+            (
+            <Trim
+              text={option.value}
+              className={styles.receiverSelectOptionName}
+            />
+            )
+          </span>
+        </Fragment>
       ) : (
         <Trim text={option.value} className={styles.receiverSelectOptionName} />
       )}

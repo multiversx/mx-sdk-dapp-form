@@ -13,7 +13,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
-import { InputActionMeta, SingleValue } from 'react-select';
 import Select from 'react-select/creatable';
 
 import globals from 'assets/sass/globals.module.scss';
@@ -29,7 +28,13 @@ import { MenuList } from './components/MenuList';
 import { Option } from './components/Option';
 import { SelectContainer } from './components/SelectContainer';
 import { ValueContainer } from './components/ValueContainer';
-import { filterOptions, formatOptions } from './helpers';
+import {
+  filterOptions,
+  formatOptions,
+  onReceiverChange,
+  onReceiverInputChange,
+  setAllReceiverValues
+} from './helpers';
 import { useReceiverDisplayStates, useReceiverError } from './hooks';
 import { GenericOptionType } from './Receiver.types';
 
@@ -75,26 +80,6 @@ export const Receiver = (props: WithClassnameType) => {
     isInvalid
   });
 
-  const setAllValues = (value: string) => {
-    const optionWithUsername = options.find((option) => option.value === value);
-    const optionLabel =
-      usernameAccounts[value]?.username ?? optionWithUsername?.label;
-    const updatedInputValue = optionLabel ?? value;
-
-    setInputValue(updatedInputValue);
-    setOption({ value, label: updatedInputValue });
-
-    setFieldValue(
-      ValuesEnum.receiver,
-      usernameAccounts[value]?.address ?? value
-    );
-
-    setFieldValue(
-      ValuesEnum.receiverUsername,
-      usernameAccounts[value]?.username
-    );
-  };
-
   useEffect(() => {
     if (!receiver) {
       return;
@@ -115,37 +100,23 @@ export const Receiver = (props: WithClassnameType) => {
     onBlurReceiver(new Event('blur'));
   };
 
-  const onInputChange = useCallback(
-    (inputValue: string, meta: InputActionMeta) => {
-      if (!['input-blur', 'menu-close'].includes(meta.action)) {
-        // changeAndBlurInput(inputValue);
-        setAllValues(inputValue);
-
-        if (!inputValue) {
-          setOption(null);
-        }
-      }
-    },
-    []
-  );
-
   const options: GenericOptionType[] = useMemo(
     () => formatOptions(knownAddresses),
     [knownAddresses]
   );
 
-  const onChange = (option: SingleValue<GenericOptionType>) => {
-    if (option) {
-      setOption(option);
-      changeAndBlurInput(option.value);
+  const setAllValues = setAllReceiverValues({
+    setFieldValue,
+    setInputValue,
+    setOption,
+    options,
+    usernameAccounts
+  });
 
-      if (option.value !== option.label) {
-        setInputValue(option.label);
-      } else {
-        setInputValue(option.value);
-      }
-    }
-  };
+  const onInputChange = useCallback(
+    onReceiverInputChange({ setAllValues, setOption }),
+    []
+  );
 
   const changeAndBlurInput = useCallback((value: string) => {
     onChangeReceiver(value ? value.trim() : '');
@@ -154,6 +125,12 @@ export const Receiver = (props: WithClassnameType) => {
     // pushing the action at the end of the event loop through setTimeout function.
     setTimeout(onBlur);
   }, []);
+
+  const onChange = onReceiverChange({
+    changeAndBlurInput,
+    setOption,
+    setInputValue
+  });
 
   const Input = useMemo(
     () => renderInput(receiverSelectReference),
