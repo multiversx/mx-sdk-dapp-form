@@ -18,7 +18,7 @@ import { InputActionMeta, SingleValue } from 'react-select';
 import Select from 'react-select/creatable';
 
 import globals from 'assets/sass/globals.module.scss';
-import { useUsernameAccount } from 'contexts/ReceiverUsernameContext/utils';
+import { useUsernameAccount } from 'contexts/ReceiverUsernameContext/hooks';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled } from 'helpers';
 import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
@@ -64,8 +64,15 @@ export const Receiver = (props: WithClassnameType) => {
   const receiverSelectReference = useRef(null);
   const debouncedUsername = useDebounce(inputValue, ms1000);
 
+  const usernameExactMatchExists = knownAddresses
+    ? knownAddresses.find((account) => account.username === inputValue)
+    : false;
+
   const { receiverErrorDataTestId, error, isInvalid } = useReceiverError();
-  const { usernameAccounts } = useUsernameAccount(debouncedUsername);
+  const { usernameAccounts } = useUsernameAccount({
+    shouldSkipSearch: Boolean(usernameExactMatchExists),
+    usernameToLookFor: debouncedUsername
+  });
 
   const setAllValues = (value: string) => {
     const optionWithUsername = options.find((option) => option.value === value);
