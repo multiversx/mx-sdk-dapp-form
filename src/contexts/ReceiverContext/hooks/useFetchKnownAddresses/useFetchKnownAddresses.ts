@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getTransactions } from '@multiversx/sdk-dapp/apiCalls/transactions/getTransactions';
-import { ServerTransactionType } from '@multiversx/sdk-dapp/types';
 import uniqBy from 'lodash/uniqBy';
 
 import { getApiConfig } from 'apiCalls';
-
-import { useAccountContext } from '../../AccountContext';
-import { trimReceiverDomain } from '../helpers';
-import { KnowAddressType } from '../ReceiverContext';
+import { useAccountContext } from 'contexts/AccountContext';
+import { KnowAddressType } from 'contexts/ReceiverContext/ReceiverContext';
+import { formatAddressesFromTransactions } from './helpers';
 
 export function useFetchKnownAddresses() {
   const { address } = useAccountContext();
@@ -28,22 +26,8 @@ export function useFetchKnownAddresses() {
         withUsername: true
       });
 
-      const knownAddresses: KnowAddressType[] = resolvedTransactions.reduce(
-        (previous: ServerTransactionType[], current: ServerTransactionType) => {
-          const receiver = {
-            address: current.receiver,
-            username: trimReceiverDomain(current.receiverAssets?.name)
-          };
-
-          const sender = {
-            address: current.sender,
-            username: trimReceiverDomain(current.senderAssets?.name)
-          };
-
-          return current ? [...previous, receiver, sender] : previous;
-        },
-        []
-      );
+      const knownAddresses =
+        formatAddressesFromTransactions(resolvedTransactions);
 
       const uniqueKnownAddresses = uniqBy(
         knownAddresses,

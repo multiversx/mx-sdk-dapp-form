@@ -1,9 +1,8 @@
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
 import { KnowAddressType } from 'contexts';
-
-import { GenericOptionType } from '../Receiver.types';
-import { filterOptions } from './filterOptions';
+import { filterOptions } from 'UI/Fields/Receiver/helpers';
+import { GenericOptionType } from 'UI/Fields/Receiver/Receiver.types';
 
 export interface IsAnyOptionFoundType {
   knownAddresses: KnowAddressType[] | null;

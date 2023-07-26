@@ -3,7 +3,7 @@ import { useFormikContext } from 'formik';
 
 import { ExtendedValuesType } from 'types';
 import { useFormContext } from '../FormContext';
-import { useFetchKnownAddresses, useScamError } from './utils';
+import { useFetchKnownAddresses, useScamError } from './hooks';
 
 export interface KnowAddressType {
   address: string;
