@@ -1,11 +1,14 @@
 import React, { ReactNode } from 'react';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
+import { CopyButton } from '@multiversx/sdk-dapp/UI/CopyButton';
 import { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
+import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
+
 import classNames from 'classnames';
 import globals from 'assets/sass/globals.module.scss';
+
 import styles from './styles.module.scss';
 
 export const {
@@ -15,7 +18,7 @@ export const {
 export interface ReceiverPropsType {
   label?: string;
   receiver: string;
-  receiverUsername?: string;
+  receiverUsername?: string | null;
   scamReport?: ReactNode;
 }
 
@@ -49,7 +52,12 @@ export const Receiver = ({
         </span>
       )}
 
-      {hasUsername && <span className={styles.subValue}>{receiver}</span>}
+      {hasUsername && (
+        <span className={styles.subValue}>
+          <Trim text={receiver} className={styles.subValueTrim} />
+          <CopyButton text={receiver} className={styles.subValueCopy} />
+        </span>
+      )}
 
       {scamReport && (
         <div className={styles.scam}>

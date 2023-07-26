@@ -8,7 +8,7 @@ import Confirm from 'UI/Confirm';
 import { NFTSFTPreview } from 'UI/NFTSFTPreview';
 
 import styles from './../confirmScreen.module.scss';
-import { getConfirmButtonLabel } from './helpers';
+import { getConfirmButtonLabel, getReceiverUsername } from './helpers';
 
 export interface TransactionSummaryPropsType {
   isConfirmCloseBtnVisible?: boolean;
@@ -24,7 +24,7 @@ export const TransactionSummary = ({
 
   const {
     receiverUsernameInfo: { receiverUsername },
-    receiverInfo: { scamError, receiver },
+    receiverInfo: { scamError, receiver, knownAddresses },
     formInfo,
     gasInfo: { gasCostError, feeLimit },
     accountInfo: { isGuarded },
@@ -32,6 +32,7 @@ export const TransactionSummary = ({
     amountInfo,
     tokensInfo
   } = useSendFormContext();
+
   const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
   const {
     readonly,
@@ -80,6 +81,12 @@ export const TransactionSummary = ({
     TransactionTypeEnum.MetaESDT
   ].includes(txType);
 
+  const transactionReceiverUsername = getReceiverUsername({
+    knownAddresses,
+    receiverAddress: receiver,
+    existingReceiverUsername: receiverUsername
+  });
+
   return (
     <div className={styles.summary}>
       <div className={styles.fields}>
@@ -90,7 +97,7 @@ export const TransactionSummary = ({
         <Confirm.Receiver
           receiver={receiver}
           scamReport={scamError}
-          receiverUsername={receiverUsername}
+          receiverUsername={transactionReceiverUsername}
         />
 
         <div className={styles.columns}>

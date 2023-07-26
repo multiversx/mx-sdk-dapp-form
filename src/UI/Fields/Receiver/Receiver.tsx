@@ -80,22 +80,6 @@ export const Receiver = (props: WithClassnameType) => {
     isInvalid
   });
 
-  useEffect(() => {
-    if (!receiver) {
-      return;
-    }
-
-    const username = Object.keys(usernameAccounts).find(
-      (key) => usernameAccounts[key]?.address === receiver
-    );
-
-    setAllValues(username ?? receiver);
-
-    if (username) {
-      setInputValue(username);
-    }
-  }, [usernameAccounts, receiver]);
-
   const onBlur = () => {
     onBlurReceiver(new Event('blur'));
   };
@@ -136,6 +120,22 @@ export const Receiver = (props: WithClassnameType) => {
     () => renderInput(receiverSelectReference),
     [receiverSelectReference]
   );
+
+  useEffect(() => {
+    if (!receiver) {
+      return;
+    }
+
+    const username = Object.keys(usernameAccounts).find(
+      (key) => usernameAccounts[key]?.address === receiver
+    );
+
+    setAllValues(username ?? receiver);
+
+    if (username) {
+      setInputValue(username);
+    }
+  }, [usernameAccounts, receiver]);
 
   return (
     <div className={classNames(styles.receiver, className)}>
