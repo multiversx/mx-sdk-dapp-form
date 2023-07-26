@@ -1,6 +1,9 @@
 import { useState } from 'react';
-import { ApiConfigType } from 'apiCalls';
+
+import { ApiConfigType, getApiConfig } from 'apiCalls';
 import { getAccountByUsername } from 'apiCalls/account';
+import { getMultiversxAccount } from 'apiCalls/account/getAccount';
+import { trimReceiverDomain } from 'contexts/ReceiverContext/helpers';
 
 export interface UsernameAccountsType {
   [username: string]: {
@@ -36,10 +39,12 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
           ...existing,
           [username]: account
         };
+
         fetchedAddresses = newAddresses;
+
         return newAddresses;
       });
-    } catch (err) {
+    } catch {
       setUsernameAddresses((existing) => ({
         ...existing,
         [username]: null
@@ -49,9 +54,51 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
     setFetching(false);
   };
 
+  const fetchUsernameByAddress = async (address: string) => {
+    const fetched = Object.values(usernameAccounts).find(
+      (account) => account && account.address === address
+    );
+
+    if (fetched || fetching) {
+      return;
+    }
+
+    setFetching(true);
+
+    try {
+      const config = apiConfig || (await getApiConfig());
+      const account = await getMultiversxAccount(address, config.baseURL);
+
+      const fetchedAddress = account?.address;
+      const fetchedUsername = trimReceiverDomain(account?.username);
+
+      if (!fetchedAddress || !fetchedUsername) {
+        return;
+      }
+
+      setUsernameAddresses((existing) => {
+        const newAddresses = {
+          ...existing,
+          [fetchedUsername]: {
+            address: fetchedAddress,
+            username: fetchedUsername
+          }
+        };
+
+        fetchedAddresses = newAddresses;
+        return newAddresses;
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
+    setFetching(false);
+  };
+
   return {
     usernameAccounts,
     fetchUsernameAccount,
+    fetchUsernameByAddress,
     fetchingUsernameAccount: fetching
   };
 }

@@ -9,20 +9,29 @@ import {
 
 export const useUsernameAccount = ({
   shouldSkipSearch = false,
-  usernameToLookFor
+  searchPatternToLookFor
 }: UseUsernameAccountType): UseUsernameAddressReturnType => {
-  const { fetchUsernameAccount, fetchingUsernameAccount, usernameAccounts } =
-    useFetchUsernameAddress();
+  const {
+    fetchUsernameAccount,
+    fetchUsernameByAddress,
+    fetchingUsernameAccount,
+    usernameAccounts
+  } = useFetchUsernameAddress();
 
-  const isValidAddress = addressIsValid(usernameToLookFor);
+  const isValidAddress = addressIsValid(searchPatternToLookFor);
 
   useEffect(() => {
-    if (!usernameToLookFor || isValidAddress || shouldSkipSearch) {
+    if (!searchPatternToLookFor || shouldSkipSearch) {
       return;
     }
 
-    fetchUsernameAccount(usernameToLookFor);
-  }, [usernameToLookFor, isValidAddress]);
+    if (isValidAddress) {
+      fetchUsernameByAddress(searchPatternToLookFor);
+      return;
+    }
+
+    fetchUsernameAccount(searchPatternToLookFor);
+  }, [searchPatternToLookFor, isValidAddress]);
 
   return {
     fetchingUsernameAccount,

@@ -6,6 +6,6 @@ export interface UseUsernameAddressReturnType {
 }
 
 export interface UseUsernameAccountType {
-  usernameToLookFor: string;
+  searchPatternToLookFor: string;
   shouldSkipSearch: boolean;
 }

@@ -22,8 +22,8 @@ import { useUsernameAccount } from 'contexts/ReceiverUsernameContext/hooks';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled } from 'helpers';
 import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
-
 import { ExtendedValuesType, ValuesEnum } from 'types';
+
 import { Control } from './components/Control';
 import { DropdownIndicator } from './components/DropdownIndicator';
 import { renderInput } from './components/Input';
@@ -32,7 +32,8 @@ import { MenuList } from './components/MenuList';
 import { Option } from './components/Option';
 import { SelectContainer } from './components/SelectContainer';
 import { ValueContainer } from './components/ValueContainer';
-import { filterOptions, useReceiverError } from './helpers';
+import { filterOptions } from './helpers';
+import { useReceiverError } from './hooks';
 import { GenericOptionType } from './Receiver.types';
 
 import styles from './styles.module.scss';
@@ -62,6 +63,7 @@ export const Receiver = (props: WithClassnameType) => {
   );
 
   const receiverSelectReference = useRef(null);
+  const searchQueryIsAddress = inputValue.startsWith('erd1');
   const debouncedUsername = useDebounce(inputValue, ms1000);
 
   const usernameExactMatchExists = knownAddresses
@@ -71,7 +73,7 @@ export const Receiver = (props: WithClassnameType) => {
   const { receiverErrorDataTestId, error, isInvalid } = useReceiverError();
   const { usernameAccounts } = useUsernameAccount({
     shouldSkipSearch: Boolean(usernameExactMatchExists),
-    usernameToLookFor: debouncedUsername
+    searchPatternToLookFor: debouncedUsername
   });
 
   const setAllValues = (value: string) => {
@@ -165,7 +167,6 @@ export const Receiver = (props: WithClassnameType) => {
   const isUsernameDebouncing =
     inputValue !== debouncedUsername && foundReceiver !== null;
 
-  const searchQueryIsAddress = inputValue.startsWith('erd1');
   const addressIsAmongKnown = Boolean(
     knownAddresses && inputValue
       ? knownAddresses.find((account) => account.address.startsWith(inputValue))
