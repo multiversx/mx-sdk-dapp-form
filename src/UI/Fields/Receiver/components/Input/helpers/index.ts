@@ -1,1 +1,1 @@
-export * from './doesFocusedOptionIncludeUsername';
+export * from './getFocusedOptionIncludesUsername';

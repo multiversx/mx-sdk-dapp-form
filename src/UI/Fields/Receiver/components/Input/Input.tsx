@@ -4,11 +4,14 @@ import { components } from 'react-select';
 
 import { useSendFormContext } from 'contexts';
 
+import { ReceiverSelectReferenceType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
-import { doesFocusedOptionIncludeUsername } from './helpers';
+import { getFocusedOptionIncludesUsername } from './helpers';
 
 export const renderInput =
-  (receiverSelectReference: MutableRefObject<null>): typeof components.Input =>
+  (
+    receiverSelectReference: MutableRefObject<ReceiverSelectReferenceType>
+  ): typeof components.Input =>
   (props) => {
     const { selectProps } = props;
     const { menuIsOpen, inputValue } = selectProps;
@@ -16,10 +19,12 @@ export const renderInput =
       receiverUsernameInfo: { receiverUsername }
     } = useSendFormContext();
 
-    const focusedOptionIncludesUsername = doesFocusedOptionIncludeUsername(
+    const focusedOptionIncludesUsername = getFocusedOptionIncludesUsername(
       receiverSelectReference,
       inputValue
     );
+
+    const isSpaced = Boolean(receiverUsername) || focusedOptionIncludesUsername;
 
     return (
       <components.Input
@@ -27,8 +32,7 @@ export const renderInput =
         data-testid='receiver'
         className={classNames(styles.receiverSelectInput, {
           [styles.visible]: menuIsOpen,
-          [styles.spaced]:
-            Boolean(receiverUsername) || focusedOptionIncludesUsername
+          [styles.spaced]: isSpaced
         })}
       />
     );

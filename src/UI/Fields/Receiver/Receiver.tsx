@@ -32,7 +32,11 @@ import { MenuList } from './components/MenuList';
 import { Option } from './components/Option';
 import { SelectContainer } from './components/SelectContainer';
 import { ValueContainer } from './components/ValueContainer';
-import { filterOptions } from './helpers';
+import {
+  filterOptions,
+  getIsValueAmongKnown,
+  isAnyOptionFound
+} from './helpers';
 import { useReceiverError } from './hooks';
 import { GenericOptionType } from './Receiver.types';
 
@@ -72,7 +76,7 @@ export const Receiver = (props: WithClassnameType) => {
 
   const { receiverErrorDataTestId, error, isInvalid } = useReceiverError();
   const { usernameAccounts } = useUsernameAccount({
-    shouldSkipSearch: Boolean(usernameExactMatchExists),
+    shouldSkipSearch: Boolean(usernameExactMatchExists) || searchQueryIsAddress,
     searchPatternToLookFor: debouncedUsername
   });
 
@@ -80,9 +84,10 @@ export const Receiver = (props: WithClassnameType) => {
     const optionWithUsername = options.find((option) => option.value === value);
     const optionLabel =
       usernameAccounts[value]?.username ?? optionWithUsername?.label;
+    const updatedInputValue = optionLabel ?? value;
 
-    setInputValue(optionLabel ?? value);
-    setOption({ value, label: optionLabel ?? value });
+    setInputValue(updatedInputValue);
+    setOption({ value, label: updatedInputValue });
 
     setFieldValue(
       ValuesEnum.receiver,
@@ -167,38 +172,41 @@ export const Receiver = (props: WithClassnameType) => {
   const isUsernameDebouncing =
     inputValue !== debouncedUsername && foundReceiver !== null;
 
-  const addressIsAmongKnown = Boolean(
-    knownAddresses && inputValue
-      ? knownAddresses.find((account) => account.address.startsWith(inputValue))
-      : false
-  );
+  const addressIsAmongKnown = getIsValueAmongKnown({
+    key: 'address',
+    knownAddresses,
+    inputValue
+  });
 
-  const usernameIsAmongKnown = Boolean(
-    knownAddresses && inputValue
-      ? knownAddresses.find((account) =>
-          account.username ? account.username.startsWith(inputValue) : false
-        )
-      : false
-  );
+  const usernameIsAmongKnown = getIsValueAmongKnown({
+    key: 'username',
+    knownAddresses,
+    inputValue
+  });
+
+  const searchMatchesOption = isAnyOptionFound({
+    inputValue,
+    knownAddresses
+  });
 
   const isUsernameFetching =
-    !isUsernameDebouncing && foundReceiver === undefined;
+    !isUsernameDebouncing && foundReceiver === undefined && inputValue;
 
   const isAddressError =
     searchQueryIsAddress &&
     (!addressIsAmongKnown || !menuIsOpen) &&
     !addressIsValid(inputValue);
 
-  const isUsernameError = [
-    !inputValue,
-    !debouncedUsername,
-    isUsernameDebouncing,
-    isUsernameFetching,
-    foundReceiver,
-    searchQueryIsAddress,
-    menuIsOpen && addressIsAmongKnown,
-    menuIsOpen && usernameIsAmongKnown
-  ].every((condition) => !condition);
+  const isUsernameError = Boolean(
+    inputValue &&
+      debouncedUsername &&
+      !isUsernameDebouncing &&
+      !isUsernameFetching &&
+      !foundReceiver &&
+      !searchQueryIsAddress &&
+      !(menuIsOpen && addressIsAmongKnown) &&
+      !(menuIsOpen && usernameIsAmongKnown)
+  );
 
   const isUsernameLoading = Boolean(
     inputValue &&
@@ -207,12 +215,14 @@ export const Receiver = (props: WithClassnameType) => {
       !usernameIsAmongKnown
   );
 
-  const isRequiredError = [
-    isInvalid,
-    !isUsernameError,
-    !isAddressError,
-    !menuIsOpen
-  ].every((condition) => condition);
+  const isRequiredError =
+    isInvalid &&
+    !isUsernameError &&
+    !isUsernameFetching &&
+    !isUsernameDebouncing &&
+    !isAddressError &&
+    !searchMatchesOption &&
+    !inputValue;
 
   const Input = useMemo(
     () => renderInput(receiverSelectReference),
@@ -262,10 +272,21 @@ export const Receiver = (props: WithClassnameType) => {
           LoadingIndicator: () => null
         }}
         className={classNames(styles.receiverSelectContainer, {
+          [styles.opened]: inputValue && searchMatchesOption && menuIsOpen,
           [styles.invalid]:
             isAddressError || isUsernameError || scamError || isRequiredError
         })}
       />
+
+      {(isAddressError || isUsernameError || isRequiredError) && (
+        <div
+          id='receiver-error'
+          data-testid={receiverErrorDataTestId}
+          className={globals.error}
+        >
+          {error}
+        </div>
+      )}
 
       {isUsernameLoading && <div className={styles.loading}>Loading...</div>}
 
@@ -274,12 +295,6 @@ export const Receiver = (props: WithClassnameType) => {
           Account found!{' '}
           <FontAwesomeIcon icon={faCheck} className={styles.foundIcon} />
         </span>
-      )}
-
-      {(isAddressError || isUsernameError || isRequiredError) && (
-        <div data-testid={receiverErrorDataTestId} className={globals.error}>
-          {error}
-        </div>
       )}
 
       {scamError && (

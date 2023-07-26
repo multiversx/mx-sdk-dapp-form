@@ -25,10 +25,12 @@ export const ValueContainer: typeof components.ValueContainer = (props) => {
   const hasUsername =
     receiverUsername ?? (option && option.value !== option.label);
 
-  const superOption = option && {
-    value: receiver ?? option.value,
-    label: receiverUsername ?? option.label
-  };
+  const superOption = option
+    ? {
+        value: receiver ?? option.value,
+        label: receiverUsername ?? option.label
+      }
+    : null;
 
   const shouldShowPreview =
     superOption && (hasUsername || (!hasUsername && !menuIsOpen));

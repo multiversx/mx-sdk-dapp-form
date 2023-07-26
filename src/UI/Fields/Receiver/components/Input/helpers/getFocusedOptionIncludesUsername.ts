@@ -2,8 +2,8 @@ import { MutableRefObject } from 'react';
 
 import { ReceiverSelectReferenceType } from 'UI/Fields/Receiver/Receiver.types';
 
-export const doesFocusedOptionIncludeUsername = (
-  receiverSelectReference: MutableRefObject<null>,
+export const getFocusedOptionIncludesUsername = (
+  receiverSelectReference: MutableRefObject<ReceiverSelectReferenceType>,
   inputValue: string
 ) => {
   const currentReceiverSelectReference =

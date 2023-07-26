@@ -86,6 +86,10 @@
       position: relative;
     }
 
+    &.opened + div {
+      display: none;
+    }
+
     .receiver-select-control {
       background-color: transparent !important;
       border: none;

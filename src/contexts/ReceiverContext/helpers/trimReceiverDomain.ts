@@ -3,5 +3,10 @@ export const trimReceiverDomain = (receiver?: string) => {
     return;
   }
 
-  return receiver.substring(0, receiver.lastIndexOf('.'));
+  const trimmedPartBeforeLastDot = receiver.substring(
+    0,
+    receiver.lastIndexOf('.')
+  );
+
+  return trimmedPartBeforeLastDot;
 };

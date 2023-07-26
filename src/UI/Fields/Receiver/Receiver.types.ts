@@ -8,6 +8,7 @@ export interface GenericOptionType {
 
 export type ReceiverSelectReferenceType = SelectInstance<
   GenericOptionType,
+  // Whether the select instance supports multiple options.
   false,
   GroupBase<GenericOptionType>
 > | null;

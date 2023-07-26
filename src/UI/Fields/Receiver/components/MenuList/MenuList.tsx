@@ -34,10 +34,11 @@ export const MenuList: typeof components.MenuList = (props) => {
 
   const showTrimmedAutocomplete = trimSuggestion && !inputValue;
 
+  const inputExceedsHalfSuggestion =
+    trimSuggestion && inputValue.length < trimSuggestion.length / 2;
+
   const showAddressUntrimmedAutocomplete =
-    trimSuggestion &&
-    Boolean(inputValue) &&
-    inputValue.length < trimSuggestion.length / 2;
+    trimSuggestion && Boolean(inputValue) && inputExceedsHalfSuggestion;
 
   const showUsernameUntrimmedAutocomplete =
     trimSuggestion && Boolean(inputValue);
