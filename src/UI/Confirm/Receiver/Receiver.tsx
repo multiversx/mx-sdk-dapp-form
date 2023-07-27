@@ -35,22 +35,20 @@ export const Receiver = ({
     <div className={styles.confirmReceiver}>
       <span className={globals.label}>{label}</span>
 
-      {receiverValue && (
-        <span
-          className={classNames(styles.value, { [styles.shrunk]: hasUsername })}
-          data-testid='confirmReceiver'
-        >
-          {hasUsername && <MultiversXIconSimple className={styles.icon} />}
-          {receiverValue}
+      <span
+        className={classNames(styles.value, { [styles.shrunk]: hasUsername })}
+        data-testid='confirmReceiver'
+      >
+        {hasUsername && <MultiversXIconSimple className={styles.icon} />}
+        {receiverValue}
 
-          {hasUsername && (
-            <ExplorerLink
-              page={`/${ACCOUNTS_ENDPOINT}/${receiver}`}
-              className={styles.explorer}
-            />
-          )}
-        </span>
-      )}
+        {hasUsername && (
+          <ExplorerLink
+            page={`/${ACCOUNTS_ENDPOINT}/${receiver}`}
+            className={styles.explorer}
+          />
+        )}
+      </span>
 
       {hasUsername && (
         <span className={styles.subValue}>
