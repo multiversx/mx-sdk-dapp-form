@@ -3,24 +3,25 @@ import { addressIsValid } from '@multiversx/sdk-dapp/utils';
 import { KnowAddressType } from 'contexts';
 import { useUsernameAccount } from 'contexts/ReceiverUsernameContext/hooks';
 import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
+import { useReceiverError } from '../useReceiverError';
 import { getIsValueAmongKnown, isAnyOptionFound } from './helpers';
 
 export interface UseReceiverDisplayStatesType {
   inputValue: string;
   knownAddresses: KnowAddressType[] | null;
   menuIsOpen: boolean;
-  isInvalid: boolean;
 }
+
+const MS_100 = process.env.NODE_ENV !== 'test' ? 1000 : 1;
 
 export const useReceiverDisplayStates = ({
   inputValue,
   knownAddresses,
-  menuIsOpen,
-  isInvalid
+  menuIsOpen
 }: UseReceiverDisplayStatesType) => {
-  const ms1000 = process.env.NODE_ENV !== 'test' ? 1000 : 1;
   const searchQueryIsAddress = inputValue.startsWith('erd1');
-  const debouncedUsername = useDebounce(inputValue, ms1000);
+  const debouncedUsername = useDebounce(inputValue, MS_100);
+  const { isInvalid } = useReceiverError();
 
   const usernameExactMatchExists = knownAddresses
     ? knownAddresses.find((account) => account.username === inputValue)
@@ -91,7 +92,7 @@ export const useReceiverDisplayStates = ({
     inputValue && searchMatchesOption && menuIsOpen;
 
   return {
-    isAddressError,
+    isAddressError: isAddressError || isInvalid,
     isUsernameError,
     isRequiredError,
     isUsernameLoading,

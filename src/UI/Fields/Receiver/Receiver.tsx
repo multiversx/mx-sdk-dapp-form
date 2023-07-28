@@ -64,7 +64,7 @@ export const Receiver = (props: WithClassnameType) => {
     receiver ? { label: receiver, value: receiver } : null
   );
 
-  const { receiverErrorDataTestId, error, isInvalid } = useReceiverError();
+  const { receiverErrorDataTestId, error } = useReceiverError();
   const {
     isAddressError,
     isUsernameError,
@@ -76,8 +76,7 @@ export const Receiver = (props: WithClassnameType) => {
   } = useReceiverDisplayStates({
     inputValue,
     menuIsOpen,
-    knownAddresses,
-    isInvalid
+    knownAddresses
   });
 
   const onBlur = () => {
