@@ -2,11 +2,13 @@ import { fireEvent, waitFor } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import {
   formConfiguration,
   renderForm as beginAll,
   sendAndConfirmTest
 } from 'tests/helpers';
+import { ValuesEnum } from 'types';
 
 const beforAllTokens = (balance?: string) =>
   beginAll({
@@ -107,17 +109,24 @@ describe('Send Meta ESDT', () => {
       expect(tokenId.value).toBe(metaToken.identifier);
     });
 
-    const canTransferWarning = await methods.findByTestId('canTransferWarning');
+    const canTransferWarning = await methods.findByTestId(
+      FormDataTestIdsEnum.canTransferWarning
+    );
     expect(canTransferWarning.textContent).toContain('Warning');
 
     // fill in receiver
-    const receiver = await methods.findByTestId('receiver');
+    const receiver = await methods.findByTestId(ValuesEnum.receiver);
 
     // expect receiver to be forbidden
     fireEvent.change(receiver, { target: { value: fakeReceiver } });
+    fireEvent.blur(receiver, { target: { value: fakeReceiver } });
 
-    const receiverError = await methods.findByTestId('receiverError');
-    expect(receiverError.textContent).toBe('Receiver not allowed');
+    await waitFor(async () => {
+      const receiverError = await methods.findByTestId(
+        FormDataTestIdsEnum.receiverError
+      );
+      expect(receiverError.textContent).toBe('Receiver not allowed');
+    });
 
     // fill in allowed receiver
     fireEvent.change(receiver, { target: { value: testReceiver } });
@@ -127,11 +136,11 @@ describe('Send Meta ESDT', () => {
     expect(available.textContent).toBe('Available: 10,000 MT1-ff89d3');
 
     // fill in amount
-    const amount: any = await methods.findByTestId('amount');
+    const amount: any = await methods.findByTestId(ValuesEnum.amount);
     fireEvent.change(amount, { target: { value: '10' } });
     fireEvent.blur(amount, { target: { value: '10' } });
 
-    const dataInput: any = methods.getByTestId('data');
+    const dataInput: any = methods.getByTestId(ValuesEnum.data);
 
     // check data input disabled
     expect(dataInput.disabled).toBeTruthy();
@@ -143,7 +152,7 @@ describe('Send Meta ESDT', () => {
       expect(dataInput.value).toBe(dataString);
     });
 
-    const gasLimit: any = methods.getByTestId('gasLimit');
+    const gasLimit: any = methods.getByTestId(ValuesEnum.gasLimit);
     expect(gasLimit.value).toBe('1000000');
 
     await sendAndConfirmTest({ methods })({

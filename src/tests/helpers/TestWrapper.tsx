@@ -7,6 +7,7 @@ import {
 } from '@multiversx/sdk-dapp/types/enums.types';
 import { GuardianScreenType } from '@multiversx/sdk-dapp/types/transactions.types';
 import { Loader } from '@multiversx/sdk-dapp/UI/Loader';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { SendFormContainer, SendFormContainerPropsType } from 'containers';
 import {
   useGetInitialValues,
@@ -55,7 +56,7 @@ export const TestWrapper = ({
   );
 
   if (!initValues) {
-    return <Loader dataTestId='loader' />;
+    return <Loader data-testid={FormDataTestIdsEnum.loader} />;
   }
 
   const initialValues = formConfigValues;

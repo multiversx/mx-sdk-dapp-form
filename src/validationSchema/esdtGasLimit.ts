@@ -7,9 +7,9 @@ import { ValidationErrorMessagesType } from 'types/validation';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 import { sharedGasLimit } from './sharedGasLimit';
 
-const required = string().required('Required');
-
 const esdtGasLimit = (errorMessages: ValidationErrorMessagesType) => {
+  const required = string().required(errorMessages.required);
+
   const minValue = string().test(
     'minValue',
     errorMessages.tooLowGasLimit(TOKEN_GAS_LIMIT),

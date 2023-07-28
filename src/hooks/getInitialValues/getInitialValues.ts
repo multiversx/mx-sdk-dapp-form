@@ -1,5 +1,7 @@
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { setApiConfig } from 'apiCalls';
+import { SendFormContainerPropsType } from 'containers/SendFormContainer';
+import { PartialNftType, PartialTokenType } from 'types';
 import getInitialAmount from './getInitialAmount';
 import { getInitialData } from './getInitialData';
 import getInitialGasLimit from './getInitialGasLimit';
@@ -15,11 +17,37 @@ function getSearchParamTokenId() {
   return searchParamTokenId;
 }
 
-export async function getInitialValues(props: GetInitialValuesType) {
+export interface GetInitialValuesReturnType {
+  initialValues: {
+    receiver: string;
+    receiverUsername?: string;
+    amount: string;
+    tokenId: string;
+    gasLimit: string;
+    gasPrice: string;
+    data: string;
+  };
+  nft?: PartialNftType;
+  gasLimitCostError?: SendFormContainerPropsType['initGasLimitError'];
+  computedTokens: PartialTokenType[];
+  computedTokenId: string;
+  tokenFound: boolean;
+}
+
+export async function getInitialValues(
+  props: GetInitialValuesType
+): Promise<GetInitialValuesReturnType> {
   const {
     address,
     egldLabel,
-    configValues: { receiver, amount, gasPrice, data, tokenId: configTokenId },
+    configValues: {
+      receiver,
+      receiverUsername,
+      amount,
+      gasPrice,
+      data,
+      tokenId: configTokenId
+    },
     networkConfig
   } = props;
 
@@ -43,8 +71,9 @@ export async function getInitialValues(props: GetInitialValuesType) {
 
   const { initGasLimit, initGasLimitError } = gasData;
 
-  const initialValues = {
+  const initialValues: GetInitialValuesReturnType['initialValues'] = {
     receiver,
+    receiverUsername,
     amount: getInitialAmount({ computedNft, amount }),
     tokenId: computedTokenId,
     gasLimit: initGasLimit,
@@ -54,7 +83,7 @@ export async function getInitialValues(props: GetInitialValuesType) {
 
   const { isEsdt } = getIdentifierType(identifier);
 
-  const returnValues = {
+  const returnValues: GetInitialValuesReturnType = {
     initialValues,
     nft: computedNft?.nft,
     gasLimitCostError: initGasLimitError,

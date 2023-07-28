@@ -14,6 +14,8 @@ interface PrepareTransactionType {
   amount: string;
   receiver: string;
   sender: string;
+  senderUsername?: string;
+  receiverUsername?: string;
   data: string;
   gasPrice: string;
   gasLimit: string;
@@ -25,7 +27,9 @@ export function prepareTransaction({
   data,
   nonce,
   receiver,
+  receiverUsername,
   sender,
+  senderUsername,
   gasPrice,
   gasLimit,
   chainId
@@ -39,6 +43,8 @@ export function prepareTransaction({
     receiver: new Address(receiver),
     gasPrice: parseInt(gasPrice),
     gasLimit: parseInt(gasLimit),
+    senderUsername,
+    receiverUsername,
     data: new TransactionPayload(data),
     chainID: chainId,
     version: new TransactionVersion(VERSION)

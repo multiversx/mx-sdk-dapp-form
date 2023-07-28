@@ -3,6 +3,7 @@ import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import { getIsDisabled } from 'helpers';
@@ -44,7 +45,10 @@ export const Data = ({ className }: WithClassnameType) => {
       </div>
 
       {isDataInvalid && (
-        <div className={globals.error} data-testid='dataError'>
+        <div
+          className={globals.error}
+          data-testid={FormDataTestIdsEnum.dataError}
+        >
           {dataError}
         </div>
       )}

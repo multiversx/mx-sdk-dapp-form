@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { TransactionSummary, TransactionSummaryPropsType } from './components';
 import styles from './components/confirmScreen.module.scss';
@@ -24,7 +25,7 @@ export const ConfirmScreen = (props: ConfirmScreenPropsType) => {
   return (
     <div
       className={classNames(styles.confirm, props.className)}
-      data-testid='confirmScreen'
+      data-testid={FormDataTestIdsEnum.confirmScreen}
     >
       <TransactionSummary {...props} />
     </div>

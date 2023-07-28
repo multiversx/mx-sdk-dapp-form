@@ -1,5 +1,7 @@
 import { fireEvent, waitFor, act } from '@testing-library/react';
 import selectEvent from 'react-select-event';
+import { FormDataTestIdsEnum } from 'constants/index';
+import { ValuesEnum } from 'types/form';
 import {
   beforAllTokens,
   setupEsdtServer,
@@ -18,12 +20,14 @@ describe('Send tokens', () => {
     const input = await setGasLimitInput('50000');
     await setAmountInput('10');
 
-    const gasLimitError = await methods.findByTestId('gasLimitError');
+    const gasLimitError = await methods.findByTestId(
+      FormDataTestIdsEnum.gasLimitError
+    );
     expect(gasLimitError.textContent).toBe(
       'Gas limit must be greater or equal to 500000'
     );
 
-    const feeLimit = methods.getByTestId('feeLimit');
+    const feeLimit = methods.getByTestId(FormDataTestIdsEnum.feeLimit);
     fireEvent.click(feeLimit);
 
     const gasLimitResetBtn = await methods.findByTestId('gasLimitResetBtn');
@@ -43,7 +47,7 @@ describe('Send tokens', () => {
     const availableTokens = await findByTestId('available-TWO-824e70');
     expect(availableTokens.getAttribute('data-value')).toBe('1000 TWO-824e70');
 
-    const gasLimit: any = getByTestId('gasLimit');
+    const gasLimit: any = getByTestId(ValuesEnum.gasLimit);
     expect(gasLimit.value).toBe('500000');
   });
 
@@ -53,7 +57,9 @@ describe('Send tokens', () => {
       const setInput = useAmountInput(methods);
 
       await setInput('0');
-      const tokenAmountError = await methods.findByTestId('amountError');
+      const tokenAmountError = await methods.findByTestId(
+        FormDataTestIdsEnum.amountError
+      );
       expect(tokenAmountError.textContent).toBe('Cannot be zero');
     });
 
@@ -62,7 +68,9 @@ describe('Send tokens', () => {
       const setInput = useAmountInput(methods);
 
       await setInput('1100');
-      const tokenAmountError = await methods.findByTestId('amountError');
+      const tokenAmountError = await methods.findByTestId(
+        FormDataTestIdsEnum.amountError
+      );
       expect(tokenAmountError.textContent).toBe('Insufficient funds');
     });
     test('Tokens amount max button', async () => {
@@ -70,10 +78,10 @@ describe('Send tokens', () => {
       const entireTokenBalaceButton = await methods.findByText('Max');
       fireEvent.click(entireTokenBalaceButton);
 
-      const input: any = await methods.findByTestId('amount');
+      const input: any = await methods.findByTestId(ValuesEnum.amount);
 
       expect(input.value).toBe('1,000');
-      const data: any = await methods.findByTestId('data');
+      const data: any = await methods.findByTestId(ValuesEnum.data);
 
       await waitFor(() => {
         expect(data.value).toBe('ESDTTransfer@54574f2d383234653730@0186a0');
@@ -86,10 +94,12 @@ describe('Send tokens', () => {
 
       await setInput('10');
 
-      const sendButton = methods.getByTestId('sendBtn');
+      const sendButton = methods.getByTestId(FormDataTestIdsEnum.sendBtn);
       fireEvent.click(sendButton);
 
-      const gasLimitError = await methods.findByTestId('gasLimitError');
+      const gasLimitError = await methods.findByTestId(
+        FormDataTestIdsEnum.gasLimitError
+      );
       expect(gasLimitError.textContent).toBe('Insufficient funds');
     });
   });
@@ -110,7 +120,7 @@ describe('Send tokens', () => {
 
       selectEvent.select(methods.getByLabelText('Token'), 'TwoTToken');
 
-      const dataInput: any = methods.getByTestId('data');
+      const dataInput: any = methods.getByTestId(ValuesEnum.data);
       expect(dataInput.value).toBe('ESDTTransfer@54574f2d383234653730@03e8');
     });
   });

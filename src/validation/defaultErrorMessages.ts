@@ -13,6 +13,7 @@ export const defaultErrorMessages: ValidationErrorMessagesType = {
   amountTooSmall: 'Amount too small',
   sameAsOwnerAddress: 'Same as owner address',
   receiverNotAllowed: 'Receiver not allowed',
+  invalidHerotag: 'Invalid herotag',
   tooLowGasLimit: (gasLimit = GAS_LIMIT) =>
     `Gas limit must be greater or equal to ${gasLimit}`,
   tooHighGasLimit: (gasLimit = GAS_LIMIT) =>

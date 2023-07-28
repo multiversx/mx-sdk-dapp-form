@@ -8,6 +8,7 @@ export interface ValidationErrorMessagesType {
   amountTooSmall: string;
   sameAsOwnerAddress: string;
   receiverNotAllowed: string;
+  invalidHerotag: string;
   required: string;
   maxDecimalsAllowed: (decimals?: string | number) => string;
   tooHighGasLimit: (gasLimit?: string | number) => string;

@@ -1,6 +1,8 @@
 import { fireEvent, waitFor } from '@testing-library/react';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { formattedAmountSelector } from 'tests/helpers';
 import { renderForm } from 'tests/helpers';
+import { ValuesEnum } from 'types/form';
 
 describe('Data field tests', () => {
   test('data changes transaction fee', async () => {
@@ -8,15 +10,15 @@ describe('Data field tests', () => {
 
     const methods = renderForm();
 
-    const feeLimit = await methods.findByTestId('feeLimit');
+    const feeLimit = await methods.findByTestId(FormDataTestIdsEnum.feeLimit);
 
     expect(formattedAmountSelector(feeLimit).intAmount).toBe('0');
 
-    const input = methods.getByTestId('data');
+    const input = methods.getByTestId(ValuesEnum.data);
 
     fireEvent.change(input, data);
 
-    const gasInput: any = methods.getByTestId('gasLimit');
+    const gasInput: any = methods.getByTestId(ValuesEnum.gasLimit);
     expect(gasInput.value).toBe('56000');
 
     expect(formattedAmountSelector(feeLimit).intAmount).toBe('0');

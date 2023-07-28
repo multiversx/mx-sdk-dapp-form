@@ -8,9 +8,9 @@ import getTokenDetails from 'operations/getTokenDetails';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from '../types/validation';
 
-const required = string().required('Required');
-
 const esdtAmount = (errorMessages: ValidationErrorMessagesType) => {
+  const required = string().required(errorMessages.required);
+
   const decimals = string().test({
     name: 'decimalFormat',
     test: function (value) {

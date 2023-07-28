@@ -1,11 +1,13 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import {
   formConfiguration,
   renderForm as beginAll,
   sendAndConfirmTest
 } from 'tests/helpers';
+import { ValuesEnum } from 'types/form';
 
 const nftToken = {
   identifier: 'NFT-f0806e-01',
@@ -73,13 +75,15 @@ describe('Send NFT tokens', () => {
     const methods = beforAllTokens();
 
     // fill in receiver
-    const receiver: any = await methods.findByTestId('receiver');
+    const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
 
     fireEvent.change(receiver, { target: { value: testAddress } });
     fireEvent.blur(receiver);
 
     await waitFor(() => {
-      const receiverError = methods.getByTestId('receiverError');
+      const receiverError = methods.getByTestId(
+        FormDataTestIdsEnum.receiverError
+      );
       expect(receiverError.innerHTML).toBe('Same as owner address');
     });
 
@@ -98,7 +102,7 @@ describe('Send NFT tokens', () => {
       expect(tokenPreviewIdentifier.textContent).toBe('NFT-f0806e-01');
     });
 
-    const data: any = await methods.findByTestId('data');
+    const data: any = await methods.findByTestId(ValuesEnum.data);
     fireEvent.blur(data);
 
     const dataString =
@@ -110,14 +114,16 @@ describe('Send NFT tokens', () => {
 
     expect(data.disabled).toBeTruthy(); // check disabled
 
-    const gasLimit: any = methods.getByTestId('gasLimit');
+    const gasLimit: any = methods.getByTestId(ValuesEnum.gasLimit);
     expect(gasLimit.value).toBe('1000000');
 
     fireEvent.change(gasLimit, { target: { value: '100000' } });
     fireEvent.blur(gasLimit);
 
     await waitFor(() => {
-      const gasLimitError = methods.getByTestId('gasLimitError');
+      const gasLimitError = methods.getByTestId(
+        FormDataTestIdsEnum.gasLimitError
+      );
       expect(gasLimitError.textContent).toBe(
         'Gas limit must be greater or equal to 1000000'
       );

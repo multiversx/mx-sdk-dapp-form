@@ -7,9 +7,8 @@ import { ValidationErrorMessagesType } from 'types/validation';
 import validateGasLimitAmount from 'validation/validateGasLimitAmount';
 import { sharedGasLimit } from './sharedGasLimit';
 
-const required = string().required('Required');
-
 const egldGasLimit = (errorMessages: ValidationErrorMessagesType) => {
+  const required = string().required(errorMessages.required);
   const funds = string().test(
     'funds',
     errorMessages.insufficientFunds,

@@ -1,11 +1,13 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import {
   formConfiguration,
   renderForm as beginAll,
   sendAndConfirmTest
 } from 'tests/helpers';
+import { ValuesEnum } from 'types/form';
 
 const sftToken = {
   identifier: 'CNTMBLT-efb397-01',
@@ -64,13 +66,15 @@ describe('Send SFT tokens', () => {
     const methods = beforAllTokens();
 
     // fill in receiver
-    const receiver: any = await methods.findByTestId('receiver');
+    const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
 
     fireEvent.change(receiver, { target: { value: testAddress } });
     fireEvent.blur(receiver);
 
     await waitFor(() => {
-      const receiverError = methods.getByTestId('receiverError');
+      const receiverError = methods.getByTestId(
+        FormDataTestIdsEnum.receiverError
+      );
       expect(receiverError.innerHTML).toBe('Same as owner address');
     });
 
@@ -96,7 +100,7 @@ describe('Send SFT tokens', () => {
     const entireTokenBalaceButton = await methods.findByText('Max');
     fireEvent.click(entireTokenBalaceButton);
 
-    const amountInput: any = await methods.findByTestId('amount');
+    const amountInput: any = await methods.findByTestId(ValuesEnum.amount);
 
     await waitFor(() => {
       expect(amountInput.value).toBe('1');
@@ -132,7 +136,7 @@ describe('Send SFT tokens', () => {
     fireEvent.change(amountInput, { target: { value: '1' } });
     fireEvent.blur(amountInput);
 
-    const data: any = await methods.findByTestId('data');
+    const data: any = await methods.findByTestId(ValuesEnum.data);
 
     const dataString =
       'ESDTNFTTransfer@434e544d424c542d656662333937@01@01@000000000000000005000e8a594d1c9b52073fcd3c856c87986045c85f568b98';
@@ -142,14 +146,16 @@ describe('Send SFT tokens', () => {
     });
     expect(data.disabled).toBeTruthy(); // check disabled
 
-    const gasLimit: any = methods.getByTestId('gasLimit');
+    const gasLimit: any = methods.getByTestId(ValuesEnum.gasLimit);
     expect(gasLimit.value).toBe('1000000');
 
     fireEvent.change(gasLimit, { target: { value: '100000' } });
     fireEvent.blur(gasLimit);
 
     await waitFor(() => {
-      const gasLimitError = methods.getByTestId('gasLimitError');
+      const gasLimitError = methods.getByTestId(
+        FormDataTestIdsEnum.gasLimitError
+      );
       expect(gasLimitError.textContent).toBe(
         'Gas limit must be greater or equal to 1000000'
       );
