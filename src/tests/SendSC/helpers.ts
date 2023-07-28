@@ -24,7 +24,7 @@ export const fillInForm: () => Promise<{
 
   expect(amount.value).toBe('0.1');
 
-  const receiver: any = render.getByTestId('receiver');
+  const receiver: any = render.getByTestId(ValuesEnum.receiver);
   fireEvent.change(receiver, {
     target: {
       value: testReceiver

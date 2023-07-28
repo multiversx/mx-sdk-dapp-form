@@ -1,3 +1,4 @@
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { beforAllTokens, setupEsdtServer, useAmountInput } from './helpers';
 
 describe('Send tokens', () => {
@@ -12,7 +13,9 @@ describe('Send tokens', () => {
       expect(input.value).toBe('1.1234567890123456789');
 
       input = await setInput('1100');
-      const tokenAmountError = await methods.findByTestId('amountError');
+      const tokenAmountError = await methods.findByTestId(
+        FormDataTestIdsEnum.amountError
+      );
       expect(tokenAmountError.textContent).toBe('Insufficient funds');
     });
   });

@@ -57,7 +57,9 @@ describe('Send tokens', () => {
       const setInput = useAmountInput(methods);
 
       await setInput('0');
-      const tokenAmountError = await methods.findByTestId('amountError');
+      const tokenAmountError = await methods.findByTestId(
+        FormDataTestIdsEnum.amountError
+      );
       expect(tokenAmountError.textContent).toBe('Cannot be zero');
     });
 
@@ -66,7 +68,9 @@ describe('Send tokens', () => {
       const setInput = useAmountInput(methods);
 
       await setInput('1100');
-      const tokenAmountError = await methods.findByTestId('amountError');
+      const tokenAmountError = await methods.findByTestId(
+        FormDataTestIdsEnum.amountError
+      );
       expect(tokenAmountError.textContent).toBe('Insufficient funds');
     });
     test('Tokens amount max button', async () => {
