@@ -15,13 +15,9 @@ export const getReceiverUsername = ({
     return existingReceiverUsername;
   }
 
-  if (!knownAddresses) {
-    return null;
-  }
-
-  const currentKnowAccount = knownAddresses.find(
+  const currentKnowAccount = knownAddresses?.find(
     (account) => account.address === receiverAddress
   );
 
-  return currentKnowAccount ? currentKnowAccount.username : null;
+  return currentKnowAccount?.username;
 };
