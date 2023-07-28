@@ -6,6 +6,7 @@ import Select, { SingleValue, components } from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
 import globals from 'assets/sass/globals.module.scss';
+import { TestIdsEnum } from 'constants/testIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled, selectCustomStyles } from 'helpers';
 import { PartialTokenType, TokenAssetsType, ValuesEnum } from 'types';
@@ -114,7 +115,7 @@ export const SelectToken = ({ className, label }: SelectTokenPropsType) => {
       {label && (
         <label
           htmlFor={ValuesEnum.tokenId}
-          data-testid='tokenIdLabel'
+          data-testid={TestIdsEnum.tokenIdLabel}
           className={styles.selectTokenLabel}
         >
           {label}
@@ -143,7 +144,7 @@ export const SelectToken = ({ className, label }: SelectTokenPropsType) => {
       />
 
       {isTokenIdInvalid && (
-        <div className={globals.error} data-testid='tokenIdError'>
+        <div className={globals.error} data-testid={TestIdsEnum.tokenIdError}>
           <small>{tokenIdError}</small>
         </div>
       )}
