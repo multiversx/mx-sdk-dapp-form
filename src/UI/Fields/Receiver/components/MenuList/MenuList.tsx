@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import classNames from 'classnames';
 import { components } from 'react-select';
@@ -34,7 +34,7 @@ export const MenuList: typeof components.MenuList = (props) => {
     inputValue.length < trimSuggestion.length / 2;
 
   return (
-    <Fragment>
+    <>
       {showUntrimmedAutocomplete && (
         <div
           className={classNames(
@@ -54,6 +54,6 @@ export const MenuList: typeof components.MenuList = (props) => {
       )}
 
       <components.MenuList {...props} className={styles.receiverSelectList} />
-    </Fragment>
+    </>
   );
 };
