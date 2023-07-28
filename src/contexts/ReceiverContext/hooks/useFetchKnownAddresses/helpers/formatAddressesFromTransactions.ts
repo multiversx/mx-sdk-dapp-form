@@ -1,4 +1,4 @@
-import { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers';
+import { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers/trimUsernameDomain';
 import { ServerTransactionType } from '@multiversx/sdk-dapp/types';
 
 import { KnowAddressType } from 'contexts/ReceiverContext/ReceiverContext';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers';
+import { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers/trimUsernameDomain';
 
 import { ApiConfigType, getApiConfig } from 'apiCalls';
 import { getAccountByUsername } from 'apiCalls/account';
