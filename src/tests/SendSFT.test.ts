@@ -136,7 +136,7 @@ describe('Send SFT tokens', () => {
     fireEvent.change(amountInput, { target: { value: '1' } });
     fireEvent.blur(amountInput);
 
-    const data: any = await methods.findByTestId('data');
+    const data: any = await methods.findByTestId(ValuesEnum.data);
 
     const dataString =
       'ESDTNFTTransfer@434e544d424c542d656662333937@01@01@000000000000000005000e8a594d1c9b52073fcd3c856c87986045c85f568b98';

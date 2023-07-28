@@ -47,7 +47,7 @@ describe('GasLimit field', () => {
     const gasLimit: any = getByLabelText('Gas Limit');
     fireEvent.blur(gasLimit);
 
-    const data = await findByTestId('data');
+    const data = await findByTestId(ValuesEnum.data);
     fireEvent.change(data, { target: { value: '123' } });
     fireEvent.keyUp(data);
 
@@ -107,7 +107,7 @@ describe('GasLimit field', () => {
 
     expectCorrectFee();
 
-    const data = await methods.findByTestId('data');
+    const data = await methods.findByTestId(ValuesEnum.data);
     fireEvent.change(data, { target: { value: '12345678' } });
 
     expectCorrectFee();

@@ -1,5 +1,6 @@
 import { fireEvent, waitFor, act } from '@testing-library/react';
 import selectEvent from 'react-select-event';
+import { ValuesEnum } from 'types/form';
 import {
   beforAllTokens,
   setupEsdtServer,
@@ -73,7 +74,7 @@ describe('Send tokens', () => {
       const input: any = await methods.findByTestId('amount');
 
       expect(input.value).toBe('1,000');
-      const data: any = await methods.findByTestId('data');
+      const data: any = await methods.findByTestId(ValuesEnum.data);
 
       await waitFor(() => {
         expect(data.value).toBe('ESDTTransfer@54574f2d383234653730@0186a0');

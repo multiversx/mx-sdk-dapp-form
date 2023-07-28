@@ -102,7 +102,7 @@ describe('Send NFT tokens', () => {
       expect(tokenPreviewIdentifier.textContent).toBe('NFT-f0806e-01');
     });
 
-    const data: any = await methods.findByTestId('data');
+    const data: any = await methods.findByTestId(ValuesEnum.data);
     fireEvent.blur(data);
 
     const dataString =

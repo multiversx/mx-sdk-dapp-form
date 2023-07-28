@@ -1,5 +1,6 @@
 import { fireEvent } from '@testing-library/react';
 import { renderForm } from 'tests/helpers';
+import { ValuesEnum } from 'types/form';
 
 describe('Data ledger field tests', () => {
   test('data field over 300 character error for ledger app version 1.0.10', async () => {
@@ -16,7 +17,7 @@ describe('Data ledger field tests', () => {
       }
     });
 
-    const input = await methods.findByTestId('data');
+    const input = await methods.findByTestId(ValuesEnum.data);
     fireEvent.change(input, data);
     fireEvent.blur(input);
 

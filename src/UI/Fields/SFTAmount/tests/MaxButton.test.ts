@@ -1,5 +1,6 @@
 import { act, fireEvent, waitFor } from '@testing-library/react';
 import { renderForm } from 'tests/helpers';
+import { ValuesEnum } from 'types/form';
 
 describe('Entire balance button', () => {
   test('Entering smaller amount than entireBalanceMinusDust shows Max', async () => {
@@ -62,7 +63,7 @@ describe('Entire balance button', () => {
     fireEvent.change(amount, value);
     fireEvent.blur(amount);
     const data = { target: { value: 'four' } };
-    const input: any = await methods.findByTestId('data');
+    const input: any = await methods.findByTestId(ValuesEnum.data);
     fireEvent.change(input, data);
     const sendButton = methods.getByTestId('sendBtn');
     fireEvent.click(sendButton);
