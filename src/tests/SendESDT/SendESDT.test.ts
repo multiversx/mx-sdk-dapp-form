@@ -90,7 +90,7 @@ describe('Send tokens', () => {
 
       await setInput('10');
 
-      const sendButton = methods.getByTestId('sendBtn');
+      const sendButton = methods.getByTestId(FormDataTestIdsEnum.sendBtn);
       fireEvent.click(sendButton);
 
       const gasLimitError = await methods.findByTestId(

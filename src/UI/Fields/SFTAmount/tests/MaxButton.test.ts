@@ -1,4 +1,5 @@
 import { act, fireEvent, waitFor } from '@testing-library/react';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { renderForm } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
 
@@ -65,7 +66,7 @@ describe('Entire balance button', () => {
     const data = { target: { value: 'four' } };
     const input: any = await methods.findByTestId(ValuesEnum.data);
     fireEvent.change(input, data);
-    const sendButton = methods.getByTestId('sendBtn');
+    const sendButton = methods.getByTestId(FormDataTestIdsEnum.sendBtn);
     fireEvent.click(sendButton);
 
     await waitFor(() => {

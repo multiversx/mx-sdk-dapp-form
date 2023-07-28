@@ -2,6 +2,7 @@ import React from 'react';
 import { GuardianScreenType } from '@multiversx/sdk-dapp/types/transactions.types';
 import { fireEvent } from '@testing-library/react';
 import { testAddress } from '__mocks__';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types/form';
 import { formConfiguration, sendAndConfirmTest } from './helpers';
@@ -35,7 +36,7 @@ describe('Guardian screen tests', () => {
     fireEvent.change(amount, { target: { value: '0.00001' } });
     fireEvent.blur(amount, { target: { value: '0.00001' } });
 
-    const sendButton = methods.getByTestId('sendBtn');
+    const sendButton = methods.getByTestId(FormDataTestIdsEnum.sendBtn);
     fireEvent.click(sendButton);
 
     await sendAndConfirmTest({ methods })({

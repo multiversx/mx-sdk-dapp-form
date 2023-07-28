@@ -23,7 +23,7 @@ describe('GasLimit field', () => {
     const gasValue = 50001; // add 1 to the end
     fireEvent.change(gasInput, { target: { value: gasValue } });
 
-    const sendButton = getByTestId('sendBtn');
+    const sendButton = getByTestId(FormDataTestIdsEnum.sendBtn);
     fireEvent.click(sendButton);
     await waitFor(() => {
       const req = queryByText('Insufficient funds');
@@ -75,7 +75,7 @@ describe('GasLimit field', () => {
     const gasLimit = methods.getByTestId(ValuesEnum.gasLimit);
     fireEvent.change(gasLimit, { target: { value: '600000000' } });
 
-    const sendButton = methods.getByTestId('sendBtn');
+    const sendButton = methods.getByTestId(FormDataTestIdsEnum.sendBtn);
     fireEvent.click(sendButton);
 
     await waitFor(() => {

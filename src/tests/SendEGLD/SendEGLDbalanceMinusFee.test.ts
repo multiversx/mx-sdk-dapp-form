@@ -1,4 +1,5 @@
 import { fireEvent, waitFor } from '@testing-library/react';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types/form';
 
@@ -16,7 +17,7 @@ describe('EGLD Amount field', () => {
       expect(input.value).toBe(value);
     });
 
-    const sendButton = getByTestId('sendBtn');
+    const sendButton = getByTestId(FormDataTestIdsEnum.sendBtn);
     fireEvent.click(sendButton);
 
     await waitFor(() => {

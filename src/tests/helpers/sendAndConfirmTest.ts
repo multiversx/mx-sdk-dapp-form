@@ -21,7 +21,7 @@ export const sendAndConfirmTest =
       expect(feeLimit.textContent).toContain(fee);
     });
 
-    const sendButton = methods.getByTestId('sendBtn');
+    const sendButton = methods.getByTestId(FormDataTestIdsEnum.sendBtn);
     fireEvent.click(sendButton);
     const confirmScreen = await methods.findByTestId('confirmScreen');
 

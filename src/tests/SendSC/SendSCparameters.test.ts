@@ -49,7 +49,7 @@ describe('SendForm Smart Contract', () => {
     fireEvent.change(gasLimit, { target: { value: '101201' } });
     fireEvent.blur(gasLimit);
 
-    const sendBtn = render.getByTestId('sendBtn');
+    const sendBtn = render.getByTestId(FormDataTestIdsEnum.sendBtn);
 
     fireEvent.click(sendBtn);
 

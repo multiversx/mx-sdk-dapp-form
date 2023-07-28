@@ -30,7 +30,7 @@ describe('SendForm Smart Contract', () => {
       expect(gasLimit.value).toBe('1650063250');
     });
 
-    const sendBtn = render.getByTestId('sendBtn');
+    const sendBtn = render.getByTestId(FormDataTestIdsEnum.sendBtn);
 
     act(() => {
       fireEvent.click(sendBtn);

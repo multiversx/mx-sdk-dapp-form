@@ -1,5 +1,6 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress } from '__mocks__';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types/form';
 
@@ -51,7 +52,7 @@ describe('EGLD Amount field', () => {
     const gasLimit = render.getByTestId(ValuesEnum.gasLimit);
     fireEvent.change(gasLimit, { target: { value: '600000000' } });
 
-    const sendButton = render.getByTestId('sendBtn');
+    const sendButton = render.getByTestId(FormDataTestIdsEnum.sendBtn);
     fireEvent.click(sendButton);
     await waitFor(() => {
       const amountError = render.getByTestId('amountError');
