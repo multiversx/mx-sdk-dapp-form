@@ -1,5 +1,6 @@
 import { fireEvent, waitFor, act } from '@testing-library/react';
 import selectEvent from 'react-select-event';
+import { FormDataTestIdsEnum } from 'constants/index';
 import { ValuesEnum } from 'types/form';
 import {
   beforAllTokens,
@@ -24,7 +25,7 @@ describe('Send tokens', () => {
       'Gas limit must be greater or equal to 500000'
     );
 
-    const feeLimit = methods.getByTestId('feeLimit');
+    const feeLimit = methods.getByTestId(FormDataTestIdsEnum.feeLimit);
     fireEvent.click(feeLimit);
 
     const gasLimitResetBtn = await methods.findByTestId('gasLimitResetBtn');
@@ -44,7 +45,7 @@ describe('Send tokens', () => {
     const availableTokens = await findByTestId('available-TWO-824e70');
     expect(availableTokens.getAttribute('data-value')).toBe('1000 TWO-824e70');
 
-    const gasLimit: any = getByTestId('gasLimit');
+    const gasLimit: any = getByTestId(ValuesEnum.gasLimit);
     expect(gasLimit.value).toBe('500000');
   });
 

@@ -1,6 +1,7 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { testAddress, testReceiver } from '__mocks__';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { fillInForm, finalFee, setResponse } from './helpers';
 
 const transactionData = {
@@ -24,7 +25,7 @@ describe('SendForm Smart Contract', () => {
   test('GasLimit gets fetched from server', async () => {
     const transactionCost = jest.spyOn(axios, 'post');
     const { render } = await fillInForm();
-    const fee = render.getByTestId('feeLimit');
+    const fee = render.getByTestId(FormDataTestIdsEnum.feeLimit);
 
     await waitFor(() => {
       expect(fee.textContent).toBe(finalFee);
