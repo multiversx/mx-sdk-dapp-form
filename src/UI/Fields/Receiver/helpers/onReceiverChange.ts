@@ -15,15 +15,16 @@ export const onReceiverChange = ({
   changeAndBlurInput
 }: OnReceiverChangeType) => {
   const onChangeCallback = (option: SingleValue<GenericOptionType>) => {
-    if (option) {
-      setOption(option);
-      changeAndBlurInput(option.value);
+    if (!option) {
+      return;
+    }
+    setOption(option);
+    changeAndBlurInput(option.value);
 
-      if (option.value !== option.label) {
-        setInputValue(option.label);
-      } else {
-        setInputValue(option.value);
-      }
+    if (option.value !== option.label) {
+      setInputValue(option.label);
+    } else {
+      setInputValue(option.value);
     }
   };
 

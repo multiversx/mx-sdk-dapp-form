@@ -5,10 +5,7 @@ import { components } from 'react-select';
 
 import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
-
-export const {
-  default: MultiversXIconSimple
-} = require('../../../../../assets/icons/mx-icon-simple.svg');
+import { MultiversXIconSimple } from '../MultiversXIconSimple';
 
 export const MenuList: typeof components.MenuList = (props) => {
   const { selectProps, focusedOption } = props;

@@ -7,10 +7,7 @@ import { useSendFormContext } from 'contexts';
 
 import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
-
-export const {
-  default: MultiversXIconSimple
-} = require('../../../../../assets/icons/mx-icon-simple.svg');
+import { MultiversXIconSimple } from '../MultiversXIconSimple';
 
 export const ValueContainer: typeof components.ValueContainer = (props) => {
   const { selectProps, isDisabled } = props;

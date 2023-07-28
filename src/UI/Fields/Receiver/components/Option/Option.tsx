@@ -7,10 +7,7 @@ import { HighlightText } from 'UI/Fields/AmountSelect/components/TokenSelect/com
 
 import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
-
-export const {
-  default: MultiversXIconSimple
-} = require('../../../../../assets/icons/mx-icon-simple.svg');
+import { MultiversXIconSimple } from '../MultiversXIconSimple';
 
 export const Option: typeof components.Option = (props) => {
   const { isFocused, data, selectProps } = props;

@@ -9,11 +9,8 @@ import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import classNames from 'classnames';
 import globals from 'assets/sass/globals.module.scss';
 
+import { MultiversXIconSimple } from 'UI/Fields/Receiver/components/MultiversXIconSimple';
 import styles from './styles.module.scss';
-
-export const {
-  default: MultiversXIconSimple
-} = require('../../../assets/icons/mx-icon-simple.svg');
 
 export interface ReceiverPropsType {
   label?: string;
