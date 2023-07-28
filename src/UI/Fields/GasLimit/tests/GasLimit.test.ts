@@ -79,7 +79,9 @@ describe('GasLimit field', () => {
     fireEvent.click(sendButton);
 
     await waitFor(() => {
-      const gasLimitError = methods.getByTestId('gasLimitError');
+      const gasLimitError = methods.getByTestId(
+        FormDataTestIdsEnum.gasLimitError
+      );
       expect(gasLimitError.innerHTML).toBe('Insufficient funds');
       const amountError = methods.queryByTestId('amountError');
       expect(amountError).toBeNull();

@@ -34,5 +34,6 @@ export enum FormDataTestIdsEnum {
   feeInFiat = 'feeInFiat',
   gasLimitResetBtn = 'gasLimitResetBtn',
   receiverLabel = 'receiverLabel',
-  receiverError = 'receiverError'
+  receiverError = 'receiverError',
+  gasLimitError = 'gasLimitError'
 }

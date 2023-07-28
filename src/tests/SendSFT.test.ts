@@ -153,7 +153,9 @@ describe('Send SFT tokens', () => {
     fireEvent.blur(gasLimit);
 
     await waitFor(() => {
-      const gasLimitError = methods.getByTestId('gasLimitError');
+      const gasLimitError = methods.getByTestId(
+        FormDataTestIdsEnum.gasLimitError
+      );
       expect(gasLimitError.textContent).toBe(
         'Gas limit must be greater or equal to 1000000'
       );

@@ -20,7 +20,9 @@ describe('Send tokens', () => {
     const input = await setGasLimitInput('50000');
     await setAmountInput('10');
 
-    const gasLimitError = await methods.findByTestId('gasLimitError');
+    const gasLimitError = await methods.findByTestId(
+      FormDataTestIdsEnum.gasLimitError
+    );
     expect(gasLimitError.textContent).toBe(
       'Gas limit must be greater or equal to 500000'
     );
@@ -91,7 +93,9 @@ describe('Send tokens', () => {
       const sendButton = methods.getByTestId('sendBtn');
       fireEvent.click(sendButton);
 
-      const gasLimitError = await methods.findByTestId('gasLimitError');
+      const gasLimitError = await methods.findByTestId(
+        FormDataTestIdsEnum.gasLimitError
+      );
       expect(gasLimitError.textContent).toBe('Insufficient funds');
     });
   });

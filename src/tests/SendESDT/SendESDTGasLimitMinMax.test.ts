@@ -1,5 +1,9 @@
 import { waitFor } from '@testing-library/react';
-import { MAX_GAS_LIMIT, TOKEN_GAS_LIMIT } from 'constants/index';
+import {
+  FormDataTestIdsEnum,
+  MAX_GAS_LIMIT,
+  TOKEN_GAS_LIMIT
+} from 'constants/index';
 
 import { beforAllTokens, setupEsdtServer, useGasLimitInput } from './helpers';
 
@@ -13,13 +17,17 @@ describe('Tokens gasLimit', () => {
     const input = await setInput('1');
     expect(input.value).toBe('1');
 
-    let gasLimitError = await methods.findByTestId('gasLimitError');
+    let gasLimitError = await methods.findByTestId(
+      FormDataTestIdsEnum.gasLimitError
+    );
     expect(gasLimitError.textContent).toBe(
       `Gas limit must be greater or equal to ${TOKEN_GAS_LIMIT}`
     );
 
     await setInput('5000000000');
-    gasLimitError = await methods.findByTestId('gasLimitError');
+    gasLimitError = await methods.findByTestId(
+      FormDataTestIdsEnum.gasLimitError
+    );
 
     await waitFor(() => {
       expect(gasLimitError.textContent).toBe(
