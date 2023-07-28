@@ -35,5 +35,6 @@ export enum FormDataTestIdsEnum {
   gasLimitResetBtn = 'gasLimitResetBtn',
   receiverLabel = 'receiverLabel',
   receiverError = 'receiverError',
-  gasLimitError = 'gasLimitError'
+  gasLimitError = 'gasLimitError',
+  guardianScreen = 'guardianScreen'
 }

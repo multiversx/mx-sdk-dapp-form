@@ -46,9 +46,13 @@ describe('Guardian screen tests', () => {
 
     // account is guarded and has GuardianComponent
     // after pressing send, GuardianScreen should be visible
-    const sendTransactionBtn = methods.getByTestId('sendTrxBtn');
+    const sendTransactionBtn = methods.getByTestId(
+      FormDataTestIdsEnum.sendTrxBtn
+    );
     fireEvent.click(sendTransactionBtn);
-    const guardianScreen = await methods.findByTestId('guardianScreen');
+    const guardianScreen = await methods.findByTestId(
+      FormDataTestIdsEnum.guardianScreen
+    );
     expect(guardianScreen).toBeDefined();
 
     // on Guardian screen back, Confirm Screen should be visible
