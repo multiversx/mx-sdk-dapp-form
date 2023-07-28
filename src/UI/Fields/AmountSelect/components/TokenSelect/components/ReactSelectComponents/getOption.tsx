@@ -6,6 +6,7 @@ import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIden
 import classNames from 'classnames';
 import { components } from 'react-select';
 
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
 import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
 
@@ -87,7 +88,7 @@ export const getOption =
                   usd={1}
                   decimals={4}
                   amount={balanceUsdValue}
-                  data-testid='token-price-usd-value'
+                  data-testid={FormDataTestIdsEnum.tokenPriceUsdValue}
                   className={styles.price}
                   addEqualSign={false}
                 />

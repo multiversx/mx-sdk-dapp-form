@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import { getIsDisabled } from 'helpers';
@@ -63,7 +64,7 @@ export const GasLimit = () => {
           >
             <button
               onClick={onResetGasPrice}
-              data-testid='gasLimitResetBtn'
+              data-testid={FormDataTestIdsEnum.gasLimitResetBtn}
               className={styles.reset}
             >
               <FontAwesomeIcon icon={faUndo} />

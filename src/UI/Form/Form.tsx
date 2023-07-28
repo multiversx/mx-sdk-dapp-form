@@ -14,7 +14,7 @@ import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 
 import globals from 'assets/sass/globals.module.scss';
-import { FormTestIdsEnum } from 'constants/dataTestIds';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { generateTransaction } from 'operations/generateTransaction';
 import { ExtendedValuesType, TransactionTypeEnum } from 'types';
@@ -188,7 +188,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
         <button
           type='button'
           id='sendBtn'
-          data-testid={FormTestIdsEnum.sendBtn}
+          data-testid={FormDataTestIdsEnum.sendBtn}
           onClick={onValidateForm}
           className={globals.buttonSend}
         >
@@ -198,7 +198,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
         <button
           type='button'
           id='closeButton'
-          data-testid={FormTestIdsEnum.returnToWalletBtn}
+          data-testid={FormDataTestIdsEnum.returnToWalletBtn}
           onClick={handleCloseClick}
           className={globals.buttonText}
         >

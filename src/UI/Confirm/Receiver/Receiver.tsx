@@ -9,6 +9,7 @@ import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import classNames from 'classnames';
 import globals from 'assets/sass/globals.module.scss';
 
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { MultiversXIconSimple } from 'UI/Fields/Receiver/components/MultiversXIconSimple';
 import styles from './styles.module.scss';
 
@@ -34,7 +35,7 @@ export const Receiver = ({
 
       <span
         className={classNames(styles.value, { [styles.shrunk]: hasUsername })}
-        data-testid='confirmReceiver'
+        data-testid={FormDataTestIdsEnum.confirmReceiver}
       >
         {hasUsername && <MultiversXIconSimple className={styles.icon} />}
         {receiverValue}

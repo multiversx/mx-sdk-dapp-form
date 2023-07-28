@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
-import { FormTestIdsEnum } from 'constants/dataTestIds';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts';
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
@@ -86,7 +86,7 @@ export const SFTAmount = (props: WithClassnameType) => {
         {isMaxButtonVisible && (
           <a
             href='/'
-            data-testid={FormTestIdsEnum.maxBtn}
+            data-testid={FormDataTestIdsEnum.maxBtn}
             className={styles.max}
             onClick={onMaxAmount}
             onMouseDown={(event) => {
@@ -101,7 +101,7 @@ export const SFTAmount = (props: WithClassnameType) => {
       {isInvalid && (
         <div
           className={globals.error}
-          data-testid={FormTestIdsEnum.amountError}
+          data-testid={FormDataTestIdsEnum.amountError}
         >
           {error}
         </div>

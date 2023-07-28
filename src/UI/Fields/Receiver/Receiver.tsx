@@ -16,6 +16,7 @@ import { useFormikContext } from 'formik';
 import Select from 'react-select/creatable';
 
 import globals from 'assets/sass/globals.module.scss';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled } from 'helpers';
 import { ExtendedValuesType, ValuesEnum } from 'types';
@@ -143,7 +144,7 @@ export const Receiver = (props: WithClassnameType) => {
     <div className={classNames(styles.receiver, className)}>
       <div
         className={globals.label}
-        data-testid='receiverLabel'
+        data-testid={FormDataTestIdsEnum.receiverLabel}
         data-loading={fetchingScamAddress}
       >
         Receiver
@@ -197,7 +198,10 @@ export const Receiver = (props: WithClassnameType) => {
       {isUsernameLoading && <div className={styles.loading}>Loading...</div>}
 
       {foundReceiver && (
-        <span className={styles.found} data-testid='receiverUsernameAddress'>
+        <span
+          className={styles.found}
+          data-testid={FormDataTestIdsEnum.receiverUsernameAddress}
+        >
           Account found!{' '}
           <FontAwesomeIcon icon={faCheck} className={styles.foundIcon} />
         </span>
@@ -205,7 +209,7 @@ export const Receiver = (props: WithClassnameType) => {
 
       {scamError && (
         <div
-          data-testid='receiverScam'
+          data-testid={FormDataTestIdsEnum.receiverScam}
           className={classNames(globals.error, globals.scam)}
         >
           <span>

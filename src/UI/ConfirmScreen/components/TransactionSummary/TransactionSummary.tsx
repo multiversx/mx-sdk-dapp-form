@@ -2,6 +2,7 @@ import React, { useState, MouseEvent } from 'react';
 import { ConfirmReceiver } from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/components/components/ConfirmReceiver';
 
 import globals from 'assets/sass/globals.module.scss';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useFormContext } from 'contexts';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { TransactionTypeEnum } from 'types';
@@ -137,7 +138,7 @@ export const TransactionSummary = ({
           className={globals.buttonSend}
           type='button'
           id='sendTrxBtn'
-          data-testid='sendTrxBtn'
+          data-testid={FormDataTestIdsEnum.sendTrxBtn}
           disabled={isSubmitting}
           onClick={onConfirmClick}
         >
@@ -149,7 +150,7 @@ export const TransactionSummary = ({
             className={globals.buttonText}
             type='button'
             id='cancelTrxBtn'
-            data-testid='cancelTrxBtn'
+            data-testid={FormDataTestIdsEnum.cancelTrxBtn}
             onClick={onCloseClick}
           >
             {readonly ? 'Close' : 'Back'}

@@ -2,7 +2,7 @@ import React from 'react';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import globals from 'assets/sass/globals.module.scss';
-import { FormTestIdsEnum } from 'constants/dataTestIds';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { ExtendedValuesType } from 'types';
 import styles from './amountSelect.module.scss';
 
@@ -49,7 +49,7 @@ export const AmountSelect = ({
         <label
           htmlFor={name}
           className={globals.label}
-          data-testid={FormTestIdsEnum.amountLabel}
+          data-testid={FormDataTestIdsEnum.amountLabel}
         >
           {label}
         </label>
