@@ -31,7 +31,7 @@ describe('Guardian screen tests', () => {
 
     fireEvent.change(receiver, { target: { value: testAddress } });
 
-    const amount: any = await methods.findByTestId('amount');
+    const amount: any = await methods.findByTestId(ValuesEnum.amount);
     fireEvent.change(amount, { target: { value: '0.00001' } });
     fireEvent.blur(amount, { target: { value: '0.00001' } });
 

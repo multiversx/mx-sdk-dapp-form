@@ -71,7 +71,7 @@ describe('Send tokens', () => {
       const entireTokenBalaceButton = await methods.findByText('Max');
       fireEvent.click(entireTokenBalaceButton);
 
-      const input: any = await methods.findByTestId('amount');
+      const input: any = await methods.findByTestId(ValuesEnum.amount);
 
       expect(input.value).toBe('1,000');
       const data: any = await methods.findByTestId(ValuesEnum.data);

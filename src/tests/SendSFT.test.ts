@@ -100,7 +100,7 @@ describe('Send SFT tokens', () => {
     const entireTokenBalaceButton = await methods.findByText('Max');
     fireEvent.click(entireTokenBalaceButton);
 
-    const amountInput: any = await methods.findByTestId('amount');
+    const amountInput: any = await methods.findByTestId(ValuesEnum.amount);
 
     await waitFor(() => {
       expect(amountInput.value).toBe('1');

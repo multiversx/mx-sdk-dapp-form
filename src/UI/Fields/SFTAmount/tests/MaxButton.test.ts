@@ -5,7 +5,7 @@ import { ValuesEnum } from 'types/form';
 describe('Entire balance button', () => {
   test('Entering smaller amount than entireBalanceMinusDust shows Max', async () => {
     const render = renderForm();
-    const amount = await render.findByTestId('amount');
+    const amount = await render.findByTestId(ValuesEnum.amount);
     const value = { target: { value: '0.7122' } };
     await act(async () => {
       fireEvent.change(amount, value);
@@ -18,7 +18,7 @@ describe('Entire balance button', () => {
   });
   test('Entering larger amount than entireBalanceMinusDust hides Max', async () => {
     const render = renderForm();
-    const amount = await render.findByTestId('amount');
+    const amount = await render.findByTestId(ValuesEnum.amount);
     const value = { target: { value: '0.8074' } };
 
     await act(async () => {
@@ -53,7 +53,7 @@ describe('Entire balance button', () => {
   });
   test('Using entire balance and writing in data filed triggers error', async () => {
     const methods = renderForm();
-    const amount: any = await methods.findByTestId('amount');
+    const amount: any = await methods.findByTestId(ValuesEnum.amount);
     const value = { target: { value: '0.8123' } }; // max + 0.1 minDust
 
     await act(async () => {

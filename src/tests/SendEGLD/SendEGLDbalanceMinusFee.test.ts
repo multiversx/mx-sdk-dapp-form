@@ -1,10 +1,11 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { renderForm } from 'tests/helpers/renderForm';
+import { ValuesEnum } from 'types/form';
 
 describe('EGLD Amount field', () => {
   it('should be =< than balance - transaction fee', async () => {
     const { queryByText, findByTestId, getByTestId } = renderForm();
-    const input: any = await findByTestId('amount');
+    const input: any = await findByTestId(ValuesEnum.amount);
     const value = '9,999,979.9998';
 
     const fullBalance = { target: { value } };

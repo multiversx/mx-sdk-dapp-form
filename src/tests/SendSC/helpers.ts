@@ -1,6 +1,7 @@
 import { RenderResult, fireEvent, queries } from '@testing-library/react';
 import { testNetwork, testReceiver } from '__mocks__';
 import { server, rest } from '__mocks__/server';
+import { ValuesEnum } from 'types/form';
 import { renderForm } from '../helpers';
 
 function* generator(arr: any[]) {
@@ -16,7 +17,7 @@ export const fillInForm: () => Promise<{
     balance: '7600000000000000000000'
   });
 
-  const amount: any = await render.findByTestId('amount');
+  const amount: any = await render.findByTestId(ValuesEnum.amount);
   fireEvent.change(amount, { target: { value: '0.1' } });
   fireEvent.blur(amount);
 

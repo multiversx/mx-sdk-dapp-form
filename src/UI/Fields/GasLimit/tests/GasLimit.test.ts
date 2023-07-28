@@ -13,7 +13,7 @@ describe('GasLimit field', () => {
   it('setting Gas limit + amount > balance should trigger error', async () => {
     const { getByLabelText, getByTestId, queryByText, findByTestId } =
       renderForm();
-    const input: any = await findByTestId('amount');
+    const input: any = await findByTestId(ValuesEnum.amount);
     const value = '0.8123';
     const data = { target: { value } };
     fireEvent.change(input, data);
