@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import classNames from 'classnames';
 import { components } from 'react-select';
@@ -25,7 +25,7 @@ export const Option: typeof components.Option = (props) => {
       })}
     >
       {hasUsername ? (
-        <Fragment>
+        <>
           <span className={styles.receiverSelectOptionUsername}>
             <MultiversXIconSimple
               className={styles.receiverSelectOptionUsernameIcon}
@@ -42,7 +42,7 @@ export const Option: typeof components.Option = (props) => {
             />
             )
           </span>
-        </Fragment>
+        </>
       ) : (
         <Trim text={option.value} className={styles.receiverSelectOptionName} />
       )}

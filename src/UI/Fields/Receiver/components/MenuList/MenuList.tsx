@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import classNames from 'classnames';
 import { components } from 'react-select';
@@ -41,7 +41,7 @@ export const MenuList: typeof components.MenuList = (props) => {
     trimSuggestion && Boolean(inputValue);
 
   return (
-    <Fragment>
+    <>
       {showAddressUntrimmedAutocomplete && !hasUsername && (
         <div
           className={classNames(
@@ -79,7 +79,7 @@ export const MenuList: typeof components.MenuList = (props) => {
           })}
         >
           {hasUsername ? (
-            <Fragment>
+            <>
               <span>
                 <MultiversXIconSimple
                   className={classNames(
@@ -94,7 +94,7 @@ export const MenuList: typeof components.MenuList = (props) => {
               <span className={styles.receiverSelectAutocompleteWrapper}>
                 (<Trim text={focused.value} />)
               </span>
-            </Fragment>
+            </>
           ) : (
             <Trim text={trimSuggestion} />
           )}
@@ -102,6 +102,6 @@ export const MenuList: typeof components.MenuList = (props) => {
       )}
 
       <components.MenuList {...props} className={styles.receiverSelectList} />
-    </Fragment>
+    </>
   );
 };
