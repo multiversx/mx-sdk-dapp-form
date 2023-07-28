@@ -10,7 +10,7 @@ export const getConfirmButtonLabel = ({
   hasGuardianScreen
 }: GetConfirmButtonLabelType) => {
   if (hasGuardianScreen) {
-    return 'Proceed to Guardian';
+    return 'Confirm & Continue';
   }
 
   if (providerType === LoginMethodsEnum.walletconnectv2) {
