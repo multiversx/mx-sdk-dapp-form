@@ -1,4 +1,5 @@
 import React, { useState, MouseEvent } from 'react';
+import { ConfirmReceiver } from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/components/components/ConfirmReceiver';
 
 import globals from 'assets/sass/globals.module.scss';
 import { useFormContext } from 'contexts';
@@ -94,9 +95,9 @@ export const TransactionSummary = ({
           <NFTSFTPreview onClick={onPreviewClick} txType={txType} {...nft} />
         )}
 
-        <Confirm.Receiver
+        <ConfirmReceiver
+          scamReport={scamError ?? null}
           receiver={receiver}
-          scamReport={scamError}
           receiverUsername={transactionReceiverUsername}
         />
 
