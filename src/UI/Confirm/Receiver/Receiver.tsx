@@ -16,7 +16,7 @@ import styles from './styles.module.scss';
 export interface ReceiverPropsType {
   label?: string;
   receiver: string;
-  receiverUsername?: string | null;
+  receiverUsername?: string;
   scamReport?: ReactNode;
 }
 
