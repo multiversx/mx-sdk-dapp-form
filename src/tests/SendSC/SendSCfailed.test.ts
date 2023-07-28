@@ -1,6 +1,6 @@
 import { act, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
-import { MAX_GAS_LIMIT } from 'constants/index';
+import { FormDataTestIdsEnum, MAX_GAS_LIMIT } from 'constants/index';
 import { ValuesEnum } from 'types/form';
 import { fillInForm, finalFee, setResponse } from './helpers';
 
@@ -18,7 +18,7 @@ describe('SendForm Smart Contract', () => {
       expect(transactionCost).toHaveBeenCalledTimes(1);
     });
 
-    let fee = await render.findByTestId('feeLimit');
+    let fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
 
     await waitFor(() => {
       expect(fee.textContent).toBe('0.0165575575 xEGLD');
@@ -61,7 +61,7 @@ describe('SendForm Smart Contract', () => {
     fireEvent.change(dataInput, { target: { value: 'claim' } });
     fireEvent.blur(dataInput);
 
-    fee = await render.findByTestId('feeLimit');
+    fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
     await waitFor(() => {
       expect(fee.textContent).toBe(finalFee);
     });

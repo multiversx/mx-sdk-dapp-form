@@ -1,5 +1,6 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress } from '__mocks__';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { formattedAmountSelector } from 'tests/helpers';
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types/form';
@@ -41,7 +42,7 @@ describe('GasLimit field', () => {
     const entireBalaceButton = getByText('Max');
     fireEvent.click(entireBalaceButton);
 
-    const feeLimit = await findByTestId('feeLimit');
+    const feeLimit = await findByTestId(FormDataTestIdsEnum.feeLimit);
     fireEvent.click(feeLimit);
 
     const gasLimit: any = getByLabelText('Gas Limit');
@@ -86,7 +87,7 @@ describe('GasLimit field', () => {
   });
   it('should keep the fee constant if gasLimit was touched', async () => {
     async function expectCorrectFee() {
-      const feeLimit = await methods.findByTestId('feeLimit');
+      const feeLimit = await methods.findByTestId(FormDataTestIdsEnum.feeLimit);
       expect(formattedAmountSelector(feeLimit).intAmount).toBe('0');
       expect(formattedAmountSelector(feeLimit).decimalAmount).toBe('.0060495');
     }

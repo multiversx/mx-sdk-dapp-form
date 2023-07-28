@@ -1,4 +1,5 @@
 import { fireEvent, waitFor } from '@testing-library/react';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { formattedAmountSelector } from 'tests/helpers';
 import { renderForm } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
@@ -9,7 +10,7 @@ describe('Data field tests', () => {
 
     const methods = renderForm();
 
-    const feeLimit = await methods.findByTestId('feeLimit');
+    const feeLimit = await methods.findByTestId(FormDataTestIdsEnum.feeLimit);
 
     expect(formattedAmountSelector(feeLimit).intAmount).toBe('0');
 

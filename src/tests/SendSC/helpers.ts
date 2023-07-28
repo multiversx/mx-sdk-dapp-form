@@ -1,6 +1,7 @@
 import { RenderResult, fireEvent, queries } from '@testing-library/react';
 import { testNetwork, testReceiver } from '__mocks__';
 import { server, rest } from '__mocks__/server';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { ValuesEnum } from 'types/form';
 import { renderForm } from '../helpers';
 
@@ -36,7 +37,7 @@ export const fillInForm: () => Promise<{
   fireEvent.change(dataInput, { target: { value: 'claim' } });
   fireEvent.blur(dataInput);
 
-  const fee = await render.findByTestId('feeLimit');
+  const fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
   expect(fee.textContent).toBe('0.0000575 xEGLD');
 
   return { render };
