@@ -1,5 +1,5 @@
 export * from './messages';
-export * from './testIds';
+export * from './dataTestIds';
 
 export const MAX_GAS_LIMIT = '600000000';
 export const GAS_LIMIT_DELTA = 10;

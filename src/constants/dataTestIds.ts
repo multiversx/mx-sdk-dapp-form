@@ -1,4 +1,4 @@
-export enum TestIdsEnum {
+export enum FormTestIdsEnum {
   loader = 'loader',
   sendBtn = 'sendBtn',
   amountLabel = 'amountLabel',

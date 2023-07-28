@@ -5,7 +5,7 @@ import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount'
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 
-import { MIN_DUST, TestIdsEnum } from 'constants/index';
+import { MIN_DUST, FormTestIdsEnum } from 'constants/index';
 import styles from './styles.module.scss';
 
 export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
@@ -28,7 +28,7 @@ export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
       data-tip
       id='info-dust'
       data-for='info-dust'
-      data-testid={TestIdsEnum.infoDust}
+      data-testid={FormTestIdsEnum.infoDust}
       className={styles.infoDustTrigger}
     >
       <FontAwesomeIcon icon={faInfoCircle} className='i-icon' />
