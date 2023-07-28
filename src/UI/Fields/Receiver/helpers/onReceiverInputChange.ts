@@ -13,12 +13,18 @@ export const onReceiverInputChange = ({
   setAllValues
 }: OnReceiverInputChangeType) => {
   const onInputChangeCallback = (inputValue: string, meta: InputActionMeta) => {
-    if (!['input-blur', 'menu-close'].includes(meta.action)) {
-      setAllValues(inputValue);
+    const isActionBlurOrMenuClose = ['input-blur', 'menu-close'].includes(
+      meta.action
+    );
 
-      if (!inputValue) {
-        setOption(null);
-      }
+    if (isActionBlurOrMenuClose) {
+      return;
+    }
+
+    setAllValues(inputValue);
+
+    if (!inputValue) {
+      setOption(null);
     }
   };
 
