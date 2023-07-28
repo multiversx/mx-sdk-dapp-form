@@ -1,7 +1,8 @@
 import React, { useState, MouseEvent } from 'react';
+import { ConfirmReceiver } from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/components/components/ConfirmReceiver';
 
 import globals from 'assets/sass/globals.module.scss';
-import { TestIdsEnum } from 'constants/testIds';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useFormContext } from 'contexts';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { TransactionTypeEnum } from 'types';
@@ -9,7 +10,7 @@ import Confirm from 'UI/Confirm';
 import { NFTSFTPreview } from 'UI/NFTSFTPreview';
 
 import styles from './../confirmScreen.module.scss';
-import { getConfirmButtonLabel } from './helpers';
+import { getConfirmButtonLabel, getReceiverUsername } from './helpers';
 
 export interface TransactionSummaryPropsType {
   isConfirmCloseBtnVisible?: boolean;
@@ -24,8 +25,8 @@ export const TransactionSummary = ({
   const { setIsGuardianScreenVisible } = useFormContext();
 
   const {
-    receiverInfo: { scamError, receiver },
     receiverUsernameInfo: { receiverUsername },
+    receiverInfo: { scamError, receiver, knownAddresses },
     formInfo,
     gasInfo: { gasCostError, feeLimit },
     accountInfo: { isGuarded },
@@ -33,6 +34,7 @@ export const TransactionSummary = ({
     amountInfo,
     tokensInfo
   } = useSendFormContext();
+
   const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
   const {
     readonly,
@@ -81,6 +83,12 @@ export const TransactionSummary = ({
     TransactionTypeEnum.MetaESDT
   ].includes(txType);
 
+  const transactionReceiverUsername = getReceiverUsername({
+    knownAddresses,
+    receiverAddress: receiver,
+    existingReceiverUsername: receiverUsername
+  });
+
   return (
     <div className={styles.summary}>
       <div className={styles.fields}>
@@ -88,10 +96,10 @@ export const TransactionSummary = ({
           <NFTSFTPreview onClick={onPreviewClick} txType={txType} {...nft} />
         )}
 
-        <Confirm.Receiver
+        <ConfirmReceiver
+          scamReport={scamError ?? null}
           receiver={receiver}
-          receiverUsername={receiverUsername}
-          scamReport={scamError}
+          receiverUsername={transactionReceiverUsername}
         />
 
         <div className={styles.columns}>
@@ -130,7 +138,7 @@ export const TransactionSummary = ({
           className={globals.buttonSend}
           type='button'
           id='sendTrxBtn'
-          data-testid={TestIdsEnum.sendTrxBtn}
+          data-testid={FormDataTestIdsEnum.sendTrxBtn}
           disabled={isSubmitting}
           onClick={onConfirmClick}
         >
@@ -142,7 +150,7 @@ export const TransactionSummary = ({
             className={globals.buttonText}
             type='button'
             id='cancelTrxBtn'
-            data-testid={TestIdsEnum.cancelTrxBtn}
+            data-testid={FormDataTestIdsEnum.cancelTrxBtn}
             onClick={onCloseClick}
           >
             {readonly ? 'Close' : 'Back'}

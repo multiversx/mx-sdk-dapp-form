@@ -7,6 +7,7 @@ import classNames from 'classnames';
 import useCollapse from 'react-collapsed';
 
 import globals from 'assets/sass/globals.module.scss';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { GasLimit } from '../GasLimit/GasLimit';
 import { GasPrice } from '../GasPrice';
@@ -35,7 +36,10 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
         className={styles.trigger}
         {...getToggleProps({ onClick: toggleAccordion })}
       >
-        <span className={styles.limit} data-testid='feeLimit'>
+        <span
+          className={styles.limit}
+          data-testid={FormDataTestIdsEnum.feeLimit}
+        >
           <FormatAmount
             value={feeLimit}
             showLastNonZeroDecimal
@@ -47,7 +51,7 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
           <FontAwesomeIcon
             icon={faSpinner}
             className='fa-spin fast-spin'
-            data-testid='gasCostLoadingSpinner'
+            data-testid={FormDataTestIdsEnum.gasCostLoadingSpinner}
           />
         )}
 

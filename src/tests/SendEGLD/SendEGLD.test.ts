@@ -1,12 +1,14 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress } from '__mocks__';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { renderForm } from 'tests/helpers/renderForm';
+import { ValuesEnum } from 'types/form';
 
 describe('EGLD Amount field', () => {
   it('should not be empty', async () => {
     const { queryByText, findByTestId } = renderForm();
     const data = { target: { value: '' } };
-    const input: any = await findByTestId('amount');
+    const input: any = await findByTestId(ValuesEnum.amount);
     fireEvent.change(input, data);
     fireEvent.blur(input);
     await waitFor(() => {
@@ -17,7 +19,7 @@ describe('EGLD Amount field', () => {
   });
   it('should be numeric', async () => {
     const { findByTestId } = renderForm();
-    const input: any = await findByTestId('amount');
+    const input: any = await findByTestId(ValuesEnum.amount);
     const value = 'asd';
     const data = { target: { value } };
     fireEvent.change(input, data);
@@ -26,7 +28,7 @@ describe('EGLD Amount field', () => {
   });
   it('should not allow hexadecimal', async () => {
     const { findByTestId } = renderForm();
-    const input: any = await findByTestId('amount');
+    const input: any = await findByTestId(ValuesEnum.amount);
     const value = '0x1';
     const data = { target: { value } };
     fireEvent.change(input, data);
@@ -43,14 +45,14 @@ describe('EGLD Amount field', () => {
 
     fireEvent.change(receiver, { target: { value: testAddress } });
 
-    const amount: any = await render.findByTestId('amount');
+    const amount: any = await render.findByTestId(ValuesEnum.amount);
     fireEvent.change(amount, { target: { value: '0.00001' } });
     fireEvent.blur(amount, { target: { value: '0.00001' } });
 
-    const gasLimit = render.getByTestId('gasLimit');
+    const gasLimit = render.getByTestId(ValuesEnum.gasLimit);
     fireEvent.change(gasLimit, { target: { value: '600000000' } });
 
-    const sendButton = render.getByTestId('sendBtn');
+    const sendButton = render.getByTestId(FormDataTestIdsEnum.sendBtn);
     fireEvent.click(sendButton);
     await waitFor(() => {
       const amountError = render.getByTestId('amountError');

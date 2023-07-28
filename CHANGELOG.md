@@ -6,7 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-
+## [[0.7.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/195)] - 2023-07-26
+- [Updated sdk-dapp and sdk-core](https://github.com/multiversx/mx-sdk-dapp-form/pull/199)
+- [Fixed ledger version error when signing with guardians](https://github.com/multiversx/mx-sdk-dapp-form/pull/194)
 ## [[0.7.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/195)] - 2023-07-06
 
 - [Adds allowNegative custom prop to amount input](https://github.com/multiversx/mx-sdk-dapp-form/pull/194)

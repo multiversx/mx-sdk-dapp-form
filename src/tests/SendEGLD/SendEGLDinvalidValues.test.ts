@@ -1,10 +1,11 @@
 import { fireEvent } from '@testing-library/react';
 import { renderForm } from 'tests/helpers/renderForm';
+import { ValuesEnum } from 'types/form';
 
 describe('EGLD Amount field', () => {
   it('should not be explicit positive', async () => {
     const { findByTestId } = renderForm();
-    const input: any = await findByTestId('amount');
+    const input: any = await findByTestId(ValuesEnum.amount);
     const invalidValues = {
       '+1': '1',
       '1e2': '12',

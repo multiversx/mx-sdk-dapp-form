@@ -3,13 +3,18 @@ import { useFormikContext } from 'formik';
 
 import { ExtendedValuesType } from 'types';
 import { useFormContext } from '../FormContext';
-import { useFetchKnownAddresses, useScamError } from './utils';
+import { useFetchKnownAddresses, useScamError } from './hooks';
+
+export interface KnowAddressType {
+  address: string;
+  username?: string;
+}
 
 export interface ReceiverContextPropsType {
   receiver: string;
   receiverError?: string;
   isReceiverInvalid: boolean;
-  knownAddresses: string[] | null;
+  knownAddresses: KnowAddressType[] | null;
   scamError?: string;
   fetchingScamAddress: boolean;
   onChangeReceiver: (newReceiver: string, shouldValidate?: boolean) => void;

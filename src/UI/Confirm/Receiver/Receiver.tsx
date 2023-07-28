@@ -1,9 +1,16 @@
 import React, { ReactNode } from 'react';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
+import { CopyButton } from '@multiversx/sdk-dapp/UI/CopyButton';
+import { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
+import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 
+import classNames from 'classnames';
 import globals from 'assets/sass/globals.module.scss';
-import { TestIdsEnum } from 'constants/testIds';
+
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { MultiversXIconSimple } from 'UI/Fields/Receiver/components/MultiversXIconSimple';
 import styles from './styles.module.scss';
 
 export interface ReceiverPropsType {
@@ -16,39 +23,49 @@ export interface ReceiverPropsType {
 export const Receiver = ({
   label = 'Receiver',
   receiver,
-  receiverUsername,
-  scamReport
-}: ReceiverPropsType) => (
-  <div className={styles.receiver}>
-    <span className={globals.label}>{label}</span>
+  scamReport,
+  receiverUsername
+}: ReceiverPropsType) => {
+  const hasUsername = Boolean(receiverUsername);
+  const receiverValue = receiverUsername ?? receiver;
 
-    {receiver && (
-      <span className={styles.value} data-testid={TestIdsEnum.confirmReceiver}>
-        {receiver}
-      </span>
-    )}
+  return (
+    <div className={styles.confirmReceiver}>
+      <span className={globals.label}>{label}</span>
 
-    {receiverUsername && (
       <span
-        className={styles.value}
-        data-testid={TestIdsEnum.confirmReceiverUsername}
+        className={classNames(styles.value, { [styles.shrunk]: hasUsername })}
+        data-testid={FormDataTestIdsEnum.confirmReceiver}
       >
-        {receiverUsername}
-      </span>
-    )}
+        {hasUsername && <MultiversXIconSimple className={styles.icon} />}
+        {receiverValue}
 
-    {scamReport && (
-      <div className={styles.scam}>
-        <span>
-          <FontAwesomeIcon
-            icon={faExclamationTriangle}
-            className={styles.icon}
+        {hasUsername && (
+          <ExplorerLink
+            page={`/${ACCOUNTS_ENDPOINT}/${receiver}`}
+            className={styles.explorer}
           />
-          <small data-testid={TestIdsEnum.confirmScamReport}>
-            {scamReport}
-          </small>
+        )}
+      </span>
+
+      {hasUsername && (
+        <span className={styles.subValue}>
+          <Trim text={receiver} className={styles.subValueTrim} />
+          <CopyButton text={receiver} className={styles.subValueCopy} />
         </span>
-      </div>
-    )}
-  </div>
-);
+      )}
+
+      {scamReport && (
+        <div className={styles.scam}>
+          <span>
+            <FontAwesomeIcon
+              icon={faExclamationTriangle}
+              className={styles.icon}
+            />
+            <small data-testid='confirmScamReport'>{scamReport}</small>
+          </span>
+        </div>
+      )}
+    </div>
+  );
+};

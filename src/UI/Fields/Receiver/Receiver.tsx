@@ -1,39 +1,50 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef
+} from 'react';
+import {
+  faCheck,
+  faExclamationTriangle
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
-import { InputActionMeta, SingleValue } from 'react-select';
 import Select from 'react-select/creatable';
 
 import globals from 'assets/sass/globals.module.scss';
-import { TestIdsEnum } from 'constants/testIds';
-import { useUsernameAccount } from 'contexts/ReceiverUsernameContext/utils';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-
 import { getIsDisabled } from 'helpers';
-import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
 import { ExtendedValuesType, ValuesEnum } from 'types';
+
 import { Control } from './components/Control';
 import { DropdownIndicator } from './components/DropdownIndicator';
-import { Input } from './components/Input';
+import { renderInput } from './components/Input';
 import { Menu } from './components/Menu';
 import { MenuList } from './components/MenuList';
 import { Option } from './components/Option';
 import { SelectContainer } from './components/SelectContainer';
 import { ValueContainer } from './components/ValueContainer';
-
-import { filterOptions, useReceiverError } from './helpers';
+import {
+  filterOptions,
+  formatOptions,
+  onReceiverChange,
+  onReceiverInputChange,
+  setAllReceiverValues
+} from './helpers';
+import { useReceiverDisplayStates, useReceiverError } from './hooks';
 import { GenericOptionType } from './Receiver.types';
+
 import styles from './styles.module.scss';
 
-const ms1000 = process.env.NODE_ENV !== 'test' ? 1000 : 1;
-
 export const Receiver = (props: WithClassnameType) => {
-  const { className } = props;
+  const receiverSelectReference = useRef(null);
 
+  const { className } = props;
   const { setFieldValue } = useFormikContext<ExtendedValuesType>();
 
   const {
@@ -48,32 +59,67 @@ export const Receiver = (props: WithClassnameType) => {
     formInfo: { readonly }
   } = useSendFormContext();
 
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState(receiver);
   const [option, setOption] = useState<GenericOptionType | null>(
     receiver ? { label: receiver, value: receiver } : null
   );
-  const debouncedUsername = useDebounce(inputValue, ms1000);
 
-  const { fetchingUsernameAccount, usernameAccounts } =
-    useUsernameAccount(debouncedUsername);
-  const { isInvalid, receiverErrorDataTestId, error } = useReceiverError();
+  const { receiverErrorDataTestId, error } = useReceiverError();
+  const {
+    isAddressError,
+    isUsernameError,
+    isRequiredError,
+    isUsernameLoading,
+    usernameAccounts,
+    isReceiverDropdownOpened,
+    foundReceiver
+  } = useReceiverDisplayStates({
+    inputValue,
+    menuIsOpen,
+    knownAddresses
+  });
 
-  const setAllValues = (value: string) => {
-    setInputValue(value);
-    setOption({
-      value,
-      label: value
-    });
-    setFieldValue(
-      ValuesEnum.receiver,
-      usernameAccounts[value]?.address ?? value
-    );
-
-    setFieldValue(
-      ValuesEnum.receiverUsername,
-      usernameAccounts[value]?.username
-    );
+  const onBlur = () => {
+    onBlurReceiver(new Event('blur'));
   };
+
+  const options: GenericOptionType[] = useMemo(
+    () => formatOptions(knownAddresses),
+    [knownAddresses]
+  );
+
+  const setAllValues = setAllReceiverValues({
+    setFieldValue,
+    setInputValue,
+    setOption,
+    options,
+    usernameAccounts
+  });
+
+  const onInputChange = useCallback(
+    onReceiverInputChange({ setAllValues, setOption }),
+    []
+  );
+
+  const changeAndBlurInput = useCallback((value: string) => {
+    onChangeReceiver(value ? value.trim() : '');
+
+    // Trigger validation after blur, by instantiating a new Event class and
+    // pushing the action at the end of the event loop through setTimeout function.
+    setTimeout(onBlur);
+  }, []);
+
+  const onChange = onReceiverChange({
+    changeAndBlurInput,
+    setOption,
+    setInputValue
+  });
+
+  const Input = useMemo(
+    () => renderInput(receiverSelectReference),
+    [receiverSelectReference]
+  );
 
   useEffect(() => {
     if (!receiver) {
@@ -84,75 +130,21 @@ export const Receiver = (props: WithClassnameType) => {
       (key) => usernameAccounts[key]?.address === receiver
     );
 
-    const newInputValue = username ? username : receiver;
+    setAllValues(username ?? receiver);
 
-    setAllValues(newInputValue);
+    if (username) {
+      setInputValue(username);
+    }
   }, [usernameAccounts, receiver]);
 
-  const onBlur = () => {
-    onBlurReceiver(new Event('blur'));
-  };
-
-  const onInputChange = useCallback(
-    (inputValue: string, meta: InputActionMeta) => {
-      if (!['input-blur', 'menu-close'].includes(meta.action)) {
-        // changeAndBlurInput(inputValue);
-        setAllValues(inputValue);
-
-        if (!inputValue) {
-          setOption(null);
-        }
-      }
-    },
-    []
-  );
-
-  const options: GenericOptionType[] = useMemo(
-    () =>
-      knownAddresses
-        ? knownAddresses
-            .filter((address) => addressIsValid(address))
-            .map((address) => ({
-              value: address,
-              label: address
-            }))
-        : [],
-    [knownAddresses]
-  );
-
-  const onChange = (option: SingleValue<GenericOptionType>) => {
-    if (option) {
-      setOption(option);
-      setInputValue(option.value);
-      changeAndBlurInput(option.value);
-    }
-  };
-
-  const changeAndBlurInput = useCallback((value: string) => {
-    onChangeReceiver(value ? value.trim() : '');
-
-    // Trigger validation after blur, by instantiating a new Event class and
-    // pushing the action at the end of the event loop through setTimeout function.
-    setTimeout(onBlur);
-  }, []);
-
-  const foundReceiver = usernameAccounts[inputValue]?.address;
-
-  const dataFetchedForUsername =
-    inputValue?.startsWith('erd1') || inputValue in usernameAccounts;
-
-  const isRandomValueString =
-    inputValue && !foundReceiver && !addressIsValid(inputValue);
-
-  const showErrors = isRandomValueString
-    ? isInvalid && dataFetchedForUsername
-    : isInvalid;
+  const showErrorText =
+    (isAddressError || isUsernameError || isRequiredError) && !menuIsOpen;
 
   return (
     <div className={classNames(styles.receiver, className)}>
       <div
         className={globals.label}
-        data-testid='receiverLabel'
+        data-testid={FormDataTestIdsEnum.receiverLabel}
         data-loading={fetchingScamAddress}
       >
         Receiver
@@ -170,12 +162,12 @@ export const Receiver = (props: WithClassnameType) => {
         noOptionsMessage={() => null}
         onChange={onChange}
         onBlur={onBlur}
-        isLoading={fetchingUsernameAccount || knownAddresses === null}
+        isLoading={knownAddresses === null}
         isMulti={false}
+        ref={receiverSelectReference}
         inputValue={inputValue}
-        className={classNames(styles.receiverSelectContainer, {
-          [styles.invalid]: showErrors || scamError
-        })}
+        onMenuClose={() => setMenuIsOpen(false)}
+        onMenuOpen={() => setMenuIsOpen(true)}
         components={{
           Menu,
           Input,
@@ -190,25 +182,34 @@ export const Receiver = (props: WithClassnameType) => {
           IndicatorSeparator: () => null,
           LoadingIndicator: () => null
         }}
+        className={classNames(styles.receiverSelectContainer, {
+          [styles.opened]: isReceiverDropdownOpened,
+          [styles.invalid]:
+            isAddressError || isUsernameError || scamError || isRequiredError
+        })}
       />
 
+      {showErrorText && (
+        <div data-testid={receiverErrorDataTestId} className={globals.error}>
+          {error}
+        </div>
+      )}
+
+      {isUsernameLoading && <div className={styles.loading}>Loading...</div>}
+
       {foundReceiver && (
-        <span data-testid={TestIdsEnum.receiverUsernameAddress}>
-          {foundReceiver}
+        <span
+          className={styles.found}
+          data-testid={FormDataTestIdsEnum.receiverUsernameAddress}
+        >
+          Account found!{' '}
+          <FontAwesomeIcon icon={faCheck} className={styles.foundIcon} />
         </span>
       )}
 
-      <>
-        {showErrors && (
-          <div data-testid={receiverErrorDataTestId} className={globals.error}>
-            {error}
-          </div>
-        )}
-      </>
-
       {scamError && (
         <div
-          data-testid={TestIdsEnum.receiverScam}
+          data-testid={FormDataTestIdsEnum.receiverScam}
           className={classNames(globals.error, globals.scam)}
         >
           <span>

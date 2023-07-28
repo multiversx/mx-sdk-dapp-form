@@ -1,5 +1,7 @@
+import { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers/trimUsernameDomain';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import axios from 'axios';
+
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
 import { AccountContextPropsType } from 'contexts/AccountContext';
 
@@ -16,7 +18,6 @@ export async function getAccountByUsername(
 
     // "https://api.multiversx.com/accounts/erd1..."
     const [, redirectAddress] = request?.responseURL?.split('/accounts/') ?? [];
-
     const address = redirectAddress ?? data.address;
 
     if (!addressIsValid(address)) {
@@ -25,7 +26,7 @@ export async function getAccountByUsername(
 
     return {
       address,
-      username: String(data.username)
+      username: trimUsernameDomain(String(data.username)) ?? ''
     };
   } catch (error) {
     return null;

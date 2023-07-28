@@ -2,7 +2,7 @@ import React from 'react';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 
 import globals from 'assets/sass/globals.module.scss';
-import { TestIdsEnum, ZERO } from 'constants/index';
+import { FormDataTestIdsEnum, ZERO } from 'constants/index';
 import { calculateFeeInFiat } from 'operations';
 
 import { TransactionTypeEnum } from 'types';
@@ -34,7 +34,7 @@ export const Fee = ({
           egldLabel={egldLabel}
           value={feeLimit}
           showLastNonZeroDecimal
-          data-testid={TestIdsEnum.confirmFee}
+          data-testid={FormDataTestIdsEnum.confirmFee}
         />
       </div>
     </div>

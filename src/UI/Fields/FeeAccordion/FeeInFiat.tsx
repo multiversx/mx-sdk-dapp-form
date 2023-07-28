@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ZERO } from 'constants/index';
+import { FormDataTestIdsEnum, ZERO } from 'constants/index';
 import { calculateFeeInFiat } from 'operations';
 
 import styles from './styles.module.scss';
@@ -16,7 +16,7 @@ export const FeeInFiat = ({ feeLimit, egldPriceInUsd }: FeeInFiatType) => {
   }
 
   return (
-    <span className={styles.fiat} data-testid='feeInFiat'>
+    <span className={styles.fiat} data-testid={FormDataTestIdsEnum.feeInFiat}>
       (
       {calculateFeeInFiat({
         feeLimit,

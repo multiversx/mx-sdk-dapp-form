@@ -1,4 +1,4 @@
-export enum TestIdsEnum {
+export enum FormDataTestIdsEnum {
   loader = 'loader',
   sendBtn = 'sendBtn',
   amountLabel = 'amountLabel',
@@ -25,5 +25,16 @@ export enum TestIdsEnum {
   canTransferWarning = 'canTransferWarning',
   tokenPreview = 'token-preview',
   tokenPreviewName = 'token-preview-name',
-  tokenPreviewIdentifier = 'token-preview-identifier'
+  tokenPreviewIdentifier = 'token-preview-identifier',
+  tokenPriceUsdValue = 'token-price-usd-value',
+  tokenSelectInput = 'tokenSelectInput',
+  dataError = 'dataError',
+  feeLimit = 'feeLimit',
+  gasCostLoadingSpinner = 'gasCostLoadingSpinner',
+  feeInFiat = 'feeInFiat',
+  gasLimitResetBtn = 'gasLimitResetBtn',
+  receiverLabel = 'receiverLabel',
+  receiverError = 'receiverError',
+  gasLimitError = 'gasLimitError',
+  guardianScreen = 'guardianScreen'
 }

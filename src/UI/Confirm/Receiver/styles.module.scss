@@ -1,8 +1,64 @@
 @import 'assets/sass/variables/_variables.scss';
 
-.value {
-  font-size: 16px;
-  word-break: break-all;
-  line-height: 1.5;
+.confirmReceiver {
   display: block;
+
+  .value {
+    font-size: 14px;
+    word-break: break-all;
+    line-height: 1.5;
+    display: block;
+
+    &.shrunk {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+  }
+
+  .subValue {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .subValueTrim {
+      line-height: 1;
+      color: var(--dapp-form-placeholder-color);
+      font-size: 12px;
+      display: flex;
+      align-items: flex-end;
+      max-width: none;
+
+      [class*='left'] *,
+      [class*='right'] * {
+        color: var(--dapp-form-placeholder-color);
+      }
+    }
+
+    .subValueCopy {
+      font-size: 12px;
+    }
+  }
+
+  .explorer {
+    margin-left: 0;
+    font-size: 12px;
+
+    svg {
+      color: var(--dapp-form-placeholder-color) !important;
+    }
+
+    &:hover svg {
+      color: var(--dapp-form-btn-bg) !important;
+    }
+  }
+
+  .icon {
+    height: 16px;
+    position: relative;
+    width: auto;
+    top: 1px;
+  }
 }

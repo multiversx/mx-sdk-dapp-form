@@ -5,6 +5,7 @@ import { components } from 'react-select';
 
 import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
+import { MultiversXIconSimple } from '../MultiversXIconSimple';
 
 export const MenuList: typeof components.MenuList = (props) => {
   const { selectProps, focusedOption } = props;
@@ -12,6 +13,7 @@ export const MenuList: typeof components.MenuList = (props) => {
 
   const focused = focusedOption as GenericOptionType;
   const searchableLabel = focused ? focused.label.toLowerCase() : null;
+  const hasUsername = focused && focused.label !== focused.value;
 
   const hasInputValue = !value || (value && inputValue);
   const showSuggestion =
@@ -28,14 +30,19 @@ export const MenuList: typeof components.MenuList = (props) => {
       : null;
 
   const showTrimmedAutocomplete = trimSuggestion && !inputValue;
-  const showUntrimmedAutocomplete =
-    trimSuggestion &&
-    Boolean(inputValue) &&
-    inputValue.length < trimSuggestion.length / 2;
+
+  const inputExceedsHalfSuggestion =
+    trimSuggestion && inputValue.length < trimSuggestion.length / 2;
+
+  const showAddressUntrimmedAutocomplete =
+    trimSuggestion && Boolean(inputValue) && inputExceedsHalfSuggestion;
+
+  const showUsernameUntrimmedAutocomplete =
+    trimSuggestion && Boolean(inputValue);
 
   return (
     <>
-      {showUntrimmedAutocomplete && (
+      {showAddressUntrimmedAutocomplete && !hasUsername && (
         <div
           className={classNames(
             styles.receiverSelectAutocomplete,
@@ -46,11 +53,52 @@ export const MenuList: typeof components.MenuList = (props) => {
         </div>
       )}
 
+      {showUsernameUntrimmedAutocomplete && hasUsername && (
+        <div
+          className={classNames(
+            styles.receiverSelectAutocomplete,
+            styles.receiverSelectAutocompleteUsername
+          )}
+        >
+          <MultiversXIconSimple
+            className={styles.receiverSelectAutocompleteIcon}
+          />
+
+          {trimSuggestion}
+
+          <span className={styles.receiverSelectAutocompleteWrapper}>
+            (<Trim text={focused.value} />)
+          </span>
+        </div>
+      )}
+
       {showTrimmedAutocomplete && (
-        <Trim
-          text={trimSuggestion}
-          className={styles.receiverSelectAutocomplete}
-        />
+        <span
+          className={classNames(styles.receiverSelectAutocomplete, {
+            [styles.receiverSelectAutocompleteUsername]: hasUsername
+          })}
+        >
+          {hasUsername ? (
+            <>
+              <span>
+                <MultiversXIconSimple
+                  className={classNames(
+                    styles.receiverSelectAutocompleteIcon,
+                    styles.receiverSelectAutocompleteIconMuted
+                  )}
+                />
+
+                {focused.label}
+              </span>
+
+              <span className={styles.receiverSelectAutocompleteWrapper}>
+                (<Trim text={focused.value} />)
+              </span>
+            </>
+          ) : (
+            <Trim text={trimSuggestion} />
+          )}
+        </span>
       )}
 
       <components.MenuList {...props} className={styles.receiverSelectList} />

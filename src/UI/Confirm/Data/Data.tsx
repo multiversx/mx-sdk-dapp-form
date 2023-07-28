@@ -3,7 +3,7 @@ import { decodePart } from '@multiversx/sdk-dapp/utils/decoders/decodePart';
 
 import globals from 'assets/sass/globals.module.scss';
 
-import { TestIdsEnum } from 'constants/testIds';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import styles from './styles.module.scss';
 
 const allOccurences = (sourceStr: string, searchStr: string) =>
@@ -73,7 +73,10 @@ export const Data = ({
         <div className={styles.data}>
           <span className={globals.label}>{scCallLabel}</span>
 
-          <div data-testid={TestIdsEnum.confirmScCall} className={styles.value}>
+          <div
+            data-testid={FormDataTestIdsEnum.confirmScCall}
+            className={styles.value}
+          >
             {[decodePart(encodedScCall), ...remainingDataFields].join('@')}
           </div>
         </div>
@@ -82,7 +85,10 @@ export const Data = ({
       <div className={styles.data}>
         <span className={globals.label}>{label}</span>
 
-        <div data-testid={TestIdsEnum.confirmData} className={styles.value}>
+        <div
+          data-testid={FormDataTestIdsEnum.confirmData}
+          className={styles.value}
+        >
           {data ? output : 'N/A'}
         </div>
       </div>
