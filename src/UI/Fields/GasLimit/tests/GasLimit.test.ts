@@ -2,6 +2,7 @@ import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress } from '__mocks__';
 import { formattedAmountSelector } from 'tests/helpers';
 import { renderForm } from 'tests/helpers/renderForm';
+import { ValuesEnum } from 'types/form';
 
 describe('GasLimit field', () => {
   it('should not be empty', async () => {
@@ -64,7 +65,7 @@ describe('GasLimit field', () => {
       balance: '1_000_000_000_000_000'.replaceAll('_', '') // 0.001
     });
 
-    const receiver: any = await methods.findByTestId('receiver');
+    const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
     fireEvent.change(receiver, { target: { value: testAddress } });
 
     const amount = methods.getByTestId('amount');
@@ -94,7 +95,7 @@ describe('GasLimit field', () => {
       balance: '1_000_000_000_000_000'.replaceAll('_', '') // 0.001
     });
 
-    const receiver: any = await methods.findByTestId('receiver');
+    const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
     fireEvent.change(receiver, { target: { value: testAddress } });
 
     const amount = methods.getByTestId('amount');

@@ -3,6 +3,7 @@ import { GuardianScreenType } from '@multiversx/sdk-dapp/types/transactions.type
 import { fireEvent } from '@testing-library/react';
 import { testAddress } from '__mocks__';
 import { renderForm } from 'tests/helpers/renderForm';
+import { ValuesEnum } from 'types/form';
 import { formConfiguration, sendAndConfirmTest } from './helpers';
 
 const GuardianScreen = (props: GuardianScreenType) => {
@@ -26,7 +27,7 @@ describe('Guardian screen tests', () => {
       }
     });
 
-    const receiver: any = await methods.findByTestId('receiver');
+    const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
 
     fireEvent.change(receiver, { target: { value: testAddress } });
 

@@ -33,5 +33,6 @@ export enum FormDataTestIdsEnum {
   gasCostLoadingSpinner = 'gasCostLoadingSpinner',
   feeInFiat = 'feeInFiat',
   gasLimitResetBtn = 'gasLimitResetBtn',
-  receiverLabel = 'receiverLabel'
+  receiverLabel = 'receiverLabel',
+  receiverError = 'receiverError'
 }

@@ -1,11 +1,13 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import {
   formConfiguration,
   renderForm as beginAll,
   sendAndConfirmTest
 } from 'tests/helpers';
+import { ValuesEnum } from 'types/form';
 
 const sftToken = {
   identifier: 'CNTMBLT-efb397-01',
@@ -64,13 +66,15 @@ describe('Send SFT tokens', () => {
     const methods = beforAllTokens();
 
     // fill in receiver
-    const receiver: any = await methods.findByTestId('receiver');
+    const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
 
     fireEvent.change(receiver, { target: { value: testAddress } });
     fireEvent.blur(receiver);
 
     await waitFor(() => {
-      const receiverError = methods.getByTestId('receiverError');
+      const receiverError = methods.getByTestId(
+        FormDataTestIdsEnum.receiverError
+      );
       expect(receiverError.innerHTML).toBe('Same as owner address');
     });
 
