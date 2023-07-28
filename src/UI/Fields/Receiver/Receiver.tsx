@@ -136,6 +136,9 @@ export const Receiver = (props: WithClassnameType) => {
     }
   }, [usernameAccounts, receiver]);
 
+  const showErrorText =
+    (isAddressError || isUsernameError || isRequiredError) && !menuIsOpen;
+
   return (
     <div className={classNames(styles.receiver, className)}>
       <div
@@ -185,7 +188,7 @@ export const Receiver = (props: WithClassnameType) => {
         })}
       />
 
-      {(isAddressError || isUsernameError || isRequiredError) && (
+      {showErrorText && (
         <div data-testid={receiverErrorDataTestId} className={globals.error}>
           {error}
         </div>
