@@ -112,7 +112,7 @@ describe('Send tokens', () => {
 
       selectEvent.select(methods.getByLabelText('Token'), 'TwoTToken');
 
-      const dataInput: any = methods.getByTestId('data');
+      const dataInput: any = methods.getByTestId(ValuesEnum.data);
       expect(dataInput.value).toBe('ESDTTransfer@54574f2d383234653730@03e8');
     });
   });

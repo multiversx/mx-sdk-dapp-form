@@ -31,7 +31,7 @@ export const fillInForm: () => Promise<{
   });
   fireEvent.blur(receiver);
 
-  const dataInput: any = render.getByTestId('data');
+  const dataInput: any = render.getByTestId(ValuesEnum.data);
 
   fireEvent.change(dataInput, { target: { value: 'claim' } });
   fireEvent.blur(dataInput);

@@ -35,13 +35,13 @@ describe('Entire balance button', () => {
     const entireBalaceButton = await render.findByTestId('maxBtn');
     fireEvent.click(entireBalaceButton);
 
-    const decreasedValue: any = render.getByTestId('amount');
+    const decreasedValue: any = render.getByTestId(ValuesEnum.amount);
     expect(decreasedValue.value).toBe('0.8073');
 
     const infoDust = await render.findByTestId('infoDust');
     expect(infoDust).toBeDefined();
 
-    const amount = render.getByTestId('amount');
+    const amount = render.getByTestId(ValuesEnum.amount);
     const value = { target: { value: '0' } };
 
     await act(async () => {

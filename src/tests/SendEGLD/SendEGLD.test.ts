@@ -48,7 +48,7 @@ describe('EGLD Amount field', () => {
     fireEvent.change(amount, { target: { value: '0.00001' } });
     fireEvent.blur(amount, { target: { value: '0.00001' } });
 
-    const gasLimit = render.getByTestId('gasLimit');
+    const gasLimit = render.getByTestId(ValuesEnum.gasLimit);
     fireEvent.change(gasLimit, { target: { value: '600000000' } });
 
     const sendButton = render.getByTestId('sendBtn');

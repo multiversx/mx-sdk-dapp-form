@@ -68,10 +68,10 @@ describe('GasLimit field', () => {
     const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
     fireEvent.change(receiver, { target: { value: testAddress } });
 
-    const amount = methods.getByTestId('amount');
+    const amount = methods.getByTestId(ValuesEnum.amount);
     fireEvent.change(amount, { target: { value: '0' } });
 
-    const gasLimit = methods.getByTestId('gasLimit');
+    const gasLimit = methods.getByTestId(ValuesEnum.gasLimit);
     fireEvent.change(gasLimit, { target: { value: '600000000' } });
 
     const sendButton = methods.getByTestId('sendBtn');
@@ -98,10 +98,10 @@ describe('GasLimit field', () => {
     const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
     fireEvent.change(receiver, { target: { value: testAddress } });
 
-    const amount = methods.getByTestId('amount');
+    const amount = methods.getByTestId(ValuesEnum.amount);
     fireEvent.change(amount, { target: { value: '0' } });
 
-    const gasLimit = methods.getByTestId('gasLimit');
+    const gasLimit = methods.getByTestId(ValuesEnum.gasLimit);
     fireEvent.change(gasLimit, { target: { value: '600000000' } });
     fireEvent.blur(gasLimit, { target: { value: '600000000' } });
 

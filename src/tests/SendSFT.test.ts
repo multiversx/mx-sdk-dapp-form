@@ -146,7 +146,7 @@ describe('Send SFT tokens', () => {
     });
     expect(data.disabled).toBeTruthy(); // check disabled
 
-    const gasLimit: any = methods.getByTestId('gasLimit');
+    const gasLimit: any = methods.getByTestId(ValuesEnum.gasLimit);
     expect(gasLimit.value).toBe('1000000');
 
     fireEvent.change(gasLimit, { target: { value: '100000' } });
