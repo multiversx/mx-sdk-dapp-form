@@ -59,6 +59,7 @@ export const Receiver = (props: WithClassnameType) => {
       onBlurReceiver,
       onChangeReceiver
     },
+    receiverUsernameInfo: { receiverUsername },
     formInfo: { readonly }
   } = useSendFormContext();
 
@@ -77,8 +78,7 @@ export const Receiver = (props: WithClassnameType) => {
     menuIsOpen
   });
 
-  const { foundReceiver, usernameAccounts, isUsernameLoading } =
-    useReceiverUsernameContext();
+  const { usernameAccounts, isUsernameLoading } = useReceiverUsernameContext();
 
   const onBlur = () => {
     onBlurReceiver(new Event('blur'));
@@ -197,7 +197,7 @@ export const Receiver = (props: WithClassnameType) => {
 
       {isUsernameLoading && <div className={styles.loading}>Loading...</div>}
 
-      {foundReceiver && (
+      {receiverUsername && (
         <span
           className={styles.found}
           data-testid={FormDataTestIdsEnum.receiverUsernameAddress}

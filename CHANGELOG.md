@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- [Fixed username value and display](https://github.com/multiversx/mx-sdk-dapp-form/pull/202)
 ## [[0.8.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/203)] - 2023-08-04
 - [Fixed username searching error on menu close](https://github.com/multiversx/mx-sdk-dapp-form/pull/202)
 ## [[0.8.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/201)] - 2023-08-04

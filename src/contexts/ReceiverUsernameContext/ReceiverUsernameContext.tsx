@@ -16,10 +16,8 @@ export interface ReceiverUsernameContextPropsType {
   searchQueryIsAddress: boolean;
   isUsernameLoading: boolean;
   isUsernameDebouncing: boolean;
-  isUsernameFetching: boolean;
   usernameIsAmongKnown: boolean;
   usernameAccounts: UsernameAccountsType;
-  foundReceiver: UsernameAccountsType[0];
 }
 
 interface ReceiverUsernameContextProviderPropsType {
@@ -64,37 +62,33 @@ export function ReceiverUsernameContextProvider({
     inputValue
   });
 
-  const isUsernameFetching =
-    !isUsernameDebouncing && foundReceiver === undefined && inputValue;
+  const isUsernameLoading = Boolean(
+    !isUsernameDebouncing &&
+      foundReceiver === undefined &&
+      inputValue &&
+      !searchQueryIsAddress &&
+      !usernameIsAmongKnown
+  );
 
   const showUsernameError = Boolean(
     inputValue &&
       debouncedUsername &&
       !isUsernameDebouncing &&
-      !isUsernameFetching &&
+      !isUsernameLoading &&
       !foundReceiver &&
       !searchQueryIsAddress // &&
-  );
-
-  const isUsernameLoading = Boolean(
-    inputValue &&
-      !searchQueryIsAddress &&
-      isUsernameFetching &&
-      !usernameIsAmongKnown
   );
 
   const value: ReceiverUsernameContextPropsType = {
     showUsernameError,
     isUsernameLoading,
-    isUsernameFetching: Boolean(isUsernameFetching),
     isUsernameDebouncing,
     usernameIsAmongKnown,
     receiverUsername,
     receiverUsernameError,
     isReceiverUsernameInvalid: Boolean(receiverUsernameError),
     usernameAccounts,
-    searchQueryIsAddress,
-    foundReceiver
+    searchQueryIsAddress
   };
 
   return (

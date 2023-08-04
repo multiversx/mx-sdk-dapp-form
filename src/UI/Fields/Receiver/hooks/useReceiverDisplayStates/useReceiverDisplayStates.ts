@@ -21,7 +21,7 @@ export const useReceiverDisplayStates = ({
   } = useFormikContext<ExtendedValuesType>();
   const {
     showUsernameError,
-    isUsernameFetching,
+    isUsernameLoading,
     isUsernameDebouncing,
     usernameIsAmongKnown,
     searchQueryIsAddress
@@ -54,7 +54,7 @@ export const useReceiverDisplayStates = ({
   const isRequiredError =
     isInvalid &&
     !isUsernameError &&
-    !isUsernameFetching &&
+    !isUsernameLoading &&
     !isUsernameDebouncing &&
     !isAddressError &&
     !searchMatchesOption &&
