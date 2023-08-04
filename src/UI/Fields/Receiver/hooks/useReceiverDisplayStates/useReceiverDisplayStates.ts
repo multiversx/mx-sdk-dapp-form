@@ -1,8 +1,10 @@
 import { addressIsValid } from '@multiversx/sdk-dapp/utils';
 
+import { useFormikContext } from 'formik';
 import { KnowAddressType } from 'contexts';
 import { useUsernameAccount } from 'contexts/ReceiverUsernameContext/hooks';
 import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
+import { ExtendedValuesType } from 'types';
 import { useReceiverError } from '../useReceiverError';
 import { getIsValueAmongKnown, isAnyOptionFound } from './helpers';
 
@@ -22,6 +24,9 @@ export const useReceiverDisplayStates = ({
   const searchQueryIsAddress = inputValue.startsWith('erd1');
   const debouncedUsername = useDebounce(inputValue, MS_100);
   const { isInvalid } = useReceiverError();
+  const {
+    values: { nft }
+  } = useFormikContext<ExtendedValuesType>();
 
   const usernameExactMatchExists = knownAddresses
     ? knownAddresses.find((account) => account.username === inputValue)
@@ -91,8 +96,10 @@ export const useReceiverDisplayStates = ({
   const isReceiverDropdownOpened =
     inputValue && searchMatchesOption && menuIsOpen;
 
+  const isNftError = nft ? isInvalid : false;
+
   return {
-    isAddressError: isAddressError || isInvalid,
+    isAddressError: isAddressError || isNftError,
     isUsernameError,
     isRequiredError,
     isUsernameLoading,
