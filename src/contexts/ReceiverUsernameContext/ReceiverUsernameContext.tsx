@@ -62,19 +62,18 @@ export function ReceiverUsernameContextProvider({
     inputValue
   });
 
+  const isUsernameFetching =
+    !isUsernameDebouncing && foundReceiver === undefined && inputValue;
+
   const isUsernameLoading = Boolean(
-    !isUsernameDebouncing &&
-      foundReceiver === undefined &&
-      inputValue &&
-      !searchQueryIsAddress &&
-      !usernameIsAmongKnown
+    isUsernameFetching && !searchQueryIsAddress && !usernameIsAmongKnown
   );
 
   const showUsernameError = Boolean(
     inputValue &&
       debouncedUsername &&
       !isUsernameDebouncing &&
-      !isUsernameLoading &&
+      !isUsernameFetching &&
       !foundReceiver &&
       !searchQueryIsAddress // &&
   );
