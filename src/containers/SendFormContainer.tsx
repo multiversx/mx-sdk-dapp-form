@@ -87,7 +87,10 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   async function handleOnSubmit(values: ExtendedValuesType) {
     const actualTransactionAmount =
       values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
-    const parsedValues = { ...values, amount: actualTransactionAmount };
+    const parsedValues = {
+      ...values,
+      amount: actualTransactionAmount
+    };
 
     const transaction = shouldGenerateTransactionOnSubmit
       ? guardedTransaction ??

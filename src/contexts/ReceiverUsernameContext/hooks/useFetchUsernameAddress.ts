@@ -8,6 +8,7 @@ import { getMultiversxAccount } from 'apiCalls/account/getAccount';
 export interface UsernameAccountsType {
   [username: string]: {
     address: string;
+    trimmedUsername: string;
     /**
      * **username**: Might differ from the original username search string.
      */
@@ -70,7 +71,10 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
       const account = await getMultiversxAccount(address, config.baseURL);
 
       const fetchedAddress = account?.address;
-      const fetchedUsername = trimUsernameDomain(account?.username);
+      const fetchedUsername = account?.username;
+      const fetchedTrimmedUsername = String(
+        trimUsernameDomain(account?.username)
+      );
 
       if (!fetchedAddress || !fetchedUsername) {
         return;
@@ -81,7 +85,8 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
           ...existing,
           [fetchedUsername]: {
             address: fetchedAddress,
-            username: fetchedUsername
+            username: fetchedUsername,
+            trimmedUsername: fetchedTrimmedUsername
           }
         };
 

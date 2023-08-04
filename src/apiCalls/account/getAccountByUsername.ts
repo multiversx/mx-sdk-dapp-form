@@ -30,7 +30,10 @@ export async function getAccountByUsername(
 
     return {
       address,
-      username: trimUsernameDomain(String(data.username)) ?? ''
+      trimmedUsername: data.username
+        ? trimUsernameDomain(String(data.username))
+        : '',
+      username: data.username ?? ''
     };
   } catch (error) {
     return null;

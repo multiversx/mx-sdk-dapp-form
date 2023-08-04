@@ -24,7 +24,7 @@ export const setAllReceiverValues = ({
   const setAllValuesCallback = (value: string) => {
     const optionWithUsername = options.find((option) => option.value === value);
     const optionLabel =
-      usernameAccounts[value]?.username ?? optionWithUsername?.label;
+      usernameAccounts[value]?.trimmedUsername ?? optionWithUsername?.label;
     const updatedInputValue = optionLabel ?? value;
 
     setInputValue(updatedInputValue);
