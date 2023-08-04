@@ -141,8 +141,6 @@ export const Receiver = (props: WithClassnameType) => {
 
   const showErrorText = isFieldError && !menuIsOpen;
 
-  console.log({ isAddressError, isUsernameError, isRequiredError });
-
   return (
     <div className={classNames(styles.receiver, className)}>
       <div
