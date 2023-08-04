@@ -2,11 +2,11 @@ import { addressIsValid } from '@multiversx/sdk-dapp/utils';
 
 import { useFormikContext } from 'formik';
 import { KnowAddressType } from 'contexts';
-import { useUsernameAccount } from 'contexts/ReceiverUsernameContext/hooks';
-import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
+import { useReceiverUsernameContext } from 'contexts/ReceiverUsernameContext';
+import { getIsValueAmongKnown } from 'contexts/ReceiverUsernameContext/helpers/getIsValueAmongKnown';
 import { ExtendedValuesType } from 'types';
 import { useReceiverError } from '../useReceiverError';
-import { getIsValueAmongKnown, isAnyOptionFound } from './helpers';
+import { isAnyOptionFound } from './helpers';
 
 export interface UseReceiverDisplayStatesType {
   inputValue: string;
@@ -14,41 +14,28 @@ export interface UseReceiverDisplayStatesType {
   menuIsOpen: boolean;
 }
 
-const MS_100 = process.env.NODE_ENV !== 'test' ? 1000 : 1;
-
 export const useReceiverDisplayStates = ({
   inputValue,
   knownAddresses,
   menuIsOpen
 }: UseReceiverDisplayStatesType) => {
-  const searchQueryIsAddress = inputValue.startsWith('erd1');
-  const debouncedUsername = useDebounce(inputValue, MS_100);
   const { isInvalid } = useReceiverError();
   const {
     values: { nft }
   } = useFormikContext<ExtendedValuesType>();
-
-  const usernameExactMatchExists = knownAddresses
-    ? knownAddresses.find((account) => account.username === inputValue)
-    : false;
-
-  const { usernameAccounts } = useUsernameAccount({
-    shouldSkipSearch: Boolean(usernameExactMatchExists) || searchQueryIsAddress,
-    searchPatternToLookFor: debouncedUsername
-  });
-
-  const foundReceiver = usernameAccounts[inputValue];
-  const isUsernameDebouncing =
-    inputValue !== debouncedUsername && foundReceiver !== null;
+  const {
+    showUsernameError,
+    isUsernameLoading,
+    isUsernameFetching,
+    isUsernameDebouncing,
+    usernameIsAmongKnown,
+    usernameAccounts,
+    searchQueryIsAddress,
+    foundReceiver
+  } = useReceiverUsernameContext();
 
   const addressIsAmongKnown = getIsValueAmongKnown({
     key: 'address',
-    knownAddresses,
-    inputValue
-  });
-
-  const usernameIsAmongKnown = getIsValueAmongKnown({
-    key: 'username',
     knownAddresses,
     inputValue
   });
@@ -58,30 +45,15 @@ export const useReceiverDisplayStates = ({
     knownAddresses
   });
 
-  const isUsernameFetching =
-    !isUsernameDebouncing && foundReceiver === undefined && inputValue;
-
   const isAddressError =
     searchQueryIsAddress &&
     (!addressIsAmongKnown || !menuIsOpen) &&
     !addressIsValid(inputValue);
 
   const isUsernameError = Boolean(
-    inputValue &&
-      debouncedUsername &&
-      !isUsernameDebouncing &&
-      !isUsernameFetching &&
-      !foundReceiver &&
-      !searchQueryIsAddress &&
+    showUsernameError &&
       !(menuIsOpen && addressIsAmongKnown) &&
       !(menuIsOpen && usernameIsAmongKnown)
-  );
-
-  const isUsernameLoading = Boolean(
-    inputValue &&
-      !searchQueryIsAddress &&
-      isUsernameFetching &&
-      !usernameIsAmongKnown
   );
 
   const isRequiredError =

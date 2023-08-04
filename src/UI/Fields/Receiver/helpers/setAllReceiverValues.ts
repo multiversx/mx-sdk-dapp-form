@@ -8,7 +8,7 @@ import { GenericOptionType } from '../Receiver.types';
 
 export interface SetAllReceiverValuesType {
   setFieldValue: FormikHelpers<ExtendedValuesType>['setFieldValue'];
-  setInputValue: (value: SetStateAction<string>) => void;
+  setInputValue: (value: string) => void;
   setOption: Dispatch<SetStateAction<GenericOptionType | null>>;
   options: GenericOptionType[];
   usernameAccounts: UsernameAccountsType;

@@ -51,6 +51,8 @@ export const Receiver = (props: WithClassnameType) => {
     receiverInfo: {
       scamError,
       fetchingScamAddress,
+      receiverInputValue,
+      setReceiverInputValue,
       knownAddresses,
       receiver,
       onBlurReceiver,
@@ -60,7 +62,6 @@ export const Receiver = (props: WithClassnameType) => {
   } = useSendFormContext();
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState(receiver);
   const [option, setOption] = useState<GenericOptionType | null>(
     receiver ? { label: receiver, value: receiver } : null
   );
@@ -75,7 +76,7 @@ export const Receiver = (props: WithClassnameType) => {
     isReceiverDropdownOpened,
     foundReceiver
   } = useReceiverDisplayStates({
-    inputValue,
+    inputValue: receiverInputValue,
     menuIsOpen,
     knownAddresses
   });
@@ -91,7 +92,7 @@ export const Receiver = (props: WithClassnameType) => {
 
   const setAllValues = setAllReceiverValues({
     setFieldValue,
-    setInputValue,
+    setInputValue: setReceiverInputValue,
     setOption,
     options,
     usernameAccounts
@@ -113,7 +114,7 @@ export const Receiver = (props: WithClassnameType) => {
   const onChange = onReceiverChange({
     changeAndBlurInput,
     setOption,
-    setInputValue
+    setInputValue: setReceiverInputValue
   });
 
   const Input = useMemo(
@@ -133,7 +134,7 @@ export const Receiver = (props: WithClassnameType) => {
     setAllValues(username ?? receiver);
 
     if (username) {
-      setInputValue(username);
+      setReceiverInputValue(username);
     }
   }, [usernameAccounts, receiver]);
 
@@ -165,7 +166,7 @@ export const Receiver = (props: WithClassnameType) => {
         isLoading={knownAddresses === null}
         isMulti={false}
         ref={receiverSelectReference}
-        inputValue={inputValue}
+        inputValue={receiverInputValue}
         onMenuClose={() => setMenuIsOpen(false)}
         onMenuOpen={() => setMenuIsOpen(true)}
         components={{
