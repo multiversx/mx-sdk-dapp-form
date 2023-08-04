@@ -137,8 +137,11 @@ export const Receiver = (props: WithClassnameType) => {
     }
   }, [usernameAccounts, receiver]);
 
-  const showErrorText =
-    (isAddressError || isUsernameError || isRequiredError) && !menuIsOpen;
+  const isFieldError = isAddressError || isUsernameError || isRequiredError;
+
+  const showErrorText = isFieldError && !menuIsOpen;
+
+  console.log({ isAddressError, isUsernameError, isRequiredError });
 
   return (
     <div className={classNames(styles.receiver, className)}>
@@ -184,8 +187,7 @@ export const Receiver = (props: WithClassnameType) => {
         }}
         className={classNames(styles.receiverSelectContainer, {
           [styles.opened]: isReceiverDropdownOpened,
-          [styles.invalid]:
-            isAddressError || isUsernameError || scamError || isRequiredError
+          [styles.invalid]: isFieldError || scamError
         })}
       />
 
