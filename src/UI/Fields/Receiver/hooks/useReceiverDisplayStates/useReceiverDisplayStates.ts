@@ -1,7 +1,7 @@
 import { addressIsValid } from '@multiversx/sdk-dapp/utils';
 
 import { useFormikContext } from 'formik';
-import { KnowAddressType } from 'contexts';
+import { useReceiverContext } from 'contexts';
 import { useReceiverUsernameContext } from 'contexts/ReceiverUsernameContext';
 import { getIsValueAmongKnown } from 'contexts/ReceiverUsernameContext/helpers/getIsValueAmongKnown';
 import { ExtendedValuesType } from 'types';
@@ -9,14 +9,10 @@ import { useReceiverError } from '../useReceiverError';
 import { isAnyOptionFound } from './helpers';
 
 export interface UseReceiverDisplayStatesType {
-  inputValue: string;
-  knownAddresses: KnowAddressType[] | null;
   menuIsOpen: boolean;
 }
 
 export const useReceiverDisplayStates = ({
-  inputValue,
-  knownAddresses,
   menuIsOpen
 }: UseReceiverDisplayStatesType) => {
   const { isInvalid } = useReceiverError();
@@ -25,14 +21,13 @@ export const useReceiverDisplayStates = ({
   } = useFormikContext<ExtendedValuesType>();
   const {
     showUsernameError,
-    isUsernameLoading,
     isUsernameFetching,
     isUsernameDebouncing,
     usernameIsAmongKnown,
-    usernameAccounts,
-    searchQueryIsAddress,
-    foundReceiver
+    searchQueryIsAddress
   } = useReceiverUsernameContext();
+  const { receiverInputValue: inputValue, knownAddresses } =
+    useReceiverContext();
 
   const addressIsAmongKnown = getIsValueAmongKnown({
     key: 'address',
@@ -74,9 +69,6 @@ export const useReceiverDisplayStates = ({
     isAddressError: isAddressError || isNftError,
     isUsernameError,
     isRequiredError,
-    isUsernameLoading,
-    usernameAccounts,
-    isReceiverDropdownOpened,
-    foundReceiver
+    isReceiverDropdownOpened
   };
 };

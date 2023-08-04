@@ -17,6 +17,7 @@ import Select from 'react-select/creatable';
 
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { useReceiverUsernameContext } from 'contexts/ReceiverUsernameContext';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled } from 'helpers';
 import { ExtendedValuesType, ValuesEnum } from 'types';
@@ -71,15 +72,13 @@ export const Receiver = (props: WithClassnameType) => {
     isAddressError,
     isUsernameError,
     isRequiredError,
-    isUsernameLoading,
-    usernameAccounts,
-    isReceiverDropdownOpened,
-    foundReceiver
+    isReceiverDropdownOpened
   } = useReceiverDisplayStates({
-    inputValue: receiverInputValue,
-    menuIsOpen,
-    knownAddresses
+    menuIsOpen
   });
+
+  const { foundReceiver, usernameAccounts, isUsernameLoading } =
+    useReceiverUsernameContext();
 
   const onBlur = () => {
     onBlurReceiver(new Event('blur'));
