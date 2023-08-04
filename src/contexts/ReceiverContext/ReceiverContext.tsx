@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, createContext } from 'react';
+import React, { useCallback, useContext, createContext, useState } from 'react';
 import { useFormikContext } from 'formik';
 
 import { ExtendedValuesType } from 'types';
@@ -12,6 +12,8 @@ export interface KnowAddressType {
 
 export interface ReceiverContextPropsType {
   receiver: string;
+  receiverInputValue: string;
+  setReceiverInputValue: (value: string) => void;
   receiverError?: string;
   isReceiverInvalid: boolean;
   knownAddresses: KnowAddressType[] | null;
@@ -33,12 +35,13 @@ export function ReceiverContextProvider({
   children
 }: ReceiverContextProviderPropsType) {
   const {
-    values: { receiver: receiver },
+    values: { receiver },
     errors: { receiver: receiverError },
     setFieldValue,
     setFieldTouched
   } = useFormikContext<ExtendedValuesType>();
   const { checkInvalid } = useFormContext();
+  const [receiverInputValue, setReceiverInputValue] = useState(receiver);
 
   const { scamError, fetchingScamAddress } = useScamError(receiver);
   const knownAddresses = useFetchKnownAddresses();
@@ -57,6 +60,8 @@ export function ReceiverContextProvider({
   const contextValue: ReceiverContextPropsType = {
     receiver,
     receiverError,
+    receiverInputValue,
+    setReceiverInputValue: (value: string) => setReceiverInputValue(value),
     isReceiverInvalid: checkInvalid(receiverField),
     scamError,
     fetchingScamAddress,
