@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers/trimUsernameDomain';
 
 import { ApiConfigType, getApiConfig } from 'apiCalls';
 import { getAccountByUsername } from 'apiCalls/account';
@@ -8,7 +7,6 @@ import { getMultiversxAccount } from 'apiCalls/account/getAccount';
 export interface UsernameAccountsType {
   [username: string]: {
     address: string;
-    trimmedUsername: string;
     /**
      * **username**: Might differ from the original username search string.
      */
@@ -72,9 +70,6 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
 
       const fetchedAddress = account?.address;
       const fetchedUsername = account?.username;
-      const fetchedTrimmedUsername = String(
-        trimUsernameDomain(account?.username)
-      );
 
       if (!fetchedAddress || !fetchedUsername) {
         return;
@@ -85,8 +80,7 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
           ...existing,
           [fetchedUsername]: {
             address: fetchedAddress,
-            username: fetchedUsername,
-            trimmedUsername: fetchedTrimmedUsername
+            username: fetchedUsername
           }
         };
 
