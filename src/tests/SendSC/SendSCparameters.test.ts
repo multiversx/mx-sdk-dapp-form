@@ -1,6 +1,8 @@
 import { fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { testAddress, testReceiver } from '__mocks__';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { ValuesEnum } from 'types/form';
 import { fillInForm, finalFee, setResponse } from './helpers';
 
 const transactionData = {
@@ -24,7 +26,7 @@ describe('SendForm Smart Contract', () => {
   test('GasLimit gets fetched from server', async () => {
     const transactionCost = jest.spyOn(axios, 'post');
     const { render } = await fillInForm();
-    const fee = render.getByTestId('feeLimit');
+    const fee = render.getByTestId(FormDataTestIdsEnum.feeLimit);
 
     await waitFor(() => {
       expect(fee.textContent).toBe(finalFee);
@@ -38,14 +40,16 @@ describe('SendForm Smart Contract', () => {
       { baseURL: 'https://testnet-api.multiversx.com', timeout: 4000 }
     );
 
-    const gasLimit = render.getByTestId('gasLimit') as HTMLInputElement;
+    const gasLimit = render.getByTestId(
+      ValuesEnum.gasLimit
+    ) as HTMLInputElement;
 
     expect(gasLimit.value).toBe('101200');
 
     fireEvent.change(gasLimit, { target: { value: '101201' } });
     fireEvent.blur(gasLimit);
 
-    const sendBtn = render.getByTestId('sendBtn');
+    const sendBtn = render.getByTestId(FormDataTestIdsEnum.sendBtn);
 
     fireEvent.click(sendBtn);
 

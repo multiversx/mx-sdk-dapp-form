@@ -10,13 +10,15 @@ import gasPrice from './gasPrice';
 import nftAmount from './nftAmount';
 import nftGasLimit from './nftGasLimit';
 import receiver from './receiver';
+import receiverUsername from './receiverUsername';
 
 export const getValidationSchema = (
   errorMessages: ValidationErrorMessagesType
 ) =>
   object().shape({
     receiver: receiver(errorMessages),
-    tokenId: string().required('Required'),
+    receiverUsername: receiverUsername(errorMessages),
+    tokenId: string().required(errorMessages.required),
     gasPrice: gasPrice(errorMessages),
     data,
     amount: string().when(

@@ -1,101 +1,106 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useMemo,
+  useRef
+} from 'react';
+import {
+  faCheck,
+  faExclamationTriangle
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import classNames from 'classnames';
-import { InputActionMeta, SingleValue } from 'react-select';
+import { useFormikContext } from 'formik';
 import Select from 'react-select/creatable';
 
 import globals from 'assets/sass/globals.module.scss';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-
 import { getIsDisabled } from 'helpers';
-import { ValuesEnum } from 'types';
+import { ExtendedValuesType, ValuesEnum } from 'types';
+
 import { Control } from './components/Control';
 import { DropdownIndicator } from './components/DropdownIndicator';
-import { Input } from './components/Input';
+import { renderInput } from './components/Input';
 import { Menu } from './components/Menu';
 import { MenuList } from './components/MenuList';
 import { Option } from './components/Option';
 import { SelectContainer } from './components/SelectContainer';
 import { ValueContainer } from './components/ValueContainer';
-
-import { filterOptions } from './helpers';
+import {
+  filterOptions,
+  formatOptions,
+  onReceiverChange,
+  onReceiverInputChange,
+  setAllReceiverValues
+} from './helpers';
+import { useReceiverDisplayStates, useReceiverError } from './hooks';
 import { GenericOptionType } from './Receiver.types';
+
 import styles from './styles.module.scss';
 
 export const Receiver = (props: WithClassnameType) => {
+  const receiverSelectReference = useRef(null);
+
   const { className } = props;
+  const { setFieldValue } = useFormikContext<ExtendedValuesType>();
 
   const {
     receiverInfo: {
       scamError,
       fetchingScamAddress,
       knownAddresses,
-      receiverError,
       receiver,
-      isReceiverInvalid,
       onBlurReceiver,
       onChangeReceiver
     },
     formInfo: { readonly }
   } = useSendFormContext();
 
-  const [key, setKey] = useState('');
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState(receiver);
   const [option, setOption] = useState<GenericOptionType | null>(
     receiver ? { label: receiver, value: receiver } : null
   );
 
-  const triggerRerenderOnceOnHook = () => {
-    if (addressIsValid(receiver) && !key) {
-      setKey(receiver);
-    }
+  const { receiverErrorDataTestId, error } = useReceiverError();
+  const {
+    isAddressError,
+    isUsernameError,
+    isRequiredError,
+    isUsernameLoading,
+    usernameAccounts,
+    isReceiverDropdownOpened,
+    foundReceiver
+  } = useReceiverDisplayStates({
+    inputValue,
+    menuIsOpen,
+    knownAddresses
+  });
+
+  const onBlur = () => {
+    onBlurReceiver(new Event('blur'));
   };
 
-  const onBlur = () => onBlurReceiver(new Event('blur'));
-
-  const onInputChange = useCallback(
-    (inputValue: string, meta: InputActionMeta) => {
-      if (!['input-blur', 'menu-close'].includes(meta.action)) {
-        changeAndBlurInput(inputValue);
-        setInputValue(inputValue);
-        setOption({
-          value: inputValue,
-          label: inputValue
-        });
-
-        if (!inputValue) {
-          setOption(null);
-        }
-      }
-    },
-    []
-  );
-
-  useEffect(triggerRerenderOnceOnHook, [receiver]);
-
   const options: GenericOptionType[] = useMemo(
-    () =>
-      knownAddresses
-        ? knownAddresses
-            .filter((address) => addressIsValid(address))
-            .map((address) => ({
-              value: address,
-              label: address
-            }))
-        : [],
+    () => formatOptions(knownAddresses),
     [knownAddresses]
   );
 
-  const onChange = (option: SingleValue<GenericOptionType>) => {
-    if (option) {
-      setOption(option);
-      setInputValue(option.value);
-      changeAndBlurInput(option.value);
-    }
-  };
+  const setAllValues = setAllReceiverValues({
+    setFieldValue,
+    setInputValue,
+    setOption,
+    options,
+    usernameAccounts
+  });
+
+  const onInputChange = useCallback(
+    onReceiverInputChange({ setAllValues, setOption }),
+    []
+  );
 
   const changeAndBlurInput = useCallback((value: string) => {
     onChangeReceiver(value ? value.trim() : '');
@@ -105,11 +110,41 @@ export const Receiver = (props: WithClassnameType) => {
     setTimeout(onBlur);
   }, []);
 
+  const onChange = onReceiverChange({
+    changeAndBlurInput,
+    setOption,
+    setInputValue
+  });
+
+  const Input = useMemo(
+    () => renderInput(receiverSelectReference),
+    [receiverSelectReference]
+  );
+
+  useEffect(() => {
+    if (!receiver) {
+      return;
+    }
+
+    const username = Object.keys(usernameAccounts).find(
+      (key) => usernameAccounts[key]?.address === receiver
+    );
+
+    setAllValues(username ?? receiver);
+
+    if (username) {
+      setInputValue(username);
+    }
+  }, [usernameAccounts, receiver]);
+
+  const showErrorText =
+    (isAddressError || isUsernameError || isRequiredError) && !menuIsOpen;
+
   return (
     <div className={classNames(styles.receiver, className)}>
       <div
         className={globals.label}
-        data-testid='receiverLabel'
+        data-testid={FormDataTestIdsEnum.receiverLabel}
         data-loading={fetchingScamAddress}
       >
         Receiver
@@ -129,10 +164,10 @@ export const Receiver = (props: WithClassnameType) => {
         onBlur={onBlur}
         isLoading={knownAddresses === null}
         isMulti={false}
+        ref={receiverSelectReference}
         inputValue={inputValue}
-        className={classNames(styles.receiverSelectContainer, {
-          [styles.invalid]: isReceiverInvalid || scamError
-        })}
+        onMenuClose={() => setMenuIsOpen(false)}
+        onMenuOpen={() => setMenuIsOpen(true)}
         components={{
           Menu,
           Input,
@@ -147,17 +182,34 @@ export const Receiver = (props: WithClassnameType) => {
           IndicatorSeparator: () => null,
           LoadingIndicator: () => null
         }}
+        className={classNames(styles.receiverSelectContainer, {
+          [styles.opened]: isReceiverDropdownOpened,
+          [styles.invalid]:
+            isAddressError || isUsernameError || scamError || isRequiredError
+        })}
       />
 
-      {isReceiverInvalid && (
-        <div data-testid='receiverError' className={globals.error}>
-          {receiverError}
+      {showErrorText && (
+        <div data-testid={receiverErrorDataTestId} className={globals.error}>
+          {error}
         </div>
+      )}
+
+      {isUsernameLoading && <div className={styles.loading}>Loading...</div>}
+
+      {foundReceiver && (
+        <span
+          className={styles.found}
+          data-testid={FormDataTestIdsEnum.receiverUsernameAddress}
+        >
+          Account found!{' '}
+          <FontAwesomeIcon icon={faCheck} className={styles.foundIcon} />
+        </span>
       )}
 
       {scamError && (
         <div
-          data-testid='receiverScam'
+          data-testid={FormDataTestIdsEnum.receiverScam}
           className={classNames(globals.error, globals.scam)}
         >
           <span>

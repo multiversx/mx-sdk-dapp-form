@@ -10,7 +10,12 @@ import React, {
 import { Transaction } from '@multiversx/sdk-core/out';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { useFormikContext } from 'formik';
-import { ExtendedValuesType, PartialNftType, TransactionTypeEnum } from 'types';
+import {
+  ExtendedValuesType,
+  PartialNftType,
+  TransactionTypeEnum,
+  ValuesEnum
+} from 'types';
 import { verifyInvalid } from 'validation';
 
 export interface FormContextBasePropsType {
@@ -68,6 +73,7 @@ export function FormContextProvider({
     errors,
     touched,
     validateForm,
+    setFieldTouched,
     setErrors,
     isValid: isFormValid,
     handleSubmit
@@ -86,6 +92,7 @@ export function FormContextProvider({
 
   const handleCheckForm = useCallback(async () => {
     setShouldValidateForm(true);
+    setFieldTouched(ValuesEnum.receiver, true);
 
     const newErrors = await validateForm();
 

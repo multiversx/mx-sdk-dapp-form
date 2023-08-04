@@ -4,7 +4,7 @@ import { ExtendedValuesType, TransactionTypeEnum } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
 
 export const receiver = (errorMessages: ValidationErrorMessagesType) => {
-  const required = string().required('Required');
+  const required = string().required(errorMessages.required);
 
   const validAddress = string().test(
     'addressIsValid',

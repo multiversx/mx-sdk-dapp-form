@@ -7,7 +7,7 @@ import { formattedConfigGasPrice } from 'operations/formattedConfigGasPrice';
 import { ValidationErrorMessagesType } from 'types/validation';
 
 export const gasPrice = (errorMessages: ValidationErrorMessagesType) => {
-  const required = string().required('Required');
+  const required = string().required(errorMessages.required);
 
   const decimalsValidation = string().test(
     'decimalFormat',

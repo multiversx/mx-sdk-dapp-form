@@ -9,6 +9,10 @@ import {
   ReceiverContextPropsType,
   useReceiverContext
 } from './ReceiverContext';
+import {
+  ReceiverUsernameContextPropsType,
+  useReceiverUsernameContext
+} from './ReceiverUsernameContext';
 import { TokensContextPropsType, useTokensContext } from './TokensContext';
 
 export interface SendFormContextPropsType {
@@ -19,6 +23,7 @@ export interface SendFormContextPropsType {
   gasInfo: GasContextPropsType;
   dataFieldInfo: DataContextPropsType;
   receiverInfo: ReceiverContextPropsType;
+  receiverUsernameInfo: ReceiverUsernameContextPropsType;
 }
 
 interface SendFormContextProviderPropsType {
@@ -37,6 +42,7 @@ export function SendFormContextProvider({
   const gasInfo = useGasContext();
   const dataFieldInfo = useDataContext();
   const receiverInfo = useReceiverContext();
+  const receiverUsernameInfo = useReceiverUsernameContext();
 
   return (
     <SendFormContext.Provider
@@ -47,6 +53,7 @@ export function SendFormContextProvider({
         gasInfo,
         dataFieldInfo,
         receiverInfo,
+        receiverUsernameInfo,
         amountInfo
       }}
     >

@@ -1,6 +1,8 @@
 import { RenderResult, fireEvent, queries } from '@testing-library/react';
 import { testNetwork, testReceiver } from '__mocks__';
 import { server, rest } from '__mocks__/server';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { ValuesEnum } from 'types/form';
 import { renderForm } from '../helpers';
 
 function* generator(arr: any[]) {
@@ -16,13 +18,13 @@ export const fillInForm: () => Promise<{
     balance: '7600000000000000000000'
   });
 
-  const amount: any = await render.findByTestId('amount');
+  const amount: any = await render.findByTestId(ValuesEnum.amount);
   fireEvent.change(amount, { target: { value: '0.1' } });
   fireEvent.blur(amount);
 
   expect(amount.value).toBe('0.1');
 
-  const receiver: any = render.getByTestId('receiver');
+  const receiver: any = render.getByTestId(ValuesEnum.receiver);
   fireEvent.change(receiver, {
     target: {
       value: testReceiver
@@ -30,12 +32,12 @@ export const fillInForm: () => Promise<{
   });
   fireEvent.blur(receiver);
 
-  const dataInput: any = render.getByTestId('data');
+  const dataInput: any = render.getByTestId(ValuesEnum.data);
 
   fireEvent.change(dataInput, { target: { value: 'claim' } });
   fireEvent.blur(dataInput);
 
-  const fee = await render.findByTestId('feeLimit');
+  const fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
   expect(fee.textContent).toBe('0.0000575 xEGLD');
 
   return { render };

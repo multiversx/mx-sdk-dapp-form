@@ -1,6 +1,7 @@
 import { act, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
-import { MAX_GAS_LIMIT } from 'constants/index';
+import { FormDataTestIdsEnum, MAX_GAS_LIMIT } from 'constants/index';
+import { ValuesEnum } from 'types/form';
 import { fillInForm, finalFee, setResponse } from './helpers';
 
 describe('SendForm Smart Contract', () => {
@@ -17,19 +18,19 @@ describe('SendForm Smart Contract', () => {
       expect(transactionCost).toHaveBeenCalledTimes(1);
     });
 
-    let fee = await render.findByTestId('feeLimit');
+    let fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
 
     await waitFor(() => {
       expect(fee.textContent).toBe('0.0165575575 xEGLD');
     });
 
-    let gasLimit = render.getByTestId('gasLimit') as HTMLInputElement;
+    let gasLimit = render.getByTestId(ValuesEnum.gasLimit) as HTMLInputElement;
 
     await waitFor(() => {
       expect(gasLimit.value).toBe('1650063250');
     });
 
-    const sendBtn = render.getByTestId('sendBtn');
+    const sendBtn = render.getByTestId(FormDataTestIdsEnum.sendBtn);
 
     act(() => {
       fireEvent.click(sendBtn);
@@ -43,7 +44,7 @@ describe('SendForm Smart Contract', () => {
       );
     });
     // modify data field to get a new gasLimit value from the server
-    let dataInput = render.getByTestId('data') as HTMLInputElement;
+    let dataInput = render.getByTestId(ValuesEnum.data) as HTMLInputElement;
     fireEvent.change(dataInput, { target: { value: 'claim@' } });
     fireEvent.blur(dataInput);
 
@@ -52,15 +53,15 @@ describe('SendForm Smart Contract', () => {
     });
 
     // call fails so default value is filled in
-    gasLimit = render.getByTestId('gasLimit') as HTMLInputElement;
+    gasLimit = render.getByTestId(ValuesEnum.gasLimit) as HTMLInputElement;
     expect(gasLimit.value).toBe('59000');
 
     // 3rd data field change fetches correct server response
-    dataInput = render.getByTestId('data') as HTMLInputElement;
+    dataInput = render.getByTestId(ValuesEnum.data) as HTMLInputElement;
     fireEvent.change(dataInput, { target: { value: 'claim' } });
     fireEvent.blur(dataInput);
 
-    fee = await render.findByTestId('feeLimit');
+    fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
     await waitFor(() => {
       expect(fee.textContent).toBe(finalFee);
     });

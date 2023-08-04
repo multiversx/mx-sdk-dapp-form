@@ -19,7 +19,7 @@ export function getValues(props: {
 }) {
   const { tx, tokenId, egldLabel, tokenFound, tokenAmount } = props;
   const transaction = tx.transaction.toPlainObject();
-  const receiver = transaction.receiver;
+  const { receiver, receiverUsername, senderUsername } = transaction;
   const isTokenTransaction = Boolean(
     tokenId && isTokenTransfer({ tokenId, erdLabel: egldLabel })
   );
@@ -46,6 +46,8 @@ export function getValues(props: {
       showLastNonZeroDecimal: true,
       addCommas: false
     }),
+    receiverUsername,
+    senderUsername,
     data: String(transaction.data),
     nonce: transaction.nonce.valueOf().toString()
   };

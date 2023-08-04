@@ -68,7 +68,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     shouldGenerateTransactionOnSubmit = true
   } = props;
 
-  const { address, balance } = accountInfo;
+  const { address, balance, username } = accountInfo;
   const { chainId } = networkConfig;
   const [isFormSubmitted, setIsFormSubmitted] = useState(
     Boolean(props.formInfo.skipToConfirm)
@@ -128,6 +128,8 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   const formikInitialValues = {
     tokenId,
     receiver: initialValues?.receiver ?? '',
+    receiverUsername: initialValues?.receiverUsername,
+    senderUsername: username,
     gasPrice: initialValues?.gasPrice ?? formattedConfigGasPrice,
     data,
     amount: initialValues?.amount ?? ZERO,

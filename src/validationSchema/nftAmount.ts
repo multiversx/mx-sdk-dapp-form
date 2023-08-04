@@ -8,9 +8,9 @@ import { parseAmount } from 'helpers';
 import { ExtendedValuesType, NftEnumType, TransactionTypeEnum } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
 
-const required = string().required('Required');
-
 const nftAmount = (errorMessages: ValidationErrorMessagesType) => {
+  const required = string().required(errorMessages.required);
+
   const metaFormattedAmount = string().test({
     name: 'formatDecimals',
     test: function hashSignCheck(value) {

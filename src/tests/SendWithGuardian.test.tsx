@@ -2,7 +2,9 @@ import React from 'react';
 import { GuardianScreenType } from '@multiversx/sdk-dapp/types/transactions.types';
 import { fireEvent } from '@testing-library/react';
 import { testAddress } from '__mocks__';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { renderForm } from 'tests/helpers/renderForm';
+import { ValuesEnum } from 'types/form';
 import { formConfiguration, sendAndConfirmTest } from './helpers';
 
 const GuardianScreen = (props: GuardianScreenType) => {
@@ -26,15 +28,15 @@ describe('Guardian screen tests', () => {
       }
     });
 
-    const receiver: any = await methods.findByTestId('receiver');
+    const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
 
     fireEvent.change(receiver, { target: { value: testAddress } });
 
-    const amount: any = await methods.findByTestId('amount');
+    const amount: any = await methods.findByTestId(ValuesEnum.amount);
     fireEvent.change(amount, { target: { value: '0.00001' } });
     fireEvent.blur(amount, { target: { value: '0.00001' } });
 
-    const sendButton = methods.getByTestId('sendBtn');
+    const sendButton = methods.getByTestId(FormDataTestIdsEnum.sendBtn);
     fireEvent.click(sendButton);
 
     await sendAndConfirmTest({ methods })({
@@ -44,9 +46,13 @@ describe('Guardian screen tests', () => {
 
     // account is guarded and has GuardianComponent
     // after pressing send, GuardianScreen should be visible
-    const sendTransactionBtn = methods.getByTestId('sendTrxBtn');
+    const sendTransactionBtn = methods.getByTestId(
+      FormDataTestIdsEnum.sendTrxBtn
+    );
     fireEvent.click(sendTransactionBtn);
-    const guardianScreen = await methods.findByTestId('guardianScreen');
+    const guardianScreen = await methods.findByTestId(
+      FormDataTestIdsEnum.guardianScreen
+    );
     expect(guardianScreen).toBeDefined();
 
     // on Guardian screen back, Confirm Screen should be visible

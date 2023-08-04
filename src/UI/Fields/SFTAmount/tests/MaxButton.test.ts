@@ -1,10 +1,12 @@
 import { act, fireEvent, waitFor } from '@testing-library/react';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { renderForm } from 'tests/helpers';
+import { ValuesEnum } from 'types/form';
 
 describe('Entire balance button', () => {
   test('Entering smaller amount than entireBalanceMinusDust shows Max', async () => {
     const render = renderForm();
-    const amount = await render.findByTestId('amount');
+    const amount = await render.findByTestId(ValuesEnum.amount);
     const value = { target: { value: '0.7122' } };
     await act(async () => {
       fireEvent.change(amount, value);
@@ -17,7 +19,7 @@ describe('Entire balance button', () => {
   });
   test('Entering larger amount than entireBalanceMinusDust hides Max', async () => {
     const render = renderForm();
-    const amount = await render.findByTestId('amount');
+    const amount = await render.findByTestId(ValuesEnum.amount);
     const value = { target: { value: '0.8074' } };
 
     await act(async () => {
@@ -34,13 +36,13 @@ describe('Entire balance button', () => {
     const entireBalaceButton = await render.findByTestId('maxBtn');
     fireEvent.click(entireBalaceButton);
 
-    const decreasedValue: any = render.getByTestId('amount');
+    const decreasedValue: any = render.getByTestId(ValuesEnum.amount);
     expect(decreasedValue.value).toBe('0.8073');
 
     const infoDust = await render.findByTestId('infoDust');
     expect(infoDust).toBeDefined();
 
-    const amount = render.getByTestId('amount');
+    const amount = render.getByTestId(ValuesEnum.amount);
     const value = { target: { value: '0' } };
 
     await act(async () => {
@@ -52,7 +54,7 @@ describe('Entire balance button', () => {
   });
   test('Using entire balance and writing in data filed triggers error', async () => {
     const methods = renderForm();
-    const amount: any = await methods.findByTestId('amount');
+    const amount: any = await methods.findByTestId(ValuesEnum.amount);
     const value = { target: { value: '0.8123' } }; // max + 0.1 minDust
 
     await act(async () => {
@@ -62,9 +64,9 @@ describe('Entire balance button', () => {
     fireEvent.change(amount, value);
     fireEvent.blur(amount);
     const data = { target: { value: 'four' } };
-    const input: any = await methods.findByTestId('data');
+    const input: any = await methods.findByTestId(ValuesEnum.data);
     fireEvent.change(input, data);
-    const sendButton = methods.getByTestId('sendBtn');
+    const sendButton = methods.getByTestId(FormDataTestIdsEnum.sendBtn);
     fireEvent.click(sendButton);
 
     await waitFor(() => {
