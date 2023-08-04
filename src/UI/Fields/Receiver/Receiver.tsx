@@ -17,6 +17,7 @@ import Select from 'react-select/creatable';
 
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { useReceiverUsernameContext } from 'contexts/ReceiverUsernameContext';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled } from 'helpers';
 import { ExtendedValuesType, ValuesEnum } from 'types';
@@ -51,16 +52,18 @@ export const Receiver = (props: WithClassnameType) => {
     receiverInfo: {
       scamError,
       fetchingScamAddress,
+      receiverInputValue,
+      setReceiverInputValue,
       knownAddresses,
       receiver,
       onBlurReceiver,
       onChangeReceiver
     },
+    receiverUsernameInfo: { receiverUsername },
     formInfo: { readonly }
   } = useSendFormContext();
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const [inputValue, setInputValue] = useState(receiver);
   const [option, setOption] = useState<GenericOptionType | null>(
     receiver ? { label: receiver, value: receiver } : null
   );
@@ -70,15 +73,12 @@ export const Receiver = (props: WithClassnameType) => {
     isAddressError,
     isUsernameError,
     isRequiredError,
-    isUsernameLoading,
-    usernameAccounts,
-    isReceiverDropdownOpened,
-    foundReceiver
+    isReceiverDropdownOpened
   } = useReceiverDisplayStates({
-    inputValue,
-    menuIsOpen,
-    knownAddresses
+    menuIsOpen
   });
+
+  const { usernameAccounts, isUsernameLoading } = useReceiverUsernameContext();
 
   const onBlur = () => {
     onBlurReceiver(new Event('blur'));
@@ -91,7 +91,7 @@ export const Receiver = (props: WithClassnameType) => {
 
   const setAllValues = setAllReceiverValues({
     setFieldValue,
-    setInputValue,
+    setInputValue: setReceiverInputValue,
     setOption,
     options,
     usernameAccounts
@@ -113,7 +113,7 @@ export const Receiver = (props: WithClassnameType) => {
   const onChange = onReceiverChange({
     changeAndBlurInput,
     setOption,
-    setInputValue
+    setInputValue: setReceiverInputValue
   });
 
   const Input = useMemo(
@@ -133,7 +133,7 @@ export const Receiver = (props: WithClassnameType) => {
     setAllValues(username ?? receiver);
 
     if (username) {
-      setInputValue(username);
+      setReceiverInputValue(username);
     }
   }, [usernameAccounts, receiver]);
 
@@ -165,7 +165,7 @@ export const Receiver = (props: WithClassnameType) => {
         isLoading={knownAddresses === null}
         isMulti={false}
         ref={receiverSelectReference}
-        inputValue={inputValue}
+        inputValue={receiverInputValue}
         onMenuClose={() => setMenuIsOpen(false)}
         onMenuOpen={() => setMenuIsOpen(true)}
         components={{
@@ -197,7 +197,7 @@ export const Receiver = (props: WithClassnameType) => {
 
       {isUsernameLoading && <div className={styles.loading}>Loading...</div>}
 
-      {foundReceiver && (
+      {receiverUsername && (
         <span
           className={styles.found}
           data-testid={FormDataTestIdsEnum.receiverUsernameAddress}

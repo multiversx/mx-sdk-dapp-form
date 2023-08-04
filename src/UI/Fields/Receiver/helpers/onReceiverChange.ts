@@ -5,7 +5,7 @@ import { GenericOptionType } from '../Receiver.types';
 
 export interface OnReceiverChangeType {
   setOption: Dispatch<SetStateAction<GenericOptionType | null>>;
-  setInputValue: (value: SetStateAction<string>) => void;
+  setInputValue: (value: string) => void;
   changeAndBlurInput: (value: string) => void;
 }
 

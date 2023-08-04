@@ -3,7 +3,7 @@ import { KnowAddressType } from 'contexts';
 export interface GetIsValueAmongKnownType {
   knownAddresses: KnowAddressType[] | null;
   inputValue: string;
-  key: string;
+  key: keyof KnowAddressType;
 }
 
 export const getIsValueAmongKnown = ({
@@ -15,9 +15,9 @@ export const getIsValueAmongKnown = ({
     return false;
   }
 
-  const valueIsAmongKnown = knownAddresses.find((account) =>
-    account[key] ? account[key].startsWith(inputValue) : false
+  const valueIsAmongKnown = knownAddresses.some((account) =>
+    Boolean(account[key]?.startsWith(inputValue))
   );
 
-  return Boolean(valueIsAmongKnown);
+  return valueIsAmongKnown;
 };
