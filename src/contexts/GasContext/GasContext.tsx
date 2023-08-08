@@ -206,9 +206,7 @@ export function GasContextProvider({
   }, [isNftTransaction, touched]);
 
   useEffect(() => {
-    if (!prefilledForm) {
-      handleUpdateGasLimit(getGasLimit({ txType, data, isGuarded }), true);
-    }
+    handleUpdateGasLimit(getGasLimit({ txType, data, isGuarded }), true);
   }, [tokenId, txType]);
 
   const value: GasContextPropsType = {
