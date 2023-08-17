@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-- [Fixed long data field exceeds modal](https://github.com/multiversx/mx-sdk-dapp-form/pull/208)
+- [Fixed long data field exceeds modal](https://github.com/multiversx/mx-sdk-dapp-form/pull/209)
 
 ## [[0.8.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/207)] - 2023-08-04
 - [Fixed receiver error display](https://github.com/multiversx/mx-sdk-dapp-form/pull/206)
