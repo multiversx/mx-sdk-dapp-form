@@ -45,16 +45,16 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
         showBalanceUsdValue,
         TokenTickerIcon
       }),
-    [options]
+    []
   );
   const ValueContainer = useMemo(
     () => components.getValueContainer(egldLabel, selectedTokenIconClassName),
-    [options]
+    []
   );
 
   const SingleValue = useMemo(
     () => components.getSingleValue(TokenTickerIcon),
-    [options]
+    []
   );
 
   const updateSelectedOption = () => {
