@@ -6,17 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [[0.8.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/211)] - 2023-08-22
+
+- [Fixed selected option not updating with the new options](https://github.com/multiversx/mx-sdk-dapp-form/pull/210)
+- [Fixed long data field exceeds modal](https://github.com/multiversx/mx-sdk-dapp-form/pull/209)
+
 ## [[0.8.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/207)] - 2023-08-04
+
 - [Fixed receiver error display](https://github.com/multiversx/mx-sdk-dapp-form/pull/206)
+
 ## [[0.8.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/205)] - 2023-08-04
+
 - [Fixed username value and display](https://github.com/multiversx/mx-sdk-dapp-form/pull/204)
+
 ## [[0.8.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/203)] - 2023-08-04
+
 - [Fixed username searching error on menu close](https://github.com/multiversx/mx-sdk-dapp-form/pull/202)
+
 ## [[0.8.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/201)] - 2023-08-04
+
 - [Added support for usernames](https://github.com/multiversx/mx-sdk-dapp-form/pull/200)
+
 ## [[0.7.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/195)] - 2023-07-26
+
 - [Updated sdk-dapp and sdk-core](https://github.com/multiversx/mx-sdk-dapp-form/pull/199)
 - [Fixed ledger version error when signing with guardians](https://github.com/multiversx/mx-sdk-dapp-form/pull/194)
+
 ## [[0.7.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/195)] - 2023-07-06
 
 - [Adds allowNegative custom prop to amount input](https://github.com/multiversx/mx-sdk-dapp-form/pull/194)
