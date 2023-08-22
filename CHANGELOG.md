@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.8.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/211)] - 2023-08-22
+
 - [Fixed selected option not updating with the new options](https://github.com/multiversx/mx-sdk-dapp-form/pull/210)
 - [Fixed long data field exceeds modal](https://github.com/multiversx/mx-sdk-dapp-form/pull/209)
 
