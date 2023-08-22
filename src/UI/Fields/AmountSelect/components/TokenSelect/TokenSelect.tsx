@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 import Select from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
@@ -56,6 +56,23 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     () => components.getSingleValue(TokenTickerIcon),
     []
   );
+
+  const updateSelectedOption = () => {
+    const updatedOption = options.find(
+      (option) => option.value === value?.value
+    );
+
+    const isSelectedOptionUpdated =
+      updatedOption?.token.balance === value?.token.balance;
+
+    if (!updatedOption || isSelectedOptionUpdated) {
+      return;
+    }
+
+    onChange(updatedOption);
+  };
+
+  useEffect(updateSelectedOption, [options]);
 
   const isTokenFromEgldFamily = (identifier: string) =>
     egldFamily.includes(identifier);
