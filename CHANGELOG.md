@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.8.5](https://github.com/multiversx/mx-sdk-dapp-form/pull/214)] - 2023-08-23
+
+- [Added filtering select options by name](https://github.com/multiversx/mx-sdk-dapp-form/pull/213)
+
 ## [[0.8.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/211)] - 2023-08-22
 
 - [Fixed selected option not updating with the new options](https://github.com/multiversx/mx-sdk-dapp-form/pull/210)
