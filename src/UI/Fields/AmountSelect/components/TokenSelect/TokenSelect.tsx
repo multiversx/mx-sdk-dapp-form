@@ -94,10 +94,19 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
   const filterOption = (
     option: FilterOptionOption<OptionType>,
     search: string
-  ) =>
-    option.data.token.ticker && Boolean(search)
+  ) => {
+    const isOptionFoundByTicker = option.data.token.ticker
       ? option.data.token.ticker.toLowerCase().includes(search.toLowerCase())
+      : false;
+
+    const isOptionFoundByName = option.data.token.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    return Boolean(search)
+      ? isOptionFoundByTicker || isOptionFoundByName
       : true;
+  };
 
   return (
     <div
