@@ -42,7 +42,10 @@ export const getOption =
     const balanceUsdValue = option.token?.valueUSD?.toString();
 
     const ticker = Boolean(selectProps.inputValue)
-      ? HighlightText(option.token.ticker, selectProps.inputValue)
+      ? HighlightText({
+          text: option.token.ticker,
+          highlight: selectProps.inputValue
+        })
       : option.token.ticker;
 
     const { isEgld } = getIdentifierType(option.value);
