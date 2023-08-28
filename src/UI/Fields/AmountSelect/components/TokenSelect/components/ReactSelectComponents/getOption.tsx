@@ -7,11 +7,11 @@ import classNames from 'classnames';
 import { components } from 'react-select';
 
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { HighlightText } from 'UI/HighlightText';
 import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
-import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
 
+import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
 import styles from './../../tokenSelect.module.scss';
-import { HighlightText } from './HighlightText';
 
 const MultiversXIcon =
   require('./../../../../../../../assets/icons/mx-icon.svg').default;
