@@ -194,5 +194,6 @@ export const AmountInput = memo(
   AmountComponent,
   (prevProps, nextProps) =>
     prevProps.value === nextProps.value &&
-    prevProps.usdPrice === nextProps.usdPrice
+    prevProps.usdPrice === nextProps.usdPrice &&
+    prevProps.className === nextProps.className
 );

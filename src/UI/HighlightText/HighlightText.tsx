@@ -2,7 +2,15 @@ import React from 'react';
 
 import styles from './styles.modules.scss';
 
-export const HighlightText = (text = '', highlight: string) => {
+export interface HighlightTextPropsType {
+  text: string;
+  highlight: string;
+}
+
+export const HighlightText = ({
+  highlight,
+  text = ''
+}: HighlightTextPropsType) => {
   const words = text.split(' ');
   const lowercaseHighlight = highlight.toLowerCase();
   const matchHighlight = new RegExp(`(${lowercaseHighlight})`, 'gi');
@@ -13,17 +21,25 @@ export const HighlightText = (text = '', highlight: string) => {
 
   return (
     <span className={styles.highlight}>
-      {wordsParts.map((wordPart, wordIndex) => (
-        <span key={`${wordPart}-${wordIndex}`}>
-          {wordPart.map((part, index) =>
-            part.toLowerCase() === lowercaseHighlight && lowercaseHighlight ? (
-              <strong key={`${part}-${index}`}>{part}</strong>
-            ) : (
-              <span key={`${part}-${index}`}>{part}</span>
-            )
-          )}
-        </span>
-      ))}
+      {wordsParts.map((wordPart, wordIndex) => {
+        const wordKey = `${wordPart}-${wordIndex}`;
+
+        return (
+          <span key={wordKey}>
+            {wordPart.map((part, index) => {
+              const highlightMatch = part.toLowerCase() === lowercaseHighlight;
+              const displayHighlight = lowercaseHighlight && highlightMatch;
+              const characterKey = `${part}-${index}`;
+
+              return displayHighlight ? (
+                <strong key={characterKey}>{part}</strong>
+              ) : (
+                <span key={characterKey}>{part}</span>
+              );
+            })}
+          </span>
+        );
+      })}
     </span>
   );
 };
