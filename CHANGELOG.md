@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Fixed long usernames display in dropdown](https://github.com/multiversx/mx-sdk-dapp-form/pull/215)
+
 ## [[0.8.5](https://github.com/multiversx/mx-sdk-dapp-form/pull/214)] - 2023-08-23
 
 - [Added filtering select options by name](https://github.com/multiversx/mx-sdk-dapp-form/pull/213)

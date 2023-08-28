@@ -132,6 +132,7 @@
             display: flex;
             align-items: center;
             gap: 4px;
+            white-space: nowrap;
 
             .receiver-select-single-username-icon {
               height: 20px;
@@ -293,6 +294,7 @@
 
         &.receiver-select-autocomplete-username {
           padding-left: 36px;
+          white-space: nowrap;
         }
 
         .receiver-select-autocomplete-icon {
@@ -406,6 +408,10 @@
 
             .receiver-select-option-username {
               color: var(--action-color);
+
+              * {
+                white-space: nowrap;
+              }
             }
 
             .receiver-select-option-collection {

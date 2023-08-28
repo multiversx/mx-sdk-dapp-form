@@ -3,7 +3,7 @@ import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import classNames from 'classnames';
 import { components } from 'react-select';
 
-import { HighlightText } from 'UI/Fields/AmountSelect/components/TokenSelect/components';
+import { HighlightText } from 'UI/HighlightText';
 
 import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
