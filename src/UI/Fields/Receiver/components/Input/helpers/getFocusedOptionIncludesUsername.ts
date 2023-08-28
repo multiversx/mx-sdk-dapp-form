@@ -27,7 +27,6 @@ export const getFocusedOptionIncludesUsername = (
   }
 
   return (
-    optionHasUsername &&
-    focusedOptionLabel.toLowerCase().startsWith(inputValue.toLowerCase())
+    optionHasUsername && focusedOptionLabel.startsWith(inputValue.toLowerCase())
   );
 };
