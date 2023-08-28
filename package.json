@@ -26,7 +26,7 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@multiversx/sdk-dapp": "2.19.2",
+    "@multiversx/sdk-dapp": "2.19.4",
     "@size-limit/preset-small-lib": "7.0.8",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
@@ -88,14 +88,14 @@
     "transaction"
   ],
   "peerDependencies": {
-    "@multiversx/sdk-dapp": "^2.19.2",
-    "@multiversx/sdk-core": "^12.4.2",
+    "@multiversx/sdk-dapp": "^2.19.4",
+    "@multiversx/sdk-core": "^12.6.0",
     "react": ">=18",
     "react-dom": ">=18"
   },
   "resolutions": {
-    "@multiversx/sdk-dapp": "^2.19.2",
-    "@multiversx/sdk-core": "12.4.2",
+    "@multiversx/sdk-dapp": "^2.19.4",
+    "@multiversx/sdk-core": "12.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
