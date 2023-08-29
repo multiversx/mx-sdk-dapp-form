@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './styles.modules.scss';
 
 export interface HighlightTextPropsType {
-  text: string;
+  text?: string;
   highlight: string;
 }
 

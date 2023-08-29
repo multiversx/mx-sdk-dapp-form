@@ -8,28 +8,32 @@ import { components } from 'react-select';
 
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { HighlightText } from 'UI/HighlightText';
-import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
 
+import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
 import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
 import styles from './../../tokenSelect.module.scss';
 
-const MultiversXIcon =
-  require('./../../../../../../../assets/icons/mx-icon.svg').default;
+export const {
+  default: MultiversXIcon
+} = require('./../../../../../../../assets/icons/mx-icon.svg');
+
+export interface GetOptionPropsType {
+  egldLabel: string;
+  showTokenPrice?: boolean;
+  showBalanceUsdValue?: boolean;
+  TokenTickerIcon?: TokenSelectPropsType['TokenTickerIcon'];
+}
 
 export const getOption =
   ({
     showTokenPrice,
     showBalanceUsdValue,
     TokenTickerIcon
-  }: {
-    egldLabel: string;
-    showTokenPrice?: boolean;
-    showBalanceUsdValue?: boolean;
-    TokenTickerIcon?: TokenSelectPropsType['TokenTickerIcon'];
-  }): typeof components.Option =>
+  }: GetOptionPropsType): typeof components.Option =>
   (props) => {
     const { data, isSelected, isFocused, isDisabled, selectProps } = props;
     const option = data as unknown as OptionType;
+    const { isEgld } = getIdentifierType(option.value);
 
     const icon = option.token.assets ? option.token.assets.svgUrl : null;
     const amount = progressiveFormatAmount({
@@ -40,12 +44,6 @@ export const getOption =
 
     const tokenPrice = option.token?.usdPrice?.toString();
     const balanceUsdValue = option.token?.valueUSD?.toString();
-
-    const ticker = Boolean(selectProps.inputValue)
-      ? HighlightText(option.token.ticker, selectProps.inputValue)
-      : option.token.ticker;
-
-    const { isEgld } = getIdentifierType(option.value);
 
     return (
       <div data-testid={`${(props as any).value}-option`}>
@@ -73,7 +71,17 @@ export const getOption =
           <div className={styles.info}>
             <div className={styles.left}>
               <div className={styles.ticker}>
-                <span className={styles.value}>{ticker}</span>
+                <span className={styles.value}>
+                  {selectProps.inputValue ? (
+                    <HighlightText
+                      text={option.token.ticker}
+                      highlight={selectProps.inputValue}
+                    />
+                  ) : (
+                    option.token.ticker
+                  )}
+                </span>
+
                 {TokenTickerIcon && <TokenTickerIcon token={option.token} />}
               </div>
 

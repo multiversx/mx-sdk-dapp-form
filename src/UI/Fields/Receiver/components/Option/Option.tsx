@@ -15,7 +15,6 @@ export const Option: typeof components.Option = (props) => {
 
   const option = data as GenericOptionType;
   const hasUsername = option.value !== option.label;
-  const username = HighlightText(option.label, inputValue);
 
   return (
     <components.Option
@@ -31,7 +30,7 @@ export const Option: typeof components.Option = (props) => {
               className={styles.receiverSelectOptionUsernameIcon}
             />
 
-            {username}
+            <HighlightText text={option.label} highlight={inputValue} />
           </span>
 
           <span className={styles.receiverSelectOptionNameWrapper}>
