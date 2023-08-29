@@ -72,7 +72,7 @@ export const getOption =
             <div className={styles.left}>
               <div className={styles.ticker}>
                 <span className={styles.value}>
-                  {Boolean(selectProps.inputValue) ? (
+                  {selectProps.inputValue ? (
                     <HighlightText
                       text={option.token.ticker}
                       highlight={selectProps.inputValue}
