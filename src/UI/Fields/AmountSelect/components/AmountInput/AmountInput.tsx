@@ -42,6 +42,7 @@ export interface AmountInputPropsType extends WithClassnameType {
   value: string;
   allowNegative?: boolean;
   autoFocus?: boolean;
+  suffix?: string;
 }
 
 const fiveHundredMs = 500;
@@ -63,7 +64,8 @@ const AmountComponent = ({
   value,
   className,
   allowNegative = true,
-  autoFocus
+  autoFocus,
+  suffix
 }: AmountInputPropsType) => {
   const ref = useRef(null);
 
@@ -172,6 +174,7 @@ const AmountComponent = ({
         thousandSeparator=','
         thousandsGroupStyle='thousand'
         value={inputValue}
+        suffix={suffix}
         valueIsNumericString
         allowNegative={allowNegative}
         autoFocus={autoFocus}
