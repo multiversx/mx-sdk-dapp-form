@@ -9,11 +9,12 @@ import React, {
 } from 'react';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
-
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import { NumberFormatValues, NumericFormat } from 'react-number-format';
+
 import globals from 'assets/sass/globals.module.scss';
+
 import styles from './amountInput.module.scss';
 import {
   ImprovedDebounceValueType,
@@ -40,6 +41,8 @@ export interface AmountInputPropsType extends WithClassnameType {
   usdPrice?: number;
   value: string;
   allowNegative?: boolean;
+  autoFocus?: boolean;
+  maxDecimals?: number;
 }
 
 const fiveHundredMs = 500;
@@ -60,7 +63,9 @@ const AmountComponent = ({
   usdPrice,
   value,
   className,
-  allowNegative = true
+  allowNegative = true,
+  autoFocus,
+  maxDecimals
 }: AmountInputPropsType) => {
   const ref = useRef(null);
 
@@ -153,9 +158,6 @@ const AmountComponent = ({
       <NumericFormat
         allowedDecimalSeparators={['.', ',']}
         autoComplete='off'
-        className={classNames(globals.input, styles.amountInput, {
-          [globals.disabled]: Boolean(disabled)
-        })}
         data-testid={dataTestId || name}
         decimalSeparator='.'
         disabled={Boolean(disabled)}
@@ -174,6 +176,11 @@ const AmountComponent = ({
         value={inputValue}
         valueIsNumericString
         allowNegative={allowNegative}
+        autoFocus={autoFocus}
+        decimalScale={maxDecimals}
+        className={classNames(globals.input, styles.amountInput, {
+          [globals.disabled]: Boolean(disabled)
+        })}
       />
 
       {usdValue && (
