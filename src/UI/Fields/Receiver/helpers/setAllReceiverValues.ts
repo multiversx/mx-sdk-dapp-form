@@ -38,6 +38,15 @@ export const setAllReceiverValues = ({
       usernameAccounts[value]?.address ?? value
     );
 
+    // TODO: check here
+    console.log(
+      '\x1b[42m%s\x1b[0m',
+      13,
+      usernameAccounts[value]?.username,
+      usernameAccounts[value]?.address,
+      value
+    );
+
     setFieldValue(
       ValuesEnum.receiverUsername,
       usernameAccounts[value]?.username
