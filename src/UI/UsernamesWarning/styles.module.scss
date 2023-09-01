@@ -1,0 +1,23 @@
+@import 'assets/sass/variables/_variables.scss';
+
+.usernames-warning {
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid var(--action-bg);
+
+  .usernames-warning-heading {
+    display: flex;
+    align-items: center;
+    color: var(--dapp-form-label-color);
+
+    .usernames-warning-icon {
+      margin-right: 12px;
+      color: $warning;
+      font-size: 24px;
+    }
+
+    .usernames-warning-label {
+      color: $warning;
+    }
+  }
+}

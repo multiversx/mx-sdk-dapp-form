@@ -2043,10 +2043,10 @@
     "keccak" "3.0.2"
     "protobufjs" "7.2.4"
 
-"@multiversx/sdk-dapp@2.19.4":
-  "integrity" "sha512-v9si08n/hGAdqkTzy6Mkjk6UyjY8PevWElwoRKvv2fw/WcUkY/tuUa5EFnilBJ4nuu8fUMeZGFxUJ73T2onSxw=="
-  "resolved" "https://registry.npmjs.org/@multiversx/sdk-dapp/-/sdk-dapp-2.19.4.tgz"
-  "version" "2.19.4"
+"@multiversx/sdk-dapp@2.19.7":
+  "integrity" "sha512-te6e6GoRVJgPK3QfJ4Su7j4MQ1rf8GCe60TCjfYftUrCytSnpX8it4dWLbIcXp0/zBuxUEk3tDpnimpmK8N1og=="
+  "resolved" "https://registry.npmjs.org/@multiversx/sdk-dapp/-/sdk-dapp-2.19.7.tgz"
+  "version" "2.19.7"
   dependencies:
     "@multiversx/sdk-core" "12.6.0"
     "@multiversx/sdk-extension-provider" "3.0.0"
@@ -2056,7 +2056,7 @@
     "@multiversx/sdk-opera-provider" "1.0.0-alpha.1"
     "@multiversx/sdk-wallet" "4.2.0"
     "@multiversx/sdk-wallet-connect-provider" "4.0.3"
-    "@multiversx/sdk-web-wallet-provider" "3.0.0"
+    "@multiversx/sdk-web-wallet-provider" "3.1.0"
     "@reduxjs/toolkit" "1.8.2"
     "axios" "0.24.0"
     "bignumber.js" "9.x"
@@ -2159,10 +2159,10 @@
     "tweetnacl" "1.0.3"
     "uuid" "8.3.2"
 
-"@multiversx/sdk-web-wallet-provider@3.0.0":
-  "integrity" "sha512-JzyOJJKx+vr1kMRHwVx6Y/SBSo/yUeWAHPeUJtvmjyRrTEhniYUhuKgy6U8lkD4djLKf8G/qpUOXwvfu4fbXuw=="
-  "resolved" "https://registry.npmjs.org/@multiversx/sdk-web-wallet-provider/-/sdk-web-wallet-provider-3.0.0.tgz"
-  "version" "3.0.0"
+"@multiversx/sdk-web-wallet-provider@3.1.0":
+  "integrity" "sha512-gIE7AudJl5Ax64AMAD0o6m0cVi+dI5LW2TSM5M9K7zKMWWCflhv27a2A61JkCIQ6CK5OTIkMXaFb61OzUqhplQ=="
+  "resolved" "https://registry.npmjs.org/@multiversx/sdk-web-wallet-provider/-/sdk-web-wallet-provider-3.1.0.tgz"
+  "version" "3.1.0"
   dependencies:
     "qs" "6.10.3"
 
@@ -4029,7 +4029,7 @@
     "es-abstract" "^1.20.4"
     "es-shim-unscopables" "^1.0.0"
 
-"array.prototype.reduce@^1.0.5":
+"array.prototype.reduce@^1.0.6":
   "integrity" "sha512-UW+Mz8LG/sPSU8jRDCjVr6J/ZKAGpHfwrZ6kWTG5qCxIEiXdVshqGnu5vEZA8S1y6X4aCSbQZ0/EEsfvEvBiSg=="
   "resolved" "https://registry.npmjs.org/array.prototype.reduce/-/array.prototype.reduce-1.0.6.tgz"
   "version" "1.0.6"
@@ -5843,9 +5843,9 @@
     "jake" "^10.8.5"
 
 "electron-to-chromium@^1.4.477":
-  "integrity" "sha512-xxGct4GPAKSRlrLBtJxJFYy74W11zX6PO9GyHgl/U+2s3Dp0ZEwAklDfNHXOWcvH7zWMpsmgbR0ggEuaYAVvHA=="
-  "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.506.tgz"
-  "version" "1.4.506"
+  "integrity" "sha512-FFa8QKjQK/A5QuFr2167myhMesGrhlOBD+3cYNxO9/S4XzHEXesyTD/1/xF644gC8buFPz3ca6G1LOQD0tZrrg=="
+  "resolved" "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.508.tgz"
+  "version" "1.4.508"
 
 "elliptic@^6.5.3":
   "integrity" "sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ=="
@@ -5950,7 +5950,7 @@
   dependencies:
     "stackframe" "^1.3.4"
 
-"es-abstract@^1.17.2", "es-abstract@^1.20.4", "es-abstract@^1.21.2", "es-abstract@^1.22.1":
+"es-abstract@^1.17.2", "es-abstract@^1.20.4", "es-abstract@^1.22.1":
   "integrity" "sha512-ioRRcXMO6OFyRpyzV3kE1IIBd4WG5/kltnzdxSCqoP8CMGs/Li+M1uF5o7lOkZVFjDs+NLesthnF66Pg/0q0Lw=="
   "resolved" "https://registry.npmjs.org/es-abstract/-/es-abstract-1.22.1.tgz"
   "version" "1.22.1"
@@ -6994,9 +6994,9 @@
   "version" "0.2.0"
 
 "fraction.js@^4.2.0":
-  "integrity" "sha512-pwiTgt0Q7t+GHZA4yaLjObx4vXmmdcS0iSJ19o8d/goUGgItX9UZWKWNnLHehxviD8wU2IWRsnR8cD5+yOJP2Q=="
-  "resolved" "https://registry.npmjs.org/fraction.js/-/fraction.js-4.3.4.tgz"
-  "version" "4.3.4"
+  "integrity" "sha512-58DncB2bO/8ZvTHapG7U2KEbeFFyUbbrFFkHakecpdUSqJrQnEuBeTUPEggIVkx5cnugZJ4IVzk2Nbb32MOxBg=="
+  "resolved" "https://registry.npmjs.org/fraction.js/-/fraction.js-4.3.5.tgz"
+  "version" "4.3.5"
 
 "fresh@0.5.2":
   "integrity" "sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q=="
@@ -9869,14 +9869,14 @@
     "es-abstract" "^1.22.1"
 
 "object.getownpropertydescriptors@^2.1.0":
-  "integrity" "sha512-lq+61g26E/BgHv0ZTFgRvi7NMEPuAxLkFU7rukXjc/AlwH4Am5xXVnIXy3un1bg/JPbXHrixRkK1itUzzPiIjQ=="
-  "resolved" "https://registry.npmjs.org/object.getownpropertydescriptors/-/object.getownpropertydescriptors-2.1.6.tgz"
-  "version" "2.1.6"
+  "integrity" "sha512-PrJz0C2xJ58FNn11XV2lr4Jt5Gzl94qpy9Lu0JlfEj14z88sqbSBJCBEzdlNUCzY2gburhbrwOZ5BHCmuNUy0g=="
+  "resolved" "https://registry.npmjs.org/object.getownpropertydescriptors/-/object.getownpropertydescriptors-2.1.7.tgz"
+  "version" "2.1.7"
   dependencies:
-    "array.prototype.reduce" "^1.0.5"
+    "array.prototype.reduce" "^1.0.6"
     "call-bind" "^1.0.2"
     "define-properties" "^1.2.0"
-    "es-abstract" "^1.21.2"
+    "es-abstract" "^1.22.1"
     "safe-array-concat" "^1.0.0"
 
 "object.groupby@^1.0.0":
