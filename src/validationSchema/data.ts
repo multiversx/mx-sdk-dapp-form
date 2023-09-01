@@ -24,17 +24,8 @@ const ledgerDataActive = string().test(
 const hashSign = string().test({
   name: 'hashSign',
   test: function hashSignCheck(value) {
-    const { ledger, isGuarded, receiverUsername, amount } = this
+    const { ledger, isGuarded, receiverUsername } = this
       .parent as ExtendedValuesType;
-
-    // TODO: check here
-    console.log('\x1b[42m%s\x1b[0m', 22, {
-      receiverUsername,
-      amount,
-      ledger,
-      value,
-      r: ledger && getLedgerVersionOptions(ledger?.version)
-    });
 
     if (ledger) {
       const { ledgerWithHashSign, ledgerWithGuardians, ledgerWithUsernames } =
