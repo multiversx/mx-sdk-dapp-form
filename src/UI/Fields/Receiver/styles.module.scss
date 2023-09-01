@@ -408,10 +408,6 @@
 
             .receiver-select-option-username {
               color: var(--action-color);
-
-              * {
-                white-space: nowrap;
-              }
             }
 
             .receiver-select-option-collection {
@@ -452,6 +448,10 @@
             color: var(--placeholder-color);
             display: flex;
             align-items: center;
+
+            * {
+              white-space: nowrap;
+            }
 
             .receiver-select-option-username-icon {
               height: 20px;

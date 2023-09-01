@@ -1,3 +1,4 @@
+import { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers/trimUsernameDomain';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import axios from 'axios';
 
@@ -29,7 +30,7 @@ export async function getAccountByUsername(
 
     return {
       address,
-      username: data.username ?? ''
+      username: trimUsernameDomain(data.username) ?? ''
     };
   } catch (error) {
     return null;

@@ -48,7 +48,7 @@ export function ReceiverUsernameContextProvider({
   );
 
   const { usernameAccounts } = useUsernameAccount({
-    shouldSkipSearch: Boolean(usernameExactMatchExists) || searchQueryIsAddress,
+    shouldSkipSearch: Boolean(usernameExactMatchExists),
     searchPatternToLookFor: debouncedUsername
   });
 

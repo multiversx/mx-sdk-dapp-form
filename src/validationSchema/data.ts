@@ -28,7 +28,13 @@ const hashSign = string().test({
       .parent as ExtendedValuesType;
 
     // TODO: check here
-    console.log('\x1b[42m%s\x1b[0m', 22, { receiverUsername, amount });
+    console.log('\x1b[42m%s\x1b[0m', 22, {
+      receiverUsername,
+      amount,
+      ledger,
+      value,
+      r: ledger && getLedgerVersionOptions(ledger?.version)
+    });
 
     if (ledger) {
       const { ledgerWithHashSign, ledgerWithGuardians, ledgerWithUsernames } =

@@ -1,5 +1,6 @@
 import { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers/trimUsernameDomain';
 import { ServerTransactionType } from '@multiversx/sdk-dapp/types';
+import { isContract } from '@multiversx/sdk-dapp/utils';
 
 import { KnowAddressType } from 'contexts/ReceiverContext/ReceiverContext';
 
@@ -10,12 +11,16 @@ export const formatAddressesFromTransactions = (
     (previous: KnowAddressType[], current: ServerTransactionType) => {
       const receiver: KnowAddressType = {
         address: current.receiver,
-        username: trimUsernameDomain(current.receiverAssets?.name)
+        username: isContract(current.receiver)
+          ? undefined
+          : trimUsernameDomain(current.receiverAssets?.name)
       };
 
       const sender: KnowAddressType = {
         address: current.sender,
-        username: trimUsernameDomain(current.senderAssets?.name)
+        username: isContract(current.sender)
+          ? undefined
+          : trimUsernameDomain(current.senderAssets?.name)
       };
 
       return current ? [...previous, receiver, sender] : previous;

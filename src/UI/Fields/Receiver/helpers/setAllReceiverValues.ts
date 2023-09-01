@@ -23,7 +23,10 @@ export const setAllReceiverValues = ({
   setOption
 }: SetAllReceiverValuesType) => {
   const setAllValuesCallback = (value: string) => {
-    const optionWithUsername = options.find((option) => option.value === value);
+    const optionWithUsername = options.find(
+      (option) => option.value === value && option.value !== option.label
+    );
+
     const optionLabel = usernameAccounts[value]?.username
       ? String(trimUsernameDomain(usernameAccounts[value]?.username))
       : optionWithUsername?.label;
@@ -36,15 +39,6 @@ export const setAllReceiverValues = ({
     setFieldValue(
       ValuesEnum.receiver,
       usernameAccounts[value]?.address ?? value
-    );
-
-    // TODO: check here
-    console.log(
-      '\x1b[42m%s\x1b[0m',
-      13,
-      usernameAccounts[value]?.username,
-      usernameAccounts[value]?.address,
-      value
     );
 
     setFieldValue(
