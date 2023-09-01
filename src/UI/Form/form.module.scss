@@ -33,5 +33,13 @@
     @media (min-width: 768px) {
       padding-top: 80px;
     }
+
+    .buttonSendDisabled {
+      color: var(--heading-color);
+      background-color: transparent;
+      border: 1px solid var(--card-subtitle);
+      pointer-events: none;
+      cursor: default;
+    }
   }
 }
