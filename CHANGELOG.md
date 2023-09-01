@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Added usernames and guardians outdated Ledger version warnings.](https://github.com/multiversx/mx-sdk-dapp-form/pull/219)
 - [Added the `autoFocus` AmountInput setting.](https://github.com/multiversx/mx-sdk-dapp-form/pull/218)
 
 ## [[0.8.6](https://github.com/multiversx/mx-sdk-dapp-form/pull/216)] - 2023-08-28
