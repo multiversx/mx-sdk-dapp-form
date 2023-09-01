@@ -6,3 +6,4 @@ export * from './Confirm';
 export * from './ConfirmScreen';
 export * from './NFTCanTransferWarning';
 export * from './WEGLDWarning';
+export * from './HighlightText';

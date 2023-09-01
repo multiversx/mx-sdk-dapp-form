@@ -18,11 +18,17 @@ export const getFocusedOptionIncludesUsername = (
   }
 
   const focusedOption = currentReceiverSelectReference.state.focusedOption;
-  const optionHasUsername = focusedOption.label !== focusedOption.value;
+  const focusedOptionLabel = focusedOption.label.toLowerCase();
+  const focusedOptionValue = focusedOption.value.toLowerCase();
+  const labelDiffersFromValue = focusedOptionLabel !== focusedOptionValue;
 
-  if (optionHasUsername && !inputValue) {
+  const optionIncludesUsername =
+    labelDiffersFromValue &&
+    focusedOptionLabel.startsWith(inputValue.toLowerCase());
+
+  if (labelDiffersFromValue && !inputValue) {
     return true;
   }
 
-  return optionHasUsername && focusedOption.label.startsWith(inputValue);
+  return optionIncludesUsername;
 };

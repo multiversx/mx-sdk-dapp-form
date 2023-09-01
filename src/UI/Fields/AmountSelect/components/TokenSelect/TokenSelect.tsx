@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 import Select from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
@@ -57,6 +57,23 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     []
   );
 
+  const updateSelectedOption = () => {
+    const updatedOption = options.find(
+      (option) => option.value === value?.value
+    );
+
+    const isSelectedOptionUpdated =
+      updatedOption?.token.balance === value?.token.balance;
+
+    if (!updatedOption || isSelectedOptionUpdated) {
+      return;
+    }
+
+    onChange(updatedOption);
+  };
+
+  useEffect(updateSelectedOption, [options]);
+
   const isTokenFromEgldFamily = (identifier: string) =>
     egldFamily.includes(identifier);
 
@@ -77,10 +94,19 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
   const filterOption = (
     option: FilterOptionOption<OptionType>,
     search: string
-  ) =>
-    option.data.token.ticker && Boolean(search)
+  ) => {
+    const isOptionFoundByTicker = option.data.token.ticker
       ? option.data.token.ticker.toLowerCase().includes(search.toLowerCase())
+      : false;
+
+    const isOptionFoundByName = option.data.token.name
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    return Boolean(search)
+      ? isOptionFoundByTicker || isOptionFoundByName
       : true;
+  };
 
   return (
     <div
