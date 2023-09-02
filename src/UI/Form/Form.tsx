@@ -29,15 +29,12 @@ import {
   AmountSelectInput
 } from 'UI/Fields';
 
-import { GuardiansWarning } from 'UI/GuardiansWarning';
 import { NFTCanTransferWarning } from 'UI/NFTCanTransferWarning';
 import { NFTSFTPreview } from 'UI/NFTSFTPreview';
-import { UsernameWarning } from 'UI/UsernamesWarning';
 import { WEGLDWarning } from 'UI/WEGLDWarning';
 
 import styles from './form.module.scss';
 import { getSendLabel } from './helpers';
-import { useAllowWithGuardians, useAllowWithUsernames } from './hooks';
 
 interface FormPropsType extends WithClassnameType {
   GuardianScreen?: (props: GuardianScreenType) => JSX.Element;
@@ -148,9 +145,6 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
     signStepInnerClasses: {}
   };
 
-  const shouldAllowUsernames = useAllowWithUsernames();
-  const shouldAllowGuardians = useAllowWithGuardians();
-
   if (GuardianScreen && isGuardianScreenVisible) {
     return <GuardianScreen {...props} />;
   }
@@ -170,10 +164,8 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
           <NFTSFTPreview onClick={onPreviewClick} txType={txType} {...nft} />
         )}
 
-        {!shouldAllowGuardians && <GuardiansWarning />}
         <Receiver />
 
-        {!shouldAllowUsernames && <UsernameWarning />}
         {isSFTTransaction ? <SFTAmount /> : <AmountSelectInput />}
 
         {uiOptions?.showAmountSlider && !isNFTTransaction && (
@@ -198,10 +190,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
           id='sendBtn'
           data-testid={FormDataTestIdsEnum.sendBtn}
           onClick={onValidateForm}
-          className={classNames(globals.buttonSend, {
-            [styles.buttonSendDisabled]:
-              !shouldAllowUsernames || !shouldAllowGuardians
-          })}
+          className={globals.buttonSend}
         >
           Send {getSendLabel(tokensInfo)}
         </button>
