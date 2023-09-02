@@ -23,7 +23,10 @@ export const setAllReceiverValues = ({
   setOption
 }: SetAllReceiverValuesType) => {
   const setAllValuesCallback = (value: string) => {
-    const optionWithUsername = options.find((option) => option.value === value);
+    const optionWithUsername = options.find(
+      (option) => option.value === value && option.value !== option.label
+    );
+
     const optionLabel = usernameAccounts[value]?.username
       ? String(trimUsernameDomain(usernameAccounts[value]?.username))
       : optionWithUsername?.label;

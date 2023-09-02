@@ -5,9 +5,9 @@ import classNames from 'classnames';
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types/form';
+
 import styles from './styles.module.scss';
 
 export const Data = ({ className }: WithClassnameType) => {
@@ -38,7 +38,7 @@ export const Data = ({ className }: WithClassnameType) => {
           spellCheck='false'
           placeholder='Add transaction data'
           className={classNames(globals.textarea, {
-            [globals.error]: isDataInvalid,
+            [globals.invalid]: isDataInvalid,
             [globals.disabled]: isDisabled
           })}
         />

@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
-import Select from 'react-select/creatable';
+import Select from 'react-select';
 
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
@@ -138,7 +138,6 @@ export const Receiver = (props: WithClassnameType) => {
   }, [usernameAccounts, receiver]);
 
   const isFieldError = isAddressError || isUsernameError || isRequiredError;
-
   const showErrorText = isFieldError && !menuIsOpen;
 
   return (
