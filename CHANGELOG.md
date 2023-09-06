@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- [Fixed sending NFTs with usernames](https://github.com/multiversx/mx-sdk-dapp-form/pull/222)
 ## [[0.8.7](https://github.com/multiversx/mx-sdk-dapp-form/pull/221)] - 2023-09-02
 - [Changed usernames and guardians ledger warnings back to data field](https://github.com/multiversx/mx-sdk-dapp-form/pull/220)
 - [Added usernames and guardians outdated Ledger version warnings and fixed displaying contract usernames](https://github.com/multiversx/mx-sdk-dapp-form/pull/219)
