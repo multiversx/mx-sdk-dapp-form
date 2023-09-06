@@ -94,6 +94,7 @@ export const Receiver = (props: WithClassnameType) => {
     setInputValue: setReceiverInputValue,
     setOption,
     options,
+    knownAddresses: knownAddresses ?? [],
     usernameAccounts
   });
 

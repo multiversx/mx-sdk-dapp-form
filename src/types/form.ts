@@ -10,6 +10,7 @@ export enum ValuesEnum {
   amount = 'amount',
   gasLimit = 'gasLimit',
   receiverUsername = 'receiverUsername',
+  rawReceiverUsername = 'rawReceiverUsername',
   senderUsername = 'senderUsername'
 }
 
@@ -20,8 +21,12 @@ type MandatoryValuesType = {
 };
 
 export interface ValuesType
-  extends Omit<MandatoryValuesType, 'receiverUsername' | 'senderUsername'> {
+  extends Omit<
+    MandatoryValuesType,
+    'receiverUsername' | 'senderUsername' | 'rawReceiverUsername'
+  > {
   receiverUsername?: string;
+  rawReceiverUsername?: string;
   senderUsername?: string;
 }
 

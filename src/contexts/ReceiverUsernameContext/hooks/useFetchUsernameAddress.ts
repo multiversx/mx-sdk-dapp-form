@@ -12,6 +12,7 @@ export interface UsernameAccountsType {
      * **username**: Might differ from the original username search string.
      */
     username: string;
+    rawUsername: string;
   } | null;
 }
 
@@ -37,7 +38,13 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
       setUsernameAddresses((existing) => {
         const newAddresses = {
           ...existing,
-          [username]: account
+          [username]: {
+            address: account?.address ?? '',
+            username: account?.username
+              ? String(trimUsernameDomain(account.username))
+              : '',
+            rawUsername: account?.username ?? ''
+          }
         };
 
         fetchedAddresses = newAddresses;
@@ -81,7 +88,8 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
           ...existing,
           [fetchedUsername]: {
             address: fetchedAddress,
-            username: fetchedUsername
+            username: String(fetchedUsername),
+            rawUsername: account?.username ?? ''
           }
         };
 

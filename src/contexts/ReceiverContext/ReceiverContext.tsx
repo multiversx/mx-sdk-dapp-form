@@ -8,6 +8,7 @@ import { useFetchKnownAddresses, useScamError } from './hooks';
 export interface KnowAddressType {
   address: string;
   username?: string;
+  rawUsername?: string;
 }
 
 export interface ReceiverContextPropsType {
