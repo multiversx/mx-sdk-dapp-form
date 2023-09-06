@@ -87,9 +87,17 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   async function handleOnSubmit(values: ExtendedValuesType) {
     const actualTransactionAmount =
       values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
+
+    // when seding NFTs, receiver is self
+    const receiverUsername =
+      values.txType === TransactionTypeEnum.NonFungibleESDT
+        ? undefined
+        : values.senderUsername;
+
     const parsedValues = {
       ...values,
-      amount: actualTransactionAmount
+      amount: actualTransactionAmount,
+      receiverUsername
     };
 
     const transaction = shouldGenerateTransactionOnSubmit
