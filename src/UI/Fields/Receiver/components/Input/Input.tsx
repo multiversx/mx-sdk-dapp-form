@@ -14,7 +14,7 @@ export const renderInput =
   ): typeof components.Input =>
   (props) => {
     const { selectProps } = props;
-    const { menuIsOpen, inputValue } = selectProps;
+    const { inputValue } = selectProps;
     const {
       receiverUsernameInfo: { receiverUsername }
     } = useSendFormContext();
@@ -31,7 +31,7 @@ export const renderInput =
         {...props}
         data-testid={ValuesEnum.receiver}
         className={classNames(styles.receiverSelectInput, {
-          [styles.visible]: menuIsOpen,
+          [styles.visible]: inputValue,
           [styles.spaced]: isSpaced
         })}
       />
