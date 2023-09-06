@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.8.9](https://github.com/multiversx/mx-sdk-dapp-form/pull/225)] - 2023-09-06
+
 - [Fixed overlapping receiver address.](https://github.com/multiversx/mx-sdk-dapp-form/pull/224)
 
 ## [[0.8.8](https://github.com/multiversx/mx-sdk-dapp-form/pull/223)] - 2023-09-06
