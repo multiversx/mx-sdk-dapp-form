@@ -1,6 +1,6 @@
 {
   "name": "@multiversx/sdk-dapp-form",
-  "version": "0.8.7",
+  "version": "0.8.8",
   "description": "A library to hold the main logic for a validating a form for transactions on the MultiversX blockchain",
   "author": "MultiversX",
   "license": "GPL-3.0-or-later",
