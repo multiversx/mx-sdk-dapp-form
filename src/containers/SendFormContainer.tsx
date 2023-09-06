@@ -17,6 +17,7 @@ import {
   TokensContextInitializationPropsType
 } from 'contexts';
 
+import { getIsNftTransaction } from 'helpers';
 import {
   formattedConfigGasPrice,
   generateTransaction,
@@ -87,9 +88,19 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   async function handleOnSubmit(values: ExtendedValuesType) {
     const actualTransactionAmount =
       values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
+
+    // when seding NFTs, receiver is self
+    const isNftTransaction = getIsNftTransaction(txType);
+    const { rawReceiverUsername, ...restOfValues } = values;
+
+    const receiverUsername = isNftTransaction
+      ? values.senderUsername
+      : rawReceiverUsername;
+
     const parsedValues = {
-      ...values,
-      amount: actualTransactionAmount
+      ...restOfValues,
+      amount: actualTransactionAmount,
+      receiverUsername
     };
 
     const transaction = shouldGenerateTransactionOnSubmit

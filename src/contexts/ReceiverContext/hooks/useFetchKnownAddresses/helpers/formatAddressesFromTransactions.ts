@@ -13,14 +13,20 @@ export const formatAddressesFromTransactions = (
         address: current.receiver,
         username: isContract(current.receiver)
           ? undefined
-          : trimUsernameDomain(current.receiverAssets?.name)
+          : trimUsernameDomain(current.receiverAssets?.name),
+        rawUsername: isContract(current.receiver)
+          ? undefined
+          : current.receiverAssets?.name
       };
 
       const sender: KnowAddressType = {
         address: current.sender,
         username: isContract(current.sender)
           ? undefined
-          : trimUsernameDomain(current.senderAssets?.name)
+          : trimUsernameDomain(current.senderAssets?.name),
+        rawUsername: isContract(current.sender)
+          ? undefined
+          : current.senderAssets?.name
       };
 
       return current ? [...previous, receiver, sender] : previous;

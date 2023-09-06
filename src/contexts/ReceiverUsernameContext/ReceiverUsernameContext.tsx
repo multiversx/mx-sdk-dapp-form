@@ -52,7 +52,9 @@ export function ReceiverUsernameContextProvider({
     searchPatternToLookFor: debouncedUsername
   });
 
-  const foundReceiver = usernameAccounts[inputValue];
+  const foundReceiver =
+    usernameAccounts[inputValue] && usernameAccounts[inputValue]?.username;
+
   const isUsernameDebouncing =
     inputValue !== debouncedUsername && foundReceiver !== null;
 
