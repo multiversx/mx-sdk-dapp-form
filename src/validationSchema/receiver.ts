@@ -1,5 +1,6 @@
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import { string } from 'yup';
+import { getIsNftTransaction } from 'helpers';
 import { ExtendedValuesType, TransactionTypeEnum } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
 
@@ -18,10 +19,7 @@ export const receiver = (errorMessages: ValidationErrorMessagesType) => {
     function sameAddressCheck(value) {
       const { ignoreTokenBalance, txType, readonly, address } = this
         .parent as ExtendedValuesType;
-      const isNftTransaction = ![
-        TransactionTypeEnum.EGLD,
-        TransactionTypeEnum.ESDT
-      ].includes(txType);
+      const isNftTransaction = getIsNftTransaction(txType);
       const signContext = ignoreTokenBalance;
 
       if (isNftTransaction && !signContext && !readonly) {

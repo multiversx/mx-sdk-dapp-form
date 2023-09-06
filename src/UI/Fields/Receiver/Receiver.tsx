@@ -82,6 +82,19 @@ export const Receiver = (props: WithClassnameType) => {
 
   const onBlur = () => {
     onBlurReceiver(new Event('blur'));
+
+    const foundValueOnBlur = knownAddresses?.find(
+      (account) => account.username === receiverInputValue
+    );
+
+    if (foundValueOnBlur) {
+      setFieldValue(ValuesEnum.receiver, foundValueOnBlur.address);
+      setFieldValue(ValuesEnum.receiverUsername, foundValueOnBlur.username);
+      setFieldValue(
+        ValuesEnum.rawReceiverUsername,
+        foundValueOnBlur.rawUsername
+      );
+    }
   };
 
   const options: GenericOptionType[] = useMemo(
@@ -94,6 +107,7 @@ export const Receiver = (props: WithClassnameType) => {
     setInputValue: setReceiverInputValue,
     setOption,
     options,
+    knownAddresses: knownAddresses ?? [],
     usernameAccounts
   });
 
