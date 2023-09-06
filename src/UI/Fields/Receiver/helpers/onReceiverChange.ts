@@ -18,6 +18,7 @@ export const onReceiverChange = ({
     if (!option) {
       return;
     }
+
     setOption(option);
     changeAndBlurInput(option.value);
 
