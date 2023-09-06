@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Fixed overlapping receiver address.](https://github.com/multiversx/mx-sdk-dapp-form/pull/224)
+
 ## [[0.8.8](https://github.com/multiversx/mx-sdk-dapp-form/pull/223)] - 2023-09-06
 
 - [Fixed sending NFTs with usernames](https://github.com/multiversx/mx-sdk-dapp-form/pull/222)
