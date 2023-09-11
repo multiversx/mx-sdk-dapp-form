@@ -4,7 +4,6 @@ import {
   TransactionOptions,
   TransactionVersion
 } from '@multiversx/sdk-core/out';
-import { ZERO } from '@multiversx/sdk-dapp/constants';
 import {
   DeviceSignedTransactions,
   GuardianScreenType
@@ -16,6 +15,7 @@ import { useFormikContext } from 'formik';
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { getTransactionFields } from 'helpers';
 import { generateTransaction } from 'operations/generateTransaction';
 import { ExtendedValuesType, TransactionTypeEnum } from 'types';
 
@@ -72,9 +72,8 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
     if (!areValidatedValuesReady) {
       return;
     }
-    const actualTransactionAmount =
-      values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
-    const parsedValues = { ...values, amount: actualTransactionAmount };
+
+    const parsedValues = getTransactionFields(values);
 
     try {
       const transaction = await generateTransaction({

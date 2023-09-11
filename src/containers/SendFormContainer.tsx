@@ -17,14 +17,14 @@ import {
   TokensContextInitializationPropsType
 } from 'contexts';
 
-import { getIsNftTransaction } from 'helpers';
+import { getTransactionFields } from 'helpers';
 import {
   formattedConfigGasPrice,
   generateTransaction,
   getGasLimit,
   getTxType
 } from 'operations';
-import { ExtendedValuesType, TransactionTypeEnum, ValuesType } from 'types';
+import { ExtendedValuesType, ValuesType } from 'types';
 import { FormNetworkConfigType } from 'types/network';
 import { ValidationErrorMessagesType } from 'types/validation';
 import { getInitialErrors } from 'validation';
@@ -86,22 +86,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   });
 
   async function handleOnSubmit(values: ExtendedValuesType) {
-    const actualTransactionAmount =
-      values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
-
-    // when seding NFTs, receiver is self
-    const isNftTransaction = getIsNftTransaction(txType);
-    const { rawReceiverUsername, ...restOfValues } = values;
-
-    const receiverUsername = isNftTransaction
-      ? values.senderUsername
-      : rawReceiverUsername;
-
-    const parsedValues = {
-      ...restOfValues,
-      amount: actualTransactionAmount,
-      receiverUsername
-    };
+    const parsedValues = getTransactionFields(values);
 
     const transaction = shouldGenerateTransactionOnSubmit
       ? guardedTransaction ??
