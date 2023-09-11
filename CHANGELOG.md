@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [[0.8.10](https://github.com/multiversx/mx-sdk-dapp-form/pull/227)] - 2023-09-11
+- [Fixed username transactions signing with 2FA](https://github.com/multiversx/mx-sdk-dapp-form/pull/226)
 
 ## [[0.8.9](https://github.com/multiversx/mx-sdk-dapp-form/pull/225)] - 2023-09-06
 
