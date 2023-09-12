@@ -1,6 +1,6 @@
 {
   "name": "@multiversx/sdk-dapp-form",
-  "version": "0.8.10",
+  "version": "0.8.11",
   "description": "A library to hold the main logic for a validating a form for transactions on the MultiversX blockchain",
   "author": "MultiversX",
   "license": "GPL-3.0-or-later",
@@ -26,7 +26,7 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@multiversx/sdk-dapp": "2.19.7",
+    "@multiversx/sdk-dapp": "2.20.0",
     "@size-limit/preset-small-lib": "7.0.8",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
@@ -89,12 +89,12 @@
   ],
   "peerDependencies": {
     "@multiversx/sdk-core": "^12.6.0",
-    "@multiversx/sdk-dapp": "^2.19.7",
+    "@multiversx/sdk-dapp": "^2.20.0",
     "react": ">=18",
     "react-dom": ">=18"
   },
   "resolutions": {
-    "@multiversx/sdk-dapp": "^2.19.7",
+    "@multiversx/sdk-dapp": "^2.20.0",
     "@multiversx/sdk-core": "12.6.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"

@@ -2048,10 +2048,10 @@
     keccak "3.0.2"
     protobufjs "7.2.4"
 
-"@multiversx/sdk-dapp@2.19.7":
-  version "2.19.7"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp/-/sdk-dapp-2.19.7.tgz"
-  integrity sha512-te6e6GoRVJgPK3QfJ4Su7j4MQ1rf8GCe60TCjfYftUrCytSnpX8it4dWLbIcXp0/zBuxUEk3tDpnimpmK8N1og==
+"@multiversx/sdk-dapp@2.20.0":
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.20.0.tgz#e94a0eb8f2f42fed3c94a84f1ed768c448f60587"
+  integrity sha512-dCVvoR1pNNVd8BjSm/TMyonHK5Knxnt9727Kudpcytb719TmJRsLYjRxVShrwkfzEVgBVgKXYuHC6PoPDAhFfQ==
   dependencies:
     "@multiversx/sdk-core" "12.6.0"
     "@multiversx/sdk-extension-provider" "3.0.0"
@@ -2088,7 +2088,7 @@
     qrcode "1.5.0"
     swr "2.2.0"
 
-"@multiversx/sdk-dapp@^2.19.7":
+"@multiversx/sdk-dapp@^2.20.0":
   version "2.20.1"
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-2.20.1.tgz#1e671a922de3d5612b12b567bed8e140123967c8"
   integrity sha512-8FcC5Ljy9Lm1nWixBC1yZsM6mPs7PCn+TN5Rnv7RVj9bQ4KStFUKMuwq+2RpdHha5h3YegN/P3WPPWm2OnD/5A==
