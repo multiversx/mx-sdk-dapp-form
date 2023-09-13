@@ -22,6 +22,7 @@ export enum FormDataTestIdsEnum {
   confirmUsdValue = 'confirmUsdValue',
   returnToWalletBtn = 'returnToWalletBtn',
   infoDust = 'infoDust',
+  enableData = 'enableData',
   canTransferWarning = 'canTransferWarning',
   tokenPreview = 'token-preview',
   tokenPreviewName = 'token-preview-name',
