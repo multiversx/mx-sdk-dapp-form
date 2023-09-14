@@ -40,6 +40,7 @@ export interface AmountInputPropsType extends WithClassnameType {
   required: boolean;
   usdPrice?: number;
   value: string;
+  usdValue?: string;
   allowNegative?: boolean;
   autoFocus?: boolean;
   suffix?: string;
@@ -62,6 +63,7 @@ const AmountComponent = ({
   required,
   usdPrice,
   value,
+  usdValue,
   className,
   allowNegative = true,
   autoFocus,
@@ -75,7 +77,7 @@ const AmountComponent = ({
   const [debounceValue, setDebounceValue] = useState<ImprovedDebounceValueType>(
     { value, count: 0 }
   );
-  const [usdValue, setUsdValue] = useState<string>();
+  const [displayUsdValue, setDisplayUsdValue] = useState<string>();
 
   const debounceAmount = useImprovedDebounce(debounceValue, fiveHundredMs);
 
@@ -103,8 +105,13 @@ const AmountComponent = ({
   };
 
   const updateUsdValue = () => {
+    if (usdValue) {
+      setDisplayUsdValue(`$${usdValue}`);
+      return;
+    }
+
     if (!usdPrice || !value) {
-      setUsdValue(undefined);
+      setDisplayUsdValue(undefined);
       return;
     }
 
@@ -112,16 +119,16 @@ const AmountComponent = ({
     const isValid = value !== '' && stringIsFloat(amount);
 
     if (!isValid || amount === '') {
-      setUsdValue(undefined);
+      setDisplayUsdValue(undefined);
       return;
     }
 
     const newUsdValue = roundAmount(
-      new BigNumber(parseFloat(amount) * (usdPrice ?? 0)).toString(10),
+      new BigNumber(amount).times(usdPrice ?? 0).toString(10),
       2
     );
 
-    setUsdValue(`$${newUsdValue}`);
+    setDisplayUsdValue(`$${newUsdValue}`);
   };
 
   const isAllowed = ({ floatValue }: NumberFormatValues) => {
@@ -138,7 +145,7 @@ const AmountComponent = ({
     }
   }, [debounceAmount]);
 
-  useEffect(updateUsdValue, [value, usdPrice]);
+  useEffect(updateUsdValue, [value, usdValue, usdPrice]);
 
   useEffect(() => {
     if (value !== inputValue) {
@@ -151,7 +158,7 @@ const AmountComponent = ({
       ref={ref}
       className={classNames(
         styles.amountHolder,
-        { [styles.showUsdValue]: Boolean(usdValue) },
+        { [styles.showUsdValue]: Boolean(displayUsdValue) },
         className
       )}
     >
@@ -183,11 +190,11 @@ const AmountComponent = ({
         })}
       />
 
-      {usdValue && (
+      {displayUsdValue && (
         <span className={styles.amountHolderUsd}>
           <small data-testid={`tokenPrice_${usdPrice}`}>
-            {usdValue !== '$0' ? <>≈ </> : <></>}
-            {usdValue}
+            {displayUsdValue !== '$0' ? <>≈ </> : <></>}
+            {displayUsdValue}
           </small>
 
           {InfoDustComponent}
