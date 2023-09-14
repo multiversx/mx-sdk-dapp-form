@@ -77,7 +77,7 @@ const AmountComponent = ({
   const [debounceValue, setDebounceValue] = useState<ImprovedDebounceValueType>(
     { value, count: 0 }
   );
-  const [displayUsdValue, setDisplayUsdValue] = useState<string>();
+  const [displayedUsdValue, setDisplayedUsdValue] = useState<string>();
 
   const debounceAmount = useImprovedDebounce(debounceValue, fiveHundredMs);
 
@@ -104,23 +104,20 @@ const AmountComponent = ({
     }
   };
 
-  const updateDisplayUsdValue = () => {
+  const updateDisplayedUsdValue = () => {
     if (usdValue) {
-      setDisplayUsdValue(`$${usdValue}`);
-      return;
+      return setDisplayedUsdValue(`$${usdValue}`);
     }
 
     if (!usdPrice || !value) {
-      setDisplayUsdValue(undefined);
-      return;
+      return setDisplayedUsdValue(undefined);
     }
 
     const amount = removeCommas(value);
     const isValid = value !== '' && stringIsFloat(amount);
 
     if (!isValid || amount === '') {
-      setDisplayUsdValue(undefined);
-      return;
+      return setDisplayedUsdValue(undefined);
     }
 
     const newUsdValue = roundAmount(
@@ -128,7 +125,7 @@ const AmountComponent = ({
       2
     );
 
-    setDisplayUsdValue(`$${newUsdValue}`);
+    setDisplayedUsdValue(`$${newUsdValue}`);
   };
 
   const isAllowed = ({ floatValue }: NumberFormatValues) => {
@@ -145,7 +142,7 @@ const AmountComponent = ({
     }
   }, [debounceAmount]);
 
-  useEffect(updateDisplayUsdValue, [value, usdValue, usdPrice]);
+  useEffect(updateDisplayedUsdValue, [value, usdValue, usdPrice]);
 
   useEffect(() => {
     if (value !== inputValue) {
@@ -158,7 +155,7 @@ const AmountComponent = ({
       ref={ref}
       className={classNames(
         styles.amountHolder,
-        { [styles.showUsdValue]: Boolean(displayUsdValue) },
+        { [styles.showUsdValue]: Boolean(displayedUsdValue) },
         className
       )}
     >
@@ -190,11 +187,11 @@ const AmountComponent = ({
         })}
       />
 
-      {displayUsdValue && (
+      {displayedUsdValue && (
         <span className={styles.amountHolderUsd}>
           <small data-testid={`tokenPrice_${usdPrice}`}>
-            {displayUsdValue !== '$0' ? <>≈ </> : <></>}
-            {displayUsdValue}
+            {displayedUsdValue !== '$0' ? <>≈ </> : <></>}
+            {displayedUsdValue}
           </small>
 
           {InfoDustComponent}
