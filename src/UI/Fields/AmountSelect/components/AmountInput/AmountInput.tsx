@@ -104,7 +104,7 @@ const AmountComponent = ({
     }
   };
 
-  const updateUsdValue = () => {
+  const updateDisplayUsdValue = () => {
     if (usdValue) {
       setDisplayUsdValue(`$${usdValue}`);
       return;
@@ -145,7 +145,7 @@ const AmountComponent = ({
     }
   }, [debounceAmount]);
 
-  useEffect(updateUsdValue, [value, usdValue, usdPrice]);
+  useEffect(updateDisplayUsdValue, [value, usdValue, usdPrice]);
 
   useEffect(() => {
     if (value !== inputValue) {
