@@ -4,6 +4,8 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import { AmountInput, AmountInputPropsType } from '../AmountInput';
 
 const dataTestId = 'amountInput';
+const usdPrice = 4;
+const testId = `tokenPrice_${usdPrice}`;
 
 const AmountWrapper = ({
   usdValueCalculator
@@ -21,7 +23,7 @@ const AmountWrapper = ({
     },
     name: 'amountInput',
     required: false,
-    usdPrice: 4,
+    usdPrice,
     value,
     usdValue
   };
@@ -34,25 +36,19 @@ describe('AmountInput tests', () => {
     const container = render(<AmountWrapper />);
     const input: any = container.getByTestId('amountInput');
 
-    expect(
-      container.queryByTestId(`usdValue_${dataTestId}`)
-    ).not.toBeInTheDocument();
+    expect(container.queryByTestId(testId)).not.toBeInTheDocument();
 
     fireEvent.change(input, { target: { value: '2' } });
 
     await waitFor(() => {
-      const usdValueLabel: any = container.getByTestId(
-        `usdValue_${dataTestId}`
-      );
+      const usdValueLabel: any = container.getByTestId(testId);
       expect(usdValueLabel.innerHTML).toBe('≈ $8.00');
     });
 
     fireEvent.change(input, { target: { value: '8' } });
 
     await waitFor(() => {
-      const usdValueLabel: any = container.getByTestId(
-        `usdValue_${dataTestId}`
-      );
+      const usdValueLabel: any = container.getByTestId(testId);
       expect(usdValueLabel.innerHTML).toBe('≈ $32.00');
     });
   });
@@ -67,18 +63,14 @@ describe('AmountInput tests', () => {
 
     fireEvent.change(input, { target: { value: '1' } });
     await waitFor(() => {
-      const usdValueLabel: any = container.getByTestId(
-        `usdValue_${dataTestId}`
-      );
+      const usdValueLabel: any = container.getByTestId(testId);
       expect(usdValueLabel.innerHTML).toBe('≈ $4.00');
     });
 
     fireEvent.change(input, { target: { value: '2' } });
 
     await waitFor(() => {
-      const usdValueLabel: any = container.getByTestId(
-        `usdValue_${dataTestId}`
-      );
+      const usdValueLabel: any = container.getByTestId(testId);
       expect(usdValueLabel.innerHTML).toBe('≈ $16.23');
     });
   });
