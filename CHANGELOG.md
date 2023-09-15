@@ -6,7 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-## [[0.8.12](https://github.com/multiversx/mx-sdk-dapp-form/pull/232)] - 2023-09-15
+## [[0.8.12](https://github.com/multiversx/mx-sdk-dapp-form/pull/234)] - 2023-09-15
+- [Fixed `AmountInput` tests](https://github.com/multiversx/mx-sdk-dapp-form/pull/233)
 - [Added Advanced button to data field](https://github.com/multiversx/mx-sdk-dapp-form/pull/231)
 - [Added optional `usdValue` to `AmountInput`](https://github.com/multiversx/mx-sdk-dapp-form/pull/230)
 
