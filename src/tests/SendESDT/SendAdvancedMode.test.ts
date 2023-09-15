@@ -1,4 +1,4 @@
-import { act } from '@testing-library/react';
+import { act, fireEvent, waitFor } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { ValuesEnum } from 'types/form';
@@ -12,11 +12,13 @@ describe('Send advanced mode', () => {
       const methods = beforAllTokens();
       const setAmountInput = useAmountInput(methods);
 
-      await setAmountInput('10');
+      const advancedMode = methods.queryByTestId(
+        FormDataTestIdsEnum.enableAdvancedMode
+      );
 
-      expect(
-        methods.queryByTestId(FormDataTestIdsEnum.enableAdvancedMode)
-      ).toBeInTheDocument();
+      expect(advancedMode).toBeNull();
+
+      await setAmountInput('10');
 
       await act(async () => {
         selectEvent.openMenu(methods.getByLabelText('Token'));
@@ -29,6 +31,31 @@ describe('Send advanced mode', () => {
 
       const dataInput: any = methods.getByTestId(ValuesEnum.data);
       expect(dataInput.value).toBe('ESDTTransfer@54574f2d383234653730@03e8');
+
+      const gasLimit: any = methods.getByTestId(ValuesEnum.gasLimit);
+      expect(gasLimit.value).toBe('500000');
+
+      const advancedModeBtn: any = methods.queryByTestId(
+        FormDataTestIdsEnum.enableAdvancedMode
+      );
+
+      fireEvent.click(advancedModeBtn);
+
+      const confirmAdvancedModeBtn = await methods.findByTestId(
+        FormDataTestIdsEnum.confirmAdvancedMode
+      );
+
+      fireEvent.click(confirmAdvancedModeBtn);
+
+      // reset form
+      expect(dataInput.value).toBe('');
+      expect(gasLimit.value).toBe('50000');
+
+      // restore form
+      await waitFor(() => {
+        expect(dataInput.value).toBe('ESDTTransfer@54574f2d383234653730@03e8');
+        expect(gasLimit.value).toBe('500000');
+      });
     });
   });
 });
