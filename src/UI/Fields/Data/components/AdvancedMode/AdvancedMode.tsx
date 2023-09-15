@@ -11,7 +11,7 @@ import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { ExtendedValuesType, ValuesEnum } from 'types/form';
 
-import { useIsDataDisabled } from '../hooks';
+import { useIsDataDisabled } from '../../hooks';
 import styles from './styles.module.scss';
 
 export const AdvancedMode = () => {
@@ -34,11 +34,12 @@ export const AdvancedMode = () => {
   const enableDataField = () => {
     setIsEnabled(true);
     // data will be changed when resetting to EGLD so we set it back after
-    const data = values.data;
+    const { data, gasLimit } = values;
     setFieldValue(ValuesEnum.amount, '0');
     setFieldValue(ValuesEnum.tokenId, egldLabel);
     setTimeout(() => {
       setFieldValue(ValuesEnum.data, data);
+      setFieldValue(ValuesEnum.gasLimit, gasLimit);
     });
   };
 
@@ -53,20 +54,27 @@ export const AdvancedMode = () => {
     return null;
   }
 
+  if (showConfirm) {
+    return (
+      <div
+        className={styles.advanced}
+        data-testid={FormDataTestIdsEnum.confirmAdvancedMode}
+        onClick={enableDataField}
+      >
+        <FontAwesomeIcon icon={faCheck} className='i-icon' />
+        <span className={styles.advancedText}>Confirm</span>
+      </div>
+    );
+  }
+
   return (
     <div
-      data-testid={FormDataTestIdsEnum.enableData}
+      data-testid={FormDataTestIdsEnum.enableAdvancedMode}
       className={styles.advanced}
-      onClick={showConfirm ? enableDataField : activateConfirm}
+      onClick={activateConfirm}
     >
-      <FontAwesomeIcon
-        icon={showConfirm ? faCheck : faScrewdriverWrench}
-        className='i-icon'
-      />
-
-      <span className={styles.advancedText}>
-        {showConfirm ? 'Confirm' : 'Advanced'}
-      </span>
+      <FontAwesomeIcon icon={faScrewdriverWrench} className='i-icon' />
+      <span className={styles.advancedText}>Advanced</span>
     </div>
   );
 };
