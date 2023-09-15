@@ -27,6 +27,10 @@ describe('AmountInput tests', () => {
     const container = render(<AmountWrapper />);
     const input: any = container.getByTestId('amountInput');
 
+    expect(
+      container.queryByTestId(`usdValue_${dataTestId}`)
+    ).not.toBeInTheDocument();
+
     fireEvent.change(input, { target: { value: '2' } });
 
     await waitFor(() => {
