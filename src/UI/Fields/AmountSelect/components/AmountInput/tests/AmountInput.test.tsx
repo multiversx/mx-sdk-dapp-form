@@ -26,7 +26,6 @@ const AmountWrapper = () => {
     // usdPrice?: number;
     value
     // usdValue?: string;
-    // allowNegative?: boolean;
     // autoFocus?: boolean;
     // suffix?: string;
   };
