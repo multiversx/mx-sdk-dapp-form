@@ -1,0 +1,33 @@
+.advanced {
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 400;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
+    top: 0;
+        color: var(--dapp-form-label-color);
+        transition: all 200ms ease;
+        right: 0;
+        cursor: pointer;
+        position: absolute;
+
+        svg path {
+            transition: all 200ms ease;
+            fill:var(--dapp-form-label-color);
+        }
+
+        &:hover {
+
+              .advanced-text {
+            color: var(--dapp-form-btn-bg);
+              }
+
+            svg path {
+                fill:var(--dapp-form-btn-bg);
+            }
+        }
+
+      
+}
