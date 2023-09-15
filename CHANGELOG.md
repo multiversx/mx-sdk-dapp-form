@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- [Added Advanced button to data field](https://github.com/multiversx/mx-sdk-dapp-form/pull/231)
 ## [[0.8.11](https://github.com/multiversx/mx-sdk-dapp-form/pull/229)] - 2023-09-12
 - [Upgrade sdk-dapp to v.2.20](https://github.com/multiversx/mx-sdk-dapp-form/pull/228)
 ## [[0.8.10](https://github.com/multiversx/mx-sdk-dapp-form/pull/227)] - 2023-09-11
