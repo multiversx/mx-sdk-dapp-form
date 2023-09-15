@@ -187,7 +187,7 @@ const AmountComponent = ({
 
       {displayedUsdValue && (
         <span className={styles.amountHolderUsd}>
-          <small data-testid={`tokenPrice_${usdPrice}`}>
+          <small data-testid={`usdValue_${dataTestId}`}>
             {displayedUsdValue !== '$0' ? <>≈ </> : <></>}
             {displayedUsdValue}
           </small>

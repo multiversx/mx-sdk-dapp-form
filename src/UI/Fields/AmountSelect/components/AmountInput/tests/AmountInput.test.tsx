@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import { AmountInput, AmountInputPropsType } from '../AmountInput';
 
-const AmountWrapper = () => {
+const dataTestId = 'amountInput';
+
+const AmountWrapper = ({ usdValue }: { usdValue?: string }) => {
   const [value, setValue] = useState('');
 
   const props: AmountInputPropsType = {
-    'data-testid': 'amountInput',
+    'data-testid': dataTestId,
     // InfoDustComponent?: JSX.Element;
     // disabled?: boolean;
     // error?: string;
@@ -23,21 +25,40 @@ const AmountWrapper = () => {
     // placeholder?: string;
     // readonly?: boolean;
     required: false,
-    // usdPrice?: number;
-    value
-    // usdValue?: string;
-    // autoFocus?: boolean;
+    usdPrice: 4,
+    value,
+    usdValue
     // suffix?: string;
   };
   return <AmountInput {...props} />;
 };
 
 describe('AmountInput tests', () => {
-  test('usdPrice changes according to value', async () => {
+  test('usdValue changes according to input value', async () => {
     const container = render(<AmountWrapper />);
     const input: any = container.getByTestId('amountInput');
-    expect(input.value).toBe('');
+
     fireEvent.change(input, { target: { value: '2' } });
-    expect(input.value).toBe('2');
+
+    await waitFor(() => {
+      const usdValueLabel: any = container.getByTestId(
+        `usdValue_${dataTestId}`
+      );
+      expect(usdValueLabel.innerHTML).toBe('≈ $8.00');
+    });
+  });
+
+  test('external usdValue is displayed when provided', async () => {
+    const container = render(<AmountWrapper usdValue={'16.23'} />);
+    const input: any = container.getByTestId('amountInput');
+
+    fireEvent.change(input, { target: { value: '2' } });
+
+    await waitFor(() => {
+      const usdValueLabel: any = container.getByTestId(
+        `usdValue_${dataTestId}`
+      );
+      expect(usdValueLabel.innerHTML).toBe('≈ $16.23');
+    });
   });
 });
