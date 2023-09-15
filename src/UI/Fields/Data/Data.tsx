@@ -1,30 +1,33 @@
 import React from 'react';
+
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types/form';
+import amountSelectStyles from '../AmountSelect/amountSelect.module.scss';
 
+import { AdvancedMode } from './components';
+import { useIsDataDisabled } from './hooks';
 import styles from './styles.module.scss';
 
 export const Data = ({ className }: WithClassnameType) => {
   const {
-    formInfo: { isEgldTransaction, readonly },
     dataFieldInfo: { data, dataError, isDataInvalid, onChange, onBlur }
   } = useSendFormContext();
 
-  const isDisabled =
-    !isEgldTransaction || getIsDisabled(ValuesEnum.data, readonly);
+  const isDisabled = useIsDataDisabled();
 
   return (
     <div className={classNames(styles.data, className)}>
-      <label htmlFor={ValuesEnum.data} className={globals.label}>
-        Data
-      </label>
-
+      <div className={amountSelectStyles.label}>
+        <label htmlFor={ValuesEnum.data} className={globals.label}>
+          Data
+        </label>
+        <AdvancedMode />
+      </div>
       <div className={styles.wrapper}>
         <textarea
           rows={1}
@@ -43,7 +46,6 @@ export const Data = ({ className }: WithClassnameType) => {
           })}
         />
       </div>
-
       {isDataInvalid && (
         <div
           className={globals.error}
