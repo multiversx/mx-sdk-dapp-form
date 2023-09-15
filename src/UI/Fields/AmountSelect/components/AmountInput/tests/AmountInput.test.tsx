@@ -8,7 +8,7 @@ const dataTestId = 'amountInput';
 const AmountWrapper = ({
   usdValueCalculator
 }: {
-  usdValueCalculator?: (val: string) => string;
+  usdValueCalculator?: (val: string) => string | undefined;
 }) => {
   const [value, setValue] = useState('');
 
@@ -25,6 +25,7 @@ const AmountWrapper = ({
     value,
     usdValue
   };
+
   return <AmountInput {...props} />;
 };
 
@@ -59,12 +60,7 @@ describe('AmountInput tests', () => {
   test('external usdValue is displayed when provided', async () => {
     const container = render(
       <AmountWrapper
-        usdValueCalculator={(val) => {
-          if (val == '2') {
-            return '16.23';
-          }
-          return (parseInt(val) * 8).toString();
-        }}
+        usdValueCalculator={(val) => (val == '2' ? '16.23' : undefined)}
       />
     );
     const input: any = container.getByTestId('amountInput');
@@ -74,7 +70,7 @@ describe('AmountInput tests', () => {
       const usdValueLabel: any = container.getByTestId(
         `usdValue_${dataTestId}`
       );
-      expect(usdValueLabel.innerHTML).toBe('≈ $8');
+      expect(usdValueLabel.innerHTML).toBe('≈ $4.00');
     });
 
     fireEvent.change(input, { target: { value: '2' } });
