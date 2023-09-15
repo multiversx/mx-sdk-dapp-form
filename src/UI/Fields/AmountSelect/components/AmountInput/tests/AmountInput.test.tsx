@@ -10,25 +10,14 @@ const AmountWrapper = ({ usdValue }: { usdValue?: string }) => {
 
   const props: AmountInputPropsType = {
     'data-testid': dataTestId,
-    // InfoDustComponent?: JSX.Element;
-    // disabled?: boolean;
-    // error?: string;
-    // handleBlur?: (event: FocusEvent<HTMLInputElement>) => void;
     handleChange: (e) => {
       setValue(e.target.value);
     },
-    // isInvalid?: boolean;
     name: 'amountInput',
-    // onDebounceChange?: (amount: string) => void;
-    // onFocus?: () => void;
-    // onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
-    // placeholder?: string;
-    // readonly?: boolean;
     required: false,
     usdPrice: 4,
     value,
     usdValue
-    // suffix?: string;
   };
   return <AmountInput {...props} />;
 };
@@ -45,6 +34,15 @@ describe('AmountInput tests', () => {
         `usdValue_${dataTestId}`
       );
       expect(usdValueLabel.innerHTML).toBe('≈ $8.00');
+    });
+
+    fireEvent.change(input, { target: { value: '8' } });
+
+    await waitFor(() => {
+      const usdValueLabel: any = container.getByTestId(
+        `usdValue_${dataTestId}`
+      );
+      expect(usdValueLabel.innerHTML).toBe('≈ $32.00');
     });
   });
 
