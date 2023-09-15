@@ -40,7 +40,7 @@ export interface AmountInputPropsType extends WithClassnameType {
   required: boolean;
   usdPrice?: number;
   value: string;
-  allowNegative?: boolean;
+  usdValue?: string;
   autoFocus?: boolean;
   suffix?: string;
 }
@@ -62,8 +62,8 @@ const AmountComponent = ({
   required,
   usdPrice,
   value,
+  usdValue,
   className,
-  allowNegative = true,
   autoFocus,
   suffix
 }: AmountInputPropsType) => {
@@ -75,7 +75,7 @@ const AmountComponent = ({
   const [debounceValue, setDebounceValue] = useState<ImprovedDebounceValueType>(
     { value, count: 0 }
   );
-  const [usdValue, setUsdValue] = useState<string>();
+  const [displayedUsdValue, setDisplayedUsdValue] = useState<string>();
 
   const debounceAmount = useImprovedDebounce(debounceValue, fiveHundredMs);
 
@@ -102,26 +102,28 @@ const AmountComponent = ({
     }
   };
 
-  const updateUsdValue = () => {
+  const updateDisplayedUsdValue = () => {
+    if (usdValue) {
+      return setDisplayedUsdValue(`$${usdValue}`);
+    }
+
     if (!usdPrice || !value) {
-      setUsdValue(undefined);
-      return;
+      return setDisplayedUsdValue(undefined);
     }
 
     const amount = removeCommas(value);
     const isValid = value !== '' && stringIsFloat(amount);
 
     if (!isValid || amount === '') {
-      setUsdValue(undefined);
-      return;
+      return setDisplayedUsdValue(undefined);
     }
 
     const newUsdValue = roundAmount(
-      new BigNumber(parseFloat(amount) * (usdPrice ?? 0)).toString(10),
+      new BigNumber(amount).times(usdPrice ?? 0).toString(10),
       2
     );
 
-    setUsdValue(`$${newUsdValue}`);
+    setDisplayedUsdValue(`$${newUsdValue}`);
   };
 
   const isAllowed = ({ floatValue }: NumberFormatValues) => {
@@ -138,7 +140,7 @@ const AmountComponent = ({
     }
   }, [debounceAmount]);
 
-  useEffect(updateUsdValue, [value, usdPrice]);
+  useEffect(updateDisplayedUsdValue, [value, usdValue, usdPrice]);
 
   useEffect(() => {
     if (value !== inputValue) {
@@ -151,7 +153,7 @@ const AmountComponent = ({
       ref={ref}
       className={classNames(
         styles.amountHolder,
-        { [styles.showUsdValue]: Boolean(usdValue) },
+        { [styles.showUsdValue]: Boolean(displayedUsdValue) },
         className
       )}
     >
@@ -176,18 +178,18 @@ const AmountComponent = ({
         value={inputValue}
         suffix={suffix}
         valueIsNumericString
-        allowNegative={allowNegative}
+        allowNegative={false}
         autoFocus={autoFocus}
         className={classNames(globals.input, styles.amountInput, {
           [globals.disabled]: Boolean(disabled)
         })}
       />
 
-      {usdValue && (
+      {displayedUsdValue && (
         <span className={styles.amountHolderUsd}>
-          <small data-testid={`tokenPrice_${usdPrice}`}>
-            {usdValue !== '$0' ? <>≈ </> : <></>}
-            {usdValue}
+          <small data-testid={`usdValue_${dataTestId}`}>
+            {displayedUsdValue !== '$0' ? <>≈ </> : <></>}
+            {displayedUsdValue}
           </small>
 
           {InfoDustComponent}
