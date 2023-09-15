@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   faScrewdriverWrench,
   faCheck
@@ -19,7 +19,7 @@ export const AdvancedMode = () => {
     networkConfig: { egldLabel }
   } = useNetworkConfigContext();
   const {
-    formInfo: { readonly }
+    formInfo: { readonly, isEgldTransaction }
   } = useSendFormContext();
   const { setFieldValue, values } = useFormikContext<ExtendedValuesType>();
   const [isEnabled, setIsEnabled] = useState<boolean | null>(null);
@@ -49,6 +49,12 @@ export const AdvancedMode = () => {
       setShowConfirm(false);
     }, 5000);
   };
+
+  useEffect(() => {
+    if (!isEgldTransaction && isEnabled != null) {
+      setIsEnabled(null);
+    }
+  }, [isEgldTransaction, values.amount]);
 
   if (!showEnabled) {
     return null;
