@@ -41,7 +41,6 @@ export interface AmountInputPropsType extends WithClassnameType {
   usdPrice?: number;
   value: string;
   usdValue?: string;
-  allowNegative?: boolean;
   autoFocus?: boolean;
   suffix?: string;
 }
@@ -65,7 +64,6 @@ const AmountComponent = ({
   value,
   usdValue,
   className,
-  allowNegative = true,
   autoFocus,
   suffix
 }: AmountInputPropsType) => {
@@ -180,7 +178,7 @@ const AmountComponent = ({
         value={inputValue}
         suffix={suffix}
         valueIsNumericString
-        allowNegative={allowNegative}
+        allowNegative={false}
         autoFocus={autoFocus}
         className={classNames(globals.input, styles.amountInput, {
           [globals.disabled]: Boolean(disabled)
