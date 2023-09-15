@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- [Adds optional usdValue](https://github.com/multiversx/mx-sdk-dapp-form/pull/230)
+- [Added optional `usdValue` to `AmountInput`](https://github.com/multiversx/mx-sdk-dapp-form/pull/230)
 
 ## [[0.8.11](https://github.com/multiversx/mx-sdk-dapp-form/pull/229)] - 2023-09-12
 
