@@ -5,8 +5,14 @@ import { AmountInput, AmountInputPropsType } from '../AmountInput';
 
 const dataTestId = 'amountInput';
 
-const AmountWrapper = ({ usdValue }: { usdValue?: string }) => {
+const AmountWrapper = ({
+  usdValueCalculator
+}: {
+  usdValueCalculator?: (val: string) => string;
+}) => {
   const [value, setValue] = useState('');
+
+  const usdValue = usdValueCalculator ? usdValueCalculator(value) : undefined;
 
   const props: AmountInputPropsType = {
     'data-testid': dataTestId,
@@ -51,8 +57,25 @@ describe('AmountInput tests', () => {
   });
 
   test('external usdValue is displayed when provided', async () => {
-    const container = render(<AmountWrapper usdValue={'16.23'} />);
+    const container = render(
+      <AmountWrapper
+        usdValueCalculator={(val) => {
+          if (val == '2') {
+            return '16.23';
+          }
+          return (parseInt(val) * 8).toString();
+        }}
+      />
+    );
     const input: any = container.getByTestId('amountInput');
+
+    fireEvent.change(input, { target: { value: '1' } });
+    await waitFor(() => {
+      const usdValueLabel: any = container.getByTestId(
+        `usdValue_${dataTestId}`
+      );
+      expect(usdValueLabel.innerHTML).toBe('≈ $8');
+    });
 
     fireEvent.change(input, { target: { value: '2' } });
 
