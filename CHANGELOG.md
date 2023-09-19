@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- [Fixed searching `receiverUsername` exists when formulating transaction](https://github.com/multiversx/mx-sdk-dapp-form/pull/235)
 ## [[0.8.12](https://github.com/multiversx/mx-sdk-dapp-form/pull/234)] - 2023-09-15
 - [Fixed `AmountInput` tests](https://github.com/multiversx/mx-sdk-dapp-form/pull/233)
 - [Added Advanced button to data field](https://github.com/multiversx/mx-sdk-dapp-form/pull/231)
