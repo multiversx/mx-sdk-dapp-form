@@ -86,7 +86,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   });
 
   async function handleOnSubmit(values: ExtendedValuesType) {
-    const parsedValues = getTransactionFields(values);
+    const parsedValues = await getTransactionFields(values);
 
     const transaction = shouldGenerateTransactionOnSubmit
       ? guardedTransaction ??
