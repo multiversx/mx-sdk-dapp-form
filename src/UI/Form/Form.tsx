@@ -73,7 +73,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
       return;
     }
 
-    const parsedValues = getTransactionFields(values);
+    const parsedValues = await getTransactionFields(values);
 
     try {
       const transaction = await generateTransaction({
