@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.8.14](https://github.com/multiversx/mx-sdk-dapp-form/pull/238)] - 2023-09-22
+
 - [Fixed `AmountInput` not reacting to props change](https://github.com/multiversx/mx-sdk-dapp-form/pull/237)
 
 ## [[0.8.13](https://github.com/multiversx/mx-sdk-dapp-form/pull/236)] - 2023-09-19
