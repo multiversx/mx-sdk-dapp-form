@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- [Removed ledger usernames minimum version limitation error](https://github.com/multiversx/mx-sdk-dapp-form/pull/231)
 ## [[0.8.13](https://github.com/multiversx/mx-sdk-dapp-form/pull/236)] - 2023-09-19
 - [Fixed searching `receiverUsername` exists when formulating transaction](https://github.com/multiversx/mx-sdk-dapp-form/pull/235)
 ## [[0.8.12](https://github.com/multiversx/mx-sdk-dapp-form/pull/234)] - 2023-09-15
