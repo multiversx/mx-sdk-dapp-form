@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { SingleValue } from 'react-select';
 import globals from 'assets/sass/globals.module.scss';
@@ -150,7 +151,7 @@ export const AmountSelectInput = () => {
     token: selectValue?.token,
     value: progressiveFormatAmount({
       amount: tokenDetails.balance,
-      decimals: isNaN(tokenDetails.decimals) ? 0 : tokenDetails.decimals,
+      decimals: tokenDetails.decimals || DECIMALS,
       addCommas: true,
       showLastNonZeroDecimal: true
     })
