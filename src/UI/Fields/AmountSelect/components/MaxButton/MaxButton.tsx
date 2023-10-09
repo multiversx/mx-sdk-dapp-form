@@ -1,4 +1,5 @@
 import React, { MouseEvent } from 'react';
+import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import BigNumber from 'bignumber.js';
 
 import classNames from 'classnames';
@@ -35,7 +36,7 @@ export const MaxButton = ({
 
   const formattedBalance = progressiveFormatAmount({
     amount: isEgld ? getBalanceMinusDust(balance) : balance,
-    decimals: token?.decimals
+    decimals: token?.decimals || DECIMALS
   });
 
   const isInputAmountMaxAmount = new BigNumber(inputAmount).isEqualTo(

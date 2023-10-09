@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+- [Fixed incorrect decimals for EGLD amount parsing](https://github.com/multiversx/mx-sdk-dapp-form/pull/241)
+
 ## [[0.8.15](https://github.com/multiversx/mx-sdk-dapp-form/pull/240)] - 2023-09-26
 - [Removed ledger usernames minimum version limitation error](https://github.com/multiversx/mx-sdk-dapp-form/pull/239)
 

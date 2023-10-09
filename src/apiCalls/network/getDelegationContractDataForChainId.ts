@@ -30,5 +30,9 @@ export const delegationContractDataByEnvironment: Record<
 
 export function getDelegationDataForChainId(chainId: string) {
   const environment = getEnvironmentForChainId(chainId);
-  return delegationContractDataByEnvironment[environment];
+
+  if (environment) {
+    return delegationContractDataByEnvironment[environment];
+  }
+  return null;
 }

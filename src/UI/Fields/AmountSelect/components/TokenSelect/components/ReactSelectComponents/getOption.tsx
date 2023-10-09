@@ -1,6 +1,7 @@
 import React from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import classNames from 'classnames';
@@ -38,7 +39,7 @@ export const getOption =
     const icon = option.token.assets ? option.token.assets.svgUrl : null;
     const amount = progressiveFormatAmount({
       amount: option.token.balance,
-      decimals: option.token.decimals,
+      decimals: option.token.decimals || DECIMALS,
       addCommas: true
     });
 

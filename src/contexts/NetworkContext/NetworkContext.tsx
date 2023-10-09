@@ -7,15 +7,12 @@ import React, {
 } from 'react';
 import { NetworkType } from '@multiversx/sdk-dapp/types/network.types';
 
-import {
-  delegationContractDataByEnvironment,
-  getDelegationDataForChainId
-} from 'apiCalls';
+import { getDelegationDataForChainId } from 'apiCalls';
 import { DelegationContractDataType } from 'types';
 
 export interface NetworkContextPropsType {
   networkConfig: NetworkType;
-  delegationContractData: DelegationContractDataType;
+  delegationContractData: DelegationContractDataType | null;
 }
 
 interface NetworkContextProviderValueType {
@@ -33,9 +30,8 @@ export function NetworkContextProvider({
   children,
   value: { networkConfig }
 }: NetworkContextProviderPropsType) {
-  const [delegationContractData, setDelegationContractData] = useState(
-    delegationContractDataByEnvironment.devnet
-  );
+  const [delegationContractData, setDelegationContractData] =
+    useState<DelegationContractDataType | null>(null);
 
   useEffect(() => {
     fetchDelegationData();
