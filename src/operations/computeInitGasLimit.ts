@@ -23,7 +23,7 @@ export interface ComputeInitGasLimitType {
   gasLimit: string;
   gasPrice: string;
   chainId: string;
-  delegationContractData: DelegationContractDataType;
+  delegationContractData: DelegationContractDataType | null;
   egldLabel: string;
 }
 
@@ -42,10 +42,13 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
   data,
   gasLimit,
   gasPrice,
-  delegationContractData: { delegationContractData, delegationContract },
+  delegationContractData,
   chainId
 }) => {
   const guardedAccountGasLimit = getGuardedAccountGasLimit(isGuarded);
+  const delegationContract = delegationContractData?.delegationContract;
+  const delegationContractMinGasLimit =
+    delegationContractData?.delegationContractData.minGasLimit ?? ZERO;
 
   if (isContract(receiver) && !isInternal) {
     const { gasLimit: resultedGasLimit, gasLimitCostError } =
@@ -66,7 +69,7 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
     const initGasLimit =
       receiver === delegationContract
         ? new BigNumber(resultedGasLimit)
-            .plus(delegationContractData.minGasLimit)
+            .plus(delegationContractMinGasLimit)
             .plus(guardedAccountGasLimit)
             .toString()
         : resultedGasLimit;

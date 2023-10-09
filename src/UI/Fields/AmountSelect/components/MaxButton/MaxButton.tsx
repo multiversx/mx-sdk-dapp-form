@@ -35,7 +35,7 @@ export const MaxButton = ({
 
   const formattedBalance = progressiveFormatAmount({
     amount: isEgld ? getBalanceMinusDust(balance) : balance,
-    decimals: token?.decimals
+    decimals: isNaN((token as any).decimals) ? 0 : token?.decimals
   });
 
   const isInputAmountMaxAmount = new BigNumber(inputAmount).isEqualTo(

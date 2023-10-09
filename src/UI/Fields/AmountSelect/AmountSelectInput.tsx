@@ -150,7 +150,7 @@ export const AmountSelectInput = () => {
     token: selectValue?.token,
     value: progressiveFormatAmount({
       amount: tokenDetails.balance,
-      decimals: tokenDetails.decimals,
+      decimals: isNaN(tokenDetails.decimals) ? 0 : tokenDetails.decimals,
       addCommas: true,
       showLastNonZeroDecimal: true
     })

@@ -38,7 +38,7 @@ export const getOption =
     const icon = option.token.assets ? option.token.assets.svgUrl : null;
     const amount = progressiveFormatAmount({
       amount: option.token.balance,
-      decimals: option.token.decimals,
+      decimals: isNaN(option.token.decimals) ? 0 : option.token.decimals,
       addCommas: true
     });
 
