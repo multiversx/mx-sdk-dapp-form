@@ -13,8 +13,8 @@ export const getTransactionFields = async (values: ExtendedValuesType) => {
   const { rawReceiverUsername, ...restOfValues } = values;
   let realReceiverUsername = rawReceiverUsername;
 
-  if (rawReceiverUsername) {
-    const account = await getAccountByUsername(rawReceiverUsername);
+  if (values.receiverUsername) {
+    const account = await getAccountByUsername(values.receiverUsername);
     if (account == null) {
       realReceiverUsername = undefined;
     }
