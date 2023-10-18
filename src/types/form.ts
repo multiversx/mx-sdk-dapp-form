@@ -38,7 +38,6 @@ export interface ExtendedValuesType extends ValuesType {
   balance: string;
   chainId: string;
   ignoreTokenBalance?: boolean;
-  skipGasLimitValidation?: boolean;
   /**
    * **readonly**: Configure disabled fields by disabling all or individual fields.\
    * Example: `readonly: [ 'amount' ]` will disable only the amount field.
@@ -92,5 +91,4 @@ export interface FormConfigType {
   successDescription?: string;
   redirectRoute?: string;
   skipToConfirm?: boolean;
-  skipGasLimitValidation?: boolean;
 }

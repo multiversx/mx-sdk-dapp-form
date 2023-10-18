@@ -15,11 +15,10 @@ const nftGasLimit = (errorMessages: ValidationErrorMessagesType) => {
     name: 'minValueData',
     test: function (value) {
       const parent: ExtendedValuesType = this.parent;
-      const { data, ignoreTokenBalance, isGuarded, skipGasLimitValidation } =
-        parent;
+      const { data, ignoreTokenBalance, isGuarded } = parent;
 
       // allow signing with 0 gasLimit
-      if (ignoreTokenBalance || skipGasLimitValidation) {
+      if (ignoreTokenBalance) {
         return true;
       }
 
