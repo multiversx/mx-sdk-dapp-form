@@ -18,6 +18,7 @@ import globals from 'assets/sass/globals.module.scss';
 import styles from './amountInput.module.scss';
 import {
   ImprovedDebounceValueType,
+  hasLeadingZeroes,
   removeCommas,
   roundAmount,
   useImprovedDebounce
@@ -126,11 +127,12 @@ const AmountComponent = ({
     setDisplayedUsdValue(`$${newUsdValue}`);
   };
 
-  const isAllowed = ({ floatValue }: NumberFormatValues) => {
-    return (
+  const isAllowed = ({ value, floatValue }: NumberFormatValues) => {
+    const defaultConditions =
       !floatValue ||
-      BigNumber(floatValue).isLessThanOrEqualTo(maxAcceptedAmount)
-    );
+      BigNumber(floatValue).isLessThanOrEqualTo(maxAcceptedAmount);
+
+    return defaultConditions && !hasLeadingZeroes(value);
   };
 
   useEffect(() => {
