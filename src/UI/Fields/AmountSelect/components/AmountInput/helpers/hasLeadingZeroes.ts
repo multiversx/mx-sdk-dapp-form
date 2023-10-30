@@ -6,9 +6,7 @@ export const hasLeadingZeroes = (value: string) => {
   const firstChacterIsZero = new BigNumber(firstCharacter).isZero();
   const secondCharacterIsPeriod = secondCharacter === '.';
 
-  if (firstChacterIsZero && secondCharacter && !secondCharacterIsPeriod) {
-    return true;
-  }
-
-  return false;
+  return Boolean(
+    firstChacterIsZero && secondCharacter && !secondCharacterIsPeriod
+  );
 };
