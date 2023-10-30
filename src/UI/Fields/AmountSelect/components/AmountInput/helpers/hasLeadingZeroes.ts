@@ -1,9 +1,9 @@
-import { ZERO } from '@multiversx/sdk-dapp/constants';
+import BigNumber from 'bignumber.js';
 
 export const hasLeadingZeroes = (value: string) => {
   const [firstCharacter, secondCharacter] = value.split('');
 
-  const firstChacterIsZero = firstCharacter === ZERO;
+  const firstChacterIsZero = new BigNumber(firstCharacter).isZero();
   const secondCharacterIsPeriod = secondCharacter === '.';
 
   if (firstChacterIsZero && secondCharacter && !secondCharacterIsPeriod) {
