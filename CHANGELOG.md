@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- [Fixed receiver on mobile, added support for custom "AmountInput" allowance](https://github.com/multiversx/mx-sdk-dapp-form/pull/246)
+- [Fixed receiver on mobile, added leading zeroes condition on "AmountInput"](https://github.com/multiversx/mx-sdk-dapp-form/pull/246)
 
 ## [[0.8.17](https://github.com/multiversx/mx-sdk-dapp-form/pull/245)] - 2023-10-18
 

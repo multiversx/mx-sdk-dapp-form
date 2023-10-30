@@ -18,6 +18,7 @@ import globals from 'assets/sass/globals.module.scss';
 import styles from './amountInput.module.scss';
 import {
   ImprovedDebounceValueType,
+  hasLeadingZeroes,
   removeCommas,
   roundAmount,
   useImprovedDebounce
@@ -43,7 +44,6 @@ export interface AmountInputPropsType extends WithClassnameType {
   usdValue?: string;
   autoFocus?: boolean;
   suffix?: string;
-  isChangeAllowed?: (value: string) => boolean;
 }
 
 const fiveHundredMs = 500;
@@ -57,7 +57,6 @@ const AmountComponent = ({
   handleChange,
   name,
   onDebounceChange,
-  isChangeAllowed,
   onFocus,
   onKeyDown,
   placeholder,
@@ -133,11 +132,7 @@ const AmountComponent = ({
       !floatValue ||
       BigNumber(floatValue).isLessThanOrEqualTo(maxAcceptedAmount);
 
-    if (isChangeAllowed) {
-      return defaultConditions && isChangeAllowed(value);
-    }
-
-    return defaultConditions;
+    return defaultConditions && !hasLeadingZeroes(value);
   };
 
   useEffect(() => {
