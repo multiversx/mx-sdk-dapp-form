@@ -273,6 +273,10 @@
         display: flex;
         gap: 4px;
 
+        & > * {
+          max-width: none;
+        }
+
         [class*='__left'],
         [class*='__right'],
         [class*='__ellipsis'] {
@@ -471,6 +475,7 @@
             color: var(--placeholder-color);
             align-items: flex-end;
             display: flex;
+            max-width: none;
 
             [class*='__left'] *,
             [class*='__right'] * {
