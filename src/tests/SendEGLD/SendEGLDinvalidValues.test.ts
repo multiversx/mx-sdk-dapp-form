@@ -9,7 +9,7 @@ describe('EGLD Amount field', () => {
     const invalidValues = {
       '+1': '1',
       '1e2': '12',
-      '0x1': '1',
+      '1x0': '10',
       '1,2': '12'
     };
     for (const value of Object.keys(invalidValues)) {
