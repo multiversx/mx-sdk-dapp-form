@@ -1,3 +1,1 @@
-export const removeCommas = (amount: string) => {
-  return amount.replace(/,/g, '');
-};
+export const removeCommas = (amount: string) => amount.replace(/,/g, '');

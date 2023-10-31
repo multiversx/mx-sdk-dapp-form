@@ -32,6 +32,34 @@ const AmountWrapper = ({
 };
 
 describe('AmountInput tests', () => {
+  test('Prevent leading zeroes', async () => {
+    const container = render(<AmountWrapper />);
+    const input: any = container.getByTestId('amountInput');
+
+    fireEvent.change(input, { target: { value: '0' } });
+    expect(input.value).toBe('0');
+
+    fireEvent.change(input, { target: { value: '00' } });
+    expect(input.value).toBe('0');
+
+    fireEvent.change(input, { target: { value: '02' } });
+    expect(input.value).toBe('0');
+  });
+
+  test('Allow leading zero if succeded by dot', async () => {
+    const container = render(<AmountWrapper />);
+    const input: any = container.getByTestId('amountInput');
+
+    fireEvent.change(input, { target: { value: '0' } });
+    expect(input.value).toBe('0');
+
+    fireEvent.change(input, { target: { value: '0.' } });
+    expect(input.value).toBe('0.');
+
+    fireEvent.change(input, { target: { value: '0.62' } });
+    expect(input.value).toBe('0.62');
+  });
+
   test('usdValue changes according to input value', async () => {
     const container = render(<AmountWrapper />);
     const input: any = container.getByTestId('amountInput');
