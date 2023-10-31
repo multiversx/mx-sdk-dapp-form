@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Added dapp-form prefix to css variables](https://github.com/multiversx/mx-sdk-dapp-form/pull/250)
+
 ## [[0.8.18](https://github.com/multiversx/mx-sdk-dapp-form/pull/249)] - 2023-10-31
 
 - [Fixed receiver on mobile, added leading zeroes condition on "AmountInput"](https://github.com/multiversx/mx-sdk-dapp-form/pull/246)

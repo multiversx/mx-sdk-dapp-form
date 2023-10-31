@@ -1,10 +1,10 @@
 export function selectCustomStyles({ docStyle }: { docStyle: any }) {
   const customColors = {
-    hoverColor: docStyle.getPropertyValue('--border-color'),
-    primaryColor: docStyle.getPropertyValue('--primary'),
-    bgColor: docStyle.getPropertyValue('--card-bg'),
-    mutedColor: docStyle.getPropertyValue('--muted'),
-    blackColor: docStyle.getPropertyValue('--black')
+    hoverColor: docStyle.getPropertyValue('--dapp-form-border-color'),
+    primaryColor: docStyle.getPropertyValue('--dapp-form-primary'),
+    bgColor: docStyle.getPropertyValue('--dapp-form-card-bg'),
+    mutedColor: docStyle.getPropertyValue('--dapp-form-muted'),
+    blackColor: docStyle.getPropertyValue('--dapp-form-black')
   };
 
   return {

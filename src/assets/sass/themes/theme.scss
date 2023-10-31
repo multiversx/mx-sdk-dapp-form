@@ -18,17 +18,17 @@ html {
 
 a,
 .link-style {
-  color: var(--primary-light);
+  color: var(--dapp-form-primary-light);
 }
 
 .link-second-style {
-  color: var(--secondary);
+  color: var(--dapp-form-secondary);
 
   &:hover {
-    color: var(--primary-light);
+    color: var(--dapp-form-primary-light);
 
     svg {
-      color: var(--primary-light);
+      color: var(--dapp-form-primary-light);
     }
   }
 }
@@ -44,7 +44,7 @@ a,
 .dapp-icon {
   padding: 5px;
   border-radius: 50%;
-  background-color: var(--light);
+  background-color: var(--dapp-form-light);
   width: toRem(65);
   height: toRem(65);
   display: flex;
@@ -96,20 +96,20 @@ a,
     justify-content: center;
     align-items: center;
     color: #fff;
-    background-color: var(--primary-light);
+    background-color: var(--dapp-form-primary-light);
     padding: 15px 20px 15px 16px;
     border-radius: 6px;
     gap: 8px;
 
     &:hover,
     &:active {
-      background-color: var(--primary-light);
+      background-color: var(--dapp-form-primary-light);
       background-image: linear-gradient(rgba(0, 0, 0, 0.1) 0 0);
     }
   }
 
   .info {
-    color: var(--primary-light);
+    color: var(--dapp-form-primary-light);
     margin-left: 48px;
   }
 }
@@ -152,14 +152,14 @@ a,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: var(--white);
+  color: var(--dapp-form-white);
   margin: 0 7px;
 
   button {
     border-radius: 50%;
     width: 40px;
     height: 40px;
-    background-color: var(--white);
+    background-color: var(--dapp-form-white);
 
     &:hover {
       opacity: 0.9;
@@ -182,7 +182,7 @@ a,
 
     tr:last-of-type {
       td {
-        border-bottom: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--dapp-form-border-color);
       }
     }
   }

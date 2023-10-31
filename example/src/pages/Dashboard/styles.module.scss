@@ -18,12 +18,12 @@
     line-height: 1;
     cursor: pointer;
     transition: all 400ms ease;
-    background-color: var(--white);
-    color: var(--black);
+    background-color: var(--dapp-form-white);
+    color: var(--dapp-form-black);
 
     &.active {
-      background-color: var(--black);
-      color: var(--white);
+      background-color: var(--dapp-form-black);
+      color: var(--dapp-form-white);
     }
   }
 }
@@ -35,7 +35,7 @@
 
 .content {
   border-radius: 15px;
-  border: 1px solid var(--primary);
+  border: 1px solid var(--dapp-form-primary);
   display: inline-block;
   margin: 30px;
   width: 100%;

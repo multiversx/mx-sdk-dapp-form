@@ -3,11 +3,11 @@
 
 $body: #000;
 $headings-font-weight: 300;
-$primary: var(--primary);
-$light: var(--light);
+$primary: var(--dapp-form-primary);
+$light: var(--dapp-form-light);
 
 $headings-font-weight: 300;
-$a: var(--primary-light);
+$a: var(--dapp-form-primary-light);
 
 /* Do not move the imports from here.
 Override Bootstrap variables only above.
@@ -36,7 +36,7 @@ html {
 .dapp-icon {
   padding: 5px;
   border-radius: 50%;
-  background-color: var(--light);
+  background-color: var(--dapp-form-light);
   width: 65px;
   height: 65px;
   display: flex;
