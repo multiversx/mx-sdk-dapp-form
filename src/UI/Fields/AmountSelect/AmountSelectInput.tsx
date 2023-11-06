@@ -28,13 +28,10 @@ export const AmountSelectInput = () => {
   const { checkInvalid } = useFormContext();
   const { tokensInfo, amountInfo, formInfo } = useSendFormContext();
   const { readonly } = formInfo;
-
   const {
     networkConfig: { egldLabel, chainId }
   } = useNetworkConfigContext();
   const { egldPriceInUsd } = useGetEconomicsInfo();
-
-  const { tokenDetails, tokenIdError, isTokenIdInvalid } = tokensInfo;
 
   const {
     amount,
@@ -53,10 +50,13 @@ export const AmountSelectInput = () => {
   const {
     allAvailableTokens,
     areTokensLoading,
-    tokenId,
-    onChangeTokenId,
+    getTokens,
+    isTokenIdInvalid,
     nft,
-    getTokens
+    onChangeTokenId,
+    tokenDetails,
+    tokenId,
+    tokenIdError
   } = tokensInfo;
 
   const options: OptionType[] = allAvailableTokens.map((token) => ({
@@ -81,7 +81,9 @@ export const AmountSelectInput = () => {
     isSearchable: true,
     onChange: (props: SingleValue<OptionType>) => {
       if (props) {
+        // Clear the amount on token change
         onChangeTokenId(props.value);
+        onChange('');
       }
     },
     onMenuOpen: getTokens,
