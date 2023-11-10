@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Fixed unable to paste in `Receiver` input](https://github.com/multiversx/mx-sdk-dapp-form/pull/253)
+
 ## [[0.8.19](https://github.com/multiversx/mx-sdk-dapp-form/pull/252)] - 2023-11-06
 
 - [Fixed amount does not reset on token change in `AmountSelectInput`](https://github.com/multiversx/mx-sdk-dapp-form/pull/251)
