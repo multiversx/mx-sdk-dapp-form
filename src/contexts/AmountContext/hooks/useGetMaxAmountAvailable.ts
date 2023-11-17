@@ -30,10 +30,12 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
   const { nft, tokens } = useTokensContext();
   const { isEsdtTransaction, isNftTransaction, isEgldTransaction } =
     useFormContext();
+
   const { gasLimit, gasPrice } = useGasContext();
   const { tokenId } = values;
 
   let nftBalance = null;
+
   if (isNftTransaction && nft) {
     const computedNftBalance = getEntireTokenBalance({
       balance: nft.balance,
@@ -44,6 +46,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
   }
 
   let tokenBalance = null;
+
   if (isEsdtTransaction) {
     const { decimals, balance: newTokenBalance } = getTokenDetails({
       tokens,
@@ -52,14 +55,16 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
 
     const tokenAmount = getEntireTokenBalance({
       balance: newTokenBalance,
-      decimals: decimals,
+      decimals,
       digits: DIGITS
     });
+
     tokenBalance = tokenAmount;
   }
 
   let formattedEgldBalance = ZERO;
   let balanceMinusDust = balance;
+
   if (balance && isEgldTransaction) {
     const { entireBalance: formattedBalance, entireBalanceMinusDust } =
       getEntireBalance({
@@ -70,6 +75,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
         digits: DIGITS,
         chainId
       });
+
     formattedEgldBalance = formattedBalance;
     balanceMinusDust = entireBalanceMinusDust;
   }
