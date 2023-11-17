@@ -1,5 +1,5 @@
 import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/constants/index';
-import { getEntireBalance } from '../getEntireBalance';
+import { getEntireBalance, getEntireTokenBalance } from '../getEntireBalance';
 
 describe('Entire balance', () => {
   test('Entire balance default values', () => {
@@ -28,5 +28,23 @@ describe('Entire balance', () => {
       });
     expect(available).toBe('0');
     expect(entireBalanceMinusDust).toBe('0');
+  });
+
+  test('decimals lower than digits', () => {
+    const tokenAmount = getEntireTokenBalance({
+      decimals: 2,
+      digits: 4,
+      balance: '100'
+    });
+    expect(tokenAmount).toBe('1');
+  });
+
+  test('decimals higher than digits', () => {
+    const tokenAmount = getEntireTokenBalance({
+      decimals: 18,
+      digits: 4,
+      balance: '123456789123456789'
+    });
+    expect(tokenAmount).toBe('0.123456789123456789');
   });
 });

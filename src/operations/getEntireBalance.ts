@@ -84,14 +84,16 @@ export function getEntireTokenBalance({
   // entireBalance >= 0
   if (bnBalance.isGreaterThanOrEqualTo(0)) {
     const input = bnBalance.toString(10);
+
     return formatAmount({
       input,
       decimals,
-      digits,
+      digits: digits > decimals ? decimals : digits,
       showLastNonZeroDecimal: true,
       addCommas: false
     });
   }
+
   return ZERO;
 }
 export default getEntireBalance;

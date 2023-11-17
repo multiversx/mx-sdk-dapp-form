@@ -20,6 +20,7 @@ const esdtAmount = (errorMessages: ValidationErrorMessagesType) => {
           tokens,
           tokenId
         });
+
         const valid = maxDecimals(String(value), decimals);
 
         if (!valid) {
