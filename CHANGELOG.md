@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.8.21](https://github.com/multiversx/mx-sdk-dapp-form/pull/256)] - 2023-11-17
+
 - [Fixed long fee styles and max amount formatting](https://github.com/multiversx/mx-sdk-dapp-form/pull/255)
 
 ## [[0.8.20](https://github.com/multiversx/mx-sdk-dapp-form/pull/254)] - 2023-11-10
