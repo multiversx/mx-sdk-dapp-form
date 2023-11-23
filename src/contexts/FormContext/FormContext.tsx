@@ -19,17 +19,18 @@ import {
 import { verifyInvalid } from 'validation';
 
 export interface FormContextBasePropsType {
-  prefilledForm: boolean;
-  skipToConfirm?: boolean;
-  readonly?: ExtendedValuesType['readonly'];
-  hiddenFields?: ExtendedValuesType['hiddenFields'];
-  uiOptions?: ExtendedValuesType['uiOptions'];
-  onCloseForm: () => void;
-  isFormSubmitted: boolean;
-  setIsFormSubmitted: Dispatch<SetStateAction<boolean>>;
-  setGuardedTransaction: (transaction: Transaction) => void;
   hasGuardianScreen: boolean;
+  hiddenFields?: ExtendedValuesType['hiddenFields'];
+  isBurn?: boolean;
+  isFormSubmitted: boolean;
+  onCloseForm: () => void;
+  prefilledForm: boolean;
+  readonly?: ExtendedValuesType['readonly'];
+  setGuardedTransaction: (transaction: Transaction) => void;
   setHasGuardianScreen: Dispatch<SetStateAction<boolean>>;
+  setIsFormSubmitted: Dispatch<SetStateAction<boolean>>;
+  skipToConfirm?: boolean;
+  uiOptions?: ExtendedValuesType['uiOptions'];
 }
 
 export interface FormContextPropsType extends FormContextBasePropsType {

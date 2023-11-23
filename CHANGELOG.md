@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.8.22](https://github.com/multiversx/mx-sdk-dapp-form/pull/257)] - 2023-11-23
+
+- [Changed receiver form validation during `Burn` NFT transaction](https://github.com/multiversx/mx-sdk-dapp-form/pull/257)
+
 ## [[0.8.21](https://github.com/multiversx/mx-sdk-dapp-form/pull/256)] - 2023-11-17
 
 - [Fixed long fee styles and max amount formatting](https://github.com/multiversx/mx-sdk-dapp-form/pull/255)
