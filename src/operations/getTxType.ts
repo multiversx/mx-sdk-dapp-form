@@ -14,18 +14,23 @@ export function getTxType({
   if (isEgld) {
     return TransactionTypeEnum.EGLD;
   }
+
   if (nft?.type === NftEnumType.NonFungibleESDT) {
     return TransactionTypeEnum.NonFungibleESDT;
   }
+
   if (nft?.type === NftEnumType.SemiFungibleESDT) {
     return TransactionTypeEnum.SemiFungibleESDT;
   }
+
   if (nft?.type === NftEnumType.MetaESDT || isNft) {
     return TransactionTypeEnum.MetaESDT;
   }
+
   if (isEsdt) {
     return TransactionTypeEnum.ESDT;
   }
+
   return TransactionTypeEnum.EGLD;
 }
 

@@ -32,25 +32,26 @@ export interface ValuesType
 
 export interface ExtendedValuesType extends ValuesType {
   // validationSchema
-  txType: TransactionTypeEnum;
   address: string;
-  isGuarded?: boolean;
   balance: string;
   chainId: string;
+  hiddenFields?: Array<ValueKeyType>;
   ignoreTokenBalance?: boolean;
+  isBurn?: boolean;
+  isGuarded?: boolean;
+  ledger?: {
+    ledgerDataActive: boolean;
+    version: string;
+  };
+  nft?: PartialNftType;
   /**
    * **readonly**: Configure disabled fields by disabling all or individual fields.\
    * Example: `readonly: [ 'amount' ]` will disable only the amount field.
    */
   readonly?: boolean | Array<ValueKeyType>;
-  hiddenFields?: Array<ValueKeyType>;
-  nft?: PartialNftType;
   tokens?: PartialTokenType[] | null;
-  ledger?: {
-    ledgerDataActive: boolean;
-    version: string;
-  };
   transaction?: Transaction;
+  txType: TransactionTypeEnum;
   uiOptions?: {
     showAmountSlider: boolean;
   };

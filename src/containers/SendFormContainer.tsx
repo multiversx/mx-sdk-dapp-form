@@ -125,23 +125,24 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     getGasLimit({ txType, data, isGuarded: accountInfo.isGuarded });
 
   const formikInitialValues = {
-    tokenId,
+    address: initialValues?.address ?? address,
+    amount: initialValues?.amount ?? ZERO,
+    balance: initialValues?.balance || balance,
+    chainId: initialValues?.chainId || networkConfig.chainId,
+    code: '',
+    data,
+    gasLimit,
+    gasPrice: initialValues?.gasPrice ?? formattedConfigGasPrice,
+    isBurn: formInfo.isBurn,
+    isGuarded: initialValues?.isGuarded ?? accountInfo.isGuarded,
+    ledger: initialValues?.ledger,
+    nft: tokensInfo?.initialNft,
     receiver: initialValues?.receiver ?? '',
     receiverUsername: initialValues?.receiverUsername,
     senderUsername: username,
-    gasPrice: initialValues?.gasPrice ?? formattedConfigGasPrice,
-    data,
-    amount: initialValues?.amount ?? ZERO,
-    gasLimit,
-    txType,
-    address: initialValues?.address ?? address,
-    nft: tokensInfo?.initialNft,
-    balance: initialValues?.balance || balance,
-    isGuarded: initialValues?.isGuarded ?? accountInfo.isGuarded,
-    chainId: initialValues?.chainId || networkConfig.chainId,
+    tokenId,
     tokens: tokensInfo?.initialTokens,
-    ledger: initialValues?.ledger,
-    code: ''
+    txType
   };
 
   return (
