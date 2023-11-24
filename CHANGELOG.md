@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- [Fixed `Receiver` input overlaps autocomplete selection](https://github.com/multiversx/mx-sdk-dapp-form/pull/258)
+## [[0.8.23](https://github.com/multiversx/mx-sdk-dapp-form/pull/260)] - 2023-11-24
 
-## [[0.8.22](https://github.com/multiversx/mx-sdk-dapp-form/pull/257)] - 2023-11-23
+- [Fixed `Receiver` input overlaps autocomplete selection](https://github.com/multiversx/mx-sdk-dapp-form/pull/259)
+
+## [[0.8.22](https://github.com/multiversx/mx-sdk-dapp-form/pull/258)] - 2023-11-23
 
 - [Changed receiver form validation during `Burn` NFT transaction](https://github.com/multiversx/mx-sdk-dapp-form/pull/257)
 
