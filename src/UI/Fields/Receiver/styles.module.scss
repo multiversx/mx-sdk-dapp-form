@@ -188,7 +188,7 @@
           }
 
           &.visible input {
-            opacity: 1 !important;
+            opacity: 1;
           }
 
           &.spaced input {
@@ -203,6 +203,10 @@
             line-height: 17px !important;
             font-size: 14px !important;
             color: var(--action-color) !important;
+
+            @media (min-width: 768px) {
+              opacity: 0 !important;
+            }
           }
         }
       }
