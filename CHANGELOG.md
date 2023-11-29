@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Fixed `Receiver` input overlaps autocomplete selection on paste](https://github.com/multiversx/mx-sdk-dapp-form/pull/261)
+
 ## [[0.8.23](https://github.com/multiversx/mx-sdk-dapp-form/pull/260)] - 2023-11-24
 
 - [Fixed `Receiver` input overlaps autocomplete selection](https://github.com/multiversx/mx-sdk-dapp-form/pull/259)
