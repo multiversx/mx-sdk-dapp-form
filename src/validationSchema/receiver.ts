@@ -17,14 +17,14 @@ export const receiver = (errorMessages: ValidationErrorMessagesType) => {
     'sameAddress',
     errorMessages.sameAsOwnerAddress,
     function sameAddressCheck(value) {
-      const { ignoreTokenBalance, txType, readonly, address } = this
+      const { ignoreTokenBalance, txType, readonly, address, isBurn } = this
         .parent as ExtendedValuesType;
       const isNftTransaction = getIsNftTransaction(txType);
-      const signContext = ignoreTokenBalance;
 
-      if (isNftTransaction && !signContext && !readonly) {
+      if (isNftTransaction && !ignoreTokenBalance && !readonly && !isBurn) {
         return address !== value;
       }
+
       return true;
     }
   );
@@ -48,13 +48,7 @@ export const receiver = (errorMessages: ValidationErrorMessagesType) => {
         return true;
       }
 
-      const isReceiverNotAllwed = !allowedReceivers.includes(value);
-
-      if (isReceiverNotAllwed) {
-        return false;
-      }
-
-      return true;
+      return allowedReceivers.includes(value);
     }
   );
 
