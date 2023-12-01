@@ -1,8 +1,8 @@
 import { ZERO } from '@multiversx/sdk-dapp/constants';
-import { getAccountByUsername } from 'apiCalls/account';
 import { getIsNftTransaction } from 'helpers/misc/getIsNftTransaction';
 import { TransactionTypeEnum } from 'types/enums';
 import { ExtendedValuesType } from 'types/form';
+import { getAccountReceiverUsername } from './getAccountReceiverUsername';
 
 export const getTransactionFields = async (values: ExtendedValuesType) => {
   const actualTransactionAmount =
@@ -11,14 +11,11 @@ export const getTransactionFields = async (values: ExtendedValuesType) => {
   // when seding NFTs, receiver is self
   const isNftTransaction = getIsNftTransaction(values.txType);
   const { rawReceiverUsername, ...restOfValues } = values;
-  let realReceiverUsername = rawReceiverUsername;
 
-  if (values.receiverUsername) {
-    const account = await getAccountByUsername(values.receiverUsername);
-    if (account == null) {
-      realReceiverUsername = undefined;
-    }
-  }
+  const realReceiverUsername = await getAccountReceiverUsername({
+    rawReceiverUsername,
+    receiverUsername: values.receiverUsername
+  });
 
   const receiverUsername = isNftTransaction
     ? values.senderUsername
