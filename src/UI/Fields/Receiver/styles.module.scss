@@ -188,7 +188,7 @@
           }
 
           &.visible input {
-            opacity: 1;
+            opacity: 1 !important;
           }
 
           &.spaced input {

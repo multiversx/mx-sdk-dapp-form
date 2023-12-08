@@ -1,21 +1,11 @@
 import {
   MultiEsdtTransactionType,
   MultiSignTransactionType,
+  RawTransactionType,
   TransactionsDataTokensType
 } from '@multiversx/sdk-dapp/types/transactions.types';
 import { ApiConfigType } from 'apiCalls';
 import { ExtendedValuesType } from 'types';
-
-export type SignTxType = {
-  nonce?: string;
-  data: any;
-  token?: string;
-  gasLimit?: string;
-  gasPrice?: string;
-  receiver?: string;
-  value?: string;
-  version?: string;
-};
 
 export interface TxSignValuesType {
   receiver: string;
@@ -42,7 +32,7 @@ export interface ValidateType {
 }
 
 export interface ValidateSignTransactionsType {
-  extractedTxs: SignTxType[];
+  extractedTxs: RawTransactionType[];
   address: string;
   egldLabel: string;
   balance: string;
