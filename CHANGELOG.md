@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [[0.8.25](https://github.com/multiversx/mx-sdk-dapp-form/pull/264)] - 2023-12-08
+## [[0.8.25](https://github.com/multiversx/mx-sdk-dapp-form/pull/266)] - 2023-12-08
 
-- [Changed `SignTxType` to `RawTransactionType` from `sdk-dapp`](https://github.com/multiversx/mx-sdk-dapp-form/pull/263)
+- [Changed `SignTxType` to `RawTransactionType` from `sdk-dapp`](https://github.com/multiversx/mx-sdk-dapp-form/pull/265)
 
 ## [[0.8.24](https://github.com/multiversx/mx-sdk-dapp-form/pull/262)] - 2023-11-29
 
