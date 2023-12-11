@@ -1,3 +1,4 @@
+import { IPlainTransactionObject } from '@multiversx/sdk-core/out';
 import { newTransaction } from '@multiversx/sdk-dapp/models/newTransaction';
 import {
   MultiEsdtTransactionType,
@@ -10,14 +11,13 @@ import { getTokenFromData } from '@multiversx/sdk-dapp/utils/transactions/getTok
 import { parseMultiEsdtTransferData } from '@multiversx/sdk-dapp/utils/transactions/parseMultiEsdtTransferData';
 import getTxWithReceiver from './getTxWithReceiver';
 import {
-  SignTxType,
   ValidateSignTransactionsType,
   validateTransaction
 } from './validateTransaction';
 
 function processMultiTx(props: {
   trx: MultiEsdtTransactionType;
-  transaction: SignTxType;
+  transaction: IPlainTransactionObject;
   transactionIndex: number;
 }) {
   const { transaction, transactionIndex, trx } = props;
@@ -69,12 +69,17 @@ function extractAllTransactions(props: ValidateSignTransactionsType) {
       });
     } else {
       const { tokenId, amount } = getTokenFromData(transaction.data);
-      if (tokenId) {
+      if (tokenId && transaction.data) {
         txsDataTokens = {
           ...txsDataTokens,
-          [transaction.data]: { tokenId, amount }
+          [transaction.data]: {
+            tokenId,
+            amount,
+            receiver: transaction.receiver
+          }
         };
       }
+
       allTransactions.push({
         ...transaction,
         transactionIndex: transactionIndex,
@@ -82,6 +87,7 @@ function extractAllTransactions(props: ValidateSignTransactionsType) {
       });
     }
   });
+
   return { allTransactions, txsDataTokens };
 }
 
@@ -118,6 +124,7 @@ async function getTxsErrors(
   for (const errors of results) {
     allErrors = { ...allErrors, ...errors };
   }
+
   return allErrors;
 }
 
@@ -141,5 +148,6 @@ export async function validateSignTransactions(
       parsedTransactions: allTransactions
     };
   }
+
   return null;
 }
