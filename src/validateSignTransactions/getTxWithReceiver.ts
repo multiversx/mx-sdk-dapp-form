@@ -1,4 +1,4 @@
-import { RawTransactionType } from '@multiversx/sdk-dapp/types/transactions.types';
+import { IPlainTransactionObject } from '@multiversx/sdk-core/out';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import { isNftOrMultiEsdtTx } from 'validation';
 
@@ -7,7 +7,7 @@ export function getTxWithReceiver({
   tx
 }: {
   address: string;
-  tx: RawTransactionType;
+  tx: IPlainTransactionObject;
 }) {
   const receiver =
     isNftOrMultiEsdtTx(String(tx.data)) && !addressIsValid(String(tx.receiver))

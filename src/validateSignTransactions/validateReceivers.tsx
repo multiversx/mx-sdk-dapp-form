@@ -1,13 +1,11 @@
 import { Address } from '@multiversx/sdk-core';
-import {
-  TransactionsDataTokensType,
-  RawTransactionType
-} from '@multiversx/sdk-dapp/types/transactions.types';
+import { IPlainTransactionObject } from '@multiversx/sdk-core/out';
+import { TransactionsDataTokensType } from '@multiversx/sdk-dapp/types/transactions.types';
 import { isContract } from '@multiversx/sdk-dapp/utils/smartContracts';
 import getTxWithReceiver from './getTxWithReceiver';
 
 interface ValidateReceiversType {
-  transactions: RawTransactionType[];
+  transactions: IPlainTransactionObject[];
   txsDataTokens?: TransactionsDataTokensType;
   isMainnet: boolean;
   address: string;

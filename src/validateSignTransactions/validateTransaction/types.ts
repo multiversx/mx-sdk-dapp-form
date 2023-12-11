@@ -1,7 +1,7 @@
+import { IPlainTransactionObject } from '@multiversx/sdk-core/out';
 import {
   MultiEsdtTransactionType,
   MultiSignTransactionType,
-  RawTransactionType,
   TransactionsDataTokensType
 } from '@multiversx/sdk-dapp/types/transactions.types';
 import { ApiConfigType } from 'apiCalls';
@@ -32,7 +32,7 @@ export interface ValidateType {
 }
 
 export interface ValidateSignTransactionsType {
-  extractedTxs: RawTransactionType[];
+  extractedTxs: IPlainTransactionObject[];
   address: string;
   egldLabel: string;
   balance: string;

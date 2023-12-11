@@ -1,8 +1,8 @@
+import { IPlainTransactionObject } from '@multiversx/sdk-core/out';
 import { newTransaction } from '@multiversx/sdk-dapp/models/newTransaction';
 import {
   MultiEsdtTransactionType,
   MultiSignTransactionType,
-  RawTransactionType,
   TransactionDataTokenType,
   TransactionsDataTokensType
 } from '@multiversx/sdk-dapp/types/transactions.types';
@@ -17,7 +17,7 @@ import {
 
 function processMultiTx(props: {
   trx: MultiEsdtTransactionType;
-  transaction: RawTransactionType;
+  transaction: IPlainTransactionObject;
   transactionIndex: number;
 }) {
   const { transaction, transactionIndex, trx } = props;
