@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [[0.8.25](https://github.com/multiversx/mx-sdk-dapp-form/pull/263)] - 2023-12-01
 - [Fix setting `receiverUsername` for accounts with both herotag and assets](https://github.com/multiversx/mx-sdk-dapp-form/pull/263)
 
+## [[0.8.25](https://github.com/multiversx/mx-sdk-dapp-form/pull/266)] - 2023-12-08
+
+- [Changed `SignTxType` to `IPlainTransactionObject` from `sdk-dapp`](https://github.com/multiversx/mx-sdk-dapp-form/pull/265)
+
 ## [[0.8.24](https://github.com/multiversx/mx-sdk-dapp-form/pull/262)] - 2023-11-29
 
 - [Fixed `Receiver` input overlaps autocomplete selection on paste](https://github.com/multiversx/mx-sdk-dapp-form/pull/261)
