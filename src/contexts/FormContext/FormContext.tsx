@@ -93,7 +93,10 @@ export function FormContextProvider({
 
   const handleCheckForm = useCallback(async () => {
     setShouldValidateForm(true);
-    setFieldTouched(ValuesEnum.receiver, true);
+
+    Object.values(ValuesEnum).forEach((value) => {
+      setFieldTouched(value, true);
+    });
 
     const newErrors = await validateForm();
 
@@ -103,6 +106,7 @@ export function FormContextProvider({
     }
 
     const gasLimitError = errors.gasLimit;
+
     if (gasLimitError || newErrors.gasPrice) {
       setErrors(newErrors);
       // open FeeAccordion
