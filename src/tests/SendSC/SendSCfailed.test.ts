@@ -2,11 +2,11 @@ import { act, fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { FormDataTestIdsEnum, MAX_GAS_LIMIT } from 'constants/index';
 import { ValuesEnum } from 'types/form';
-import { fillInForm, finalFee, setResponse } from './helpers';
+import { fillInForm, setResponse } from './helpers';
 
 describe('SendForm Smart Contract', () => {
   beforeEach(() => {
-    setResponse([1500057500, false, 92000]);
+    setResponse([1500057500, false, 5900]);
   });
 
   test('Too high gasLimit shows error', async () => {
@@ -49,12 +49,15 @@ describe('SendForm Smart Contract', () => {
     fireEvent.blur(dataInput);
 
     await waitFor(() => {
-      expect(transactionCost).toHaveBeenCalledTimes(2);
+      expect(transactionCost).toHaveBeenCalledTimes(1);
     });
 
     // call fails so default value is filled in
     gasLimit = render.getByTestId(ValuesEnum.gasLimit) as HTMLInputElement;
-    expect(gasLimit.value).toBe('59000');
+
+    await waitFor(() => {
+      expect(gasLimit.value).toBe('1650063250');
+    });
 
     // 3rd data field change fetches correct server response
     dataInput = render.getByTestId(ValuesEnum.data) as HTMLInputElement;
@@ -62,10 +65,11 @@ describe('SendForm Smart Contract', () => {
     fireEvent.blur(dataInput);
 
     fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
+
     await waitFor(() => {
-      expect(fee.textContent).toBe(finalFee);
+      expect(fee.textContent).toBe('0.0165501325 xEGLD');
     });
 
-    expect(transactionCost).toHaveBeenCalledTimes(3);
+    expect(transactionCost).toHaveBeenCalledTimes(1);
   });
 });
