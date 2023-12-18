@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [[0.8.27](https://github.com/multiversx/mx-sdk-dapp-form/pull/268)] - 2023-12-15
 
+- [Fixed failed test](https://github.com/multiversx/mx-sdk-dapp-form/pull/269)
 - [Fixed not all field errors are validated on form submit](https://github.com/multiversx/mx-sdk-dapp-form/pull/267)
 
 ## [[0.8.26](https://github.com/multiversx/mx-sdk-dapp-form/pull/266)] - 2023-12-11
