@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [[0.9.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/270)] - 2023-12-21
+- [Upgrade axios to 1.6.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/270)
+
 
 ## [[0.8.27](https://github.com/multiversx/mx-sdk-dapp-form/pull/268)] - 2023-12-15
 

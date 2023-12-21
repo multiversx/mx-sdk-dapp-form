@@ -1,6 +1,6 @@
 {
   "name": "@multiversx/sdk-dapp-form",
-  "version": "0.8.27",
+  "version": "0.9.0",
   "description": "A library to hold the main logic for a validating a form for transactions on the MultiversX blockchain",
   "author": "MultiversX",
   "license": "GPL-3.0-or-later",
@@ -108,7 +108,7 @@
   },
   "dependencies": {
     "anchorme": "2.1.2",
-    "axios": "0.24.0",
+    "axios": "1.6.2",
     "bech32": "2.0.0",
     "bignumber.js": "9.x",
     "formik": "2.2.9",
