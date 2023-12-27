@@ -1,4 +1,4 @@
-import { act, fireEvent, waitFor } from '@testing-library/react';
+import { act, fireEvent } from '@testing-library/react';
 import selectEvent from 'react-select-event';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { ValuesEnum } from 'types/form';
@@ -48,14 +48,9 @@ describe('Send advanced mode', () => {
       fireEvent.click(confirmAdvancedModeBtn);
 
       // reset form
-      expect(dataInput.value).toBe('');
-      expect(gasLimit.value).toBe('50000');
-
-      // restore form
-      await waitFor(() => {
-        expect(dataInput.value).toBe('ESDTTransfer@54574f2d383234653730@03e8');
-        expect(gasLimit.value).toBe('500000');
-      });
+      expect(dataInput.value).toBe('ESDTTransfer@54574f2d383234653730@03e8');
+      expect(gasLimit.value).toBe('500000');
+      expect(dataInput).toBeEnabled();
     });
   });
 });
