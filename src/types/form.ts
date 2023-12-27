@@ -37,6 +37,7 @@ export interface ExtendedValuesType extends ValuesType {
   chainId: string;
   hiddenFields?: Array<ValueKeyType>;
   ignoreTokenBalance?: boolean;
+  isAdvancedModeEnabled: boolean;
   isBurn?: boolean;
   isGuarded?: boolean;
   ledger?: {
