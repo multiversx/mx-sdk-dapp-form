@@ -19,7 +19,7 @@ export interface DataContextPropsType {
   data: string;
   dataError?: string;
   isDataInvalid: boolean;
-  isAdvancedModeEnabled: boolean;
+  isAdvancedModeEnabled?: boolean;
   onChange: (
     newValue: string | ChangeEvent<any>,
     shouldValidate?: boolean
