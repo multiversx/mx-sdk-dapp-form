@@ -84,7 +84,7 @@ export function AppInfoContextProvider({
   }, [formNetworkConfig]);
 
   if (!networkConfig) {
-    return Loader;
+    return Loader != null ? <Loader /> : null;
   }
 
   return (
