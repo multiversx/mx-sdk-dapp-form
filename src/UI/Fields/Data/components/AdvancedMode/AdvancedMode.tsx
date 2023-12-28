@@ -7,56 +7,44 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useFormikContext } from 'formik';
 
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
-import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { ExtendedValuesType, ValuesEnum } from 'types/form';
+import { ExtendedValuesType } from 'types/form';
 
 import { useIsDataDisabled } from '../../hooks';
 import styles from './styles.module.scss';
 
 export const AdvancedMode = () => {
   const {
-    networkConfig: { egldLabel }
-  } = useNetworkConfigContext();
-  const {
     formInfo: { readonly, isEgldTransaction }
   } = useSendFormContext();
   const { setFieldValue, values } = useFormikContext<ExtendedValuesType>();
-  const [isEnabled, setIsEnabled] = useState<boolean | null>(null);
+  const [isEnabled, setIsEnabled] = useState<boolean>(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const isDataFieldDisabled = useIsDataDisabled();
 
-  const isDataDisabled = useIsDataDisabled();
-  const isDataEnabled = isEnabled ?? !isDataDisabled;
-  const isDisabled = !isDataEnabled;
-  const showEnabled =
-    isEnabled === null && isDisabled && !readonly && Boolean(values.data);
+  const showAdvancedMode =
+    !isEnabled && !readonly && isDataFieldDisabled && Boolean(values.data);
 
-  const enableDataField = () => {
+  const handleAdvancedModeEnabled = () => {
     setIsEnabled(true);
-    // data will be changed when resetting to EGLD so we set it back after
-    const { data, gasLimit } = values;
-    setFieldValue(ValuesEnum.amount, '0');
-    setFieldValue(ValuesEnum.tokenId, egldLabel);
-    setTimeout(() => {
-      setFieldValue(ValuesEnum.data, data);
-      setFieldValue(ValuesEnum.gasLimit, gasLimit);
-    });
+    setFieldValue('isAdvancedModeEnabled', true);
   };
 
-  const activateConfirm = () => {
+  const handleShowConfirm = () => {
     setShowConfirm(true);
+
     setTimeout(() => {
       setShowConfirm(false);
     }, 5000);
   };
 
   useEffect(() => {
-    if (!isEgldTransaction && isEnabled != null) {
-      setIsEnabled(null);
+    if (!isEgldTransaction && isEnabled) {
+      setIsEnabled(false);
     }
   }, [isEgldTransaction, values.amount]);
 
-  if (!showEnabled) {
+  if (!showAdvancedMode) {
     return null;
   }
 
@@ -65,7 +53,7 @@ export const AdvancedMode = () => {
       <div
         className={styles.advanced}
         data-testid={FormDataTestIdsEnum.confirmAdvancedMode}
-        onClick={enableDataField}
+        onClick={handleAdvancedModeEnabled}
       >
         <FontAwesomeIcon icon={faCheck} className='i-icon' />
         <span className={styles.advancedText}>Confirm</span>
@@ -77,7 +65,7 @@ export const AdvancedMode = () => {
     <div
       data-testid={FormDataTestIdsEnum.enableAdvancedMode}
       className={styles.advanced}
-      onClick={activateConfirm}
+      onClick={handleShowConfirm}
     >
       <FontAwesomeIcon icon={faScrewdriverWrench} className='i-icon' />
       <span className={styles.advancedText}>Advanced</span>

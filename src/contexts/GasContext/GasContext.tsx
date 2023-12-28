@@ -116,7 +116,7 @@ export function GasContextProvider({
     touched
   });
 
-  // gasLimit errors should only show once amonut is valid
+  // gasLimit errors should only show once amount is valid
   const isGasLimitInvalid =
     !isAmountInvalid && checkInvalid(ValuesEnum.gasLimit);
 

@@ -19,6 +19,7 @@ export interface DataContextPropsType {
   data: string;
   dataError?: string;
   isDataInvalid: boolean;
+  isAdvancedModeEnabled?: boolean;
   onChange: (
     newValue: string | ChangeEvent<any>,
     shouldValidate?: boolean
@@ -46,7 +47,7 @@ export function DataContextProvider({
   } = useFormikContext<ExtendedValuesType>();
   const { checkInvalid, prefilledForm, isEgldTransaction } = useFormContext();
   const { nft } = useTokensContext();
-  const { receiver, txType, amount, tokenId } = values;
+  const { receiver, txType, amount, tokenId, isAdvancedModeEnabled } = values;
   const { onChangeGasLimit } = useGasContext();
   const { isGuarded } = useAccountContext();
 
@@ -58,12 +59,15 @@ export function DataContextProvider({
   ) => {
     const value =
       typeof newValue === 'string' ? newValue : newValue?.target?.value;
+
     setFieldValue(ValuesEnum.data, value, shouldValidate);
+
     if (!prefilledForm && !touched.gasLimit && isEgldTransaction) {
       const newGasLimit = calculateGasLimit({
         data: value,
         isGuarded
       });
+
       onChangeGasLimit(newGasLimit);
     }
   };
@@ -114,8 +118,10 @@ export function DataContextProvider({
     isDataInvalid,
     onChange: handleUpdateData,
     onBlur: handleBlurData,
-    onReset: handleResetData
+    onReset: handleResetData,
+    isAdvancedModeEnabled
   };
+
   return (
     <DataFieldContext.Provider value={value}>
       {children}
