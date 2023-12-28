@@ -4,11 +4,13 @@ import { ValuesEnum } from 'types';
 
 export const useIsDataDisabled = () => {
   const {
-    formInfo: { isEgldTransaction, readonly }
+    formInfo: { isEgldTransaction, readonly },
+    dataFieldInfo: { isAdvancedModeEnabled }
   } = useSendFormContext();
 
-  const isDataDisabled =
-    !isEgldTransaction || getIsDisabled(ValuesEnum.data, readonly);
+  if (isAdvancedModeEnabled) {
+    return false;
+  }
 
-  return isDataDisabled;
+  return !isEgldTransaction || getIsDisabled(ValuesEnum.data, readonly);
 };
