@@ -8,12 +8,17 @@ const emptyData = {
   quantity: ''
 };
 
-export const getNft = async (props: {
+interface GetNftParamsType {
   data?: string;
   address: string;
   identifier?: string;
-}): Promise<ComputedNftType | null> => {
-  const { data, address, identifier } = props;
+}
+
+export const getNft = async ({
+  data,
+  address,
+  identifier
+}: GetNftParamsType): Promise<ComputedNftType | null> => {
   if (data) {
     return await searchNft({ data, address });
   }

@@ -26,15 +26,11 @@ export const extractNftFromData = ({
   nft,
   address
 }: SearchNFTPropsType): ExistingNftType | undefined => {
-  const isNFTData =
-    data &&
-    (data.startsWith(TransferDataEnum.ESDTNFTTransfer) ||
-      data.startsWith(TransferDataEnum.ESDTNFTBurn)) &&
-    data.includes('@');
+  const isBurnNFT = data?.startsWith(TransferDataEnum.ESDTNFTBurn);
+  const isNFTTransfer = data?.startsWith(TransferDataEnum.ESDTNFTTransfer);
+  const isNFTData = (isBurnNFT || isNFTTransfer) && data.includes('@');
 
   if (isNFTData) {
-    const isBurnNFT = data.startsWith(TransferDataEnum.ESDTNFTBurn);
-
     try {
       const [, collection, nonce, quantity, receiver] = nft
         ? [
@@ -48,13 +44,18 @@ export const extractNftFromData = ({
 
       // Burn NFT may not have receiver
       const usedReceiver = isBurnNFT && !receiver ? address : receiver;
+      const hasAllDataFields = [
+        collection,
+        nonce,
+        quantity,
+        usedReceiver
+      ].every((el) => el);
 
-      if (
-        [collection, nonce, quantity, usedReceiver].every((el) =>
-          Boolean(el)
-        ) &&
-        addressIsValid(new Address(usedReceiver).bech32())
-      ) {
+      const isValidReceiver = addressIsValid(
+        new Address(usedReceiver).bech32()
+      );
+
+      if (hasAllDataFields && isValidReceiver) {
         return {
           collection,
           nonce,
