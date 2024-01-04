@@ -7,7 +7,7 @@ import {
 import { ZERO } from 'constants/index';
 import { formatAmount } from 'helpers';
 
-export function getInitialGasPrice(gasPrice?: string) {
+export const getInitialGasPrice = (gasPrice?: string) => {
   const isGasPriceValid = gasPrice != null && gasPrice !== ZERO;
   const gasPriceValue = isGasPriceValid
     ? gasPrice
@@ -19,6 +19,4 @@ export function getInitialGasPrice(gasPrice?: string) {
       });
 
   return gasPriceValue;
-}
-
-export default getInitialGasPrice;
+};

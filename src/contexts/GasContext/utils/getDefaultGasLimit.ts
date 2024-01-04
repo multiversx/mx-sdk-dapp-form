@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 import { TOKEN_GAS_LIMIT } from 'constants/index';
 import { calculateNftGasLimit, getGuardedAccountGasLimit } from 'operations';
 
-export function getDefaultGasLimit({
+export const getDefaultGasLimit = ({
   isNftTransaction,
   isEsdtTransaction,
   data,
@@ -13,17 +13,18 @@ export function getDefaultGasLimit({
   isEsdtTransaction: boolean;
   data?: string;
   isGuarded?: boolean;
-}): string {
+}): string => {
   const guardedAccountGasLimit = getGuardedAccountGasLimit(isGuarded);
 
   let gasLimit = GAS_LIMIT.toString();
+
   if (isNftTransaction) {
     gasLimit = calculateNftGasLimit(data);
   }
+
   if (isEsdtTransaction) {
     gasLimit = TOKEN_GAS_LIMIT;
   }
-  return new BigNumber(gasLimit).plus(guardedAccountGasLimit).toString(10);
-}
 
-export default getDefaultGasLimit;
+  return new BigNumber(gasLimit).plus(guardedAccountGasLimit).toString(10);
+};

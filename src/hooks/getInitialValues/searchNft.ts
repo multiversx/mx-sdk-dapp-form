@@ -5,7 +5,7 @@ import {
   getGlobalNftByIdentifier,
   getNftByAddressAndIdentifier
 } from 'apiCalls';
-import extractNftFromData from './extractNftFromData';
+import { extractNftFromData } from './extractNftFromData';
 import { ComputedNftType } from './types';
 
 interface ExistingNftType {
@@ -15,10 +15,10 @@ interface ExistingNftType {
   receiver: string;
 }
 
-async function searchdNftById(
+const searchNftById = async (
   props: { identifier: string; address: string },
   apiConfig?: ApiConfigType
-) {
+) => {
   const { address, identifier } = props;
   try {
     return await getNftByAddressAndIdentifier(
@@ -31,23 +31,26 @@ async function searchdNftById(
   } catch {
     return await getGlobalNftByIdentifier(identifier, apiConfig);
   }
+};
+
+export interface SearchNFTPropsType {
+  data: string;
+  address: string;
+  nft?: ExistingNftType;
 }
 
-export async function searchNft(
-  props: {
-    data: string;
-    address: string;
-    nft?: ExistingNftType;
-  },
+export const searchNft = async (
+  props: SearchNFTPropsType,
   apiConfig?: ApiConfigType
-): Promise<ComputedNftType | null> {
-  const { data, address, nft } = props;
-  const extractedNft = extractNftFromData(data, nft);
+): Promise<ComputedNftType | null> => {
+  const { address, nft } = props;
+  const extractedNft = extractNftFromData(props);
+
   try {
     if (extractedNft) {
       const { collection, nonce, quantity, receiver } = extractedNft;
       const identifier = `${collection}-${nonce}`;
-      const apiNft = await searchdNftById({ identifier, address }, apiConfig);
+      const apiNft = await searchNftById({ identifier, address }, apiConfig);
       if (apiNft) {
         return {
           receiver: new Address(receiver).bech32(),
@@ -60,6 +63,4 @@ export async function searchNft(
     console.log(e);
   }
   return null;
-}
-
-export default searchNft;
+};

@@ -5,7 +5,7 @@ import { calculateNftGasLimit } from 'operations/calculateNftGasLimit';
 import { getGuardedAccountGasLimit } from 'operations/getGuardedAccountGasLimit';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
-import validateGasLimitAmount from 'validation/validateGasLimitAmount';
+import { validateGasLimitAmount } from 'validation/validateGasLimitAmount';
 import { sharedGasLimit } from './sharedGasLimit';
 
 const nftGasLimit = (errorMessages: ValidationErrorMessagesType) => {
@@ -29,12 +29,15 @@ const nftGasLimit = (errorMessages: ValidationErrorMessagesType) => {
         const bNcalculatedGasLimit = new BigNumber(calculatedGasLimit).plus(
           getGuardedAccountGasLimit(isGuarded)
         );
+
         const valid =
           value && bNgasLimit.isGreaterThanOrEqualTo(bNcalculatedGasLimit);
 
         if (!valid) {
           return this.createError({
-            message: errorMessages.tooLowGasLimit(calculatedGasLimit),
+            message: errorMessages.tooLowGasLimit(
+              bNcalculatedGasLimit.toString()
+            ),
             path: 'gasLimit'
           });
         }

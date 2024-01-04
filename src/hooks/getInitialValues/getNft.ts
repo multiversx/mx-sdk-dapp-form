@@ -1,6 +1,6 @@
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { searchNftByIdentifier } from './getSearchParamNft';
-import searchNft from './searchNft';
+import { searchNft } from './searchNft';
 import { ComputedNftType } from './types';
 
 const emptyData = {
@@ -8,12 +8,17 @@ const emptyData = {
   quantity: ''
 };
 
-export async function getNft(props: {
+interface GetNftParamsType {
   data?: string;
   address: string;
   identifier?: string;
-}): Promise<ComputedNftType | null> {
-  const { data, address, identifier } = props;
+}
+
+export const getNft = async ({
+  data,
+  address,
+  identifier
+}: GetNftParamsType): Promise<ComputedNftType | null> => {
   if (data) {
     return await searchNft({ data, address });
   }
@@ -33,6 +38,4 @@ export async function getNft(props: {
     return null;
   }
   return null;
-}
-
-export default getNft;
+};
