@@ -4,7 +4,7 @@ import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
 import { getGuardedAccountGasLimit } from 'operations';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
-import validateGasLimitAmount from 'validation/validateGasLimitAmount';
+import { validateGasLimitAmount } from 'validation/validateGasLimitAmount';
 import { sharedGasLimit } from './sharedGasLimit';
 
 const esdtGasLimit = (errorMessages: ValidationErrorMessagesType) => {

@@ -4,7 +4,7 @@ import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFlo
 import { string } from 'yup';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
-import validateGasLimitAmount from 'validation/validateGasLimitAmount';
+import { validateGasLimitAmount } from 'validation/validateGasLimitAmount';
 
 const egldAmount = (errorMessages: ValidationErrorMessagesType) => {
   const required = string().required(errorMessages.required);

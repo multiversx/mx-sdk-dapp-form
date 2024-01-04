@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.9.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/278)] - 2024-01-04
+- [Fixed `ESDTNFTBurn` transaction info is not extracted from data field](https://github.com/multiversx/mx-sdk-dapp-form/pull/277)
+
 ## [[0.9.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/276)] - 2023-12-28
 - [Updated `sdk-dapp` to latest version](https://github.com/multiversx/mx-sdk-dapp-form/pull/275)
 

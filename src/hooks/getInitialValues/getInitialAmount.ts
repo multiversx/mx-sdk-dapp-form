@@ -5,10 +5,10 @@ import { ComputedNftType } from './types';
 
 const nftDefaultAmount = '1';
 
-export function getInitialAmount(props: {
+export const getInitialAmount = (props: {
   computedNft: ComputedNftType | null;
   amount: string;
-}) {
+}) => {
   const { computedNft, amount } = props;
   if (computedNft?.nft?.type === NftEnumType.NonFungibleESDT) {
     return nftDefaultAmount;
@@ -28,6 +28,4 @@ export function getInitialAmount(props: {
     });
   }
   return amountValue;
-}
-
-export default getInitialAmount;
+};

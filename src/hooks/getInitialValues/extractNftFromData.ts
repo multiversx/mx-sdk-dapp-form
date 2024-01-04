@@ -1,6 +1,8 @@
 import { Address } from '@multiversx/sdk-core';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import { decodePart } from '@multiversx/sdk-dapp/utils/decoders/decodePart';
+import { TransferDataEnum } from '../../types';
+import { SearchNFTPropsType } from './searchNft';
 
 interface ExistingNftType {
   collection: string;
@@ -19,35 +21,52 @@ const decodeData = (data: string) => {
   return decodedParts;
 };
 
-export default function extractNftFromData(
-  data: string,
-  nft?: ExistingNftType
-): ExistingNftType | undefined {
-  if (data && data.startsWith('ESDTNFTTransfer') && data.includes('@')) {
+export const extractNftFromData = ({
+  data,
+  nft,
+  address
+}: SearchNFTPropsType): ExistingNftType | undefined => {
+  const isNFTData =
+    data &&
+    (data.startsWith(TransferDataEnum.ESDTNFTTransfer) ||
+      data.startsWith(TransferDataEnum.ESDTNFTBurn)) &&
+    data.includes('@');
+
+  if (isNFTData) {
+    const isBurnNFT = data.startsWith(TransferDataEnum.ESDTNFTBurn);
+
     try {
-      const [, /*ESDTNFTTransfer*/ collection, nonce, quantity, receiver] = nft
+      const [, collection, nonce, quantity, receiver] = nft
         ? [
-            'ESDTNFTTransfer',
+            TransferDataEnum.ESDTNFTTransfer,
             nft.collection,
             nft.nonce,
             nft.quantity,
             nft.receiver
           ]
         : decodeData(data);
+
+      // Burn NFT may not have receiver
+      const usedReceiver = isBurnNFT && !receiver ? address : receiver;
+
       if (
-        [collection, nonce, quantity, receiver].every((el) => Boolean(el)) &&
-        addressIsValid(new Address(receiver).bech32())
+        [collection, nonce, quantity, usedReceiver].every((el) =>
+          Boolean(el)
+        ) &&
+        addressIsValid(new Address(usedReceiver).bech32())
       ) {
         return {
           collection,
           nonce,
           quantity,
-          receiver
+          receiver: usedReceiver
         };
       }
     } catch (err) {
+      console.error('Could not extract NFT from data:', err);
       return undefined;
     }
   }
+
   return undefined;
-}
+};

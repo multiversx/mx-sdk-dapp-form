@@ -2,11 +2,11 @@ import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIden
 import { setApiConfig } from 'apiCalls';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { PartialNftType, PartialTokenType } from 'types';
-import getInitialAmount from './getInitialAmount';
+import { getInitialAmount } from './getInitialAmount';
 import { getInitialData } from './getInitialData';
-import getInitialGasLimit from './getInitialGasLimit';
-import getInitialGasPrice from './getInitialGasPrice';
-import getNft from './getNft';
+import { getInitialGasLimit } from './getInitialGasLimit';
+import { getInitialGasPrice } from './getInitialGasPrice';
+import { getNft } from './getNft';
 import { getToken } from './getToken';
 import { GetInitialValuesType } from './types';
 
