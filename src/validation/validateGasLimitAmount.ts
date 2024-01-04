@@ -15,14 +15,14 @@ interface ValidateGasLimitAmountType {
   chainId: string;
 }
 
-export function validateGasLimitAmount({
+export const validateGasLimitAmount = ({
   amount,
   balance,
   gasPrice,
   gasLimit,
   data,
   chainId
-}: ValidateGasLimitAmountType) {
+}: ValidateGasLimitAmountType) => {
   const parsedAmount = parseAmount(amount.toString());
   const bnAmount = new BigNumber(parsedAmount);
   const bnBalance = new BigNumber(balance);
@@ -40,5 +40,4 @@ export function validateGasLimitAmount({
   const valid = bnBalance.isGreaterThanOrEqualTo(bnAmount.plus(fee));
 
   return valid;
-}
-export default validateGasLimitAmount;
+};

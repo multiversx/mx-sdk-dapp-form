@@ -1,10 +1,10 @@
 import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
-import calculateGasLimit from 'operations/calculateGasLimit';
+import { calculateGasLimit } from 'operations/calculateGasLimit';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
-import validateGasLimitAmount from 'validation/validateGasLimitAmount';
+import { validateGasLimitAmount } from 'validation/validateGasLimitAmount';
 import { sharedGasLimit } from './sharedGasLimit';
 
 const egldGasLimit = (errorMessages: ValidationErrorMessagesType) => {

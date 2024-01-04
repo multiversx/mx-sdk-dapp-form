@@ -10,7 +10,10 @@ interface CalculateGasLimitType {
   isGuarded?: boolean;
 }
 
-export function calculateGasLimit({ data, isGuarded }: CalculateGasLimitType) {
+export const calculateGasLimit = ({
+  data,
+  isGuarded
+}: CalculateGasLimitType) => {
   const bNconfigGasLimit = new BigNumber(GAS_LIMIT);
   const bNgasPerDataByte = new BigNumber(GAS_PER_DATA_BYTE);
   const bNgasValue = data
@@ -21,6 +24,4 @@ export function calculateGasLimit({ data, isGuarded }: CalculateGasLimitType) {
     .plus(bNgasValue)
     .plus(guardedAccountGasLimit);
   return bNgasLimit.toString(10);
-}
-
-export default calculateGasLimit;
+};

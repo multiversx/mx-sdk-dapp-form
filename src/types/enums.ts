@@ -13,6 +13,6 @@ export enum TransactionTypeEnum {
 export enum TransferDataEnum {
   ESDTNFTTransfer = 'ESDTNFTTransfer',
   ESDTNFTCreate = 'ESDTNFTCreate',
-  ESDTTransfer = 'ESDTTransfer',
+  ESDTNFTBurn = 'ESDTNFTBurn',
   MultiESDTNFTTransfer = 'MultiESDTNFTTransfer'
 }

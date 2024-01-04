@@ -2,9 +2,9 @@ import { getDelegationDataForChainId } from 'apiCalls';
 import { computeInitGasLimit, ComputeInitGasLimitType } from 'operations';
 import { GetInitialValuesType } from './types';
 
-export async function getInitialGasLimit(
+export const getInitialGasLimit = async (
   props: GetInitialValuesType & { computedTokenId: string }
-) {
+) => {
   const { configValues, ...rest } = props;
   const delegationContractData = getDelegationDataForChainId(props.chainId);
 
@@ -14,8 +14,6 @@ export async function getInitialGasLimit(
     ...configValues,
     delegationContractData
   };
-  const initGasLimitData = await computeInitGasLimit(computeGasLimitProps);
-  return initGasLimitData;
-}
 
-export default getInitialGasLimit;
+  return computeInitGasLimit(computeGasLimitProps);
+};

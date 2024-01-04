@@ -1,6 +1,8 @@
 import { Address } from '@multiversx/sdk-core';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import { decodePart } from '@multiversx/sdk-dapp/utils/decoders/decodePart';
+import { TransferDataEnum } from '../../types';
+import { SearchNFTPropsType } from './searchNft';
 
 interface ExistingNftType {
   collection: string;
@@ -19,35 +21,53 @@ const decodeData = (data: string) => {
   return decodedParts;
 };
 
-export default function extractNftFromData(
-  data: string,
-  nft?: ExistingNftType
-): ExistingNftType | undefined {
-  if (data && data.startsWith('ESDTNFTTransfer') && data.includes('@')) {
+export const extractNftFromData = ({
+  data,
+  nft,
+  address
+}: SearchNFTPropsType): ExistingNftType | undefined => {
+  const isBurnNFT = data?.startsWith(TransferDataEnum.ESDTNFTBurn);
+  const isNFTTransfer = data?.startsWith(TransferDataEnum.ESDTNFTTransfer);
+  const isNFTData = (isBurnNFT || isNFTTransfer) && data.includes('@');
+
+  if (isNFTData) {
     try {
-      const [, /*ESDTNFTTransfer*/ collection, nonce, quantity, receiver] = nft
+      const [, collection, nonce, quantity, receiver] = nft
         ? [
-            'ESDTNFTTransfer',
+            TransferDataEnum.ESDTNFTTransfer,
             nft.collection,
             nft.nonce,
             nft.quantity,
             nft.receiver
           ]
         : decodeData(data);
-      if (
-        [collection, nonce, quantity, receiver].every((el) => Boolean(el)) &&
-        addressIsValid(new Address(receiver).bech32())
-      ) {
+
+      // Burn NFT may not have receiver
+      const usedReceiver = isBurnNFT && !receiver ? address : receiver;
+      const hasAllDataFields = [
+        collection,
+        nonce,
+        quantity,
+        usedReceiver
+      ].every((el) => el);
+
+      const isValidReceiver = addressIsValid(
+        new Address(usedReceiver).bech32()
+      );
+
+      if (hasAllDataFields && isValidReceiver) {
         return {
           collection,
           nonce,
           quantity,
-          receiver
+          receiver: usedReceiver
         };
       }
     } catch (err) {
+      console.error('Could not extract NFT from data:', err);
       return undefined;
     }
   }
+
   return undefined;
-}
+};

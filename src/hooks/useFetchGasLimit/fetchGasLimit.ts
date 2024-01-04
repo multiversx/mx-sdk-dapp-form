@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js';
 import { getTransactionCost } from 'apiCalls/transactions';
 import { GAS_LIMIT_DELTA, ZERO } from 'constants/index';
 import { parseAmount } from 'helpers';
-import calculateGasLimit from 'operations/calculateGasLimit';
+import { calculateGasLimit } from 'operations/calculateGasLimit';
 import { ValuesType } from 'types';
 import { prepareTransaction } from './prepareTransaction';
 
