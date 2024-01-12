@@ -7,21 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Updated packages](https://github.com/multiversx/mx-sdk-dapp-form/pull/279)
+
 ## [[0.9.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/278)] - 2024-01-04
+
 - [Fixed `ESDTNFTBurn` transaction info is not extracted from data field](https://github.com/multiversx/mx-sdk-dapp-form/pull/277)
 
 ## [[0.9.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/276)] - 2023-12-28
+
 - [Updated `sdk-dapp` to latest version](https://github.com/multiversx/mx-sdk-dapp-form/pull/275)
 
 ## [[0.9.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/274)] - 2023-12-28
+
 - [Fixed advanced mode modifies form fields](https://github.com/multiversx/mx-sdk-dapp-form/pull/273)
 
 ## [[0.9.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/272)] - 2023-12-27
+
 - [Fixed receiver is not trimmed on select](https://github.com/multiversx/mx-sdk-dapp-form/pull/271)
 
 ## [[0.9.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/270)] - 2023-12-21
-- [Upgrade axios to 1.6.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/270)
 
+- [Upgrade axios to 1.6.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/270)
 
 ## [[0.8.27](https://github.com/multiversx/mx-sdk-dapp-form/pull/268)] - 2023-12-15
 
