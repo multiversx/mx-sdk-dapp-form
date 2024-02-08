@@ -4,18 +4,20 @@ import { TransactionsDataTokensType } from '@multiversx/sdk-dapp/types/transacti
 import { isContract } from '@multiversx/sdk-dapp/utils/smartContracts';
 import getTxWithReceiver from './getTxWithReceiver';
 
-interface ValidateReceiversType {
+export interface ValidateReceiversType {
   transactions: IPlainTransactionObject[];
   txsDataTokens?: TransactionsDataTokensType;
   isMainnet: boolean;
   address: string;
+  whitelistedReceivers?: string[];
 }
 
 export function validateReceivers({
   transactions: txs,
   txsDataTokens,
   isMainnet,
-  address
+  address,
+  whitelistedReceivers = []
 }: ValidateReceiversType): boolean {
   if (isMainnet) {
     try {
@@ -24,7 +26,10 @@ export function validateReceivers({
       const allTxReceiversWhitelisted =
         transactions.length === 0 ||
         transactions.every(
-          ({ receiver }) => receiver === address || isContract(receiver)
+          ({ receiver }) =>
+            receiver === address ||
+            isContract(receiver) ||
+            whitelistedReceivers.includes(receiver)
         );
 
       const dataFieldReceivers = txsDataTokens
@@ -35,10 +40,16 @@ export function validateReceivers({
 
       const receiversWhitelisted =
         dataFieldReceivers.length > 0
-          ? dataFieldReceivers.every(
-              (receiver) =>
-                receiver == null || receiver === address || isContract(receiver)
-            )
+          ? dataFieldReceivers.every((receiver) => {
+              const isWhitelisted =
+                Boolean(receiver) && whitelistedReceivers.includes(receiver);
+              return (
+                receiver == null ||
+                receiver === address ||
+                isContract(receiver) ||
+                isWhitelisted
+              );
+            })
           : true;
 
       const whitelisted = allTxReceiversWhitelisted && receiversWhitelisted;

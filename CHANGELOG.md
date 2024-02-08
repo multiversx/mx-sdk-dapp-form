@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+## [[0.10.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/285)] - 2024-02-08
+- [Added option for whitelistedReceivers ](https://github.com/multiversx/mx-sdk-dapp-form/pull/284)
 
 ## [[0.10.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/282)] - 2024-01-12
 
