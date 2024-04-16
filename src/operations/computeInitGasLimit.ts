@@ -50,6 +50,14 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
   const delegationContractMinGasLimit =
     delegationContractData?.delegationContractData.minGasLimit ?? ZERO;
 
+  const isUserDefinedGasLimit =
+    !new BigNumber(gasLimit).isNaN() &&
+    new BigNumber(gasLimit).isGreaterThan(ZERO);
+
+  if (isUserDefinedGasLimit && receiver !== delegationContract) {
+    return { initGasLimit: gasLimit };
+  }
+
   if (isContract(receiver) && !isInternal) {
     const { gasLimit: resultedGasLimit, gasLimitCostError } =
       await fetchGasLimit({
@@ -78,10 +86,6 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
       initGasLimit,
       initGasLimitError: gasLimitCostError
     };
-  }
-
-  if (gasLimit !== ZERO) {
-    return { initGasLimit: gasLimit };
   }
 
   if (data.length > 0) {
