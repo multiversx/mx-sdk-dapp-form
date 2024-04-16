@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.10.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/287)] - 2024-04-16
+
 - [Fixed wrongly overwritten user defined gas](https://github.com/multiversx/mx-sdk-dapp-form/pull/286)
 
 ## [[0.10.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/285)] - 2024-02-08
