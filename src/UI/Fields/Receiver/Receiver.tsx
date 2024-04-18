@@ -84,7 +84,8 @@ export const Receiver = (props: WithClassnameType) => {
     onBlurReceiver(new Event('blur'));
 
     const foundValueOnBlur = knownAddresses?.find(
-      (account) => account.username === receiverInputValue
+      (account) =>
+        account.username === receiverInputValue && account.address === receiver
     );
 
     if (foundValueOnBlur) {
