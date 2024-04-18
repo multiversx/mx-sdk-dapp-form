@@ -98,10 +98,19 @@ export const Receiver = (props: WithClassnameType) => {
     }
   };
 
-  const options: GenericOptionType[] = useMemo(
+  const oneOption = knownAddresses?.find(
+    (account) =>
+      account.username === receiverInputValue && account.address === receiver
+  );
+
+  const allOptions = useMemo(
     () => formatOptions(knownAddresses),
     [knownAddresses]
   );
+
+  const options: GenericOptionType[] = oneOption
+    ? formatOptions([oneOption])
+    : allOptions;
 
   const setAllValues = setAllReceiverValues({
     setFieldValue,
