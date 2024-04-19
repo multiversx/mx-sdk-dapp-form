@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.10.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/290)] - 2024-04-19
+- [Fixed delegation contract `gasLimit`](https://github.com/multiversx/mx-sdk-dapp-form/pull/290)
+
 ## [[0.10.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/289)] - 2024-04-18
 - [Fixed multiple addresses with same assets username displayed](https://github.com/multiversx/mx-sdk-dapp-form/pull/288)
 
