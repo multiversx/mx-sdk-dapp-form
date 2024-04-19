@@ -54,7 +54,7 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
     !new BigNumber(gasLimit).isNaN() &&
     new BigNumber(gasLimit).isGreaterThan(ZERO);
 
-  if (isUserDefinedGasLimit && receiver !== delegationContract) {
+  if (isUserDefinedGasLimit) {
     return { initGasLimit: gasLimit };
   }
 
