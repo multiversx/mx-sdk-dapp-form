@@ -25,46 +25,64 @@ export function useFetchGasLimit(
 
   const {
     values,
-    touched,
     errors: { gasLimit: gasLimitError, amount: amountError },
     setFieldValue
   } = formikContext;
 
-  const { data, amount } = values;
+  const { data, amount, gasLimit } = values;
   const debouncedData = useDebounce(data, ms500);
   const debouncedAmount = useDebounce(amount, ms500);
+  const debouncedGasLimit = useDebounce(gasLimit, ms500);
   const [gasCostLoading, setGasCostLoading] = useState(false);
   const [gasCostError, setGasCostError] = useState(initGasLimitError);
 
-  useEffect(() => {
+  const getGasCost = async () => {
     const hasErrors = gasLimitError || amountError;
-    if (
+    const hasData = debouncedData.length > 0;
+    const hasAmount = debouncedAmount.length > 0;
+    const isDevelopment =
+      chainId !== MAINNET_CHAIN_ID || process.env.NODE_ENV === 'test';
+
+    const shouldFetchGasLimit =
       !prefilledForm &&
       isContract(values.receiver) &&
-      (chainId !== MAINNET_CHAIN_ID || process.env.NODE_ENV === 'test') && // TODO: remove when ready
-      !touched.gasLimit &&
+      isDevelopment && // TODO: remove when ready
       !hasErrors &&
-      debouncedData.length > 0
-    ) {
+      hasData &&
+      hasAmount;
+
+    if (shouldFetchGasLimit) {
       setGasCostLoading(true);
-      fetchGasLimit({
-        balance,
-        address,
-        nonce,
-        values,
-        chainId
-      })
-        .then(({ gasLimit: resultedGasLimit, gasLimitCostError: error }) => {
-          setGasCostLoading(false);
-          setGasCostError(error);
-          setFieldValue(ValuesEnum.gasLimit, resultedGasLimit, true);
-        })
-        .catch((err) => {
-          setGasCostLoading(false);
-          console.error(err);
-        });
+
+      try {
+        const { gasLimit: resultedGasLimit, gasLimitCostError: error } =
+          await fetchGasLimit({
+            balance,
+            address,
+            nonce,
+            values,
+            chainId
+          });
+
+        setGasCostLoading(false);
+        setGasCostError(error);
+        setFieldValue(ValuesEnum.gasLimit, resultedGasLimit, true);
+      } catch (err) {
+        setGasCostLoading(false);
+        console.error(err);
+      }
     }
-  }, [debouncedData, debouncedAmount, values.receiver]);
+  };
+
+  useEffect(() => {
+    getGasCost();
+  }, [
+    debouncedData,
+    debouncedAmount,
+    debouncedGasLimit,
+    values.receiver,
+    prefilledForm
+  ]);
 
   return { gasCostLoading, gasCostError };
 }
