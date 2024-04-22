@@ -1,4 +1,3 @@
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { useEffect, useState } from 'react';
 import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/constants/index';
@@ -41,9 +40,7 @@ export function useFetchGasLimit(
   const getGasCost = async () => {
     const hasErrors = gasLimitError || amountError;
     const hasData = debouncedData.length > 0;
-    const hasAmount =
-      stringIsFloat(debouncedAmount) &&
-      new BigNumber(debouncedAmount).isGreaterThan(0);
+    const hasAmount = new BigNumber(debouncedAmount).isGreaterThanOrEqualTo(0);
     const isDevelopment =
       chainId !== MAINNET_CHAIN_ID || process.env.NODE_ENV === 'test';
 
