@@ -1,5 +1,3 @@
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
-import BigNumber from 'bignumber.js';
 import { useEffect, useState } from 'react';
 import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/constants/index';
 import { isContract } from '@multiversx/sdk-dapp/utils/smartContracts';
@@ -27,66 +25,46 @@ export function useFetchGasLimit(
 
   const {
     values,
+    touched,
     errors: { gasLimit: gasLimitError, amount: amountError },
     setFieldValue
   } = formikContext;
 
-  const { data, amount, gasLimit } = values;
+  const { data, amount } = values;
   const debouncedData = useDebounce(data, ms500);
   const debouncedAmount = useDebounce(amount, ms500);
-  const debouncedGasLimit = useDebounce(gasLimit, ms500);
   const [gasCostLoading, setGasCostLoading] = useState(false);
   const [gasCostError, setGasCostError] = useState(initGasLimitError);
 
-  const getGasCost = async () => {
+  useEffect(() => {
     const hasErrors = gasLimitError || amountError;
-    const hasData = debouncedData.length > 0;
-    const hasAmount =
-      stringIsFloat(debouncedAmount) &&
-      new BigNumber(debouncedAmount).isGreaterThan(0);
-    const isDevelopment =
-      chainId !== MAINNET_CHAIN_ID || process.env.NODE_ENV === 'test';
-
-    const shouldFetchGasLimit =
+    if (
       !prefilledForm &&
       isContract(values.receiver) &&
-      isDevelopment && // TODO: remove when ready
+      (chainId !== MAINNET_CHAIN_ID || process.env.NODE_ENV === 'test') && // TODO: remove when ready
+      !touched.gasLimit &&
       !hasErrors &&
-      hasData &&
-      hasAmount;
-
-    if (shouldFetchGasLimit) {
+      debouncedData.length > 0
+    ) {
       setGasCostLoading(true);
-
-      try {
-        const { gasLimit: resultedGasLimit, gasLimitCostError: error } =
-          await fetchGasLimit({
-            balance,
-            address,
-            nonce,
-            values,
-            chainId
-          });
-
-        setGasCostLoading(false);
-        setGasCostError(error);
-        setFieldValue(ValuesEnum.gasLimit, resultedGasLimit, true);
-      } catch (err) {
-        setGasCostLoading(false);
-        console.error(err);
-      }
+      fetchGasLimit({
+        balance,
+        address,
+        nonce,
+        values,
+        chainId
+      })
+        .then(({ gasLimit: resultedGasLimit, gasLimitCostError: error }) => {
+          setGasCostLoading(false);
+          setGasCostError(error);
+          setFieldValue(ValuesEnum.gasLimit, resultedGasLimit, true);
+        })
+        .catch((err) => {
+          setGasCostLoading(false);
+          console.error(err);
+        });
     }
-  };
-
-  useEffect(() => {
-    getGasCost();
-  }, [
-    debouncedData,
-    debouncedAmount,
-    debouncedGasLimit,
-    values.receiver,
-    prefilledForm
-  ]);
+  }, [debouncedData, debouncedAmount, values.receiver]);
 
   return { gasCostLoading, gasCostError };
 }
