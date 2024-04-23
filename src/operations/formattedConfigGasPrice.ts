@@ -7,7 +7,7 @@ import { formatAmount } from 'helpers';
 
 export const formattedConfigGasPrice = formatAmount({
   input: String(GAS_PRICE ?? 1_000_000_000),
-  decimals: DECIMALS,
+  decimals: DECIMALS ?? 18,
   showLastNonZeroDecimal: true,
-  digits: DIGITS
+  digits: DIGITS ?? 4
 });
