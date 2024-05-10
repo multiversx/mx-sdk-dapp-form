@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [[0.10.5](https://github.com/multiversx/mx-sdk-dapp-form/pull/293)] - 2024-04-22
-- [Fixed gasLimit is not calculated after form was submitted and invalid](https://github.com/multiversx/mx-sdk-dapp-form/pull/292)
+## [[0.10.6](https://github.com/multiversx/mx-sdk-dapp-form/pull/295)] - 2024-04-23
+- [Fixed `sdk-dapp npm link` `formatAmount` decimals and digits error](https://github.com/multiversx/mx-sdk-dapp-form/pull/295)
+
+## [[0.10.5](https://github.com/multiversx/mx-sdk-dapp-form/pull/294)] - 2024-04-22
+- [Reverted cost API changes & fixed `sdk-dapp npm link` `formatAmount` gasLimit error](https://github.com/multiversx/mx-sdk-dapp-form/pull/293)
+- [Fixed cost API not called when user changes gasLimit](https://github.com/multiversx/mx-sdk-dapp-form/pull/291)
 
 ## [[0.10.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/290)] - 2024-04-19
 - [Fixed delegation contract `gasLimit`](https://github.com/multiversx/mx-sdk-dapp-form/pull/290)
