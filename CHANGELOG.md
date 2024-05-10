@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [[0.10.5](https://github.com/multiversx/mx-sdk-dapp-form/pull/297)] - 2024-05-10
+## [[0.10.7](https://github.com/multiversx/mx-sdk-dapp-form/pull/297)] - 2024-05-10
 - [Fixed gasLimit is not calculated after form was submitted and invalid](https://github.com/multiversx/mx-sdk-dapp-form/pull/296)
 
 ## [[0.10.6](https://github.com/multiversx/mx-sdk-dapp-form/pull/295)] - 2024-04-23
