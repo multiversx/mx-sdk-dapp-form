@@ -21,7 +21,7 @@ import { ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
-import { parseAmount } from 'helpers';
+import { getGasLimitChanged, parseAmount } from 'helpers';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
   calculateNftGasLimit,
@@ -182,8 +182,11 @@ export function GasContextProvider({
       return ZERO;
     }
 
-    const isGasLimitChanged =
-      initialValues.gasLimit !== gasLimit && touched.gasLimit;
+    const isGasLimitChanged = getGasLimitChanged({
+      initialValues,
+      gasLimit,
+      touched
+    });
 
     const isInitialGasLimit =
       !prefilledForm && !isGasLimitChanged && isEgldTransaction;
@@ -214,8 +217,11 @@ export function GasContextProvider({
   ]);
 
   useEffect(() => {
-    const isGasLimitChanged =
-      initialValues.gasLimit !== gasLimit && touched.gasLimit;
+    const isGasLimitChanged = getGasLimitChanged({
+      initialValues,
+      gasLimit,
+      touched
+    });
 
     if (!prefilledForm && isNftTransaction && !isGasLimitChanged) {
       handleUpdateGasLimit(

@@ -8,6 +8,7 @@ import { useAccountContext } from 'contexts/AccountContext';
 import { useFormContext } from 'contexts/FormContext/FormContext';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
 import { ExtendedValuesType, ValuesEnum } from 'types/form';
+import { getGasLimitChanged } from 'helpers';
 import { fetchGasLimit } from './fetchGasLimit';
 import useDebounce from './useDebounce';
 
@@ -43,8 +44,11 @@ export function useFetchGasLimit(
     const hasErrors = gasLimitError || amountError;
     const hasData = debouncedData.length > 0;
     const hasAmount = new BigNumber(debouncedAmount).isGreaterThanOrEqualTo(0);
-    const isGasLimitChanged =
-      initialValues.gasLimit !== gasLimit && touched.gasLimit;
+    const isGasLimitChanged = getGasLimitChanged({
+      initialValues,
+      gasLimit,
+      touched
+    });
     const isDevelopment =
       chainId !== MAINNET_CHAIN_ID || process.env.NODE_ENV === 'test';
 

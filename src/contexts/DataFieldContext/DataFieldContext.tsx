@@ -11,6 +11,7 @@ import { useFormikContext } from 'formik';
 import { useAccountContext } from 'contexts/AccountContext';
 import { calculateGasLimit, getDataField } from 'operations';
 import { ExtendedValuesType, TransactionTypeEnum, ValuesEnum } from 'types';
+import { getGasLimitChanged } from 'helpers';
 import { useFormContext } from '../FormContext';
 import { useGasContext } from '../GasContext';
 import { useTokensContext } from '../TokensContext';
@@ -62,8 +63,11 @@ export function DataContextProvider({
     const value =
       typeof newValue === 'string' ? newValue : newValue?.target?.value;
 
-    const isGasLimitChanged =
-      initialValues.gasLimit !== gasLimit && touched.gasLimit;
+    const isGasLimitChanged = getGasLimitChanged({
+      initialValues,
+      gasLimit,
+      touched
+    });
 
     setFieldValue(ValuesEnum.data, value, shouldValidate);
 
