@@ -1,14 +1,14 @@
-import BigNumber from 'bignumber.js';
 import { useEffect, useState } from 'react';
 import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/constants/index';
 import { isContract } from '@multiversx/sdk-dapp/utils/smartContracts';
+import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { useAccountContext } from 'contexts/AccountContext';
 import { useFormContext } from 'contexts/FormContext/FormContext';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
-import { ExtendedValuesType, ValuesEnum } from 'types/form';
 import { getGasLimitChanged } from 'helpers';
+import { ExtendedValuesType, ValuesEnum } from 'types/form';
 import { fetchGasLimit } from './fetchGasLimit';
 import useDebounce from './useDebounce';
 

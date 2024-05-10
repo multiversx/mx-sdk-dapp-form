@@ -9,9 +9,9 @@ import React, {
 import { useFormikContext } from 'formik';
 
 import { useAccountContext } from 'contexts/AccountContext';
+import { getGasLimitChanged } from 'helpers';
 import { calculateGasLimit, getDataField } from 'operations';
 import { ExtendedValuesType, TransactionTypeEnum, ValuesEnum } from 'types';
-import { getGasLimitChanged } from 'helpers';
 import { useFormContext } from '../FormContext';
 import { useGasContext } from '../GasContext';
 import { useTokensContext } from '../TokensContext';
