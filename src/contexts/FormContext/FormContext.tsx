@@ -111,6 +111,10 @@ export function FormContextProvider({
       setErrors(newErrors);
       // open FeeAccordion
       setRenderKey(Date.now());
+    } else {
+      // Prevent marking gasLimit as touched to not confuse when the user modifies it
+      // Need to know when to call cost API and generate gasLimit
+      setFieldTouched(ValuesEnum.gasLimit, false);
     }
   }, [errors, validateForm]);
 
