@@ -83,10 +83,20 @@ export function GasContextProvider({
     touched,
     errors: { gasPrice: gasPriceError, gasLimit: gasLimitError },
     setFieldValue,
-    setFieldTouched
+    setFieldTouched,
+    initialValues
   } = formikContext;
 
-  const { gasPrice, gasLimit, data, tokenId, txType, isGuarded } = values;
+  const {
+    gasPrice,
+    gasLimit,
+    data,
+    tokenId,
+    txType,
+    isGuarded,
+    receiver,
+    amount
+  } = values;
 
   const guardedAccountGasLimit = getGuardedAccountGasLimit(isGuarded);
 
@@ -167,12 +177,16 @@ export function GasContextProvider({
   const feeLimit = useMemo(() => {
     const isInvalidGasLimit = !stringIsInteger(gasLimit);
     const isInvalidGasPrice = !stringIsFloat(gasPrice);
+
     if (isInvalidGasLimit || isInvalidGasPrice) {
       return ZERO;
     }
 
+    const isGasLimitChanged =
+      initialValues.gasLimit !== gasLimit && touched.gasLimit;
+
     const isInitialGasLimit =
-      !prefilledForm && !touched.gasLimit && isEgldTransaction;
+      !prefilledForm && !isGasLimitChanged && isEgldTransaction;
 
     const dataField = isInitialGasLimit ? data.trim() : '';
 
@@ -184,6 +198,7 @@ export function GasContextProvider({
       gasPerDataByte: String(GAS_PER_DATA_BYTE),
       gasPriceModifier: String(GAS_PRICE_MODIFIER)
     });
+
     return stringIsInteger(newFeeLimit) ? newFeeLimit : ZERO;
   }, [
     hasErrors,
@@ -192,11 +207,17 @@ export function GasContextProvider({
     chainId,
     prefilledForm,
     isEgldTransaction,
-    touched.gasLimit
+    touched.gasLimit,
+    data,
+    receiver,
+    amount
   ]);
 
   useEffect(() => {
-    if (!prefilledForm && isNftTransaction && !touched.gasLimit) {
+    const isGasLimitChanged =
+      initialValues.gasLimit !== gasLimit && touched.gasLimit;
+
+    if (!prefilledForm && isNftTransaction && !isGasLimitChanged) {
       handleUpdateGasLimit(
         new BigNumber(calculateNftGasLimit())
           .plus(guardedAccountGasLimit)

@@ -26,6 +26,8 @@ export function useFetchGasLimit(
 
   const {
     values,
+    initialValues,
+    touched,
     errors: { gasLimit: gasLimitError, amount: amountError },
     setFieldValue
   } = formikContext;
@@ -41,6 +43,8 @@ export function useFetchGasLimit(
     const hasErrors = gasLimitError || amountError;
     const hasData = debouncedData.length > 0;
     const hasAmount = new BigNumber(debouncedAmount).isGreaterThanOrEqualTo(0);
+    const isGasLimitChanged =
+      initialValues.gasLimit !== gasLimit && touched.gasLimit;
     const isDevelopment =
       chainId !== MAINNET_CHAIN_ID || process.env.NODE_ENV === 'test';
 
@@ -48,6 +52,7 @@ export function useFetchGasLimit(
       !prefilledForm &&
       isContract(values.receiver) &&
       isDevelopment && // TODO: remove when ready
+      !isGasLimitChanged &&
       !hasErrors &&
       hasData &&
       hasAmount;

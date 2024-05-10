@@ -37,20 +37,13 @@ export const DataFieldContext = createContext({} as DataContextPropsType);
 export function DataContextProvider({
   children
 }: DataContextProviderPropsType) {
-  const {
-    values,
-    errors,
-    touched,
-    setFieldValue,
-    handleBlur,
-    setFieldTouched
-  } = useFormikContext<ExtendedValuesType>();
+  const { values, errors, setFieldValue, handleBlur, setFieldTouched } =
+    useFormikContext<ExtendedValuesType>();
   const { checkInvalid, prefilledForm, isEgldTransaction } = useFormContext();
   const { nft } = useTokensContext();
   const { receiver, txType, amount, tokenId, isAdvancedModeEnabled } = values;
   const { onChangeGasLimit } = useGasContext();
   const { isGuarded } = useAccountContext();
-
   const isDataInvalid = checkInvalid(ValuesEnum.data);
 
   const handleUpdateData = (
@@ -62,7 +55,7 @@ export function DataContextProvider({
 
     setFieldValue(ValuesEnum.data, value, shouldValidate);
 
-    if (!prefilledForm && !touched.gasLimit && isEgldTransaction) {
+    if (!prefilledForm && isEgldTransaction) {
       const newGasLimit = calculateGasLimit({
         data: value,
         isGuarded
@@ -107,6 +100,7 @@ export function DataContextProvider({
 
   useEffect(() => {
     const resetDataFieldOnEgldSelect = !prefilledForm && isEgldTransaction;
+
     if (resetDataFieldOnEgldSelect) {
       handleUpdateData('');
     }
