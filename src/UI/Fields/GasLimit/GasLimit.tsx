@@ -40,20 +40,20 @@ export const GasLimit = () => {
 
       <div className={styles.wrapper}>
         <input
-          type='text'
-          id={ValuesEnum.gasLimit}
-          name={ValuesEnum.gasLimit}
-          data-testid={ValuesEnum.gasLimit}
-          disabled={isDisabled}
-          required
-          value={gasLimit}
-          onChange={onChangeGasLimit}
-          onBlur={onBlurGasLimit}
           autoComplete='off'
           className={classNames(globals.input, {
             [globals.disabled]: isDisabled,
             [globals.invalid]: isGasLimitInvalid
           })}
+          data-testid={ValuesEnum.gasLimit}
+          disabled={isDisabled}
+          id={ValuesEnum.gasLimit}
+          name={ValuesEnum.gasLimit}
+          onBlur={onBlurGasLimit}
+          onChange={onChangeGasLimit}
+          required
+          type='text'
+          value={gasLimit}
         />
 
         {showUndoButton && (

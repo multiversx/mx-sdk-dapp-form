@@ -21,7 +21,7 @@ import { ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
-import { parseAmount } from 'helpers';
+import { getGasLimitChanged, parseAmount } from 'helpers';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
   calculateNftGasLimit,
@@ -83,10 +83,20 @@ export function GasContextProvider({
     touched,
     errors: { gasPrice: gasPriceError, gasLimit: gasLimitError },
     setFieldValue,
-    setFieldTouched
+    setFieldTouched,
+    initialValues
   } = formikContext;
 
-  const { gasPrice, gasLimit, data, tokenId, txType, isGuarded } = values;
+  const {
+    gasPrice,
+    gasLimit,
+    data,
+    tokenId,
+    txType,
+    isGuarded,
+    receiver,
+    amount
+  } = values;
 
   const guardedAccountGasLimit = getGuardedAccountGasLimit(isGuarded);
 
@@ -167,12 +177,19 @@ export function GasContextProvider({
   const feeLimit = useMemo(() => {
     const isInvalidGasLimit = !stringIsInteger(gasLimit);
     const isInvalidGasPrice = !stringIsFloat(gasPrice);
+
     if (isInvalidGasLimit || isInvalidGasPrice) {
       return ZERO;
     }
 
+    const isGasLimitChanged = getGasLimitChanged({
+      initialValues,
+      gasLimit,
+      touched
+    });
+
     const isInitialGasLimit =
-      !prefilledForm && !touched.gasLimit && isEgldTransaction;
+      !prefilledForm && !isGasLimitChanged && isEgldTransaction;
 
     const dataField = isInitialGasLimit ? data.trim() : '';
 
@@ -184,6 +201,7 @@ export function GasContextProvider({
       gasPerDataByte: String(GAS_PER_DATA_BYTE),
       gasPriceModifier: String(GAS_PRICE_MODIFIER)
     });
+
     return stringIsInteger(newFeeLimit) ? newFeeLimit : ZERO;
   }, [
     hasErrors,
@@ -192,11 +210,20 @@ export function GasContextProvider({
     chainId,
     prefilledForm,
     isEgldTransaction,
-    touched.gasLimit
+    touched.gasLimit,
+    data,
+    receiver,
+    amount
   ]);
 
   useEffect(() => {
-    if (!prefilledForm && isNftTransaction && !touched.gasLimit) {
+    const isGasLimitChanged = getGasLimitChanged({
+      initialValues,
+      gasLimit,
+      touched
+    });
+
+    if (!prefilledForm && isNftTransaction && !isGasLimitChanged) {
       handleUpdateGasLimit(
         new BigNumber(calculateNftGasLimit())
           .plus(guardedAccountGasLimit)
