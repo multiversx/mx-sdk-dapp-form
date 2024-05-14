@@ -1,8 +1,10 @@
 import React, { useContext, ReactNode, createContext } from 'react';
+import { AssetType } from '@multiversx/sdk-dapp/types/account.types';
 import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
 
 export interface AccountContextPropsType {
   address: string;
+  assets?: AssetType;
   nonce: number;
   balance: string;
   username?: string;

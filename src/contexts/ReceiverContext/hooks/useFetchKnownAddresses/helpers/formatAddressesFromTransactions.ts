@@ -9,24 +9,28 @@ export const formatAddressesFromTransactions = (
 ): KnowAddressType[] =>
   transactions.reduce(
     (previous: KnowAddressType[], current: ServerTransactionType) => {
+      const receiverUsername = current.receiverAssets?.name;
+      const senderUsername = current.senderAssets?.name;
+      const receiverHeroTag = trimUsernameDomain(receiverUsername);
+      const senderHeroTag = trimUsernameDomain(senderUsername);
+
+      // Only usernames that end with .elrond are valid usernames; asset names should be skipped
+      // Currently, both usernames and asset names come into the receiverAssets and senderAssets
+      const shouldSkipReceiverUsername =
+        isContract(current.receiver) || receiverUsername === receiverHeroTag;
+      const shouldSkipSenderUsername =
+        isContract(current.sender) || senderUsername === senderHeroTag;
+
       const receiver: KnowAddressType = {
         address: current.receiver,
-        username: isContract(current.receiver)
-          ? undefined
-          : trimUsernameDomain(current.receiverAssets?.name),
-        rawUsername: isContract(current.receiver)
-          ? undefined
-          : current.receiverAssets?.name
+        username: shouldSkipReceiverUsername ? undefined : receiverHeroTag,
+        rawUsername: shouldSkipReceiverUsername ? undefined : receiverUsername
       };
 
       const sender: KnowAddressType = {
         address: current.sender,
-        username: isContract(current.sender)
-          ? undefined
-          : trimUsernameDomain(current.senderAssets?.name),
-        rawUsername: isContract(current.sender)
-          ? undefined
-          : current.senderAssets?.name
+        username: shouldSkipSenderUsername ? undefined : senderHeroTag,
+        rawUsername: shouldSkipSenderUsername ? undefined : senderUsername
       };
 
       return current ? [...previous, receiver, sender] : previous;

@@ -34,16 +34,17 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
 
     try {
       const account = await getAccountByUsername(username, apiConfig);
+      const accountUsername = account?.username;
 
       setUsernameAddresses((existing) => {
         const newAddresses = {
           ...existing,
           [username]: {
             address: account?.address ?? '',
-            username: account?.username
-              ? String(trimUsernameDomain(account.username))
+            username: accountUsername
+              ? String(trimUsernameDomain(accountUsername))
               : '',
-            rawUsername: account?.username ?? ''
+            rawUsername: accountUsername ?? ''
           }
         };
 
@@ -75,9 +76,9 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
     try {
       const config = apiConfig || (await getApiConfig());
       const account = await getMultiversxAccount(address, config.baseURL);
-
       const fetchedAddress = account?.address;
-      const fetchedUsername = trimUsernameDomain(account?.username);
+      const accountUsername = account?.username;
+      const fetchedUsername = trimUsernameDomain(accountUsername);
 
       if (!fetchedAddress || !fetchedUsername) {
         return;
@@ -89,7 +90,7 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
           [fetchedUsername]: {
             address: fetchedAddress,
             username: String(fetchedUsername),
-            rawUsername: account?.username ?? ''
+            rawUsername: accountUsername ?? ''
           }
         };
 

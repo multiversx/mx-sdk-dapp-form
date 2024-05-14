@@ -17,7 +17,7 @@ export function useFetchKnownAddresses() {
   async function getKnownAddresses() {
     try {
       const apiConfig = await getApiConfig();
-      const { data: resolvedTransactions } = await getTransactions({
+      const { data: transactions } = await getTransactions({
         sender: address,
         receiver: address,
         transactionSize: 50,
@@ -26,8 +26,7 @@ export function useFetchKnownAddresses() {
         withUsername: true
       });
 
-      const knownAddresses =
-        formatAddressesFromTransactions(resolvedTransactions);
+      const knownAddresses = formatAddressesFromTransactions(transactions);
 
       const uniqueKnownAddresses = uniqBy(
         knownAddresses,
