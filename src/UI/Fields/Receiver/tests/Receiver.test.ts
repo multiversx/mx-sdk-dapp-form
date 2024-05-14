@@ -18,6 +18,7 @@ describe('Receiver field', () => {
       expect(req?.innerHTML).toBe('Required');
     });
   });
+
   it('should validate address', async () => {
     const { findByTestId } = renderForm();
     const input: any = await findByTestId('receiver');
@@ -25,6 +26,7 @@ describe('Receiver field', () => {
     const data = { target: { value } };
     fireEvent.change(input, data);
     fireEvent.blur(input);
+
     await waitFor(async () => {
       const receiverUsernameError = await findByTestId('receiverUsernameError');
       expect(receiverUsernameError?.innerHTML).toBe('Invalid herotag');

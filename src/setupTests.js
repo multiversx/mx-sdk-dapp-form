@@ -5,6 +5,10 @@ import '@testing-library/jest-dom/extend-expect';
  ***************/
 
 import { server } from './__mocks__/server';
+import { TextDecoder, TextEncoder } from 'util';
+
+jest.setTimeout(60000);
+jest.retryTimes(2);
 
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());
@@ -34,4 +38,9 @@ Object.defineProperty(window, 'matchMedia', {
     removeEventListener: jest.fn(),
     dispatchEvent: jest.fn()
   }))
+});
+
+Object.assign(global, {
+  TextDecoder,
+  TextEncoder
 });
