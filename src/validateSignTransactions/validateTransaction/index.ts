@@ -76,7 +76,9 @@ export const validateTransaction = async ({
       ledger
     };
     getValidationSchema(defaultErrorMessages).validateSync(allValues);
-  } catch ({ path, message }) {
+  } catch (error) {
+    const { path, message } = error as { path: string; message: string };
+
     errors = {
       [String(path)]: String(message)
     };

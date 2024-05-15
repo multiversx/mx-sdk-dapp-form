@@ -1,5 +1,5 @@
 import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types';
-import { getAccountByUsername } from '../../../apiCalls/account/getAccountByUsername';
+import { getAccountByUsername } from 'apiCalls/account/getAccountByUsername';
 import { getAccountReceiverUsername } from '../getAccountReceiverUsername';
 
 const commonValues = {
