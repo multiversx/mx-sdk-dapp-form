@@ -12,17 +12,19 @@ export const getAccountReceiverUsername = async ({
   receiver,
   receiverUsername
 }: GetAccountReceiverUsernameType) => {
-  if (receiverUsername) {
-    let account = await getAccountByUsername(receiverUsername);
+  let account;
+  const username = receiverUsername || rawReceiverUsername;
 
-    if (account == null && receiver != null) {
-      account = await getAccount(receiver);
-    }
-
-    if (account?.username) {
-      return account.username;
-    }
+  if (username) {
+    account = await getAccountByUsername(username);
   }
 
-  return rawReceiverUsername;
+  // Get the account by address and use its username, in case the account is not found by specified username
+  // This may happen if the username is not present or if it is a business/asset name.
+  // The latter is not a valid username and should not be added in tha transaction
+  if (!account && Boolean(receiver)) {
+    account = await getAccount(receiver);
+  }
+
+  return account.username;
 };
