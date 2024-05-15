@@ -97,6 +97,7 @@ export const TransactionSummary = ({
         )}
 
         <ConfirmReceiver
+          amount={amountInfo.amount}
           scamReport={scamError ?? null}
           receiver={receiver}
           receiverUsername={transactionReceiverUsername}
