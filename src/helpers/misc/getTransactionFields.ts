@@ -14,6 +14,7 @@ export const getTransactionFields = async (values: ExtendedValuesType) => {
 
   const realReceiverUsername = await getAccountReceiverUsername({
     rawReceiverUsername,
+    receiver: values.receiver,
     receiverUsername: values.receiverUsername
   });
 
