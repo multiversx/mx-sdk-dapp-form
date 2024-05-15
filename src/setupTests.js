@@ -4,8 +4,8 @@ import '@testing-library/jest-dom/extend-expect';
  * MSW config code
  ***************/
 
-import { server } from './__mocks__/server';
 import { TextDecoder, TextEncoder } from 'util';
+import { server } from './__mocks__/server';
 
 jest.setTimeout(60000);
 jest.retryTimes(2);

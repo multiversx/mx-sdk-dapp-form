@@ -8,10 +8,8 @@ export const getTransactionFields = async (values: ExtendedValuesType) => {
   const actualTransactionAmount =
     values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
 
-  // when seding NFTs, receiver is self
+  // when sending NFTs, receiver is self
   const isNftTransaction = getIsNftTransaction(values.txType);
-  const { rawReceiverUsername, ...restOfValues } = values;
-
   const receiverAccount = await getAccount(values.receiver);
   const realReceiverUsername = receiverAccount?.username;
 
@@ -20,10 +18,12 @@ export const getTransactionFields = async (values: ExtendedValuesType) => {
     : realReceiverUsername;
 
   const parsedValues = {
-    ...restOfValues,
+    ...values,
     amount: actualTransactionAmount,
     receiverUsername
   };
+
+  delete parsedValues.rawReceiverUsername;
 
   return parsedValues;
 };
