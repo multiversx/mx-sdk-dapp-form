@@ -20,7 +20,9 @@ export const getInitialErrors = ({
   try {
     getValidationSchema(errorMessages).validateSync(initialValues);
     return {};
-  } catch ({ path, message }) {
+  } catch (error) {
+    const { path, message } = error as { path: string; message: string };
+
     return {
       [String(path)]: message
     };

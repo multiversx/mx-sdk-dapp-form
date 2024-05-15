@@ -6,7 +6,7 @@ describe('EGLD Amount field', () => {
   it('should not be explicit positive', async () => {
     const { findByTestId } = renderForm();
     const input: any = await findByTestId(ValuesEnum.amount);
-    const invalidValues = {
+    const invalidValues: Record<string, string> = {
       '+1': '1',
       '1e2': '12',
       '1x0': '10',

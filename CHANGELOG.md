@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.10.8](https://github.com/multiversx/mx-sdk-dapp-form/pull/299)] - 2024-05-15
+- [Fixed assets name is added as username in the transaction](https://github.com/multiversx/mx-sdk-dapp-form/pull/298)
+
 ## [[0.10.7](https://github.com/multiversx/mx-sdk-dapp-form/pull/297)] - 2024-05-10
 - [Fixed gasLimit is not calculated after form was submitted and invalid](https://github.com/multiversx/mx-sdk-dapp-form/pull/296)
 

@@ -125,7 +125,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
   const isNFTTransaction = txType === TransactionTypeEnum.NonFungibleESDT;
   const isSFTTransaction = txType === TransactionTypeEnum.SemiFungibleESDT;
 
-  const onConfirmClick = () => {
+  const onConfirmClick = async () => {
     // allow setting guarded transaction then submit form
 
     setTimeout(() => {

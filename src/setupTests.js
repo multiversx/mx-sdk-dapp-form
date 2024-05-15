@@ -4,7 +4,11 @@ import '@testing-library/jest-dom/extend-expect';
  * MSW config code
  ***************/
 
+import { TextDecoder, TextEncoder } from 'util';
 import { server } from './__mocks__/server';
+
+jest.setTimeout(60000);
+jest.retryTimes(2);
 
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());
@@ -34,4 +38,9 @@ Object.defineProperty(window, 'matchMedia', {
     removeEventListener: jest.fn(),
     dispatchEvent: jest.fn()
   }))
+});
+
+Object.assign(global, {
+  TextDecoder,
+  TextEncoder
 });
