@@ -26,5 +26,5 @@ export const getAccountReceiverUsername = async ({
     account = await getAccount(receiver);
   }
 
-  return account.username;
+  return account?.username;
 };
