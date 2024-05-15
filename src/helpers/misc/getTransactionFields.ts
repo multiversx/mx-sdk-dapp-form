@@ -1,8 +1,8 @@
 import { ZERO } from '@multiversx/sdk-dapp/constants';
+import { getAccount } from '@multiversx/sdk-dapp/utils/account/getAccount';
 import { getIsNftTransaction } from 'helpers/misc/getIsNftTransaction';
 import { TransactionTypeEnum } from 'types/enums';
 import { ExtendedValuesType } from 'types/form';
-import { getAccountReceiverUsername } from './getAccountReceiverUsername';
 
 export const getTransactionFields = async (values: ExtendedValuesType) => {
   const actualTransactionAmount =
@@ -12,11 +12,8 @@ export const getTransactionFields = async (values: ExtendedValuesType) => {
   const isNftTransaction = getIsNftTransaction(values.txType);
   const { rawReceiverUsername, ...restOfValues } = values;
 
-  const realReceiverUsername = await getAccountReceiverUsername({
-    rawReceiverUsername,
-    receiver: values.receiver,
-    receiverUsername: values.receiverUsername
-  });
+  const receiverAccount = await getAccount(values.receiver);
+  const realReceiverUsername = receiverAccount?.username;
 
   const receiverUsername = isNftTransaction
     ? values.senderUsername
