@@ -52,6 +52,7 @@ export const AmountSelectInput = () => {
     areTokensLoading,
     getTokens,
     isTokenIdInvalid,
+    EgldIcon,
     nft,
     onChangeTokenId,
     tokenDetails,
@@ -91,7 +92,8 @@ export const AmountSelectInput = () => {
     error: tokenIdError,
     isInvalid: isTokenIdInvalid,
     egldLabel,
-    chainId
+    chainId,
+    EgldIcon
   };
 
   const InfoDustComponent = useMemo(

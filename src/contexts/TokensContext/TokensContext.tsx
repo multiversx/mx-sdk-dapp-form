@@ -5,7 +5,8 @@ import React, {
   useMemo,
   useRef,
   useState,
-  createContext
+  createContext,
+  JSXElementConstructor
 } from 'react';
 import { useFormikContext } from 'formik';
 import uniqBy from 'lodash/uniqBy';
@@ -25,6 +26,7 @@ import { useNetworkConfigContext } from '../NetworkContext';
 import { getAllowedReceiversData, useGetEconomicsInfo } from './utils';
 
 export interface TokensContextInitializationPropsType {
+  EgldIcon?: JSXElementConstructor<any>;
   initialNft?: PartialNftType;
   initialTokens?: PartialTokenType[] | null;
 }
@@ -34,6 +36,7 @@ export interface TokensContextPropsType {
   isTokenIdInvalid: boolean;
   digits: number;
   egldLabel: string;
+  EgldIcon?: JSXElementConstructor<any>;
   egldPriceInUsd: number;
   tokenIdError?: string;
   areTokensLoading: boolean;
@@ -193,6 +196,7 @@ export function TokensContextProvider({
         tokenId,
         tokenDetails,
         egldLabel,
+        EgldIcon: value?.EgldIcon,
         egldPriceInUsd,
         digits,
         isTokenIdInvalid,

@@ -1,4 +1,8 @@
-import React, { PropsWithChildren, useMemo } from 'react';
+import React, {
+  JSXElementConstructor,
+  PropsWithChildren,
+  useMemo
+} from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
@@ -13,19 +17,28 @@ const MultiversXIcon =
   require('../../../../../../../assets/icons/mx-icon.svg').default;
 
 interface ValueComponentPropsType {
-  isDisabled?: boolean;
-  tokenId?: string;
+  EgldIcon?: JSXElementConstructor<any>;
   egldLabel: string;
   icon?: string | null;
+  isDisabled?: boolean;
+  tokenId?: string;
 }
 
-export const ValueComponent = ({ tokenId, icon }: ValueComponentPropsType) => {
+export const ValueComponent = ({
+  EgldIcon,
+  tokenId,
+  icon
+}: ValueComponentPropsType) => {
   const { isEgld } = getIdentifierType(tokenId);
 
   if (isEgld) {
     return (
       <span className={styles.asset}>
-        <MultiversXIcon className={styles.diamond} />
+        {EgldIcon ? (
+          <EgldIcon className={styles.diamond} />
+        ) : (
+          <MultiversXIcon className={styles.diamond} />
+        )}
       </span>
     );
   }
@@ -47,7 +60,8 @@ const ValueWrapper = ({ children }: PropsWithChildren) =>
 export const getValueContainer =
   (
     egldLabel: string,
-    selectedTokenIconClassName?: string
+    selectedTokenIconClassName?: string,
+    EgldIcon?: JSXElementConstructor<any>
   ): typeof components.ValueContainer =>
   (props) => {
     const { selectProps, isDisabled, children } = props;
@@ -66,10 +80,11 @@ export const getValueContainer =
       <components.ValueContainer {...props} className={styles.container}>
         <div className={classNames(styles.icon, selectedTokenIconClassName)}>
           <ValueComponent
-            tokenId={token?.value}
-            icon={icon}
+            EgldIcon={EgldIcon}
             egldLabel={egldLabel}
+            icon={icon}
             isDisabled={isDisabled}
+            tokenId={token?.value}
           />
         </div>
 
