@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [[0.10.10](https://github.com/multiversx/mx-sdk-dapp-form/pull/302)] - 2024-05-23
+## [[0.10.10](https://github.com/multiversx/mx-sdk-dapp-form/pull/303)] - 2024-05-23
 - [Skip fetch economics data if it is custom network](https://github.com/multiversx/mx-sdk-dapp-form/pull/302)
 
 ## [[0.10.9](https://github.com/multiversx/mx-sdk-dapp-form/pull/301)] - 2024-05-23
