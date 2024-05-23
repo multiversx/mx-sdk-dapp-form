@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSXElementConstructor } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
@@ -8,8 +8,9 @@ import { TransactionTypeEnum } from 'types';
 import styles from './tokenAvatar.styles.scss';
 
 export interface TokenAvatarPropsType {
-  type: TransactionTypeEnum;
+  EgldIcon?: JSXElementConstructor<any>;
   avatar?: string;
+  type: TransactionTypeEnum;
 }
 
 const MultiversXIcon = require('../../../assets/icons/mx-icon.svg').default;
@@ -36,7 +37,7 @@ export const TokenAvatar = (props: TokenAvatarPropsType) => {
   if (type === TransactionTypeEnum.EGLD) {
     return (
       <div className={styles.tokenAvatar}>
-        <MultiversXIcon />
+        {props.EgldIcon ? <props.EgldIcon /> : <MultiversXIcon />}
       </div>
     );
   }

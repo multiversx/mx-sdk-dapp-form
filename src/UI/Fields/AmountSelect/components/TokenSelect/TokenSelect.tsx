@@ -19,6 +19,7 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     noOptionsMessage = 'No Tokens',
     disabledOption,
     egldLabel,
+    EgldIcon,
     disabled,
     value,
     onBlur,
@@ -41,6 +42,7 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     () =>
       components.getOption({
         egldLabel,
+        EgldIcon,
         showTokenPrice,
         showBalanceUsdValue,
         TokenTickerIcon
@@ -48,7 +50,12 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     []
   );
   const ValueContainer = useMemo(
-    () => components.getValueContainer(egldLabel, selectedTokenIconClassName),
+    () =>
+      components.getValueContainer(
+        egldLabel,
+        selectedTokenIconClassName,
+        EgldIcon
+      ),
     []
   );
 

@@ -47,6 +47,7 @@ export const SelectToken = ({ className, label }: SelectTokenPropsType) => {
     tokens,
     tokenId,
     egldLabel,
+    EgldIcon,
     tokenIdError,
     onChangeTokenId,
     isTokenIdInvalid
@@ -58,6 +59,7 @@ export const SelectToken = ({ className, label }: SelectTokenPropsType) => {
         inDropdown
         token={token}
         isEgld={token.identifier === egldLabel}
+        EgldIcon={EgldIcon}
       />
     );
   };

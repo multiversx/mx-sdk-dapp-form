@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSXElementConstructor } from 'react';
 
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import globals from 'assets/sass/globals.module.scss';
@@ -9,20 +9,22 @@ import { TokenElement } from 'UI/Fields/SelectToken/TokenElement';
 import styles from './styles.module.scss';
 
 export interface TokenPropsType extends WithClassnameType {
-  tokenId: string;
+  EgldIcon?: JSXElementConstructor<any>;
   egldLabel: string;
-  tokenAvatar?: string;
   isEsdtTransaction: boolean;
-  tokenIdError?: string;
   nft?: PartialNftType;
+  tokenAvatar?: string;
+  tokenId: string;
+  tokenIdError?: string;
 }
 
 export const Token = ({
-  nft,
-  isEsdtTransaction,
-  tokenId,
+  EgldIcon,
   egldLabel,
+  isEsdtTransaction,
+  nft,
   tokenAvatar,
+  tokenId,
   tokenIdError
 }: TokenPropsType) => {
   const tokenLabel = nft?.name || '';
@@ -63,6 +65,7 @@ export const Token = ({
               }
             }}
             isEgld={tokenId === egldLabel}
+            EgldIcon={EgldIcon}
           />
         )}
       </div>
