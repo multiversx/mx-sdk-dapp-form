@@ -1,4 +1,5 @@
 import { PartialTokenType, TokenAssetsType } from 'types';
+import { JSXElementConstructor } from 'react';
 
 export interface SelectOptionType {
   label: string;
@@ -29,6 +30,7 @@ export interface TokenSelectPropsType {
   onMenuOpen?: () => void;
   disabled?: boolean;
   error?: string;
+  EgldIcon?: JSXElementConstructor<any>;
   egldLabel: string;
   chainId: string;
   isInvalid?: boolean;

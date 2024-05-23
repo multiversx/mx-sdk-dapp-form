@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { JSXElementConstructor } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DECIMALS } from '@multiversx/sdk-dapp/constants';
@@ -19,17 +19,19 @@ export const {
 } = require('./../../../../../../../assets/icons/mx-icon.svg');
 
 export interface GetOptionPropsType {
-  egldLabel: string;
-  showTokenPrice?: boolean;
-  showBalanceUsdValue?: boolean;
+  EgldIcon?: JSXElementConstructor<any>;
   TokenTickerIcon?: TokenSelectPropsType['TokenTickerIcon'];
+  egldLabel: string;
+  showBalanceUsdValue?: boolean;
+  showTokenPrice?: boolean;
 }
 
 export const getOption =
   ({
-    showTokenPrice,
+    EgldIcon,
+    TokenTickerIcon,
     showBalanceUsdValue,
-    TokenTickerIcon
+    showTokenPrice
   }: GetOptionPropsType): typeof components.Option =>
   (props) => {
     const { data, isSelected, isFocused, isDisabled, selectProps } = props;
@@ -58,7 +60,7 @@ export const getOption =
           <div className={styles.image}>
             {isEgld ? (
               <span className={styles.icon}>
-                <MultiversXIcon />
+                {EgldIcon ? <EgldIcon /> : <MultiversXIcon />}
               </span>
             ) : icon ? (
               <img src={icon} className={styles.icon} />

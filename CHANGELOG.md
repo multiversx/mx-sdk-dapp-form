@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Added ability to use custom EGLD icon](https://github.com/multiversx/mx-sdk-dapp-form/pull/300)
+
 ## [[0.10.8](https://github.com/multiversx/mx-sdk-dapp-form/pull/299)] - 2024-05-15
 - [Fixed assets name is added as username in the transaction](https://github.com/multiversx/mx-sdk-dapp-form/pull/298)
 

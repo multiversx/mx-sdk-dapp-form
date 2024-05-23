@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { JSXElementConstructor, useEffect, useState } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as constants from '@multiversx/sdk-dapp/constants/index';
@@ -9,24 +9,26 @@ import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum, ZERO } from 'constants/index';
 import { scamFlag } from 'helpers';
 import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
-
 import styles from './styles.module.scss';
+
 const MultiversXIcon =
   require('./../../../../assets/icons/mx-icon.svg').default;
 
 export interface TokenElementPropsType {
-  token: PartialTokenType;
+  EgldIcon?: JSXElementConstructor<any>;
   inDropdown?: boolean;
   isEgld?: boolean;
-  nftType?: NftEnumType;
   nftTokenDetails?: PartialNftType;
+  nftType?: NftEnumType;
+  token: PartialTokenType;
 }
 
 export const TokenElement = ({
+  EgldIcon,
   inDropdown = false,
   isEgld,
-  nftType,
   nftTokenDetails,
+  nftType,
   token
 }: TokenElementPropsType) => {
   const { name, identifier, balance, decimals } = token;
@@ -81,7 +83,7 @@ export const TokenElement = ({
   if (isEgld) {
     tokenIcon = (
       <div className={styles.tokenElementCircle}>
-        <MultiversXIcon height={36} />
+        {EgldIcon ? <EgldIcon height={36} /> : <MultiversXIcon height={36} />}
       </div>
     );
   }
