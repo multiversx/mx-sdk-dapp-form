@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { DIGITS } from '@multiversx/sdk-dapp/constants/index';
 import { getEconomicsInfo } from 'apiCalls';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
+import { EnvironmentsEnum } from '@multiversx/sdk-dapp/types/enums.types';
 
 interface EconomicsInfoType {
   egldPriceInUsd: number;
@@ -22,6 +23,16 @@ export function useGetEconomicsInfo(): EconomicsInfoType {
   }
 
   useEffect(() => {
+    if (
+      ![
+        EnvironmentsEnum.mainnet,
+        EnvironmentsEnum.testnet,
+        EnvironmentsEnum.devnet
+      ].includes(networkConfig?.id as EnvironmentsEnum)
+    ) {
+      return;
+    }
+
     fetchEconomicsInfo();
   }, [networkConfig?.id]);
 
