@@ -91,7 +91,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
       };
       transaction.setOptions(TransactionOptions.withOptions(options));
 
-      setSignedTransactions({ 0: transaction });
+      setSignedTransactions({ 0: transaction } as any);
     } catch {
       // no need to handle error, since values may be invalid
       setSignedTransactions({});
@@ -113,7 +113,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
     }
     const transaction = signedTransactions[0];
     if (transaction) {
-      setGuardedTransaction(transaction);
+      setGuardedTransaction(transaction as any);
     }
   }, [signedTransactions]);
 

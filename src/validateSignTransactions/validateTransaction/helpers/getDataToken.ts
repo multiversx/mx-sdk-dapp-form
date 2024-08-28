@@ -13,8 +13,18 @@ export async function getDataToken(
   apiConfig: ApiConfigType
 ) {
   try {
+    if (!tokenId) {
+      return {
+        tokenData: null,
+        tokenAmount: ZERO,
+        tokenFound: false
+      };
+    }
+
     const { data } = await getToken(tokenId, apiConfig);
+
     const { decimals } = data;
+
     const formattedAmount = formatAmount({
       input: parsedTokenAmount,
       decimals,
