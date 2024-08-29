@@ -2,6 +2,7 @@ import {
   TOKENS_ENDPOINT,
   ACCOUNTS_ENDPOINT
 } from '@multiversx/sdk-dapp/apiCalls/endpoints';
+import { getPersistedToken } from '@multiversx/sdk-dapp/apiCalls/tokens/getPersistedToken';
 import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
@@ -69,8 +70,9 @@ export async function getAccountToken(
 }
 
 export async function getToken(token: string, apiConfig?: ApiConfigType) {
-  const config = apiConfig || (await getApiConfig());
-  return axios.get<PartialTokenType>(`/${TOKENS_ENDPOINT}/${token}`, config);
+  return getPersistedToken<PartialTokenType>(
+    `${apiConfig?.baseURL}/${TOKENS_ENDPOINT}/${token}`
+  );
 }
 
 export interface FetchTokensArgumentsType {
