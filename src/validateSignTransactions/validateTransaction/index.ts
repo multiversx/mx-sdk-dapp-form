@@ -50,7 +50,6 @@ export const validateTransaction = async ({
     tokenId,
     nftFound: Boolean(computedNft)
   });
-  console.log('dataTokenId', apiConfig);
 
   const { tokenData, tokenAmount, tokenFound } = await getDataToken(
     {
