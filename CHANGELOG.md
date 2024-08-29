@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[0.10.11](https://github.com/multiversx/mx-sdk-dapp-form/pull/305)] - 2024-08-29
+- [Added cached tokens functionality](https://github.com/multiversx/mx-sdk-dapp/pull/304)
+
 ## [[0.10.10](https://github.com/multiversx/mx-sdk-dapp-form/pull/303)] - 2024-05-23
 - [Skip fetch economics data if it is custom network](https://github.com/multiversx/mx-sdk-dapp-form/pull/302)
 
