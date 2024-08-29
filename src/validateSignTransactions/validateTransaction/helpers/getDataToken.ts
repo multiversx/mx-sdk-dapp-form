@@ -21,7 +21,7 @@ export async function getDataToken(
       };
     }
 
-    const { data } = await getToken(tokenId, apiConfig);
+    const data = await getToken(tokenId, apiConfig);
 
     const { decimals } = data;
 

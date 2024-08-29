@@ -70,7 +70,9 @@ export async function getAccountToken(
 }
 
 export async function getToken(token: string, apiConfig?: ApiConfigType) {
-  return getPersistedToken(`${apiConfig?.baseURL}/${TOKENS_ENDPOINT}/${token}`);
+  return getPersistedToken<PartialTokenType>(
+    `${apiConfig?.baseURL}/${TOKENS_ENDPOINT}/${token}`
+  );
 }
 
 export interface FetchTokensArgumentsType {
