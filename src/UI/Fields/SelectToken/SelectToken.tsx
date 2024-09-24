@@ -109,7 +109,7 @@ export const SelectToken = ({ className, label }: SelectTokenPropsType) => {
     return true;
   };
 
-  const docStyle = window.getComputedStyle(document.documentElement);
+  const docStyle = window?.getComputedStyle(document?.documentElement);
   const selectStyle = selectCustomStyles({ docStyle });
 
   return (

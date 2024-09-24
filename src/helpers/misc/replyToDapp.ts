@@ -1,4 +1,5 @@
 import { buildUrlParams } from '@multiversx/sdk-dapp/utils/buildUrlParams';
+import { getWindowLocation } from '@multiversx/sdk-dapp/utils/window/getWindowLocation';
 
 interface ReplyToDappBasicType {
   callbackUrl: string;
@@ -45,7 +46,7 @@ export function replyToDapp({
     ? replyQsUrl({ callbackUrl, qsStr })
     : replyUrl({ callbackUrl, urlParams });
 
-  window.location.href = url;
+  getWindowLocation().href = url;
 }
 
 export default replyToDapp;
