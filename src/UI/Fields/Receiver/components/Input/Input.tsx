@@ -1,9 +1,9 @@
 import React, { MutableRefObject } from 'react';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils';
 import classNames from 'classnames';
 import { components } from 'react-select';
 
 import { useSendFormContext } from 'contexts';
+import { addressIsValid } from 'helpers';
 import { ValuesEnum } from 'types';
 
 import { ReceiverSelectReferenceType } from '../../Receiver.types';

@@ -1,6 +1,7 @@
 import { Address } from '@multiversx/sdk-core';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import { decodePart } from '@multiversx/sdk-dapp/utils/decoders/decodePart';
+
+import { addressIsValid } from 'helpers';
 import { TransferDataEnum } from '../../types';
 import { SearchNFTPropsType } from './searchNft';
 

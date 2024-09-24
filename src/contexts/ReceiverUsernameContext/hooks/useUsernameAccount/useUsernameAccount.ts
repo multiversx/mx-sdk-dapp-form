@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils';
 
+import { addressIsValid } from 'helpers';
 import { useFetchUsernameAddress } from '../useFetchUsernameAddress';
 import {
   UseUsernameAccountType,

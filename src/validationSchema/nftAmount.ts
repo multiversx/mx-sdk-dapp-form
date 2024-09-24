@@ -1,10 +1,13 @@
-import { maxDecimals } from '@multiversx/sdk-dapp/utils/validation/maxDecimals';
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
-import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
+
 import { ZERO } from 'constants/index';
-import { parseAmount } from 'helpers';
+import {
+  maxDecimals,
+  parseAmount,
+  stringIsFloat,
+  stringIsInteger
+} from 'helpers';
 import { ExtendedValuesType, NftEnumType, TransactionTypeEnum } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
 

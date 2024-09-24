@@ -1,5 +1,4 @@
 import React, { MouseEvent } from 'react';
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 
@@ -7,7 +6,7 @@ import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts';
 import { getIsDisabled } from 'helpers';
-import { ValuesEnum } from 'types';
+import { ValuesEnum, WithClassnameType } from 'types';
 
 import styles from './styles.module.scss';
 

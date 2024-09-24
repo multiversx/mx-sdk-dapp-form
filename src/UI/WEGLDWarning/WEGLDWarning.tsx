@@ -1,12 +1,12 @@
 import React from 'react';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 
 import classNames from 'classnames';
 import { getWegldIdForChainId } from 'apiCalls';
 import { WEGLD_MESSAGE } from 'constants/index';
 import { useNetworkConfigContext } from 'contexts';
+import { WithClassnameType } from 'types';
 
 import styles from './styles.module.scss';
 

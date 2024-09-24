@@ -8,11 +8,10 @@ import React, {
   useEffect
 } from 'react';
 import { DIGITS } from '@multiversx/sdk-dapp/constants/index';
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 
-import { formatAmount, parseAmount } from 'helpers';
+import { formatAmount, parseAmount, stringIsFloat } from 'helpers';
 import { ExtendedValuesType, ValuesEnum } from 'types';
 import { useFormContext } from '../FormContext';
 import { useTokensContext } from '../TokensContext';

@@ -1,9 +1,8 @@
-// import { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers/trimUsernameDomain';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import axios from 'axios';
 
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
 import { AccountContextPropsType } from 'contexts/AccountContext';
+import { addressIsValid } from 'helpers';
 
 export async function getAccountByUsername(
   username: string,

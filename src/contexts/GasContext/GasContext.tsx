@@ -7,21 +7,24 @@ import React, {
   useEffect,
   useMemo
 } from 'react';
-
 import {
   GAS_PER_DATA_BYTE,
   GAS_PRICE_MODIFIER
 } from '@multiversx/sdk-dapp/constants/index';
-import { calculateFeeLimit } from '@multiversx/sdk-dapp/utils/operations/calculateFeeLimit';
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
-import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
+
 import { ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
-import { getGasLimitChanged, parseAmount } from 'helpers';
+import {
+  calculateFeeLimit,
+  getGasLimitChanged,
+  parseAmount,
+  stringIsFloat,
+  stringIsInteger
+} from 'helpers';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
   calculateNftGasLimit,
