@@ -1,4 +1,3 @@
-
 # sdk-dapp-form
 
 > A library that holds the core functional logic of a dapp on the MultiversX blockchain
@@ -36,10 +35,9 @@ yarn add @multiversx/sdk-dapp-form --no-optional
 
 sdk-dapp-form aims to abstract and simplify the process of formulating and validating transactions on the MultiversX blockchain.
 
-
 ## Roadmap
 
-See the [open issues](https://github.com/@multiversx/sdk-dapp-form/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/multiversx/mx-sdk-dapp-form/issues) for a list of proposed features (and known issues).
 
 ## Contributing
 
@@ -52,7 +50,6 @@ One can contribute by creating _pull requests_, or by opening _issues_ for disco
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
 
 ## License
 
