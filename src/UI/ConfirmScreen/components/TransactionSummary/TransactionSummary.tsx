@@ -1,15 +1,14 @@
 import React, { useState, MouseEvent } from 'react';
 import { ConfirmReceiver } from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/components/components/ConfirmReceiver';
 
-import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useFormContext } from 'contexts';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { TransactionTypeEnum } from 'types';
 import Confirm from 'UI/Confirm';
 import { NFTSFTPreview } from 'UI/NFTSFTPreview';
 
-import styles from './../confirmScreen.module.scss';
 import { getConfirmButtonLabel, getReceiverUsername } from './helpers';
 
 export interface TransactionSummaryPropsType {
@@ -18,10 +17,12 @@ export interface TransactionSummaryPropsType {
   hasGuardianScreen?: boolean;
 }
 
-export const TransactionSummary = ({
+export const TransactionSummaryComponent = ({
   isConfirmCloseBtnVisible = true,
-  providerType
-}: TransactionSummaryPropsType) => {
+  providerType,
+  globalStyles,
+  styles
+}: TransactionSummaryPropsType & WithStylesImportType) => {
   const { setIsGuardianScreenVisible } = useFormContext();
 
   const {
@@ -90,8 +91,8 @@ export const TransactionSummary = ({
   });
 
   return (
-    <div className={styles.summary}>
-      <div className={styles.fields}>
+    <div className={styles?.summary}>
+      <div className={styles?.fields}>
         {isNFTTransaction && nft && (
           <NFTSFTPreview onClick={onPreviewClick} txType={txType} {...nft} />
         )}
@@ -103,9 +104,9 @@ export const TransactionSummary = ({
           receiverUsername={transactionReceiverUsername}
         />
 
-        <div className={styles.columns}>
+        <div className={styles?.columns}>
           {!isNFT && (
-            <div className={styles.column}>
+            <div className={styles?.column}>
               <Confirm.Amount
                 txType={txType}
                 tokenId={tokenId}
@@ -120,7 +121,7 @@ export const TransactionSummary = ({
             </div>
           )}
 
-          <div className={styles.column}>
+          <div className={styles?.column}>
             <Confirm.Fee
               egldLabel={egldLabel}
               egldPriceInUsd={egldPriceInUsd}
@@ -131,12 +132,12 @@ export const TransactionSummary = ({
 
         <Confirm.Data data={data} />
 
-        {gasCostError && <p className={globals.error}>{gasCostError}</p>}
+        {gasCostError && <p className={globalStyles?.error}>{gasCostError}</p>}
       </div>
 
-      <div className={styles.buttons}>
+      <div className={styles?.buttons}>
         <button
-          className={globals.buttonSend}
+          className={globalStyles?.buttonSend}
           type='button'
           id='sendTrxBtn'
           data-testid={FormDataTestIdsEnum.sendTrxBtn}
@@ -148,7 +149,7 @@ export const TransactionSummary = ({
 
         {isConfirmCloseBtnVisible && (
           <button
-            className={globals.buttonText}
+            className={globalStyles?.buttonText}
             type='button'
             id='cancelTrxBtn'
             data-testid={FormDataTestIdsEnum.cancelTrxBtn}
@@ -161,3 +162,8 @@ export const TransactionSummary = ({
     </div>
   );
 };
+
+export const TransactionSummary = withStyles(TransactionSummaryComponent, {
+  ssrStyles: () => import('UI/ConfirmScreen/styles?.scss'),
+  clientStyles: () => require('UI/ConfirmScreen/styles?.scss').default
+});
