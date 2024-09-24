@@ -3,12 +3,10 @@ import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount'
 
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum, ZERO } from 'constants/index';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { calculateFeeInFiat } from 'operations';
-
 import { TransactionTypeEnum } from 'types';
 import { TokenAvatar } from '../TokenAvatar';
-
-import styles from './styles.module.scss';
 
 export interface FeePropsType {
   label?: string;
@@ -17,19 +15,20 @@ export interface FeePropsType {
   egldLabel: string;
 }
 
-export const Fee = ({
+export const FeeComponent = ({
   egldPriceInUsd,
   label = 'Fee',
   feeLimit,
-  egldLabel
-}: FeePropsType) => (
-  <div className={styles.fee}>
+  egldLabel,
+  styles
+}: FeePropsType & WithStylesImportType) => (
+  <div className={styles?.fee}>
     <span className={globals.label}>{label}</span>
 
-    <div className={styles.token}>
+    <div className={styles?.token}>
       <TokenAvatar type={TransactionTypeEnum.EGLD} />
 
-      <div className={styles.value}>
+      <div className={styles?.value}>
         <FormatAmount
           egldLabel={egldLabel}
           value={feeLimit}
@@ -40,7 +39,7 @@ export const Fee = ({
     </div>
 
     {feeLimit !== ZERO && (
-      <span className={styles.price}>
+      <span className={styles?.price}>
         {calculateFeeInFiat({
           feeLimit,
           egldPriceInUsd
@@ -49,3 +48,8 @@ export const Fee = ({
     )}
   </div>
 );
+
+export const Fee = withStyles(FeeComponent, {
+  ssrStyles: () => import('UI/Confirm/Fee/styles.scss'),
+  clientStyles: () => require('UI/Confirm/Fee/styles.scss').default
+});
