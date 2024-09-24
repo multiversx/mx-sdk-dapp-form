@@ -8,10 +8,9 @@ import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 
 import classNames from 'classnames';
 import globals from 'assets/sass/globals.module.scss';
-
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { MultiversXIconSimple } from 'UI/Fields/Receiver/components/MultiversXIconSimple';
-import styles from './styles.module.scss';
 
 export interface ReceiverPropsType {
   label?: string;
@@ -20,47 +19,48 @@ export interface ReceiverPropsType {
   scamReport?: ReactNode;
 }
 
-export const Receiver = ({
+export const ReceiverComponent = ({
   label = 'Receiver',
   receiver,
   scamReport,
-  receiverUsername
-}: ReceiverPropsType) => {
+  receiverUsername,
+  styles
+}: ReceiverPropsType & WithStylesImportType) => {
   const hasUsername = Boolean(receiverUsername);
   const receiverValue = receiverUsername ?? receiver;
 
   return (
-    <div className={styles.confirmReceiver}>
+    <div className={styles?.confirmReceiver}>
       <span className={globals.label}>{label}</span>
 
       <span
-        className={classNames(styles.value, { [styles.shrunk]: hasUsername })}
+        className={classNames(styles?.value, { [styles?.shrunk]: hasUsername })}
         data-testid={FormDataTestIdsEnum.confirmReceiver}
       >
-        {hasUsername && <MultiversXIconSimple className={styles.icon} />}
+        {hasUsername && <MultiversXIconSimple className={styles?.icon} />}
         {receiverValue}
 
         {hasUsername && (
           <ExplorerLink
             page={`/${ACCOUNTS_ENDPOINT}/${receiver}`}
-            className={styles.explorer}
+            className={styles?.explorer}
           />
         )}
       </span>
 
       {hasUsername && (
-        <span className={styles.subValue}>
-          <Trim text={receiver} className={styles.subValueTrim} />
-          <CopyButton text={receiver} className={styles.subValueCopy} />
+        <span className={styles?.subValue}>
+          <Trim text={receiver} className={styles?.subValueTrim} />
+          <CopyButton text={receiver} className={styles?.subValueCopy} />
         </span>
       )}
 
       {scamReport && (
-        <div className={styles.scam}>
+        <div className={styles?.scam}>
           <span>
             <FontAwesomeIcon
               icon={faExclamationTriangle}
-              className={styles.icon}
+              className={styles?.icon}
             />
             <small data-testid='confirmScamReport'>{scamReport}</small>
           </span>
@@ -69,3 +69,8 @@ export const Receiver = ({
     </div>
   );
 };
+
+export const Receiver = withStyles(ReceiverComponent, {
+  ssrStyles: () => import('UI/Confirm/Receiver/styles.scss'),
+  clientStyles: () => require('UI/Confirm/Receiver/styles.scss').default
+});
