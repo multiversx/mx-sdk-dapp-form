@@ -3,9 +3,8 @@ import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { TransactionTypeEnum } from 'types';
-
-import styles from './tokenAvatar.styles.scss';
 
 export interface TokenAvatarPropsType {
   EgldIcon?: JSXElementConstructor<any>;
@@ -15,12 +14,14 @@ export interface TokenAvatarPropsType {
 
 const MultiversXIcon = require('../../../assets/icons/mx-icon.svg').default;
 
-export const TokenAvatar = (props: TokenAvatarPropsType) => {
-  const { avatar, type } = props;
+export const TokenAvatarComponent = (
+  props: TokenAvatarPropsType & WithStylesImportType
+) => {
+  const { avatar, type, styles } = props;
 
   if (type === TransactionTypeEnum.NonFungibleESDT) {
     return (
-      <div className={classNames(styles.tokenAvatar, styles.tokenAvatarNFT)}>
+      <div className={classNames(styles?.tokenAvatar, styles?.tokenAvatarNFT)}>
         NFT
       </div>
     );
@@ -28,7 +29,7 @@ export const TokenAvatar = (props: TokenAvatarPropsType) => {
 
   if (type === TransactionTypeEnum.SemiFungibleESDT) {
     return (
-      <div className={classNames(styles.tokenAvatar, styles.tokenAvatarSFT)}>
+      <div className={classNames(styles?.tokenAvatar, styles?.tokenAvatarSFT)}>
         SFT
       </div>
     );
@@ -36,7 +37,7 @@ export const TokenAvatar = (props: TokenAvatarPropsType) => {
 
   if (type === TransactionTypeEnum.EGLD) {
     return (
-      <div className={styles.tokenAvatar}>
+      <div className={styles?.tokenAvatar}>
         {props.EgldIcon ? <props.EgldIcon /> : <MultiversXIcon />}
       </div>
     );
@@ -44,15 +45,20 @@ export const TokenAvatar = (props: TokenAvatarPropsType) => {
 
   if (avatar) {
     return (
-      <div className={styles.tokenAvatar}>
+      <div className={styles?.tokenAvatar}>
         <img src={avatar} />
       </div>
     );
   }
 
   return (
-    <div className={styles.tokenAvatar}>
+    <div className={styles?.tokenAvatar}>
       <FontAwesomeIcon icon={faDiamond} />
     </div>
   );
 };
+
+export const TokenAvatar = withStyles(TokenAvatarComponent, {
+  ssrStyles: () => import('UI/Confirm/TokenAvatar/styles.scss'),
+  clientStyles: () => require('UI/Confirm/TokenAvatar/styles.scss').default
+});
