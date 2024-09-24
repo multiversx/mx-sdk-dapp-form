@@ -1,11 +1,9 @@
 import React, { JSXElementConstructor } from 'react';
 
-import globals from 'assets/sass/globals.module.scss';
 import { ZERO } from 'constants/index';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { PartialNftType, WithClassnameType } from 'types';
 import { TokenElement } from 'UI/Fields/SelectToken/TokenElement';
-
-import styles from './styles.module.scss';
 
 export interface TokenPropsType extends WithClassnameType {
   EgldIcon?: JSXElementConstructor<any>;
@@ -17,20 +15,22 @@ export interface TokenPropsType extends WithClassnameType {
   tokenIdError?: string;
 }
 
-export const Token = ({
+export const TokenComponent = ({
   EgldIcon,
   egldLabel,
   isEsdtTransaction,
   nft,
   tokenAvatar,
   tokenId,
-  tokenIdError
-}: TokenPropsType) => {
+  tokenIdError,
+  globalStyles,
+  styles
+}: TokenPropsType & WithStylesImportType) => {
   const tokenLabel = nft?.name || '';
 
   return (
-    <div className={styles.token}>
-      <span className={globals.label}>
+    <div className={styles?.token}>
+      <span className={globalStyles?.label}>
         {nft ? <span>{nft?.name} </span> : ''}
         Token
       </span>
@@ -69,7 +69,14 @@ export const Token = ({
         )}
       </div>
 
-      {tokenIdError && <div className={globals.error}>{tokenIdError}</div>}
+      {tokenIdError && (
+        <div className={globalStyles?.error}>{tokenIdError}</div>
+      )}
     </div>
   );
 };
+
+export const Token = withStyles(TokenComponent, {
+  ssrStyles: () => import('UI/Confirm/Token/styles.scss'),
+  clientStyles: () => require('UI/Confirm/Token/styles.scss').default
+});
