@@ -1,10 +1,8 @@
 import React from 'react';
 import { decodePart } from '@multiversx/sdk-dapp/utils/decoders/decodePart';
 
-import globals from 'assets/sass/globals.module.scss';
-
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
-import styles from './styles.module.scss';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 
 const allOccurences = (sourceStr: string, searchStr: string) =>
   [...sourceStr.matchAll(new RegExp(searchStr, 'gi'))].map((a) => a.index);
@@ -17,13 +15,15 @@ export interface DataPropsType {
   isScCall?: boolean;
 }
 
-export const Data = ({
+export const DataComponent = ({
   label = 'Data',
   scCallLabel = 'SC Call',
   data,
   highlight,
-  isScCall
-}: DataPropsType) => {
+  isScCall,
+  globalStyles,
+  styles
+}: DataPropsType & WithStylesImportType) => {
   let output = <>{data}</>;
 
   const [encodedScCall, ...remainingDataFields] =
@@ -70,24 +70,24 @@ export const Data = ({
   return (
     <>
       {encodedScCall && (
-        <div className={styles.data}>
-          <span className={globals.label}>{scCallLabel}</span>
+        <div className={styles?.data}>
+          <span className={globalStyles?.label}>{scCallLabel}</span>
 
           <div
             data-testid={FormDataTestIdsEnum.confirmScCall}
-            className={styles.value}
+            className={styles?.value}
           >
             {[decodePart(encodedScCall), ...remainingDataFields].join('@')}
           </div>
         </div>
       )}
 
-      <div className={styles.data}>
-        <span className={globals.label}>{label}</span>
+      <div className={styles?.data}>
+        <span className={globalStyles?.label}>{label}</span>
 
         <div
           data-testid={FormDataTestIdsEnum.confirmData}
-          className={styles.value}
+          className={styles?.value}
         >
           {data ? output : 'N/A'}
         </div>
@@ -95,3 +95,8 @@ export const Data = ({
     </>
   );
 };
+
+export const Data = withStyles(DataComponent, {
+  ssrStyles: () => import('UI/Confirm/Data/styles.scss'),
+  clientStyles: () => require('UI/Confirm/Data/styles.scss').default
+});
