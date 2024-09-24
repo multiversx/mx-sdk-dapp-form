@@ -3,14 +3,12 @@ import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp/constants/index';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue/index';
 
-import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { parseAmount } from 'helpers';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { PartialNftType, TransactionTypeEnum } from 'types';
 
 import { TokenAvatar } from '../TokenAvatar';
-
-import styles from './styles.module.scss';
 
 export interface AmountPropsType {
   amount: string;
@@ -26,7 +24,7 @@ export interface AmountPropsType {
   nft?: PartialNftType;
 }
 
-export const Amount = ({
+export const AmountComponent = ({
   label = 'Amount',
   amount,
   txType,
@@ -35,8 +33,10 @@ export const Amount = ({
   egldLabel,
   egldPriceInUsd,
   nft,
-  tokenAvatar
-}: AmountPropsType) => {
+  tokenAvatar,
+  styles,
+  globalStyles
+}: AmountPropsType & WithStylesImportType) => {
   const nftDecimals = nft?.decimals || 0;
   const isEsdtTransaction = txType === TransactionTypeEnum.ESDT;
   const isMetaEsdt = txType === TransactionTypeEnum.MetaESDT;
@@ -75,13 +75,13 @@ export const Amount = ({
   }
 
   return (
-    <div className={styles.amount}>
-      <span className={globals.label}>{label}</span>
+    <div className={styles?.amount}>
+      <span className={globalStyles?.label}>{label}</span>
 
-      <div className={styles.token}>
+      <div className={styles?.token}>
         <TokenAvatar type={txType} avatar={tokenAvatar} />
 
-        <div className={styles.value}>
+        <div className={styles?.value}>
           {amountRenderer} {tokenLabel}
         </div>
       </div>
@@ -91,9 +91,14 @@ export const Amount = ({
           amount={amount}
           usd={egldPriceInUsd}
           data-testid={FormDataTestIdsEnum.confirmUsdValue}
-          className={styles.price}
+          className={styles?.price}
         />
       )}
     </div>
   );
 };
+
+export const Amount = withStyles(AmountComponent, {
+  ssrStyles: () => import('UI/Confirm/Amount/styles.scss'),
+  clientStyles: () => require('UI/Confirm/Amount/styles.scss').default
+});
