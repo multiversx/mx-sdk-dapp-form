@@ -6,16 +6,17 @@ import classNames from 'classnames';
 import { getWegldIdForChainId } from 'apiCalls';
 import { WEGLD_MESSAGE } from 'constants/index';
 import { useNetworkConfigContext } from 'contexts';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { WithClassnameType } from 'types';
-
-import styles from './styles.module.scss';
 
 export interface WEGLDWarningPropsType extends WithClassnameType {
   tokenId: string;
 }
 
-export const WEGLDWarning = (props: WEGLDWarningPropsType) => {
-  const { tokenId, className } = props;
+export const WEGLDWarningComponent = (
+  props: WEGLDWarningPropsType & WithStylesImportType
+) => {
+  const { tokenId, className, styles } = props;
   const {
     networkConfig: { chainId }
   } = useNetworkConfigContext();
@@ -27,19 +28,24 @@ export const WEGLDWarning = (props: WEGLDWarningPropsType) => {
   }
 
   return (
-    <div className={classNames(styles.wegldWarning, className)}>
-      <div className={styles.wegldWarningHeading}>
+    <div className={classNames(styles?.wegldWarning, className)}>
+      <div className={styles?.wegldWarningHeading}>
         <FontAwesomeIcon
           icon={faExclamationTriangle}
-          className={styles.wegldWarningIcon}
+          className={styles?.wegldWarningIcon}
           size='lg'
         />
 
-        <div className={styles.wegldWarningTitle}>
-          <div className={styles.wegldWarningLabel}>Warning!</div>
-          <div className={styles.wegldWarningMessage}>{WEGLD_MESSAGE}</div>
+        <div className={styles?.wegldWarningTitle}>
+          <div className={styles?.wegldWarningLabel}>Warning!</div>
+          <div className={styles?.wegldWarningMessage}>{WEGLD_MESSAGE}</div>
         </div>
       </div>
     </div>
   );
 };
+
+export const WEGLDWarning = withStyles(WEGLDWarningComponent, {
+  ssrStyles: () => import('UI/WEGLDWarning/styles.scss'),
+  clientStyles: () => require('UI/WEGLDWarning/styles.scss').default
+});
