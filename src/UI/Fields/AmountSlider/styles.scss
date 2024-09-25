@@ -13,7 +13,7 @@
       transform: translateY(-50%);
       content: '';
       position: absolute;
-      background: var(--border-color);
+      background: var(--dapp-form-border-color);
       height: 4px;
     }
 
@@ -43,23 +43,23 @@
       top: 50%;
       transform: translateY(-50%);
       border-radius: 50%;
-      background-color: var(--black);
+      background-color: var(--dapp-form-black);
       z-index: 5;
 
       &.disabled {
-        background-color: var(--secondary);
+        background-color: var(--dapp-form-secondary);
       }
 
       .amountSliderThumbPercentage {
         line-height: 1;
         opacity: 0;
         transition: all 400ms ease;
-        color: var(--white);
+        color: var(--dapp-form-white);
         font-weight: 500;
         position: absolute;
         left: 50%;
         padding: 0.25rem 0.35rem;
-        background: var(--black);
+        background: var(--dapp-form-black);
         border-radius: var(--dapp-form-input-border-radius);
         font-size: 11px;
         transform: translateX(-50%);
@@ -69,7 +69,7 @@
 
     .amountSliderCompletion {
       height: 4px;
-      background: var(--primary);
+      background: var(--dapp-form-primary);
       position: absolute;
       top: 50%;
       left: 0;
@@ -78,7 +78,7 @@
       margin-left: 2px;
 
       &.disabled {
-        background: var(--secondary);
+        background: var(--dapp-form-secondary);
       }
     }
 
@@ -94,8 +94,8 @@
         position: absolute;
         height: 12px;
         border-radius: 50%;
-        background-color: var(--white);
-        border: 2px solid var(--primary);
+        background-color: var(--dapp-form-white);
+        border: 2px solid var(--dapp-form-primary);
         width: 12px;
         top: 50%;
         left: 50%;
@@ -103,15 +103,15 @@
       }
 
       &.completed:after {
-        background-color: var(--primary);
+        background-color: var(--dapp-form-primary);
 
         &.disabled:after {
-          background-color: var(--secondary);
+          background-color: var(--dapp-form-secondary);
         }
       }
 
       &.disabled:after {
-        border-color: var(--secondary);
+        border-color: var(--dapp-form-secondary);
       }
     }
 
@@ -122,7 +122,7 @@
       z-index: 7;
       padding: 1.5rem 0 0;
       line-height: 1;
-      color: var(--black);
+      color: var(--dapp-form-black);
       font-size: 12px;
       cursor: pointer;
 

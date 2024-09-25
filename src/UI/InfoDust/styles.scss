@@ -6,10 +6,10 @@
 
   .infoDustTrigger {
     cursor: pointer;
-    color: var(--primary-light);
+    color: var(--dapp-form-primary-light);
 
     &:hover {
-      color: var(--link-hover-color);
+      color: var(--dapp-form-link-hover-color);
     }
   }
 
@@ -17,9 +17,9 @@
     width: 200px;
     max-width: 200px;
     padding: 0.25rem 0.5rem;
-    color: var(--white);
+    color: var(--dapp-form-white);
     text-align: center;
     border-radius: var(--dapp-form-input-border-radius);
-    background-color: var(--black);
+    background-color: var(--dapp-form-black);
   }
 }

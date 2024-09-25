@@ -23,7 +23,7 @@
     transform: translateX(120%);
     background-color: #fff;
     border-radius: var(--dapp-form-input-border-radius);
-    border-color: var(--border-color);
+    border-color: var(--dapp-form-border-color);
 
     &.clickable {
       cursor: pointer;
@@ -68,7 +68,7 @@
   .close {
     opacity: 1;
     svg {
-      color: var(--secondary);
+      color: var(--dapp-form-secondary);
     }
   }
 }

@@ -5,11 +5,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--white);
+  background-color: var(--dapp-form-white);
   border-radius: 50%;
   svg {
     #egld-token {
-      fill: var(--black);
+      fill: var(--dapp-form-black);
     }
   }
 }
@@ -19,7 +19,7 @@
 }
 
 .token-symbol {
-  border: 1px solid var(--black);
+  border: 1px solid var(--dapp-form-black);
   width: 2rem;
   height: 2rem;
 
@@ -43,7 +43,7 @@
   svg {
     filter: drop-shadow(0 0 0.25rem $black);
     circle {
-      fill: var(--card-bg);
+      fill: var(--dapp-form-card-bg);
     }
   }
   width: 4.5rem;

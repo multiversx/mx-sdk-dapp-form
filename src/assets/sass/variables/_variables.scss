@@ -15,19 +15,17 @@ $warning: #ffc107 !default;
 $btn-blue: #163aa0 !default;
 
 :root {
-  --primary: #1b46c2;
-  --primary-light: #1392ff;
-  --border-color: #dee2e6;
-  --card-bg: white;
-  --black: black;
-  --light: #fafafa;
-  --secondary: #6c757d;
-  --card-bg: #ffffff;
-  --border-color: #dee2e6;
-  --warning: #ffc107;
-  --btn-blue: #163aa0;
-  --brown: #212529;
-  --link-hover-color: #122e7f;
+  --dapp-form-primary: #1b46c2;
+  --dapp-form-primary-light: #1392ff;
+  --dapp-form-border-color: #dee2e6;
+  --dapp-form-black: black;
+  --dapp-form-light: #fafafa;
+  --dapp-form-secondary: #6c757d;
+  --dapp-form-card-bg: #ffffff;
+  --dapp-form-warning: #ffc107;
+  --dapp-form-btn-blue: #163aa0;
+  --dapp-form-brown: #212529;
+  --dapp-form-link-hover-color: #122e7f;
 
   --dapp-form-bg: #242526;
   --dapp-form-label-color: #9ba5b4;
