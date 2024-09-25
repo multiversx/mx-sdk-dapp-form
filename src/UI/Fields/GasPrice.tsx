@@ -3,14 +3,15 @@ import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 
-import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { formattedConfigGasPrice } from 'operations';
-
 import { ValuesEnum } from 'types';
-import styles from './styles.module.scss';
 
-export const GasPrice = () => {
+export const GasPriceComponent = ({
+  globalStyles,
+  styles
+}: WithStylesImportType) => {
   const { gasInfo, formInfo } = useSendFormContext();
 
   const {
@@ -27,12 +28,12 @@ export const GasPrice = () => {
   const isDisabled = true;
 
   return (
-    <div className={styles.gas}>
-      <label className={globals.label} htmlFor={ValuesEnum.gasPrice}>
+    <div className={styles?.gas}>
+      <label className={globalStyles?.label} htmlFor={ValuesEnum.gasPrice}>
         Gas Price
       </label>
 
-      <div className={styles.wrapper}>
+      <div className={styles?.wrapper}>
         <input
           type='text'
           id={ValuesEnum.gasPrice}
@@ -44,19 +45,19 @@ export const GasPrice = () => {
           onChange={onChangeGasPrice}
           onBlur={onBlurGasPrice}
           autoComplete='off'
-          className={classNames(globals.input, {
-            [globals.invalid]: isGasPriceInvalid,
-            [globals.disabled]: isDisabled
+          className={classNames(globalStyles?.input, {
+            [globalStyles?.invalid]: isGasPriceInvalid,
+            [globalStyles?.disabled]: isDisabled
           })}
         />
 
         {showUndoButton && (
           <span
-            className={classNames(styles.undo, {
-              [styles.disabled]: isDisabled
+            className={classNames(styles?.undo, {
+              [styles?.disabled]: isDisabled
             })}
           >
-            <button onClick={onResetGasPrice} className={styles.reset}>
+            <button onClick={onResetGasPrice} className={styles?.reset}>
               <FontAwesomeIcon icon={faUndo} />
             </button>
           </span>
@@ -64,8 +65,13 @@ export const GasPrice = () => {
       </div>
 
       {isGasPriceInvalid && (
-        <div className={globals.error}>{gasPriceError}</div>
+        <div className={globalStyles?.error}>{gasPriceError}</div>
       )}
     </div>
   );
 };
+
+export const GasPrice = withStyles(GasPriceComponent, {
+  ssrStyles: () => import('UI/Fields/styles.scss'),
+  clientStyles: () => require('UI/Fields/styles.scss').default
+});
