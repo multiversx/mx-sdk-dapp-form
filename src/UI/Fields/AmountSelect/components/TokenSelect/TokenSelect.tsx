@@ -6,17 +6,18 @@ import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 import { getWegldIdForChainId } from 'apiCalls/network/getEnvironmentForChainId';
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 
-import * as components from './components';
+import {
+  renderControl,
+  renderIndicatorsContainer,
+  renderInput,
+  renderMenu,
+  renderMenuList,
+  renderOption,
+  renderPlaceholder,
+  renderSingleValue,
+  renderValueContainer
+} from './components';
 import { OptionType, TokenSelectPropsType } from './tokenSelect.types';
-
-const {
-  getMenu,
-  getControl,
-  getInput,
-  getMenuList,
-  getIndicatorsContainer,
-  getPlaceholder
-} = components;
 
 export const TokenSelectComponent = (
   props: TokenSelectPropsType & WithStylesImportType
@@ -51,7 +52,7 @@ export const TokenSelectComponent = (
 
   const Option = useMemo(
     () =>
-      components.getOption({
+      renderOption({
         egldLabel,
         EgldIcon,
         showTokenPrice,
@@ -63,7 +64,7 @@ export const TokenSelectComponent = (
   );
   const ValueContainer = useMemo(
     () =>
-      components.getValueContainer(
+      renderValueContainer(
         egldLabel,
         selectedTokenIconClassName,
         EgldIcon,
@@ -73,7 +74,7 @@ export const TokenSelectComponent = (
   );
 
   const SingleValue = useMemo(
-    () => components.getSingleValue(TokenTickerIcon, styles),
+    () => renderSingleValue(TokenTickerIcon, styles),
     []
   );
 
@@ -173,12 +174,12 @@ export const TokenSelectComponent = (
         components={{
           IndicatorSeparator: () => null,
           LoadingIndicator: () => null,
-          Menu: getMenu(styles),
-          Control: getControl(styles),
-          Input: getInput(styles),
-          MenuList: getMenuList(styles),
-          IndicatorsContainer: getIndicatorsContainer(styles),
-          Placeholder: getPlaceholder(styles),
+          Menu: renderMenu(styles),
+          Control: renderControl(styles),
+          Input: renderInput(styles),
+          MenuList: renderMenuList(styles),
+          IndicatorsContainer: renderIndicatorsContainer(styles),
+          Placeholder: renderPlaceholder(styles),
           ValueContainer,
           Option,
           SingleValue

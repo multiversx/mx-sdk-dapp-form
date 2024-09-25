@@ -3,7 +3,7 @@ import { components } from 'react-select';
 
 import { WithStylesImportType } from 'hocs/withStyles';
 
-export const getMenuList =
+export const renderMenuList =
   (styles?: WithStylesImportType['styles']): typeof components.MenuList =>
   (props) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

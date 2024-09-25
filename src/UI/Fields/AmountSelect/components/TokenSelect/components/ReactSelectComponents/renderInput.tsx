@@ -4,7 +4,7 @@ import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 
 import { WithStylesImportType } from 'hocs/withStyles';
 
-export const getInput =
+export const renderInput =
   (styles?: WithStylesImportType['styles']): typeof components.Input =>
   (props) => {
     return (

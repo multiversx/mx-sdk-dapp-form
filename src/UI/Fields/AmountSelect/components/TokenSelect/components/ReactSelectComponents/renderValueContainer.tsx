@@ -61,7 +61,7 @@ const ValueWrapper = ({
     <div className={styles?.wrapper}>{children}</div>
   );
 
-export const getValueContainer =
+export const renderValueContainer =
   (
     egldLabel: string,
     selectedTokenIconClassName?: string,

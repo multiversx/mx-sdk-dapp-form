@@ -26,7 +26,7 @@ export interface GetOptionPropsType extends WithStylesImportType {
   showTokenPrice?: boolean;
 }
 
-export const getOption =
+export const renderOption =
   ({
     EgldIcon,
     TokenTickerIcon,

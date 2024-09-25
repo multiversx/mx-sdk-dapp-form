@@ -5,7 +5,7 @@ import { components } from 'react-select';
 
 import { WithStylesImportType } from 'hocs/withStyles';
 
-export const getMenu =
+export const renderMenu =
   (styles?: WithStylesImportType['styles']): typeof components.Menu =>
   (props) => {
     return (

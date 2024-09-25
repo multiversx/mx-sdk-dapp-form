@@ -6,7 +6,7 @@ import { WithStylesImportType } from 'hocs/withStyles';
 
 import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
 
-export const getSingleValue =
+export const renderSingleValue =
   (
     TokenTickerIcon?: TokenSelectPropsType['TokenTickerIcon'],
     styles?: WithStylesImportType['styles']

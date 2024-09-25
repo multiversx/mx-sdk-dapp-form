@@ -4,7 +4,7 @@ import { components } from 'react-select';
 
 import { WithStylesImportType } from 'hocs/withStyles';
 
-export const getPlaceholder =
+export const renderPlaceholder =
   (styles?: WithStylesImportType['styles']): typeof components.Placeholder =>
   (props) => {
     return (
