@@ -4,15 +4,16 @@ import { components } from 'react-select';
 
 import { useSendFormContext } from 'contexts';
 import { addressIsValid } from 'helpers';
+import { WithStylesImportType } from 'hocs/withStyles';
 import { ValuesEnum } from 'types';
 
 import { ReceiverSelectReferenceType } from '../../Receiver.types';
-import styles from '../../styles.module.scss';
 import { getFocusedOptionIncludesUsername } from './helpers';
 
 export const renderInput =
   (
-    receiverSelectReference: MutableRefObject<ReceiverSelectReferenceType>
+    receiverSelectReference: MutableRefObject<ReceiverSelectReferenceType>,
+    styles?: WithStylesImportType['styles']
   ): typeof components.Input =>
   (props) => {
     const { selectProps, value } = props;
@@ -37,9 +38,9 @@ export const renderInput =
       <components.Input
         {...props}
         data-testid={ValuesEnum.receiver}
-        className={classNames(styles.receiverSelectInput, {
-          [styles.visible]: isVisible,
-          [styles.spaced]: isSpaced
+        className={classNames(styles?.receiverSelectInput, {
+          [styles?.visible]: isVisible,
+          [styles?.spaced]: isSpaced
         })}
       />
     );

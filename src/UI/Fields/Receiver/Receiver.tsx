@@ -14,21 +14,23 @@ import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 import Select from 'react-select';
 
-import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useReceiverUsernameContext } from 'contexts/ReceiverUsernameContext';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled } from 'helpers';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { ExtendedValuesType, ValuesEnum, WithClassnameType } from 'types';
 
-import { Control } from './components/Control';
-import { DropdownIndicator } from './components/DropdownIndicator';
-import { renderInput } from './components/Input';
-import { Menu } from './components/Menu';
-import { MenuList } from './components/MenuList';
-import { Option } from './components/Option';
-import { SelectContainer } from './components/SelectContainer';
-import { ValueContainer } from './components/ValueContainer';
+import {
+  renderControl,
+  renderDropdownIndicator,
+  renderInput,
+  renderMenu,
+  renderMenuList,
+  renderOption,
+  renderSelectContainer,
+  renderValueContainer
+} from './components';
 import {
   filterOptions,
   formatOptions,
@@ -39,12 +41,12 @@ import {
 import { useReceiverDisplayStates, useReceiverError } from './hooks';
 import { GenericOptionType } from './Receiver.types';
 
-import styles from './styles.module.scss';
-
-export const Receiver = (props: WithClassnameType) => {
+export const ReceiverComponent = (
+  props: WithClassnameType & WithStylesImportType
+) => {
   const receiverSelectReference = useRef(null);
 
-  const { className } = props;
+  const { className, globalStyles, styles } = props;
   const { setFieldValue } = useFormikContext<ExtendedValuesType>();
 
   const {
@@ -140,7 +142,7 @@ export const Receiver = (props: WithClassnameType) => {
   });
 
   const Input = useMemo(
-    () => renderInput(receiverSelectReference),
+    () => renderInput(receiverSelectReference, styles),
     [receiverSelectReference]
   );
 
@@ -164,9 +166,9 @@ export const Receiver = (props: WithClassnameType) => {
   const showErrorText = isFieldError && !menuIsOpen;
 
   return (
-    <div className={classNames(styles.receiver, className)}>
+    <div className={classNames(styles?.receiver, className)}>
       <div
-        className={globals.label}
+        className={globalStyles?.label}
         data-testid={FormDataTestIdsEnum.receiverLabel}
         data-loading={fetchingScamAddress}
       >
@@ -192,47 +194,50 @@ export const Receiver = (props: WithClassnameType) => {
         onMenuClose={() => setMenuIsOpen(false)}
         onMenuOpen={() => setMenuIsOpen(true)}
         components={{
-          Menu,
           Input,
-          Control,
-          ValueContainer,
-          DropdownIndicator,
-          SelectContainer,
-          MenuList,
-          Option,
+          Menu: renderMenu(styles),
+          Control: renderControl(styles),
+          ValueContainer: renderValueContainer(styles),
+          DropdownIndicator: renderDropdownIndicator(styles),
+          SelectContainer: renderSelectContainer(styles),
+          MenuList: renderMenuList(styles),
+          Option: renderOption(styles),
           Placeholder: () => null,
           SingleValue: () => null,
           IndicatorSeparator: () => null,
           LoadingIndicator: () => null
         }}
-        className={classNames(styles.receiverSelectContainer, {
-          [styles.opened]: isReceiverDropdownOpened,
-          [styles.invalid]: isFieldError || scamError
+        className={classNames(styles?.receiverSelectContainer, {
+          [styles?.opened]: isReceiverDropdownOpened,
+          [styles?.invalid]: isFieldError || scamError
         })}
       />
 
       {showErrorText && (
-        <div data-testid={receiverErrorDataTestId} className={globals.error}>
+        <div
+          data-testid={receiverErrorDataTestId}
+          className={globalStyles?.error}
+        >
           {error}
         </div>
       )}
 
-      {isUsernameLoading && <div className={styles.loading}>Loading...</div>}
+      {isUsernameLoading && <div className={styles?.loading}>Loading...</div>}
 
       {receiverUsername && (
         <span
-          className={styles.found}
+          className={styles?.found}
           data-testid={FormDataTestIdsEnum.receiverUsernameAddress}
         >
           Account found!{' '}
-          <FontAwesomeIcon icon={faCheck} className={styles.foundIcon} />
+          <FontAwesomeIcon icon={faCheck} className={styles?.foundIcon} />
         </span>
       )}
 
       {scamError && (
         <div
           data-testid={FormDataTestIdsEnum.receiverScam}
-          className={classNames(globals.error, globals.scam)}
+          className={classNames(globalStyles?.error, globalStyles?.scam)}
         >
           <span>
             <FontAwesomeIcon icon={faExclamationTriangle} />
@@ -243,3 +248,8 @@ export const Receiver = (props: WithClassnameType) => {
     </div>
   );
 };
+
+export const Receiver = withStyles(ReceiverComponent, {
+  ssrStyles: () => import('UI/Fields/Receiver/styles.scss'),
+  clientStyles: () => require('UI/Fields/Receiver/styles.scss').default
+});
