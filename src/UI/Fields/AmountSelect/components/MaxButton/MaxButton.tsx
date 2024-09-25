@@ -1,12 +1,12 @@
 import React, { MouseEvent } from 'react';
 import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import BigNumber from 'bignumber.js';
-
 import classNames from 'classnames';
+
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { PartialTokenType } from 'types/tokens';
 
 import { getBalanceMinusDust } from './getBalanceMinusDust';
-import styles from './maxButton.module.scss';
 import { progressiveFormatAmount } from './progressiveFormatAmount';
 
 export interface MaxButtonPropsType {
@@ -20,13 +20,14 @@ export interface MaxButtonPropsType {
   wrapperClassName?: string;
 }
 
-export const MaxButton = ({
+export const MaxButtonComponent = ({
   token,
   egldLabel,
   inputAmount,
   className,
-  onMaxClick
-}: MaxButtonPropsType) => {
+  onMaxClick,
+  styles
+}: MaxButtonPropsType & WithStylesImportType) => {
   const isEgld = token?.identifier === egldLabel;
   const balance = token?.balance ?? '0';
 
@@ -56,7 +57,7 @@ export const MaxButton = ({
     <a
       href='/'
       data-testid='maxBtn'
-      className={classNames(styles.max, className)}
+      className={classNames(styles?.max, className)}
       onClick={handleOnMaxBtnClick}
       onMouseDown={(event) => {
         event.preventDefault();
@@ -66,3 +67,10 @@ export const MaxButton = ({
     </a>
   );
 };
+
+export const MaxButton = withStyles(MaxButtonComponent, {
+  ssrStyles: () =>
+    import('UI/Fields/AmountSelect/components/MaxButton/styles.scss'),
+  clientStyles: () =>
+    require('UI/Fields/AmountSelect/components/MaxButton/styles.scss').default
+});

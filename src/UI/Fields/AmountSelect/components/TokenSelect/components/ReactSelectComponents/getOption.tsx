@@ -8,17 +8,17 @@ import classNames from 'classnames';
 import { components } from 'react-select';
 
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { WithStylesImportType } from 'hocs/withStyles';
 import { HighlightText } from 'UI/HighlightText';
 
 import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
 import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
-import styles from './../../tokenSelect.module.scss';
 
 export const {
   default: MultiversXIcon
 } = require('./../../../../../../../assets/icons/mx-icon.svg');
 
-export interface GetOptionPropsType {
+export interface GetOptionPropsType extends WithStylesImportType {
   EgldIcon?: JSXElementConstructor<any>;
   TokenTickerIcon?: TokenSelectPropsType['TokenTickerIcon'];
   egldLabel: string;
@@ -31,7 +31,8 @@ export const getOption =
     EgldIcon,
     TokenTickerIcon,
     showBalanceUsdValue,
-    showTokenPrice
+    showTokenPrice,
+    styles
   }: GetOptionPropsType): typeof components.Option =>
   (props) => {
     const { data, isSelected, isFocused, isDisabled, selectProps } = props;
@@ -52,29 +53,29 @@ export const getOption =
       <div data-testid={`${(props as any).value}-option`}>
         <components.Option
           {...props}
-          className={classNames(styles.option, {
-            [styles.selected]: isSelected || isFocused,
-            [styles.disabled]: isDisabled
+          className={classNames(styles?.option, {
+            [styles?.selected]: isSelected || isFocused,
+            [styles?.disabled]: isDisabled
           })}
         >
-          <div className={styles.image}>
+          <div className={styles?.image}>
             {isEgld ? (
-              <span className={styles.icon}>
+              <span className={styles?.icon}>
                 {EgldIcon ? <EgldIcon /> : <MultiversXIcon />}
               </span>
             ) : icon ? (
-              <img src={icon} className={styles.icon} />
+              <img src={icon} className={styles?.icon} />
             ) : (
-              <span className={styles.icon}>
-                <FontAwesomeIcon icon={faDiamond} className={styles.diamond} />
+              <span className={styles?.icon}>
+                <FontAwesomeIcon icon={faDiamond} className={styles?.diamond} />
               </span>
             )}
           </div>
 
-          <div className={styles.info}>
-            <div className={styles.left}>
-              <div className={styles.ticker}>
-                <span className={styles.value}>
+          <div className={styles?.info}>
+            <div className={styles?.left}>
+              <div className={styles?.ticker}>
+                <span className={styles?.value}>
                   {selectProps.inputValue ? (
                     <HighlightText
                       text={option.token.ticker}
@@ -89,25 +90,25 @@ export const getOption =
               </div>
 
               {showTokenPrice && (
-                <small className={styles.price}>{tokenPrice}</small>
+                <small className={styles?.price}>{tokenPrice}</small>
               )}
             </div>
-            <div className={styles.right}>
-              <span className={styles.value}>{amount}</span>
+            <div className={styles?.right}>
+              <span className={styles?.value}>{amount}</span>
               {showBalanceUsdValue && balanceUsdValue && (
                 <UsdValue
                   usd={1}
                   decimals={4}
                   amount={balanceUsdValue}
                   data-testid={FormDataTestIdsEnum.tokenPriceUsdValue}
-                  className={styles.price}
+                  className={styles?.price}
                   addEqualSign={false}
                 />
               )}
             </div>
           </div>
 
-          <div className={styles.children}>{props.children}</div>
+          <div className={styles?.children}>{props.children}</div>
         </components.Option>
       </div>
     );

@@ -2,13 +2,14 @@ import React, { useMemo } from 'react';
 import { DECIMALS } from '@multiversx/sdk-dapp/constants';
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { SingleValue } from 'react-select';
-import globals from 'assets/sass/globals.module.scss';
 import { useFormContext } from 'contexts';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
 import { getIsDisabled } from 'helpers';
+import { WithStylesImportType } from 'hocs/withStyles';
 import { NftEnumType, ValuesEnum } from 'types';
+
 import { AmountSelect } from './AmountSelect';
 import {
   AmountErrorPropsType,
@@ -24,7 +25,7 @@ import { progressiveFormatAmount } from './components/MaxButton/progressiveForma
 /**
  * Gets form state and renders a connected `AmountSelect` component
  */
-export const AmountSelectInput = () => {
+export const AmountSelectInput = ({ globalStyles }: WithStylesImportType) => {
   const { checkInvalid } = useFormContext();
   const { tokensInfo, amountInfo, formInfo } = useSendFormContext();
   const { readonly } = formInfo;
@@ -142,7 +143,7 @@ export const AmountSelectInput = () => {
       tokenSelectProps.isInvalid ||
       isValueMissing,
     error: amountInputProps.error || tokenSelectProps.error,
-    className: globals.error,
+    className: globalStyles?.error,
     'data-testid': amountInputProps.error
       ? `${ValuesEnum.amount}Error`
       : `${ValuesEnum.tokenId}Error`

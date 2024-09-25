@@ -1,9 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
-import globals from 'assets/sass/globals.module.scss';
+
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { ExtendedValuesType, WithClassnameType } from 'types';
-import styles from './amountSelect.module.scss';
 
 import {
   AmountError,
@@ -30,7 +30,7 @@ export interface AmountSelectPropsType extends WithClassnameType {
   maxButtonProps: MaxButtonPropsType;
 }
 
-export const AmountSelect = ({
+export const AmountSelectComponent = ({
   className,
   label,
   name,
@@ -40,14 +40,16 @@ export const AmountSelect = ({
   amountInputProps,
   amountErrorProps,
   maxButtonProps,
-  readonly
-}: AmountSelectPropsType) => (
-  <div className={classNames(styles.amount, className)}>
-    <div className={styles.label}>
+  readonly,
+  globalStyles,
+  styles
+}: AmountSelectPropsType & WithStylesImportType) => (
+  <div className={classNames(styles?.amount, className)}>
+    <div className={styles?.label}>
       {label && (
         <label
           htmlFor={name}
-          className={globals.label}
+          className={globalStyles?.label}
           data-testid={FormDataTestIdsEnum.amountLabel}
         >
           {label}
@@ -58,25 +60,25 @@ export const AmountSelect = ({
     </div>
 
     <div
-      className={classNames(styles.wrapper, wrapperControlsClassName, {
-        [styles.error]:
+      className={classNames(styles?.wrapper, wrapperControlsClassName, {
+        [styles?.error]:
           amountInputProps.isInvalid ||
           tokenSelectProps.isInvalid ||
           amountErrorProps.hasErrors,
-        [styles.disabled]: readonly
+        [styles?.disabled]: readonly
       })}
     >
       <AmountInput {...amountInputProps} />
 
       <div
         className={classNames(
-          styles.interaction,
+          styles?.interaction,
           maxButtonProps.wrapperClassName
         )}
       >
         {maxButtonProps.isMaxButtonVisible && <MaxButton {...maxButtonProps} />}
 
-        <div className={styles.select}>
+        <div className={styles?.select}>
           <TokenSelect {...tokenSelectProps} />
         </div>
       </div>
@@ -85,3 +87,8 @@ export const AmountSelect = ({
     <AmountError {...amountErrorProps} />
   </div>
 );
+
+export const AmountSelect = withStyles(AmountSelectComponent, {
+  ssrStyles: () => import('UI/Fields/AmountSelect/styles.scss'),
+  clientStyles: () => require('UI/Fields/AmountSelect/styles.scss').default
+});

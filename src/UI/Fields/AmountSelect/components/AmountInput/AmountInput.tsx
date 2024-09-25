@@ -11,11 +11,10 @@ import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import { NumberFormatValues, NumericFormat } from 'react-number-format';
 
-import globals from 'assets/sass/globals.module.scss';
 import { stringIsFloat } from 'helpers';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { WithClassnameType } from 'types';
 
-import styles from './amountInput.module.scss';
 import {
   ImprovedDebounceValueType,
   hasLeadingZeroes,
@@ -66,8 +65,10 @@ const AmountComponent = ({
   usdValue,
   className,
   autoFocus,
-  suffix
-}: AmountInputPropsType) => {
+  suffix,
+  globalStyles,
+  styles
+}: AmountInputPropsType & WithStylesImportType) => {
   const ref = useRef(null);
 
   const [inputValue, setInputValue] = useState<string>();
@@ -154,8 +155,8 @@ const AmountComponent = ({
     <div
       ref={ref}
       className={classNames(
-        styles.amountHolder,
-        { [styles.showUsdValue]: Boolean(displayedUsdValue) },
+        styles?.amountHolder,
+        { [styles?.showUsdValue]: Boolean(displayedUsdValue) },
         className
       )}
     >
@@ -182,13 +183,13 @@ const AmountComponent = ({
         valueIsNumericString
         allowNegative={false}
         autoFocus={autoFocus}
-        className={classNames(globals.input, styles.amountInput, {
-          [globals.disabled]: Boolean(disabled)
+        className={classNames(globalStyles?.input, styles?.amountInput, {
+          [globalStyles?.disabled]: Boolean(disabled)
         })}
       />
 
       {displayedUsdValue && (
-        <span className={styles.amountHolderUsd}>
+        <span className={styles?.amountHolderUsd}>
           <small data-testid={`tokenPrice_${usdPrice}`}>
             {displayedUsdValue !== '$0' ? <>≈ </> : <></>}
             {displayedUsdValue}
@@ -201,7 +202,7 @@ const AmountComponent = ({
   );
 };
 
-export const AmountInput = memo(
+export const MemoizedAmountInput = memo(
   AmountComponent,
   (prevProps, nextProps) =>
     prevProps.value === nextProps.value &&
@@ -210,3 +211,10 @@ export const AmountInput = memo(
     prevProps.disabled === nextProps.disabled &&
     prevProps.usdValue === nextProps.usdValue
 );
+
+export const AmountInput = withStyles(MemoizedAmountInput, {
+  ssrStyles: () =>
+    import('UI/Fields/AmountSelect/components/AmountInput/styles.scss'),
+  clientStyles: () =>
+    require('UI/Fields/AmountSelect/components/AmountInput/styles.scss').default
+});

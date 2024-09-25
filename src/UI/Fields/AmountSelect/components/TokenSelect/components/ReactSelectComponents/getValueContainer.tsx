@@ -9,14 +9,14 @@ import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIden
 import classNames from 'classnames';
 import { components } from 'react-select';
 
-import type { OptionType } from '../../tokenSelect.types';
+import { WithStylesImportType } from 'hocs/withStyles';
 
-import styles from './../../tokenSelect.module.scss';
+import type { OptionType } from '../../tokenSelect.types';
 
 const MultiversXIcon =
   require('../../../../../../../assets/icons/mx-icon.svg').default;
 
-interface ValueComponentPropsType {
+interface ValueComponentPropsType extends WithStylesImportType {
   EgldIcon?: JSXElementConstructor<any>;
   egldLabel: string;
   icon?: string | null;
@@ -27,41 +27,46 @@ interface ValueComponentPropsType {
 export const ValueComponent = ({
   EgldIcon,
   tokenId,
-  icon
+  icon,
+  styles
 }: ValueComponentPropsType) => {
   const { isEgld } = getIdentifierType(tokenId);
 
   if (isEgld) {
     return (
-      <span className={styles.asset}>
+      <span className={styles?.asset}>
         {EgldIcon ? (
-          <EgldIcon className={styles.diamond} />
+          <EgldIcon className={styles?.diamond} />
         ) : (
-          <MultiversXIcon className={styles.diamond} />
+          <MultiversXIcon className={styles?.diamond} />
         )}
       </span>
     );
   }
 
   if (icon) {
-    return <img src={icon} className={styles.asset} />;
+    return <img src={icon} className={styles?.asset} />;
   }
 
-  return <FontAwesomeIcon icon={faDiamond} className={styles.asset} />;
+  return <FontAwesomeIcon icon={faDiamond} className={styles?.asset} />;
 };
 
-const ValueWrapper = ({ children }: PropsWithChildren) =>
+const ValueWrapper = ({
+  children,
+  styles
+}: PropsWithChildren & WithStylesImportType) =>
   process.env.NODE_ENV === 'test' ? (
     <>{children}</>
   ) : (
-    <div className={styles.wrapper}>{children}</div>
+    <div className={styles?.wrapper}>{children}</div>
   );
 
 export const getValueContainer =
   (
     egldLabel: string,
     selectedTokenIconClassName?: string,
-    EgldIcon?: JSXElementConstructor<any>
+    EgldIcon?: JSXElementConstructor<any>,
+    styles?: WithStylesImportType['styles']
   ): typeof components.ValueContainer =>
   (props) => {
     const { selectProps, isDisabled, children } = props;
@@ -77,8 +82,8 @@ export const getValueContainer =
     }, [token?.token.usdPrice]);
 
     return (
-      <components.ValueContainer {...props} className={styles.container}>
-        <div className={classNames(styles.icon, selectedTokenIconClassName)}>
+      <components.ValueContainer {...props} className={styles?.container}>
+        <div className={classNames(styles?.icon, selectedTokenIconClassName)}>
           <ValueComponent
             EgldIcon={EgldIcon}
             egldLabel={egldLabel}
@@ -88,12 +93,12 @@ export const getValueContainer =
           />
         </div>
 
-        <div className={styles.payload}>
+        <div className={styles?.payload}>
           <ValueWrapper>
             {children}
 
             {token?.token.usdPrice && (
-              <small className={styles.price}>{price}</small>
+              <small className={styles?.price}>{price}</small>
             )}
           </ValueWrapper>
         </div>

@@ -2,13 +2,14 @@ import React from 'react';
 import classNames from 'classnames';
 import { components } from 'react-select';
 
-import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
+import { WithStylesImportType } from 'hocs/withStyles';
 
-import styles from './../../tokenSelect.module.scss';
+import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
 
 export const getSingleValue =
   (
-    TokenTickerIcon?: TokenSelectPropsType['TokenTickerIcon']
+    TokenTickerIcon?: TokenSelectPropsType['TokenTickerIcon'],
+    styles?: WithStylesImportType['styles']
   ): typeof components.SingleValue =>
   (props) => {
     const { selectProps, children } = props;
@@ -18,11 +19,11 @@ export const getSingleValue =
     return (
       <components.SingleValue
         {...props}
-        className={classNames(styles.single, {
-          [styles.focused]: props.selectProps.menuIsOpen
+        className={classNames(styles?.single, {
+          [styles?.focused]: props.selectProps.menuIsOpen
         })}
       >
-        <div className={styles.ticker}>
+        <div className={styles?.ticker}>
           {children}
           {TokenTickerIcon && <TokenTickerIcon token={token?.token} />}
         </div>

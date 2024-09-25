@@ -1,10 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { WithClassnameType } from 'types';
 
 import { OptionType } from '../TokenSelect';
-import styles from './tokenBalance.module.scss';
 
 export interface TokenBalancePropsType extends WithClassnameType {
   label?: string;
@@ -13,22 +13,31 @@ export interface TokenBalancePropsType extends WithClassnameType {
   'data-value'?: string; // used for testing
 }
 
-export const TokenBalance = ({
+export const TokenBalanceComponent = ({
   label,
   value,
   className,
   token,
   'data-testid': dataTestId,
-  'data-value': dataValue
-}: TokenBalancePropsType) => {
+  'data-value': dataValue,
+  styles
+}: TokenBalancePropsType & WithStylesImportType) => {
   return (
     <div
       data-testid={dataTestId}
       data-value={dataValue}
-      className={classNames(styles.balance, className)}
+      className={classNames(styles?.balance, className)}
     >
       <span>{label}: </span>
       {value} {token?.ticker}
     </div>
   );
 };
+
+export const TokenBalance = withStyles(TokenBalanceComponent, {
+  ssrStyles: () =>
+    import('UI/Fields/AmountSelect/components/TokenBalance/styles.scss'),
+  clientStyles: () =>
+    require('UI/Fields/AmountSelect/components/TokenBalance/styles.scss')
+      .default
+});
