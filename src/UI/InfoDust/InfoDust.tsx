@@ -6,17 +6,24 @@ import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 
 import { MIN_DUST, FormDataTestIdsEnum } from 'constants/index';
-import styles from './styles.module.scss';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 
-export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
-  <div className={styles.infoDust}>
+interface InfoDustPropsType {
+  egldLabel: string;
+}
+
+export const InfoDustComponent = ({
+  egldLabel,
+  styles
+}: InfoDustPropsType & WithStylesImportType) => (
+  <div className={styles?.infoDust}>
     <Tooltip
       anchorId='info-dust'
       place='top'
       noArrow
       delayHide={400}
       delayShow={250}
-      className={styles.infoDustTooltip}
+      className={styles?.infoDustTooltip}
     >
       A minimal amount of{' '}
       <FormatAmount egldLabel={egldLabel} value={MIN_DUST} digits={3} /> has
@@ -29,9 +36,14 @@ export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
       id='info-dust'
       data-for='info-dust'
       data-testid={FormDataTestIdsEnum.infoDust}
-      className={styles.infoDustTrigger}
+      className={styles?.infoDustTrigger}
     >
       <FontAwesomeIcon icon={faInfoCircle} className='i-icon' />
     </div>
   </div>
 );
+
+export const InfoDust = withStyles(InfoDustComponent, {
+  ssrStyles: () => import('UI/InfoDust/styles.scss'),
+  clientStyles: () => require('UI/InfoDust/styles.scss').default
+});
