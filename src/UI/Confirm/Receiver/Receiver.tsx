@@ -7,7 +7,6 @@ import { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
 import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 
 import classNames from 'classnames';
-import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { MultiversXIconSimple } from 'UI/Fields/Receiver/components/MultiversXIconSimple';
@@ -24,6 +23,7 @@ export const ReceiverComponent = ({
   receiver,
   scamReport,
   receiverUsername,
+  globalStyles,
   styles
 }: ReceiverPropsType & WithStylesImportType) => {
   const hasUsername = Boolean(receiverUsername);
@@ -31,7 +31,7 @@ export const ReceiverComponent = ({
 
   return (
     <div className={styles?.confirmReceiver}>
-      <span className={globals.label}>{label}</span>
+      <span className={globalStyles?.label}>{label}</span>
 
       <span
         className={classNames(styles?.value, { [styles?.shrunk]: hasUsername })}

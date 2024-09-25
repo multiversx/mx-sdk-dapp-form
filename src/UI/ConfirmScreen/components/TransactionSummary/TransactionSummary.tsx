@@ -164,6 +164,6 @@ export const TransactionSummaryComponent = ({
 };
 
 export const TransactionSummary = withStyles(TransactionSummaryComponent, {
-  ssrStyles: () => import('UI/ConfirmScreen/styles?.scss'),
-  clientStyles: () => require('UI/ConfirmScreen/styles?.scss').default
+  ssrStyles: () => import('UI/ConfirmScreen/styles.scss'),
+  clientStyles: () => require('UI/ConfirmScreen/styles.scss').default
 });

@@ -7,7 +7,7 @@ import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext'
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { useGetEconomicsInfo } from 'contexts/TokensContext/utils/useGetEconomicsInfo';
 import { getIsDisabled } from 'helpers';
-import { WithStylesImportType } from 'hocs/withStyles';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { NftEnumType, ValuesEnum } from 'types';
 
 import { AmountSelect } from './AmountSelect';
@@ -25,7 +25,9 @@ import { progressiveFormatAmount } from './components/MaxButton/progressiveForma
 /**
  * Gets form state and renders a connected `AmountSelect` component
  */
-export const AmountSelectInput = ({ globalStyles }: WithStylesImportType) => {
+export const AmountSelectInputComponent = ({
+  globalStyles
+}: WithStylesImportType) => {
   const { checkInvalid } = useFormContext();
   const { tokensInfo, amountInfo, formInfo } = useSendFormContext();
   const { readonly } = formInfo;
@@ -179,3 +181,5 @@ export const AmountSelectInput = ({ globalStyles }: WithStylesImportType) => {
     />
   );
 };
+
+export const AmountSelectInput = withStyles(AmountSelectInputComponent, {});

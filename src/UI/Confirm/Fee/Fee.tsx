@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 
-import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum, ZERO } from 'constants/index';
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { calculateFeeInFiat } from 'operations';
@@ -20,10 +19,11 @@ export const FeeComponent = ({
   label = 'Fee',
   feeLimit,
   egldLabel,
+  globalStyles,
   styles
 }: FeePropsType & WithStylesImportType) => (
   <div className={styles?.fee}>
-    <span className={globals.label}>{label}</span>
+    <span className={globalStyles?.label}>{label}</span>
 
     <div className={styles?.token}>
       <TokenAvatar type={TransactionTypeEnum.EGLD} />

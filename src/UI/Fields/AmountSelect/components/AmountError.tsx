@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
-import globals from 'assets/sass/globals.module.scss';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { WithClassnameType } from 'types';
 
 export interface AmountErrorPropsType
@@ -11,21 +11,24 @@ export interface AmountErrorPropsType
   error?: string;
 }
 
-export const AmountError = ({
+export const AmountErrorComponent = ({
   hasErrors,
   className,
   error,
-  'data-testid': dataTestId
-}: AmountErrorPropsType) => {
+  'data-testid': dataTestId,
+  globalStyles
+}: AmountErrorPropsType & WithStylesImportType) => {
   if (!hasErrors) {
     return null;
   }
   return (
     <div
-      className={classNames(globals.error, className)}
+      className={classNames(globalStyles?.error, className)}
       data-testid={dataTestId}
     >
       {error}
     </div>
   );
 };
+
+export const AmountError = withStyles(AmountErrorComponent, {});
