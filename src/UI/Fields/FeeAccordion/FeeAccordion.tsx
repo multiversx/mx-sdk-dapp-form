@@ -5,18 +5,20 @@ import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount'
 import classNames from 'classnames';
 import useCollapse from 'react-collapsed';
 
-import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { WithClassnameType } from 'types';
 
 import { GasLimit } from '../GasLimit/GasLimit';
 import { GasPrice } from '../GasPrice';
 import { FeeInFiat } from './FeeInFiat';
 
-import styles from './styles.module.scss';
-
-export const FeeAccordion = ({ className }: WithClassnameType) => {
+export const FeeAccordionComponent = ({
+  className,
+  styles,
+  globalStyles
+}: WithClassnameType & WithStylesImportType) => {
   const { gasInfo, tokensInfo } = useSendFormContext();
   const { feeLimit, gasCostLoading, gasPriceError, gasLimitError } = gasInfo;
   const { egldPriceInUsd, egldLabel } = tokensInfo;
@@ -31,14 +33,14 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
   };
 
   return (
-    <div className={classNames(styles.fee, className)}>
-      <label className={globals.label}>Fee</label>
+    <div className={classNames(styles?.fee, className)}>
+      <label className={globalStyles?.label}>Fee</label>
       <div
-        className={styles.trigger}
+        className={styles?.trigger}
         {...getToggleProps({ onClick: toggleAccordion })}
       >
         <span
-          className={styles.limit}
+          className={styles?.limit}
           data-testid={FormDataTestIdsEnum.feeLimit}
         >
           <FormatAmount
@@ -60,12 +62,12 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
 
         <FontAwesomeIcon
           icon={faChevronRight}
-          className={classNames(styles.arrow, { [styles.active]: active })}
+          className={classNames(styles?.arrow, { [styles?.active]: active })}
         />
       </div>
 
-      <div className={styles.expandable} {...getCollapseProps()}>
-        <div className={styles.content}>
+      <div className={styles?.expandable} {...getCollapseProps()}>
+        <div className={styles?.content}>
           <GasPrice />
           <GasLimit />
         </div>
@@ -73,3 +75,8 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
     </div>
   );
 };
+
+export const FeeAccordion = withStyles(FeeAccordionComponent, {
+  ssrStyles: () => import('UI/Fields/FeeAccordion/styles.scss'),
+  clientStyles: () => require('UI/Fields/FeeAccordion/styles.scss').default
+});
