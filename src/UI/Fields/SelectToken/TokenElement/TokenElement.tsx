@@ -5,11 +5,10 @@ import * as constants from '@multiversx/sdk-dapp/constants/index';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 import classNames from 'classnames';
 
-import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum, ZERO } from 'constants/index';
 import { scamFlag } from 'helpers';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
-import styles from './styles.module.scss';
 
 const MultiversXIcon =
   require('./../../../../assets/icons/mx-icon.svg').default;
@@ -23,14 +22,16 @@ export interface TokenElementPropsType {
   token: PartialTokenType;
 }
 
-export const TokenElement = ({
+export const TokenElementComponent = ({
   EgldIcon,
   inDropdown = false,
   isEgld,
   nftTokenDetails,
   nftType,
-  token
-}: TokenElementPropsType) => {
+  token,
+  globalStyles,
+  styles
+}: TokenElementPropsType & WithStylesImportType) => {
   const { name, identifier, balance, decimals } = token;
   const avatar = token.assets?.svgUrl || token.assets?.pngUrl || '';
   const avatarDropdownSize = avatar ? 28 : 20;
@@ -67,12 +68,12 @@ export const TokenElement = ({
   const showFormattedValue =
     !inDropdown && nftType !== NftEnumType.NonFungibleESDT;
 
-  let tokenIcon = <div className={styles.tokenElementCircle}>{symbol}</div>;
+  let tokenIcon = <div className={styles?.tokenElementCircle}>{symbol}</div>;
 
   if (avatar) {
     tokenIcon = (
       <img
-        className={styles.tokenElementCircle}
+        className={styles?.tokenElementCircle}
         src={avatar}
         alt={name}
         height={avatarDropdownSize}
@@ -82,20 +83,20 @@ export const TokenElement = ({
 
   if (isEgld) {
     tokenIcon = (
-      <div className={styles.tokenElementCircle}>
+      <div className={styles?.tokenElementCircle}>
         {EgldIcon ? <EgldIcon height={36} /> : <MultiversXIcon height={36} />}
       </div>
     );
   }
 
   return (
-    <div className={classNames(globals.value, styles.tokenElement)}>
-      <div className={styles.tokenElementWrapper}>{tokenIcon}</div>
+    <div className={classNames(globalStyles?.value, styles?.tokenElement)}>
+      <div className={styles?.tokenElementWrapper}>{tokenIcon}</div>
 
       <div data-testid={FormDataTestIdsEnum.tokenName}>
         <span data-testid={`${identifier}-element`}>
           <span>{title}</span>{' '}
-          <span className={styles.tokenElementIdentifier}>{identifier}</span>
+          <span className={styles?.tokenElementIdentifier}>{identifier}</span>
         </span>
 
         {showFormattedValue && (
@@ -115,3 +116,9 @@ export const TokenElement = ({
     </div>
   );
 };
+
+export const TokenElement = withStyles(TokenElementComponent, {
+  ssrStyles: () => import('UI/Fields/SelectToken/TokenElement/styles.scss'),
+  clientStyles: () =>
+    require('UI/Fields/SelectToken/TokenElement/styles.scss').default
+});
