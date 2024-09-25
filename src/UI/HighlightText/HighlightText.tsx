@@ -1,16 +1,17 @@
 import React from 'react';
 
-import styles from './styles.modules.scss';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 
 export interface HighlightTextPropsType {
   text?: string;
   highlight: string;
 }
 
-export const HighlightText = ({
+export const HighlightTextComponent = ({
   highlight,
-  text = ''
-}: HighlightTextPropsType) => {
+  text = '',
+  styles
+}: HighlightTextPropsType & WithStylesImportType) => {
   const words = text.split(' ');
   const lowercaseHighlight = highlight.toLowerCase();
   const matchHighlight = new RegExp(`(${lowercaseHighlight})`, 'gi');
@@ -20,7 +21,7 @@ export const HighlightText = ({
   );
 
   return (
-    <span className={styles.highlight}>
+    <span className={styles?.highlight}>
       {wordsParts.map((wordPart, wordIndex) => {
         const wordKey = `${wordPart}-${wordIndex}`;
 
@@ -43,3 +44,8 @@ export const HighlightText = ({
     </span>
   );
 };
+
+export const HighlightText = withStyles(HighlightTextComponent, {
+  ssrStyles: () => import('UI/HighlightText/styles.scss'),
+  clientStyles: () => require('UI/HighlightText/styles.scss').default
+});
