@@ -2,16 +2,16 @@ import React, { MouseEvent } from 'react';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 
-import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts';
 import { getIsDisabled } from 'helpers';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { ValuesEnum, WithClassnameType } from 'types';
 
-import styles from './styles.module.scss';
-
-export const SFTAmount = (props: WithClassnameType) => {
-  const { className } = props;
+export const SFTAmountComponent = (
+  props: WithClassnameType & WithStylesImportType
+) => {
+  const { className, globalStyles, styles } = props;
   const {
     formInfo: { readonly },
     amountInfo,
@@ -41,21 +41,21 @@ export const SFTAmount = (props: WithClassnameType) => {
   };
 
   return (
-    <div className={classNames(styles.amount, className)}>
-      <div className={styles.label}>
-        <label htmlFor={ValuesEnum.amount} className={globals.label}>
+    <div className={classNames(styles?.amount, className)}>
+      <div className={styles?.label}>
+        <label htmlFor={ValuesEnum.amount} className={globalStyles?.label}>
           Amount
         </label>
 
         {hasPositiveBalance && nft && (
           <div
             data-value={`${maxAmountAvailable} ${nft.identifier}`}
-            className={classNames(styles.balance, className)}
+            className={classNames(styles?.balance, className)}
           >
             <span>Available:</span>{' '}
             <span
               data-testid={`available-${nft.identifier}`}
-              className={styles.available}
+              className={styles?.available}
             >
               {maxAmountAvailable} {nft.ticker}
             </span>
@@ -63,7 +63,7 @@ export const SFTAmount = (props: WithClassnameType) => {
         )}
       </div>
 
-      <div className={styles.wrapper}>
+      <div className={styles?.wrapper}>
         <input
           type='text'
           id={ValuesEnum.amount}
@@ -76,9 +76,9 @@ export const SFTAmount = (props: WithClassnameType) => {
           onBlur={onBlur}
           onChange={onChange}
           autoComplete='off'
-          className={classNames(globals.input, {
-            [globals.invalid]: isInvalid,
-            [globals.disabled]: getIsDisabled(ValuesEnum.amount, readonly)
+          className={classNames(globalStyles?.input, {
+            [globalStyles?.invalid]: isInvalid,
+            [globalStyles?.disabled]: getIsDisabled(ValuesEnum.amount, readonly)
           })}
         />
 
@@ -86,7 +86,7 @@ export const SFTAmount = (props: WithClassnameType) => {
           <a
             href='/'
             data-testid={FormDataTestIdsEnum.maxBtn}
-            className={styles.max}
+            className={styles?.max}
             onClick={onMaxAmount}
             onMouseDown={(event) => {
               event.preventDefault();
@@ -99,7 +99,7 @@ export const SFTAmount = (props: WithClassnameType) => {
 
       {isInvalid && (
         <div
-          className={globals.error}
+          className={globalStyles?.error}
           data-testid={FormDataTestIdsEnum.amountError}
         >
           {error}
@@ -108,3 +108,8 @@ export const SFTAmount = (props: WithClassnameType) => {
     </div>
   );
 };
+
+export const SFTAmount = withStyles(SFTAmountComponent, {
+  ssrStyles: () => import('UI/Fields/SFTAmount/styles.scss'),
+  clientStyles: () => require('UI/Fields/SFTAmount/styles.scss').default
+});
