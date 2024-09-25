@@ -2,18 +2,19 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { ValuesEnum, WithClassnameType } from 'types';
-
-import amountSelectStyles from '../AmountSelect/amountSelect.module.scss';
 
 import { AdvancedMode } from './components';
 import { useIsDataDisabled } from './hooks';
-import styles from './styles.module.scss';
 
-export const Data = ({ className }: WithClassnameType) => {
+export const DataComponent = ({
+  className,
+  styles,
+  globalStyles
+}: WithClassnameType & WithStylesImportType) => {
   const {
     dataFieldInfo: { data, dataError, isDataInvalid, onChange, onBlur }
   } = useSendFormContext();
@@ -21,14 +22,14 @@ export const Data = ({ className }: WithClassnameType) => {
   const isDisabled = useIsDataDisabled();
 
   return (
-    <div className={classNames(styles.data, className)}>
-      <div className={amountSelectStyles.label}>
-        <label htmlFor={ValuesEnum.data} className={globals.label}>
+    <div className={classNames(styles?.data, className)}>
+      <div className={styles?.label}>
+        <label htmlFor={ValuesEnum.data} className={globalStyles?.label}>
           Data
         </label>
         <AdvancedMode />
       </div>
-      <div className={styles.wrapper}>
+      <div className={styles?.wrapper}>
         <textarea
           rows={1}
           id={ValuesEnum.data}
@@ -40,15 +41,15 @@ export const Data = ({ className }: WithClassnameType) => {
           onChange={onChange}
           spellCheck='false'
           placeholder='Add transaction data'
-          className={classNames(globals.textarea, {
-            [globals.invalid]: isDataInvalid,
-            [globals.disabled]: isDisabled
+          className={classNames(globalStyles?.textarea, {
+            [globalStyles?.invalid]: isDataInvalid,
+            [globalStyles?.disabled]: isDisabled
           })}
         />
       </div>
       {isDataInvalid && (
         <div
-          className={globals.error}
+          className={globalStyles?.error}
           data-testid={FormDataTestIdsEnum.dataError}
         >
           {dataError}
@@ -57,3 +58,8 @@ export const Data = ({ className }: WithClassnameType) => {
     </div>
   );
 };
+
+export const Data = withStyles(DataComponent, {
+  ssrStyles: () => import('UI/Fields/Data/styles.scss'),
+  clientStyles: () => require('UI/Fields/Data/styles.scss').default
+});

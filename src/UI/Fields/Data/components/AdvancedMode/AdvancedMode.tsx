@@ -8,12 +8,12 @@ import { useFormikContext } from 'formik';
 
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { ExtendedValuesType } from 'types/form';
 
 import { useIsDataDisabled } from '../../hooks';
-import styles from './styles.module.scss';
 
-export const AdvancedMode = () => {
+export const AdvancedModeComponent = ({ styles }: WithStylesImportType) => {
   const {
     formInfo: { readonly, isEgldTransaction }
   } = useSendFormContext();
@@ -51,12 +51,12 @@ export const AdvancedMode = () => {
   if (showConfirm) {
     return (
       <div
-        className={styles.advanced}
+        className={styles?.advanced}
         data-testid={FormDataTestIdsEnum.confirmAdvancedMode}
         onClick={handleAdvancedModeEnabled}
       >
         <FontAwesomeIcon icon={faCheck} className='i-icon' />
-        <span className={styles.advancedText}>Confirm</span>
+        <span className={styles?.advancedText}>Confirm</span>
       </div>
     );
   }
@@ -64,11 +64,17 @@ export const AdvancedMode = () => {
   return (
     <div
       data-testid={FormDataTestIdsEnum.enableAdvancedMode}
-      className={styles.advanced}
+      className={styles?.advanced}
       onClick={handleShowConfirm}
     >
       <FontAwesomeIcon icon={faScrewdriverWrench} className='i-icon' />
-      <span className={styles.advancedText}>Advanced</span>
+      <span className={styles?.advancedText}>Advanced</span>
     </div>
   );
 };
+
+export const AdvancedMode = withStyles(AdvancedModeComponent, {
+  ssrStyles: () => import('UI/Fields/Data/components/AdvancedMode/styles.scss'),
+  clientStyles: () =>
+    require('UI/Fields/Data/components/AdvancedMode/styles.scss').default
+});
