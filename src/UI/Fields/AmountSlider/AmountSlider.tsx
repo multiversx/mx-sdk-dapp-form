@@ -1,9 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import classNames from 'classnames';
 
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { WithClassnameType } from 'types';
-
-import styles from './styles.module.scss';
 
 export interface AmountSliderPropsType extends WithClassnameType {
   disabled?: boolean;
@@ -11,18 +10,19 @@ export interface AmountSliderPropsType extends WithClassnameType {
   onPercentageChange: (percentage: number) => void;
 }
 
-export const AmountSlider = ({
+export const AmountSliderComponent = ({
   disabled,
   percentageValue = 0,
   onPercentageChange,
-  className
-}: AmountSliderPropsType) => {
+  className,
+  styles
+}: AmountSliderPropsType & WithStylesImportType) => {
   const breakpoints = [0, 25, 50, 75, 100];
   const amountSliderField = 'amountSlider';
 
   return (
-    <div className={classNames(styles.amountSlider, className)}>
-      <div className={styles.amountSliderRange}>
+    <div className={classNames(styles?.amountSlider, className)}>
+      <div className={styles?.amountSliderRange}>
         <input
           name={amountSliderField}
           id={amountSliderField}
@@ -32,8 +32,8 @@ export const AmountSlider = ({
           min={0}
           max={100}
           value={String(percentageValue)}
-          className={classNames(styles.amountSliderInput, {
-            [styles.disabled]: disabled
+          className={classNames(styles?.amountSliderInput, {
+            [styles?.disabled]: disabled
           })}
           onChange={(event: ChangeEvent<HTMLInputElement>) => {
             onPercentageChange(Number(event.target.value));
@@ -42,8 +42,8 @@ export const AmountSlider = ({
 
         <div
           style={{ width: `${percentageValue}%` }}
-          className={classNames(styles.amountSliderCompletion, {
-            [styles.disabled]: disabled
+          className={classNames(styles?.amountSliderCompletion, {
+            [styles?.disabled]: disabled
           })}
         />
 
@@ -52,9 +52,9 @@ export const AmountSlider = ({
             onClick={() => onPercentageChange(breakpoint)}
             key={`breakpoint-${breakpoint}`}
             style={{ left: `${breakpoint}%` }}
-            className={classNames(styles.amountSliderBreakpoint, {
-              [styles.completed]: breakpoint <= percentageValue,
-              [styles.disabled]: disabled
+            className={classNames(styles?.amountSliderBreakpoint, {
+              [styles?.completed]: breakpoint <= percentageValue,
+              [styles?.disabled]: disabled
             })}
           />
         ))}
@@ -64,9 +64,9 @@ export const AmountSlider = ({
             style={{ left: `${breakpoint}%` }}
             key={`breakpoint-${breakpoint}`}
             onClick={() => onPercentageChange(breakpoint)}
-            className={classNames(styles.amountSliderPercentage, {
-              [styles.exact]: breakpoint === percentageValue,
-              [styles.disabled]: disabled
+            className={classNames(styles?.amountSliderPercentage, {
+              [styles?.exact]: breakpoint === percentageValue,
+              [styles?.disabled]: disabled
             })}
           >
             {breakpoint}%
@@ -75,13 +75,13 @@ export const AmountSlider = ({
 
         <span
           style={{ left: `${percentageValue}%` }}
-          className={classNames(styles.amountSliderThumb, {
-            [styles.disabled]: disabled
+          className={classNames(styles?.amountSliderThumb, {
+            [styles?.disabled]: disabled
           })}
         >
           <strong
-            className={classNames(styles.amountSliderThumbPercentage, {
-              [styles.hidden]: breakpoints.includes(percentageValue)
+            className={classNames(styles?.amountSliderThumbPercentage, {
+              [styles?.hidden]: breakpoints.includes(percentageValue)
             })}
           >
             {Math.round(percentageValue)}%
@@ -91,3 +91,8 @@ export const AmountSlider = ({
     </div>
   );
 };
+
+export const AmountSlider = withStyles(AmountSliderComponent, {
+  ssrStyles: () => import('UI/Fields/AmountSlider/styles.scss'),
+  clientStyles: () => require('UI/Fields/AmountSlider/styles.scss').default
+});
