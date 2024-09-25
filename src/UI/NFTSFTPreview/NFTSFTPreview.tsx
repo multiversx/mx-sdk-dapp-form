@@ -4,17 +4,18 @@ import classNames from 'classnames';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { FormContextPropsType } from 'contexts';
 import { processScamNft } from 'helpers';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { PartialNftType, TransactionTypeEnum } from 'types';
-
-import styles from './styles.module.scss';
 
 export interface NFTSFTPreviewPropsType extends PartialNftType {
   txType: TransactionTypeEnum;
   onClick?: FormContextPropsType['onPreviewClick'];
 }
 
-export const NFTSFTPreview = (props: NFTSFTPreviewPropsType) => {
-  const { txType, onClick, identifier, ...nft } = props;
+export const NFTSFTPreviewComponent = (
+  props: NFTSFTPreviewPropsType & WithStylesImportType
+) => {
+  const { txType, onClick, identifier, styles, ...nft } = props;
   const { name, thumbnail } = processScamNft({
     nft
   });
@@ -41,34 +42,34 @@ export const NFTSFTPreview = (props: NFTSFTPreviewPropsType) => {
     <div
       onClick={onPreviewClick}
       data-testid={FormDataTestIdsEnum.tokenPreview}
-      className={classNames(styles.preview, {
-        [styles.clickable]: Boolean(onClick)
+      className={classNames(styles?.preview, {
+        [styles?.clickable]: Boolean(onClick)
       })}
     >
-      <img src={thumbnail} className={styles.image} />
+      <img src={thumbnail} className={styles?.image} />
 
-      <div className={styles.content}>
-        <div className={styles.left}>
+      <div className={styles?.content}>
+        <div className={styles?.left}>
           <div
             data-testid={FormDataTestIdsEnum.tokenPreviewName}
-            className={styles.name}
+            className={styles?.name}
           >
             {name}
           </div>
 
           <div
             data-testid={FormDataTestIdsEnum.tokenPreviewIdentifier}
-            className={styles.identifier}
+            className={styles?.identifier}
           >
             {identifier}
           </div>
         </div>
 
-        <div className={styles.right}>
+        <div className={styles?.right}>
           <div
-            className={classNames(styles.badge, {
-              [styles.nft]: txType === TransactionTypeEnum.NonFungibleESDT,
-              [styles.sft]: txType === TransactionTypeEnum.SemiFungibleESDT
+            className={classNames(styles?.badge, {
+              [styles?.nft]: txType === TransactionTypeEnum.NonFungibleESDT,
+              [styles?.sft]: txType === TransactionTypeEnum.SemiFungibleESDT
             })}
           >
             {badge}
@@ -78,3 +79,8 @@ export const NFTSFTPreview = (props: NFTSFTPreviewPropsType) => {
     </div>
   );
 };
+
+export const NFTSFTPreview = withStyles(NFTSFTPreviewComponent, {
+  ssrStyles: () => import('UI/NFTSFTPreview/styles.scss'),
+  clientStyles: () => require('UI/NFTSFTPreview/styles.scss').default
+});
