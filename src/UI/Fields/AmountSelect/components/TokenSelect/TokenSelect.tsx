@@ -60,7 +60,7 @@ export const TokenSelectComponent = (
         TokenTickerIcon,
         styles
       }),
-    []
+    [styles]
   );
   const ValueContainer = useMemo(
     () =>
@@ -70,12 +70,12 @@ export const TokenSelectComponent = (
         EgldIcon,
         styles
       ),
-    []
+    [styles]
   );
 
   const SingleValue = useMemo(
     () => renderSingleValue(TokenTickerIcon, styles),
-    []
+    [styles]
   );
 
   const updateSelectedOption = () => {

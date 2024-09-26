@@ -144,7 +144,7 @@ export const ReceiverComponent = (
 
   const Input = useMemo(
     () => renderInput(receiverSelectReference, styles),
-    [receiverSelectReference]
+    [receiverSelectReference, styles]
   );
 
   useEffect(() => {
