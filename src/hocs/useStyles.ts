@@ -9,9 +9,9 @@ export type WithStylesImportType = {
 };
 
 const defaultServerGlobalImport = async () =>
-  await import('assets/sass/main.scss');
+  await import('assets/sass/globals.module.scss');
 const defaultClientGlobalImport = () =>
-  require('assets/sass/main.scss').default;
+  require('assets/sass/globals.module.scss').default;
 
 const ssr = isSSR();
 export function useStyles({

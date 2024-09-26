@@ -1,4 +1,7 @@
-@import 'assets/sass/variables/variables';
+@import 'themes/theme.scss';
+
+// Variables override
+@import 'variables/variables';
 
 .error {
   width: 100%;
