@@ -32,6 +32,7 @@ export const AmountErrorComponent = ({
 };
 
 export const AmountError = withStyles(AmountErrorComponent, {
-  ssrStyles: () => import('UI/Fields/AmountSelect/styles.scss'),
-  clientStyles: () => require('UI/Fields/AmountSelect/styles.scss').default
+  ssrStyles: () => import('UI/Fields/AmountSelect/amountSelect.module.scss'),
+  clientStyles: () =>
+    require('UI/Fields/AmountSelect/amountSelect.module.scss').default
 });
