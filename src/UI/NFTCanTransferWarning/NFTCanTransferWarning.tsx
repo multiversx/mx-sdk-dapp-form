@@ -72,7 +72,8 @@ export const NFTCanTransferWarningComponent = (
 export const NFTCanTransferWarning = withStyles(
   NFTCanTransferWarningComponent,
   {
-    ssrStyles: () => import('UI/NFTCanTransferWarning/styles.scss'),
-    clientStyles: () => require('UI/NFTCanTransferWarning/styles.scss').default
+    ssrStyles: () => import('UI/NFTCanTransferWarning/styles.module.scss'),
+    clientStyles: () =>
+      require('UI/NFTCanTransferWarning/styles.module.scss').default
   }
 );

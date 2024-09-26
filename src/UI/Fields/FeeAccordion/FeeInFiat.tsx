@@ -31,6 +31,7 @@ export const FeeInFiatComponent = ({
 };
 
 export const FeeInFiat = withStyles(FeeInFiatComponent, {
-  ssrStyles: () => import('UI/Fields/FeeAccordion/styles.scss'),
-  clientStyles: () => require('UI/Fields/FeeAccordion/styles.scss').default
+  ssrStyles: () => import('UI/Fields/FeeAccordion/styles.module.scss'),
+  clientStyles: () =>
+    require('UI/Fields/FeeAccordion/styles.module.scss').default
 });

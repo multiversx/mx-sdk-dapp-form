@@ -10,6 +10,6 @@ export const LoaderComponent = ({ styles }: WithStylesImportType) => (
 );
 
 export const Loader = withStyles(LoaderComponent, {
-  ssrStyles: () => import('UI/Loader/styles.scss'),
-  clientStyles: () => require('UI/Loader/styles.scss').default
+  ssrStyles: () => import('UI/Loader/styles.module.scss'),
+  clientStyles: () => require('UI/Loader/styles.module.scss').default
 });

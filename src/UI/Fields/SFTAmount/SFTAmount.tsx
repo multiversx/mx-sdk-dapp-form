@@ -111,6 +111,6 @@ export const SFTAmountComponent = (
 };
 
 export const SFTAmount = withStyles(SFTAmountComponent, {
-  ssrStyles: () => import('UI/Fields/SFTAmount/styles.scss'),
-  clientStyles: () => require('UI/Fields/SFTAmount/styles.scss').default
+  ssrStyles: () => import('UI/Fields/SFTAmount/styles.module.scss'),
+  clientStyles: () => require('UI/Fields/SFTAmount/styles.module.scss').default
 });

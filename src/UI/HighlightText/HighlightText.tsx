@@ -46,6 +46,6 @@ export const HighlightTextComponent = ({
 };
 
 export const HighlightText = withStyles(HighlightTextComponent, {
-  ssrStyles: () => import('UI/HighlightText/styles.scss'),
-  clientStyles: () => require('UI/HighlightText/styles.scss').default
+  ssrStyles: () => import('UI/HighlightText/styles.modules.scss'),
+  clientStyles: () => require('UI/HighlightText/styles.modules.scss').default
 });

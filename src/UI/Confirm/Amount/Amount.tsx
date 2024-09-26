@@ -99,6 +99,6 @@ export const AmountComponent = ({
 };
 
 export const Amount = withStyles(AmountComponent, {
-  ssrStyles: () => import('UI/Confirm/Amount/styles.scss'),
-  clientStyles: () => require('UI/Confirm/Amount/styles.scss').default
+  ssrStyles: () => import('UI/Confirm/Amount/styles.module.scss'),
+  clientStyles: () => require('UI/Confirm/Amount/styles.module.scss').default
 });

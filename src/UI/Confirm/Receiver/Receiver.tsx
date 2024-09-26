@@ -71,6 +71,6 @@ export const ReceiverComponent = ({
 };
 
 export const Receiver = withStyles(ReceiverComponent, {
-  ssrStyles: () => import('UI/Confirm/Receiver/styles.scss'),
-  clientStyles: () => require('UI/Confirm/Receiver/styles.scss').default
+  ssrStyles: () => import('UI/Confirm/Receiver/styles.module.scss'),
+  clientStyles: () => require('UI/Confirm/Receiver/styles.module.scss').default
 });

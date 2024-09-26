@@ -97,6 +97,6 @@ export const DataComponent = ({
 };
 
 export const Data = withStyles(DataComponent, {
-  ssrStyles: () => import('UI/Confirm/Data/styles.scss'),
-  clientStyles: () => require('UI/Confirm/Data/styles.scss').default
+  ssrStyles: () => import('UI/Confirm/Data/styles.module.scss'),
+  clientStyles: () => require('UI/Confirm/Data/styles.module.scss').default
 });

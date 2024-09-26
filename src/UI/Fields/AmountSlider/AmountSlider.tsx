@@ -93,6 +93,7 @@ export const AmountSliderComponent = ({
 };
 
 export const AmountSlider = withStyles(AmountSliderComponent, {
-  ssrStyles: () => import('UI/Fields/AmountSlider/styles.scss'),
-  clientStyles: () => require('UI/Fields/AmountSlider/styles.scss').default
+  ssrStyles: () => import('UI/Fields/AmountSlider/styles.module.scss'),
+  clientStyles: () =>
+    require('UI/Fields/AmountSlider/styles.module.scss').default
 });

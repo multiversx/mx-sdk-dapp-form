@@ -60,6 +60,6 @@ export const DataComponent = ({
 };
 
 export const Data = withStyles(DataComponent, {
-  ssrStyles: () => import('UI/Fields/Data/styles.scss'),
-  clientStyles: () => require('UI/Fields/Data/styles.scss').default
+  ssrStyles: () => import('UI/Fields/Data/styles.module.scss'),
+  clientStyles: () => require('UI/Fields/Data/styles.module.scss').default
 });

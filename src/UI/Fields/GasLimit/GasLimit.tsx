@@ -87,6 +87,6 @@ export const GasLimitComponent = ({
 };
 
 export const GasLimit = withStyles(GasLimitComponent, {
-  ssrStyles: () => import('UI/Fields/styles.scss'),
-  clientStyles: () => require('UI/Fields/styles.scss').default
+  ssrStyles: () => import('UI/Fields/styles.module.scss'),
+  clientStyles: () => require('UI/Fields/styles.module.scss').default
 });

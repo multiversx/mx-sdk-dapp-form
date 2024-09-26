@@ -118,7 +118,8 @@ export const TokenElementComponent = ({
 };
 
 export const TokenElement = withStyles(TokenElementComponent, {
-  ssrStyles: () => import('UI/Fields/SelectToken/TokenElement/styles.scss'),
+  ssrStyles: () =>
+    import('UI/Fields/SelectToken/TokenElement/styles.module.scss'),
   clientStyles: () =>
-    require('UI/Fields/SelectToken/TokenElement/styles.scss').default
+    require('UI/Fields/SelectToken/TokenElement/styles.module.scss').default
 });

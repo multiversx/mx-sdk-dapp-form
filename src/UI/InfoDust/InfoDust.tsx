@@ -44,6 +44,6 @@ export const InfoDustComponent = ({
 );
 
 export const InfoDust = withStyles(InfoDustComponent, {
-  ssrStyles: () => import('UI/InfoDust/styles.scss'),
-  clientStyles: () => require('UI/InfoDust/styles.scss').default
+  ssrStyles: () => import('UI/InfoDust/styles.module.scss'),
+  clientStyles: () => require('UI/InfoDust/styles.module.scss').default
 });

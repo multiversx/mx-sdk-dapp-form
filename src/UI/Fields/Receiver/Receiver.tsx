@@ -251,6 +251,6 @@ export const ReceiverComponent = (
 };
 
 export const Receiver = withStyles(ReceiverComponent, {
-  ssrStyles: () => import('UI/Fields/Receiver/styles.scss'),
-  clientStyles: () => require('UI/Fields/Receiver/styles.scss').default
+  ssrStyles: () => import('UI/Fields/Receiver/styles.module.scss'),
+  clientStyles: () => require('UI/Fields/Receiver/styles.module.scss').default
 });

@@ -78,6 +78,6 @@ export const TokenComponent = ({
 };
 
 export const Token = withStyles(TokenComponent, {
-  ssrStyles: () => import('UI/Confirm/Token/styles.scss'),
-  clientStyles: () => require('UI/Confirm/Token/styles.scss').default
+  ssrStyles: () => import('UI/Confirm/Token/styles.module.scss'),
+  clientStyles: () => require('UI/Confirm/Token/styles.module.scss').default
 });

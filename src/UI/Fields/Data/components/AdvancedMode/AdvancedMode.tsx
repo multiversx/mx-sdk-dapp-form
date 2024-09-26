@@ -74,7 +74,8 @@ export const AdvancedModeComponent = ({ styles }: WithStylesImportType) => {
 };
 
 export const AdvancedMode = withStyles(AdvancedModeComponent, {
-  ssrStyles: () => import('UI/Fields/Data/components/AdvancedMode/styles.scss'),
+  ssrStyles: () =>
+    import('UI/Fields/Data/components/AdvancedMode/styles.module.scss'),
   clientStyles: () =>
-    require('UI/Fields/Data/components/AdvancedMode/styles.scss').default
+    require('UI/Fields/Data/components/AdvancedMode/styles.module.scss').default
 });

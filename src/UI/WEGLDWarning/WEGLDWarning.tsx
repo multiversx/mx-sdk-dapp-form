@@ -46,6 +46,6 @@ export const WEGLDWarningComponent = (
 };
 
 export const WEGLDWarning = withStyles(WEGLDWarningComponent, {
-  ssrStyles: () => import('UI/WEGLDWarning/styles.scss'),
-  clientStyles: () => require('UI/WEGLDWarning/styles.scss').default
+  ssrStyles: () => import('UI/WEGLDWarning/styles.module.scss'),
+  clientStyles: () => require('UI/WEGLDWarning/styles.module.scss').default
 });

@@ -50,6 +50,6 @@ export const FeeComponent = ({
 );
 
 export const Fee = withStyles(FeeComponent, {
-  ssrStyles: () => import('UI/Confirm/Fee/styles.scss'),
-  clientStyles: () => require('UI/Confirm/Fee/styles.scss').default
+  ssrStyles: () => import('UI/Confirm/Fee/styles.module.scss'),
+  clientStyles: () => require('UI/Confirm/Fee/styles.module.scss').default
 });

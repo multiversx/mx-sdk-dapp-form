@@ -81,6 +81,6 @@ export const NFTSFTPreviewComponent = (
 };
 
 export const NFTSFTPreview = withStyles(NFTSFTPreviewComponent, {
-  ssrStyles: () => import('UI/NFTSFTPreview/styles.scss'),
-  clientStyles: () => require('UI/NFTSFTPreview/styles.scss').default
+  ssrStyles: () => import('UI/NFTSFTPreview/styles.module.scss'),
+  clientStyles: () => require('UI/NFTSFTPreview/styles.module.scss').default
 });
