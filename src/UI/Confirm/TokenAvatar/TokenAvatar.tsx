@@ -59,6 +59,7 @@ export const TokenAvatarComponent = (
 };
 
 export const TokenAvatar = withStyles(TokenAvatarComponent, {
-  ssrStyles: () => import('UI/Confirm/TokenAvatar/styles.scss'),
-  clientStyles: () => require('UI/Confirm/TokenAvatar/styles.scss').default
+  ssrStyles: () => import('UI/Confirm/TokenAvatar/tokenAvatar.styles.scss'),
+  clientStyles: () =>
+    require('UI/Confirm/TokenAvatar/tokenAvatar.styles.scss').default
 });

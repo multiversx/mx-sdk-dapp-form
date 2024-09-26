@@ -38,6 +38,7 @@ export const ConfirmScreenComponent = (
 };
 
 export const ConfirmScreen = withStyles(ConfirmScreenComponent, {
-  ssrStyles: () => import('UI/ConfirmScreen/styles.scss'),
-  clientStyles: () => require('UI/ConfirmScreen/styles.scss').default
+  ssrStyles: () => import('UI/ConfirmScreen/confirmScreen.module.scss'),
+  clientStyles: () =>
+    require('UI/ConfirmScreen/confirmScreen.module.scss').default
 });

@@ -191,7 +191,10 @@ export const TokenSelectComponent = (
 
 export const TokenSelect = withStyles(TokenSelectComponent, {
   ssrStyles: () =>
-    import('UI/Fields/AmountSelect/components/TokenSelect/styles.scss'),
+    import(
+      'UI/Fields/AmountSelect/components/TokenSelect/tokenSelect.module.scss'
+    ),
   clientStyles: () =>
-    require('UI/Fields/AmountSelect/components/TokenSelect/styles.scss').default
+    require('UI/Fields/AmountSelect/components/TokenSelect/tokenSelect.module.scss')
+      .default
 });

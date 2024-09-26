@@ -214,7 +214,10 @@ export const MemoizedAmountInput = memo(
 
 export const AmountInput = withStyles(MemoizedAmountInput, {
   ssrStyles: () =>
-    import('UI/Fields/AmountSelect/components/AmountInput/styles.scss'),
+    import(
+      'UI/Fields/AmountSelect/components/AmountInput/amountInput.module.scss'
+    ),
   clientStyles: () =>
-    require('UI/Fields/AmountSelect/components/AmountInput/styles.scss').default
+    require('UI/Fields/AmountSelect/components/AmountInput/amountInput.module.scss')
+      .default
 });

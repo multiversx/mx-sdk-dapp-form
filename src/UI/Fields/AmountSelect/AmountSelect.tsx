@@ -90,6 +90,7 @@ export const AmountSelectComponent = ({
 );
 
 export const AmountSelect = withStyles(AmountSelectComponent, {
-  ssrStyles: () => import('UI/Fields/AmountSelect/styles.scss'),
-  clientStyles: () => require('UI/Fields/AmountSelect/styles.scss').default
+  ssrStyles: () => import('UI/Fields/AmountSelect/amountSelect.module.scss'),
+  clientStyles: () =>
+    require('UI/Fields/AmountSelect/amountSelect.module.scss').default
 });

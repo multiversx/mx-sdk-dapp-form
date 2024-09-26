@@ -70,7 +70,8 @@ export const MaxButtonComponent = ({
 
 export const MaxButton = withStyles(MaxButtonComponent, {
   ssrStyles: () =>
-    import('UI/Fields/AmountSelect/components/MaxButton/styles.scss'),
+    import('UI/Fields/AmountSelect/components/MaxButton/maxButton.module.scss'),
   clientStyles: () =>
-    require('UI/Fields/AmountSelect/components/MaxButton/styles.scss').default
+    require('UI/Fields/AmountSelect/components/MaxButton/maxButton.module.scss')
+      .default
 });

@@ -36,8 +36,10 @@ export const TokenBalanceComponent = ({
 
 export const TokenBalance = withStyles(TokenBalanceComponent, {
   ssrStyles: () =>
-    import('UI/Fields/AmountSelect/components/TokenBalance/styles.scss'),
+    import(
+      'UI/Fields/AmountSelect/components/TokenBalance/tokenBalance.module.scss'
+    ),
   clientStyles: () =>
-    require('UI/Fields/AmountSelect/components/TokenBalance/styles.scss')
+    require('UI/Fields/AmountSelect/components/TokenBalance/tokenBalance.module.scss')
       .default
 });

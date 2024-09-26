@@ -211,6 +211,6 @@ export const FormComponent = ({
 };
 
 export const Form = withStyles(FormComponent, {
-  ssrStyles: () => import('UI/Form/styles.scss'),
-  clientStyles: () => require('UI/Form/styles.scss').default
+  ssrStyles: () => import('UI/Form/form.module.scss'),
+  clientStyles: () => require('UI/Form/form.module.scss').default
 });
