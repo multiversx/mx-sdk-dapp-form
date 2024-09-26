@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
-import { WithClassnameType } from 'types';
 
 export interface AmountSliderPropsType extends WithClassnameType {
   disabled?: boolean;

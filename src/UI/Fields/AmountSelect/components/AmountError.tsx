@@ -1,8 +1,8 @@
 import React, { PropsWithChildren } from 'react';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
-import { WithClassnameType } from 'types';
 
 export interface AmountErrorPropsType
   extends WithClassnameType,
@@ -31,4 +31,7 @@ export const AmountErrorComponent = ({
   );
 };
 
-export const AmountError = withStyles(AmountErrorComponent, {});
+export const AmountError = withStyles(AmountErrorComponent, {
+  ssrStyles: () => import('UI/Fields/AmountSelect/styles.scss'),
+  clientStyles: () => require('UI/Fields/AmountSelect/styles.scss').default
+});

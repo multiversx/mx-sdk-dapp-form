@@ -5,12 +5,13 @@ import { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
 import { CopyButton } from '@multiversx/sdk-dapp/UI/CopyButton';
 import { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
 import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 
 import { CAN_TRANSFER_MESSAGE, FormDataTestIdsEnum } from 'constants/index';
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
-import { ExtendedValuesType, WithClassnameType } from 'types';
+import { ExtendedValuesType } from 'types';
 
 export const NFTCanTransferWarningComponent = (
   props: WithClassnameType & WithStylesImportType

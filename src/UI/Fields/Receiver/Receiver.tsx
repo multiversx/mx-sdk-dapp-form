@@ -10,6 +10,7 @@ import {
   faExclamationTriangle
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 import Select from 'react-select';
@@ -19,7 +20,7 @@ import { useReceiverUsernameContext } from 'contexts/ReceiverUsernameContext';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled } from 'helpers';
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
-import { ExtendedValuesType, ValuesEnum, WithClassnameType } from 'types';
+import { ExtendedValuesType, ValuesEnum } from 'types';
 
 import {
   renderControl,

@@ -7,13 +7,13 @@ import React, {
   useRef,
   useState
 } from 'react';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import { NumberFormatValues, NumericFormat } from 'react-number-format';
 
 import { stringIsFloat } from 'helpers';
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
-import { WithClassnameType } from 'types';
 
 import {
   ImprovedDebounceValueType,

@@ -182,4 +182,7 @@ export const AmountSelectInputComponent = ({
   );
 };
 
-export const AmountSelectInput = withStyles(AmountSelectInputComponent, {});
+export const AmountSelectInput = withStyles(AmountSelectInputComponent, {
+  ssrStyles: () => import('UI/Fields/AmountSelect/styles.scss'),
+  clientStyles: () => require('UI/Fields/AmountSelect/styles.scss').default
+});

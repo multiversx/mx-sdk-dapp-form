@@ -1,8 +1,9 @@
 import React, { JSXElementConstructor } from 'react';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 
 import { ZERO } from 'constants/index';
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
-import { PartialNftType, WithClassnameType } from 'types';
+import { PartialNftType } from 'types';
 import { TokenElement } from 'UI/Fields/SelectToken/TokenElement';
 
 export interface TokenPropsType extends WithClassnameType {

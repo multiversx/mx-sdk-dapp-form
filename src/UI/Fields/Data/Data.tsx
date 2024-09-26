@@ -1,11 +1,11 @@
 import React from 'react';
-
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
-import { ValuesEnum, WithClassnameType } from 'types';
+import { ValuesEnum } from 'types';
 
 import { AdvancedMode } from './components';
 import { useIsDataDisabled } from './hooks';

@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { faChevronRight, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import useCollapse from 'react-collapsed';
 
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
-import { WithClassnameType } from 'types';
 
 import { GasLimit } from '../GasLimit/GasLimit';
 import { GasPrice } from '../GasPrice';

@@ -1,9 +1,10 @@
 import React from 'react';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
-import { ExtendedValuesType, WithClassnameType } from 'types';
+import { ExtendedValuesType } from 'types';
 
 import {
   AmountError,

@@ -1,4 +1,5 @@
 import React, { MouseEvent } from 'react';
+import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 
@@ -6,7 +7,7 @@ import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts';
 import { getIsDisabled } from 'helpers';
 import { withStyles, WithStylesImportType } from 'hocs/withStyles';
-import { ValuesEnum, WithClassnameType } from 'types';
+import { ValuesEnum } from 'types';
 
 export const SFTAmountComponent = (
   props: WithClassnameType & WithStylesImportType
