@@ -3,6 +3,7 @@
 .data {
   display: flex;
   position: relative;
+  flex-direction: column;
 
   .wrapper {
     display: flex;

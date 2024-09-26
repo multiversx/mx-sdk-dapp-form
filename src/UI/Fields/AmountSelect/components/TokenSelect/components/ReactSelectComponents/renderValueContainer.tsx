@@ -90,11 +90,12 @@ export const renderValueContainer =
             icon={icon}
             isDisabled={isDisabled}
             tokenId={token?.value}
+            styles={styles}
           />
         </div>
 
         <div className={styles?.payload}>
-          <ValueWrapper>
+          <ValueWrapper styles={styles}>
             {children}
 
             {token?.token.usdPrice && (
