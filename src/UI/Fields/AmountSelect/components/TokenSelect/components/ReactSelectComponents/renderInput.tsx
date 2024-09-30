@@ -11,7 +11,7 @@ export const renderInput =
       <components.Input
         {...props}
         data-testid={FormDataTestIdsEnum.tokenSelectInput}
-        className={styles?.input}
+        className={styles?.dropdown}
       />
     );
   };
