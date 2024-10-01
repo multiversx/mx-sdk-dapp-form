@@ -32,8 +32,6 @@ export const ValueContainer: typeof components.ValueContainer = (props) => {
     (hasUsername || (!hasUsername && !menuIsOpen)) &&
     addressIsValid(superOption.value);
 
-  console.log({ shouldShowPreview });
-
   return (
     <components.ValueContainer
       {...props}
