@@ -7,34 +7,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Fixed broken receiver input mirror effect on pasting](https://github.com/multiversx/mx-sdk-dapp-form/pull/307)
+
 ## [[0.10.11](https://github.com/multiversx/mx-sdk-dapp-form/pull/305)] - 2024-08-29
+
 - [Added cached tokens functionality](https://github.com/multiversx/mx-sdk-dapp/pull/304)
 
 ## [[0.10.10](https://github.com/multiversx/mx-sdk-dapp-form/pull/303)] - 2024-05-23
+
 - [Skip fetch economics data if it is custom network](https://github.com/multiversx/mx-sdk-dapp-form/pull/302)
 
 ## [[0.10.9](https://github.com/multiversx/mx-sdk-dapp-form/pull/301)] - 2024-05-23
+
 - [Added ability to use custom EGLD icon](https://github.com/multiversx/mx-sdk-dapp-form/pull/300)
 
 ## [[0.10.8](https://github.com/multiversx/mx-sdk-dapp-form/pull/299)] - 2024-05-15
+
 - [Fixed assets name is added as username in the transaction](https://github.com/multiversx/mx-sdk-dapp-form/pull/298)
 
 ## [[0.10.7](https://github.com/multiversx/mx-sdk-dapp-form/pull/297)] - 2024-05-10
+
 - [Fixed gasLimit is not calculated after form was submitted and invalid](https://github.com/multiversx/mx-sdk-dapp-form/pull/296)
 
 ## [[0.10.6](https://github.com/multiversx/mx-sdk-dapp-form/pull/295)] - 2024-04-23
+
 - [Fixed `sdk-dapp npm link` `formatAmount` decimals and digits error](https://github.com/multiversx/mx-sdk-dapp-form/pull/295)
 
 ## [[0.10.5](https://github.com/multiversx/mx-sdk-dapp-form/pull/294)] - 2024-04-22
+
 - [Reverted cost API changes & fixed `sdk-dapp npm link` `formatAmount` gasLimit error](https://github.com/multiversx/mx-sdk-dapp-form/pull/293)
 - [Fixed cost API not called when user changes gasLimit](https://github.com/multiversx/mx-sdk-dapp-form/pull/291)
 
 ## [[0.10.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/290)] - 2024-04-19
+
 - [Fixed delegation contract `gasLimit`](https://github.com/multiversx/mx-sdk-dapp-form/pull/290)
 
 ## [[0.10.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/289)] - 2024-04-18
-- [Fixed multiple addresses with same assets username displayed](https://github.com/multiversx/mx-sdk-dapp-form/pull/288)
 
+- [Fixed multiple addresses with same assets username displayed](https://github.com/multiversx/mx-sdk-dapp-form/pull/288)
 
 ## [[0.10.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/287)] - 2024-04-16
 
