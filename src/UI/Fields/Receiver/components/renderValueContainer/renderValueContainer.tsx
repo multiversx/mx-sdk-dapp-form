@@ -1,5 +1,6 @@
 import React from 'react';
 import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
+import { addressIsValid } from '@multiversx/sdk-dapp/utils';
 import classNames from 'classnames';
 import { components } from 'react-select';
 
@@ -25,14 +26,13 @@ export const renderValueContainer =
       receiverUsername ?? (option && option.value !== option.label);
 
     const superOption = option
-      ? {
-          value: receiver ?? option.value,
-          label: option.label
-        }
+      ? { value: receiver ?? option.value, label: option.label }
       : null;
 
     const shouldShowPreview =
-      superOption && (hasUsername || (!hasUsername && !menuIsOpen));
+      superOption &&
+      (hasUsername || (!hasUsername && !menuIsOpen)) &&
+      addressIsValid(superOption.value);
 
     return (
       <components.ValueContainer

@@ -202,11 +202,8 @@
             padding: 12px !important;
             line-height: 17px !important;
             font-size: 14px !important;
+            opacity: 0 !important;
             color: var(--action-color) !important;
-
-            @media (min-width: 768px) {
-              opacity: 0 !important;
-            }
           }
         }
       }
