@@ -5,13 +5,12 @@ import classNames from 'classnames';
 import Select, { SingleValue, components } from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
 
-import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled, selectCustomStyles } from 'helpers';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { PartialTokenType, TokenAssetsType, ValuesEnum } from 'types';
 
-import styles from './styles.module.scss';
 import { TokenElement } from './TokenElement';
 
 interface OptionType {
@@ -36,7 +35,12 @@ const ListOption = (props: any) => {
   );
 };
 
-export const SelectToken = ({ className, label }: SelectTokenPropsType) => {
+export const SelectTokenComponent = ({
+  className,
+  label,
+  globalStyles,
+  styles
+}: SelectTokenPropsType & WithStylesImportType) => {
   const { formInfo, accountInfo, tokensInfo } = useSendFormContext();
 
   const { readonly } = formInfo;
@@ -109,16 +113,16 @@ export const SelectToken = ({ className, label }: SelectTokenPropsType) => {
     return true;
   };
 
-  const docStyle = window.getComputedStyle(document.documentElement);
+  const docStyle = window?.getComputedStyle(document?.documentElement);
   const selectStyle = selectCustomStyles({ docStyle });
 
   return (
-    <div className={classNames(styles.selectTokenContainer, className)}>
+    <div className={classNames(styles?.selectTokenContainer, className)}>
       {label && (
         <label
           htmlFor={ValuesEnum.tokenId}
           data-testid={FormDataTestIdsEnum.tokenIdLabel}
-          className={styles.selectTokenLabel}
+          className={styles?.selectTokenLabel}
         >
           {label}
         </label>
@@ -147,7 +151,7 @@ export const SelectToken = ({ className, label }: SelectTokenPropsType) => {
 
       {isTokenIdInvalid && (
         <div
-          className={globals.error}
+          className={globalStyles?.error}
           data-testid={FormDataTestIdsEnum.tokenIdError}
         >
           <small>{tokenIdError}</small>
@@ -156,3 +160,9 @@ export const SelectToken = ({ className, label }: SelectTokenPropsType) => {
     </div>
   );
 };
+
+export const SelectToken = withStyles(SelectTokenComponent, {
+  ssrStyles: () => import('UI/Fields/SelectToken/styles.module.scss'),
+  clientStyles: () =>
+    require('UI/Fields/SelectToken/styles.module.scss').default
+});

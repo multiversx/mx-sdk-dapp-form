@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
-import globals from 'assets/sass/globals.module.scss';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 
 export interface AmountErrorPropsType
   extends WithClassnameType,
@@ -11,21 +11,28 @@ export interface AmountErrorPropsType
   error?: string;
 }
 
-export const AmountError = ({
+export const AmountErrorComponent = ({
   hasErrors,
   className,
   error,
-  'data-testid': dataTestId
-}: AmountErrorPropsType) => {
+  'data-testid': dataTestId,
+  globalStyles
+}: AmountErrorPropsType & WithStylesImportType) => {
   if (!hasErrors) {
     return null;
   }
   return (
     <div
-      className={classNames(globals.error, className)}
+      className={classNames(globalStyles?.error, className)}
       data-testid={dataTestId}
     >
       {error}
     </div>
   );
 };
+
+export const AmountError = withStyles(AmountErrorComponent, {
+  ssrStyles: () => import('UI/Fields/AmountSelect/amountSelect.module.scss'),
+  clientStyles: () =>
+    require('UI/Fields/AmountSelect/amountSelect.module.scss').default
+});

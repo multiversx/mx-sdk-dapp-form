@@ -1,9 +1,6 @@
-import { maxDecimals } from '@multiversx/sdk-dapp/utils/validation/maxDecimals';
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
-
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
-import { parseAmount } from 'helpers';
+import { parseAmount, maxDecimals, stringIsFloat } from 'helpers';
 import getTokenDetails from 'operations/getTokenDetails';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from '../types/validation';

@@ -1,3 +1,3 @@
 export * from './transformations';
 export * from './misc';
-export * from './dapp-core';
+export * from './sdk-dapp';

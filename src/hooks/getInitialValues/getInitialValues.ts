@@ -1,4 +1,5 @@
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
+import { getWindowLocation } from '@multiversx/sdk-dapp/utils/window/getWindowLocation';
 import { setApiConfig } from 'apiCalls';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { PartialNftType, PartialTokenType } from 'types';
@@ -11,7 +12,7 @@ import { getToken } from './getToken';
 import { GetInitialValuesType } from './types';
 
 function getSearchParamTokenId() {
-  const urlSearchParams = new URLSearchParams(window.location.search);
+  const urlSearchParams = new URLSearchParams(getWindowLocation().search);
   const searchParams = Object.fromEntries(urlSearchParams);
   const searchParamTokenId = searchParams.token;
   return searchParamTokenId;

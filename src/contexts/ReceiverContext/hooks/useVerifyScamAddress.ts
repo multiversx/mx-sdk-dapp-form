@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
+
 import { ApiConfigType, getScamAddressData } from 'apiCalls';
+import { addressIsValid } from 'helpers';
 
 interface VerifiedAddressesType {
   [address: string]: { type: string; info: string };

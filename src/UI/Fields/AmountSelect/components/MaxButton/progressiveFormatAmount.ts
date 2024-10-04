@@ -1,6 +1,6 @@
 import { DIGITS as configDigits } from '@multiversx/sdk-dapp/constants';
-import { formatAmount as dappCoreFormatAmount } from '@multiversx/sdk-dapp/utils/operations/formatAmount';
-import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsInteger';
+
+import { formatAmount as dappCoreFormatAmount, stringIsInteger } from 'helpers';
 
 export const progressiveFormatAmount = ({
   amount = '0',

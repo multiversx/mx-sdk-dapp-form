@@ -1,5 +1,6 @@
 import { IPlainTransactionObject } from '@multiversx/sdk-core/out';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
+
+import { addressIsValid } from 'helpers';
 import { isNftOrMultiEsdtTx } from 'validation';
 
 export function getTxWithReceiver({

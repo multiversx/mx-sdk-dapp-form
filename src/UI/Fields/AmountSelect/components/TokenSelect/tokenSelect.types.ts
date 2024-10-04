@@ -1,5 +1,6 @@
-import { PartialTokenType, TokenAssetsType } from 'types';
 import { JSXElementConstructor } from 'react';
+
+import { PartialTokenType, TokenAssetsType } from 'types';
 
 export interface SelectOptionType {
   label: string;

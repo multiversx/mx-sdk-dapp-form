@@ -1,6 +1,6 @@
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
+import { stringIsFloat } from 'helpers';
 import { calculateGasLimit } from 'operations/calculateGasLimit';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';

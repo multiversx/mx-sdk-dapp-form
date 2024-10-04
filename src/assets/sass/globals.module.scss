@@ -1,4 +1,5 @@
-@import 'assets/sass/variables/variables';
+// Variables override
+@import 'variables/variables';
 
 .error {
   width: 100%;
@@ -140,21 +141,21 @@
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
   &.btnPrimary {
-    background-color: var(--primary);
-    color: var(--white);
+    background-color: var(--dapp-form-primary);
+    color: var(--dapp-form-white);
 
     &:hover {
-      background-color: var(--btn-blue);
+      background-color: var(--dapp-form-btn-blue);
     }
   }
 
   &.btnWarning {
-    background-color: var(--warning);
-    color: var(--brown);
+    background-color: var(--dapp-form-warning);
+    color: var(--dapp-form-brown);
   }
 
   &.btnLink {
-    color: var(--primary-light);
+    color: var(--dapp-form-primary-light);
     background: none;
     padding: 0;
 

@@ -1,7 +1,8 @@
-import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
+
 import { MAX_GAS_LIMIT } from 'constants/index';
+import { stringIsInteger } from 'helpers';
 import { ValidationErrorMessagesType } from 'types/validation';
 
 export const sharedGasLimit = (errorMessages: ValidationErrorMessagesType) => {

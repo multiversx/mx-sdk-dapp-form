@@ -7,15 +7,16 @@ import { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
 import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
-
 import { useFormikContext } from 'formik';
+
 import { CAN_TRANSFER_MESSAGE, FormDataTestIdsEnum } from 'constants/index';
-
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { ExtendedValuesType } from 'types';
-import styles from './styles.module.scss';
 
-export const NFTCanTransferWarning = (props: WithClassnameType) => {
-  const { className } = props;
+export const NFTCanTransferWarningComponent = (
+  props: WithClassnameType & WithStylesImportType
+) => {
+  const { className, styles } = props;
   const {
     values: { nft, address }
   } = useFormikContext<ExtendedValuesType>();
@@ -26,40 +27,40 @@ export const NFTCanTransferWarning = (props: WithClassnameType) => {
 
   return (
     <div
-      className={classNames(styles.canTransferWarning, className)}
+      className={classNames(styles?.canTransferWarning, className)}
       data-testid={FormDataTestIdsEnum.canTransferWarning}
     >
-      <div className={styles.canTransferWarningHeading}>
+      <div className={styles?.canTransferWarningHeading}>
         <FontAwesomeIcon
           icon={faExclamationTriangle}
-          className={styles.canTransferWarningIcon}
+          className={styles?.canTransferWarningIcon}
           size='lg'
         />
 
-        <div className={styles.canTransferWarningTitle}>
-          <div className={styles.canTransferWarningLabel}>Warning!</div>
-          <div className={styles.canTransferWarningMessage}>
+        <div className={styles?.canTransferWarningTitle}>
+          <div className={styles?.canTransferWarningLabel}>Warning!</div>
+          <div className={styles?.canTransferWarningMessage}>
             {CAN_TRANSFER_MESSAGE}
           </div>
         </div>
       </div>
 
-      <div className={styles.canTransferWarningAddresses}>
+      <div className={styles?.canTransferWarningAddresses}>
         {nft.allowedReceivers.map((receiver) => (
-          <div className={styles.canTransferWarningAddress} key={receiver}>
+          <div className={styles?.canTransferWarningAddress} key={receiver}>
             <Trim
               text={receiver}
-              className={styles.canTransferWarningAddressTrim}
+              className={styles?.canTransferWarningAddressTrim}
             />
 
             <CopyButton
               text={receiver}
-              className={styles.canTransferWarningAddressCopy}
+              className={styles?.canTransferWarningAddressCopy}
             />
 
             <ExplorerLink
               page={`/${ACCOUNTS_ENDPOINT}/${receiver}`}
-              className={styles.canTransferWarningAddressExplorer}
+              className={styles?.canTransferWarningAddressExplorer}
             />
           </div>
         ))}
@@ -67,3 +68,12 @@ export const NFTCanTransferWarning = (props: WithClassnameType) => {
     </div>
   );
 };
+
+export const NFTCanTransferWarning = withStyles(
+  NFTCanTransferWarningComponent,
+  {
+    ssrStyles: () => import('UI/NFTCanTransferWarning/styles.module.scss'),
+    clientStyles: () =>
+      require('UI/NFTCanTransferWarning/styles.module.scss').default
+  }
+);

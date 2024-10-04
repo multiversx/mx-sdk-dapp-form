@@ -1,9 +1,9 @@
-import { addressIsValid } from '@multiversx/sdk-dapp/utils';
-
 import { useFormikContext } from 'formik';
+
 import { useReceiverContext } from 'contexts';
 import { useReceiverUsernameContext } from 'contexts/ReceiverUsernameContext';
 import { getIsValueAmongKnown } from 'contexts/ReceiverUsernameContext/helpers/getIsValueAmongKnown';
+import { addressIsValid } from 'helpers';
 import { ExtendedValuesType } from 'types';
 import { useReceiverError } from '../useReceiverError';
 import { isAnyOptionFound } from './helpers';

@@ -2,15 +2,26 @@ import React, { useEffect, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 import Select from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
+
 import { getWegldIdForChainId } from 'apiCalls/network/getEnvironmentForChainId';
-import * as components from './components';
-import styles from './tokenSelect.module.scss';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
+
+import {
+  renderControl,
+  renderIndicatorsContainer,
+  renderInput,
+  renderMenu,
+  renderMenuList,
+  renderOption,
+  renderPlaceholder,
+  renderSingleValue,
+  renderValueContainer
+} from './components';
 import { OptionType, TokenSelectPropsType } from './tokenSelect.types';
 
-const { Menu, Control, Input, MenuList, IndicatorsContainer, Placeholder } =
-  components;
-
-export const TokenSelect = (props: TokenSelectPropsType) => {
+export const TokenSelectComponent = (
+  props: TokenSelectPropsType & WithStylesImportType
+) => {
   const {
     name,
     options,
@@ -32,7 +43,8 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     showTokenPrice = false,
     showBalanceUsdValue = false,
     selectedTokenIconClassName,
-    TokenTickerIcon
+    TokenTickerIcon,
+    styles
   } = props;
 
   const ref = useRef(null);
@@ -40,27 +52,29 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
 
   const Option = useMemo(
     () =>
-      components.getOption({
+      renderOption({
         egldLabel,
         EgldIcon,
         showTokenPrice,
         showBalanceUsdValue,
-        TokenTickerIcon
+        TokenTickerIcon,
+        styles
       }),
     []
   );
   const ValueContainer = useMemo(
     () =>
-      components.getValueContainer(
+      renderValueContainer(
         egldLabel,
         selectedTokenIconClassName,
-        EgldIcon
+        EgldIcon,
+        styles
       ),
     []
   );
 
   const SingleValue = useMemo(
-    () => components.getSingleValue(TokenTickerIcon),
+    () => renderSingleValue(TokenTickerIcon, styles),
     []
   );
 
@@ -123,7 +137,11 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
       }`}
     >
       {/* Label is only used in testing */}
-      <label htmlFor={name} data-testid='tokenIdLabel' className={styles.label}>
+      <label
+        htmlFor={name}
+        data-testid='tokenIdLabel'
+        className={styles?.label}
+      >
         Token
       </label>
 
@@ -150,19 +168,19 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
         maxMenuHeight={260}
         onMenuOpen={onMenuOpen}
         noOptionsMessage={() => noOptionsMessage}
-        className={classNames(styles.select, className, {
-          [styles.disabled]: props.disabled
+        className={classNames(styles?.select, className, {
+          [styles?.disabled]: props.disabled
         })}
         components={{
           IndicatorSeparator: () => null,
           LoadingIndicator: () => null,
-          Menu,
-          Control,
-          Input,
-          MenuList,
-          IndicatorsContainer,
+          Menu: renderMenu(styles),
+          Control: renderControl(styles),
+          Input: renderInput(styles),
+          MenuList: renderMenuList(styles),
+          IndicatorsContainer: renderIndicatorsContainer(styles),
+          Placeholder: renderPlaceholder(styles),
           ValueContainer,
-          Placeholder,
           Option,
           SingleValue
         }}
@@ -170,3 +188,13 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     </div>
   );
 };
+
+export const TokenSelect = withStyles(TokenSelectComponent, {
+  ssrStyles: () =>
+    import(
+      'UI/Fields/AmountSelect/components/TokenSelect/tokenSelect.module.scss'
+    ),
+  clientStyles: () =>
+    require('UI/Fields/AmountSelect/components/TokenSelect/tokenSelect.module.scss')
+      .default
+});

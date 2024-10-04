@@ -1,6 +1,6 @@
-import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import { string } from 'yup';
-import { getIsNftTransaction } from 'helpers';
+
+import { addressIsValid, getIsNftTransaction } from 'helpers';
 import { ExtendedValuesType, TransactionTypeEnum } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
 

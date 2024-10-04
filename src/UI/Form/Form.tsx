@@ -1,5 +1,4 @@
 import React, { useEffect, MouseEvent, useState } from 'react';
-
 import {
   TransactionOptions,
   TransactionVersion
@@ -12,13 +11,12 @@ import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 
-import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getTransactionFields } from 'helpers';
+import { withStyles, WithStylesImportType } from 'hocs/withStyles';
 import { generateTransaction } from 'operations/generateTransaction';
 import { ExtendedValuesType, TransactionTypeEnum } from 'types';
-
 import { ConfirmScreen } from 'UI/ConfirmScreen';
 import {
   SFTAmount,
@@ -33,14 +31,18 @@ import { NFTCanTransferWarning } from 'UI/NFTCanTransferWarning';
 import { NFTSFTPreview } from 'UI/NFTSFTPreview';
 import { WEGLDWarning } from 'UI/WEGLDWarning';
 
-import styles from './form.module.scss';
 import { getSendLabel } from './helpers';
 
 interface FormPropsType extends WithClassnameType {
   GuardianScreen?: (props: GuardianScreenType) => JSX.Element;
 }
 
-export const Form = ({ className, GuardianScreen }: FormPropsType) => {
+export const FormComponent = ({
+  className,
+  GuardianScreen,
+  globalStyles,
+  styles
+}: FormPropsType & WithStylesImportType) => {
   const { formInfo, accountInfo, amountInfo, tokensInfo } =
     useSendFormContext();
   const { values } = useFormikContext<ExtendedValuesType>();
@@ -156,9 +158,9 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
     <form
       key={renderKey}
       onSubmit={onValidateForm}
-      className={classNames(styles.form, className)}
+      className={classNames(styles?.form, className)}
     >
-      <fieldset className={styles.formFieldset}>
+      <fieldset className={styles?.formFieldset}>
         {(isNFTTransaction || isSFTTransaction) && nft && (
           <NFTSFTPreview onClick={onPreviewClick} txType={txType} {...nft} />
         )}
@@ -183,13 +185,13 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
         <Data />
       </fieldset>
 
-      <div className={styles.formButtons}>
+      <div className={styles?.formButtons}>
         <button
           type='button'
           id='sendBtn'
           data-testid={FormDataTestIdsEnum.sendBtn}
           onClick={onValidateForm}
-          className={globals.buttonSend}
+          className={globalStyles?.buttonSend}
         >
           Send {getSendLabel(tokensInfo)}
         </button>
@@ -199,7 +201,7 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
           id='closeButton'
           data-testid={FormDataTestIdsEnum.returnToWalletBtn}
           onClick={handleCloseClick}
-          className={globals.buttonText}
+          className={globalStyles?.buttonText}
         >
           Cancel
         </button>
@@ -207,3 +209,8 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
     </form>
   );
 };
+
+export const Form = withStyles(FormComponent, {
+  ssrStyles: () => import('UI/Form/form.module.scss'),
+  clientStyles: () => require('UI/Form/form.module.scss').default
+});
