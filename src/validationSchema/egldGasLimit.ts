@@ -69,8 +69,8 @@ const egldGasLimit = (errorMessages: ValidationErrorMessagesType) => {
   });
 
   const validations = [
-    ...sharedGasLimit(errorMessages),
     required,
+    ...sharedGasLimit(errorMessages),
     funds,
     minValueData
   ];

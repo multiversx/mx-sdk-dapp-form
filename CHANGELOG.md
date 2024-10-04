@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Updated form validation error messages priority](https://github.com/multiversx/mx-sdk-dapp-form/pull/309)
+
 ## [[0.10.12](https://github.com/multiversx/mx-sdk-dapp-form/pull/308)] - 2024-10-01
 
 - [Fixed broken receiver input mirror effect on pasting](https://github.com/multiversx/mx-sdk-dapp-form/pull/307)
