@@ -70,9 +70,9 @@ const nftGasLimit = (errorMessages: ValidationErrorMessagesType) => {
 
   const validations = [
     required,
-    minValueData,
+    ...sharedGasLimit(errorMessages),
     funds,
-    ...sharedGasLimit(errorMessages)
+    minValueData
   ];
 
   return validations.reduce(

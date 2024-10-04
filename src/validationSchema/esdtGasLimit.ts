@@ -55,10 +55,10 @@ const esdtGasLimit = (errorMessages: ValidationErrorMessagesType) => {
   );
 
   const validations = [
-    ...sharedGasLimit(errorMessages),
     required,
-    minValue,
-    funds
+    ...sharedGasLimit(errorMessages),
+    funds,
+    minValue
   ];
 
   return validations.reduce(
