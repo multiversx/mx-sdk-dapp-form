@@ -27,7 +27,7 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@multiversx/sdk-core": "12.18.0",
+    "@multiversx/sdk-core": "13.5.0",
     "@multiversx/sdk-dapp": "2.38.8",
     "@multiversx/sdk-dapp-utils": "0.0.1",
     "@size-limit/preset-small-lib": "7.0.8",
@@ -93,7 +93,7 @@
     "transaction"
   ],
   "peerDependencies": {
-    "@multiversx/sdk-core": ">=12.18.0",
+    "@multiversx/sdk-core": ">=13.5.0",
     "@multiversx/sdk-dapp": ">=2.38.8",
     "@multiversx/sdk-dapp-utils": ">=0.0.1",
     "react": ">=18",
