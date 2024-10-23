@@ -2,8 +2,18 @@
   line-height: 1;
   font-size: 12px;
   color: var(--dapp-form-input-color);
+  max-width: 75%;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  gap: 4px;
 
   span {
     color: var(--dapp-form-label-color);
+  }
+
+  .value {
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
