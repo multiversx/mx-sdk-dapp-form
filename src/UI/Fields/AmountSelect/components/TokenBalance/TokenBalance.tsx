@@ -26,8 +26,8 @@ export const TokenBalance = ({
       data-value={dataValue}
       className={classNames(styles.balance, className)}
     >
-      <span>{label}: </span>
-      {value} {token?.ticker}
+      <span className={styles.label}>{label}: </span>
+      <span className={styles.value}>{value}</span> {token?.ticker}
     </div>
   );
 };
