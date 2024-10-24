@@ -58,7 +58,8 @@ export const SFTAmount = (props: WithClassnameType) => {
               data-testid={`available-${nft.identifier}`}
               className={styles.available}
             >
-              {maxAmountAvailable} {nft.ticker}
+              <span className={styles.amount}>{maxAmountAvailable}</span>{' '}
+              {nft.ticker}
             </span>
           </div>
         )}
