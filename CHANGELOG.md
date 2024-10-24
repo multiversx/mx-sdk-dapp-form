@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[1.0.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/316)] - 2024-10-23
+
+- [Upgrade sdk-core & remove sdk-dapp-utils dependency](https://github.com/multiversx/mx-sdk-dapp-form/pull/315)
+
 ## [[1.0.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/314)] - 2024-10-23
 
 - [Fixed large available amount broken styles](https://github.com/multiversx/mx-sdk-dapp-form/pull/313)
