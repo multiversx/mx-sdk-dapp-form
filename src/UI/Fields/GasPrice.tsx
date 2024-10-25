@@ -1,5 +1,5 @@
-import React from 'react';
-import { faUndo } from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from 'react';
+import { faCheck, faPencil, faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
@@ -15,10 +15,11 @@ import styles from './styles.module.scss';
 
 export const GasPrice = () => {
   const { gasInfo, formInfo } = useSendFormContext();
+  const [isDisabled, setIsDisabled] = useState(true);
+  const [isConfirmed, setIsConfirmed] = useState(false);
 
   const isAllowed = ({ value, floatValue }: NumberFormatValues) => {
     const defaultConditions = !floatValue || !BigNumber(floatValue).isNaN();
-
     return defaultConditions && !hasLeadingZeroes(value);
   };
 
@@ -32,8 +33,16 @@ export const GasPrice = () => {
   } = gasInfo;
   const { readonly } = formInfo;
 
+  const handleEnable = () => setIsDisabled(false);
+  const handleConfirm = () => setIsConfirmed(true);
+  const handleReset = () => {
+    setIsDisabled(true);
+    setIsConfirmed(false);
+    onResetGasPrice();
+  };
+
   const showUndoButton = gasPrice !== formattedConfigGasPrice && !readonly;
-  const isDisabled = readonly === true;
+  const showEditButton = !readonly && !isConfirmed;
 
   return (
     <div className={styles.gas}>
@@ -47,7 +56,7 @@ export const GasPrice = () => {
           autoComplete='off'
           data-testid={ValuesEnum.gasPrice}
           decimalSeparator='.'
-          disabled={isDisabled}
+          disabled={Boolean(readonly || !isConfirmed)}
           id={ValuesEnum.gasPrice}
           inputMode='decimal'
           isAllowed={isAllowed}
@@ -66,13 +75,28 @@ export const GasPrice = () => {
           })}
         />
 
+        {showEditButton && (
+          <span
+            className={classNames(styles.undo, {
+              [styles.noSeparator]: true
+            })}
+          >
+            <button
+              onClick={isDisabled ? handleEnable : handleConfirm}
+              className={styles.reset}
+            >
+              <FontAwesomeIcon icon={isDisabled ? faPencil : faCheck} />
+            </button>
+          </span>
+        )}
+
         {showUndoButton && (
           <span
             className={classNames(styles.undo, {
               [styles.disabled]: isDisabled
             })}
           >
-            <button onClick={onResetGasPrice} className={styles.reset}>
+            <button onClick={handleReset} className={styles.reset}>
               <FontAwesomeIcon icon={faUndo} />
             </button>
           </span>

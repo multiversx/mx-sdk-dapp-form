@@ -2,7 +2,7 @@
 
 .gas {
   position: relative;
-  
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -30,6 +30,12 @@
         content: '';
         position: absolute;
         transition: all 200ms ease;
+      }
+
+      &.no-separator {
+        &:before {
+          width: 0px;
+        }
       }
 
       &.disabled {
