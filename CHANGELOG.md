@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[1.1.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/320)] - 2024-10-25
+
+- [Added gasPrice editing](https://github.com/multiversx/mx-sdk-dapp-form/pull/319)
+
+
 ## [[1.0.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/316)] - 2024-10-24
 
 - [Upgrade sdk-core & remove sdk-dapp-utils dependency](https://github.com/multiversx/mx-sdk-dapp-form/pull/315)
