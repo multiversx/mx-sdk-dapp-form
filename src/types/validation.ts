@@ -14,4 +14,5 @@ export interface ValidationErrorMessagesType {
   tooHighGasLimit: (gasLimit?: string | number) => string;
   tooLowGasLimit: (gasLimit?: string | number) => string;
   tooLowGasPrice: (gasPrice?: string | number) => string;
+  tooHighGasPrice: (gasPrice?: string | number) => string;
 }

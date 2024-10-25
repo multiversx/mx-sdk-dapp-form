@@ -5,6 +5,7 @@ import {
 import { calculateFeeLimit } from '@multiversx/sdk-dapp/utils/operations/calculateFeeLimit';
 import BigNumber from 'bignumber.js';
 import { parseAmount } from 'helpers';
+import { getParsedGasPrice } from 'operations';
 
 interface ValidateGasLimitAmountType {
   amount: string;
@@ -26,9 +27,10 @@ export const validateGasLimitAmount = ({
   const parsedAmount = parseAmount(amount.toString());
   const bnAmount = new BigNumber(parsedAmount);
   const bnBalance = new BigNumber(balance);
+
   const fee = new BigNumber(
     calculateFeeLimit({
-      gasPrice: parseAmount(gasPrice),
+      gasPrice: getParsedGasPrice(gasPrice),
       gasLimit,
       data,
       chainId,

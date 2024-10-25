@@ -137,10 +137,6 @@ export function GasContextProvider({
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
 
-      if (isNaN(Number(value))) {
-        return;
-      }
-
       setFieldValue(ValuesEnum.gasPrice, value, shouldValidate);
     },
     []

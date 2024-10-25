@@ -3,7 +3,10 @@ import { maxDecimals } from '@multiversx/sdk-dapp/utils/validation/maxDecimals';
 import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
-import { formattedConfigGasPrice } from 'operations/formattedConfigGasPrice';
+import {
+  formattedConfigGasPrice,
+  maxAcceptedGasPrice
+} from 'operations/formattedConfigGasPrice';
 import { ValidationErrorMessagesType } from 'types/validation';
 
 export const gasPrice = (errorMessages: ValidationErrorMessagesType) => {
@@ -25,13 +28,30 @@ export const gasPrice = (errorMessages: ValidationErrorMessagesType) => {
       return Boolean(result);
     }
   );
+  const maximum = string().test(
+    'maximum',
+    errorMessages.tooHighGasPrice(maxAcceptedGasPrice),
+    (value) => {
+      const bNgasPrice = new BigNumber(String(value));
+      const bNmaxAcceptedGasPrice = new BigNumber(maxAcceptedGasPrice);
+      const result =
+        value && bNgasPrice.isLessThanOrEqualTo(bNmaxAcceptedGasPrice);
+      return Boolean(result);
+    }
+  );
   const validNumber = string().test(
     'isValidNumber',
     errorMessages.invalidNumber,
     (value) => Boolean(value && stringIsFloat(value))
   );
 
-  const validations = [required, decimalsValidation, minimum, validNumber];
+  const validations = [
+    required,
+    decimalsValidation,
+    minimum,
+    maximum,
+    validNumber
+  ];
 
   return validations.reduce(
     (previousValue, currentValue) => previousValue.concat(currentValue),
