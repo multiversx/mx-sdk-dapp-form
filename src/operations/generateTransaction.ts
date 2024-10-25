@@ -1,6 +1,6 @@
-import { parseAmount } from 'helpers';
 import { prepareTransaction } from 'hooks/useFetchGasLimit/prepareTransaction';
 import { ExtendedValuesType } from 'types';
+import { getParsedGasPrice } from './getParsedGasPrice';
 
 interface GenerateTransactionPropsType {
   address: string;
@@ -29,7 +29,7 @@ export async function generateTransaction(props: GenerateTransactionPropsType) {
       balance,
       amount: String(amount),
       gasLimit: String(gasLimit),
-      gasPrice: parseAmount(gasPrice),
+      gasPrice: getParsedGasPrice(gasPrice),
       data: data.trim(),
       receiver: transactionReceiver,
       receiverUsername,
