@@ -188,7 +188,6 @@ export function GasContextProvider({
       !prefilledForm && !isGasLimitChanged && isEgldTransaction;
 
     const dataField = isInitialGasLimit ? data.trim() : '';
-    console.log(1, { gasPrice });
 
     const newFeeLimit = calculateFeeLimit({
       gasLimit,
