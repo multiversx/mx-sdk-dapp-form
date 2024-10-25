@@ -1,5 +1,8 @@
 import { GAS_LIMIT } from '@multiversx/sdk-dapp/constants/index';
-import { formattedConfigGasPrice } from 'operations/formattedConfigGasPrice';
+import {
+  formattedConfigGasPrice,
+  maxAcceptedGasPrice
+} from 'operations/formattedConfigGasPrice';
 import { ValidationErrorMessagesType } from '../types/validation';
 
 export const defaultErrorMessages: ValidationErrorMessagesType = {
@@ -18,7 +21,9 @@ export const defaultErrorMessages: ValidationErrorMessagesType = {
     `Gas limit must be greater or equal to ${gasLimit}`,
   tooHighGasLimit: (gasLimit = GAS_LIMIT) =>
     `Gas limit must be lower than ${gasLimit}`,
-  tooLowGasPrice: (gasPrice = formattedConfigGasPrice) =>
-    `Gas price must be greater or equal to ${gasPrice}`,
+  tooLowGasPrice: (lowestGasPrice = formattedConfigGasPrice) =>
+    `Gas price must be greater or equal to ${lowestGasPrice}`,
+  tooHighGasPrice: (highestGasPrice = maxAcceptedGasPrice) =>
+    `Gas price must be lower or equal to ${highestGasPrice}`,
   maxDecimalsAllowed: (decimals) => `Maximum ${decimals} decimals allowed`
 };

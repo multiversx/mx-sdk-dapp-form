@@ -137,10 +137,6 @@ export function GasContextProvider({
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
 
-      if (isNaN(Number(value))) {
-        return;
-      }
-
       setFieldValue(ValuesEnum.gasPrice, value, shouldValidate);
     },
     []
@@ -192,6 +188,7 @@ export function GasContextProvider({
       !prefilledForm && !isGasLimitChanged && isEgldTransaction;
 
     const dataField = isInitialGasLimit ? data.trim() : '';
+    console.log(1, { gasPrice });
 
     const newFeeLimit = calculateFeeLimit({
       gasLimit,

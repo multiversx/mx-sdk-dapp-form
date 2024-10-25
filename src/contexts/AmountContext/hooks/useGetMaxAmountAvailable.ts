@@ -3,10 +3,10 @@ import { useFormikContext } from 'formik';
 import { ZERO } from 'constants/index';
 import { useAccountContext } from 'contexts/AccountContext';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
-import { parseAmount } from 'helpers';
 import {
   getEntireBalance,
   getEntireTokenBalance,
+  getParsedGasPrice,
   getTokenDetails
 } from 'operations';
 
@@ -69,7 +69,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
     const { entireBalance: formattedBalance, entireBalanceMinusDust } =
       getEntireBalance({
         balance,
-        gasPrice: parseAmount(gasPrice),
+        gasPrice: getParsedGasPrice(gasPrice),
         gasLimit: gasLimit,
         decimals: DECIMALS,
         digits: DIGITS,

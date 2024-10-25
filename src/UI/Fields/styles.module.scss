@@ -1,6 +1,8 @@
 @import 'assets/sass/variables/_variables.scss';
 
 .gas {
+  position: relative;
+  
   &:last-child {
     margin-bottom: 0;
   }

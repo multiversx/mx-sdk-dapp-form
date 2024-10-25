@@ -10,4 +10,5 @@ export * from './computeInitGasLimit';
 export * from './formattedConfigGasPrice';
 export * from './getEntireBalance';
 export * from './getGasLimit';
+export * from './getParsedGasPrice';
 export * from './getGuardedAccountGasLimit';

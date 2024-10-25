@@ -1,17 +1,26 @@
 import React from 'react';
 import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 
+import { NumberFormatValues, NumericFormat } from 'react-number-format';
 import globals from 'assets/sass/globals.module.scss';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { formattedConfigGasPrice } from 'operations';
 
 import { ValuesEnum } from 'types';
+import { hasLeadingZeroes } from './AmountSelect/components/AmountInput/helpers';
 import styles from './styles.module.scss';
 
 export const GasPrice = () => {
   const { gasInfo, formInfo } = useSendFormContext();
+
+  const isAllowed = ({ value, floatValue }: NumberFormatValues) => {
+    const defaultConditions = !floatValue || !BigNumber(floatValue).isNaN();
+
+    return defaultConditions && !hasLeadingZeroes(value);
+  };
 
   const {
     gasPrice,
@@ -24,7 +33,7 @@ export const GasPrice = () => {
   const { readonly } = formInfo;
 
   const showUndoButton = gasPrice !== formattedConfigGasPrice && !readonly;
-  const isDisabled = true;
+  const isDisabled = readonly === true;
 
   return (
     <div className={styles.gas}>
@@ -33,17 +42,24 @@ export const GasPrice = () => {
       </label>
 
       <div className={styles.wrapper}>
-        <input
-          type='text'
-          id={ValuesEnum.gasPrice}
-          name={ValuesEnum.gasPrice}
-          data-testid={ValuesEnum.gasPrice}
-          required
-          disabled={isDisabled}
-          value={gasPrice}
-          onChange={onChangeGasPrice}
-          onBlur={onBlurGasPrice}
+        <NumericFormat
+          allowedDecimalSeparators={['.', ',']}
           autoComplete='off'
+          data-testid={ValuesEnum.gasPrice}
+          decimalSeparator='.'
+          disabled={isDisabled}
+          id={ValuesEnum.gasPrice}
+          inputMode='decimal'
+          isAllowed={isAllowed}
+          name={ValuesEnum.gasPrice}
+          onBlur={onBlurGasPrice}
+          onChange={(e) => onChangeGasPrice(e, true)}
+          required
+          thousandSeparator=','
+          thousandsGroupStyle='thousand'
+          value={gasPrice}
+          valueIsNumericString
+          allowNegative={false}
           className={classNames(globals.input, {
             [globals.invalid]: isGasPriceInvalid,
             [globals.disabled]: isDisabled
