@@ -57,19 +57,17 @@ export const GasLimit = () => {
         />
 
         {showUndoButton && (
-          <span
-            className={classNames(styles.undo, {
-              [styles.disabled]: isDisabled
-            })}
-          >
-            <button
+          <div className={styles.actions}>
+            <div
               onClick={onResetGasPrice}
               data-testid={FormDataTestIdsEnum.gasLimitResetBtn}
-              className={styles.reset}
+              className={classNames(styles.action, {
+                [styles.disabled]: isDisabled
+              })}
             >
-              <FontAwesomeIcon icon={faUndo} />
-            </button>
-          </span>
+              <FontAwesomeIcon icon={faUndo} className={styles.icon} />
+            </div>
+          </div>
         )}
 
         {isGasLimitInvalid && (

@@ -10,56 +10,39 @@
   .wrapper {
     position: relative;
 
-    .undo {
-      position: absolute;
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+    .actions {
       right: 0;
       top: 0;
+      position: absolute;
       bottom: 0;
+      display: flex;
 
-      &:before {
-        background-color: var(--dapp-form-placeholder-color);
-        width: 1px;
-        top: 16px;
-        bottom: 16px;
-        left: 0;
-        content: '';
-        position: absolute;
-        transition: all 200ms ease;
-      }
+      .action {
+        padding: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-      &.no-separator {
-        &:before {
-          width: 0px;
-        }
-      }
-
-      &.disabled {
-        pointer-events: none;
-        opacity: 0.5;
-      }
-
-      &.disabled,
-      &:hover {
-        &:before {
-          background-color: var(--dapp-form-input-color);
+        &:hover .icon {
+          color: #23f7dd;
         }
 
-        .reset svg {
-          color: var(--dapp-form-input-color);
+        &:not(:first-child) {
+          position: relative;
+
+          &:before {
+            background-color: var(--dapp-form-placeholder-color);
+            width: 1px;
+            top: 16px;
+            bottom: 16px;
+            left: 0;
+            content: '';
+            position: absolute;
+          }
         }
-      }
 
-      .reset {
-        background-color: transparent;
-        border: none;
-        padding: 0;
-
-        svg {
+        .icon {
           color: var(--dapp-form-placeholder-color);
           transition: all 200ms ease;
         }
