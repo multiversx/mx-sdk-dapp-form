@@ -238,10 +238,11 @@
     }
 
     .receiver-select-menu {
+      background-color: var(--body-bg);
+      border: 2px solid var(--action-bg);
+      border-radius: var(--border-radius-low);
       margin: 8px 0 0;
       padding: 4px;
-      background-color: var(--body-bg);
-      border-radius: var(--border-radius-low);
       z-index: 1;
 
       &:before {

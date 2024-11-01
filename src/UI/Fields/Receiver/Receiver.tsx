@@ -186,7 +186,6 @@ export const Receiver = (props: WithClassnameType) => {
         noOptionsMessage={() => null}
         onChange={onChange}
         onBlur={onBlur}
-        isLoading={knownAddresses === null}
         isMulti={false}
         ref={receiverSelectReference}
         inputValue={receiverInputValue}
