@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
@@ -12,6 +12,22 @@ import amountSelectStyles from '../AmountSelect/amountSelect.module.scss';
 import { AdvancedMode } from './components';
 import { useIsDataDisabled } from './hooks';
 import styles from './styles.module.scss';
+import { DecodeMethodEnum } from '@multiversx/sdk-dapp/types';
+import { decodeForDisplay } from '@multiversx/sdk-dapp/utils/transactions/transactionInfoHelpers/decodeForDisplay';
+
+import Select, { components, SingleValue } from 'react-select';
+import { CopyButton } from '@multiversx/sdk-dapp/UI/CopyButton';
+
+const ListOption = (props: any) => {
+  return (
+    <div
+      className={`token-option ${props.isSelected ? 'is-selected' : ''}`}
+      data-testid={`${props.value}-option`}
+    >
+      <components.Option {...props} />
+    </div>
+  );
+};
 
 export const Data = ({ className }: WithClassnameType) => {
   const {
@@ -19,6 +35,25 @@ export const Data = ({ className }: WithClassnameType) => {
   } = useSendFormContext();
 
   const isDisabled = useIsDataDisabled();
+  const [activeKey, setActiveKey] = useState(DecodeMethodEnum.raw);
+  const [displayValue, setDisplayValue] = useState('');
+  const [validationWarnings, setValidationWarnings] = useState<any>([]);
+
+  const handleSelect = (event: SingleValue<DecodeMethodEnum>) => {
+    if (event) {
+      setActiveKey(event);
+    }
+  };
+
+  useEffect(() => {
+    const { displayValue, validationWarnings } = decodeForDisplay({
+      input: data,
+      decodeMethod: activeKey as DecodeMethodEnum
+    });
+
+    setDisplayValue(displayValue);
+    setValidationWarnings(validationWarnings);
+  }, [activeKey, data]);
 
   return (
     <div className={classNames(styles.data, className)}>
@@ -35,7 +70,7 @@ export const Data = ({ className }: WithClassnameType) => {
           name={ValuesEnum.data}
           disabled={isDisabled}
           data-testid={ValuesEnum.data}
-          value={data}
+          value={displayValue}
           onBlur={onBlur}
           onChange={onChange}
           spellCheck='false'
@@ -44,6 +79,15 @@ export const Data = ({ className }: WithClassnameType) => {
             [globals.invalid]: isDataInvalid,
             [globals.disabled]: isDisabled
           })}
+        />
+        <CopyButton text={displayValue} className='copy-button' />
+        <Select
+          className='data-decode-select'
+          components={{ Option: ListOption }}
+          onChange={handleSelect}
+          openMenuOnFocus
+          options={Object.values(DecodeMethodEnum)}
+          value={activeKey}
         />
       </div>
       {isDataInvalid && (
@@ -54,6 +98,15 @@ export const Data = ({ className }: WithClassnameType) => {
           {dataError}
         </div>
       )}
+      {validationWarnings.map((warning: string, i: number) => (
+        <div
+          key={i}
+          className={globals.error}
+          data-testid={FormDataTestIdsEnum.dataError}
+        >
+          {warning}
+        </div>
+      ))}
     </div>
   );
 };

@@ -7,5 +7,43 @@
   .wrapper {
     display: flex;
     position: relative;
+
+    .button-holder {
+      .dropdown {
+        right: 0.313rem;
+        top: 0.313rem;
+        pointer-events: none;
+        * {
+          pointer-events: initial;
+        }
+        .dropdown-item::after {
+          display: none;
+        }
+        .dropdown-toggle {
+          width: 6.125rem;
+        }
+      }
+
+      .copy-button {
+        position: absolute;
+        top: 0.313rem;
+        right: 6.75rem;
+        width: 1.813rem;
+        height: 1.813rem;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--neutral-900);
+
+        &:hover {
+          background-color: var(--black);
+        }
+
+        svg {
+          height: 0.75rem;
+        }
+      }
+    }
   }
 }
