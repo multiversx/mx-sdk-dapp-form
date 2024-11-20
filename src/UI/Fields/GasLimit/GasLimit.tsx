@@ -4,7 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 
-import { NumberFormatValues, NumericFormat } from 'react-number-format';
+import {
+  NumberFormatValues,
+  NumericFormat,
+  OnValueChange
+} from 'react-number-format';
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
@@ -37,6 +41,10 @@ export const GasLimit = () => {
     return defaultConditions && !hasLeadingZeroes(value);
   };
 
+  const handleValueChange: OnValueChange = (event) => {
+    onChangeGasLimit(event.value, true);
+  };
+
   const showUndoButton = gasLimit !== defaultGasLimit && !readonly;
   const isDisabled = getIsDisabled(ValuesEnum.gasLimit, readonly);
 
@@ -57,7 +65,7 @@ export const GasLimit = () => {
           inputMode='decimal'
           name={ValuesEnum.gasLimit}
           onBlur={onBlurGasLimit}
-          onChange={onChangeGasLimit}
+          onValueChange={handleValueChange}
           required
           isAllowed={isAllowed}
           thousandSeparator=','

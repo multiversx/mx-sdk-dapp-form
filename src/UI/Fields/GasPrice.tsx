@@ -55,7 +55,7 @@ export const GasPrice = ({ egldLabel }: GasPricePropsType) => {
   return (
     <div className={styles.gas}>
       <label className={globals.label} htmlFor={ValuesEnum.gasPrice}>
-        Gas Price
+        Gas Price (per Gas Unit)
       </label>
 
       <div className={styles.wrapper}>
