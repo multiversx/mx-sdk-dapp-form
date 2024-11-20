@@ -1,14 +1,17 @@
 import React, { MouseEvent } from 'react';
 import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 
+import { NumberFormatValues, NumericFormat } from 'react-number-format';
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
+import { hasLeadingZeroes } from '../AmountSelect/components/AmountInput/helpers';
 import styles from './../styles.module.scss';
 
 export const GasLimit = () => {
@@ -24,9 +27,14 @@ export const GasLimit = () => {
     isGasLimitInvalid
   } = gasInfo;
 
-  const onResetGasPrice = (event: MouseEvent) => {
+  const handleResetGasLimit = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     onResetGasLimit();
+  };
+
+  const isAllowed = ({ value, floatValue }: NumberFormatValues) => {
+    const defaultConditions = !floatValue || !BigNumber(floatValue).isNaN();
+    return defaultConditions && !hasLeadingZeroes(value);
   };
 
   const showUndoButton = gasLimit !== defaultGasLimit && !readonly;
@@ -39,27 +47,35 @@ export const GasLimit = () => {
       </label>
 
       <div className={styles.wrapper}>
-        <input
+        <NumericFormat
+          allowedDecimalSeparators={['.', ',']}
           autoComplete='off'
-          className={classNames(globals.input, {
-            [globals.disabled]: isDisabled,
-            [globals.invalid]: isGasLimitInvalid
-          })}
           data-testid={ValuesEnum.gasLimit}
+          decimalSeparator='.'
           disabled={isDisabled}
           id={ValuesEnum.gasLimit}
+          inputMode='decimal'
           name={ValuesEnum.gasLimit}
           onBlur={onBlurGasLimit}
           onChange={onChangeGasLimit}
           required
-          type='text'
+          isAllowed={isAllowed}
+          thousandSeparator=','
+          thousandsGroupStyle='thousand'
           value={gasLimit}
+          valueIsNumericString
+          allowNegative={false}
+          className={classNames(globals.input, styles.input, {
+            [globals.disabled]: isDisabled,
+            [globals.invalid]: isGasLimitInvalid,
+            [styles.spaced]: showUndoButton
+          })}
         />
 
         {showUndoButton && (
           <div className={styles.actions}>
             <div
-              onClick={onResetGasPrice}
+              onClick={handleResetGasLimit}
               data-testid={FormDataTestIdsEnum.gasLimitResetBtn}
               className={classNames(styles.action, {
                 [styles.disabled]: isDisabled

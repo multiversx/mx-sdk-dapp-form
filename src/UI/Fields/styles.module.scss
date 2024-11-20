@@ -10,6 +10,14 @@
   .wrapper {
     position: relative;
 
+    .input {
+      display: initial;
+
+      &.spaced {
+        padding-right: 44px;
+      }
+    }
+
     .actions {
       right: 0;
       top: 0;
