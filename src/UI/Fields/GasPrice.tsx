@@ -10,6 +10,7 @@ import {
 } from 'react-number-format';
 
 import globals from 'assets/sass/globals.module.scss';
+import { useNetworkConfigContext } from 'contexts';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled } from 'helpers';
 import { formattedConfigGasPrice } from 'operations';
@@ -18,13 +19,11 @@ import { ValuesEnum } from 'types';
 import { hasLeadingZeroes } from './AmountSelect/components/AmountInput/helpers';
 import styles from './styles.module.scss';
 
-export interface GasPricePropsType {
-  egldLabel?: string;
-}
-
-export const GasPrice = ({ egldLabel }: GasPricePropsType) => {
+export const GasPrice = () => {
+  const { networkConfig } = useNetworkConfigContext();
   const { gasInfo, formInfo } = useSendFormContext();
   const { readonly } = formInfo;
+  const { egldLabel } = networkConfig;
 
   const {
     gasPrice,

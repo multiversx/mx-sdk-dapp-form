@@ -65,7 +65,7 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
 
       <div className={styles.expandable} {...getCollapseProps()}>
         <div className={styles.content}>
-          <GasPrice egldLabel={egldLabel} />
+          <GasPrice />
           <GasLimit />
         </div>
       </div>
