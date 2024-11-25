@@ -3,6 +3,7 @@ import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFlo
 import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
+
 import { ZERO } from 'constants/index';
 import { parseAmount } from 'helpers';
 import { ExtendedValuesType, NftEnumType, TransactionTypeEnum } from 'types';

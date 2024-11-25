@@ -1,7 +1,9 @@
 import { fireEvent, waitFor, act } from '@testing-library/react';
 import selectEvent from 'react-select-event';
+
 import { FormDataTestIdsEnum } from 'constants/index';
 import { ValuesEnum } from 'types/form';
+
 import {
   beforAllTokens,
   setupEsdtServer,
@@ -34,7 +36,7 @@ describe('Send tokens', () => {
     fireEvent.click(gasLimitResetBtn);
 
     await act(async () => {
-      expect(input.value).toBe('500000');
+      expect(input.value).toBe('500,000');
     });
   });
 
@@ -79,13 +81,17 @@ describe('Send tokens', () => {
       const entireTokenBalaceButton = await methods.findByText('Max');
       fireEvent.click(entireTokenBalaceButton);
 
-      const input: any = await methods.findByTestId(ValuesEnum.amount);
+      const amountInput = await methods.findByTestId(ValuesEnum.amount);
+      const processedAmountInput = amountInput as HTMLInputElement;
 
-      expect(input.value).toBe('1,000');
-      const data: any = await methods.findByTestId(ValuesEnum.data);
+      expect(processedAmountInput.value).toBe('1,000');
+      const dataInput = await methods.findByTestId(ValuesEnum.data);
+      const processedDataInput = dataInput as HTMLInputElement;
 
       await waitFor(() => {
-        expect(data.value).toBe('ESDTTransfer@54574f2d383234653730@0186a0');
+        expect(processedDataInput.value).toBe(
+          'ESDTTransfer@54574f2d383234653730@0186a0'
+        );
       });
     });
 
@@ -94,7 +100,6 @@ describe('Send tokens', () => {
       const setInput = useAmountInput(methods);
 
       await setInput('10');
-
       const sendButton = methods.getByTestId(FormDataTestIdsEnum.sendBtn);
       fireEvent.click(sendButton);
 
@@ -121,8 +126,12 @@ describe('Send tokens', () => {
 
       selectEvent.select(methods.getByLabelText('Token'), 'TwoTToken');
 
-      const dataInput: any = methods.getByTestId(ValuesEnum.data);
-      expect(dataInput.value).toBe('ESDTTransfer@54574f2d383234653730@03e8');
+      const dataInput = methods.getByTestId(ValuesEnum.data);
+      const processedDataInput = dataInput as HTMLInputElement;
+
+      expect(processedDataInput.value).toBe(
+        'ESDTTransfer@54574f2d383234653730@03e8'
+      );
     });
   });
 });

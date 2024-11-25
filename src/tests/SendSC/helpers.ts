@@ -1,8 +1,10 @@
 import { RenderResult, fireEvent, queries } from '@testing-library/react';
+
 import { testNetwork, testReceiver } from '__mocks__';
 import { server, rest } from '__mocks__/server';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { ValuesEnum } from 'types/form';
+
 import { renderForm } from '../helpers';
 
 function* generator(arr: any[]) {
@@ -14,28 +16,23 @@ export const finalFee = '0.000057937 xEGLD';
 export const fillInForm: () => Promise<{
   render: RenderResult<typeof queries, HTMLElement, HTMLElement>;
 }> = async () => {
-  const render = renderForm({
-    balance: '7600000000000000000000'
-  });
+  const render = renderForm({ balance: '7600000000000000000000' });
+  const amountInput = await render.findByTestId(ValuesEnum.amount);
+  const processedAmountInput = amountInput as HTMLInputElement;
 
-  const amount: any = await render.findByTestId(ValuesEnum.amount);
-  fireEvent.change(amount, { target: { value: '0.1' } });
-  fireEvent.blur(amount);
+  fireEvent.change(processedAmountInput, { target: { value: '0.1' } });
+  fireEvent.blur(processedAmountInput);
+  expect(processedAmountInput.value).toBe('0.1');
 
-  expect(amount.value).toBe('0.1');
-
-  const receiver: any = render.getByTestId(ValuesEnum.receiver);
-  fireEvent.change(receiver, {
-    target: {
-      value: testReceiver
-    }
-  });
+  const receiver = render.getByTestId(ValuesEnum.receiver);
+  fireEvent.change(receiver, { target: { value: testReceiver } });
   fireEvent.blur(receiver);
 
-  const dataInput: any = render.getByTestId(ValuesEnum.data);
+  const dataInput = render.getByTestId(ValuesEnum.data);
+  const processedDataInput = dataInput as HTMLInputElement;
 
-  fireEvent.change(dataInput, { target: { value: 'claim' } });
-  fireEvent.blur(dataInput);
+  fireEvent.change(processedDataInput, { target: { value: 'claim' } });
+  fireEvent.blur(processedDataInput);
 
   const fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
   expect(fee.textContent).toBe('0.0000575 xEGLD');

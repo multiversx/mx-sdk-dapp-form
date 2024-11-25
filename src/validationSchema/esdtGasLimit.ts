@@ -29,6 +29,8 @@ const esdtGasLimit = (errorMessages: ValidationErrorMessagesType) => {
       const isValid =
         value && bNgasLimit.isGreaterThanOrEqualTo(bNcalculatedGasLimit);
 
+      console.log({ isValid, value });
+
       return isValid;
     }
   );
