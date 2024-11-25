@@ -47,8 +47,9 @@ describe('Send tokens', () => {
     const availableTokens = await findByTestId('available-TWO-824e70');
     expect(availableTokens.getAttribute('data-value')).toBe('1000 TWO-824e70');
 
-    const gasLimit: any = getByTestId(ValuesEnum.gasLimit);
-    expect(gasLimit.value).toBe('500000');
+    const gasLimitInput = getByTestId(ValuesEnum.gasLimit);
+    const processedGasLimitInput = gasLimitInput as HTMLInputElement;
+    expect(processedGasLimitInput.value).toBe('500,000');
   });
 
   describe('Tokens amount', () => {

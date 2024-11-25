@@ -62,7 +62,7 @@ export const GasLimit = () => {
           allowLeadingZeros={false}
           disabled={isDisabled}
           id={ValuesEnum.gasLimit}
-          inputMode='decimal'
+          inputMode='numeric'
           name={ValuesEnum.gasLimit}
           onBlur={onBlurGasLimit}
           onValueChange={handleValueChange}
