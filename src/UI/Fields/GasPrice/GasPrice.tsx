@@ -16,8 +16,8 @@ import { getIsDisabled } from 'helpers';
 import { formattedConfigGasPrice } from 'operations';
 import { ValuesEnum } from 'types';
 
-import { hasLeadingZeroes } from './AmountSelect/components/AmountInput/helpers';
-import styles from './styles.module.scss';
+import { hasLeadingZeroes } from '../AmountSelect/components/AmountInput/helpers';
+import styles from '../styles.module.scss';
 
 export const GasPrice = () => {
   const { networkConfig } = useNetworkConfigContext();
@@ -62,6 +62,7 @@ export const GasPrice = () => {
           allowedDecimalSeparators={['.', ',']}
           autoComplete='off'
           data-testid={ValuesEnum.gasPrice}
+          allowLeadingZeros={false}
           decimalSeparator='.'
           disabled={isDisabled}
           id={ValuesEnum.gasPrice}
@@ -99,7 +100,12 @@ export const GasPrice = () => {
       </div>
 
       {isGasPriceInvalid && (
-        <div className={globals.error}>{gasPriceError}</div>
+        <div
+          className={globals.error}
+          data-testid={`${ValuesEnum.gasPrice}Error`}
+        >
+          {gasPriceError}
+        </div>
       )}
     </div>
   );

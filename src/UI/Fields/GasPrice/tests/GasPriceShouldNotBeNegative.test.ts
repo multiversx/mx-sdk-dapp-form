@@ -2,17 +2,17 @@ import { fireEvent } from '@testing-library/react';
 
 import { renderForm } from 'tests/helpers/renderForm';
 
-describe('GasLimit field', () => {
-  it('should not be string', async () => {
+describe('GasPrice field', () => {
+  it('should not allow negative gasPrice', async () => {
     const { findByLabelText } = renderForm();
 
-    const input = await findByLabelText('Gas Limit');
+    const input = await findByLabelText('Gas Price (per Gas Unit)');
     const processedInput = input as HTMLInputElement;
-    const data = { target: { value: 'string' } };
+    const data = { target: { value: '-1' } };
 
     fireEvent.change(processedInput, data);
     fireEvent.blur(processedInput);
 
-    expect(processedInput.value).toMatch('');
+    expect(processedInput.value).toMatch('1');
   });
 });

@@ -12,9 +12,9 @@ import {
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
+
 import { hasLeadingZeroes } from '../AmountSelect/components/AmountInput/helpers';
 import styles from './../styles.module.scss';
 
@@ -56,10 +56,10 @@ export const GasLimit = () => {
 
       <div className={styles.wrapper}>
         <NumericFormat
-          allowedDecimalSeparators={['.', ',']}
+          allowedDecimalSeparators={[',']}
           autoComplete='off'
           data-testid={ValuesEnum.gasLimit}
-          decimalSeparator='.'
+          allowLeadingZeros={false}
           disabled={isDisabled}
           id={ValuesEnum.gasLimit}
           inputMode='decimal'

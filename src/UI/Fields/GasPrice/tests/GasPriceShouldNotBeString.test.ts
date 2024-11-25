@@ -2,11 +2,11 @@ import { fireEvent } from '@testing-library/react';
 
 import { renderForm } from 'tests/helpers/renderForm';
 
-describe('GasLimit field', () => {
+describe('GasPrice field', () => {
   it('should not be string', async () => {
     const { findByLabelText } = renderForm();
 
-    const input = await findByLabelText('Gas Limit');
+    const input = await findByLabelText('Gas Price (per Gas Unit)');
     const processedInput = input as HTMLInputElement;
     const data = { target: { value: 'string' } };
 
