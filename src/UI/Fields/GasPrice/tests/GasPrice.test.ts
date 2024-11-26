@@ -6,7 +6,7 @@ import { formattedAmountSelector } from 'tests/helpers';
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types/form';
 
-describe('GasPrice field', () => {
+describe('GasPrice field constraints tests', () => {
   it('should not be empty', async () => {
     const { findByLabelText } = renderForm();
 
