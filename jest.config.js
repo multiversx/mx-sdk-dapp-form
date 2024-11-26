@@ -15,5 +15,8 @@ module.exports = {
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|svg)$':
       'identity-obj-proxy'
   },
-  transformIgnorePatterns: ['node_modules/(^.+\\\\.(ts|js)$)']
+  transformIgnorePatterns: ['node_modules/(^.+\\\\.(ts|js)$)'],
+  bail: 1,
+  workerIdleMemoryLimit: '512MB', // Memory used per worker. Required to prevent memory leaks
+  maxWorkers: '50%' // Maximum tests ran in parallel. Required to prevent CPU usage at 100%
 };
