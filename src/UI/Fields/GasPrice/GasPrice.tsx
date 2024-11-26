@@ -3,79 +3,84 @@ import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
-
 import {
   NumberFormatValues,
   NumericFormat,
   OnValueChange
 } from 'react-number-format';
+
 import globals from 'assets/sass/globals.module.scss';
-import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { useNetworkConfigContext } from 'contexts';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled } from 'helpers';
+import { formattedConfigGasPrice } from 'operations';
 import { ValuesEnum } from 'types';
 
 import { hasLeadingZeroes } from '../AmountSelect/components/AmountInput/helpers';
-import styles from './../styles.module.scss';
+import styles from '../styles.module.scss';
 
-export const GasLimit = () => {
-  const { formInfo, gasInfo } = useSendFormContext();
+export const GasPrice = () => {
+  const { networkConfig } = useNetworkConfigContext();
+  const { gasInfo, formInfo } = useSendFormContext();
   const { readonly } = formInfo;
+  const { egldLabel } = networkConfig;
+
   const {
-    defaultGasLimit,
-    onResetGasLimit,
-    onChangeGasLimit,
-    onBlurGasLimit,
-    gasLimit,
-    gasLimitError,
-    isGasLimitInvalid
+    gasPrice,
+    gasPriceError,
+    isGasPriceInvalid,
+    onChangeGasPrice,
+    onBlurGasPrice,
+    onResetGasPrice
   } = gasInfo;
 
-  const handleResetGasLimit = (event: MouseEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    onResetGasLimit();
-  };
+  const showUndoButton = gasPrice !== formattedConfigGasPrice && !readonly;
+  const isDisabled = getIsDisabled(ValuesEnum.gasPrice, readonly);
 
   const isAllowed = ({ value, floatValue }: NumberFormatValues) => {
     const defaultConditions = !floatValue || !BigNumber(floatValue).isNaN();
     return defaultConditions && !hasLeadingZeroes(value);
   };
 
-  const handleValueChange: OnValueChange = (event) => {
-    onChangeGasLimit(event.value, true);
+  const handleResetGasPrice = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    onResetGasPrice();
   };
 
-  const showUndoButton = gasLimit !== defaultGasLimit && !readonly;
-  const isDisabled = getIsDisabled(ValuesEnum.gasLimit, readonly);
+  const handleValueChange: OnValueChange = (event) => {
+    onChangeGasPrice(event.value, true);
+  };
 
   return (
     <div className={styles.gas}>
-      <label className={globals.label} htmlFor={ValuesEnum.gasLimit}>
-        Gas Limit
+      <label className={globals.label} htmlFor={ValuesEnum.gasPrice}>
+        Gas Price (per Gas Unit)
       </label>
 
       <div className={styles.wrapper}>
         <NumericFormat
-          allowedDecimalSeparators={[',']}
+          allowedDecimalSeparators={['.', ',']}
           autoComplete='off'
-          data-testid={ValuesEnum.gasLimit}
+          data-testid={ValuesEnum.gasPrice}
           allowLeadingZeros={false}
+          decimalSeparator='.'
           disabled={isDisabled}
-          id={ValuesEnum.gasLimit}
-          inputMode='numeric'
-          name={ValuesEnum.gasLimit}
-          onBlur={onBlurGasLimit}
+          id={ValuesEnum.gasPrice}
+          inputMode='decimal'
+          isAllowed={isAllowed}
+          name={ValuesEnum.gasPrice}
+          onBlur={onBlurGasPrice}
           onValueChange={handleValueChange}
           required
-          isAllowed={isAllowed}
+          suffix={` ${egldLabel}`}
           thousandSeparator=','
           thousandsGroupStyle='thousand'
-          value={gasLimit}
+          value={gasPrice}
           valueIsNumericString
           allowNegative={false}
           className={classNames(globals.input, styles.input, {
             [globals.disabled]: isDisabled,
-            [globals.invalid]: isGasLimitInvalid,
+            [globals.invalid]: isGasPriceInvalid,
             [styles.spaced]: showUndoButton
           })}
         />
@@ -83,8 +88,7 @@ export const GasLimit = () => {
         {showUndoButton && (
           <div className={styles.actions}>
             <div
-              onClick={handleResetGasLimit}
-              data-testid={FormDataTestIdsEnum.gasLimitResetBtn}
+              onClick={handleResetGasPrice}
               className={classNames(styles.action, {
                 [styles.disabled]: isDisabled
               })}
@@ -93,16 +97,16 @@ export const GasLimit = () => {
             </div>
           </div>
         )}
-
-        {isGasLimitInvalid && (
-          <div
-            className={globals.error}
-            data-testid={`${ValuesEnum.gasLimit}Error`}
-          >
-            {gasLimitError}
-          </div>
-        )}
       </div>
+
+      {isGasPriceInvalid && (
+        <div
+          className={globals.error}
+          data-testid={`${ValuesEnum.gasPrice}Error`}
+        >
+          {gasPriceError}
+        </div>
+      )}
     </div>
   );
 };

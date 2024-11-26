@@ -93,6 +93,7 @@ describe('Send Meta ESDT', () => {
     const selectInput = await methods.findByLabelText('Token');
     fireEvent.focus(selectInput);
     selectEvent.openMenu(selectInput);
+
     const metaTokenOption = await methods.findByTestId(
       `${metaToken.identifier}-option`
     );
@@ -101,12 +102,13 @@ describe('Send Meta ESDT', () => {
     // select metaEsdt token
     selectEvent.select(selectInput, metaToken.ticker);
 
-    const tokenId: any = methods.container.querySelector(
+    const tokenIdInput = methods.container.querySelector(
       'input[name="tokenId"]'
     );
 
+    const processedTokenIdInput = tokenIdInput as HTMLInputElement;
     await waitFor(() => {
-      expect(tokenId.value).toBe(metaToken.identifier);
+      expect(processedTokenIdInput.value).toBe(metaToken.identifier);
     });
 
     const canTransferWarning = await methods.findByTestId(
@@ -136,24 +138,26 @@ describe('Send Meta ESDT', () => {
     expect(available.textContent).toBe('Available: 10,000 MT1-ff89d3');
 
     // fill in amount
-    const amount: any = await methods.findByTestId(ValuesEnum.amount);
+    const amount = await methods.findByTestId(ValuesEnum.amount);
     fireEvent.change(amount, { target: { value: '10' } });
     fireEvent.blur(amount, { target: { value: '10' } });
 
-    const dataInput: any = methods.getByTestId(ValuesEnum.data);
+    const dataInput = methods.getByTestId(ValuesEnum.data);
+    const processedDataInput = dataInput as HTMLInputElement;
 
     // check data input disabled
-    expect(dataInput.disabled).toBeTruthy();
+    expect(processedDataInput.disabled).toBeTruthy();
 
     const dataString =
       'ESDTNFTTransfer@4d54312d666638396433@01@8ac7230489e80000@000000000000000005000e8a594d1c9b52073fcd3c856c87986045c85f568b98';
 
     await waitFor(() => {
-      expect(dataInput.value).toBe(dataString);
+      expect(processedDataInput.value).toBe(dataString);
     });
 
-    const gasLimit: any = methods.getByTestId(ValuesEnum.gasLimit);
-    expect(gasLimit.value).toBe('1000000');
+    const gasLimitInput = methods.getByTestId(ValuesEnum.gasLimit);
+    const processedGasLimitInput = gasLimitInput as HTMLInputElement;
+    expect(processedGasLimitInput.value).toBe('1,000,000');
 
     await sendAndConfirmTest({ methods })({
       amount: '10.0000',

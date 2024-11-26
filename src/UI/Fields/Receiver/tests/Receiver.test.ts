@@ -8,12 +8,14 @@ describe('Receiver field', () => {
     const { findByTestId, queryByText } = renderForm();
 
     const data = { target: { value: '' } };
-    const input: any = await findByTestId('receiver');
+    const receiverInput = await findByTestId('receiver');
+    const processedReceiverInput = receiverInput as HTMLInputElement;
 
-    fireEvent.change(input, data);
-    fireEvent.blur(input);
+    fireEvent.change(processedReceiverInput, data);
+    fireEvent.blur(processedReceiverInput);
+
     await waitFor(() => {
-      expect(input.value).toBe('');
+      expect(processedReceiverInput.value).toBe('');
       const req = queryByText('Required');
       expect(req?.innerHTML).toBe('Required');
     });
@@ -21,11 +23,12 @@ describe('Receiver field', () => {
 
   it('should validate address', async () => {
     const { findByTestId } = renderForm();
-    const input: any = await findByTestId('receiver');
-    const value = '123';
-    const data = { target: { value } };
-    fireEvent.change(input, data);
-    fireEvent.blur(input);
+    const receiverInput = await findByTestId('receiver');
+    const processedReceiverInput = receiverInput as HTMLInputElement;
+
+    const data = { target: { value: '123' } };
+    fireEvent.change(processedReceiverInput, data);
+    fireEvent.blur(processedReceiverInput);
 
     await waitFor(async () => {
       const receiverUsernameError = await findByTestId('receiverUsernameError');
@@ -50,11 +53,12 @@ describe('Receiver username found', () => {
     const { findByTestId } = renderForm();
 
     const data = { target: { value: 'alice' } };
-    const input: any = await findByTestId('receiver');
+    const receiverInput = await findByTestId('receiver');
+    const processedReceiverInput = receiverInput as HTMLInputElement;
 
-    fireEvent.change(input, data);
-    fireEvent.blur(input);
-    expect(input.value).toBe('alice');
+    fireEvent.change(processedReceiverInput, data);
+    fireEvent.blur(processedReceiverInput);
+    expect(processedReceiverInput.value).toBe('alice');
 
     await waitFor(async () => {
       const receiverUsernameAddress = await findByTestId(

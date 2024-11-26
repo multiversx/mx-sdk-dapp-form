@@ -66,7 +66,7 @@ describe('Send SFT tokens', () => {
     const methods = beforAllTokens();
 
     // fill in receiver
-    const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
+    const receiver = await methods.findByTestId(ValuesEnum.receiver);
 
     fireEvent.change(receiver, { target: { value: testAddress } });
     fireEvent.blur(receiver);
@@ -100,10 +100,11 @@ describe('Send SFT tokens', () => {
     const entireTokenBalaceButton = await methods.findByText('Max');
     fireEvent.click(entireTokenBalaceButton);
 
-    const amountInput: any = await methods.findByTestId(ValuesEnum.amount);
+    const amountInput = await methods.findByTestId(ValuesEnum.amount);
+    const processedAmountInput = amountInput as HTMLInputElement;
 
     await waitFor(() => {
-      expect(amountInput.value).toBe('1');
+      expect(processedAmountInput.value).toBe('1');
     });
 
     // test sending decimals
@@ -146,11 +147,12 @@ describe('Send SFT tokens', () => {
     });
     expect(data.disabled).toBeTruthy(); // check disabled
 
-    const gasLimit: any = methods.getByTestId(ValuesEnum.gasLimit);
-    expect(gasLimit.value).toBe('1000000');
+    const gasLimitInput = methods.getByTestId(ValuesEnum.gasLimit);
+    const processedGasLimitInput = gasLimitInput as HTMLInputElement;
+    expect(processedGasLimitInput.value).toBe('1,000,000');
 
-    fireEvent.change(gasLimit, { target: { value: '100000' } });
-    fireEvent.blur(gasLimit);
+    fireEvent.change(processedGasLimitInput, { target: { value: '100000' } });
+    fireEvent.blur(processedGasLimitInput);
 
     await waitFor(() => {
       const gasLimitError = methods.getByTestId(
@@ -164,8 +166,7 @@ describe('Send SFT tokens', () => {
     // reset gasLimit
     const gasLimitResetBtn = methods.getByTestId('gasLimitResetBtn');
     fireEvent.click(gasLimitResetBtn);
-
-    expect(gasLimit.value).toBe('1000000');
+    expect(processedGasLimitInput.value).toBe('1,000,000');
 
     await sendAndConfirmTest({ methods })({
       amount: '1',

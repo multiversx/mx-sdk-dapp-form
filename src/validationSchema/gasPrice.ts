@@ -7,6 +7,7 @@ import {
   formattedConfigGasPrice,
   maxAcceptedGasPrice
 } from 'operations/formattedConfigGasPrice';
+
 import { ValidationErrorMessagesType } from 'types/validation';
 
 export const gasPrice = (errorMessages: ValidationErrorMessagesType) => {
@@ -17,6 +18,7 @@ export const gasPrice = (errorMessages: ValidationErrorMessagesType) => {
     errorMessages.maxDecimalsAllowed(DECIMALS),
     (value) => maxDecimals(String(value))
   );
+
   const minimum = string().test(
     'minimum',
     errorMessages.tooLowGasPrice(formattedConfigGasPrice),

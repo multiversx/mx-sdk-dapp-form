@@ -27,7 +27,7 @@ describe('SendForm Smart Contract', () => {
     let gasLimit = render.getByTestId(ValuesEnum.gasLimit) as HTMLInputElement;
 
     await waitFor(() => {
-      expect(gasLimit.value).toBe('1650063250');
+      expect(gasLimit.value).toBe('1,650,063,250');
     });
 
     const sendBtn = render.getByTestId(FormDataTestIdsEnum.sendBtn);
@@ -56,7 +56,7 @@ describe('SendForm Smart Contract', () => {
     gasLimit = render.getByTestId(ValuesEnum.gasLimit) as HTMLInputElement;
 
     await waitFor(() => {
-      expect(gasLimit.value).toBe('1650063250');
+      expect(gasLimit.value).toBe('1,650,063,250');
     });
 
     // 3rd data field change fetches correct server response
