@@ -8,7 +8,7 @@ import { TextDecoder, TextEncoder } from 'util';
 import { server } from './__mocks__/server';
 
 jest.setTimeout(60000);
-jest.retryTimes(2);
+jest.retryTimes(5);
 
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());

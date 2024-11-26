@@ -19,20 +19,21 @@ export const fillInForm: () => Promise<{
   const render = renderForm({ balance: '7600000000000000000000' });
   const amountInput = await render.findByTestId(ValuesEnum.amount);
   const processedAmountInput = amountInput as HTMLInputElement;
-
   fireEvent.change(processedAmountInput, { target: { value: '0.1' } });
   fireEvent.blur(processedAmountInput);
   expect(processedAmountInput.value).toBe('0.1');
 
   const receiver = render.getByTestId(ValuesEnum.receiver);
-  fireEvent.change(receiver, { target: { value: testReceiver } });
-  fireEvent.blur(receiver);
+  const processedReceiverInput = receiver as HTMLInputElement;
+  fireEvent.change(processedReceiverInput, { target: { value: testReceiver } });
+  fireEvent.blur(processedReceiverInput);
+  expect(processedReceiverInput.value).toBe(testReceiver);
 
   const dataInput = render.getByTestId(ValuesEnum.data);
   const processedDataInput = dataInput as HTMLInputElement;
-
   fireEvent.change(processedDataInput, { target: { value: 'claim' } });
   fireEvent.blur(processedDataInput);
+  expect(processedDataInput.value).toBe('claim');
 
   const fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
   expect(fee.textContent).toBe('0.0000575 xEGLD');
