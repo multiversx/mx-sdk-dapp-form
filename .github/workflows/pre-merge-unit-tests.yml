@@ -1,4 +1,4 @@
-name: "Jest Unit Tests"
+name: 'Jest Unit Tests'
 on:
   pull_request:
     branches: [main]
@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   run-unit-tests:
-    runs-on: ubuntu-latest
+    runs-on: runner-dapp
     steps:
       - uses: actions/checkout@v3
         with:
