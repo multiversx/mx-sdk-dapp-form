@@ -6,14 +6,14 @@ import { formattedAmountSelector } from 'tests/helpers';
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types/form';
 
-describe('GasLimit field', () => {
+describe('GasPrice field constraints tests', () => {
   it('should not be empty', async () => {
     const { findByLabelText } = renderForm();
 
-    const input = await findByLabelText('Gas Limit');
+    const input = await findByLabelText('Gas Price (per Gas Unit)');
     const processedInput = input as HTMLInputElement;
 
-    expect(processedInput.value).toBe('50,000');
+    expect(processedInput.value).toBe('0.000000001 xEGLD');
   });
 
   it('setting Gas limit + amount > balance should trigger error', async () => {
@@ -25,10 +25,10 @@ describe('GasLimit field', () => {
     const data = { target: { value } };
     fireEvent.change(input, data);
 
-    const gasInput = getByLabelText('Gas Limit');
+    const gasInput = getByLabelText('Gas Price (per Gas Unit)');
     const gasValue = 50001; // add 1 to the end
-
     fireEvent.change(gasInput, { target: { value: gasValue } });
+
     const sendButton = getByTestId(FormDataTestIdsEnum.sendBtn);
     fireEvent.click(sendButton);
 
@@ -52,7 +52,7 @@ describe('GasLimit field', () => {
     const feeLimit = await findByTestId(FormDataTestIdsEnum.feeLimit);
     fireEvent.click(feeLimit);
 
-    const gasLimit = getByLabelText('Gas Limit');
+    const gasLimit = getByLabelText('Gas Price (per Gas Unit)');
     fireEvent.blur(gasLimit);
 
     const data = await findByTestId(ValuesEnum.data);
@@ -67,9 +67,8 @@ describe('GasLimit field', () => {
     const usdValue = await findByTestId('tokenPrice_58.14');
     expect(usdValue).toBeDefined();
   });
-
   it('should show error when not enough balance for zero transaction with large gas', async () => {
-    const { findByTestId, getByTestId, queryByTestId } = renderForm({
+    const { getByTestId, queryByTestId, findByTestId } = renderForm({
       balance: '1_000_000_000_000_000'.replaceAll('_', '') // 0.001
     });
 
@@ -117,7 +116,6 @@ describe('GasLimit field', () => {
 
     const data = await findByTestId(ValuesEnum.data);
     fireEvent.change(data, { target: { value: '12345678' } });
-
     expectCorrectFee();
   });
 });

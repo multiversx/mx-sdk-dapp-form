@@ -44,13 +44,12 @@ describe('SendForm Smart Contract', () => {
       ValuesEnum.gasLimit
     ) as HTMLInputElement;
 
-    expect(gasLimit.value).toBe('101200');
+    expect(gasLimit.value).toBe('101,200');
 
     fireEvent.change(gasLimit, { target: { value: '101201' } });
     fireEvent.blur(gasLimit);
 
     const sendBtn = render.getByTestId(FormDataTestIdsEnum.sendBtn);
-
     fireEvent.click(sendBtn);
 
     const confirmFee = await render.findByTestId('confirmFee');

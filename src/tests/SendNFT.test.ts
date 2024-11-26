@@ -114,11 +114,12 @@ describe('Send NFT tokens', () => {
 
     expect(data.disabled).toBeTruthy(); // check disabled
 
-    const gasLimit: any = methods.getByTestId(ValuesEnum.gasLimit);
-    expect(gasLimit.value).toBe('1000000');
+    const gasLimitInput = methods.getByTestId(ValuesEnum.gasLimit);
+    const processedGasLimitInput = gasLimitInput as HTMLInputElement;
+    expect(processedGasLimitInput.value).toBe('1,000,000');
 
-    fireEvent.change(gasLimit, { target: { value: '100000' } });
-    fireEvent.blur(gasLimit);
+    fireEvent.change(processedGasLimitInput, { target: { value: '100000' } });
+    fireEvent.blur(processedGasLimitInput);
 
     await waitFor(() => {
       const gasLimitError = methods.getByTestId(
@@ -132,8 +133,7 @@ describe('Send NFT tokens', () => {
     // reset gasLimit
     const gasLimitResetBtn = methods.getByTestId('gasLimitResetBtn');
     fireEvent.click(gasLimitResetBtn);
-
-    expect(gasLimit.value).toBe('1000000');
+    expect(processedGasLimitInput.value).toBe('1,000,000');
 
     await sendAndConfirmTest({ methods })({
       fee: '0.0000595',

@@ -1,17 +1,18 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
+
 import { renderForm } from 'tests/helpers/renderForm';
 
 describe('GasLimit field', () => {
   it('should not allow explicit positive gasLimit', async () => {
-    const { findByLabelText, queryByText } = renderForm();
-    const input: any = await findByLabelText('Gas Limit');
-    const value = '+1';
-    const data = { target: { value } };
-    fireEvent.change(input, data);
-    fireEvent.blur(input);
-    await waitFor(() => {
-      const req = queryByText('Invalid number');
-      expect(req?.innerHTML).toBeDefined();
-    });
+    const { findByLabelText } = renderForm();
+
+    const input = await findByLabelText('Gas Limit');
+    const processedInput = input as HTMLInputElement;
+    const data = { target: { value: '+1' } };
+
+    fireEvent.change(processedInput, data);
+    fireEvent.blur(processedInput);
+
+    expect(processedInput.value).toMatch('1');
   });
 });

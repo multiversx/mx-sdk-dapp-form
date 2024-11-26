@@ -19,7 +19,6 @@ describe('Send advanced mode', () => {
       expect(advancedMode).toBeNull();
 
       await setAmountInput('10');
-
       await act(async () => {
         selectEvent.openMenu(methods.getByLabelText('Token'));
       });
@@ -29,11 +28,15 @@ describe('Send advanced mode', () => {
 
       selectEvent.select(methods.getByLabelText('Token'), 'TwoTToken');
 
-      const dataInput: any = methods.getByTestId(ValuesEnum.data);
-      expect(dataInput.value).toBe('ESDTTransfer@54574f2d383234653730@03e8');
+      const dataInput = methods.getByTestId(ValuesEnum.data);
+      const processedDataInput = dataInput as HTMLInputElement;
+      expect(processedDataInput.value).toBe(
+        'ESDTTransfer@54574f2d383234653730@03e8'
+      );
 
-      const gasLimit: any = methods.getByTestId(ValuesEnum.gasLimit);
-      expect(gasLimit.value).toBe('500000');
+      const gasLimitInput = methods.getByTestId(ValuesEnum.gasLimit);
+      const processedGasLimitInput = gasLimitInput as HTMLInputElement;
+      expect(processedGasLimitInput.value).toBe('500,000');
 
       const advancedModeBtn: any = methods.queryByTestId(
         FormDataTestIdsEnum.enableAdvancedMode
@@ -48,8 +51,11 @@ describe('Send advanced mode', () => {
       fireEvent.click(confirmAdvancedModeBtn);
 
       // reset form
-      expect(dataInput.value).toBe('ESDTTransfer@54574f2d383234653730@03e8');
-      expect(gasLimit.value).toBe('500000');
+      expect(processedDataInput.value).toBe(
+        'ESDTTransfer@54574f2d383234653730@03e8'
+      );
+
+      expect(processedGasLimitInput.value).toBe('500,000');
       expect(dataInput).toBeEnabled();
     });
   });

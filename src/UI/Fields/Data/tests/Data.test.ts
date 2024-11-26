@@ -6,26 +6,25 @@ import { ValuesEnum } from 'types/form';
 
 describe('Data field tests', () => {
   test('data changes transaction fee', async () => {
-    const data = { target: { value: 'four' } };
+    const { findByTestId, getByTestId } = renderForm();
 
-    const methods = renderForm();
-
-    const feeLimit = await methods.findByTestId(FormDataTestIdsEnum.feeLimit);
-
+    const feeLimit = await findByTestId(FormDataTestIdsEnum.feeLimit);
     expect(formattedAmountSelector(feeLimit).intAmount).toBe('0');
 
-    const input = methods.getByTestId(ValuesEnum.data);
+    const data = { target: { value: 'four' } };
+    const input = getByTestId(ValuesEnum.data);
 
     fireEvent.change(input, data);
 
-    const gasInput: any = methods.getByTestId(ValuesEnum.gasLimit);
-    expect(gasInput.value).toBe('56000');
+    const gasInput = getByTestId(ValuesEnum.gasLimit);
+    const processedGasLimitInput = gasInput as HTMLInputElement;
+    expect(processedGasLimitInput.value).toBe('56,000');
 
     expect(formattedAmountSelector(feeLimit).intAmount).toBe('0');
     expect(formattedAmountSelector(feeLimit).decimalAmount).toBe('.000056');
 
     // prevent async effects error logging
-    const feeInFiat = await methods.findByTestId('feeInFiat');
+    const feeInFiat = await findByTestId('feeInFiat');
     await waitFor(() => {
       expect(feeInFiat.textContent).toBe('(≈ $0.0033)');
     });

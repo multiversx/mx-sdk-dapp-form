@@ -26,12 +26,14 @@ export const twoToken = {
 
 const useInput =
   (field: ValuesEnum) => (methods: RenderResult) => async (value: string) => {
-    const input: any = await methods.findByTestId(field);
+    const input = await methods.findByTestId(field);
+    const processedInput = input as HTMLInputElement;
     const data = { target: { value } };
-    fireEvent.change(input, data);
-    fireEvent.blur(input);
 
-    return input;
+    fireEvent.change(processedInput, data);
+    fireEvent.blur(processedInput);
+
+    return processedInput;
   };
 
 export const useAmountInput = useInput(ValuesEnum.amount);

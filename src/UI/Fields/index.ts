@@ -4,6 +4,6 @@ export * from './FeeAccordion';
 export * from './SelectToken';
 export * from './AmountSelect';
 export * from './Data';
-export * from './GasLimit/GasLimit';
+export * from './GasLimit';
 export * from './GasPrice';
 export * from './AmountSlider';
