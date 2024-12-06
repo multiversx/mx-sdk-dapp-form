@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[1.1.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/327)] - 2024-12-06
+
+- [Allow custom HRP](https://github.com/multiversx/mx-sdk-dapp-form/pull/326)
+
 ## [[1.1.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/326)] - 2024-11-26
 
 - [Updated send flow gas interaction experience](https://github.com/multiversx/mx-sdk-dapp-form/pull/325)
