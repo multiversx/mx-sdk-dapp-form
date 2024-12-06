@@ -10,6 +10,7 @@ import {
 import { getTokenFromData } from '@multiversx/sdk-dapp/utils/transactions/getTokenFromData';
 import { parseMultiEsdtTransferData } from '@multiversx/sdk-dapp/utils/transactions/parseMultiEsdtTransferData';
 import getTxWithReceiver from './getTxWithReceiver';
+// import { newTransaction } from './newTransaction';
 import {
   ValidateSignTransactionsType,
   validateTransaction
@@ -69,6 +70,7 @@ function extractAllTransactions(props: ValidateSignTransactionsType) {
       });
     } else {
       const { tokenId, amount } = getTokenFromData(transaction.data);
+
       if (tokenId && transaction.data) {
         txsDataTokens = {
           ...txsDataTokens,

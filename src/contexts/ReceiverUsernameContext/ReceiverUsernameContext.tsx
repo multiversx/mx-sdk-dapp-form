@@ -1,7 +1,7 @@
 import React, { useContext, ReactNode, createContext } from 'react';
+import { Address } from '@multiversx/sdk-core/out';
 import { useFormikContext } from 'formik';
 import { useReceiverContext } from 'contexts/ReceiverContext';
-import { getStartsWithErd1 } from 'helpers';
 import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
 import { ExtendedValuesType } from 'types';
 import { getIsValueAmongKnown } from './helpers';
@@ -40,7 +40,14 @@ export function ReceiverUsernameContextProvider({
   const { receiverInputValue: inputValue, knownAddresses } =
     useReceiverContext();
 
-  const searchQueryIsAddress = getStartsWithErd1(inputValue);
+  let searchQueryIsAddress = false;
+
+  try {
+    Address.newFromBech32(inputValue);
+    searchQueryIsAddress = true;
+  } catch (error) {
+    console.error(error);
+  }
   const debouncedUsername = useDebounce(inputValue, MS_100);
 
   const usernameExactMatchExists = knownAddresses?.some(

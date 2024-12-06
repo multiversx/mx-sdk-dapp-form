@@ -52,7 +52,7 @@ export const extractNftFromData = ({
       ].every((el) => el);
 
       const isValidReceiver = addressIsValid(
-        new Address(usedReceiver).bech32()
+        Address.newFromHex(usedReceiver).toBech32()
       );
 
       if (hasAllDataFields && isValidReceiver) {

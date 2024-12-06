@@ -1,3 +1,4 @@
+import { Address } from '@multiversx/sdk-core/out';
 import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
 import { string } from 'yup';
 import { ExtendedValuesType } from 'types';
@@ -12,7 +13,13 @@ export const receiverUsername = (
     function checkUsername(value) {
       const { receiver } = this.parent as ExtendedValuesType;
 
-      const userIntendsToUseValidAddress = receiver?.startsWith('erd1');
+      let userIntendsToUseValidAddress = false;
+      try {
+        Address.newFromBech32(receiver);
+        userIntendsToUseValidAddress = true;
+      } catch (error) {
+        console.error(error);
+      }
       const receiverIsEmpty = !value && !receiver;
 
       if (userIntendsToUseValidAddress || receiverIsEmpty) {

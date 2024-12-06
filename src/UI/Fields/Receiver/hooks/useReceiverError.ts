@@ -1,3 +1,4 @@
+import { Address } from '@multiversx/sdk-core/out';
 import { useFormikContext } from 'formik';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { ExtendedValuesType } from 'types';
@@ -18,7 +19,15 @@ export const useReceiverError = () => {
   const isInvalid =
     (isReceiverInvalid && receiverTouched) || isReceiverUsernameInvalid;
 
-  if (receiverUsername?.startsWith('erd1')) {
+  let userIntendsToUseValidAddress = false;
+  try {
+    Address.newFromBech32(receiverUsername || '');
+    userIntendsToUseValidAddress = true;
+  } catch (error) {
+    console.error(error);
+  }
+
+  if (userIntendsToUseValidAddress) {
     return {
       isInvalid: isReceiverInvalid,
       receiverErrorDataTestId: 'receiverError',

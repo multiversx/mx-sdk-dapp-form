@@ -39,8 +39,8 @@ export function prepareTransaction({
   const transaction = new Transaction({
     nonce: nonce,
     value: TokenPayment.egldFromBigInteger(bNamount.toString(10)),
-    sender: new Address(sender),
-    receiver: new Address(receiver),
+    sender: Address.newFromBech32(sender),
+    receiver: Address.newFromBech32(receiver),
     gasPrice: parseInt(gasPrice),
     gasLimit: parseInt(gasLimit),
     senderUsername,

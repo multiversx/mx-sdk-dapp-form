@@ -35,7 +35,7 @@ export function validateReceivers({
       const dataFieldReceivers = txsDataTokens
         ? Object.values(txsDataTokens)
             .filter(({ receiver }) => Boolean(receiver))
-            .map(({ receiver }) => new Address(receiver).bech32())
+            .map(({ receiver }) => Address.newFromHex(receiver).toBech32())
         : [];
 
       const receiversWhitelisted =

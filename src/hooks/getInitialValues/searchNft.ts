@@ -53,7 +53,7 @@ export const searchNft = async (
       const apiNft = await searchNftById({ identifier, address }, apiConfig);
       if (apiNft) {
         return {
-          receiver: new Address(receiver).bech32(),
+          receiver: Address.newFromBech32(receiver).toBech32(),
           nft: apiNft,
           quantity: nft ? quantity : new BigNumber(quantity, 16).toString(10)
         };
