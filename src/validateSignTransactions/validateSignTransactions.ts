@@ -126,8 +126,6 @@ async function getTxsErrors(
     allErrors = { ...allErrors, ...errors };
   }
 
-  console.log({ allErrors });
-
   return allErrors;
 }
 
