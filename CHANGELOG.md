@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[1.2.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/329)] - 2025-01-28
+
+- [Added support for relayed transactions](https://github.com/multiversx/mx-sdk-dapp-form/pull/328)
+
 ## [[1.1.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/326)] - 2024-11-26
 
 - [Updated send flow gas interaction experience](https://github.com/multiversx/mx-sdk-dapp-form/pull/325)
