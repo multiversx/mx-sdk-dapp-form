@@ -14,6 +14,7 @@ import {
   ValidateSignTransactionsType,
   validateTransaction
 } from './validateTransaction';
+console.log('\x1b[42m%s\x1b[0m', 'link working');
 
 function processMultiTx(props: {
   trx: MultiEsdtTransactionType;
@@ -124,6 +125,8 @@ async function getTxsErrors(
   for (const errors of results) {
     allErrors = { ...allErrors, ...errors };
   }
+
+  console.log({ allErrors });
 
   return allErrors;
 }

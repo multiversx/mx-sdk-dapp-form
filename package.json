@@ -29,7 +29,7 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@multiversx/sdk-core": ">=13.12.0",
+    "@multiversx/sdk-core": ">=13.17.1",
     "@multiversx/sdk-dapp": ">=3.0.0",
     "@size-limit/preset-small-lib": "7.0.8",
     "@swc-node/jest": "1.6.6",
@@ -95,7 +95,7 @@
     "transaction"
   ],
   "peerDependencies": {
-    "@multiversx/sdk-core": ">=13.12.0",
+    "@multiversx/sdk-core": ">=13.17.1",
     "@multiversx/sdk-dapp": ">=3.0.0",
     "react": ">=18",
     "react-dom": ">=18",
