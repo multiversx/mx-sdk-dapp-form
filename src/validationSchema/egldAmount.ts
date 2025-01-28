@@ -19,8 +19,18 @@ const egldAmount = (errorMessages: ValidationErrorMessagesType) => {
     errorMessages.insufficientFunds,
     function (amount) {
       if (amount && stringIsFloat(amount)) {
-        const { gasLimit, data, gasPrice, balance, chainId } = this
-          .parent as ExtendedValuesType;
+        const {
+          gasLimit,
+          data,
+          gasPrice,
+          balance,
+          chainId,
+          ignoreTokenBalance
+        } = this.parent as ExtendedValuesType;
+
+        if (ignoreTokenBalance) {
+          return true;
+        }
 
         const valid = validateGasLimitAmount({
           amount,
