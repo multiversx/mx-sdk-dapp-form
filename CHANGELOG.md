@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[1.2.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/331)] - 2025-01-30
+
+- [Removed address suggestions that included foreign addresses to the user](https://github.com/multiversx/mx-sdk-dapp-form/pull/330)
+
 ## [[1.2.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/329)] - 2025-01-28
 
 - [Added support for relayed transactions](https://github.com/multiversx/mx-sdk-dapp-form/pull/328)
