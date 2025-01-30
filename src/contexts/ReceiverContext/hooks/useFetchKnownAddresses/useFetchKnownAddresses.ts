@@ -19,7 +19,6 @@ export function useFetchKnownAddresses() {
       const apiConfig = await getApiConfig();
       const { data: transactions } = await getTransactions({
         sender: address,
-        receiver: address,
         transactionSize: 50,
         apiAddress: apiConfig.baseURL,
         apiTimeout: apiConfig.timeout,
