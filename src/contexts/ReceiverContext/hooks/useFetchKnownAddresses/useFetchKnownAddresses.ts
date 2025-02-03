@@ -7,7 +7,7 @@ import { useAccountContext } from 'contexts/AccountContext';
 import { KnowAddressType } from 'contexts/ReceiverContext/ReceiverContext';
 import { formatAddressesFromTransactions } from './helpers';
 
-export function useFetchKnownAddresses() {
+export const useFetchKnownAddresses = () => {
   const { address } = useAccountContext();
 
   const [knownAddresses, setKnownAddresses] = useState<
@@ -44,4 +44,4 @@ export function useFetchKnownAddresses() {
   }, []);
 
   return knownAddresses;
-}
+};
