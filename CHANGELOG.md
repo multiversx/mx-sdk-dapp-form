@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[1.2.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/333)] - 2025-02-03
+
 - [Added foreign receiver warning](https://github.com/multiversx/mx-sdk-dapp-form/pull/332)
 
 ## [[1.2.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/331)] - 2025-01-30
