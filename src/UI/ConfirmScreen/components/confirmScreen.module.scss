@@ -12,6 +12,29 @@
     flex: 1;
     justify-content: center;
 
+    .warning {
+      background-color: #2a1d15;
+      border-radius: 16px;
+      padding: 16px;
+      color: #f59e0b;
+      font-size: 14;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      line-height: 1.25;
+
+      strong {
+        font-size: 16px;
+        margin-bottom: 4px;
+        display: block;
+      }
+
+      .warning-icon {
+        color: #f59e0b;
+        font-size: 20px;
+      }
+    }
+
     .columns {
       display: flex;
       column-gap: 16px;
