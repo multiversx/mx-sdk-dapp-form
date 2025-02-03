@@ -1,4 +1,6 @@
 import React, { useState, MouseEvent } from 'react';
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ConfirmReceiver } from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/components/components/ConfirmReceiver';
 
 import globals from 'assets/sass/globals.module.scss';
@@ -34,6 +36,10 @@ export const TransactionSummary = ({
     amountInfo,
     tokensInfo
   } = useSendFormContext();
+
+  const isReceiverKnown = knownAddresses?.find(
+    (knownAddress) => knownAddress.address === receiver
+  );
 
   const { tokenId, tokenDetails, nft, egldPriceInUsd, egldLabel } = tokensInfo;
   const {
@@ -96,11 +102,27 @@ export const TransactionSummary = ({
           <NFTSFTPreview onClick={onPreviewClick} txType={txType} {...nft} />
         )}
 
+        {!isReceiverKnown && (
+          <div className={styles.warning}>
+            <FontAwesomeIcon
+              className={styles.warningIcon}
+              icon={faTriangleExclamation}
+            />
+
+            <div className={styles.warningText}>
+              <strong>Verify the full address.</strong> This is your first time
+              transacting with this address. Please double check to ensure its
+              accuracy before proceeding.
+            </div>
+          </div>
+        )}
+
         <ConfirmReceiver
           amount={amountInfo.amount}
           scamReport={scamError ?? null}
           receiver={receiver}
           receiverUsername={transactionReceiverUsername}
+          shouldTrimReceiver={Boolean(isReceiverKnown)}
         />
 
         <div className={styles.columns}>
