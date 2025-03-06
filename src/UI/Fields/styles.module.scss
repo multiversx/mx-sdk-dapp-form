@@ -10,11 +10,51 @@
   .wrapper {
     position: relative;
 
+    .inputContainer {
+      position: relative;
+    }
+
     .input {
       display: initial;
 
       &.spaced {
-        padding-right: 44px;
+        padding-right: 200px;
+      }
+    }
+
+    .speedSelector {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 44px;
+      display: flex;
+      gap: 12px;
+      z-index: 1;
+
+      .speedOption {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--dapp-form-placeholder-color);
+        transition: color 200ms ease;
+
+        &:hover {
+          color: #23f7dd;
+        }
+
+        &.selected {
+          color: #23f7dd;
+        }
+
+        input[type="radio"] {
+          margin: 0;
+          cursor: pointer;
+          width: 14px;
+          height: 14px;
+          accent-color: #23f7dd;
+        }
       }
     }
 
