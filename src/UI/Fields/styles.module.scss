@@ -7,14 +7,75 @@
     margin-bottom: 0;
   }
 
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    gap: 8px;
+
+    & > label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .gas-multipliers {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 12px;
+
+      .gas-multiplier {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        gap: 4px;
+        transition: all 200ms ease;
+        color: #a3a3a3;
+
+        &.checked {
+          color: #23f7dd;
+        }
+
+        .gas-multiplier-input {
+          height: 12px;
+          width: 12px;
+          min-height: auto;
+          border: 1px solid #a3a3a3;
+          cursor: pointer;
+          border-radius: 50%;
+          appearance: none;
+          background-color: transparent;
+
+          &:checked {
+            border-width: 4px;
+            border-color: #23f7dd;
+          }
+        }
+
+        .gas-multiplier-label {
+          font-size: 12px;
+          cursor: pointer;
+          line-height: 1;
+        }
+      }
+    }
+  }
+
   .wrapper {
     position: relative;
+
+    .inputContainer {
+      position: relative;
+    }
 
     .input {
       display: initial;
 
       &.spaced {
-        padding-right: 44px;
+        padding-right: 48px;
       }
     }
 
