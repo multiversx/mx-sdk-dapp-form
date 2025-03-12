@@ -18,6 +18,7 @@ import { ValuesEnum } from 'types';
 
 import { hasLeadingZeroes } from '../AmountSelect/components/AmountInput/helpers';
 import styles from '../styles.module.scss';
+import { GasMultiplerOptionType } from './gasPrice.types';
 
 const GAS_PRICE_MODIFIER_FIELD = 'gasPriceModifier';
 
@@ -55,22 +56,66 @@ export const GasPrice = () => {
     onChangeGasPrice(event.value, true);
   };
 
-  const handleSpeedChange = (modifier: 1 | 2 | 3) => () => {
-    const newGasPrice = new BigNumber(initialGasPrice).multipliedBy(modifier);
-    onChangeGasPrice(newGasPrice.toString(10), true);
-  };
-
   const isNormal = gasPrice === initialGasPrice;
   const isFast =
     gasPrice === new BigNumber(initialGasPrice).multipliedBy(2).toString(10);
   const isFaster =
     gasPrice === new BigNumber(initialGasPrice).multipliedBy(3).toString(10);
 
+  const handleGasMultiplierClick =
+    (gasMultiplier: GasMultiplerOptionType['value']) => () => {
+      const gasBigNumber = new BigNumber(initialGasPrice);
+      const newGasPrice = gasBigNumber.multipliedBy(gasMultiplier).toString(10);
+
+      if (gasMultiplier === 1) {
+        onResetGasPrice();
+      } else {
+        onChangeGasPrice(newGasPrice, true);
+      }
+    };
+
+  const gasMultiplierOptions: GasMultiplerOptionType[] = [
+    { label: 'Standard', isChecked: isNormal, value: 1 },
+    { label: 'Fast', isChecked: isFast, value: 2 },
+    { label: 'Faster', isChecked: isFaster, value: 3 }
+  ];
+
   return (
     <div className={styles.gas}>
-      <label className={globals.label} htmlFor={ValuesEnum.gasPrice}>
-        Gas Price (per Gas Unit)
-      </label>
+      <div className={styles.heading}>
+        <label className={globals.label} htmlFor={ValuesEnum.gasPrice}>
+          Gas Price (per Gas Unit)
+        </label>
+
+        <div className={styles.gasMultipliers}>
+          {gasMultiplierOptions.map((gasMultiplierOption) => (
+            <div
+              key={gasMultiplierOption.label}
+              onClick={handleGasMultiplierClick(gasMultiplierOption.value)}
+              className={classNames(styles.gasMultiplier, {
+                [styles.checked]: gasMultiplierOption.isChecked
+              })}
+            >
+              <input
+                type='radio'
+                name={GAS_PRICE_MODIFIER_FIELD}
+                value={gasMultiplierOption.value}
+                className={styles.gasMultiplierInput}
+                checked={gasMultiplierOption.isChecked}
+                onChange={handleGasMultiplierClick(gasMultiplierOption.value)}
+                id={`${GAS_PRICE_MODIFIER_FIELD}-${gasMultiplierOption.value}`}
+              />
+
+              <label
+                className={styles.gasMultiplierLabel}
+                htmlFor={`${GAS_PRICE_MODIFIER_FIELD}-${gasMultiplierOption.value}`}
+              >
+                {gasMultiplierOption.label}
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
 
       <div className={styles.wrapper}>
         <div className={styles.inputContainer}>
@@ -100,54 +145,6 @@ export const GasPrice = () => {
               [styles.spaced]: showUndoButton
             })}
           />
-
-          <div className={styles.speedSelector}>
-            <div
-              className={classNames(styles.speedOption, {
-                [styles.selected]: isNormal
-              })}
-              onClick={onResetGasPrice}
-            >
-              <input
-                type='radio'
-                name={GAS_PRICE_MODIFIER_FIELD}
-                value={1}
-                checked={isNormal}
-                onChange={onResetGasPrice}
-              />
-              Normal
-            </div>
-            <div
-              className={classNames(styles.speedOption, {
-                [styles.selected]: isFast
-              })}
-              onClick={handleSpeedChange(2)}
-            >
-              <input
-                type='radio'
-                name={GAS_PRICE_MODIFIER_FIELD}
-                value={2}
-                checked={isFast}
-                onChange={handleSpeedChange(2)}
-              />
-              Fast
-            </div>
-            <div
-              className={classNames(styles.speedOption, {
-                [styles.selected]: isFaster
-              })}
-              onClick={handleSpeedChange(3)}
-            >
-              <input
-                type='radio'
-                name={GAS_PRICE_MODIFIER_FIELD}
-                value={3}
-                checked={isFaster}
-                onChange={handleSpeedChange(3)}
-              />
-              Faster
-            </div>
-          </div>
         </div>
 
         {showUndoButton && (
