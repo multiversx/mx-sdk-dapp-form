@@ -21,6 +21,7 @@ import styles from '../styles.module.scss';
 import { GasMultiplerOptionType } from './gasPrice.types';
 
 const GAS_PRICE_MODIFIER_FIELD = 'gasPriceModifier';
+const DEFAULT_GAS_PRICE_MULTIPLIER = 1;
 
 export const GasPrice = () => {
   const { networkConfig } = useNetworkConfigContext();
@@ -64,7 +65,7 @@ export const GasPrice = () => {
     (gasMultiplier: GasMultiplerOptionType['value']) => () => {
       const newGasPrice = gasBigNumber.multipliedBy(gasMultiplier).toString(10);
 
-      if (gasMultiplier === 1) {
+      if (gasMultiplier === DEFAULT_GAS_PRICE_MULTIPLIER) {
         onResetGasPrice();
       } else {
         onChangeGasPrice(newGasPrice, true);
@@ -72,7 +73,11 @@ export const GasPrice = () => {
     };
 
   const gasMultiplierOptions: GasMultiplerOptionType[] = [
-    { label: 'Standard', isChecked: gasPrice === initialGasPrice, value: 1 },
+    {
+      label: 'Standard',
+      isChecked: gasPrice === initialGasPrice,
+      value: DEFAULT_GAS_PRICE_MULTIPLIER
+    },
     { label: 'Fast', isChecked: isFast, value: 2 },
     { label: 'Faster', isChecked: isFaster, value: 3 }
   ];
