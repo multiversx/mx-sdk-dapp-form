@@ -39,6 +39,7 @@ export const GasPrice = () => {
 
   const [initialGasPrice] = useState(gasPrice);
 
+  const gasBigNumber = new BigNumber(initialGasPrice);
   const showUndoButton = gasPrice !== formattedConfigGasPrice && !readonly;
   const isDisabled = getIsDisabled(ValuesEnum.gasPrice, readonly);
 
@@ -56,15 +57,11 @@ export const GasPrice = () => {
     onChangeGasPrice(event.value, true);
   };
 
-  const isNormal = gasPrice === initialGasPrice;
-  const isFast =
-    gasPrice === new BigNumber(initialGasPrice).multipliedBy(2).toString(10);
-  const isFaster =
-    gasPrice === new BigNumber(initialGasPrice).multipliedBy(3).toString(10);
+  const isFast = gasPrice === gasBigNumber.multipliedBy(2).toString(10);
+  const isFaster = gasPrice === gasBigNumber.multipliedBy(3).toString(10);
 
   const handleGasMultiplierClick =
     (gasMultiplier: GasMultiplerOptionType['value']) => () => {
-      const gasBigNumber = new BigNumber(initialGasPrice);
       const newGasPrice = gasBigNumber.multipliedBy(gasMultiplier).toString(10);
 
       if (gasMultiplier === 1) {
@@ -75,7 +72,7 @@ export const GasPrice = () => {
     };
 
   const gasMultiplierOptions: GasMultiplerOptionType[] = [
-    { label: 'Standard', isChecked: isNormal, value: 1 },
+    { label: 'Standard', isChecked: gasPrice === initialGasPrice, value: 1 },
     { label: 'Fast', isChecked: isFast, value: 2 },
     { label: 'Faster', isChecked: isFaster, value: 3 }
   ];
