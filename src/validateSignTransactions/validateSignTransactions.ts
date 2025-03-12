@@ -25,7 +25,8 @@ function processMultiTx(props: {
     ...transaction,
     transaction: newTransaction(transaction),
     multiTxData: trx.data,
-    transactionIndex
+    transactionIndex,
+    needsSigning: true
   };
 
   return {
@@ -83,7 +84,8 @@ function extractAllTransactions(props: ValidateSignTransactionsType) {
       allTransactions.push({
         ...transaction,
         transactionIndex: transactionIndex,
-        transaction: newTransaction({ ...transaction, chainID: chainId })
+        transaction: newTransaction({ ...transaction, chainID: chainId }),
+        needsSigning: true
       });
     }
   });
