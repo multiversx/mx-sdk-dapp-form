@@ -1,11 +1,11 @@
-export enum GasMultiplierOptionLabelEnum {
+export enum PpuOptionLabelEnum {
   Standard = 'Standard',
   Fast = 'Fast',
   Faster = 'Faster'
 }
 
-export interface GasMultiplerOptionType {
-  value: 1 | 2 | 3;
-  label: `${GasMultiplierOptionLabelEnum}`;
+export interface PpuOptionType {
+  value: number;
+  label: `${PpuOptionLabelEnum}`;
   isChecked: boolean;
 }
