@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[1.2.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/335)] - 2025-03-12
 
 - [Added gasPrice radios](https://github.com/multiversx/mx-sdk-dapp-form/pull/334)
 
