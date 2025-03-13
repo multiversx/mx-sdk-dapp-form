@@ -6,6 +6,7 @@ export interface AccountContextPropsType {
   address: string;
   assets?: AssetType;
   nonce: number;
+  shard: number;
   balance: string;
   username?: string;
   isGuarded?: boolean;

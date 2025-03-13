@@ -14,5 +14,6 @@ export const accountConfiguration = {
   chainId: TESTNET_CHAIN_ID,
   balance: '812350000000000000',
   nonce: 0,
+  shard: 0,
   networkConfig: activeNetwork
 };

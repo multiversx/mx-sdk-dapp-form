@@ -13,7 +13,7 @@ import {
 } from 'react-number-format';
 
 import globals from 'assets/sass/globals.module.scss';
-import { useNetworkConfigContext } from 'contexts';
+import { useAccountContext, useNetworkConfigContext } from 'contexts';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { formatAmount, getIsDisabled, parseAmount } from 'helpers';
 import { formattedConfigGasPrice } from 'operations';
@@ -40,7 +40,8 @@ export const GasPrice = () => {
   const { networkConfig } = useNetworkConfigContext();
   const { gasInfo, formInfo, dataFieldInfo } = useSendFormContext();
   const { readonly } = formInfo;
-  const { egldLabel, ppuForGasPrice } = networkConfig;
+  const { egldLabel, gasStationMetadata } = networkConfig;
+  const { shard } = useAccountContext();
 
   const {
     gasPrice,
@@ -91,19 +92,22 @@ export const GasPrice = () => {
     onChangeGasPrice(formattedGasPrice, true);
   };
 
-  const fastGasPrice = getRecommendedGasPrice(ppuForGasPrice?.fast);
+  const fastPpu = gasStationMetadata ? gasStationMetadata[shard]?.fast : 0;
+  const fasterPpu = gasStationMetadata ? gasStationMetadata[shard]?.faster : 0;
 
-  const fasterGasPrice = getRecommendedGasPrice(ppuForGasPrice?.faster);
+  const fastGasPrice = getRecommendedGasPrice(fastPpu);
 
-  const areRadiosEnabled = new BigNumber(fastGasPrice).isGreaterThan(
-    parseAmount(initialGasPrice)
-  );
+  const fasterGasPrice = getRecommendedGasPrice(fasterPpu);
 
-  const isFast = ppuForGasPrice
+  const areRadiosEnabled =
+    new BigNumber(fastGasPrice).isGreaterThan(parseAmount(initialGasPrice)) ||
+    new BigNumber(fasterGasPrice).isGreaterThan(parseAmount(initialGasPrice));
+
+  const isFast = gasStationMetadata
     ? gasPrice === getFormattedGasPrice(fastGasPrice)
     : false;
 
-  const isFaster = ppuForGasPrice
+  const isFaster = gasStationMetadata
     ? gasPrice === getFormattedGasPrice(fasterGasPrice)
     : false;
 
@@ -116,12 +120,12 @@ export const GasPrice = () => {
     {
       label: 'Fast',
       isChecked: areRadiosEnabled && isFast,
-      value: ppuForGasPrice?.fast ?? EMPTY_PPU
+      value: fastPpu ?? EMPTY_PPU
     },
     {
       label: 'Faster',
       isChecked: areRadiosEnabled && isFaster,
-      value: ppuForGasPrice?.faster ?? EMPTY_PPU
+      value: fasterPpu ?? EMPTY_PPU
     }
   ];
 
@@ -132,7 +136,7 @@ export const GasPrice = () => {
           Gas Price (per Gas Unit)
         </label>
 
-        {ppuForGasPrice && areRadiosEnabled && (
+        {gasStationMetadata && areRadiosEnabled && (
           <div className={styles.gasMultipliers}>
             {ppuOptions.map((ppuOption) => (
               <div
