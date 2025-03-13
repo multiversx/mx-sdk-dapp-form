@@ -5,7 +5,7 @@ export enum PpuOptionLabelEnum {
 }
 
 export interface PpuOptionType {
-  value: number;
-  label: `${PpuOptionLabelEnum}`;
+  label: 'Standard' | 'Fast' | 'Faster';
   isChecked: boolean;
+  value: number;
 }

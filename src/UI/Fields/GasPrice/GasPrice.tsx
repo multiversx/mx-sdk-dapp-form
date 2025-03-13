@@ -22,6 +22,7 @@ import { ValuesEnum } from 'types';
 import { hasLeadingZeroes } from '../AmountSelect/components/AmountInput/helpers';
 import styles from '../styles.module.scss';
 import { PpuOptionType } from './gasPrice.types';
+import { PpuOptionLabelEnum } from './gasPrice.types';
 
 const GAS_PRICE_MODIFIER_FIELD = 'gasPriceModifier';
 const EMPTY_PPU = 0;
@@ -99,9 +100,15 @@ export const GasPrice = () => {
 
   const fasterGasPrice = getRecommendedGasPrice(fasterPpu);
 
-  const areRadiosEnabled =
-    new BigNumber(fastGasPrice).isGreaterThan(parseAmount(initialGasPrice)) ||
-    new BigNumber(fasterGasPrice).isGreaterThan(parseAmount(initialGasPrice));
+  const isFastHigherThanInitial = new BigNumber(fastGasPrice).isGreaterThan(
+    parseAmount(initialGasPrice)
+  );
+
+  const isFasterHigherThanInitial = new BigNumber(fasterGasPrice).isGreaterThan(
+    parseAmount(initialGasPrice)
+  );
+
+  const areRadiosEnabled = isFasterHigherThanInitial || isFastHigherThanInitial;
 
   const isFast = gasStationMetadata
     ? gasPrice === getFormattedGasPrice(fastGasPrice)
@@ -113,20 +120,28 @@ export const GasPrice = () => {
 
   const ppuOptions: PpuOptionType[] = [
     {
-      label: 'Standard',
+      label: PpuOptionLabelEnum.Standard,
       isChecked: gasPrice === initialGasPrice,
       value: EMPTY_PPU
     },
-    {
-      label: 'Fast',
-      isChecked: areRadiosEnabled && isFast,
-      value: fastPpu ?? EMPTY_PPU
-    },
-    {
-      label: 'Faster',
-      isChecked: areRadiosEnabled && isFaster,
-      value: fasterPpu ?? EMPTY_PPU
-    }
+    ...(isFastHigherThanInitial
+      ? [
+          {
+            label: PpuOptionLabelEnum.Fast,
+            isChecked: areRadiosEnabled && isFast,
+            value: fastPpu ?? EMPTY_PPU
+          }
+        ]
+      : []),
+    ...(isFasterHigherThanInitial
+      ? [
+          {
+            label: PpuOptionLabelEnum.Faster,
+            isChecked: areRadiosEnabled && isFaster,
+            value: fasterPpu ?? EMPTY_PPU
+          }
+        ]
+      : [])
   ];
 
   return (
