@@ -92,6 +92,7 @@ export const TestWrapper = ({
     accountInfo: {
       address,
       isGuarded,
+      shard: accountConfiguration.shard,
       nonce: accountConfiguration.nonce,
       balance,
       providerType: LoginMethodsEnum.extra

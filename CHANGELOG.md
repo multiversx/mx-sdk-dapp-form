@@ -7,9 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[1.3.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/338)] - 2025-03-13
+- [Added gasStationMetadata and shard](https://github.com/multiversx/mx-sdk-dapp-form/pull/337)
+
 ## [[1.3.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/336)] - 2025-03-12
 - [Added gasPrice radios](https://github.com/multiversx/mx-sdk-dapp-form/pull/336)
-
 
 ## [[1.2.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/335)] - 2025-03-12
 
