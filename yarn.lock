@@ -2145,7 +2145,7 @@
   resolved "https://registry.npmjs.org/@multiversx/sdk-bls-wasm/-/sdk-bls-wasm-0.3.5.tgz"
   integrity sha512-c0tIdQUnbBLSt6NYU+OpeGPYdL0+GV547HeHT8Xc0BKQ7Cj0v82QUoA2QRtWrR1G4MNZmLsIacZSsf6DrIS2Bw==
 
-"@multiversx/sdk-core@>=14.0.1":
+"@multiversx/sdk-core@^14.x":
   version "14.0.1"
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-core/-/sdk-core-14.0.1.tgz#18c6bafa97e5c2f14cf9202428f3e6007bc510cb"
   integrity sha512-50BinNuAg/JkJC+H3s/IfgliB1o+/XhuPB+B83fdV3z4VMxO0s+1JKDACDrr4lJ0uYT1O6Gb+eToHxZr7kGQEw==
@@ -2173,10 +2173,10 @@
   resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-2.0.0.tgz#15cae568ae5d25ea2ac12c3793d52d18db5ac1fe"
   integrity sha512-NcaQUgXrjDqjKJgbUj1eM11ID7sDJRVFamjEA/VO4qquP8jBOrSeW0ltvppHElZGC/A14tNDERPbZQkrLIa2KQ==
 
-"@multiversx/sdk-dapp@>=4.0.0-alpha.0":
-  version "4.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-4.0.0-alpha.0.tgz#c0728cc1efaf3317aa9abd2bb8a6059cab0eee49"
-  integrity sha512-ehk5UB/AuSYurjd8LBUWHn4E4IilxVQpmp71sMuhElxqda7AIY5VfeJo7TMUo97wQj4o0d7nda9xZkx3TpY/dQ==
+"@multiversx/sdk-dapp@^4.x":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@multiversx/sdk-dapp/-/sdk-dapp-4.0.0.tgz#17bfc03ec0e14089d6790d1b3c3f1b5dbd2509f4"
+  integrity sha512-TsMzhxaPKDIqGFrM6AYYMjYGmGQTeJwla89DLqByS0Qtm236TZw+P7fotk1xVDDjTqNo89YgmwpaIVbcHLhb5A==
   dependencies:
     "@lifeomic/axios-fetch" "3.0.1"
     "@metamask/providers" "16.0.0"
