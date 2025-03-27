@@ -84,12 +84,12 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
         values: parsedValues
       });
 
-      transaction.setVersion(TransactionVersion.withTxOptions());
+      transaction.version = TransactionVersion.withTxOptions().valueOf();
       const options = {
         guarded: true,
         ...(ledger ? { hashSign: true } : {})
       };
-      transaction.setOptions(TransactionOptions.withOptions(options));
+      transaction.options = TransactionOptions.withOptions(options).valueOf();
 
       setSignedTransactions({ 0: transaction });
     } catch {
