@@ -1,10 +1,4 @@
-import {
-  Transaction,
-  TransactionPayload,
-  TransactionVersion,
-  Address,
-  TokenPayment
-} from '@multiversx/sdk-core';
+import { Transaction, Address, TokenTransfer } from '@multiversx/sdk-core';
 import { VERSION } from '@multiversx/sdk-dapp/constants/index';
 import BigNumber from 'bignumber.js';
 import { parseAmount } from 'helpers';
@@ -37,17 +31,18 @@ export function prepareTransaction({
   const bNamount = new BigNumber(parseAmount(amount));
 
   const transaction = new Transaction({
-    nonce: nonce,
-    value: TokenPayment.egldFromBigInteger(bNamount.toString(10)),
+    nonce: BigInt(nonce),
+    value: TokenTransfer.newFromNativeAmount(BigInt(bNamount.toString(10)))
+      .amount,
     sender: new Address(sender),
     receiver: new Address(receiver),
-    gasPrice: parseInt(gasPrice),
-    gasLimit: parseInt(gasLimit),
+    gasPrice: BigInt(parseInt(gasPrice)),
+    gasLimit: BigInt(parseInt(gasLimit)),
     senderUsername,
     receiverUsername,
-    data: new TransactionPayload(data),
+    data: Buffer.from(data.trim()),
     chainID: chainId,
-    version: new TransactionVersion(VERSION)
+    version: VERSION
   });
 
   return transaction;
