@@ -19,6 +19,7 @@ function getSearchParamTokenId() {
 
 export interface GetInitialValuesReturnType {
   initialValues: {
+    balance: string;
     receiver: string;
     receiverUsername?: string;
     amount: string;
@@ -39,6 +40,7 @@ export async function getInitialValues(
 ): Promise<GetInitialValuesReturnType> {
   const {
     address,
+    balance,
     egldLabel,
     configValues: {
       receiver,
@@ -72,6 +74,7 @@ export async function getInitialValues(
   const { initGasLimit, initGasLimitError } = gasData;
 
   const initialValues: GetInitialValuesReturnType['initialValues'] = {
+    balance,
     receiver,
     receiverUsername,
     amount: getInitialAmount({ computedNft, amount }),
