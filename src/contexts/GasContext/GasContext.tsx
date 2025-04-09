@@ -105,7 +105,8 @@ export function GasContextProvider({
     isNftTransaction,
     isEsdtTransaction,
     prefilledForm,
-    isEgldTransaction
+    isEgldTransaction,
+    isDeposit
   } = useFormContext();
   const {
     networkConfig: { chainId }
@@ -230,7 +231,10 @@ export function GasContextProvider({
 
   useEffect(() => {
     if (!prefilledForm) {
-      handleUpdateGasLimit(getGasLimit({ txType, data, isGuarded }), true);
+      handleUpdateGasLimit(
+        getGasLimit({ txType, data, isGuarded, isDeposit }),
+        true
+      );
     }
   }, [tokenId, txType]);
 

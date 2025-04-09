@@ -16,11 +16,13 @@ const evenLengthValue = (value: string) =>
 export const computeTokenDataField = ({
   amount,
   decimals,
-  tokenId
+  tokenId,
+  isDeposit
 }: {
   amount: string;
   tokenId: string;
   decimals: number;
+  isDeposit?: boolean;
 }) => {
   const amountValue = Boolean(amount) ? amount : ZERO;
   const hexEncodedId = evenLengthValue(Buffer.from(tokenId).toString('hex'));
@@ -28,7 +30,12 @@ export const computeTokenDataField = ({
   const hexEncodedValue = evenLengthValue(
     new BigNumber(parseAmount(amountValue, decimals)).toString(16)
   );
-  const data = `ESDTTransfer@${hexEncodedId}@${hexEncodedValue}`;
+
+  const hexEncodedDeposit = isDeposit
+    ? `@${evenLengthValue(Buffer.from('deposit').toString('hex'))}`
+    : '';
+
+  const data = `ESDTTransfer@${hexEncodedId}@${hexEncodedValue}${hexEncodedDeposit}`;
   return data;
 };
 
@@ -36,12 +43,14 @@ export const computeNftDataField = ({
   nft,
   amount,
   receiver,
-  errors
+  errors,
+  isDeposit
 }: {
   nft?: PartialNftType;
   amount: string;
   receiver: string;
   errors: boolean;
+  isDeposit?: boolean;
 }) => {
   const isNoErrorNft = nft && amount && receiver && !errors;
 
@@ -61,6 +70,9 @@ export const computeNftDataField = ({
     )}`;
     dataStr += `@${evenLengthValue(new BigNumber(quantity).toString(16))}`;
     dataStr += `@${bech32.decode(receiver)}`;
+    dataStr += isDeposit
+      ? `@${evenLengthValue(Buffer.from('deposit').toString('hex'))}`
+      : '';
     return dataStr;
   } catch (err) {
     return '';
@@ -72,13 +84,15 @@ export const getDataField = ({
   values,
   nft,
   amountError,
-  receiverError
+  receiverError,
+  isDeposit
 }: {
   txType: TransactionTypeEnum;
   values: ExtendedValuesType;
   nft?: PartialNftType;
   amountError?: boolean;
   receiverError?: string;
+  isDeposit?: boolean;
 }) => {
   const { tokens, tokenId, amount, receiver } = values;
   if (tokens && txType === TransactionTypeEnum.ESDT && !amountError) {
@@ -90,7 +104,8 @@ export const getDataField = ({
     return computeTokenDataField({
       amount,
       tokenId,
-      decimals
+      decimals,
+      isDeposit
     });
   }
   // NFT SFT MetaESDT
@@ -99,7 +114,8 @@ export const getDataField = ({
       nft,
       amount,
       receiver,
-      errors: Boolean(amountError || receiverError)
+      errors: Boolean(amountError || receiverError),
+      isDeposit
     });
   }
 

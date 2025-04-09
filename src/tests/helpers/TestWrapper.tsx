@@ -99,6 +99,7 @@ export const TestWrapper = ({
     },
     formInfo: {
       prefilledForm: false,
+      isDeposit: false,
       skipToConfirm: false,
       readonly: false,
       isFormSubmitted,

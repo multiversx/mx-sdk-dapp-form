@@ -3,16 +3,19 @@ import {
   GAS_PER_DATA_BYTE
 } from '@multiversx/sdk-dapp/constants/index';
 import BigNumber from 'bignumber.js';
+import { MULTISIG_GAS_LIMIT } from 'constants/index';
 import { getGuardedAccountGasLimit } from './getGuardedAccountGasLimit';
 
 interface CalculateGasLimitType {
   data: string;
   isGuarded?: boolean;
+  isDeposit?: boolean;
 }
 
 export const calculateGasLimit = ({
   data,
-  isGuarded
+  isGuarded,
+  isDeposit
 }: CalculateGasLimitType) => {
   const bNconfigGasLimit = new BigNumber(GAS_LIMIT);
   const bNgasPerDataByte = new BigNumber(GAS_PER_DATA_BYTE);
@@ -23,5 +26,10 @@ export const calculateGasLimit = ({
   const bNgasLimit = bNconfigGasLimit
     .plus(bNgasValue)
     .plus(guardedAccountGasLimit);
+
+  if (isDeposit) {
+    return bNgasLimit.plus(MULTISIG_GAS_LIMIT).toString(10);
+  }
+
   return bNgasLimit.toString(10);
 };

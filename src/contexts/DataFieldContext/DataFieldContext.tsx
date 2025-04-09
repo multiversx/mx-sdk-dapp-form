@@ -47,7 +47,9 @@ export function DataContextProvider({
     setFieldTouched,
     initialValues
   } = useFormikContext<ExtendedValuesType>();
-  const { checkInvalid, prefilledForm, isEgldTransaction } = useFormContext();
+  const { checkInvalid, prefilledForm, isEgldTransaction, isDeposit } =
+    useFormContext();
+
   const { nft } = useTokensContext();
   const { receiver, txType, amount, tokenId, isAdvancedModeEnabled, gasLimit } =
     values;
@@ -74,7 +76,8 @@ export function DataContextProvider({
     if (!prefilledForm && !isGasLimitChanged && isEgldTransaction) {
       const newGasLimit = calculateGasLimit({
         data: value,
-        isGuarded
+        isGuarded,
+        isDeposit
       });
 
       onChangeGasLimit(newGasLimit);
@@ -90,7 +93,7 @@ export function DataContextProvider({
   }, []);
 
   useEffect(() => {
-    if (!prefilledForm) {
+    if (!prefilledForm || isDeposit) {
       const receiverError =
         txType !== TransactionTypeEnum.ESDT ? errors.receiver : '';
 
@@ -99,7 +102,8 @@ export function DataContextProvider({
         values,
         nft,
         amountError: Boolean(errors.amount),
-        receiverError
+        receiverError,
+        isDeposit
       });
 
       handleUpdateData(newDataField);
@@ -107,6 +111,7 @@ export function DataContextProvider({
   }, [
     amount,
     receiver,
+    isDeposit,
     prefilledForm,
     nft,
     errors.receiver,
