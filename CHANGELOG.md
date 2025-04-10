@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[2.0.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/345)] - 2025-04-10
+
+- [Added ability to call deposit method of smart contract](https://github.com/multiversx/mx-sdk-dapp-form/pull/344)
+
 ## [[2.0.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/343)] - 2025-04-01
 
 - [Fixed getInitialValues ignores balance](https://github.com/multiversx/mx-sdk-dapp-form/pull/342)

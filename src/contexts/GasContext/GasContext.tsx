@@ -45,14 +45,8 @@ export interface GasContextPropsType {
   gasLimitError?: string;
   defaultGasLimit: string;
   feeLimit: string;
-  onChangeGasPrice: (
-    newValue: string | ChangeEvent<any>,
-    shouldValidate?: boolean
-  ) => void;
-  onChangeGasLimit: (
-    newValue: string | ChangeEvent<any>,
-    shouldValidate?: boolean
-  ) => void;
+  onChangeGasPrice: (newValue: IUpdateGasParams) => void;
+  onChangeGasLimit: (newValue: IUpdateGasParams) => void;
   onBlurGasPrice: () => void;
   onBlurGasLimit: () => void;
   onResetGasPrice: () => void;
@@ -62,6 +56,11 @@ export interface GasContextPropsType {
 interface GasContextProviderPropsType {
   children: ReactNode;
   initGasLimitError?: SendFormContainerPropsType['initGasLimitError'];
+}
+
+interface IUpdateGasParams {
+  newValue: string | ChangeEvent<any>;
+  shouldValidate?: boolean;
 }
 
 export const GasContext = createContext({} as GasContextPropsType);
@@ -105,7 +104,8 @@ export function GasContextProvider({
     isNftTransaction,
     isEsdtTransaction,
     prefilledForm,
-    isEgldTransaction
+    isEgldTransaction,
+    isDeposit
   } = useFormContext();
   const {
     networkConfig: { chainId }
@@ -133,7 +133,7 @@ export function GasContextProvider({
   const isGasPriceInvalid = checkInvalid(ValuesEnum.gasPrice);
 
   const handleUpdateGasPrice = useCallback(
-    (newValue: string | ChangeEvent<any>, shouldValidate = false) => {
+    ({ newValue, shouldValidate = false }: IUpdateGasParams) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
 
@@ -143,7 +143,7 @@ export function GasContextProvider({
   );
 
   const handleUpdateGasLimit = useCallback(
-    (newValue: string | ChangeEvent<any>, shouldValidate = false) => {
+    ({ newValue, shouldValidate = false }: IUpdateGasParams) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
 
@@ -220,17 +220,20 @@ export function GasContextProvider({
     });
 
     if (!prefilledForm && isNftTransaction && !isGasLimitChanged) {
-      handleUpdateGasLimit(
-        new BigNumber(calculateNftGasLimit())
+      handleUpdateGasLimit({
+        newValue: new BigNumber(calculateNftGasLimit())
           .plus(guardedAccountGasLimit)
           .toString()
-      );
+      });
     }
   }, [isNftTransaction, touched]);
 
   useEffect(() => {
     if (!prefilledForm) {
-      handleUpdateGasLimit(getGasLimit({ txType, data, isGuarded }), true);
+      handleUpdateGasLimit({
+        newValue: getGasLimit({ txType, data, isGuarded, isDeposit }),
+        shouldValidate: true
+      });
     }
   }, [tokenId, txType]);
 

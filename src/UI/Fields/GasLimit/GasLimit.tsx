@@ -42,7 +42,10 @@ export const GasLimit = () => {
   };
 
   const handleValueChange: OnValueChange = (event) => {
-    onChangeGasLimit(event.value, true);
+    onChangeGasLimit({
+      newValue: event.value,
+      shouldValidate: true
+    });
   };
 
   const showUndoButton = gasLimit !== defaultGasLimit && !readonly;
