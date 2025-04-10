@@ -44,19 +44,21 @@ export const computeTokenDataField = ({
   return data;
 };
 
+interface IComputeNftDataFieldParams {
+  nft?: PartialNftType;
+  amount: string;
+  receiver: string;
+  errors: boolean;
+  isDeposit?: boolean;
+}
+
 export const computeNftDataField = ({
   nft,
   amount,
   receiver,
   errors,
   isDeposit
-}: {
-  nft?: PartialNftType;
-  amount: string;
-  receiver: string;
-  errors: boolean;
-  isDeposit?: boolean;
-}) => {
+}: IComputeNftDataFieldParams) => {
   const isNoErrorNft = nft && amount && receiver && !errors;
 
   if (!isNoErrorNft) {
@@ -82,6 +84,15 @@ export const computeNftDataField = ({
   }
 };
 
+interface IGetDataFieldParams {
+  txType: TransactionTypeEnum;
+  values: ExtendedValuesType;
+  nft?: PartialNftType;
+  amountError?: boolean;
+  receiverError?: string;
+  isDeposit?: boolean;
+}
+
 export const getDataField = ({
   txType,
   values,
@@ -89,14 +100,7 @@ export const getDataField = ({
   amountError,
   receiverError,
   isDeposit
-}: {
-  txType: TransactionTypeEnum;
-  values: ExtendedValuesType;
-  nft?: PartialNftType;
-  amountError?: boolean;
-  receiverError?: string;
-  isDeposit?: boolean;
-}) => {
+}: IGetDataFieldParams) => {
   const { tokens, tokenId, amount, receiver } = values;
   if (tokens && txType === TransactionTypeEnum.ESDT && !amountError) {
     const { decimals } = getTokenDetails({
