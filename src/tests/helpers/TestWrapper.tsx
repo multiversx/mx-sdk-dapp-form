@@ -101,7 +101,7 @@ export const TestWrapper = ({
     },
     formInfo: {
       prefilledForm: false,
-      isDeposit: isDeposit || false,
+      isDeposit,
       skipToConfirm: false,
       readonly: false,
       isFormSubmitted,
