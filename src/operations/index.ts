@@ -12,4 +12,4 @@ export * from './getEntireBalance';
 export * from './getGasLimit';
 export * from './getParsedGasPrice';
 export * from './getGuardedAccountGasLimit';
-export * from './addMultisigGasLimit';
+export * from './addDepositGatLimit';

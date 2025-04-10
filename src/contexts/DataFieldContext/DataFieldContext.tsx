@@ -80,7 +80,7 @@ export function DataContextProvider({
         isDeposit
       });
 
-      onChangeGasLimit(newGasLimit);
+      onChangeGasLimit({ newValue: newGasLimit });
     }
   };
 

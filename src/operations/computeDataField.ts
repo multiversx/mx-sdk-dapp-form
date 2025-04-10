@@ -18,17 +18,19 @@ const getDepositHex = (isDeposit?: boolean) =>
     ? `@${evenLengthValue(Buffer.from('deposit').toString('hex'))}`
     : '';
 
+interface IComputeTokenDataFieldParams {
+  amount: string;
+  tokenId: string;
+  decimals: number;
+  isDeposit?: boolean;
+}
+
 export const computeTokenDataField = ({
   amount,
   decimals,
   tokenId,
   isDeposit
-}: {
-  amount: string;
-  tokenId: string;
-  decimals: number;
-  isDeposit?: boolean;
-}) => {
+}: IComputeTokenDataFieldParams) => {
   const amountValue = Boolean(amount) ? amount : ZERO;
   const hexEncodedId = evenLengthValue(Buffer.from(tokenId).toString('hex'));
 
