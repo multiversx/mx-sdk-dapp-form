@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { DIGITS } from '@multiversx/sdk-dapp/constants/index';
+import { EnvironmentsEnum } from '@multiversx/sdk-dapp/types/enums.types';
 import { getEconomicsInfo } from 'apiCalls';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
-import { EnvironmentsEnum } from '@multiversx/sdk-dapp/types/enums.types';
 
 interface EconomicsInfoType {
   egldPriceInUsd: number;
