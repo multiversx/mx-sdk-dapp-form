@@ -25,7 +25,7 @@ export interface FormContextBasePropsType {
   isFormSubmitted: boolean;
   onCloseForm: () => void;
   prefilledForm: boolean;
-  isDeposit: boolean;
+  isDeposit?: boolean;
   readonly?: ExtendedValuesType['readonly'];
   setGuardedTransaction: (transaction: Transaction) => void;
   setHasGuardianScreen: Dispatch<SetStateAction<boolean>>;

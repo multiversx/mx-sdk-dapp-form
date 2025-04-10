@@ -13,6 +13,11 @@ import getTokenDetails from './getTokenDetails';
 const evenLengthValue = (value: string) =>
   value.length % 2 === 0 ? value : `0${value}`;
 
+const getDepositHex = (isDeposit?: boolean) =>
+  isDeposit
+    ? `@${evenLengthValue(Buffer.from('deposit').toString('hex'))}`
+    : '';
+
 export const computeTokenDataField = ({
   amount,
   decimals,
@@ -31,9 +36,7 @@ export const computeTokenDataField = ({
     new BigNumber(parseAmount(amountValue, decimals)).toString(16)
   );
 
-  const hexEncodedDeposit = isDeposit
-    ? `@${evenLengthValue(Buffer.from('deposit').toString('hex'))}`
-    : '';
+  const hexEncodedDeposit = getDepositHex(isDeposit);
 
   const data = `ESDTTransfer@${hexEncodedId}@${hexEncodedValue}${hexEncodedDeposit}`;
   return data;
@@ -70,9 +73,7 @@ export const computeNftDataField = ({
     )}`;
     dataStr += `@${evenLengthValue(new BigNumber(quantity).toString(16))}`;
     dataStr += `@${bech32.decode(receiver)}`;
-    dataStr += isDeposit
-      ? `@${evenLengthValue(Buffer.from('deposit').toString('hex'))}`
-      : '';
+    dataStr += getDepositHex(isDeposit);
     return dataStr;
   } catch (err) {
     return '';

@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js';
-import { MULTISIG_GAS_LIMIT, TOKEN_GAS_LIMIT } from 'constants/index';
+import { TOKEN_GAS_LIMIT } from 'constants/index';
 import { TransactionTypeEnum } from 'types/enums';
+import { addMultisigGasLimit } from './addMultisigGasLimit';
 import { calculateGasLimit } from './calculateGasLimit';
 import { calculateNftGasLimit } from './calculateNftGasLimit';
 import { getGuardedAccountGasLimit } from './getGuardedAccountGasLimit';
@@ -32,13 +33,14 @@ export function getGasLimit({
     });
   }
 
-  if (isDeposit) {
-    gasLimit = new BigNumber(gasLimit).plus(MULTISIG_GAS_LIMIT).toString(10);
-  }
+  const numericGasLimit = new BigNumber(gasLimit).toString(10);
+  gasLimit = addMultisigGasLimit({ gasLimit: numericGasLimit, isDeposit });
 
   const finalGasLimit = new BigNumber(gasLimit)
     .plus(guardedAccountGasLimit)
     .toString(10);
+
+  console.log('finalGasLimit', finalGasLimit);
 
   return finalGasLimit;
 }

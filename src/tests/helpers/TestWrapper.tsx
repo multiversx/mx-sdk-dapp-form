@@ -29,6 +29,7 @@ export interface TestWrapperType {
   GuardianScreen?: (props: GuardianScreenType) => JSX.Element;
   isGuarded?: boolean;
   ledger?: ExtendedValuesType['ledger'];
+  isDeposit?: boolean;
 }
 
 export const TestWrapper = ({
@@ -38,7 +39,8 @@ export const TestWrapper = ({
   chainId = accountConfiguration.chainId,
   ledger,
   isGuarded,
-  GuardianScreen
+  GuardianScreen,
+  isDeposit
 }: TestWrapperType) => {
   const initValues = useGetInitialValues({
     configValues: formConfigValues,
@@ -99,7 +101,7 @@ export const TestWrapper = ({
     },
     formInfo: {
       prefilledForm: false,
-      isDeposit: false,
+      isDeposit: isDeposit || false,
       skipToConfirm: false,
       readonly: false,
       isFormSubmitted,
