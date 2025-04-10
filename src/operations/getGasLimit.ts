@@ -40,7 +40,5 @@ export function getGasLimit({
     .plus(guardedAccountGasLimit)
     .toString(10);
 
-  console.log('finalGasLimit', finalGasLimit);
-
   return finalGasLimit;
 }

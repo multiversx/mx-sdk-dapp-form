@@ -8,16 +8,13 @@ import { addMultisigGasLimit } from '../addMultisigGasLimit';
 import { calculateGasLimit } from '../calculateGasLimit';
 import { getGuardedAccountGasLimit } from '../getGuardedAccountGasLimit';
 
-// Mock dependencies
 jest.mock('../addMultisigGasLimit');
 jest.mock('../getGuardedAccountGasLimit');
 
 describe('calculateGasLimit', () => {
     beforeEach(() => {
         jest.clearAllMocks();
-        // Mock implementation for getGuardedAccountGasLimit
         (getGuardedAccountGasLimit as jest.Mock).mockReturnValue('1000');
-        // Mock implementation for addMultisigGasLimit
         (addMultisigGasLimit as jest.Mock).mockImplementation(
             ({ gasLimit, isDeposit }) => {
                 return isDeposit
@@ -80,7 +77,6 @@ describe('calculateGasLimit', () => {
             isDeposit: true
         });
 
-        // Calculate the expected result
         const expectedResult = new BigNumber(expectedGasLimit)
             .plus(MULTISIG_GAS_LIMIT)
             .toString(10);

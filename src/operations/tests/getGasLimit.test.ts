@@ -7,7 +7,6 @@ import { calculateNftGasLimit } from '../calculateNftGasLimit';
 import { getGasLimit } from '../getGasLimit';
 import { getGuardedAccountGasLimit } from '../getGuardedAccountGasLimit';
 
-// Mock dependencies
 jest.mock('../calculateGasLimit');
 jest.mock('../calculateNftGasLimit');
 jest.mock('../getGuardedAccountGasLimit');

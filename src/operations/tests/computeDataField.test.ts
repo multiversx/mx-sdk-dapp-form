@@ -9,7 +9,6 @@ import {
 } from '../computeDataField';
 import getTokenDetails from '../getTokenDetails';
 
-// Mock dependencies
 jest.mock('../getTokenDetails');
 jest.mock('helpers', () => ({
     bech32: {
