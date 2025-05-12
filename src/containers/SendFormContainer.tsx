@@ -70,7 +70,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   } = props;
 
   const { address, balance, username } = accountInfo;
-  const { chainId } = networkConfig;
+  const { chainId, apiAddress } = networkConfig;
   const [isFormSubmitted, setIsFormSubmitted] = useState(
     Boolean(props.formInfo.skipToConfirm)
   );
@@ -86,7 +86,9 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   });
 
   async function handleOnSubmit(values: ExtendedValuesType) {
-    const parsedValues = await getTransactionFields(values);
+    const parsedValues = await getTransactionFields(values, {
+      apiAddress
+    });
 
     const transaction = shouldGenerateTransactionOnSubmit
       ? guardedTransaction ??

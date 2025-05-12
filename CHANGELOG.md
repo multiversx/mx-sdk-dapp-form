@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[2.0.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/347)] - 2025-05-12
+- [Fixed account network config](https://github.com/multiversx/mx-sdk-dapp-form/pull/346)
+
 ## [[2.0.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/345)] - 2025-04-10
 
 - [Added ability to call deposit method of smart contract](https://github.com/multiversx/mx-sdk-dapp-form/pull/344)

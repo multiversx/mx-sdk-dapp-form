@@ -4,13 +4,18 @@ import { getIsNftTransaction } from 'helpers/misc/getIsNftTransaction';
 import { TransactionTypeEnum } from 'types/enums';
 import { ExtendedValuesType } from 'types/form';
 
-export const getTransactionFields = async (values: ExtendedValuesType) => {
+export const getTransactionFields = async (
+  values: ExtendedValuesType,
+  options?: {
+    apiAddress?: string;
+  }
+) => {
   const actualTransactionAmount =
     values.txType === TransactionTypeEnum.EGLD ? values.amount : ZERO;
 
   // when sending NFTs, receiver is self
   const isNftTransaction = getIsNftTransaction(values.txType);
-  const receiverAccount = await getAccount(values.receiver);
+  const receiverAccount = await getAccount(values.receiver, options);
   const realReceiverUsername = receiverAccount?.username;
 
   const receiverUsername = isNftTransaction
