@@ -21,7 +21,7 @@ export const sharedGasLimit = (errorMessages: ValidationErrorMessagesType) => {
     (value) => {
       const bNgasLimit = new BigNumber(String(value));
       const bNmaxGasLimit = new BigNumber(MAX_GAS_LIMIT);
-      const result = value && bNmaxGasLimit.comparedTo(bNgasLimit) >= 0;
+      const result = value && Number(bNmaxGasLimit.comparedTo(bNgasLimit)) >= 0;
       return Boolean(result);
     }
   );

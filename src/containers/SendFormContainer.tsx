@@ -124,7 +124,12 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
 
   const gasLimit =
     initialValues?.gasLimit ??
-    getGasLimit({ txType, data, isGuarded: accountInfo.isGuarded });
+    getGasLimit({
+      txType,
+      data,
+      isGuarded: accountInfo.isGuarded,
+      isDeposit: formInfo.isDeposit
+    });
 
   const formikInitialValues = {
     address: initialValues?.address ?? address,

@@ -96,7 +96,7 @@ describe('Send tokens', () => {
     });
 
     test('Tokens amount no EGLD balance', async () => {
-      const methods = beforAllTokens('0');
+      const methods = beforAllTokens({ balance: '0' });
       const setInput = useAmountInput(methods);
 
       await setInput('10');
@@ -131,6 +131,28 @@ describe('Send tokens', () => {
 
       expect(processedDataInput.value).toBe(
         'ESDTTransfer@54574f2d383234653730@03e8'
+      );
+    });
+  });
+
+  describe('Tokens deposit', () => {
+    test('When isDeposit is true, hex encoded deposit is added to data field', async () => {
+      const methods = beforAllTokens({ isDeposit: true });
+      const setAmountInput = useAmountInput(methods);
+
+      await setAmountInput('10');
+
+      await act(async () => {
+        selectEvent.openMenu(methods.getByLabelText('Token'));
+      });
+
+      selectEvent.select(methods.getByLabelText('Token'), 'TwoTToken');
+
+      const dataInput = methods.getByTestId(ValuesEnum.data);
+      const processedDataInput = dataInput as HTMLInputElement;
+
+      expect(processedDataInput.value).toBe(
+        'ESDTTransfer@54574f2d383234653730@03e8@6465706f736974'
       );
     });
   });

@@ -70,7 +70,10 @@ export const GasPrice = () => {
   };
 
   const handleValueChange: OnValueChange = (event) => {
-    onChangeGasPrice(event.value, true);
+    onChangeGasPrice({
+      newValue: event.value,
+      shouldValidate: true
+    });
   };
 
   const getRecommendedGasPrice = (ppu: PpuOptionType['value'] = EMPTY_PPU) => {
@@ -90,7 +93,10 @@ export const GasPrice = () => {
 
     const formattedGasPrice = getFormattedGasPrice(newGasPrice);
 
-    onChangeGasPrice(formattedGasPrice, true);
+    onChangeGasPrice({
+      newValue: formattedGasPrice,
+      shouldValidate: true
+    });
   };
 
   const fastPpu = gasStationMetadata ? gasStationMetadata[shard]?.fast : 0;

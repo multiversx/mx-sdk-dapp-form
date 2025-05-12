@@ -6,14 +6,18 @@ import { ValuesEnum } from 'types';
 
 export { queries };
 
-export const beforAllTokens = (balance?: string) =>
+export const beforAllTokens = (props?: {
+  balance?: string;
+  isDeposit?: boolean;
+}) =>
   beginAll({
     formConfigValues: {
       ...formConfiguration,
       gasLimit: '500000',
       tokenId: 'TWO-824e70'
     },
-    ...(balance ? { balance } : {})
+    ...(props?.balance ? { balance: props.balance } : {}),
+    ...(props?.isDeposit ? { isDeposit: props.isDeposit } : {})
   });
 
 export const twoToken = {

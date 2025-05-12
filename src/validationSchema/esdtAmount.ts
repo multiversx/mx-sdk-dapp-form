@@ -50,7 +50,8 @@ const esdtAmount = (errorMessages: ValidationErrorMessagesType) => {
         const parsedAmount = parseAmount(tokenAmount.toString(), decimals);
         const bnAmount = new BigNumber(parsedAmount);
         const bnTokenBalance = new BigNumber(tokenBalance);
-        return bnTokenBalance.comparedTo(bnAmount) >= 0;
+
+        return Number(bnTokenBalance.comparedTo(bnAmount)) >= 0;
       }
       return true;
     }
