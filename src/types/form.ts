@@ -104,4 +104,5 @@ export interface FormConfigType {
   successDescription?: string;
   redirectRoute?: string;
   skipToConfirm?: boolean;
+  relayer?: string;
 }

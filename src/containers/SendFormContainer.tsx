@@ -3,14 +3,12 @@ import React, {
   JSXElementConstructor,
   ReactNode,
   SetStateAction,
-  useState,
-  useEffect
+  useState
 } from 'react';
 import { Transaction } from '@multiversx/sdk-core';
 import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/index';
 import { Formik } from 'formik';
 
-import { getMultiversxAccount } from 'apiCalls/account/getAccount';
 import { ZERO } from 'constants/index';
 import {
   AccountContextPropsType,
@@ -78,33 +76,6 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   );
   const [guardedTransaction, setGuardedTransaction] = useState<Transaction>();
   const [hasGuardianScreen, setHasGuardianScreen] = useState(false);
-  const [relayerBalance, setRelayerBalance] = useState<string>(
-    initialValues?.relayerBalance ?? ''
-  );
-
-  useEffect(() => {
-    const fetchRelayerBalance = async () => {
-      if (initialValues?.relayer) {
-        try {
-          const relayerAccount = await getMultiversxAccount(
-            initialValues.relayer,
-            apiAddress ?? ''
-          );
-
-          if (relayerAccount && relayerAccount.balance) {
-            setRelayerBalance(relayerAccount.balance);
-          } else {
-            setRelayerBalance('');
-          }
-        } catch (error) {
-          console.error('Error fetching relayer balance:', error);
-          setRelayerBalance('');
-        }
-      }
-    };
-
-    fetchRelayerBalance();
-  }, [initialValues?.relayer, apiAddress]);
 
   const initialErrors = getInitialErrors({
     initialValues,
@@ -172,7 +143,7 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     ledger: initialValues?.ledger,
     nft: tokensInfo?.initialNft,
     relayer: initialValues?.relayer,
-    relayerBalance,
+    relayerBalance: initialValues?.relayerBalance,
     receiver: initialValues?.receiver ?? '',
     receiverUsername: initialValues?.receiverUsername,
     senderUsername: username,

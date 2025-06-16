@@ -25,6 +25,7 @@ export interface ComputeInitGasLimitType {
   chainId: string;
   delegationContractData: DelegationContractDataType | null;
   egldLabel: string;
+  relayer?: string;
 }
 
 export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
@@ -43,7 +44,8 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
   gasLimit,
   gasPrice,
   delegationContractData,
-  chainId
+  chainId,
+  relayer
 }) => {
   const guardedAccountGasLimit = getGuardedAccountGasLimit(isGuarded);
   const delegationContract = delegationContractData?.delegationContract;
@@ -71,7 +73,8 @@ export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
           gasLimit,
           gasPrice
         },
-        chainId
+        chainId,
+        relayer
       });
 
     const initGasLimit =

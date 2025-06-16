@@ -25,8 +25,7 @@ const egldAmount = (errorMessages: ValidationErrorMessagesType) => {
           gasPrice,
           balance,
           chainId,
-          ignoreTokenBalance,
-          relayerBalance
+          ignoreTokenBalance
         } = this.parent as ExtendedValuesType;
 
         if (ignoreTokenBalance) {
@@ -35,8 +34,7 @@ const egldAmount = (errorMessages: ValidationErrorMessagesType) => {
 
         const valid = validateGasLimitAmount({
           amount,
-          balance:
-            relayerBalance && relayerBalance !== '' ? relayerBalance : balance,
+          balance,
           gasLimit,
           gasPrice,
           data,
