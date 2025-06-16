@@ -14,6 +14,7 @@ interface FetchGasLimitType {
   values: Omit<ValuesType, 'tokenId'>;
   chainId: string;
   relayer?: string;
+  relayerSignature?: string;
 }
 
 export const fetchGasLimit = async ({
@@ -23,7 +24,8 @@ export const fetchGasLimit = async ({
   nonce,
   values,
   chainId,
-  relayer
+  relayer,
+  relayerSignature
 }: FetchGasLimitType): Promise<{
   gasLimit: string;
   gasLimitCostError?: string;
@@ -40,7 +42,8 @@ export const fetchGasLimit = async ({
     sender: address,
     nonce,
     chainId,
-    relayer
+    relayer,
+    relayerSignature
   });
 
   const plainTransaction = transaction.toPlainObject();

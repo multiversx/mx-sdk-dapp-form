@@ -29,6 +29,7 @@ export interface GetInitialValuesReturnType {
     gasPrice: string;
     data: string;
     relayer?: string;
+    relayerSignature?: string;
     relayerBalance?: string;
   };
   nft?: PartialNftType;
@@ -52,7 +53,8 @@ export async function getInitialValues(
       gasPrice,
       data,
       tokenId: configTokenId,
-      relayer
+      relayer,
+      relayerSignature
     },
     networkConfig
   } = props;
@@ -102,6 +104,7 @@ export async function getInitialValues(
     gasPrice: getInitialGasPrice(gasPrice),
     data: getInitialData({ computedNft, data, receiver, amount }),
     relayer,
+    relayerSignature,
     relayerBalance
   };
 
