@@ -37,12 +37,19 @@ const esdtGasLimit = (errorMessages: ValidationErrorMessagesType) => {
     'funds',
     errorMessages.insufficientFunds,
     function fundsCheck(value) {
-      const { data, gasPrice, ignoreTokenBalance, balance, chainId } = this
-        .parent as ExtendedValuesType;
+      const {
+        data,
+        gasPrice,
+        ignoreTokenBalance,
+        balance,
+        chainId,
+        relayerBalance
+      } = this.parent as ExtendedValuesType;
+
       if (value && !ignoreTokenBalance) {
         const valid = validateGasLimitAmount({
           amount: ZERO,
-          balance,
+          balance: relayerBalance ?? balance,
           gasLimit: value,
           gasPrice,
           data,

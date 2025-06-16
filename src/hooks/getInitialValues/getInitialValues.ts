@@ -27,6 +27,7 @@ export interface GetInitialValuesReturnType {
     gasLimit: string;
     gasPrice: string;
     data: string;
+    relayer?: string;
   };
   nft?: PartialNftType;
   gasLimitCostError?: SendFormContainerPropsType['initGasLimitError'];

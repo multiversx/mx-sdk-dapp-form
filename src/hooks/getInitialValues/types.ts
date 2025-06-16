@@ -15,4 +15,5 @@ export interface GetInitialValuesType {
   nonce: number;
   chainId: string;
   networkConfig?: NetworkType;
+  relayer?: string;
 }

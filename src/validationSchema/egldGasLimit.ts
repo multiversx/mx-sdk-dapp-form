@@ -13,8 +13,15 @@ const egldGasLimit = (errorMessages: ValidationErrorMessagesType) => {
     'funds',
     errorMessages.insufficientFunds,
     function fundsCheck(value) {
-      const { data, gasPrice, amount, balance, chainId, ignoreTokenBalance } =
-        this.parent as ExtendedValuesType;
+      const {
+        data,
+        gasPrice,
+        amount,
+        balance,
+        chainId,
+        ignoreTokenBalance,
+        relayerBalance
+      } = this.parent as ExtendedValuesType;
       // allow 0 gasLimit signing
       if (ignoreTokenBalance) {
         return true;
@@ -22,7 +29,7 @@ const egldGasLimit = (errorMessages: ValidationErrorMessagesType) => {
       if (amount && stringIsFloat(amount) && value != null) {
         const valid = validateGasLimitAmount({
           amount,
-          balance,
+          balance: relayerBalance ?? balance,
           gasLimit: value,
           gasPrice,
           data,
