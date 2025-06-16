@@ -63,7 +63,8 @@ const nftGasLimit = (errorMessages: ValidationErrorMessagesType) => {
       if (value && !ignoreTokenBalance) {
         const valid = validateGasLimitAmount({
           amount: ZERO,
-          balance: relayerBalance ?? balance,
+          balance:
+            relayerBalance && relayerBalance !== '' ? relayerBalance : balance,
           gasLimit: value,
           gasPrice,
           data,

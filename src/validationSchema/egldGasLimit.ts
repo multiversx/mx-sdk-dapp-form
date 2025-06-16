@@ -29,7 +29,8 @@ const egldGasLimit = (errorMessages: ValidationErrorMessagesType) => {
       if (amount && stringIsFloat(amount) && value != null) {
         const valid = validateGasLimitAmount({
           amount,
-          balance: relayerBalance ?? balance,
+          balance:
+            relayerBalance && relayerBalance !== '' ? relayerBalance : balance,
           gasLimit: value,
           gasPrice,
           data,

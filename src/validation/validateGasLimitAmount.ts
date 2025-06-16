@@ -35,10 +35,15 @@ export const validateGasLimitAmount = async ({
 
   // If relayer is present, fetch relayer account balance
   if (relayer) {
-    const apiAddress = getApiAddressForChainID(chainId);
-    const relayerAccount = await getMultiversxAccount(relayer, apiAddress);
-    if (relayerAccount) {
-      actualBalance = relayerAccount.balance;
+    try {
+      const apiAddress = getApiAddressForChainID(chainId);
+      const relayerAccount = await getMultiversxAccount(relayer, apiAddress);
+      if (relayerAccount?.balance) {
+        actualBalance = relayerAccount.balance;
+      }
+    } catch (e) {
+      // silently fall back – validation will be done on sender balance
+      console.error(`Error fetching relayer balance for ${relayer}: ${e}`);
     }
   }
 

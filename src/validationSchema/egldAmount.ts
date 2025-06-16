@@ -35,7 +35,8 @@ const egldAmount = (errorMessages: ValidationErrorMessagesType) => {
 
         const valid = validateGasLimitAmount({
           amount,
-          balance: relayerBalance ?? balance,
+          balance:
+            relayerBalance && relayerBalance !== '' ? relayerBalance : balance,
           gasLimit,
           gasPrice,
           data,
