@@ -72,10 +72,6 @@ export interface ValidationSchemaType {
    */
   ignoreTokenBalance?: boolean;
   readonly?: ExtendedValuesType['readonly'];
-  /**
-   * **relayer**: Address of the relayer account to fetch and use for gas limit validation
-   * instead of the sender account.
-   */
   relayer?: string;
   tokenId: string;
   nft?: PartialNftType;
