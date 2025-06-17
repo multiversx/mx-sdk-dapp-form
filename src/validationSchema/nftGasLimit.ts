@@ -51,9 +51,10 @@ const nftGasLimit = (errorMessages: ValidationErrorMessagesType) => {
     'funds',
     errorMessages.insufficientFunds,
     function funds(value) {
-      const { data, gasPrice, balance, chainId, ignoreTokenBalance } = this
-        .parent as ExtendedValuesType;
-      if (value && !ignoreTokenBalance) {
+      const { data, gasPrice, balance, chainId, ignoreTokenBalance, relayer } =
+        this.parent as ExtendedValuesType;
+
+      if (value && !ignoreTokenBalance && !relayer) {
         const valid = validateGasLimitAmount({
           amount: ZERO,
           balance,

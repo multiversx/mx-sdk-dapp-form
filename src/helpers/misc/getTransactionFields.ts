@@ -25,7 +25,9 @@ export const getTransactionFields = async (
   const parsedValues = {
     ...values,
     amount: actualTransactionAmount,
-    receiverUsername
+    receiverUsername,
+    relayer: values.relayer,
+    relayerSignature: values.relayerSignature
   };
 
   delete parsedValues.rawReceiverUsername;
