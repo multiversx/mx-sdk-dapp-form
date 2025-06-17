@@ -1,6 +1,5 @@
 import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
 import { setApiConfig } from 'apiCalls';
-import { getMultiversxAccount } from 'apiCalls/account/getAccount';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { PartialNftType, PartialTokenType } from 'types';
 import { getInitialAmount } from './getInitialAmount';
@@ -30,7 +29,6 @@ export interface GetInitialValuesReturnType {
     data: string;
     relayer?: string;
     relayerSignature?: string;
-    relayerBalance?: string;
   };
   nft?: PartialNftType;
   gasLimitCostError?: SendFormContainerPropsType['initGasLimitError'];
@@ -79,21 +77,6 @@ export async function getInitialValues(
 
   const { initGasLimit, initGasLimitError } = gasData;
 
-  let relayerBalance: string | undefined;
-
-  if (relayer) {
-    try {
-      const relayerAccount = await getMultiversxAccount(
-        relayer,
-        networkConfig?.apiAddress ?? ''
-      );
-
-      relayerBalance = relayerAccount?.balance;
-    } catch (error) {
-      console.error('Error fetching relayer balance:', error);
-    }
-  }
-
   const initialValues: GetInitialValuesReturnType['initialValues'] = {
     balance,
     receiver,
@@ -104,8 +87,7 @@ export async function getInitialValues(
     gasPrice: getInitialGasPrice(gasPrice),
     data: getInitialData({ computedNft, data, receiver, amount }),
     relayer,
-    relayerSignature,
-    relayerBalance
+    relayerSignature
   };
 
   const { isEsdt } = getIdentifierType(identifier);

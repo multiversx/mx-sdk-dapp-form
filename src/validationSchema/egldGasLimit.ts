@@ -20,17 +20,17 @@ const egldGasLimit = (errorMessages: ValidationErrorMessagesType) => {
         balance,
         chainId,
         ignoreTokenBalance,
-        relayerBalance
+        relayer
       } = this.parent as ExtendedValuesType;
       // allow 0 gasLimit signing
-      if (ignoreTokenBalance) {
+      if (ignoreTokenBalance || relayer) {
         return true;
       }
+
       if (amount && stringIsFloat(amount) && value != null) {
         const valid = validateGasLimitAmount({
           amount,
-          balance:
-            relayerBalance && relayerBalance !== '' ? relayerBalance : balance,
+          balance,
           gasLimit: value,
           gasPrice,
           data,

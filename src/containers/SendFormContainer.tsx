@@ -144,7 +144,6 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     nft: tokensInfo?.initialNft,
     relayer: initialValues?.relayer,
     relayerSignature: initialValues?.relayerSignature,
-    relayerBalance: initialValues?.relayerBalance,
     receiver: initialValues?.receiver ?? '',
     receiverUsername: initialValues?.receiverUsername,
     senderUsername: username,

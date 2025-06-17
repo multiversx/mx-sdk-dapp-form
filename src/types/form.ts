@@ -52,7 +52,6 @@ export interface ExtendedValuesType extends ValuesType {
   readonly?: boolean | Array<ValueKeyType>;
   relayer?: string;
   relayerSignature?: string;
-  relayerBalance?: string;
   tokens?: PartialTokenType[] | null;
   transaction?: Transaction;
   txType: TransactionTypeEnum;
@@ -78,7 +77,6 @@ export interface ValidationSchemaType {
    * instead of the sender account.
    */
   relayer?: string;
-  relayerBalance?: string;
   tokenId: string;
   nft?: PartialNftType;
   tokens?: PartialTokenType[];
