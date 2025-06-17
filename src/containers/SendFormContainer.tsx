@@ -77,8 +77,6 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
   const [guardedTransaction, setGuardedTransaction] = useState<Transaction>();
   const [hasGuardianScreen, setHasGuardianScreen] = useState(false);
 
-  //this is updated from within the main context with updated values
-
   const initialErrors = getInitialErrors({
     initialValues,
     prefilledForm: formInfo.prefilledForm,
@@ -144,6 +142,8 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     isGuarded: initialValues?.isGuarded ?? accountInfo.isGuarded,
     ledger: initialValues?.ledger,
     nft: tokensInfo?.initialNft,
+    relayer: initialValues?.relayer,
+    relayerSignature: initialValues?.relayerSignature,
     receiver: initialValues?.receiver ?? '',
     receiverUsername: initialValues?.receiverUsername,
     senderUsername: username,

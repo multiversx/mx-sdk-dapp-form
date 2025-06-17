@@ -20,7 +20,9 @@ export async function generateTransaction(props: GenerateTransactionPropsType) {
     gasPrice,
     nft,
     receiverUsername,
-    senderUsername
+    senderUsername,
+    relayer,
+    relayerSignature
   } = values;
   const transactionReceiver = Boolean(nft) ? address : receiver;
 
@@ -36,7 +38,9 @@ export async function generateTransaction(props: GenerateTransactionPropsType) {
       senderUsername,
       sender: address,
       nonce,
-      chainId
+      chainId,
+      relayer,
+      relayerSignature
     });
 
     return transaction;

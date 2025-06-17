@@ -23,9 +23,10 @@ export const validateGasLimitAmount = ({
   gasLimit,
   data,
   chainId
-}: ValidateGasLimitAmountType) => {
+}: ValidateGasLimitAmountType): boolean => {
   const parsedAmount = parseAmount(amount.toString());
   const bnAmount = new BigNumber(parsedAmount);
+
   const bnBalance = new BigNumber(balance);
 
   const fee = new BigNumber(

@@ -27,6 +27,8 @@ export interface GetInitialValuesReturnType {
     gasLimit: string;
     gasPrice: string;
     data: string;
+    relayer?: string;
+    relayerSignature?: string;
   };
   nft?: PartialNftType;
   gasLimitCostError?: SendFormContainerPropsType['initGasLimitError'];
@@ -48,7 +50,9 @@ export async function getInitialValues(
       amount,
       gasPrice,
       data,
-      tokenId: configTokenId
+      tokenId: configTokenId,
+      relayer,
+      relayerSignature
     },
     networkConfig
   } = props;
@@ -81,7 +85,9 @@ export async function getInitialValues(
     tokenId: computedTokenId,
     gasLimit: initGasLimit,
     gasPrice: getInitialGasPrice(gasPrice),
-    data: getInitialData({ computedNft, data, receiver, amount })
+    data: getInitialData({ computedNft, data, receiver, amount }),
+    relayer,
+    relayerSignature
   };
 
   const { isEsdt } = getIdentifierType(identifier);

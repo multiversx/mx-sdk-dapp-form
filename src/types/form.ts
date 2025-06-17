@@ -50,6 +50,8 @@ export interface ExtendedValuesType extends ValuesType {
    * Example: `readonly: [ 'amount' ]` will disable only the amount field.
    */
   readonly?: boolean | Array<ValueKeyType>;
+  relayer?: string;
+  relayerSignature?: string;
   tokens?: PartialTokenType[] | null;
   transaction?: Transaction;
   txType: TransactionTypeEnum;
@@ -70,6 +72,7 @@ export interface ValidationSchemaType {
    */
   ignoreTokenBalance?: boolean;
   readonly?: ExtendedValuesType['readonly'];
+  relayer?: string;
   tokenId: string;
   nft?: PartialNftType;
   tokens?: PartialTokenType[];
@@ -87,10 +90,11 @@ export interface FormConfigType {
   gasLimit: string;
   gasPrice: string;
   data: string;
-
   readonly?: ExtendedValuesType['readonly'];
   successTitle?: string;
   successDescription?: string;
   redirectRoute?: string;
   skipToConfirm?: boolean;
+  relayer?: string;
+  relayerSignature?: string;
 }
