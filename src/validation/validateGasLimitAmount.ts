@@ -4,8 +4,6 @@ import {
 } from '@multiversx/sdk-dapp/constants/index';
 import { calculateFeeLimit } from '@multiversx/sdk-dapp/utils/operations/calculateFeeLimit';
 import BigNumber from 'bignumber.js';
-import { getMultiversxAccount } from 'apiCalls/account/getAccount';
-import { getApiAddressForChainID } from 'apiCalls/network/getApiAddressForChainID';
 import { parseAmount } from 'helpers';
 import { getParsedGasPrice } from 'operations';
 
@@ -16,36 +14,20 @@ interface ValidateGasLimitAmountType {
   gasLimit: string;
   data: string;
   chainId: string;
-  relayer?: string;
 }
 
-export const validateGasLimitAmount = async ({
+export const validateGasLimitAmount = ({
   amount,
   balance,
   gasPrice,
   gasLimit,
   data,
-  chainId,
-  relayer
-}: ValidateGasLimitAmountType): Promise<boolean> => {
+  chainId
+}: ValidateGasLimitAmountType): boolean => {
   const parsedAmount = parseAmount(amount.toString());
   const bnAmount = new BigNumber(parsedAmount);
 
-  let actualBalance = balance;
-
-  if (relayer) {
-    try {
-      const apiAddress = getApiAddressForChainID(chainId);
-      const relayerAccount = await getMultiversxAccount(relayer, apiAddress);
-      if (relayerAccount?.balance) {
-        actualBalance = relayerAccount.balance;
-      }
-    } catch (e) {
-      console.error(`Error fetching relayer balance for ${relayer}: ${e}`);
-    }
-  }
-
-  const bnBalance = new BigNumber(actualBalance);
+  const bnBalance = new BigNumber(balance);
 
   const fee = new BigNumber(
     calculateFeeLimit({
