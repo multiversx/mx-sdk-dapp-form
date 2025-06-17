@@ -10,6 +10,8 @@ interface PrepareTransactionType {
   sender: string;
   senderUsername?: string;
   receiverUsername?: string;
+  relayer?: string;
+  relayerSignature?: string;
   data: string;
   gasPrice: string;
   gasLimit: string;
@@ -26,7 +28,9 @@ export function prepareTransaction({
   senderUsername,
   gasPrice,
   gasLimit,
-  chainId
+  chainId,
+  relayer,
+  relayerSignature
 }: PrepareTransactionType) {
   const bNamount = new BigNumber(parseAmount(amount));
 
@@ -42,7 +46,11 @@ export function prepareTransaction({
     receiverUsername,
     data: Buffer.from(data.trim()),
     chainID: chainId,
-    version: VERSION
+    version: VERSION,
+    relayer: relayer ? new Address(relayer) : undefined,
+    relayerSignature: relayerSignature
+      ? Buffer.from(relayerSignature)
+      : undefined
   });
 
   return transaction;
