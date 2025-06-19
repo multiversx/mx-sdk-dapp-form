@@ -1,5 +1,6 @@
-import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp/constants/index';
-import { formatAmount, usdValue } from 'helpers';
+import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out';
+import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
+import { getUsdValue } from '@multiversx/sdk-dapp/out/utils/operations/getUsdValue';
 
 export function calculateFeeInFiat({
   feeLimit,
@@ -15,7 +16,7 @@ export function calculateFeeInFiat({
     showLastNonZeroDecimal: true
   });
 
-  const feeInFiat = `≈ ${usdValue({
+  const feeInFiat = `≈ ${getUsdValue({
     amount,
     usd: egldPriceInUsd,
     decimals: DIGITS

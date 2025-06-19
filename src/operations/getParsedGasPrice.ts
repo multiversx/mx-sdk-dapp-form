@@ -1,4 +1,4 @@
-import { parseAmount } from 'helpers/dapp-core';
+import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 
 export function getParsedGasPrice(value: string) {
   if (isNaN(Number(value)) || value === '') {

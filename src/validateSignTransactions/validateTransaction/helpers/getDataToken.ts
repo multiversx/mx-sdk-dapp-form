@@ -1,6 +1,6 @@
+import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
 import { ApiConfigType, getToken } from 'apiCalls';
 import { ZERO } from 'constants/index';
-import { formatAmount } from 'helpers';
 
 export async function getDataToken(
   {

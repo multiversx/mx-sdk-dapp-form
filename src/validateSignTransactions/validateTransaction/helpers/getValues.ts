@@ -1,10 +1,10 @@
 import { DIGITS, DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
+import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
 import { GAS_PRICE } from '@multiversx/sdk-dapp/out/constants';
 import { isTokenTransfer } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/isTokenTransfer';
 import { MultiSignTransactionType } from '@multiversx/sdk-dapp/out/types/transactions.types';
 
 import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
-import { formatAmount } from 'helpers';
 import { TxSignValuesType } from '../types';
 
 export function getValues(props: {

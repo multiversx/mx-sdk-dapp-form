@@ -7,7 +7,7 @@ export const ExplorerLink = ({
   children,
   page,
   className,
-  dataTestId
+  'data-testid': dataTestId
 }: ExplorerLinkPropsType) => {
   const { network } = useGetNetworkConfig();
 

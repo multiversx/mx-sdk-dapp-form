@@ -1,4 +1,4 @@
 export interface WithClassnameType {
   className?: string;
-  dataTestId?: string;
+  'data-testid'?: string;
 }

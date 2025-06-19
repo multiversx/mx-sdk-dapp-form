@@ -1,9 +1,8 @@
 import React, { JSXElementConstructor } from 'react';
 
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import globals from 'assets/sass/globals.module.scss';
 import { ZERO } from 'constants/index';
-import { PartialNftType } from 'types';
+import { WithClassnameType, PartialNftType } from 'types';
 import { TokenElement } from 'UI/Fields/SelectToken/TokenElement';
 
 import styles from './styles.module.scss';

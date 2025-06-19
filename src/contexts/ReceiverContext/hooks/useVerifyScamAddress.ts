@@ -30,9 +30,14 @@ export function useVerifyScamAddress(apiConfig?: ApiConfigType) {
       setFetching(true);
       try {
         const data = await getScamAddressData(addressToVerify, apiConfig);
+
+        if (!data) {
+          return;
+        }
+
         setVerifiedAddresses((existing) => ({
           ...existing,
-          ...(data.scamInfo ? { [addressToVerify]: data.scamInfo } : {})
+          ...(data?.scamInfo ? { [addressToVerify]: data.scamInfo } : {})
         }));
       } catch (err) {
         console.error('Unable to find address', err);

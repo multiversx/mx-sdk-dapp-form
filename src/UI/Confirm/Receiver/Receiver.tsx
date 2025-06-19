@@ -1,69 +1,151 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
-import { CopyButton } from '@multiversx/sdk-dapp/UI/CopyButton';
-import { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
-import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
-
+import { isContract } from '@multiversx/sdk-dapp';
+import { getAccountFromApi } from '@multiversx/sdk-dapp/out/apiCalls/account/getAccountFromApi';
+import { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/out/apiCalls/endpoints';
+import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
-import globals from 'assets/sass/globals.module.scss';
+import MultiversXIconSimple from 'assets/icons/mx-icon-simple.svg';
 
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
-import { MultiversXIconSimple } from 'UI/Fields/Receiver/components/MultiversXIconSimple';
+import { CopyButton } from 'UI/CopyButton';
+import { ExplorerLink } from 'UI/ExplorerLink';
+import { LoadingDots } from 'UI/LoadingDots';
+import { Trim } from 'UI/Trim';
 import styles from './styles.module.scss';
 
+interface AccountData {
+  username?: string;
+}
+
 export interface ReceiverPropsType {
-  label?: string;
+  amount: string;
+  label?: ReactNode;
+  customCopyIcon?: IconProp;
+  customExplorerIcon?: IconProp;
   receiver: string;
   receiverUsername?: string;
-  scamReport?: ReactNode;
+  scamReport: string | null;
+  shouldTrimReceiver?: boolean;
 }
 
 export const Receiver = ({
-  label = 'Receiver',
+  amount,
+  label,
   receiver,
+  receiverUsername,
   scamReport,
-  receiverUsername
+  shouldTrimReceiver = true
 }: ReceiverPropsType) => {
-  const hasUsername = Boolean(receiverUsername);
-  const receiverValue = receiverUsername ?? receiver;
+  const [usernameAccount, setUsernameAccount] = useState<AccountData | null>(
+    null
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<unknown | null>(null);
+  const isSmartContract = isContract(receiver);
+  const skipFetchingAccount = Boolean(isSmartContract || receiverUsername);
+  const isAmountZero = new BigNumber(amount).isZero();
+
+  const foundReceiverUsername = receiverUsername ?? usernameAccount?.username;
+  const receiverValue = foundReceiverUsername ?? receiver;
+  const hasUsername =
+    Boolean(receiver && Boolean(foundReceiverUsername)) && !error;
+
+  const defaultReceiverLabel =
+    isAmountZero && isSmartContract ? 'To interact with' : 'To';
+
+  const fetchUsernameAccount = async () => {
+    if (skipFetchingAccount) {
+      setUsernameAccount(null);
+    } else {
+      try {
+        setIsLoading(true);
+        const username = await getAccountFromApi({
+          address: receiver,
+          baseURL: ACCOUNTS_ENDPOINT
+        });
+        setUsernameAccount(username);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    fetchUsernameAccount();
+  }, [receiver, skipFetchingAccount]);
 
   return (
-    <div className={styles.confirmReceiver}>
-      <span className={globals.label}>{label}</span>
+    <div className={styles.receiver}>
+      <div className={styles.receiverLabelWrapper}>
+        <div className={styles.receiverLabel}>
+          {label ?? defaultReceiverLabel}
+        </div>
 
-      <span
-        className={classNames(styles.value, { [styles.shrunk]: hasUsername })}
-        data-testid={FormDataTestIdsEnum.confirmReceiver}
-      >
-        {hasUsername && <MultiversXIconSimple className={styles.icon} />}
-        {receiverValue}
+        {scamReport && (
+          <div className={styles.receiverLabelScam}>
+            <span
+              className={styles.receiverLabelScamText}
+              data-testid={FormDataTestIdsEnum.confirmScamReport}
+            >
+              {scamReport}
+            </span>
 
-        {hasUsername && (
-          <ExplorerLink
-            page={`/${ACCOUNTS_ENDPOINT}/${receiver}`}
-            className={styles.explorer}
-          />
-        )}
-      </span>
-
-      {hasUsername && (
-        <span className={styles.subValue}>
-          <Trim text={receiver} className={styles.subValueTrim} />
-          <CopyButton text={receiver} className={styles.subValueCopy} />
-        </span>
-      )}
-
-      {scamReport && (
-        <div className={styles.scam}>
-          <span>
             <FontAwesomeIcon
               icon={faExclamationTriangle}
-              className={styles.icon}
+              className={styles.receiverLabelScamIcon}
             />
-            <small data-testid='confirmScamReport'>{scamReport}</small>
-          </span>
+          </div>
+        )}
+      </div>
+
+      {isLoading ? (
+        <div className={styles?.receiverWrapper}>
+          <LoadingDots className={styles?.receiverLoading} />
+        </div>
+      ) : (
+        <div
+          data-testid={FormDataTestIdsEnum.confirmReceiver}
+          className={classNames(styles.receiverWrapper, {
+            [styles.unwrappable]: shouldTrimReceiver
+          })}
+        >
+          {shouldTrimReceiver ? (
+            <Trim text={receiver} className={styles.receiverTrim} />
+          ) : (
+            <div className={styles.receiverText}>{receiver}</div>
+          )}
+
+          {hasUsername && !isSmartContract && (
+            <span className={styles.receiverData}>
+              (<MultiversXIconSimple className={styles.receiverDataIcon} />
+              <span className={styles.receiverDataUsername}>
+                {receiverValue}
+              </span>
+              )
+            </span>
+          )}
+
+          {isSmartContract && (
+            <span className={styles.receiverData}>
+              (
+              <span className={styles.receiverDataUsername}>
+                Smart Contract
+              </span>
+              )
+            </span>
+          )}
+
+          <CopyButton text={receiver} className={styles.receiverCopy} />
+
+          <ExplorerLink
+            page={`/${ACCOUNTS_ENDPOINT}/${receiver}`}
+            className={styles.receiverExternal}
+          />
         </div>
       )}
     </div>

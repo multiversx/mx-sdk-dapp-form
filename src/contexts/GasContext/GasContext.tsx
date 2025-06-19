@@ -8,6 +8,7 @@ import React, {
   useMemo
 } from 'react';
 
+import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';
 import { stringIsInteger } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsInteger';
 import {
@@ -21,7 +22,7 @@ import { ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
-import { getGasLimitChanged, parseAmount } from 'helpers';
+import { getGasLimitChanged } from 'helpers';
 import useFetchGasLimit from 'hooks/useFetchGasLimit';
 import {
   calculateNftGasLimit,

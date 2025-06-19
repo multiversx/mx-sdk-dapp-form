@@ -1,5 +1,5 @@
-import { DIGITS } from '@multiversx/sdk-dapp/constants/index';
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
+import { DIGITS } from '@multiversx/sdk-dapp-utils/out';
+import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';
 import BigNumber from 'bignumber.js';
 
 export const roundAmount = (amount: string, digits?: number) => {

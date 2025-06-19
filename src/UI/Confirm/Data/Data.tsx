@@ -1,8 +1,7 @@
 import React from 'react';
-import { decodePart } from '@multiversx/sdk-dapp/utils/decoders/decodePart';
 
+import { decodePart } from '@multiversx/sdk-dapp/out/utils/decoders/decodePart';
 import globals from 'assets/sass/globals.module.scss';
-
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import styles from './styles.module.scss';
 

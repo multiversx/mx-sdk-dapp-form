@@ -34,6 +34,10 @@ export async function getTokens({
   }).toString();
 
   const apiConfig = await getApiConfig();
+  if (!apiConfig) {
+    return null;
+  }
+
   return axios.get<Array<PartialTokenType | PartialMetaEsdtType>>(
     `/${ACCOUNTS_ENDPOINT}/${address}/${TOKENS_ENDPOINT}?${params}`,
     apiConfig
@@ -47,6 +51,10 @@ export async function getTokensCount({ address, search }: GetTokensType) {
   }).toString();
 
   const apiConfig = await getApiConfig();
+  if (!apiConfig) {
+    return null;
+  }
+
   return axios.get<number>(
     `/${ACCOUNTS_ENDPOINT}/${address}/${TOKENS_ENDPOINT}/count?${params}`,
     apiConfig
@@ -63,6 +71,11 @@ export async function getAccountToken(
   const { address, token } = props;
 
   const config = apiConfig || (await getApiConfig());
+
+  if (!config) {
+    return null;
+  }
+
   return axios.get<PartialTokenType>(
     `/${ACCOUNTS_ENDPOINT}/${address}/${TOKENS_ENDPOINT}/${token}`,
     config
@@ -102,8 +115,13 @@ export async function fetchTokens({
     params.size = tokenPayloadSize;
   }
 
-  const { data: newTokens } = await getTokens(params);
-  return newTokens;
+  const response = await getTokens(params);
+
+  if (!response) {
+    return null;
+  }
+
+  return response.data;
 }
 
 export async function fetchAllTokens(address: string) {

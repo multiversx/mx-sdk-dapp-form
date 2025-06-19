@@ -14,6 +14,11 @@ export async function getScamAddressData(
   apiConfig?: ApiConfigType
 ) {
   const config = apiConfig || (await getApiConfig());
+
+  if (!config) {
+    return null;
+  }
+
   const { data } = await axios.get<ScamInfoType>(
     `/accounts/${addressToVerify}`,
     config

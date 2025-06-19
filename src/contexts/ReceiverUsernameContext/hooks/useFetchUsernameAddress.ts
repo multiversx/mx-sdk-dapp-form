@@ -75,6 +75,11 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
 
     try {
       const config = apiConfig || (await getApiConfig());
+
+      if (!config) {
+        return;
+      }
+
       const account = await getMultiversxAccount(address, config.baseURL);
       const fetchedAddress = account?.address;
       const accountUsername = account?.username;

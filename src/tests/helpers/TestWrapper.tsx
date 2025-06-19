@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
-import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/network';
-
-import {
-  EnvironmentsEnum,
-  LoginMethodsEnum
-} from '@multiversx/sdk-dapp/types/enums.types';
-import { GuardianScreenType } from '@multiversx/sdk-dapp/types/transactions.types';
-import { Loader } from '@multiversx/sdk-dapp/UI/Loader';
+import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/out/constants';
+import { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
+import { EnvironmentsEnum } from '@multiversx/sdk-dapp/out/types/enums.types';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { SendFormContainer, SendFormContainerPropsType } from 'containers';
 import {
@@ -14,8 +9,10 @@ import {
   GetInitialValuesReturnType
 } from 'hooks/useGetInitialValues';
 import getTxType from 'operations/getTxType';
+import { GuardianScreenType } from 'types';
 import { ExtendedValuesType, FormConfigType } from 'types/form';
 import { Form } from 'UI/Form';
+import { Loader } from 'UI/Loader';
 import { accountConfiguration } from './accountConfiguration';
 import { formConfiguration } from './formConfiguraiton';
 
@@ -86,7 +83,8 @@ export const TestWrapper = ({
   const containerProps: Omit<SendFormContainerPropsType, 'children'> = {
     networkConfig: {
       ...activeNetwork,
-      skipFetchFromServer: true
+      skipFetchFromServer: true,
+      apiTimeout: Number(activeNetwork.apiTimeout)
     },
     initGasLimitError: gasLimitCostError,
     initialValues: validationValues,
@@ -97,7 +95,7 @@ export const TestWrapper = ({
       shard: accountConfiguration.shard,
       nonce: accountConfiguration.nonce,
       balance,
-      providerType: LoginMethodsEnum.extra
+      providerType: ProviderTypeEnum
     },
     formInfo: {
       prefilledForm: false,

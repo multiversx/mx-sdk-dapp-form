@@ -1,14 +1,14 @@
 import React, { useState, MouseEvent } from 'react';
 import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ConfirmReceiver } from '@multiversx/sdk-dapp/UI/SignTransactionsModals/SignWithDeviceModal/components/components/ConfirmReceiver';
-
+import { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useFormContext } from 'contexts';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { TransactionTypeEnum } from 'types';
 import Confirm from 'UI/Confirm';
+import { Receiver as ConfirmReceiver } from 'UI/Confirm/Receiver';
 import { NFTSFTPreview } from 'UI/NFTSFTPreview';
 
 import styles from './../confirmScreen.module.scss';
@@ -16,7 +16,7 @@ import { getConfirmButtonLabel, getReceiverUsername } from './helpers';
 
 export interface TransactionSummaryPropsType {
   isConfirmCloseBtnVisible?: boolean;
-  providerType: string;
+  providerType: keyof typeof ProviderTypeEnum;
   hasGuardianScreen?: boolean;
 }
 

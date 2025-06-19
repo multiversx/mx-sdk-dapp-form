@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { DECIMALS } from '@multiversx/sdk-dapp/constants';
-import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
+import { DECIMALS } from '@multiversx/sdk-dapp-utils/out';
+import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import { SingleValue } from 'react-select';
 import globals from 'assets/sass/globals.module.scss';
 import { useFormContext } from 'contexts';

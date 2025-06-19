@@ -1,4 +1,4 @@
-import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
+import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import { NftEnumType, PartialNftType } from 'types';
 import { TransactionTypeEnum } from 'types';
 

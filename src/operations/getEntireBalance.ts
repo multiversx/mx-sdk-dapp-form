@@ -1,13 +1,12 @@
+import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out';
+import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
 import {
   GAS_PER_DATA_BYTE,
-  GAS_PRICE_MODIFIER,
-  DECIMALS,
-  DIGITS
-} from '@multiversx/sdk-dapp/constants/index';
-
+  GAS_PRICE_MODIFIER
+} from '@multiversx/sdk-dapp/out/constants';
+import { calculateFeeLimit } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/calculateFeeLimit';
 import BigNumber from 'bignumber.js';
 import { MIN_DUST, ZERO } from 'constants/index';
-import { formatAmount, calculateFeeLimit } from 'helpers';
 
 interface EntireBalanceType {
   balance?: string;

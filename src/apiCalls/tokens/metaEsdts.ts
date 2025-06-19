@@ -12,6 +12,11 @@ export async function getAllowedReceivers(
   }
 
   const config = apiConfig || (await getApiConfig());
+
+  if (!config) {
+    return null;
+  }
+
   try {
     const { data: collectionData } = await axios.get<{
       canTransfer?: boolean;

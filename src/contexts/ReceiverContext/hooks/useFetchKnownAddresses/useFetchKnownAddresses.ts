@@ -20,8 +20,8 @@ export const useFetchKnownAddresses = () => {
       const { data: transactions } = await getTransactions({
         sender: address,
         transactionSize: 50,
-        apiAddress: apiConfig.baseURL,
-        apiTimeout: apiConfig.timeout,
+        apiAddress: apiConfig?.baseURL ?? '',
+        apiTimeout: apiConfig?.timeout ?? 0,
         withUsername: true
       });
 

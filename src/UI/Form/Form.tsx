@@ -4,6 +4,7 @@ import {
   TransactionOptions,
   TransactionVersion
 } from '@multiversx/sdk-core/out';
+import { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 import globals from 'assets/sass/globals.module.scss';
@@ -149,7 +150,13 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
   }
 
   if (areValidatedValuesReady) {
-    return <ConfirmScreen providerType={accountInfo.providerType} />;
+    return (
+      <ConfirmScreen
+        providerType={
+          String(accountInfo.providerType) as keyof typeof ProviderTypeEnum
+        }
+      />
+    );
   }
 
   return (

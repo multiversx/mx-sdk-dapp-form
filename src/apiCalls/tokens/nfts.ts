@@ -17,6 +17,11 @@ export async function getNftByAddressAndIdentifier(
 ) {
   try {
     const config = apiConfig || (await getApiConfig());
+
+    if (!config) {
+      return null;
+    }
+
     const { data }: { data: PartialNftType } = await axios.get(
       `/${ACCOUNTS_ENDPOINT}/${address}/${NFTS_ENDPOINT}/${identifier}`,
       config
@@ -33,6 +38,11 @@ export async function getGlobalNftByIdentifier(
 ) {
   try {
     const config = apiConfig || (await getApiConfig());
+
+    if (!config) {
+      return null;
+    }
+
     const { data }: { data: PartialNftType } = await axios.get(
       `/${NFTS_ENDPOINT}/${identifier}`,
       config

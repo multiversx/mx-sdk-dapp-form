@@ -9,6 +9,17 @@ export interface DelegationContractDataType {
   };
 }
 
+export interface SignStepInnerClassesType {
+  buttonsWrapperClassName?: string;
+  inputGroupClassName?: string;
+  inputLabelClassName?: string;
+  inputValueClassName?: string;
+  errorClassName?: string;
+  scamAlertClassName?: string;
+  buttonClassName?: string;
+  progressClassName?: string;
+}
+
 export type DeviceSignedTransactions = Record<number, Transaction>;
 
 export interface GuardianScreenType extends WithClassnameType {

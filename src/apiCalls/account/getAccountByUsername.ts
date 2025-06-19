@@ -11,6 +11,11 @@ export async function getAccountByUsername(
 ) {
   try {
     const config = apiConfig || (await getApiConfig());
+
+    if (!config) {
+      return null;
+    }
+
     const { request, data: account } = await axios.get<AccountContextPropsType>(
       `usernames/${username}`,
       config

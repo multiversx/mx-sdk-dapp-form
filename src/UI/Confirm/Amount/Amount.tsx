@@ -1,12 +1,12 @@
 import React from 'react';
-import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp/constants/index';
-import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
-import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue/index';
+import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out';
 
+import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
+import { getUsdValue } from '@multiversx/sdk-dapp/out/utils/operations/getUsdValue';
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
-import { parseAmount } from 'helpers';
 import { PartialNftType, TransactionTypeEnum } from 'types';
+import { FormatAmount } from 'UI';
 
 import { TokenAvatar } from '../TokenAvatar';
 
@@ -74,6 +74,11 @@ export const Amount = ({
     return null;
   }
 
+  const usdValue = getUsdValue({
+    amount,
+    usd: egldPriceInUsd
+  });
+
   return (
     <div className={styles.amount}>
       <span className={globals.label}>{label}</span>
@@ -86,14 +91,7 @@ export const Amount = ({
         </div>
       </div>
 
-      {!isEsdtTransaction && (
-        <UsdValue
-          amount={amount}
-          usd={egldPriceInUsd}
-          data-testid={FormDataTestIdsEnum.confirmUsdValue}
-          className={styles.price}
-        />
-      )}
+      {!isEsdtTransaction && <small className={styles.price}>{usdValue}</small>}
     </div>
   );
 };

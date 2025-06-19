@@ -4,7 +4,7 @@ import { getApiAddressForChainID } from 'apiCalls/network/getApiAddressForChainI
 
 export async function getNetworkConfigForChainId(
   chainId: string
-): Promise<NetworkType> {
+): Promise<NetworkType | null> {
   const apiAddress = getApiAddressForChainID(chainId);
 
   return await getServerConfiguration(apiAddress);

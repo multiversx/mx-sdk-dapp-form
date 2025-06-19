@@ -1,9 +1,9 @@
 import React from 'react';
-import { GuardianScreenType } from '@multiversx/sdk-dapp/types/transactions.types';
 import { fireEvent } from '@testing-library/react';
 import { testAddress } from '__mocks__';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { renderForm } from 'tests/helpers/renderForm';
+import { GuardianScreenType } from 'types';
 import { ValuesEnum } from 'types/form';
 import { formConfiguration, sendAndConfirmTest } from './helpers';
 

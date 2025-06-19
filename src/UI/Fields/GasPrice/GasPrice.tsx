@@ -2,6 +2,8 @@ import React, { MouseEvent, useState } from 'react';
 import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DIGITS, DECIMALS } from '@multiversx/sdk-dapp-utils/out';
+import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
+import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 import { recommendGasPrice } from '@multiversx/sdk-dapp-utils/out/helpers/recommendGasPrice';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
@@ -14,7 +16,7 @@ import {
 import globals from 'assets/sass/globals.module.scss';
 import { useAccountContext, useNetworkConfigContext } from 'contexts';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { formatAmount, getIsDisabled, parseAmount } from 'helpers';
+import { getIsDisabled } from 'helpers';
 import { formattedConfigGasPrice } from 'operations';
 import { ValuesEnum } from 'types';
 

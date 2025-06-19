@@ -1,7 +1,7 @@
-import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
+import { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
 
 export interface GetConfirmButtonLabelType {
-  providerType: string;
+  providerType: keyof typeof ProviderTypeEnum;
   hasGuardianScreen: boolean;
 }
 
@@ -13,17 +13,14 @@ export const getConfirmButtonLabel = ({
     return 'Confirm & Continue';
   }
 
-  if (providerType === LoginMethodsEnum.walletconnectv2) {
-    return 'Confirm on xPortal';
+  switch (providerType) {
+    case ProviderTypeEnum.walletConnect:
+      return 'Confirm on xPortal';
+    case ProviderTypeEnum.extension:
+      return 'Confirm on DeFi Wallet';
+    case ProviderTypeEnum.ledger:
+      return 'Confirm on Ledger';
+    default:
+      return 'Confirm';
   }
-
-  if (providerType === LoginMethodsEnum.extension) {
-    return 'Confirm on DeFi Wallet';
-  }
-
-  if (providerType === LoginMethodsEnum.ledger) {
-    return 'Confirm on Ledger';
-  }
-
-  return 'Confirm';
 };
