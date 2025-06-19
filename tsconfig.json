@@ -12,7 +12,6 @@
     "forceConsistentCasingInFileNames": true,
     "rootDir": "./src",
     "baseUrl": "./src",
-    "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
     "noImplicitReturns": true,
@@ -24,6 +23,8 @@
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "emitDeclarationOnly": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true
   },
   "include": ["src/**/*"],

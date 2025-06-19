@@ -1,6 +1,6 @@
 import React from 'react';
-import { MvxFormatAmount } from '@multiversx/sdk-dapp-ui/dist/react/components';
-import type { MvxFormatAmount as MvxFormatAmountPropsType } from '@multiversx/sdk-dapp-ui/dist/web-components/mvx-format-amount';
+import { MvxFormatAmount } from '@multiversx/sdk-dapp-ui/react';
+import type { MvxFormatAmount as MvxFormatAmountPropsType } from '@multiversx/sdk-dapp-ui/web-components/mvx-format-amount';
 import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { FormatAmountController } from '@multiversx/sdk-dapp/out/controllers';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/out/react/network/useGetNetworkConfig';

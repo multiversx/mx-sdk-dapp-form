@@ -1,6 +1,6 @@
 import React from 'react';
-import { MvxTrimText } from '@multiversx/sdk-dapp-ui/dist/react/components';
-import type { MvxTrimText as MvxTrimTextPropsType } from '@multiversx/sdk-dapp-ui/dist/web-components/mvx-trim-text';
+import { MvxTrimText } from '@multiversx/sdk-dapp-ui/react';
+import type { MvxTrimText as MvxTrimTextPropsType } from '@multiversx/sdk-dapp-ui/web-components/mvx-trim-text';
 import { WithClassnameType } from 'types';
 
 interface TrimPropsType

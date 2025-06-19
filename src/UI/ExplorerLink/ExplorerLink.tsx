@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { MvxExplorerLink } from '@multiversx/sdk-dapp-ui/dist/react/components';
+import { MvxExplorerLink } from '@multiversx/sdk-dapp-ui/react';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/out/react/network/useGetNetworkConfig';
 import { WithClassnameType } from 'types';
 
