@@ -1,8 +1,8 @@
 import {
   GAS_PER_DATA_BYTE,
   GAS_PRICE_MODIFIER
-} from '@multiversx/sdk-dapp/constants/index';
-import { calculateFeeLimit } from '@multiversx/sdk-dapp/utils/operations/calculateFeeLimit';
+} from '@multiversx/sdk-dapp/out/constants';
+import { calculateFeeLimit } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/calculateFeeLimit';
 import BigNumber from 'bignumber.js';
 import { parseAmount } from 'helpers';
 import { getParsedGasPrice } from 'operations';

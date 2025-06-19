@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
+import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import classNames from 'classnames';
 import { components } from 'react-select';
 

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { WithClassnameType } from 'types';
 import { ValuesEnum } from 'types/form';
 import amountSelectStyles from '../AmountSelect/amountSelect.module.scss';
 

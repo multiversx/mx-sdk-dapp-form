@@ -1,4 +1,4 @@
-import { GAS_LIMIT } from '@multiversx/sdk-dapp/constants/index';
+import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants';
 import { fireEvent, waitFor } from '@testing-library/react';
 
 import { renderForm } from 'tests/helpers/renderForm';

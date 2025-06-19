@@ -1,5 +1,5 @@
-import { maxDecimals } from '@multiversx/sdk-dapp/utils/validation/maxDecimals';
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
+import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';
+import { maxDecimals } from '@multiversx/sdk-dapp/out/utils/validation/maxDecimals';
 
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';

@@ -1,9 +1,8 @@
 import React, { MouseEvent, useState } from 'react';
 import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { DIGITS } from '@multiversx/sdk-dapp/constants';
-import { DECIMALS } from '@multiversx/sdk-dapp/constants';
-import { recommendGasPrice } from '@multiversx/sdk-dapp/hooks/transactions/helpers/recommendGasPrice';
+import { DIGITS, DECIMALS } from '@multiversx/sdk-dapp-utils/out';
+import { recommendGasPrice } from '@multiversx/sdk-dapp-utils/out/helpers/recommendGasPrice';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import {

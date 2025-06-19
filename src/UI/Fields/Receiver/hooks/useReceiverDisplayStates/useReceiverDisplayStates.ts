@@ -1,5 +1,4 @@
-import { addressIsValid } from '@multiversx/sdk-dapp/utils';
-
+import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 import { useFormikContext } from 'formik';
 import { useReceiverContext } from 'contexts';
 import { useReceiverUsernameContext } from 'contexts/ReceiverUsernameContext';

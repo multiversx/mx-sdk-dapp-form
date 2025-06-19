@@ -1,17 +1,14 @@
 import React from 'react';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
-import { CopyButton } from '@multiversx/sdk-dapp/UI/CopyButton';
-import { ExplorerLink } from '@multiversx/sdk-dapp/UI/ExplorerLink';
-import { Trim } from '@multiversx/sdk-dapp/UI/Trim';
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
+import { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/out/apiCalls/endpoints';
 import classNames from 'classnames';
-
 import { useFormikContext } from 'formik';
 import { CAN_TRANSFER_MESSAGE, FormDataTestIdsEnum } from 'constants/index';
+import { WithClassnameType } from 'types';
 
 import { ExtendedValuesType } from 'types';
+import { Trim, ExplorerLink, CopyButton } from 'UI';
 import styles from './styles.module.scss';
 
 export const NFTCanTransferWarning = (props: WithClassnameType) => {
@@ -48,8 +45,8 @@ export const NFTCanTransferWarning = (props: WithClassnameType) => {
         {nft.allowedReceivers.map((receiver) => (
           <div className={styles.canTransferWarningAddress} key={receiver}>
             <Trim
-              text={receiver}
               className={styles.canTransferWarningAddressTrim}
+              text={receiver}
             />
 
             <CopyButton

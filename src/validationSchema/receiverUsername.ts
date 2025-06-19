@@ -1,4 +1,4 @@
-import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
+import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 import { string } from 'yup';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';

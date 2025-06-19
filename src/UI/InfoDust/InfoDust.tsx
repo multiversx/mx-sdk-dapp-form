@@ -1,11 +1,10 @@
 import React from 'react';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
-
 import { MIN_DUST, FormDataTestIdsEnum } from 'constants/index';
+import { FormatAmount } from 'UI';
 import styles from './styles.module.scss';
 
 export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (

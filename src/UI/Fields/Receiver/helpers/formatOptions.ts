@@ -1,6 +1,5 @@
-import { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers/trimUsernameDomain';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils';
-
+import { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimUsernameDomain';
+import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 import { KnowAddressType } from 'contexts';
 
 export const formatOptions = (knownAddresses: KnowAddressType[] | null) => {
