@@ -4,8 +4,8 @@ import React, {
   ReactNode,
   useState
 } from 'react';
-import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/constants/index';
-import { NetworkType } from '@multiversx/sdk-dapp/types/network.types';
+import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/out/constants';
+import { NetworkType } from '@multiversx/sdk-dapp/out/types/network.types';
 
 import {
   getEnvironmentForChainId,
@@ -63,7 +63,10 @@ export function AppInfoContextProvider({
         const newConfig = {
           ...fallbackConfig,
           ...newNetworkConfig,
-          ...formNetworkConfig
+          ...formNetworkConfig,
+          apiTimeout: String(
+            formNetworkConfig.apiTimeout ?? newNetworkConfig.apiTimeout
+          )
         };
         setApiConfig(newConfig);
         setNetworkConfig(newConfig);
@@ -73,7 +76,10 @@ export function AppInfoContextProvider({
 
     const localConfig: NetworkType = {
       ...fallbackConfig,
-      ...formNetworkConfig
+      ...formNetworkConfig,
+      apiTimeout: String(
+        formNetworkConfig.apiTimeout ?? fallbackConfig.apiTimeout
+      )
     };
     setApiConfig(localConfig);
     setNetworkConfig(localConfig);

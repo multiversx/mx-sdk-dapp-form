@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getTransactions } from '@multiversx/sdk-dapp/apiCalls/transactions/getTransactions';
+import { getTransactions } from '@multiversx/sdk-dapp/out/apiCalls/transactions/getTransactions';
 import uniqBy from 'lodash/uniqBy';
 
 import { getApiConfig } from 'apiCalls';

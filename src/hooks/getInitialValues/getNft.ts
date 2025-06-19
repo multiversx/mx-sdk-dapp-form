@@ -1,4 +1,4 @@
-import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
+import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import { searchNftByIdentifier } from './getSearchParamNft';
 import { searchNft } from './searchNft';
 import { ComputedNftType } from './types';

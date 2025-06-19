@@ -8,7 +8,7 @@ import React, {
   MouseEvent
 } from 'react';
 import { Transaction } from '@multiversx/sdk-core/out';
-import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
+import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import { useFormikContext } from 'formik';
 import {
   ExtendedValuesType,

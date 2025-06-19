@@ -1,5 +1,5 @@
 // import { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers/trimUsernameDomain';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils/account/addressIsValid';
+import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 import axios from 'axios';
 
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';

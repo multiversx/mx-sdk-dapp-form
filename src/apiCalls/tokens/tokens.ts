@@ -1,8 +1,8 @@
 import {
   TOKENS_ENDPOINT,
   ACCOUNTS_ENDPOINT
-} from '@multiversx/sdk-dapp/apiCalls/endpoints';
-import { getPersistedToken } from '@multiversx/sdk-dapp/apiCalls/tokens/getPersistedToken';
+} from '@multiversx/sdk-dapp/out/apiCalls/endpoints';
+import { getPersistedToken } from '@multiversx/sdk-dapp/out/apiCalls/tokens/getPersistedToken';
 import axios from 'axios';
 import uniqBy from 'lodash/uniqBy';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';

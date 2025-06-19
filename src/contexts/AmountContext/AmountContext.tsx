@@ -7,8 +7,8 @@ import React, {
   createContext,
   useEffect
 } from 'react';
-import { DIGITS } from '@multiversx/sdk-dapp/constants/index';
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
+import { DIGITS } from '@multiversx/sdk-dapp-utils/out';
+import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 

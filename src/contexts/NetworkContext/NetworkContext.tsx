@@ -5,7 +5,7 @@ import React, {
   useState,
   createContext
 } from 'react';
-import { NetworkType } from '@multiversx/sdk-dapp/types/network.types';
+import { NetworkType } from '@multiversx/sdk-dapp/out/types/network.types';
 
 import { getDelegationDataForChainId } from 'apiCalls';
 import { DelegationContractDataType } from 'types';

@@ -8,13 +8,13 @@ import React, {
   useMemo
 } from 'react';
 
+import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';
+import { stringIsInteger } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsInteger';
 import {
   GAS_PER_DATA_BYTE,
   GAS_PRICE_MODIFIER
-} from '@multiversx/sdk-dapp/constants/index';
-import { calculateFeeLimit } from '@multiversx/sdk-dapp/utils/operations/calculateFeeLimit';
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation/stringIsFloat';
-import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsInteger';
+} from '@multiversx/sdk-dapp/out/constants';
+import { calculateFeeLimit } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/calculateFeeLimit';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 import { ZERO } from 'constants/index';

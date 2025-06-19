@@ -1,6 +1,6 @@
-import { trimUsernameDomain } from '@multiversx/sdk-dapp/hooks/account/helpers/trimUsernameDomain';
-import { ServerTransactionType } from '@multiversx/sdk-dapp/types';
-import { isContract } from '@multiversx/sdk-dapp/utils';
+import { ServerTransactionType } from '@multiversx/sdk-dapp/out/types/serverTransactions.types';
+import { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimUsernameDomain';
+import { isContract } from '@multiversx/sdk-dapp/out/utils/validation/isContract';
 
 import { KnowAddressType } from 'contexts/ReceiverContext/ReceiverContext';
 
