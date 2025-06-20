@@ -38,5 +38,11 @@ export enum FormDataTestIdsEnum {
   receiverLabel = 'receiverLabel',
   receiverError = 'receiverError',
   gasLimitError = 'gasLimitError',
-  guardianScreen = 'guardianScreen'
+  guardianScreen = 'guardianScreen',
+  formatAmountInt = 'formatAmountInt',
+  formatAmountDecimals = 'formatAmountDecimals',
+  receiverLoading = 'receiverLoading',
+  gasPrice = 'gasPrice',
+  gasLimit = 'gasLimit',
+  data = 'data'
 }

@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom/extend-expect';
+import 'whatwg-fetch';
 
 /**************
  * MSW config code
@@ -6,6 +7,10 @@ import '@testing-library/jest-dom/extend-expect';
 
 import { TextDecoder, TextEncoder } from 'util';
 import { server } from './__mocks__/server';
+
+global.ResizeObserver = require('resize-observer-polyfill');
+global.TextEncoder = TextEncoder;
+global.TextDecoder = TextDecoder;
 
 jest.setTimeout(60000);
 jest.retryTimes(5);
@@ -38,9 +43,4 @@ Object.defineProperty(window, 'matchMedia', {
     removeEventListener: jest.fn(),
     dispatchEvent: jest.fn()
   }))
-});
-
-Object.assign(global, {
-  TextDecoder,
-  TextEncoder
 });

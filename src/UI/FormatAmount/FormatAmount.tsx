@@ -1,10 +1,14 @@
 import React from 'react';
-import { MvxFormatAmount } from '@multiversx/sdk-dapp-ui/react';
-import type { MvxFormatAmount as MvxFormatAmountPropsType } from '@multiversx/sdk-dapp-ui/web-components/mvx-format-amount';
 import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { FormatAmountController } from '@multiversx/sdk-dapp/out/controllers';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/out/react/network/useGetNetworkConfig';
 import { WithClassnameType } from 'types';
+import { MvxFormatAmount } from '@multiversx/sdk-dapp-ui/react';
+
+interface MvxFormatAmountPropsType {
+  'data-testid'?: string;
+  class?: string;
+}
 
 interface FormatAmountPropsType
   extends Partial<MvxFormatAmountPropsType>,
@@ -15,30 +19,30 @@ interface FormatAmountPropsType
   egldLabel?: string;
   value: string;
   showLastNonZeroDecimal?: boolean;
+  showLabel?: boolean;
 }
 
 export const FormatAmount = (props: FormatAmountPropsType) => {
   const { network } = useGetNetworkConfig();
 
-  const { isValid, valueDecimal, valueInteger, label } =
+  const { valueDecimal, valueInteger, label, isValid } =
     FormatAmountController.getData({
       digits: props.digits ?? DIGITS,
       decimals: props.decimals ?? DECIMALS,
-      egldLabel: network.egldLabel,
+      egldLabel: props.egldLabel ?? network.egldLabel,
       token: props.token,
       showLastNonZeroDecimal: props.showLastNonZeroDecimal,
-      ...props,
       input: props.value
     });
 
   return (
     <MvxFormatAmount
-      class={props.className}
-      dataTestId={props.dataTestId}
+      {...props}
       isValid={isValid}
-      label={label}
+      dataTestId={props['data-testid']}
       valueDecimal={valueDecimal}
       valueInteger={valueInteger}
+      label={label}
     />
   );
 };
