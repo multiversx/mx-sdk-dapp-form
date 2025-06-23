@@ -35,8 +35,15 @@ export const fillInForm: () => Promise<{
   fireEvent.blur(processedDataInput);
   expect(processedDataInput.value).toBe('claim');
 
-  const fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
-  expect(fee.textContent).toBe('0.0000575 xEGLD');
+  const formatAmountInt = await render.findByTestId(
+    FormDataTestIdsEnum.formatAmountInt
+  );
+  expect(formatAmountInt.innerHTML).toBe('0');
+
+  const formatAmountDecimal = await render.findByTestId(
+    FormDataTestIdsEnum.formatAmountDecimals
+  );
+  expect(formatAmountDecimal.innerHTML).toBe('.0000575');
 
   return { render };
 };

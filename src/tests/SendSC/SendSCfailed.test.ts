@@ -18,11 +18,16 @@ describe('SendForm Smart Contract', () => {
       expect(transactionCost).toHaveBeenCalledTimes(1);
     });
 
-    let fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
+    let formatAmountInt = await render.findByTestId(
+      FormDataTestIdsEnum.formatAmountInt
+    );
 
-    await waitFor(() => {
-      expect(fee.textContent).toBe('0.0165575575 xEGLD');
-    });
+    expect(formatAmountInt.innerHTML).toBe('0');
+
+    let formatAmountDecimal = await render.findByTestId(
+      FormDataTestIdsEnum.formatAmountDecimals
+    );
+    expect(formatAmountDecimal.innerHTML).toBe('.0000575575');
 
     let gasLimit = render.getByTestId(ValuesEnum.gasLimit) as HTMLInputElement;
 
@@ -64,11 +69,15 @@ describe('SendForm Smart Contract', () => {
     fireEvent.change(dataInput, { target: { value: 'claim' } });
     fireEvent.blur(dataInput);
 
-    fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
+    formatAmountInt = await render.findByTestId(
+      FormDataTestIdsEnum.formatAmountInt
+    );
+    expect(formatAmountInt.innerHTML).toBe('0');
 
-    await waitFor(() => {
-      expect(fee.textContent).toBe('0.0165501325 xEGLD');
-    });
+    formatAmountDecimal = await render.findByTestId(
+      FormDataTestIdsEnum.formatAmountDecimals
+    );
+    expect(formatAmountDecimal.innerHTML).toBe('.0000501325');
 
     expect(transactionCost).toHaveBeenCalledTimes(1);
   });
