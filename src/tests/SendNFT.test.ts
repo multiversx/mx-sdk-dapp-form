@@ -1,4 +1,4 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
@@ -8,6 +8,7 @@ import {
   sendAndConfirmTest
 } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
+import userEvent from '@testing-library/user-event';
 
 const nftToken = {
   identifier: 'NFT-f0806e-01',
@@ -77,8 +78,8 @@ describe('Send NFT tokens', () => {
     // fill in receiver
     const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
 
-    fireEvent.change(receiver, { target: { value: testAddress } });
-    fireEvent.blur(receiver);
+    await userEvent.type(receiver, testAddress);
+    await userEvent.tab();
 
     await waitFor(() => {
       const receiverError = methods.getByTestId(
@@ -87,8 +88,9 @@ describe('Send NFT tokens', () => {
       expect(receiverError.innerHTML).toBe('Same as owner address');
     });
 
-    fireEvent.change(receiver, { target: { value: testReceiver } });
-    fireEvent.blur(receiver);
+    await userEvent.clear(receiver);
+    await userEvent.type(receiver, testReceiver);
+    await userEvent.tab();
 
     const tokenPreview = methods.getByTestId('token-preview');
     const tokenPreviewName = methods.getByTestId('token-preview-name');
@@ -103,7 +105,7 @@ describe('Send NFT tokens', () => {
     });
 
     const data: any = await methods.findByTestId(ValuesEnum.data);
-    fireEvent.blur(data);
+    await userEvent.tab();
 
     const dataString =
       'ESDTNFTTransfer@4e46542d663038303665@01@01@000000000000000005000e8a594d1c9b52073fcd3c856c87986045c85f568b98';
@@ -118,8 +120,9 @@ describe('Send NFT tokens', () => {
     const processedGasLimitInput = gasLimitInput as HTMLInputElement;
     expect(processedGasLimitInput.value).toBe('1,000,000');
 
-    fireEvent.change(processedGasLimitInput, { target: { value: '100000' } });
-    fireEvent.blur(processedGasLimitInput);
+    await userEvent.clear(processedGasLimitInput);
+    await userEvent.type(processedGasLimitInput, '100000');
+    await userEvent.tab();
 
     await waitFor(() => {
       const gasLimitError = methods.getByTestId(
@@ -131,8 +134,8 @@ describe('Send NFT tokens', () => {
     });
 
     // reset gasLimit
-    const gasLimitResetBtn = methods.getByTestId('gasLimitResetBtn');
-    fireEvent.click(gasLimitResetBtn);
+    const gasLimitResetBtn = await methods.findByTestId('gasLimitResetBtn');
+    await userEvent.click(gasLimitResetBtn);
     expect(processedGasLimitInput.value).toBe('1,000,000');
 
     await sendAndConfirmTest({ methods })({

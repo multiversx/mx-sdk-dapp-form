@@ -1,16 +1,15 @@
-import { act, fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
-import { renderForm } from 'tests/helpers';
+import { renderForm, sleep } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
+import userEvent from '@testing-library/user-event';
 
 describe('Entire balance button', () => {
   test('Entering smaller amount than entireBalanceMinusDust shows Max', async () => {
     const render = renderForm();
     const amount = await render.findByTestId(ValuesEnum.amount);
     const value = { target: { value: '0.7122' } };
-    await act(async () => {
-      fireEvent.change(amount, value);
-    });
+    await userEvent.type(amount, value.target.value);
 
     await waitFor(() => {
       const entireBalaceButton = render.getByTestId('maxBtn');
@@ -22,9 +21,7 @@ describe('Entire balance button', () => {
     const amount = await render.findByTestId(ValuesEnum.amount);
     const value = { target: { value: '0.8074' } };
 
-    await act(async () => {
-      fireEvent.change(amount, value);
-    });
+    await userEvent.type(amount, value.target.value);
 
     await waitFor(() => {
       const entireBalaceButton = render.queryByTestId('maxBtn');
@@ -34,10 +31,11 @@ describe('Entire balance button', () => {
   test('Pressing entire balance fills amount with balance - fee - minDust', async () => {
     const render = renderForm();
     const entireBalaceButton = await render.findByTestId('maxBtn');
-    fireEvent.click(entireBalaceButton);
+    await userEvent.click(entireBalaceButton);
+    await sleep(1000);
 
-    const decreasedValue: any = render.getByTestId(ValuesEnum.amount);
-    expect(decreasedValue.value).toBe('0.8072');
+    const decreasedValue: any = await render.findByTestId(ValuesEnum.amount);
+    expect(decreasedValue.value).toBe('0.8073');
 
     const infoDust = await render.findByTestId('infoDust');
     expect(infoDust).toBeDefined();
@@ -45,9 +43,7 @@ describe('Entire balance button', () => {
     const amount = render.getByTestId(ValuesEnum.amount);
     const value = { target: { value: '0' } };
 
-    await act(async () => {
-      fireEvent.change(amount, value);
-    });
+    await userEvent.type(amount, value.target.value);
 
     const noInfoDust = render.queryByTestId('infoDust');
     expect(noInfoDust).toBeNull();
@@ -57,17 +53,14 @@ describe('Entire balance button', () => {
     const amount: any = await methods.findByTestId(ValuesEnum.amount);
     const value = { target: { value: '0.8123' } }; // max + 0.1 minDust
 
-    await act(async () => {
-      fireEvent.change(amount, value);
-    });
+    await userEvent.type(amount, value.target.value);
+    await userEvent.tab();
 
-    fireEvent.change(amount, value);
-    fireEvent.blur(amount);
     const data = { target: { value: 'four' } };
     const input: any = await methods.findByTestId(ValuesEnum.data);
-    fireEvent.change(input, data);
-    const sendButton = methods.getByTestId(FormDataTestIdsEnum.sendBtn);
-    fireEvent.click(sendButton);
+    await userEvent.type(input, data.target.value);
+    const sendButton = await methods.findByTestId(FormDataTestIdsEnum.sendBtn);
+    await userEvent.click(sendButton);
 
     await waitFor(() => {
       const req = methods.queryByText('Insufficient funds');

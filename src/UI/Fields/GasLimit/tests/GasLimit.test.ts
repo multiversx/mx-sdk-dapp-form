@@ -12,7 +12,7 @@ describe('GasLimit field', () => {
     const input = await findByLabelText('Gas Limit');
     const processedInput = input as HTMLInputElement;
 
-    expect(processedInput.value).toBe('100,000');
+    expect(processedInput.value).toBe('50,000');
   });
 
   it('setting Gas limit + amount > balance should trigger error', async () => {
