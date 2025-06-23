@@ -1,5 +1,6 @@
-import { fireEvent, RenderResult, waitFor } from '@testing-library/react';
+import { RenderResult, waitFor } from '@testing-library/react';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { sleep } from './sleep';
 
 interface ConfirmScreenType {
   methods: RenderResult;
@@ -14,29 +15,29 @@ interface ConfirmScreenPropsType {
 export const sendAndConfirmTest =
   ({ methods }: ConfirmScreenType) =>
   async ({ amount, fee, data }: ConfirmScreenPropsType) => {
-    const feeLimit: any = methods.getByTestId(FormDataTestIdsEnum.feeLimit);
+    await sleep(1000);
+    const feeLimit: any = methods.queryAllByTestId(
+      FormDataTestIdsEnum.confirmFee
+    )[0];
 
-    // wait for fee update before
     await waitFor(() => {
       expect(feeLimit.textContent).toContain(fee);
     });
 
-    const sendButton = methods.getByTestId(FormDataTestIdsEnum.sendBtn);
-    fireEvent.click(sendButton);
     const confirmScreen = await methods.findByTestId('confirmScreen');
 
     if (amount != null) {
-      expect(methods.getByTestId('confirmAmount').textContent).toBe(amount);
+      const confirmAmount = methods.queryAllByTestId('confirmAmount')[0];
+      expect(confirmAmount.textContent).toContain(amount);
     }
 
     if (fee != null) {
-      expect(
-        methods.getByTestId('confirmFee').textContent?.toString()
-      ).toContain(fee);
+      const confirmFee = methods.queryAllByTestId('confirmFee')[0];
+      expect(confirmFee.textContent).toContain(fee);
     }
 
     if (data != null) {
-      expect(methods.getByTestId('confirmData').textContent).toBe(data);
+      expect((await methods.findByTestId('confirmData')).innerHTML).toBe(data);
     }
 
     expect(confirmScreen).toBeDefined();

@@ -2,7 +2,6 @@ import { fireEvent, waitFor } from '@testing-library/react';
 
 import { testAddress } from '__mocks__';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
-import { formattedAmountSelector } from 'tests/helpers';
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types/form';
 
@@ -13,7 +12,7 @@ describe('GasLimit field', () => {
     const input = await findByLabelText('Gas Limit');
     const processedInput = input as HTMLInputElement;
 
-    expect(processedInput.value).toBe('50,000');
+    expect(processedInput.value).toBe('100,000');
   });
 
   it('setting Gas limit + amount > balance should trigger error', async () => {

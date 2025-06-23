@@ -13,7 +13,7 @@ global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 
 jest.setTimeout(60000);
-jest.retryTimes(5);
+jest.retryTimes(0);
 
 // Establish API mocking before all tests.
 beforeAll(() => server.listen());

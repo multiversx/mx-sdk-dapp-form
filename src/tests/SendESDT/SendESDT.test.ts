@@ -48,7 +48,7 @@ describe('Send tokens', () => {
 
     const availableTokens = await findByTestId('available-TWO-824e70');
     expect(availableTokens.getAttribute('data-value')).toBe(
-      '1,000.00 TWO-824e70'
+      '1000.00 TWO-824e70'
     );
 
     const gasLimitInput = getByTestId(ValuesEnum.gasLimit);

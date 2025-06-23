@@ -164,13 +164,13 @@ describe('Send SFT tokens', () => {
     });
 
     // reset gasLimit
-    const gasLimitResetBtn = methods.getByTestId('gasLimitResetBtn');
+    const gasLimitResetBtn = await methods.findByTestId('gasLimitResetBtn');
     fireEvent.click(gasLimitResetBtn);
     expect(processedGasLimitInput.value).toBe('1,000,000');
 
     await sendAndConfirmTest({ methods })({
       amount: '1',
-      fee: '0.0000595'
+      fee: '0.0000595 xEGLD'
     });
   });
 });

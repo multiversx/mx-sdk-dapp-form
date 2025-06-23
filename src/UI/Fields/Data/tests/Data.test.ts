@@ -1,4 +1,5 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { renderForm } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
@@ -15,7 +16,7 @@ describe('Data field tests', () => {
     const data = { target: { value: 'four' } };
     const input = await findByTestId(ValuesEnum.data);
 
-    fireEvent.change(input, data);
+    userEvent.type(input, data.target.value);
 
     const formatAmountDecimal = await findByTestId(
       FormDataTestIdsEnum.formatAmountDecimals

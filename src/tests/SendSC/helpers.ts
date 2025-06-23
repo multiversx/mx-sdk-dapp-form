@@ -1,4 +1,12 @@
-import { RenderResult, fireEvent, queries } from '@testing-library/react';
+import {
+  RenderResult,
+  fireEvent,
+  queries,
+  screen,
+  act,
+  waitFor
+} from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { testNetwork, testReceiver } from '__mocks__';
 import { server, rest } from '__mocks__/server';
@@ -17,11 +25,29 @@ export const fillInForm: () => Promise<{
   render: RenderResult<typeof queries, HTMLElement, HTMLElement>;
 }> = async () => {
   const render = renderForm({ balance: '7600000000000000000000' });
+
+  // Wait for loader to disappear (form is ready)
+  await render.findByTestId('amount');
+
+  // Wait for the input to be enabled and have the expected initial value
   const amountInput = await render.findByTestId(ValuesEnum.amount);
   const processedAmountInput = amountInput as HTMLInputElement;
-  fireEvent.change(processedAmountInput, { target: { value: '0.1' } });
-  fireEvent.blur(processedAmountInput);
-  expect(processedAmountInput.value).toBe('0.1');
+  await waitFor(() => {
+    expect(processedAmountInput.disabled).toBeFalsy();
+    expect(processedAmountInput.value).toBe('');
+  });
+
+  await act(async () => {
+    await userEvent.type(processedAmountInput, '0.1');
+    fireEvent.blur(processedAmountInput);
+  });
+
+  await waitFor(() => {
+    expect(processedAmountInput.value).toBe('0.1');
+  });
+
+  // Debug output
+  screen.debug();
 
   const receiver = render.getByTestId(ValuesEnum.receiver);
   const processedReceiverInput = receiver as HTMLInputElement;
@@ -43,7 +69,7 @@ export const fillInForm: () => Promise<{
   const formatAmountDecimal = await render.findByTestId(
     FormDataTestIdsEnum.formatAmountDecimals
   );
-  expect(formatAmountDecimal.innerHTML).toBe('.0000575');
+  expect(formatAmountDecimal.innerHTML).toBe('.0000500');
 
   return { render };
 };

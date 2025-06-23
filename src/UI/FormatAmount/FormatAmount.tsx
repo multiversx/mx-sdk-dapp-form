@@ -1,5 +1,5 @@
 import React from 'react';
-import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
+import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { FormatAmountController } from '@multiversx/sdk-dapp/out/controllers';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/out/react/network/useGetNetworkConfig';
 import { WithClassnameType } from 'types';
@@ -27,7 +27,7 @@ export const FormatAmount = (props: FormatAmountPropsType) => {
 
   const { valueDecimal, valueInteger, label, isValid } =
     FormatAmountController.getData({
-      digits: props.digits ?? DIGITS,
+      digits: props.digits ?? 7,
       decimals: props.decimals ?? DECIMALS,
       egldLabel: props.egldLabel ?? network.egldLabel,
       token: props.token,

@@ -44,7 +44,6 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
             value={feeLimit}
             showLastNonZeroDecimal
             egldLabel={egldLabel}
-            digits={7}
           />
         </span>
 

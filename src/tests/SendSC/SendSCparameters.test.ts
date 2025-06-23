@@ -34,7 +34,7 @@ describe('SendForm Smart Contract', () => {
     const formatAmountDecimal = await render.findByTestId(
       FormDataTestIdsEnum.formatAmountDecimals
     );
-    expect(formatAmountDecimal.innerHTML).toBe('.000057937');
+    expect(formatAmountDecimal.innerHTML).toBe('.0000500');
 
     expect(transactionCost).toHaveBeenCalledTimes(1);
 

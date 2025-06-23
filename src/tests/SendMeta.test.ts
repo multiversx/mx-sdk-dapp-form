@@ -1,4 +1,5 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import selectEvent from 'react-select-event';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
@@ -91,7 +92,7 @@ describe('Send Meta ESDT', () => {
 
     // confirm metaEsdt token is in list
     const selectInput = await methods.findByLabelText('Token');
-    fireEvent.focus(selectInput);
+    await userEvent.click(selectInput);
     selectEvent.openMenu(selectInput);
 
     const metaTokenOption = await methods.findByTestId(
@@ -120,8 +121,8 @@ describe('Send Meta ESDT', () => {
     const receiver = await methods.findByTestId(ValuesEnum.receiver);
 
     // expect receiver to be forbidden
-    fireEvent.change(receiver, { target: { value: fakeReceiver } });
-    fireEvent.blur(receiver, { target: { value: fakeReceiver } });
+    userEvent.type(receiver, fakeReceiver);
+    await userEvent.tab();
 
     await waitFor(async () => {
       const receiverError = await methods.findByTestId(
@@ -131,7 +132,8 @@ describe('Send Meta ESDT', () => {
     });
 
     // fill in allowed receiver
-    fireEvent.change(receiver, { target: { value: testReceiver } });
+    userEvent.type(receiver, testReceiver);
+    await userEvent.tab();
 
     // check available
     const available = methods.getByTestId(`available-${metaToken.identifier}`);
@@ -139,8 +141,8 @@ describe('Send Meta ESDT', () => {
 
     // fill in amount
     const amount = await methods.findByTestId(ValuesEnum.amount);
-    fireEvent.change(amount, { target: { value: '10' } });
-    fireEvent.blur(amount, { target: { value: '10' } });
+    userEvent.type(amount, '10');
+    await userEvent.tab();
 
     const dataInput = methods.getByTestId(ValuesEnum.data);
     const processedDataInput = dataInput as HTMLInputElement;
@@ -161,7 +163,7 @@ describe('Send Meta ESDT', () => {
 
     await sendAndConfirmTest({ methods })({
       amount: '10.0000',
-      fee: '0.0000595'
+      fee: '0.0000595 xEGLD'
     });
   });
 });

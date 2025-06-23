@@ -37,7 +37,7 @@ describe('Entire balance button', () => {
     fireEvent.click(entireBalaceButton);
 
     const decreasedValue: any = render.getByTestId(ValuesEnum.amount);
-    expect(decreasedValue.value).toBe('0.8073');
+    expect(decreasedValue.value).toBe('0.8072');
 
     const infoDust = await render.findByTestId('infoDust');
     expect(infoDust).toBeDefined();

@@ -1,7 +1,8 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import { testAddress, testNetwork } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
 import { renderForm } from 'tests/helpers/renderForm';
+import userEvent from '@testing-library/user-event';
 
 describe('Receiver field', () => {
   test('Receiver field should not be empty', async () => {
@@ -11,8 +12,8 @@ describe('Receiver field', () => {
     const receiverInput = await findByTestId('receiver');
     const processedReceiverInput = receiverInput as HTMLInputElement;
 
-    fireEvent.change(processedReceiverInput, data);
-    fireEvent.blur(processedReceiverInput);
+    await userEvent.type(processedReceiverInput, data.target.value);
+    await userEvent.tab();
 
     await waitFor(() => {
       expect(processedReceiverInput.value).toBe('');
@@ -27,9 +28,8 @@ describe('Receiver field', () => {
     const processedReceiverInput = receiverInput as HTMLInputElement;
 
     const data = { target: { value: '123' } };
-    fireEvent.change(processedReceiverInput, data);
-    fireEvent.blur(processedReceiverInput);
-
+    await userEvent.type(processedReceiverInput, data.target.value);
+    await userEvent.tab();
     await waitFor(async () => {
       const receiverUsernameError = await findByTestId('receiverUsernameError');
       expect(receiverUsernameError?.innerHTML).toBe('Invalid herotag');
@@ -56,8 +56,8 @@ describe('Receiver username found', () => {
     const receiverInput = await findByTestId('receiver');
     const processedReceiverInput = receiverInput as HTMLInputElement;
 
-    fireEvent.change(processedReceiverInput, data);
-    fireEvent.blur(processedReceiverInput);
+    await userEvent.type(processedReceiverInput, data.target.value);
+    await userEvent.tab();
     expect(processedReceiverInput.value).toBe('alice');
 
     await waitFor(async () => {
