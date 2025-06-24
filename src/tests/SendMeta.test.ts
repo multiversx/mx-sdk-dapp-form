@@ -7,7 +7,8 @@ import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import {
   formConfiguration,
   renderForm as beginAll,
-  sendAndConfirmTest
+  sendAndConfirmTest,
+  sleep
 } from 'tests/helpers';
 import { ValuesEnum } from 'types';
 
@@ -121,8 +122,10 @@ describe('Send Meta ESDT', () => {
     const receiver = await methods.findByTestId(ValuesEnum.receiver);
 
     // expect receiver to be forbidden
-    userEvent.type(receiver, fakeReceiver);
+    await userEvent.clear(receiver);
+    await userEvent.type(receiver, fakeReceiver);
     await userEvent.tab();
+    await sleep(1000);
 
     await waitFor(async () => {
       const receiverError = await methods.findByTestId(
@@ -132,17 +135,21 @@ describe('Send Meta ESDT', () => {
     });
 
     // fill in allowed receiver
-    userEvent.type(receiver, testReceiver);
+    await userEvent.clear(receiver);
+    await userEvent.type(receiver, testReceiver);
     await userEvent.tab();
+    await sleep(1000);
 
     // check available
     const available = methods.getByTestId(`available-${metaToken.identifier}`);
-    expect(available.textContent).toBe('Available: 10,000 MT1-ff89d3');
+    expect(available.textContent).toBe('Available: 10,000.0000 MT1-ff89d3');
 
     // fill in amount
     const amount = await methods.findByTestId(ValuesEnum.amount);
-    userEvent.type(amount, '10');
+    await userEvent.clear(amount);
+    await userEvent.type(amount, '10');
     await userEvent.tab();
+    await sleep(1000);
 
     const dataInput = methods.getByTestId(ValuesEnum.data);
     const processedDataInput = dataInput as HTMLInputElement;
