@@ -7,12 +7,8 @@ import {
   getDataField
 } from '../computeDataField';
 import getTokenDetails from '../getTokenDetails';
-import { bech32 } from 'helpers/transformations';
 
 jest.mock('../getTokenDetails');
-
-const evenLengthValue = (value: string) =>
-  value.length % 2 === 0 ? value : `0${value}`;
 
 describe('computeDataField', () => {
   const mockNft = {
@@ -178,15 +174,9 @@ describe('computeDataField', () => {
         isDeposit
       });
 
-      const expected = [
-        'ESDTNFTTransfer',
-        Buffer.from(metaNft.collection).toString('hex'),
-        evenLengthValue(new BigNumber(String(metaNft.nonce)).toString(16)),
-        evenLengthValue(new BigNumber('1000000000000000000').toString(16)),
-        bech32.decode(receiver)
-      ].join('@');
-
-      expect(data).toBe(expected);
+      expect(data).toBe(
+        'ESDTNFTTransfer@5745474c442d313233343536@01e240@0de0b6b3a7640000@8049d639e5a6980d1cd2392abcce41029cda74a1563523a202f09641cc2618f8'
+      );
     });
   });
 
