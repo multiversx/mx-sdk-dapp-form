@@ -1,6 +1,7 @@
 import { RenderResult, waitFor } from '@testing-library/react';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { sleep } from './sleep';
+import userEvent from '@testing-library/user-event';
 
 interface ConfirmScreenType {
   methods: RenderResult;
@@ -15,10 +16,13 @@ interface ConfirmScreenPropsType {
 export const sendAndConfirmTest =
   ({ methods }: ConfirmScreenType) =>
   async ({ amount, fee, data }: ConfirmScreenPropsType) => {
+    const sendButton = await methods.findByTestId(FormDataTestIdsEnum.sendBtn);
+    await userEvent.click(sendButton);
     await sleep(1000);
-    const feeLimit: any = methods.queryAllByTestId(
+
+    const [feeLimit]: any = await methods.findAllByTestId(
       FormDataTestIdsEnum.confirmFee
-    )[0];
+    );
 
     await waitFor(() => {
       expect(feeLimit.textContent).toContain(fee);

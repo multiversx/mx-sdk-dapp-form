@@ -6,6 +6,7 @@ import { GuardianScreenType } from 'types';
 import { ValuesEnum } from 'types/form';
 import { formConfiguration, sendAndConfirmTest } from './helpers';
 import userEvent from '@testing-library/user-event';
+import { sleep } from 'tests/helpers';
 
 const GuardianScreen = (props: GuardianScreenType) => {
   return (
@@ -30,15 +31,24 @@ describe('Guardian screen tests', () => {
 
     const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
 
+    await userEvent.clear(receiver);
     await userEvent.type(receiver, testAddress);
     await userEvent.tab();
 
     const amount: any = await methods.findByTestId(ValuesEnum.amount);
+    await userEvent.clear(amount);
     await userEvent.type(amount, '0.00001');
     await userEvent.tab();
 
     const sendButton = await methods.findByTestId(FormDataTestIdsEnum.sendBtn);
     await userEvent.click(sendButton);
+    await sleep(1000);
+
+    const gasLimitError = await methods.findByTestId(
+      FormDataTestIdsEnum.gasLimitError
+    );
+
+    expect(gasLimitError).toBeDefined();
 
     await sendAndConfirmTest({ methods })({
       amount: '0.00001',
