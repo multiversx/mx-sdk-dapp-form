@@ -77,7 +77,7 @@ describe('Send NFT tokens', () => {
 
     // fill in receiver
     const receiver: any = await methods.findByTestId(ValuesEnum.receiver);
-
+    await userEvent.clear(receiver);
     await userEvent.type(receiver, testAddress);
     await userEvent.tab();
 

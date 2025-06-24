@@ -1,7 +1,9 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types';
+import userEvent from '@testing-library/user-event';
+import { sleep } from 'tests/helpers';
 
 describe('GasPrice field', () => {
   it('should be below given threshold', async () => {
@@ -11,8 +13,10 @@ describe('GasPrice field', () => {
     const processedInput = input as HTMLInputElement;
     const data = { target: { value: '0.0000001' } };
 
-    fireEvent.change(processedInput, data);
-    fireEvent.blur(processedInput);
+    await userEvent.clear(processedInput);
+    await userEvent.type(processedInput, data.target.value);
+    await userEvent.tab();
+    await sleep(1000);
 
     await waitFor(async () => {
       const errorMessage = await findByTestId(`${ValuesEnum.gasPrice}Error`);
@@ -29,8 +33,10 @@ describe('GasPrice field', () => {
     const processedInput = input as HTMLInputElement;
     const data = { target: { value: '0.1234567891234567890' } };
 
-    fireEvent.change(processedInput, data);
-    fireEvent.blur(processedInput);
+    await userEvent.clear(processedInput);
+    await userEvent.type(processedInput, data.target.value);
+    await userEvent.tab();
+    await sleep(1000);
 
     await waitFor(() => {
       const req = queryByText('Maximum 18 decimals allowed');
@@ -45,8 +51,10 @@ describe('GasPrice field', () => {
     const processedInput = input as HTMLInputElement;
     const data = { target: { value: '1e20' } };
 
-    fireEvent.change(processedInput, data);
-    fireEvent.blur(processedInput);
+    await userEvent.clear(processedInput);
+    await userEvent.type(processedInput, data.target.value);
+    await userEvent.tab();
+    await sleep(1000);
 
     expect(processedInput.value).toMatch('1');
   });
@@ -58,8 +66,10 @@ describe('GasPrice field', () => {
     const processedInput = input as HTMLInputElement;
     const data = { target: { value: '+1' } };
 
-    fireEvent.change(processedInput, data);
-    fireEvent.blur(processedInput);
+    await userEvent.clear(processedInput);
+    await userEvent.type(processedInput, data.target.value);
+    await userEvent.tab();
+    await sleep(1000);
 
     expect(processedInput.value).toMatch('1');
   });
@@ -71,8 +81,10 @@ describe('GasPrice field', () => {
     const processedInput = input as HTMLInputElement;
     const data = { target: { value: '-1' } };
 
-    fireEvent.change(processedInput, data);
-    fireEvent.blur(processedInput);
+    await userEvent.clear(processedInput);
+    await userEvent.type(processedInput, data.target.value);
+    await userEvent.tab();
+    await sleep(1000);
 
     expect(processedInput.value).toMatch('1');
   });
@@ -84,8 +96,10 @@ describe('GasPrice field', () => {
     const processedInput = input as HTMLInputElement;
     const data = { target: { value: 'string' } };
 
-    fireEvent.change(processedInput, data);
-    fireEvent.blur(processedInput);
+    await userEvent.clear(processedInput);
+    await userEvent.type(processedInput, data.target.value);
+    await userEvent.tab();
+    await sleep(1000);
 
     expect(processedInput.value).toMatch('');
   });

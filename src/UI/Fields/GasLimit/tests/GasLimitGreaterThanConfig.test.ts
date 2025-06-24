@@ -1,7 +1,9 @@
 import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants';
-import { fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 
 import { renderForm } from 'tests/helpers/renderForm';
+import userEvent from '@testing-library/user-event';
+import { sleep } from 'tests/helpers';
 
 describe('GasLimit field', () => {
   it('should >= than the one set by config', async () => {
@@ -11,8 +13,10 @@ describe('GasLimit field', () => {
     const value = GAS_LIMIT - 1;
     const data = { target: { value } };
 
-    fireEvent.change(input, data);
-    fireEvent.blur(input);
+    await userEvent.clear(input);
+    await userEvent.type(input, data.target.value.toString());
+    await userEvent.tab();
+    await sleep(1000);
 
     await waitFor(() => {
       const req = queryByText(/^Gas limit must be greater/);

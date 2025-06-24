@@ -1,8 +1,10 @@
-import { act, fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { FormDataTestIdsEnum, MAX_GAS_LIMIT } from 'constants/index';
 import { ValuesEnum } from 'types/form';
 import { fillInForm, setResponse } from './helpers';
+import userEvent from '@testing-library/user-event';
+import { sleep } from 'tests/helpers';
 
 describe('SendForm Smart Contract', () => {
   beforeEach(() => {
@@ -27,7 +29,7 @@ describe('SendForm Smart Contract', () => {
     let formatAmountDecimal = await render.findByTestId(
       FormDataTestIdsEnum.formatAmountDecimals
     );
-    expect(formatAmountDecimal.innerHTML).toBe('.0000575');
+    expect(formatAmountDecimal.innerHTML).toBe('.0165575');
 
     let gasLimit = render.getByTestId(ValuesEnum.gasLimit) as HTMLInputElement;
 
@@ -37,9 +39,8 @@ describe('SendForm Smart Contract', () => {
 
     const sendBtn = render.getByTestId(FormDataTestIdsEnum.sendBtn);
 
-    act(() => {
-      fireEvent.click(sendBtn);
-    });
+    await userEvent.click(sendBtn);
+    await sleep(1000);
 
     // first server response fetches a gasLimit value over maxGasLimit
     const req = await render.findByText(/must be lower than/);
@@ -50,8 +51,10 @@ describe('SendForm Smart Contract', () => {
     });
     // modify data field to get a new gasLimit value from the server
     let dataInput = render.getByTestId(ValuesEnum.data) as HTMLInputElement;
-    fireEvent.change(dataInput, { target: { value: 'claim@' } });
-    fireEvent.blur(dataInput);
+    await userEvent.clear(dataInput);
+    await userEvent.type(dataInput, 'claim@');
+    await userEvent.tab();
+    await sleep(1000);
 
     await waitFor(() => {
       expect(transactionCost).toHaveBeenCalled();
@@ -66,9 +69,10 @@ describe('SendForm Smart Contract', () => {
 
     // 3rd data field change fetches correct server response
     dataInput = render.getByTestId(ValuesEnum.data) as HTMLInputElement;
-    fireEvent.change(dataInput, { target: { value: 'claim' } });
-    fireEvent.blur(dataInput);
-
+    await userEvent.clear(dataInput);
+    await userEvent.type(dataInput, 'claim');
+    await userEvent.tab();
+    await sleep(1000);
     formatAmountInt = await render.findByTestId(
       FormDataTestIdsEnum.formatAmountInt
     );

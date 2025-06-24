@@ -1,6 +1,6 @@
-import { fireEvent } from '@testing-library/react';
-
 import { renderForm } from 'tests/helpers/renderForm';
+import userEvent from '@testing-library/user-event';
+import { sleep } from 'tests/helpers';
 
 describe('GasLimit field', () => {
   it('should not allow exponential gasLimit', async () => {
@@ -10,8 +10,10 @@ describe('GasLimit field', () => {
     const processedInput = input as HTMLInputElement;
     const data = { target: { value: '1e20' } };
 
-    fireEvent.change(processedInput, data);
-    fireEvent.blur(processedInput);
+    await userEvent.clear(processedInput);
+    await userEvent.type(processedInput, data.target.value);
+    await userEvent.tab();
+    await sleep(1000);
 
     expect(processedInput.value).toMatch('1');
   });

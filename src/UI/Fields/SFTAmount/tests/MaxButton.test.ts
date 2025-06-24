@@ -9,6 +9,7 @@ describe('Entire balance button', () => {
     const render = renderForm();
     const amount = await render.findByTestId(ValuesEnum.amount);
     const value = { target: { value: '0.7122' } };
+    await userEvent.clear(amount);
     await userEvent.type(amount, value.target.value);
 
     await waitFor(() => {
@@ -21,6 +22,7 @@ describe('Entire balance button', () => {
     const amount = await render.findByTestId(ValuesEnum.amount);
     const value = { target: { value: '0.8074' } };
 
+    await userEvent.clear(amount);
     await userEvent.type(amount, value.target.value);
 
     await waitFor(() => {
@@ -53,11 +55,13 @@ describe('Entire balance button', () => {
     const amount: any = await methods.findByTestId(ValuesEnum.amount);
     const value = { target: { value: '0.8123' } }; // max + 0.1 minDust
 
+    await userEvent.clear(amount);
     await userEvent.type(amount, value.target.value);
     await userEvent.tab();
 
     const data = { target: { value: 'four' } };
     const input: any = await methods.findByTestId(ValuesEnum.data);
+    await userEvent.clear(input);
     await userEvent.type(input, data.target.value);
     const sendButton = await methods.findByTestId(FormDataTestIdsEnum.sendBtn);
     await userEvent.click(sendButton);
