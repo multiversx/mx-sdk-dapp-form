@@ -3,6 +3,12 @@ import { testAddress, testNetwork } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
 import { renderForm } from 'tests/helpers/renderForm';
 import userEvent from '@testing-library/user-event';
+import { sleep } from 'tests/helpers';
+
+jest.mock('../../../../assets/icons/mx-icon-simple.svg', () => ({
+  __esModule: true,
+  default: () => 'svg'
+}));
 
 describe('Receiver field', () => {
   test('Receiver field should not be empty', async () => {
@@ -12,6 +18,7 @@ describe('Receiver field', () => {
     const receiverInput = await findByTestId('receiver');
     const processedReceiverInput = receiverInput as HTMLInputElement;
 
+    await userEvent.clear(processedReceiverInput);
     await userEvent.type(processedReceiverInput, data.target.value);
     await userEvent.tab();
 
@@ -28,6 +35,7 @@ describe('Receiver field', () => {
     const processedReceiverInput = receiverInput as HTMLInputElement;
 
     const data = { target: { value: '123' } };
+    await userEvent.clear(processedReceiverInput);
     await userEvent.type(processedReceiverInput, data.target.value);
     await userEvent.tab();
     await waitFor(async () => {
@@ -56,15 +64,15 @@ describe('Receiver username found', () => {
     const receiverInput = await findByTestId('receiver');
     const processedReceiverInput = receiverInput as HTMLInputElement;
 
+    await userEvent.clear(processedReceiverInput);
     await userEvent.type(processedReceiverInput, data.target.value);
     await userEvent.tab();
+    await sleep(1000);
     expect(processedReceiverInput.value).toBe('alice');
 
-    await waitFor(async () => {
-      const receiverUsernameAddress = await findByTestId(
-        'receiverUsernameAddress'
-      );
-      expect(receiverUsernameAddress?.innerHTML).toBeDefined();
-    });
+    const receiverUsernameAddress = await findByTestId(
+      'receiverUsernameAddress'
+    );
+    expect(receiverUsernameAddress?.innerHTML).toBeDefined();
   });
 });

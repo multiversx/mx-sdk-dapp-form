@@ -7,7 +7,7 @@ import { HighlightText } from 'UI/HighlightText';
 
 import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
-import { MultiversXIconSimple } from '../MultiversXIconSimple';
+import MultiversXIconSimple from '../MultiversXIconSimple';
 
 export const Option: typeof components.Option = (props) => {
   const { isFocused, data, selectProps } = props;

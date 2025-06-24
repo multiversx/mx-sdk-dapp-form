@@ -4,7 +4,7 @@ import { components } from 'react-select';
 import { Trim } from 'UI';
 import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
-import { MultiversXIconSimple } from '../MultiversXIconSimple';
+import MultiversXIconSimple from '../MultiversXIconSimple';
 
 export const MenuList: typeof components.MenuList = (props) => {
   const { selectProps, focusedOption } = props;
