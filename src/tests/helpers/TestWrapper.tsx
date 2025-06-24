@@ -27,6 +27,7 @@ export interface TestWrapperType {
   isGuarded?: boolean;
   ledger?: ExtendedValuesType['ledger'];
   isDeposit?: boolean;
+  EgldIcon?: JSX.ElementType;
 }
 
 export const TestWrapper = ({
@@ -37,7 +38,8 @@ export const TestWrapper = ({
   ledger,
   isGuarded,
   GuardianScreen,
-  isDeposit
+  isDeposit,
+  EgldIcon
 }: TestWrapperType) => {
   const initValues = useGetInitialValues({
     configValues: formConfigValues,
@@ -80,6 +82,9 @@ export const TestWrapper = ({
     ...(ledger ? { ledger: { ...ledger } } : {})
   };
 
+  // Provide a default mock EgldIcon if not supplied
+  const MockEgldIcon = () => <svg data-testid='mock-egld-icon' />;
+
   const containerProps: Omit<SendFormContainerPropsType, 'children'> = {
     networkConfig: {
       ...activeNetwork,
@@ -118,7 +123,8 @@ export const TestWrapper = ({
           ...token,
           ledgerSignature: (token as any).assets?.ledgerSignature || '',
           decimals: token.decimals
-        })) ?? []
+        })) ?? [],
+      EgldIcon: (EgldIcon || MockEgldIcon) as React.JSXElementConstructor<any>
     }
   };
 

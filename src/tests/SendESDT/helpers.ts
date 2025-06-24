@@ -1,5 +1,5 @@
 import { RenderResult, queries } from '@testing-library/react';
-import { testAddress, testNetwork } from '__mocks__';
+import { testAddress, testNetwork } from '__mocks__/accountConfig';
 import { rest, server, mockResponse } from '__mocks__/server';
 import { formConfiguration, renderForm as beginAll } from 'tests/helpers';
 import { ValuesEnum } from 'types';
