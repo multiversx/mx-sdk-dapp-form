@@ -126,7 +126,7 @@ describe('Send tokens', () => {
       const oneTokenOption = await methods.findByTestId('TWO-824e70-option');
       expect(oneTokenOption.innerHTML).toBeDefined();
 
-      selectEvent.select(methods.getByLabelText('Token'), 'TwoTToken');
+      selectEvent.select(methods.getByLabelText('Token'), 'Two');
 
       const dataInput = methods.getByTestId(ValuesEnum.data);
       const processedDataInput = dataInput as HTMLInputElement;
@@ -148,7 +148,7 @@ describe('Send tokens', () => {
         selectEvent.openMenu(methods.getByLabelText('Token'));
       });
 
-      selectEvent.select(methods.getByLabelText('Token'), 'TwoTToken');
+      selectEvent.select(methods.getByLabelText('Token'), 'Two');
 
       const dataInput = methods.getByTestId(ValuesEnum.data);
       const processedDataInput = dataInput as HTMLInputElement;
