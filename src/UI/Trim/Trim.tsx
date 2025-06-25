@@ -1,6 +1,6 @@
 import React from 'react';
-import { MvxTrimText } from '@multiversx/sdk-dapp-ui/react';
-import type { MvxTrimText as MvxTrimTextPropsType } from '@multiversx/sdk-dapp-ui/web-components/mvx-trim-text';
+import { MvxTrim } from '@multiversx/sdk-dapp-ui/react';
+import type { MvxTrim as MvxTrimTextPropsType } from '@multiversx/sdk-dapp-ui/web-components/mvx-trim';
 import { WithClassnameType } from 'types';
 
 interface TrimPropsType
@@ -9,7 +9,7 @@ interface TrimPropsType
 
 export const Trim = (props: TrimPropsType) => {
   return (
-    <MvxTrimText
+    <MvxTrim
       text={props.text}
       class={props.className}
       dataTestId={props.dataTestId}

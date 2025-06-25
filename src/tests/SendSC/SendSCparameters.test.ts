@@ -5,7 +5,6 @@ import { ValuesEnum } from 'types/form';
 import { fillInForm, setResponse } from './helpers';
 import { sleep } from 'tests/helpers';
 import userEvent from '@testing-library/user-event';
-import { screen } from '@testing-library/react';
 
 const transactionData = {
   chainID: 'T',

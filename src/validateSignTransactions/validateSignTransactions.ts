@@ -86,7 +86,7 @@ function extractAllTransactions(props: ValidateSignTransactionsType) {
         transaction: Transaction.newFromPlainObject({
           ...transaction,
           chainID: chainId
-        }),
+        }) as any,
         needsSigning: true
       });
     }
