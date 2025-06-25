@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [[3.0.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/351)] - 2025-06-24
+## [[3.0.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/351)] - 2025-06-25
 
 - [Migrated to sdk-dapp v5](https://github.com/multiversx/mx-sdk-dapp-form/pull/350)
 
