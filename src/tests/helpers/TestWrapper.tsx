@@ -82,7 +82,6 @@ export const TestWrapper = ({
     ...(ledger ? { ledger: { ...ledger } } : {})
   };
 
-  // Provide a default mock EgldIcon if not supplied
   const MockEgldIcon = () => <svg data-testid='mock-egld-icon' />;
 
   const containerProps: Omit<SendFormContainerPropsType, 'children'> = {
