@@ -21,7 +21,7 @@ describe('Data ledger field tests', () => {
     await userEvent.clear(input);
     await userEvent.type(input, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     const dataError = await methods.findByTestId('dataError');
     expect(dataError.textContent).toBe(

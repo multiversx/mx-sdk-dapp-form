@@ -14,7 +14,7 @@ describe('EGLD Amount field', () => {
     await userEvent.clear(input);
     await userEvent.type(input, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
     await waitFor(() => {
       expect(input.value).toBe('');
       const req = queryByText('Required');
@@ -29,7 +29,7 @@ describe('EGLD Amount field', () => {
     await userEvent.clear(input);
     await userEvent.type(input, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
     expect(input.value).toBe('');
   });
   it('should not allow hexadecimal', async () => {
@@ -40,7 +40,7 @@ describe('EGLD Amount field', () => {
     await userEvent.clear(input);
     await userEvent.type(input, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     expect(input.value).toBe('0');
   });
@@ -55,23 +55,23 @@ describe('EGLD Amount field', () => {
     await userEvent.clear(receiver);
     await userEvent.type(receiver, testAddress);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     const amount: any = await render.findByTestId(ValuesEnum.amount);
     await userEvent.clear(amount);
     await userEvent.type(amount, '0.00001');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     const gasLimit = render.getByTestId(ValuesEnum.gasLimit);
     await userEvent.clear(gasLimit);
     await userEvent.type(gasLimit, '600000000');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     const sendButton = render.getByTestId(FormDataTestIdsEnum.sendBtn);
     await userEvent.click(sendButton);
-    await sleep(1000);
+    await sleep();
 
     await waitFor(() => {
       const amountError = render.getByTestId('amountError');

@@ -41,20 +41,20 @@ describe('AmountInput tests', () => {
     await userEvent.clear(input);
     await userEvent.type(input, '0');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     expect(input.value).toBe('0');
 
     await userEvent.clear(input);
     await userEvent.type(input, '00');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
     expect(input.value).toBe('0');
 
     await userEvent.clear(input);
     await userEvent.type(input, '02');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
     expect(input.value).toBe('0');
   });
 
@@ -70,13 +70,13 @@ describe('AmountInput tests', () => {
     await userEvent.clear(input);
     await userEvent.type(input, '0.');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
     expect(input.value).toBe('0');
 
     await userEvent.clear(input);
     await userEvent.type(input, '0.62');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
     expect(input.value).toBe('0.62');
   });
 
@@ -89,7 +89,7 @@ describe('AmountInput tests', () => {
     await userEvent.clear(input);
     await userEvent.type(input, '2');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     await waitFor(() => {
       const usdValueLabel: any = container.getByTestId(testId);
@@ -99,7 +99,7 @@ describe('AmountInput tests', () => {
     await userEvent.clear(input);
     await userEvent.type(input, '8');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     await waitFor(() => {
       const usdValueLabel: any = container.getByTestId(testId);
@@ -118,7 +118,7 @@ describe('AmountInput tests', () => {
     await userEvent.clear(input);
     await userEvent.type(input, '1');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
     await waitFor(() => {
       const usdValueLabel: any = container.getByTestId(testId);
       expect(usdValueLabel.innerHTML).toBe('≈ $4.00');
@@ -127,7 +127,7 @@ describe('AmountInput tests', () => {
     await userEvent.clear(input);
     await userEvent.type(input, '2');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     await waitFor(() => {
       const usdValueLabel: any = container.getByTestId(testId);

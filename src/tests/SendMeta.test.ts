@@ -125,7 +125,7 @@ describe('Send Meta ESDT', () => {
     await userEvent.clear(receiver);
     await userEvent.type(receiver, fakeReceiver);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     await waitFor(async () => {
       const receiverError = await methods.findByTestId(
@@ -138,7 +138,7 @@ describe('Send Meta ESDT', () => {
     await userEvent.clear(receiver);
     await userEvent.type(receiver, testReceiver);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     // check available
     const available = methods.getByTestId(`available-${metaToken.identifier}`);
@@ -149,7 +149,7 @@ describe('Send Meta ESDT', () => {
     await userEvent.clear(amount);
     await userEvent.type(amount, '10');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     const dataInput = methods.getByTestId(ValuesEnum.data);
     const processedDataInput = dataInput as HTMLInputElement;

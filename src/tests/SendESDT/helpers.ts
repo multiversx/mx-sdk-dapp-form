@@ -38,7 +38,7 @@ const useInput =
     await userEvent.clear(processedInput);
     await userEvent.type(processedInput, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     return processedInput;
   };

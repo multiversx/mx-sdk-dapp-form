@@ -67,7 +67,7 @@ describe('Receiver username found', () => {
     await userEvent.clear(processedReceiverInput);
     await userEvent.type(processedReceiverInput, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
     expect(processedReceiverInput.value).toBe('alice');
 
     const receiverUsernameAddress = await findByTestId(

@@ -57,14 +57,14 @@ describe('SendForm Smart Contract', () => {
     await userEvent.type(gasLimit, '101201');
     await userEvent.tab();
 
-    await sleep(1000);
+    await sleep();
     const sendBtn = render.getByTestId(FormDataTestIdsEnum.sendBtn);
     await userEvent.click(sendBtn);
-    await sleep(1000);
+    await sleep();
 
     const sendTrxBtn = render.getByTestId(FormDataTestIdsEnum.sendTrxBtn);
     await userEvent.click(sendTrxBtn);
-    await sleep(1000);
+    await sleep();
 
     const confirmFee = await render.findByTestId(
       FormDataTestIdsEnum.confirmFee

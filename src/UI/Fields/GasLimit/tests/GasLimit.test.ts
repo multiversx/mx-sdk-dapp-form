@@ -57,21 +57,21 @@ describe('GasLimit field', () => {
     await userEvent.clear(receiver);
     await userEvent.type(receiver, testAddress);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     const entireBalaceButton = getByText('Max');
     await userEvent.click(entireBalaceButton);
-    await sleep(1000);
+    await sleep();
 
     const feeLimit = await findByTestId(FormDataTestIdsEnum.feeLimit);
     await userEvent.click(feeLimit);
-    await sleep(1000);
+    await sleep();
 
     const data = await findByTestId(ValuesEnum.data);
     await userEvent.clear(data);
     await userEvent.type(data, '123');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     await waitFor(() => {
       const req = queryByText(/^Gas limit must be greater/);
@@ -126,19 +126,19 @@ describe('GasLimit field', () => {
     await userEvent.clear(receiver);
     await userEvent.type(receiver, testAddress);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     const amount = getByTestId(ValuesEnum.amount);
     await userEvent.clear(amount);
     await userEvent.type(amount, '0');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     const gasLimit = getByTestId(ValuesEnum.gasLimit);
     await userEvent.clear(gasLimit);
     await userEvent.type(gasLimit, '600000000');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     async function expectCorrectFee() {
       const formatAmountInt = await findByTestId(
@@ -158,7 +158,7 @@ describe('GasLimit field', () => {
     await userEvent.clear(data);
     await userEvent.type(data, '12345678');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     expectCorrectFee();
   });

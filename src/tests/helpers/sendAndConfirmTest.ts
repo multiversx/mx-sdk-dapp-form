@@ -18,7 +18,7 @@ export const sendAndConfirmTest =
   async ({ amount, fee, data }: ConfirmScreenPropsType) => {
     const sendButton = await methods.findByTestId(FormDataTestIdsEnum.sendBtn);
     await userEvent.click(sendButton);
-    await sleep(1000);
+    await sleep();
 
     const [feeLimit]: any = await methods.findAllByTestId(
       FormDataTestIdsEnum.confirmFee

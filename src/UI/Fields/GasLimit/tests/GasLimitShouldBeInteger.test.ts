@@ -14,7 +14,7 @@ describe('GasLimit field', () => {
     await userEvent.clear(input);
     await userEvent.type(input, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     await waitFor(() => {
       const req = queryByText('Invalid number');

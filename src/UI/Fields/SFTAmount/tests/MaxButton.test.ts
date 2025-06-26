@@ -34,7 +34,7 @@ describe('Entire balance button', () => {
     const render = renderForm();
     const entireBalaceButton = await render.findByTestId('maxBtn');
     await userEvent.click(entireBalaceButton);
-    await sleep(1000);
+    await sleep();
 
     const decreasedValue: any = await render.findByTestId(ValuesEnum.amount);
     expect(decreasedValue.value).toBe('0.8073');

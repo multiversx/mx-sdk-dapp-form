@@ -42,7 +42,7 @@ describe('Guardian screen tests', () => {
 
     const sendButton = await methods.findByTestId(FormDataTestIdsEnum.sendBtn);
     await userEvent.click(sendButton);
-    await sleep(1000);
+    await sleep();
 
     const gasLimitError = await methods.findByTestId(
       FormDataTestIdsEnum.gasLimitError

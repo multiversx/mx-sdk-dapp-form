@@ -61,7 +61,7 @@ export const fillInForm: () => Promise<{
   );
 
   expect(formatAmountDecimal.innerHTML).toBe('.0000575');
-  await sleep(1000);
+  await sleep();
 
   return { render };
 };

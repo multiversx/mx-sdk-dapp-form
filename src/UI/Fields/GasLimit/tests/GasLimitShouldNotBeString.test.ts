@@ -13,7 +13,7 @@ describe('GasLimit field', () => {
     await userEvent.clear(processedInput);
     await userEvent.type(processedInput, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     expect(processedInput.value).toMatch('');
   });

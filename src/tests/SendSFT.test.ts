@@ -74,7 +74,7 @@ describe('Send SFT tokens', () => {
     await userEvent.type(receiver, testAddress);
     await userEvent.tab();
 
-    await sleep(1000);
+    await sleep();
 
     await waitFor(() => {
       const receiverError = methods.getByTestId(
@@ -86,7 +86,7 @@ describe('Send SFT tokens', () => {
     await userEvent.clear(receiver);
     await userEvent.type(receiver, testReceiver);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     const tokenPreview = methods.getByTestId('token-preview');
     const tokenPreviewName = methods.getByTestId('token-preview-name');
@@ -118,7 +118,7 @@ describe('Send SFT tokens', () => {
     await userEvent.clear(amountInput);
     await userEvent.type(amountInput, '1.1');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     await waitFor(() => {
       const req = methods.queryByText('Invalid number');
@@ -129,7 +129,7 @@ describe('Send SFT tokens', () => {
     await userEvent.clear(amountInput);
     await userEvent.type(amountInput, '2');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
     await waitFor(() => {
       const req = methods.queryByText('Insufficient funds');
       expect(req?.innerHTML).toBe('Insufficient funds');
@@ -139,7 +139,7 @@ describe('Send SFT tokens', () => {
     await userEvent.clear(amountInput);
     await userEvent.type(amountInput, '0');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
     await waitFor(() => {
       const req = methods.queryByText('Cannot be zero');
       expect(req?.innerHTML).toBe('Cannot be zero');
@@ -166,7 +166,7 @@ describe('Send SFT tokens', () => {
     await userEvent.clear(processedGasLimitInput);
     await userEvent.type(processedGasLimitInput, '100000');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
     await waitFor(() => {
       const gasLimitError = methods.getByTestId(
         FormDataTestIdsEnum.gasLimitError
@@ -182,7 +182,7 @@ describe('Send SFT tokens', () => {
     );
 
     await userEvent.click(gasLimitResetBtn);
-    await sleep(1000);
+    await sleep();
     expect(processedGasLimitInput.value).toBe('1,000,000');
 
     await sendAndConfirmTest({ methods })({

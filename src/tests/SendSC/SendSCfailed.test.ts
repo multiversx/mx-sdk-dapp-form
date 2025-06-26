@@ -40,7 +40,7 @@ describe('SendForm Smart Contract', () => {
     const sendBtn = render.getByTestId(FormDataTestIdsEnum.sendBtn);
 
     await userEvent.click(sendBtn);
-    await sleep(1000);
+    await sleep();
 
     // first server response fetches a gasLimit value over maxGasLimit
     const req = await render.findByText(/must be lower than/);
@@ -54,7 +54,7 @@ describe('SendForm Smart Contract', () => {
     await userEvent.clear(dataInput);
     await userEvent.type(dataInput, 'claim@');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     await waitFor(() => {
       expect(transactionCost).toHaveBeenCalled();
@@ -72,7 +72,7 @@ describe('SendForm Smart Contract', () => {
     await userEvent.clear(dataInput);
     await userEvent.type(dataInput, 'claim');
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
     formatAmountInt = await render.findByTestId(
       FormDataTestIdsEnum.formatAmountInt
     );

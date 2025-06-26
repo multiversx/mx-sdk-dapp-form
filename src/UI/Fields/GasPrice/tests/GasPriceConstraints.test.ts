@@ -16,7 +16,7 @@ describe('GasPrice field', () => {
     await userEvent.clear(processedInput);
     await userEvent.type(processedInput, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     await waitFor(async () => {
       const errorMessage = await findByTestId(`${ValuesEnum.gasPrice}Error`);
@@ -36,7 +36,7 @@ describe('GasPrice field', () => {
     await userEvent.clear(processedInput);
     await userEvent.type(processedInput, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     await waitFor(() => {
       const req = queryByText('Maximum 18 decimals allowed');
@@ -54,7 +54,7 @@ describe('GasPrice field', () => {
     await userEvent.clear(processedInput);
     await userEvent.type(processedInput, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     expect(processedInput.value).toMatch('1');
   });
@@ -69,7 +69,7 @@ describe('GasPrice field', () => {
     await userEvent.clear(processedInput);
     await userEvent.type(processedInput, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     expect(processedInput.value).toMatch('1');
   });
@@ -84,7 +84,7 @@ describe('GasPrice field', () => {
     await userEvent.clear(processedInput);
     await userEvent.type(processedInput, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     expect(processedInput.value).toMatch('1');
   });
@@ -99,7 +99,7 @@ describe('GasPrice field', () => {
     await userEvent.clear(processedInput);
     await userEvent.type(processedInput, data.target.value);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     expect(processedInput.value).toMatch('');
   });

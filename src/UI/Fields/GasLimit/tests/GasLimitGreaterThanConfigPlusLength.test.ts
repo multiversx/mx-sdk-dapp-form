@@ -16,7 +16,7 @@ describe('GasLimit field', () => {
     await userEvent.clear(dataInput);
     await userEvent.type(dataInput, dataValue);
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     const input = getByLabelText('Gas Limit');
     const value = GAS_LIMIT;
@@ -25,7 +25,7 @@ describe('GasLimit field', () => {
     await userEvent.clear(input);
     await userEvent.type(input, data.target.value.toString());
     await userEvent.tab();
-    await sleep(1000);
+    await sleep();
 
     await waitFor(() => {
       const req = queryByText(/^Gas limit must be greater/);
