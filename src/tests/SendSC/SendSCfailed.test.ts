@@ -29,7 +29,7 @@ describe('SendForm Smart Contract', () => {
     let formatAmountDecimal = await render.findByTestId(
       FormDataTestIdsEnum.formatAmountDecimals
     );
-    expect(formatAmountDecimal.innerHTML).toBe('.0165');
+    expect(formatAmountDecimal.innerHTML).toBe('.0165575575');
 
     let gasLimit = render.getByTestId(ValuesEnum.gasLimit) as HTMLInputElement;
 
@@ -81,7 +81,7 @@ describe('SendForm Smart Contract', () => {
     formatAmountDecimal = await render.findByTestId(
       FormDataTestIdsEnum.formatAmountDecimals
     );
-    expect(formatAmountDecimal.innerHTML).toBe('.0165');
+    expect(formatAmountDecimal.innerHTML).toBe('.0165501325');
 
     expect(transactionCost).toHaveBeenCalled();
   });

@@ -9,4 +9,5 @@ export interface FormatAmountPropsType extends WithClassnameType {
   decimals?: number;
   egldLabel?: string;
   'data-testid'?: string;
+  useMaxPrecision?: boolean;
 }

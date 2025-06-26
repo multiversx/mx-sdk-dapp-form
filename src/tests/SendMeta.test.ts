@@ -169,7 +169,7 @@ describe('Send Meta ESDT', () => {
     expect(processedGasLimitInput.value).toBe('1,000,000');
 
     await sendAndConfirmTest({ methods })({
-      amount: '10.0000',
+      amount: '10',
       fee: '0.0000595 xEGLD'
     });
   });

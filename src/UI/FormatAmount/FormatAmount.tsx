@@ -34,22 +34,42 @@ const formatAmountValid = (props: FormatAmountPropsType, erdLabel: string) => {
   const digits = props.digits != null ? props.digits : DIGITS;
   const decimals = props.decimals != null ? props.decimals : DECIMALS;
 
-  const formattedValue = formatAmount({
+  // When showLastNonZeroDecimal is true, increase digits limit
+  // to allow the formatAmount function to see all decimal places
+  const effectiveDigits = showLastNonZeroDecimal
+    ? Math.max(digits, 18)
+    : digits;
+
+  let formattedValue = formatAmount({
     input: value,
     decimals,
-    digits,
+    digits: effectiveDigits,
     showLastNonZeroDecimal,
     addCommas: true
   });
+
+  // Clean up trailing zeros when showLastNonZeroDecimal is true
+  if (showLastNonZeroDecimal) {
+    const parts = formattedValue.split('.');
+    if (parts.length > 1) {
+      // Remove trailing zeros from decimal part
+      parts[1] = parts[1].replace(/0+$/, '');
+      // If decimal part is empty after removing zeros, remove the decimal point
+      if (parts[1] === '') {
+        formattedValue = parts[0];
+      } else {
+        formattedValue = parts.join('.');
+      }
+    }
+  }
 
   const valueParts = formattedValue.split('.');
   const hasNoDecimals = valueParts.length === 1;
   const isNotZero = formattedValue !== ZERO;
 
-  // fill in zeros to match specific formatting
-  // example: if DIGITS are 2, `0.1` will be turned into `0.10`
-  // to take up the same amount of space in a right-aligned table cell
-  if (digits > 0 && hasNoDecimals && isNotZero) {
+  // Only add trailing zeros when showLastNonZeroDecimal is FALSE
+  // This preserves the original behavior for fixed-width formatting
+  if (digits > 0 && hasNoDecimals && isNotZero && !showLastNonZeroDecimal) {
     let zeros = '';
 
     for (let i = 1; i <= digits; i++) {
@@ -85,28 +105,19 @@ const formatAmountValid = (props: FormatAmountPropsType, erdLabel: string) => {
           className={classNames('symbol', { 'text-muted': props.token })}
           data-testid={FormDataTestIdsEnum.formatAmountSymbol}
         >
-          {` ${props.token ?? erdLabel}`}
+          {` ${props.token ?? props.egldLabel ?? erdLabel}`}
         </span>
       )}
     </span>
   );
 };
 
-const FormatAmountComponent = (props: FormatAmountPropsType) => {
-  const { value } = props;
-
-  return !stringIsInteger(value)
-    ? formatAmountInvalid(props)
-    : formatAmountValid(props, props.egldLabel || '');
-};
-
-/**
- * @param props.egldLabel  if not provided, will fallback on **EGLD**
- */
 export const FormatAmount = (props: FormatAmountPropsType) => {
-  const egldLabel = props.egldLabel || getEgldLabel();
+  const erdLabel = getEgldLabel();
 
-  const formatAmountProps = { ...props, egldLabel };
+  if (!stringIsInteger(props.value, false)) {
+    return formatAmountInvalid(props);
+  }
 
-  return <FormatAmountComponent {...formatAmountProps} />;
+  return formatAmountValid(props, erdLabel);
 };

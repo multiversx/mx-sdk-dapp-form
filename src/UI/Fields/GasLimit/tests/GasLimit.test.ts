@@ -149,7 +149,7 @@ describe('GasLimit field', () => {
       );
 
       expect(formatAmountInt.innerHTML).toBe('0');
-      expect(formatAmountDecimal.innerHTML).toBe('.0060');
+      expect(formatAmountDecimal.innerHTML).toBe('.0060495');
     }
 
     expectCorrectFee();
