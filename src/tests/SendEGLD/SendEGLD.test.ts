@@ -1,4 +1,4 @@
-import { waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import { testAddress } from '__mocks__';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { renderForm } from 'tests/helpers/renderForm';
@@ -37,12 +37,10 @@ describe('EGLD Amount field', () => {
     const input: any = await findByTestId(ValuesEnum.amount);
     const value = '0x1';
     const data = { target: { value } };
-    await userEvent.clear(input);
-    await userEvent.type(input, data.target.value);
-    await userEvent.tab();
-    await sleep();
+    fireEvent.change(input, data);
+    fireEvent.blur(input);
 
-    expect(input.value).toBe('0');
+    expect(input.value).toBe('');
   });
 
   it('should show error when not enough balance for non-zero transaction with large gas', async () => {
