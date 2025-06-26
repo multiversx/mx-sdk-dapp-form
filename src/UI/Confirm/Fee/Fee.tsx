@@ -33,9 +33,8 @@ export const Fee = ({
         <FormatAmount
           egldLabel={egldLabel}
           value={feeLimit}
-          showLastNonZeroDecimal={false}
+          showLastNonZeroDecimal
           data-testid={FormDataTestIdsEnum.confirmFee}
-          digits={11}
         />
       </div>
     </div>
