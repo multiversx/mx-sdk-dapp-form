@@ -1,5 +1,5 @@
 import React from 'react';
-import { DECIMALS } from '@multiversx/sdk-dapp-utils/out';
+import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
 import classNames from 'classnames';
 import Select, { SingleValue, components } from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';

@@ -1,4 +1,4 @@
-import { DIGITS as configDigits } from '@multiversx/sdk-dapp-utils/out';
+import { DIGITS as configDigits } from '@multiversx/sdk-dapp-utils/out/constants';
 import { formatAmount as dappCoreFormatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
 import { stringIsInteger } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsInteger';
 

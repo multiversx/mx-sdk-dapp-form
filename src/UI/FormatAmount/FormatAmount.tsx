@@ -3,10 +3,10 @@ import classNames from 'classnames';
 import {
   DIGITS,
   DECIMALS,
-  formatAmount,
-  stringIsInteger,
   ZERO
-} from '@multiversx/sdk-dapp-utils/out';
+} from '@multiversx/sdk-dapp-utils/out/constants';
+import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
+import { stringIsInteger } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsInteger';
 import { getEgldLabel } from '@multiversx/sdk-dapp/out/methods/network/getEgldLabel';
 import { FormatAmountPropsType } from './formatAmount.types';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';

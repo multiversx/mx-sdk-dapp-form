@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { DECIMALS } from '@multiversx/sdk-dapp-utils/out';
+import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import { SingleValue } from 'react-select';
 import globals from 'assets/sass/globals.module.scss';

@@ -1,4 +1,4 @@
-import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out';
+import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
 import { GAS_PRICE } from '@multiversx/sdk-dapp/out/constants';
 import { ZERO } from 'constants/index';

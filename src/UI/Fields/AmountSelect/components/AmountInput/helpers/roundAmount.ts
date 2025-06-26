@@ -1,4 +1,4 @@
-import { DIGITS } from '@multiversx/sdk-dapp-utils/out';
+import { DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';
 import BigNumber from 'bignumber.js';
 

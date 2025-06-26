@@ -1,5 +1,5 @@
 import React from 'react';
-import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out';
+import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 
 import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 import { getUsdValue } from '@multiversx/sdk-dapp/out/utils/operations/getUsdValue';

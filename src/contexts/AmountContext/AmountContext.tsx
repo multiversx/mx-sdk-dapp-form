@@ -7,7 +7,7 @@ import React, {
   createContext,
   useEffect
 } from 'react';
-import { DIGITS } from '@multiversx/sdk-dapp-utils/out';
+import { DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
 import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';

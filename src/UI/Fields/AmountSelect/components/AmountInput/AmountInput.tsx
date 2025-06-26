@@ -7,7 +7,7 @@ import React, {
   useRef,
   useState
 } from 'react';
-import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out';
+import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import { NumberFormatValues, NumericFormat } from 'react-number-format';

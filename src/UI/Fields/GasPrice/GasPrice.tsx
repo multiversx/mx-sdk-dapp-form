@@ -1,7 +1,7 @@
 import React, { MouseEvent, useState } from 'react';
 import { faUndo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { DIGITS, DECIMALS } from '@multiversx/sdk-dapp-utils/out';
+import { DIGITS, DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
 import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 import { recommendGasPrice } from '@multiversx/sdk-dapp-utils/out/helpers/recommendGasPrice';

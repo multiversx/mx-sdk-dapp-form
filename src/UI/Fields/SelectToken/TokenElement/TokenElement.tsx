@@ -1,7 +1,7 @@
 import React, { JSXElementConstructor, useEffect, useState } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { DIGITS } from '@multiversx/sdk-dapp-utils/out';
+import { DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import classNames from 'classnames';
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum, ZERO } from 'constants/index';

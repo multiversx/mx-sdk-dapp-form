@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react';
-import { DECIMALS } from '@multiversx/sdk-dapp-utils/out';
+import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
 import BigNumber from 'bignumber.js';
 
 import classNames from 'classnames';
