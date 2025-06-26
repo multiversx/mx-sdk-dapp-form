@@ -12,3 +12,4 @@ export const MIN_DUST = '5000000000000000'; // 0.05 EGLD
 
 export const ZERO = '0';
 export const WEGLD_ID = 'WEGLD-bd4d79';
+export const ELLIPSIS = '…';

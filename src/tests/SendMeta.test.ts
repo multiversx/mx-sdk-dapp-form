@@ -142,7 +142,7 @@ describe('Send Meta ESDT', () => {
 
     // check available
     const available = methods.getByTestId(`available-${metaToken.identifier}`);
-    expect(available.textContent).toBe('Available: 10,000.0000 MT1-ff89d3');
+    expect(available.textContent).toBe('Available: 10,000 MT1-ff89d3');
 
     // fill in amount
     const amount = await methods.findByTestId(ValuesEnum.amount);

@@ -28,13 +28,13 @@ describe('SendForm Smart Contract', () => {
     const transactionCost = jest.spyOn(axios, 'post');
     const { render } = await fillInForm();
 
-    const formatAmountInt = await render.findByTestId(
+    let formatAmountInt = await render.findByTestId(
       FormDataTestIdsEnum.formatAmountInt
     );
 
     expect(formatAmountInt.innerHTML).toBe('0');
 
-    const formatAmountDecimal = await render.findByTestId(
+    let formatAmountDecimal = await render.findByTestId(
       FormDataTestIdsEnum.formatAmountDecimals
     );
 
@@ -62,11 +62,15 @@ describe('SendForm Smart Contract', () => {
     await userEvent.click(sendBtn);
     await sleep(1000);
 
-    const [, confirmFee] = await render.findAllByTestId(
+    const sendTrxBtn = render.getByTestId(FormDataTestIdsEnum.sendTrxBtn);
+    await userEvent.click(sendTrxBtn);
+    await sleep(1000);
+
+    const confirmFee = await render.findByTestId(
       FormDataTestIdsEnum.confirmFee
     );
 
-    expect(confirmFee.textContent).toContain('0.0000505 xEGLD');
+    expect(confirmFee.textContent).toContain('0.00005051201 xEGLD');
 
     // after gasLimit edit, transactionCost does no longer get called
     expect(transactionCost).toHaveBeenCalledTimes(2);

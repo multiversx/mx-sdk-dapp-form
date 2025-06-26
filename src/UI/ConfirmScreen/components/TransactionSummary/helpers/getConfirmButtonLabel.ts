@@ -1,7 +1,10 @@
-import { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
+import {
+  ProviderType,
+  ProviderTypeEnum
+} from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
 
 export interface GetConfirmButtonLabelType {
-  providerType: keyof typeof ProviderTypeEnum;
+  providerType: ProviderType;
   hasGuardianScreen: boolean;
 }
 

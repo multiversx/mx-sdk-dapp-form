@@ -1,21 +1,58 @@
-import React from 'react';
-import { MvxCopyButton } from '@multiversx/sdk-dapp-ui/react';
-import type { MvxCopyButton as MvxCopyButtonPropsType } from '@multiversx/sdk-dapp-ui/web-components/mvx-copy-button';
+import React, { useState, MouseEvent } from 'react';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faCheck, faCopy } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import { copyTextToClipboard } from './helpers/copyToClipboard';
+import { WithClassnameType } from 'types';
+
+export interface CopyButtonPropsType extends WithClassnameType {
+  text: string;
+  copyIcon?: IconProp;
+  successIcon?: IconProp;
+}
 
 export const CopyButton = ({
-  className = 'ml-0.5 inline-block cursor-pointer px-1 hover:text-white text-gray-400',
   text,
-  copyIcon,
-  iconClass,
-  successIcon
-}: Partial<MvxCopyButtonPropsType>) => {
+  className = 'dapp-copy-button',
+  copyIcon = faCopy,
+  successIcon = faCheck
+}: CopyButtonPropsType) => {
+  const [copyResult, setCopyResut] = useState({
+    default: true,
+    success: false
+  });
+
+  const handleCopyToClipboard = async (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const noSpaces = text ? text.trim() : text;
+
+    setCopyResut({
+      default: false,
+      success: await copyTextToClipboard(noSpaces)
+    });
+
+    setTimeout(() => {
+      setCopyResut({
+        default: true,
+        success: false
+      });
+    }, 1000);
+  };
+
   return (
-    <MvxCopyButton
-      class={className}
-      text={text}
-      copyIcon={copyIcon}
-      iconClass={iconClass}
-      successIcon={successIcon}
-    />
+    <a
+      href='/#'
+      onClick={handleCopyToClipboard}
+      className={classNames('copy', className)}
+    >
+      {copyResult.default || !copyResult.success ? (
+        <FontAwesomeIcon icon={copyIcon} />
+      ) : (
+        <FontAwesomeIcon icon={successIcon} />
+      )}
+    </a>
   );
 };

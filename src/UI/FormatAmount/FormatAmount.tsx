@@ -1,48 +1,112 @@
 import React from 'react';
-import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
-import { FormatAmountController } from '@multiversx/sdk-dapp/out/controllers';
-import { useGetNetworkConfig } from '@multiversx/sdk-dapp/out/react/network/useGetNetworkConfig';
-import { WithClassnameType } from 'types';
-import { MvxFormatAmount } from '@multiversx/sdk-dapp-ui/react';
+import classNames from 'classnames';
+import {
+  DIGITS,
+  DECIMALS,
+  formatAmount,
+  stringIsInteger,
+  ZERO
+} from '@multiversx/sdk-dapp-utils/out';
+import { getEgldLabel } from '@multiversx/sdk-dapp/out/methods/network/getEgldLabel';
+import { FormatAmountPropsType } from './formatAmount.types';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 
-interface MvxFormatAmountPropsType {
-  'data-testid'?: string;
-  class?: string;
-}
+const formatAmountInvalid = (props: FormatAmountPropsType) => {
+  return (
+    <span
+      data-testid={
+        props['data-testid'] || FormDataTestIdsEnum.formatAmountComponent
+      }
+      className={props.className}
+    >
+      <span
+        className='int-amount'
+        data-testid={FormDataTestIdsEnum.formatAmountInt}
+      >
+        ...
+      </span>
+    </span>
+  );
+};
 
-interface FormatAmountPropsType
-  extends Partial<MvxFormatAmountPropsType>,
-    WithClassnameType {
-  token?: string;
-  decimals?: number;
-  digits?: number;
-  egldLabel?: string;
-  value: string;
-  showLastNonZeroDecimal?: boolean;
-  showLabel?: boolean;
-}
+const formatAmountValid = (props: FormatAmountPropsType, erdLabel: string) => {
+  const { value, showLastNonZeroDecimal = false, showLabel = true } = props;
+  const digits = props.digits != null ? props.digits : DIGITS;
+  const decimals = props.decimals != null ? props.decimals : DECIMALS;
 
-export const FormatAmount = (props: FormatAmountPropsType) => {
-  const { network } = useGetNetworkConfig();
+  const formattedValue = formatAmount({
+    input: value,
+    decimals,
+    digits,
+    showLastNonZeroDecimal,
+    addCommas: true
+  });
 
-  const { valueDecimal, valueInteger, label, isValid } =
-    FormatAmountController.getData({
-      digits: props.digits ?? 7,
-      decimals: props.decimals ?? DECIMALS,
-      egldLabel: props.egldLabel ?? network.egldLabel,
-      token: props.token,
-      showLastNonZeroDecimal: props.showLastNonZeroDecimal,
-      input: props.value
-    });
+  const valueParts = formattedValue.split('.');
+  const hasNoDecimals = valueParts.length === 1;
+  const isNotZero = formattedValue !== ZERO;
+
+  // fill in zeros to match specific formatting
+  // example: if DIGITS are 2, `0.1` will be turned into `0.10`
+  // to take up the same amount of space in a right-aligned table cell
+  if (digits > 0 && hasNoDecimals && isNotZero) {
+    let zeros = '';
+
+    for (let i = 1; i <= digits; i++) {
+      zeros = zeros + ZERO;
+    }
+
+    valueParts.push(zeros);
+  }
 
   return (
-    <MvxFormatAmount
-      {...props}
-      isValid={isValid}
-      dataTestId={props['data-testid']}
-      valueDecimal={valueDecimal}
-      valueInteger={valueInteger}
-      label={label}
-    />
+    <span
+      data-testid={
+        props['data-testid'] || FormDataTestIdsEnum.formatAmountComponent
+      }
+      className={props.className}
+    >
+      <span
+        className={'int-amount'}
+        data-testid={FormDataTestIdsEnum.formatAmountInt}
+      >
+        {valueParts[0]}
+      </span>
+      {valueParts.length > 1 && (
+        <span
+          className={'decimals'}
+          data-testid={FormDataTestIdsEnum.formatAmountDecimals}
+        >
+          .{valueParts[1]}
+        </span>
+      )}
+      {showLabel && (
+        <span
+          className={classNames('symbol', { 'text-muted': props.token })}
+          data-testid={FormDataTestIdsEnum.formatAmountSymbol}
+        >
+          {` ${props.token ?? erdLabel}`}
+        </span>
+      )}
+    </span>
   );
+};
+
+const FormatAmountComponent = (props: FormatAmountPropsType) => {
+  const { value } = props;
+
+  return !stringIsInteger(value)
+    ? formatAmountInvalid(props)
+    : formatAmountValid(props, props.egldLabel || '');
+};
+
+/**
+ * @param props.egldLabel  if not provided, will fallback on **EGLD**
+ */
+export const FormatAmount = (props: FormatAmountPropsType) => {
+  const egldLabel = props.egldLabel || getEgldLabel();
+
+  const formatAmountProps = { ...props, egldLabel };
+
+  return <FormatAmountComponent {...formatAmountProps} />;
 };

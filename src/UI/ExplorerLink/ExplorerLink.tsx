@@ -1,29 +1,56 @@
 import React, { PropsWithChildren } from 'react';
-import { MvxExplorerLink } from '@multiversx/sdk-dapp-ui/react';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import { getExplorerLink } from '@multiversx/sdk-dapp/out/utils/transactions/getExplorerLink';
 import { useGetNetworkConfig } from '@multiversx/sdk-dapp/out/react/network/useGetNetworkConfig';
 import { WithClassnameType } from 'types';
 
+export interface ExplorerLinkPropsType
+  extends PropsWithChildren,
+    WithClassnameType {
+  page: string;
+  text?: any;
+  customExplorerIcon?: IconProp;
+  title?: string;
+  onClick?: () => void;
+  'data-testid'?: string;
+}
+
 export const ExplorerLink = ({
-  children,
   page,
-  className,
-  'data-testid': dataTestId
+  text,
+  className = 'dapp-explorer-link',
+  children,
+  customExplorerIcon,
+  ...rest
 }: ExplorerLinkPropsType) => {
-  const { network } = useGetNetworkConfig();
+  const {
+    network: { explorerAddress }
+  } = useGetNetworkConfig();
+
+  const defaultContent = text ?? (
+    <FontAwesomeIcon
+      icon={customExplorerIcon ?? faArrowUpRightFromSquare}
+      className='search'
+    />
+  );
+
+  const link = getExplorerLink({
+    explorerAddress: String(explorerAddress),
+    to: page
+  });
 
   return (
-    <MvxExplorerLink
-      link={`${network.explorerAddress}${page}`}
-      class={className}
-      dataTestId={dataTestId}
+    <a
+      href={link}
+      target='_blank'
+      className={classNames('link', 'ml-2', className)}
+      rel='noreferrer'
+      {...rest}
     >
-      {children ? <span slot='content'>{children}</span> : null}
-    </MvxExplorerLink>
+      {children ?? defaultContent}
+    </a>
   );
 };
-
-export interface ExplorerLinkPropsType
-  extends WithClassnameType,
-    PropsWithChildren {
-  page: string;
-}

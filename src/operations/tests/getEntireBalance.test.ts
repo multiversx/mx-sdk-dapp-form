@@ -12,7 +12,7 @@ describe('Entire balance', () => {
         digits: 4,
         chainId: MAINNET_CHAIN_ID
       });
-    expect(available).toBe('1.0000');
+    expect(available).toBe('1');
     expect(entireBalanceMinusDust).toBe('0.9950');
   });
 
@@ -36,7 +36,7 @@ describe('Entire balance', () => {
       digits: 4,
       balance: '100'
     });
-    expect(tokenAmount).toBe('1.00');
+    expect(tokenAmount).toBe('1');
   });
 
   test('decimals higher than digits', () => {

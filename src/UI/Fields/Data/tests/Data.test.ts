@@ -27,7 +27,7 @@ describe('Data field tests', () => {
     expect(processedGasLimitInput.value).toBe('56,000');
 
     expect(formatAmountInt.innerHTML).toBe('0');
-    expect(formatAmountDecimal.innerHTML).toBe('.0000500');
+    expect(formatAmountDecimal.innerHTML).toBe('.0000560');
 
     // prevent async effects error logging
     const feeInFiat = await findByTestId('feeInFiat');
