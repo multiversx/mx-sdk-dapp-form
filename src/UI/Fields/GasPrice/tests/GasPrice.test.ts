@@ -115,7 +115,7 @@ describe('GasPrice field constraints tests', () => {
       );
 
       expect(formatAmountInt.innerHTML).toBe('0');
-      expect(formatAmountDecimal.innerHTML).toBe('.0060495');
+      expect(formatAmountDecimal.innerHTML).toBe('.0060');
     }
 
     expectCorrectFee();

@@ -38,7 +38,7 @@ describe('SendForm Smart Contract', () => {
       FormDataTestIdsEnum.formatAmountDecimals
     );
 
-    expect(formatAmountDecimal.innerHTML).toBe('.0000579');
+    expect(formatAmountDecimal.innerHTML).toBe('.000057937');
     expect(transactionCost).toHaveBeenCalledTimes(2);
 
     expect(transactionCost).toHaveBeenCalledWith(
