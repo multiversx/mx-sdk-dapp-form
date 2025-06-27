@@ -2,9 +2,10 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { isContract } from '@multiversx/sdk-dapp';
+import { isContract } from '@multiversx/sdk-dapp/out/utils/validation/isContract';
 import { getAccountFromApi } from '@multiversx/sdk-dapp/out/apiCalls/account/getAccountFromApi';
 import { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/out/apiCalls/endpoints';
+import { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimUsernameDomain';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import MultiversXIconSimple from 'assets/icons/mx-icon-simple.svg';
@@ -35,6 +36,8 @@ export const Receiver = ({
   amount,
   label,
   receiver,
+  customCopyIcon,
+  customExplorerIcon,
   receiverUsername,
   scamReport,
   shouldTrimReceiver = true
@@ -104,8 +107,8 @@ export const Receiver = ({
       </div>
 
       {isLoading ? (
-        <div className={styles?.receiverWrapper}>
-          <LoadingDots className={styles?.receiverLoading} />
+        <div className={styles.receiverWrapper}>
+          <LoadingDots className={styles.receiverLoading} />
         </div>
       ) : (
         <div
@@ -124,7 +127,7 @@ export const Receiver = ({
             <span className={styles.receiverData}>
               (<MultiversXIconSimple className={styles.receiverDataIcon} />
               <span className={styles.receiverDataUsername}>
-                {receiverValue}
+                {trimUsernameDomain(receiverValue)}
               </span>
               )
             </span>
@@ -140,11 +143,16 @@ export const Receiver = ({
             </span>
           )}
 
-          <CopyButton text={receiver} className={styles.receiverCopy} />
+          <CopyButton
+            text={receiver}
+            className={styles.receiverCopy}
+            copyIcon={customCopyIcon}
+          />
 
           <ExplorerLink
             page={`/${ACCOUNTS_ENDPOINT}/${receiver}`}
             className={styles.receiverExternal}
+            customExplorerIcon={customExplorerIcon}
           />
         </div>
       )}
