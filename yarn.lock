@@ -2255,10 +2255,10 @@
     qrcode ">= 1.5.4"
     sass-embedded "^1.85.1"
 
-"@multiversx/sdk-dapp-utils@2.0.1":
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-2.0.1.tgz#1d38df24b5823e70e62c271e47556883843bd7a5"
-  integrity sha512-3lGS1AuAiJCL0bQPYG1VS5mfOGCTTKeS5lY0DyaC9vtzQ50CnzgDFpu3vS4nSCeVYlIt1jtA/RAIUpJ/t45nHg==
+"@multiversx/sdk-dapp-utils@2.0.2-alpha.1":
+  version "2.0.2-alpha.1"
+  resolved "https://registry.npmjs.org/@multiversx/sdk-dapp-utils/-/sdk-dapp-utils-2.0.2-alpha.1.tgz#5f8a403480f638362029275315542cd6567ae071"
+  integrity sha512-EsPm7NL0W6QZxmNsOCLH54Rp+0RQUds6Z26hdg3E8CQ0mtLYmqTndiIRTDLpX3znR73DagXwiFDB1VdPJ/I1HQ==
 
 "@multiversx/sdk-dapp-utils@>= 1.0.4", "@multiversx/sdk-dapp-utils@^2.x":
   version "2.0.0"

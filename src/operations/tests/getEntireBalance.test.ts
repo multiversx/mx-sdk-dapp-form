@@ -13,7 +13,7 @@ describe('Entire balance', () => {
         chainId: MAINNET_CHAIN_ID
       });
     expect(available).toBe('1');
-    expect(entireBalanceMinusDust).toBe('0.9950');
+    expect(entireBalanceMinusDust).toBe('0.995');
   });
 
   test('Balance smaller than fee', () => {
@@ -45,6 +45,6 @@ describe('Entire balance', () => {
       digits: 4,
       balance: '123456789123456789'
     });
-    expect(tokenAmount).toBe('0.1234');
+    expect(tokenAmount).toBe('0.123456789123456789');
   });
 });

@@ -62,10 +62,6 @@ describe('SendForm Smart Contract', () => {
     await userEvent.click(sendBtn);
     await sleep();
 
-    const sendTrxBtn = render.getByTestId(FormDataTestIdsEnum.sendTrxBtn);
-    await userEvent.click(sendTrxBtn);
-    await sleep();
-
     const confirmFee = await render.findByTestId(
       FormDataTestIdsEnum.confirmFee
     );
