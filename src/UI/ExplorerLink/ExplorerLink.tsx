@@ -4,7 +4,7 @@ import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { getExplorerLink } from '@multiversx/sdk-dapp/out/utils/transactions/getExplorerLink';
-import { useGetNetworkConfig } from '@multiversx/sdk-dapp/out/react/network/useGetNetworkConfig';
+import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import { WithClassnameType } from 'types';
 
 export interface ExplorerLinkPropsType
@@ -27,8 +27,8 @@ export const ExplorerLink = ({
   ...rest
 }: ExplorerLinkPropsType) => {
   const {
-    network: { explorerAddress }
-  } = useGetNetworkConfig();
+    networkConfig: { explorerAddress }
+  } = useNetworkConfigContext();
 
   const defaultContent = text ?? (
     <FontAwesomeIcon
