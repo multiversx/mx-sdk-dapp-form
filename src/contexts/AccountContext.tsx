@@ -1,6 +1,6 @@
 import React, { useContext, ReactNode, createContext } from 'react';
-import { AssetType } from '@multiversx/sdk-dapp/types/account.types';
-import { LoginMethodsEnum } from '@multiversx/sdk-dapp/types/enums.types';
+import { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
+import { AssetType } from '@multiversx/sdk-dapp/out/types/account.types';
 
 export interface AccountContextPropsType {
   address: string;
@@ -10,7 +10,7 @@ export interface AccountContextPropsType {
   balance: string;
   username?: string;
   isGuarded?: boolean;
-  providerType: LoginMethodsEnum;
+  providerType: typeof ProviderTypeEnum;
 }
 
 interface AccountContextProviderPropsType {

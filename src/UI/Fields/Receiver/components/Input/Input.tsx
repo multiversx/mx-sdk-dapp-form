@@ -1,5 +1,5 @@
 import React, { MutableRefObject } from 'react';
-import { addressIsValid } from '@multiversx/sdk-dapp/utils';
+import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 import classNames from 'classnames';
 import { components } from 'react-select';
 

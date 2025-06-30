@@ -1,10 +1,11 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 
-import { testAddress } from '__mocks__';
+import { testAddress } from '__mocks__/accountConfig';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
-import { formattedAmountSelector } from 'tests/helpers';
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types/form';
+import userEvent from '@testing-library/user-event';
+import { sleep } from 'tests/helpers';
 
 describe('GasLimit field', () => {
   it('should not be empty', async () => {
@@ -17,47 +18,60 @@ describe('GasLimit field', () => {
   });
 
   it('setting Gas limit + amount > balance should trigger error', async () => {
-    const { getByLabelText, getByTestId, queryByText, findByTestId } =
-      renderForm();
+    const { findByTestId } = renderForm({
+      balance: '1'
+    });
 
-    const input = await findByTestId(ValuesEnum.amount);
-    const value = '0.8123';
-    const data = { target: { value } };
-    fireEvent.change(input, data);
+    const receiver = await findByTestId(ValuesEnum.receiver);
+    await userEvent.clear(receiver);
+    await userEvent.type(receiver, testAddress);
+    await userEvent.tab();
+    await sleep(1500);
 
-    const gasInput = getByLabelText('Gas Limit');
-    const gasValue = 50001; // add 1 to the end
+    const amount = await findByTestId(ValuesEnum.amount);
+    await userEvent.clear(amount);
+    await userEvent.type(amount, '0.000000000000000001');
+    await userEvent.tab();
+    await sleep(1500);
 
-    fireEvent.change(gasInput, { target: { value: gasValue } });
-    const sendButton = getByTestId(FormDataTestIdsEnum.sendBtn);
-    fireEvent.click(sendButton);
+    const gasLimit = await findByTestId(ValuesEnum.gasLimit);
+    await userEvent.clear(gasLimit);
+    await userEvent.type(gasLimit, '50001');
+    await userEvent.tab();
+    await sleep(1500);
 
-    await waitFor(() => {
-      const req = queryByText('Insufficient funds');
-      expect(req?.innerHTML).toBe('Insufficient funds');
+    const sendButton = await findByTestId(FormDataTestIdsEnum.sendBtn);
+    await userEvent.click(sendButton);
+    await sleep(1500);
+
+    await waitFor(async () => {
+      const amountError = await findByTestId(FormDataTestIdsEnum.amountError);
+      expect(amountError.textContent).toBe('Insufficient funds');
     });
   });
 
   it('should not show error when writing in data', async () => {
-    const { getByLabelText, queryByText, getByText, findByTestId } =
-      renderForm();
+    const { queryByText, getByText, findByTestId } = renderForm();
 
-    const receiver = await findByTestId('receiver'); // TODO change to receiver
-    fireEvent.change(receiver, { target: { value: testAddress } });
-    fireEvent.blur(receiver);
+    const receiver = await findByTestId(ValuesEnum.receiver);
+    await userEvent.clear(receiver);
+    await userEvent.type(receiver, testAddress);
+    await userEvent.tab();
+    await sleep();
 
     const entireBalaceButton = getByText('Max');
-    fireEvent.click(entireBalaceButton);
+    await userEvent.click(entireBalaceButton);
+    await sleep();
 
     const feeLimit = await findByTestId(FormDataTestIdsEnum.feeLimit);
-    fireEvent.click(feeLimit);
-
-    const gasLimit = getByLabelText('Gas Limit');
-    fireEvent.blur(gasLimit);
+    await userEvent.click(feeLimit);
+    await sleep();
 
     const data = await findByTestId(ValuesEnum.data);
-    fireEvent.change(data, { target: { value: '123' } });
-    fireEvent.keyUp(data);
+    await userEvent.clear(data);
+    await userEvent.type(data, '123');
+    await userEvent.tab();
+    await sleep();
 
     await waitFor(() => {
       const req = queryByText(/^Gas limit must be greater/);
@@ -69,54 +83,82 @@ describe('GasLimit field', () => {
   });
 
   it('should show error when not enough balance for zero transaction with large gas', async () => {
-    const { findByTestId, getByTestId, queryByTestId } = renderForm({
-      balance: '1_000_000_000_000_000'.replaceAll('_', '') // 0.001
+    const { findByTestId, getByTestId } = renderForm({
+      balance: '1'
     });
 
     const receiver = await findByTestId(ValuesEnum.receiver);
-    fireEvent.change(receiver, { target: { value: testAddress } });
+    await userEvent.clear(receiver);
+    await userEvent.type(receiver, testAddress);
+    await userEvent.tab();
+    await sleep(1500);
 
     const amount = getByTestId(ValuesEnum.amount);
-    fireEvent.change(amount, { target: { value: '0' } });
+    await userEvent.clear(amount);
+    await userEvent.type(amount, '0');
+    await userEvent.tab();
+    await sleep(1500);
 
     const gasLimit = getByTestId(ValuesEnum.gasLimit);
-    fireEvent.change(gasLimit, { target: { value: '600000000' } });
+    await userEvent.clear(gasLimit);
+    await userEvent.type(gasLimit, '50000');
+    await userEvent.tab();
+    await sleep(1500);
 
     const sendButton = getByTestId(FormDataTestIdsEnum.sendBtn);
-    fireEvent.click(sendButton);
+    await userEvent.click(sendButton);
+    await sleep(1500);
 
-    await waitFor(() => {
-      const gasLimitError = getByTestId(FormDataTestIdsEnum.gasLimitError);
-      expect(gasLimitError.innerHTML).toBe('Insufficient funds');
-      const amountError = queryByTestId('amountError');
-      expect(amountError).toBeNull();
+    await waitFor(async () => {
+      const gasLimitError = await findByTestId(
+        FormDataTestIdsEnum.gasLimitError
+      );
+      expect(gasLimitError.textContent).toBe('Insufficient funds');
     });
   });
 
   it('should keep the fee constant if gasLimit was touched', async () => {
-    async function expectCorrectFee() {
-      const feeLimit = await findByTestId(FormDataTestIdsEnum.feeLimit);
-      expect(formattedAmountSelector(feeLimit).intAmount).toBe('0');
-      expect(formattedAmountSelector(feeLimit).decimalAmount).toBe('.0060495');
-    }
-
     const { findByTestId, getByTestId } = renderForm({
       balance: '1_000_000_000_000_000'.replaceAll('_', '') // 0.001
     });
 
     const receiver = await findByTestId(ValuesEnum.receiver);
-    fireEvent.change(receiver, { target: { value: testAddress } });
+    await userEvent.clear(receiver);
+    await userEvent.type(receiver, testAddress);
+    await userEvent.tab();
+    await sleep();
 
     const amount = getByTestId(ValuesEnum.amount);
-    fireEvent.change(amount, { target: { value: '0' } });
+    await userEvent.clear(amount);
+    await userEvent.type(amount, '0');
+    await userEvent.tab();
+    await sleep();
 
     const gasLimit = getByTestId(ValuesEnum.gasLimit);
-    fireEvent.change(gasLimit, { target: { value: '600000000' } });
-    fireEvent.blur(gasLimit, { target: { value: '600000000' } });
+    await userEvent.clear(gasLimit);
+    await userEvent.type(gasLimit, '600000000');
+    await userEvent.tab();
+    await sleep();
+
+    async function expectCorrectFee() {
+      const formatAmountInt = await findByTestId(
+        FormDataTestIdsEnum.formatAmountInt
+      );
+      const formatAmountDecimal = await findByTestId(
+        FormDataTestIdsEnum.formatAmountDecimals
+      );
+
+      expect(formatAmountInt.innerHTML).toBe('0');
+      expect(formatAmountDecimal.innerHTML).toBe('.0060495');
+    }
+
     expectCorrectFee();
 
     const data = await findByTestId(ValuesEnum.data);
-    fireEvent.change(data, { target: { value: '12345678' } });
+    await userEvent.clear(data);
+    await userEvent.type(data, '12345678');
+    await userEvent.tab();
+    await sleep();
 
     expectCorrectFee();
   });

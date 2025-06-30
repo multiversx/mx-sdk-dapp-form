@@ -1,7 +1,7 @@
 import { Address } from '@multiversx/sdk-core';
 import { IPlainTransactionObject } from '@multiversx/sdk-core/out';
-import { TransactionsDataTokensType } from '@multiversx/sdk-dapp/types/transactions.types';
-import { isContract } from '@multiversx/sdk-dapp/utils/smartContracts';
+import { TransactionsDataTokensType } from '@multiversx/sdk-dapp/out/types/transactions.types';
+import { isContract } from '@multiversx/sdk-dapp/out/utils/validation/isContract';
 import getTxWithReceiver from './getTxWithReceiver';
 
 export interface ValidateReceiversType {

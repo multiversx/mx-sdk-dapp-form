@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[3.0.0-alpha.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/351)] - 2025-06-30
+
+- [Migrated to sdk-dapp v5](https://github.com/multiversx/mx-sdk-dapp-form/pull/350)
+
 ## [[2.0.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/349)] - 2025-06-17
 
 - [Implemented relayer balance fetching and validation for gas fees](https://github.com/multiversx/mx-sdk-dapp-form/pull/348)

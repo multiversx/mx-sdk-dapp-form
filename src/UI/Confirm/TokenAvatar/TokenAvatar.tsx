@@ -6,14 +6,13 @@ import classNames from 'classnames';
 import { TransactionTypeEnum } from 'types';
 
 import styles from './tokenAvatar.styles.scss';
+import MultiversXIcon from '../../../assets/icons/mx-icon.svg';
 
 export interface TokenAvatarPropsType {
   EgldIcon?: JSXElementConstructor<any>;
   avatar?: string;
   type: TransactionTypeEnum;
 }
-
-const MultiversXIcon = require('../../../assets/icons/mx-icon.svg').default;
 
 export const TokenAvatar = (props: TokenAvatarPropsType) => {
   const { avatar, type } = props;

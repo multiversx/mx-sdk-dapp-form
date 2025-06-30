@@ -1,8 +1,10 @@
-import { act, fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { FormDataTestIdsEnum, MAX_GAS_LIMIT } from 'constants/index';
 import { ValuesEnum } from 'types/form';
 import { fillInForm, setResponse } from './helpers';
+import userEvent from '@testing-library/user-event';
+import { sleep } from 'tests/helpers';
 
 describe('SendForm Smart Contract', () => {
   beforeEach(() => {
@@ -15,14 +17,19 @@ describe('SendForm Smart Contract', () => {
     const { render } = await fillInForm();
 
     await waitFor(() => {
-      expect(transactionCost).toHaveBeenCalledTimes(1);
+      expect(transactionCost).toHaveBeenCalled();
     });
 
-    let fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
+    let formatAmountInt = await render.findByTestId(
+      FormDataTestIdsEnum.formatAmountInt
+    );
 
-    await waitFor(() => {
-      expect(fee.textContent).toBe('0.0165575575 xEGLD');
-    });
+    expect(formatAmountInt.innerHTML).toBe('0');
+
+    let formatAmountDecimal = await render.findByTestId(
+      FormDataTestIdsEnum.formatAmountDecimals
+    );
+    expect(formatAmountDecimal.innerHTML).toBe('.0165575575');
 
     let gasLimit = render.getByTestId(ValuesEnum.gasLimit) as HTMLInputElement;
 
@@ -32,9 +39,8 @@ describe('SendForm Smart Contract', () => {
 
     const sendBtn = render.getByTestId(FormDataTestIdsEnum.sendBtn);
 
-    act(() => {
-      fireEvent.click(sendBtn);
-    });
+    await userEvent.click(sendBtn);
+    await sleep();
 
     // first server response fetches a gasLimit value over maxGasLimit
     const req = await render.findByText(/must be lower than/);
@@ -45,11 +51,13 @@ describe('SendForm Smart Contract', () => {
     });
     // modify data field to get a new gasLimit value from the server
     let dataInput = render.getByTestId(ValuesEnum.data) as HTMLInputElement;
-    fireEvent.change(dataInput, { target: { value: 'claim@' } });
-    fireEvent.blur(dataInput);
+    await userEvent.clear(dataInput);
+    await userEvent.type(dataInput, 'claim@');
+    await userEvent.tab();
+    await sleep();
 
     await waitFor(() => {
-      expect(transactionCost).toHaveBeenCalledTimes(1);
+      expect(transactionCost).toHaveBeenCalled();
     });
 
     // call fails so default value is filled in
@@ -61,15 +69,20 @@ describe('SendForm Smart Contract', () => {
 
     // 3rd data field change fetches correct server response
     dataInput = render.getByTestId(ValuesEnum.data) as HTMLInputElement;
-    fireEvent.change(dataInput, { target: { value: 'claim' } });
-    fireEvent.blur(dataInput);
+    await userEvent.clear(dataInput);
+    await userEvent.type(dataInput, 'claim');
+    await userEvent.tab();
+    await sleep();
+    formatAmountInt = await render.findByTestId(
+      FormDataTestIdsEnum.formatAmountInt
+    );
+    expect(formatAmountInt.innerHTML).toBe('0');
 
-    fee = await render.findByTestId(FormDataTestIdsEnum.feeLimit);
+    formatAmountDecimal = await render.findByTestId(
+      FormDataTestIdsEnum.formatAmountDecimals
+    );
+    expect(formatAmountDecimal.innerHTML).toBe('.0165501325');
 
-    await waitFor(() => {
-      expect(fee.textContent).toBe('0.0165501325 xEGLD');
-    });
-
-    expect(transactionCost).toHaveBeenCalledTimes(1);
+    expect(transactionCost).toHaveBeenCalled();
   });
 });

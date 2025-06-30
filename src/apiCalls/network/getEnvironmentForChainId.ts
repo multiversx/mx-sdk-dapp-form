@@ -1,9 +1,10 @@
+import { EnvironmentsEnum } from '@multiversx/sdk-dapp/out/types/enums.types';
 import { WEGLD_ID } from 'constants/index';
 
-const chainIDToEnvironment: Record<string, string> = {
-  D: 'devnet',
-  T: 'testnet',
-  '1': 'mainnet'
+const chainIDToEnvironment: Record<string, EnvironmentsEnum> = {
+  D: EnvironmentsEnum.devnet,
+  T: EnvironmentsEnum.testnet,
+  '1': EnvironmentsEnum.mainnet
 };
 
 const chainIDToWegldId: Record<string, string> = {

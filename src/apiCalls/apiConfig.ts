@@ -1,4 +1,4 @@
-import { NetworkType } from '@multiversx/sdk-dapp/types/network.types';
+import { NetworkType } from '@multiversx/sdk-dapp/out/types/network.types';
 import { getNetworkConfigForChainId } from 'apiCalls/network';
 
 export interface ApiConfigType {
@@ -10,7 +10,11 @@ const apiConfig: { value: ApiConfigType | null } = {
   value: null
 };
 
-export function setApiConfig(networkConfiguration: NetworkType) {
+export function setApiConfig(networkConfiguration: NetworkType | null) {
+  if (!networkConfiguration) {
+    return null;
+  }
+
   apiConfig.value = {
     baseURL: networkConfiguration.apiAddress,
     timeout: Number(networkConfiguration.apiTimeout)
@@ -19,7 +23,9 @@ export function setApiConfig(networkConfiguration: NetworkType) {
   return apiConfig.value;
 }
 
-export async function getApiConfig(chainId?: string): Promise<ApiConfigType> {
+export async function getApiConfig(
+  chainId?: string
+): Promise<ApiConfigType | null> {
   if (apiConfig.value != null) {
     return apiConfig.value;
   }

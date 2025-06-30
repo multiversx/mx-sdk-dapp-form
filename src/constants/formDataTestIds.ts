@@ -22,6 +22,10 @@ export enum FormDataTestIdsEnum {
   confirmUsdValue = 'confirmUsdValue',
   returnToWalletBtn = 'returnToWalletBtn',
   infoDust = 'infoDust',
+  formatAmountComponent = 'formatAmountComponent',
+  formatAmountInt = 'formatAmountInt',
+  formatAmountDecimals = 'formatAmountDecimals',
+  formatAmountSymbol = 'formatAmountSymbol',
   enableAdvancedMode = 'enableAdvancedMode',
   confirmAdvancedMode = 'confirmAdvancedMode',
   canTransferWarning = 'canTransferWarning',
@@ -38,5 +42,9 @@ export enum FormDataTestIdsEnum {
   receiverLabel = 'receiverLabel',
   receiverError = 'receiverError',
   gasLimitError = 'gasLimitError',
-  guardianScreen = 'guardianScreen'
+  guardianScreen = 'guardianScreen',
+  receiverLoading = 'receiverLoading',
+  gasPrice = 'gasPrice',
+  gasLimit = 'gasLimit',
+  data = 'data'
 }

@@ -1,5 +1,5 @@
-import { NftEnumType } from '@multiversx/sdk-dapp/types/tokens.types';
-import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
+import { NftEnumType } from '@multiversx/sdk-dapp/out/types/tokens.types';
+import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import { ApiConfigType, getNftByAddressAndIdentifier } from 'apiCalls';
 import { getAllowedReceiversData } from 'contexts/TokensContext/utils';
 

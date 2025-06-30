@@ -1,4 +1,4 @@
-import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
+import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import { ApiConfigType, getAccountToken } from 'apiCalls';
 
 async function getSingleToken(
@@ -7,11 +7,16 @@ async function getSingleToken(
 ) {
   const { address, identifier } = props;
   try {
-    const { data: token } = await getAccountToken(
+    const response = await getAccountToken(
       { address, token: identifier },
       apiConfig
     );
-    return token;
+
+    if (!response) {
+      return null;
+    }
+
+    return response.data;
   } catch (e) {
     console.log(e);
   }

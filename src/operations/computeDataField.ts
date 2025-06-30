@@ -1,7 +1,7 @@
+import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 import BigNumber from 'bignumber.js';
-
 import { ZERO } from 'constants/index';
-import { bech32, parseAmount } from 'helpers';
+import { bech32 } from 'helpers/transformations';
 import {
   NftEnumType,
   PartialNftType,

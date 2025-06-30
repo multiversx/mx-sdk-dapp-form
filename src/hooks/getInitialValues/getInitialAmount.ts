@@ -1,5 +1,5 @@
-import { DIGITS } from '@multiversx/sdk-dapp/constants/index';
-import { formatAmount } from 'helpers';
+import { DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
+import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
 import { NftEnumType } from 'types';
 import { ComputedNftType } from './types';
 

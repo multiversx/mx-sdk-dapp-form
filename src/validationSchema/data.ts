@@ -1,8 +1,8 @@
 import {
   LEDGER_HASH_SIGN_MINIMUM_VERSION,
   LEDGER_WITH_GUARDIANS_MINIMUM_VERSION
-} from '@multiversx/sdk-dapp/constants/ledger.constants';
-import getLedgerVersionOptions from '@multiversx/sdk-dapp/utils/operations/ledger/getLedgerVersionOptions';
+} from '@multiversx/sdk-dapp/out/constants/ledger.constants';
+import getLedgerVersionOptions from '@multiversx/sdk-dapp/out/providers/strategies/LedgerProviderStrategy/helpers/getLedgerVersionOptions';
 import { string } from 'yup';
 import { ExtendedValuesType } from 'types';
 

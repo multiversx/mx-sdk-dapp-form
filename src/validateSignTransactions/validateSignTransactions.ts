@@ -1,14 +1,13 @@
-import { IPlainTransactionObject } from '@multiversx/sdk-core/out';
-import { newTransaction } from '@multiversx/sdk-dapp/models/newTransaction';
+import { IPlainTransactionObject, Transaction } from '@multiversx/sdk-core/out';
+
+import { getTokenFromData } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/getMultiEsdtTransferData/helpers/getTokenFromData';
+import { parseMultiEsdtTransferData } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/getMultiEsdtTransferData/helpers/parseMultiEsdtTransferData';
 import {
   MultiEsdtTransactionType,
   MultiSignTransactionType,
   TransactionDataTokenType,
   TransactionsDataTokensType
-} from '@multiversx/sdk-dapp/types/transactions.types';
-
-import { getTokenFromData } from '@multiversx/sdk-dapp/utils/transactions/getTokenFromData';
-import { parseMultiEsdtTransferData } from '@multiversx/sdk-dapp/utils/transactions/parseMultiEsdtTransferData';
+} from '@multiversx/sdk-dapp/out/types/transactions.types';
 import getTxWithReceiver from './getTxWithReceiver';
 import {
   ValidateSignTransactionsType,
@@ -23,7 +22,7 @@ function processMultiTx(props: {
   const { transaction, transactionIndex, trx } = props;
   const newTx: MultiSignTransactionType = {
     ...transaction,
-    transaction: newTransaction(transaction),
+    transaction: Transaction.newFromPlainObject(transaction),
     multiTxData: trx.data,
     transactionIndex,
     needsSigning: true
@@ -84,7 +83,10 @@ function extractAllTransactions(props: ValidateSignTransactionsType) {
       allTransactions.push({
         ...transaction,
         transactionIndex: transactionIndex,
-        transaction: newTransaction({ ...transaction, chainID: chainId }),
+        transaction: Transaction.newFromPlainObject({
+          ...transaction,
+          chainID: chainId
+        }),
         needsSigning: true
       });
     }

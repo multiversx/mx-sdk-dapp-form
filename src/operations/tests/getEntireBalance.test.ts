@@ -1,4 +1,4 @@
-import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/constants/index';
+import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/out/constants';
 import { getEntireBalance, getEntireTokenBalance } from '../getEntireBalance';
 
 describe('Entire balance', () => {
@@ -13,7 +13,7 @@ describe('Entire balance', () => {
         chainId: MAINNET_CHAIN_ID
       });
     expect(available).toBe('1');
-    expect(entireBalanceMinusDust).toBe('0.9950');
+    expect(entireBalanceMinusDust).toBe('0.995');
   });
 
   test('Balance smaller than fee', () => {

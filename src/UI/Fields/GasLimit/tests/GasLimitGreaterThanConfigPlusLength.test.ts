@@ -1,8 +1,10 @@
-import { GAS_LIMIT } from '@multiversx/sdk-dapp/constants/index';
-import { fireEvent, waitFor } from '@testing-library/react';
+import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants';
+import { waitFor } from '@testing-library/react';
 
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types';
+import userEvent from '@testing-library/user-event';
+import { sleep } from 'tests/helpers';
 
 describe('GasLimit field', () => {
   it('should >= than the configGasLimit + data.length if data is set', async () => {
@@ -11,15 +13,19 @@ describe('GasLimit field', () => {
     const dataInput = await findByTestId(ValuesEnum.data);
     const dataValue = 'four';
 
-    fireEvent.change(dataInput, { target: { value: dataValue } });
-    fireEvent.blur(dataInput);
+    await userEvent.clear(dataInput);
+    await userEvent.type(dataInput, dataValue);
+    await userEvent.tab();
+    await sleep();
 
     const input = getByLabelText('Gas Limit');
     const value = GAS_LIMIT;
     const data = { target: { value } };
 
-    fireEvent.change(input, data);
-    fireEvent.blur(input);
+    await userEvent.clear(input);
+    await userEvent.type(input, data.target.value.toString());
+    await userEvent.tab();
+    await sleep();
 
     await waitFor(() => {
       const req = queryByText(/^Gas limit must be greater/);

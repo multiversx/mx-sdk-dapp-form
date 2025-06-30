@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
+import { WithClassnameType } from 'types';
 import { TransactionSummary, TransactionSummaryPropsType } from './components';
 import styles from './components/confirmScreen.module.scss';
 

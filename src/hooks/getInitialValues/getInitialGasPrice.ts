@@ -1,11 +1,7 @@
-import {
-  DIGITS,
-  DECIMALS,
-  GAS_PRICE
-} from '@multiversx/sdk-dapp/constants/index';
-
+import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
+import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
+import { GAS_PRICE } from '@multiversx/sdk-dapp/out/constants';
 import { ZERO } from 'constants/index';
-import { formatAmount } from 'helpers';
 
 export const getInitialGasPrice = (gasPrice?: string) => {
   const isGasPriceValid = gasPrice != null && gasPrice !== ZERO;

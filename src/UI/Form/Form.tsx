@@ -4,20 +4,21 @@ import {
   TransactionOptions,
   TransactionVersion
 } from '@multiversx/sdk-core/out';
-import {
-  DeviceSignedTransactions,
-  GuardianScreenType
-} from '@multiversx/sdk-dapp/types/transactions.types';
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
+import { ProviderType } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
 import classNames from 'classnames';
 import { useFormikContext } from 'formik';
-
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getTransactionFields } from 'helpers';
 import { generateTransaction } from 'operations/generateTransaction';
-import { ExtendedValuesType, TransactionTypeEnum } from 'types';
+import { WithClassnameType } from 'types';
+import {
+  ExtendedValuesType,
+  TransactionTypeEnum,
+  DeviceSignedTransactions,
+  GuardianScreenType
+} from 'types';
 
 import { ConfirmScreen } from 'UI/ConfirmScreen';
 import {
@@ -149,7 +150,11 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
   }
 
   if (areValidatedValuesReady) {
-    return <ConfirmScreen providerType={accountInfo.providerType} />;
+    return (
+      <ConfirmScreen
+        providerType={String(accountInfo.providerType) as ProviderType}
+      />
+    );
   }
 
   return (

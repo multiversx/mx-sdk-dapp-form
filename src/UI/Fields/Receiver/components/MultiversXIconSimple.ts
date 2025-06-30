@@ -1,3 +1,3 @@
-export const {
-  default: MultiversXIconSimple
-} = require('../../../../assets/icons/mx-icon-simple.svg');
+const MultiversXIconSimple =
+  require('../../../../assets/icons/mx-icon-simple.svg').default;
+export default MultiversXIconSimple;

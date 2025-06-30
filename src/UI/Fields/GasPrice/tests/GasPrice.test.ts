@@ -2,7 +2,6 @@ import { fireEvent, waitFor } from '@testing-library/react';
 
 import { testAddress } from '__mocks__';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
-import { formattedAmountSelector } from 'tests/helpers';
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types/form';
 
@@ -93,12 +92,6 @@ describe('GasPrice field constraints tests', () => {
   });
 
   it('should keep the fee constant if gasLimit was touched', async () => {
-    async function expectCorrectFee() {
-      const feeLimit = await findByTestId(FormDataTestIdsEnum.feeLimit);
-      expect(formattedAmountSelector(feeLimit).intAmount).toBe('0');
-      expect(formattedAmountSelector(feeLimit).decimalAmount).toBe('.0060495');
-    }
-
     const { findByTestId, getByTestId } = renderForm({
       balance: '1_000_000_000_000_000'.replaceAll('_', '') // 0.001
     });
@@ -112,6 +105,19 @@ describe('GasPrice field constraints tests', () => {
     const gasLimit = getByTestId(ValuesEnum.gasLimit);
     fireEvent.change(gasLimit, { target: { value: '600000000' } });
     fireEvent.blur(gasLimit, { target: { value: '600000000' } });
+
+    async function expectCorrectFee() {
+      const formatAmountInt = await findByTestId(
+        FormDataTestIdsEnum.formatAmountInt
+      );
+      const formatAmountDecimal = await findByTestId(
+        FormDataTestIdsEnum.formatAmountDecimals
+      );
+
+      expect(formatAmountInt.innerHTML).toBe('0');
+      expect(formatAmountDecimal.innerHTML).toBe('.0060495');
+    }
+
     expectCorrectFee();
 
     const data = await findByTestId(ValuesEnum.data);

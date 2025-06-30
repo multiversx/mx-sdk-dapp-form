@@ -1,25 +1,28 @@
 import {
   DefaultBodyType,
   PathParams,
-  ResponseComposition,
   rest,
   RestContext,
-  RestRequest
+  RestRequest,
+  RestHandler,
+  ResponseResolver
 } from 'msw';
-import { setupServer } from 'msw/node';
+import { setupServer, SetupServer } from 'msw/node';
 import { testAddress, testNetwork, testReceiver } from './accountConfig';
 
-export const mockResponse =
-  <T extends DefaultBodyType>(body: T) =>
-  (
-    _req: RestRequest<never, PathParams<string>>,
-    res: ResponseComposition<DefaultBodyType>,
-    ctx: RestContext
-  ) => {
+export const mockResponse = <T extends DefaultBodyType>(
+  body: T
+): ResponseResolver<
+  RestRequest<never, PathParams<string>>,
+  RestContext,
+  DefaultBodyType
+> => {
+  return (_req, res, ctx) => {
     return res(ctx.status(200), ctx.json(body));
   };
+};
 
-const handlers = [
+const handlers: RestHandler[] = [
   ...['tokens', 'nfts', 'sfts'].map((el) => {
     return rest.get(
       `${testNetwork.apiAddress}/accounts/${testAddress}/${el}`,
@@ -47,6 +50,6 @@ const handlers = [
 ];
 
 // This configures a request mocking server with the given request handlers.
-const server = setupServer(...handlers);
+const server: SetupServer = setupServer(...handlers);
 
 export { server, rest };

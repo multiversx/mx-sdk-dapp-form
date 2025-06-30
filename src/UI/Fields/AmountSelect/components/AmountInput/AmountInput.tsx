@@ -7,13 +7,13 @@ import React, {
   useRef,
   useState
 } from 'react';
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
-import { stringIsFloat } from '@multiversx/sdk-dapp/utils/validation';
+import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import { NumberFormatValues, NumericFormat } from 'react-number-format';
 
 import globals from 'assets/sass/globals.module.scss';
+import { WithClassnameType } from 'types';
 
 import styles from './amountInput.module.scss';
 import {

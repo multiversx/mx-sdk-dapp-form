@@ -1,4 +1,4 @@
-import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
+import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import { setApiConfig } from 'apiCalls';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { PartialNftType, PartialTokenType } from 'types';

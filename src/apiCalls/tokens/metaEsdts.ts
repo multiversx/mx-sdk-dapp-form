@@ -1,4 +1,4 @@
-import { COLLECTIONS_ENDPOINT } from '@multiversx/sdk-dapp/apiCalls/endpoints';
+import { COLLECTIONS_ENDPOINT } from '@multiversx/sdk-dapp/out/apiCalls/endpoints';
 import axios from 'axios';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
 import { NftEnumType, PartialNftType } from 'types';
@@ -12,6 +12,11 @@ export async function getAllowedReceivers(
   }
 
   const config = apiConfig || (await getApiConfig());
+
+  if (!config) {
+    return null;
+  }
+
   try {
     const { data: collectionData } = await axios.get<{
       canTransfer?: boolean;

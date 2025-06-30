@@ -1,9 +1,9 @@
 import React, { JSXElementConstructor } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { DECIMALS } from '@multiversx/sdk-dapp/constants';
-import { UsdValue } from '@multiversx/sdk-dapp/UI/UsdValue';
-import { getIdentifierType } from '@multiversx/sdk-dapp/utils/validation/getIdentifierType';
+import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
+import { getUsdValue } from '@multiversx/sdk-dapp/out/utils/operations/getUsdValue';
+import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import classNames from 'classnames';
 import { components } from 'react-select';
 
@@ -47,6 +47,13 @@ export const getOption =
 
     const tokenPrice = option.token?.usdPrice?.toString();
     const balanceUsdValue = option.token?.valueUSD?.toString();
+
+    const usdValue = getUsdValue({
+      usd: 1,
+      decimals: 4,
+      amount: balanceUsdValue || '0',
+      addEqualSign: false
+    });
 
     return (
       <div data-testid={`${(props as any).value}-option`}>
@@ -95,14 +102,12 @@ export const getOption =
             <div className={styles.right}>
               <span className={styles.value}>{amount}</span>
               {showBalanceUsdValue && balanceUsdValue && (
-                <UsdValue
-                  usd={1}
-                  decimals={4}
-                  amount={balanceUsdValue}
+                <small
                   data-testid={FormDataTestIdsEnum.tokenPriceUsdValue}
                   className={styles.price}
-                  addEqualSign={false}
-                />
+                >
+                  {usdValue}
+                </small>
               )}
             </div>
           </div>

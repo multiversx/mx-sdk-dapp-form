@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { DIGITS } from '@multiversx/sdk-dapp/constants/index';
-import { EnvironmentsEnum } from '@multiversx/sdk-dapp/types/enums.types';
+import { DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
+import { EnvironmentsEnum } from '@multiversx/sdk-dapp/out/types/enums.types';
 import { getEconomicsInfo } from 'apiCalls';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 

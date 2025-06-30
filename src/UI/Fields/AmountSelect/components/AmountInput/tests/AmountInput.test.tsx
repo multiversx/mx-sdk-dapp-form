@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { AmountInput, AmountInputPropsType } from '../AmountInput';
+import userEvent from '@testing-library/user-event';
+import { sleep } from 'tests/helpers';
 
 const dataTestId = 'amountInput';
 const usdPrice = 4;
@@ -36,13 +38,23 @@ describe('AmountInput tests', () => {
     const container = render(<AmountWrapper />);
     const input: any = container.getByTestId('amountInput');
 
-    fireEvent.change(input, { target: { value: '0' } });
+    await userEvent.clear(input);
+    await userEvent.type(input, '0');
+    await userEvent.tab();
+    await sleep();
+
     expect(input.value).toBe('0');
 
-    fireEvent.change(input, { target: { value: '00' } });
+    await userEvent.clear(input);
+    await userEvent.type(input, '00');
+    await userEvent.tab();
+    await sleep();
     expect(input.value).toBe('0');
 
-    fireEvent.change(input, { target: { value: '02' } });
+    await userEvent.clear(input);
+    await userEvent.type(input, '02');
+    await userEvent.tab();
+    await sleep();
     expect(input.value).toBe('0');
   });
 
@@ -50,13 +62,21 @@ describe('AmountInput tests', () => {
     const container = render(<AmountWrapper />);
     const input: any = container.getByTestId('amountInput');
 
-    fireEvent.change(input, { target: { value: '0' } });
+    await userEvent.clear(input);
+    await userEvent.type(input, '0');
+    await userEvent.tab();
     expect(input.value).toBe('0');
 
-    fireEvent.change(input, { target: { value: '0.' } });
-    expect(input.value).toBe('0.');
+    await userEvent.clear(input);
+    await userEvent.type(input, '0.');
+    await userEvent.tab();
+    await sleep();
+    expect(input.value).toBe('0');
 
-    fireEvent.change(input, { target: { value: '0.62' } });
+    await userEvent.clear(input);
+    await userEvent.type(input, '0.62');
+    await userEvent.tab();
+    await sleep();
     expect(input.value).toBe('0.62');
   });
 
@@ -66,14 +86,20 @@ describe('AmountInput tests', () => {
 
     expect(container.queryByTestId(testId)).not.toBeInTheDocument();
 
-    fireEvent.change(input, { target: { value: '2' } });
+    await userEvent.clear(input);
+    await userEvent.type(input, '2');
+    await userEvent.tab();
+    await sleep();
 
     await waitFor(() => {
       const usdValueLabel: any = container.getByTestId(testId);
       expect(usdValueLabel.innerHTML).toBe('≈ $8.00');
     });
 
-    fireEvent.change(input, { target: { value: '8' } });
+    await userEvent.clear(input);
+    await userEvent.type(input, '8');
+    await userEvent.tab();
+    await sleep();
 
     await waitFor(() => {
       const usdValueLabel: any = container.getByTestId(testId);
@@ -89,13 +115,19 @@ describe('AmountInput tests', () => {
     );
     const input: any = container.getByTestId('amountInput');
 
-    fireEvent.change(input, { target: { value: '1' } });
+    await userEvent.clear(input);
+    await userEvent.type(input, '1');
+    await userEvent.tab();
+    await sleep();
     await waitFor(() => {
       const usdValueLabel: any = container.getByTestId(testId);
       expect(usdValueLabel.innerHTML).toBe('≈ $4.00');
     });
 
-    fireEvent.change(input, { target: { value: '2' } });
+    await userEvent.clear(input);
+    await userEvent.type(input, '2');
+    await userEvent.tab();
+    await sleep();
 
     await waitFor(() => {
       const usdValueLabel: any = container.getByTestId(testId);

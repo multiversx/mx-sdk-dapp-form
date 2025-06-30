@@ -1,11 +1,11 @@
 import React from 'react';
-import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
 
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum, ZERO } from 'constants/index';
 import { calculateFeeInFiat } from 'operations';
 
 import { TransactionTypeEnum } from 'types';
+import { FormatAmount } from 'UI';
 import { TokenAvatar } from '../TokenAvatar';
 
 import styles from './styles.module.scss';

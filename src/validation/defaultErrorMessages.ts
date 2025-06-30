@@ -1,4 +1,4 @@
-import { GAS_LIMIT } from '@multiversx/sdk-dapp/constants/index';
+import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants';
 import {
   formattedConfigGasPrice,
   maxAcceptedGasPrice

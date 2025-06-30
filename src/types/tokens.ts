@@ -1,7 +1,7 @@
 import {
   TokenType,
   NftType as NftInterface
-} from '@multiversx/sdk-dapp/types/tokens.types';
+} from '@multiversx/sdk-dapp/out/types/tokens.types';
 import { NftEnumType, TransactionTypeEnum } from 'types/enums';
 
 // partial because it's only defining propreties needed by dapp-core-form
