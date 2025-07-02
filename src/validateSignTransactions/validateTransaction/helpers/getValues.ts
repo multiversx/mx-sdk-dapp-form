@@ -1,13 +1,10 @@
-import {
-  DIGITS,
-  DECIMALS,
-  GAS_PRICE
-} from '@multiversx/sdk-dapp/constants/index';
-import { MultiSignTransactionType } from '@multiversx/sdk-dapp/types/transactions.types';
-import { isTokenTransfer } from '@multiversx/sdk-dapp/utils/transactions/isTokenTransfer';
+import { DIGITS, DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
+import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
+import { GAS_PRICE } from '@multiversx/sdk-dapp/out/constants';
+import { isTokenTransfer } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/isTokenTransfer';
+import { MultiSignTransactionType } from '@multiversx/sdk-dapp/out/types/transactions.types';
 
 import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
-import { formatAmount } from 'helpers';
 import { TxSignValuesType } from '../types';
 
 export function getValues(props: {
@@ -21,7 +18,7 @@ export function getValues(props: {
   const transaction = tx.transaction.toPlainObject();
   const { receiver, receiverUsername, senderUsername } = transaction;
   const isTokenTransaction = Boolean(
-    tokenId && isTokenTransfer({ tokenId, erdLabel: egldLabel })
+    tokenId && isTokenTransfer({ tokenId, egldLabel })
   );
 
   const gasLimit = isTokenTransaction ? TOKEN_GAS_LIMIT : ZERO;

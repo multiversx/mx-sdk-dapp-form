@@ -1,7 +1,7 @@
 import { Transaction, Address, TokenTransfer } from '@multiversx/sdk-core';
-import { VERSION } from '@multiversx/sdk-dapp/constants/index';
+import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
+import { VERSION } from '@multiversx/sdk-dapp/out/constants';
 import BigNumber from 'bignumber.js';
-import { parseAmount } from 'helpers';
 
 interface PrepareTransactionType {
   balance: string;

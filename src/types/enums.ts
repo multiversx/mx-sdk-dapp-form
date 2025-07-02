@@ -1,4 +1,4 @@
-import { NftEnumType } from '@multiversx/sdk-dapp/types/tokens.types';
+import { NftEnumType } from '@multiversx/sdk-dapp/out/types/tokens.types';
 
 export { NftEnumType };
 

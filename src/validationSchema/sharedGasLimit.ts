@@ -1,4 +1,4 @@
-import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsInteger';
+import { stringIsInteger } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import { MAX_GAS_LIMIT } from 'constants/index';

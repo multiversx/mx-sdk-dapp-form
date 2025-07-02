@@ -1,4 +1,4 @@
-import { GAS_PER_DATA_BYTE } from '@multiversx/sdk-dapp/constants/index';
+import { GAS_PER_DATA_BYTE } from '@multiversx/sdk-dapp/out/constants';
 import {
   MIN_NFT_GAS_LIMIT,
   MAX_NFT_GAS_LIMIT,

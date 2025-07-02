@@ -3,7 +3,7 @@ import {
   MultiEsdtTransactionType,
   MultiSignTransactionType,
   TransactionsDataTokensType
-} from '@multiversx/sdk-dapp/types/transactions.types';
+} from '@multiversx/sdk-dapp/out/types/transactions.types';
 import { ApiConfigType } from 'apiCalls';
 import { ExtendedValuesType } from 'types';
 

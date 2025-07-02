@@ -4,6 +4,13 @@ import { getApiConfig } from 'apiCalls/apiConfig';
 export async function getTransactionCost(transaction: { [key: string]: any }) {
   try {
     const apiConfig = await getApiConfig();
+
+    if (!apiConfig) {
+      return {
+        success: false
+      };
+    }
+
     const { data } = await axios.post<{
       data?: {
         txGasUnits: number;

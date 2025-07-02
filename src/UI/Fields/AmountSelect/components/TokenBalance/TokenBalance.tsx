@@ -1,6 +1,6 @@
 import React from 'react';
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
 import classNames from 'classnames';
+import { WithClassnameType } from 'types';
 
 import { OptionType } from '../TokenSelect';
 import styles from './tokenBalance.module.scss';

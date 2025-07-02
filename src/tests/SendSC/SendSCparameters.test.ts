@@ -1,9 +1,10 @@
-import { fireEvent, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import { testAddress, testReceiver } from '__mocks__';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { ValuesEnum } from 'types/form';
-import { fillInForm, finalFee, setResponse } from './helpers';
+import { fillInForm, setResponse } from './helpers';
+import { sleep } from 'tests/helpers';
+import userEvent from '@testing-library/user-event';
 
 const transactionData = {
   chainID: 'T',
@@ -26,13 +27,19 @@ describe('SendForm Smart Contract', () => {
   test('GasLimit gets fetched from server', async () => {
     const transactionCost = jest.spyOn(axios, 'post');
     const { render } = await fillInForm();
-    const fee = render.getByTestId(FormDataTestIdsEnum.feeLimit);
 
-    await waitFor(() => {
-      expect(fee.textContent).toBe(finalFee);
-    });
+    let formatAmountInt = await render.findByTestId(
+      FormDataTestIdsEnum.formatAmountInt
+    );
 
-    expect(transactionCost).toHaveBeenCalledTimes(1);
+    expect(formatAmountInt.innerHTML).toBe('0');
+
+    let formatAmountDecimal = await render.findByTestId(
+      FormDataTestIdsEnum.formatAmountDecimals
+    );
+
+    expect(formatAmountDecimal.innerHTML).toBe('.000057937');
+    expect(transactionCost).toHaveBeenCalledTimes(2);
 
     expect(transactionCost).toHaveBeenCalledWith(
       '/transaction/cost',
@@ -46,16 +53,22 @@ describe('SendForm Smart Contract', () => {
 
     expect(gasLimit.value).toBe('101,200');
 
-    fireEvent.change(gasLimit, { target: { value: '101201' } });
-    fireEvent.blur(gasLimit);
+    await userEvent.clear(gasLimit);
+    await userEvent.type(gasLimit, '101201');
+    await userEvent.tab();
 
+    await sleep();
     const sendBtn = render.getByTestId(FormDataTestIdsEnum.sendBtn);
-    fireEvent.click(sendBtn);
+    await userEvent.click(sendBtn);
+    await sleep();
 
-    const confirmFee = await render.findByTestId('confirmFee');
-    expect(confirmFee.textContent).toContain('0.00005051201');
+    const confirmFee = await render.findByTestId(
+      FormDataTestIdsEnum.confirmFee
+    );
+
+    expect(confirmFee.textContent).toContain('0.00005051201 xEGLD');
 
     // after gasLimit edit, transactionCost does no longer get called
-    expect(transactionCost).toHaveBeenCalledTimes(1);
+    expect(transactionCost).toHaveBeenCalledTimes(2);
   });
 });

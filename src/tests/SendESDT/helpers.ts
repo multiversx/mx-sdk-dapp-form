@@ -1,9 +1,10 @@
-import { fireEvent, RenderResult, queries } from '@testing-library/react';
-import { testAddress, testNetwork } from '__mocks__';
+import { RenderResult, queries } from '@testing-library/react';
+import { testAddress, testNetwork } from '__mocks__/accountConfig';
 import { rest, server, mockResponse } from '__mocks__/server';
 import { formConfiguration, renderForm as beginAll } from 'tests/helpers';
 import { ValuesEnum } from 'types';
-
+import userEvent from '@testing-library/user-event';
+import { sleep } from 'tests/helpers';
 export { queries };
 
 export const beforAllTokens = (props?: {
@@ -34,8 +35,10 @@ const useInput =
     const processedInput = input as HTMLInputElement;
     const data = { target: { value } };
 
-    fireEvent.change(processedInput, data);
-    fireEvent.blur(processedInput);
+    await userEvent.clear(processedInput);
+    await userEvent.type(processedInput, data.target.value);
+    await userEvent.tab();
+    await sleep();
 
     return processedInput;
   };

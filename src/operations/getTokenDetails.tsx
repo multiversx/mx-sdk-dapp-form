@@ -1,4 +1,4 @@
-import { DECIMALS } from '@multiversx/sdk-dapp/constants/index';
+import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { ZERO } from 'constants/index';
 import { PartialTokenType } from 'types';
 

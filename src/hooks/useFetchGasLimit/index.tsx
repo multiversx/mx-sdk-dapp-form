@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/constants/index';
-import { isContract } from '@multiversx/sdk-dapp/utils/smartContracts';
+import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/out/constants';
+import { isContract } from '@multiversx/sdk-dapp/out/utils/validation/isContract';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';

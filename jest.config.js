@@ -6,13 +6,13 @@ module.exports = {
   transform: {
     '^.+\\.(ts|js|tsx|jsx)$': ['@swc/jest'],
     '^.+\\.scss$': 'jest-css-modules-transform',
-    '\\.svg$': '<rootDir>/jestFileTransformer.js'
+    '^.+\\.svg$': 'jest-transformer-svg'
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
   moduleFileExtensions: ['js', 'ts', 'tsx', 'jsx', 'json'],
   testMatch: ['**/src/**/?(*.)+(spec|test).ts?(x)'],
   moduleNameMapper: {
-    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|svg)$':
+    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$':
       'identity-obj-proxy'
   },
   transformIgnorePatterns: ['node_modules/(^.+\\\\.(ts|js)$)'],

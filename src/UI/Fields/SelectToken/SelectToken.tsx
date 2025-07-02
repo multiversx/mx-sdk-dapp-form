@@ -1,6 +1,5 @@
 import React from 'react';
-import * as constants from '@multiversx/sdk-dapp/constants/index';
-import { WithClassnameType } from '@multiversx/sdk-dapp/UI/types';
+import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
 import classNames from 'classnames';
 import Select, { SingleValue, components } from 'react-select';
 import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
@@ -9,6 +8,7 @@ import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled, selectCustomStyles } from 'helpers';
+import { WithClassnameType } from 'types';
 import { PartialTokenType, TokenAssetsType, ValuesEnum } from 'types';
 
 import styles from './styles.module.scss';
@@ -69,7 +69,7 @@ export const SelectToken = ({ className, label }: SelectTokenPropsType) => {
       name: 'MultiversX eGold',
       identifier: egldLabel,
       balance,
-      decimals: constants.DECIMALS,
+      decimals: DECIMALS,
       ticker: ''
     },
     ...tokens

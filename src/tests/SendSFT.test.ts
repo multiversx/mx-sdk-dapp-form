@@ -1,4 +1,4 @@
-import { fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
@@ -8,6 +8,8 @@ import {
   sendAndConfirmTest
 } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
+import userEvent from '@testing-library/user-event';
+import { sleep } from 'tests/helpers';
 
 const sftToken = {
   identifier: 'CNTMBLT-efb397-01',
@@ -68,8 +70,11 @@ describe('Send SFT tokens', () => {
     // fill in receiver
     const receiver = await methods.findByTestId(ValuesEnum.receiver);
 
-    fireEvent.change(receiver, { target: { value: testAddress } });
-    fireEvent.blur(receiver);
+    await userEvent.clear(receiver);
+    await userEvent.type(receiver, testAddress);
+    await userEvent.tab();
+
+    await sleep();
 
     await waitFor(() => {
       const receiverError = methods.getByTestId(
@@ -78,8 +83,10 @@ describe('Send SFT tokens', () => {
       expect(receiverError.innerHTML).toBe('Same as owner address');
     });
 
-    fireEvent.change(receiver, { target: { value: testReceiver } });
-    fireEvent.blur(receiver);
+    await userEvent.clear(receiver);
+    await userEvent.type(receiver, testReceiver);
+    await userEvent.tab();
+    await sleep();
 
     const tokenPreview = methods.getByTestId('token-preview');
     const tokenPreviewName = methods.getByTestId('token-preview-name');
@@ -98,7 +105,7 @@ describe('Send SFT tokens', () => {
     expect(available.textContent).toBe('1 CNTMBLT-efb397');
 
     const entireTokenBalaceButton = await methods.findByText('Max');
-    fireEvent.click(entireTokenBalaceButton);
+    await userEvent.click(entireTokenBalaceButton);
 
     const amountInput = await methods.findByTestId(ValuesEnum.amount);
     const processedAmountInput = amountInput as HTMLInputElement;
@@ -108,8 +115,10 @@ describe('Send SFT tokens', () => {
     });
 
     // test sending decimals
-    fireEvent.change(amountInput, { target: { value: '1.1' } });
-    fireEvent.blur(amountInput);
+    await userEvent.clear(amountInput);
+    await userEvent.type(amountInput, '1.1');
+    await userEvent.tab();
+    await sleep();
 
     await waitFor(() => {
       const req = methods.queryByText('Invalid number');
@@ -117,25 +126,28 @@ describe('Send SFT tokens', () => {
     });
 
     // test funds
-    fireEvent.change(amountInput, { target: { value: '2' } });
-    fireEvent.blur(amountInput);
-
+    await userEvent.clear(amountInput);
+    await userEvent.type(amountInput, '2');
+    await userEvent.tab();
+    await sleep();
     await waitFor(() => {
       const req = methods.queryByText('Insufficient funds');
       expect(req?.innerHTML).toBe('Insufficient funds');
     });
 
     // test zero
-    fireEvent.change(amountInput, { target: { value: '0' } });
-    fireEvent.blur(amountInput);
-
+    await userEvent.clear(amountInput);
+    await userEvent.type(amountInput, '0');
+    await userEvent.tab();
+    await sleep();
     await waitFor(() => {
       const req = methods.queryByText('Cannot be zero');
       expect(req?.innerHTML).toBe('Cannot be zero');
     });
 
-    fireEvent.change(amountInput, { target: { value: '1' } });
-    fireEvent.blur(amountInput);
+    await userEvent.clear(amountInput);
+    await userEvent.type(amountInput, '1');
+    await userEvent.tab();
 
     const data: any = await methods.findByTestId(ValuesEnum.data);
 
@@ -151,9 +163,10 @@ describe('Send SFT tokens', () => {
     const processedGasLimitInput = gasLimitInput as HTMLInputElement;
     expect(processedGasLimitInput.value).toBe('1,000,000');
 
-    fireEvent.change(processedGasLimitInput, { target: { value: '100000' } });
-    fireEvent.blur(processedGasLimitInput);
-
+    await userEvent.clear(processedGasLimitInput);
+    await userEvent.type(processedGasLimitInput, '100000');
+    await userEvent.tab();
+    await sleep();
     await waitFor(() => {
       const gasLimitError = methods.getByTestId(
         FormDataTestIdsEnum.gasLimitError
@@ -164,13 +177,17 @@ describe('Send SFT tokens', () => {
     });
 
     // reset gasLimit
-    const gasLimitResetBtn = methods.getByTestId('gasLimitResetBtn');
-    fireEvent.click(gasLimitResetBtn);
+    const gasLimitResetBtn = await methods.findByTestId(
+      FormDataTestIdsEnum.gasLimitResetBtn
+    );
+
+    await userEvent.click(gasLimitResetBtn);
+    await sleep();
     expect(processedGasLimitInput.value).toBe('1,000,000');
 
     await sendAndConfirmTest({ methods })({
       amount: '1',
-      fee: '0.0000595'
+      fee: '0.0000595 xEGLD'
     });
   });
 });

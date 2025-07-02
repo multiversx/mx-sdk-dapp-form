@@ -1,4 +1,4 @@
-import { NetworkType } from '@multiversx/sdk-dapp/types/network.types';
+import { NetworkType } from '@multiversx/sdk-dapp/out/types/network.types';
 import { FormConfigType, PartialNftType } from 'types';
 
 export interface ComputedNftType {

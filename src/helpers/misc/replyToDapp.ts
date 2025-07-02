@@ -1,4 +1,4 @@
-import { buildUrlParams } from '@multiversx/sdk-dapp/utils/buildUrlParams';
+import { buildUrlParams } from '@multiversx/sdk-dapp/out/utils/window/buildUrlParams';
 
 interface ReplyToDappBasicType {
   callbackUrl: string;

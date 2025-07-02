@@ -15,6 +15,11 @@ export interface EconomicsInfoType {
 export async function getEconomicsInfo() {
   try {
     const apiConfig = await getApiConfig();
+
+    if (!apiConfig) {
+      return null;
+    }
+
     const { data } = await axios.get<EconomicsInfoType>('economics', apiConfig);
     return data;
   } catch (err) {

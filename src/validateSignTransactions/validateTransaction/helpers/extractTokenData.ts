@@ -1,4 +1,4 @@
-import { TransactionsDataTokensType } from '@multiversx/sdk-dapp/types/transactions.types';
+import { TransactionsDataTokensType } from '@multiversx/sdk-dapp/out/types/transactions.types';
 
 export function extractTokenData(props: {
   dataId: string;

@@ -1,4 +1,4 @@
-import { stringIsInteger } from '@multiversx/sdk-dapp/utils/validation/stringIsInteger';
+import { stringIsInteger } from '@multiversx/sdk-dapp-utils/out/helpers';
 
 export const getRemainingPages = ({
   count,

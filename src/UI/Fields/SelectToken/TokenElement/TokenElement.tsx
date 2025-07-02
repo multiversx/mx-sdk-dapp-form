@@ -1,14 +1,13 @@
 import React, { JSXElementConstructor, useEffect, useState } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as constants from '@multiversx/sdk-dapp/constants/index';
-import { FormatAmount } from '@multiversx/sdk-dapp/UI/FormatAmount/FormatAmount';
+import { DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import classNames from 'classnames';
-
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum, ZERO } from 'constants/index';
 import { scamFlag } from 'helpers';
 import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
+import { FormatAmount } from 'UI';
 import styles from './styles.module.scss';
 
 const MultiversXIcon =
@@ -102,9 +101,7 @@ export const TokenElement = ({
           <FormatAmount
             egldLabel={identifier}
             value={balance || ZERO}
-            digits={
-              nftType === NftEnumType.SemiFungibleESDT ? 0 : constants.DIGITS
-            }
+            digits={nftType === NftEnumType.SemiFungibleESDT ? 0 : DIGITS}
             token={identifier}
             showLabel={false}
             decimals={decimals}
