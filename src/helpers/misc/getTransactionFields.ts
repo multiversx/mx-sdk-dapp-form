@@ -8,6 +8,7 @@ export const getTransactionFields = async (
   values: ExtendedValuesType,
   options?: {
     apiAddress?: string;
+    headers?: Record<string, string>;
   }
 ) => {
   const actualTransactionAmount =
@@ -17,7 +18,8 @@ export const getTransactionFields = async (
   const isNftTransaction = getIsNftTransaction(values.txType);
   const receiverAccount = await getAccountFromApi({
     address: values.receiver,
-    baseURL: options?.apiAddress ?? ''
+    baseURL: options?.apiAddress ?? '',
+    headers: options?.headers
   });
   const realReceiverUsername = receiverAccount?.username;
 

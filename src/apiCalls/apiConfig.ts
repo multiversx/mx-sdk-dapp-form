@@ -4,6 +4,7 @@ import { getNetworkConfigForChainId } from 'apiCalls/network';
 export interface ApiConfigType {
   baseURL: string;
   timeout: number;
+  headers?: Record<string, string>;
 }
 
 const apiConfig: { value: ApiConfigType | null } = {
@@ -17,7 +18,8 @@ export function setApiConfig(networkConfiguration: NetworkType | null) {
 
   apiConfig.value = {
     baseURL: networkConfiguration.apiAddress,
-    timeout: Number(networkConfiguration.apiTimeout)
+    timeout: Number(networkConfiguration.apiTimeout),
+    headers: networkConfiguration.headers
   };
 
   return apiConfig.value;
