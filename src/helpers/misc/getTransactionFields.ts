@@ -8,6 +8,7 @@ export const getTransactionFields = async (
   values: ExtendedValuesType,
   options?: {
     apiAddress?: string;
+    headers?: Record<string, string>;
   }
 ) => {
   const actualTransactionAmount =
