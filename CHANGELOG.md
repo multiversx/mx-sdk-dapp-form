@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[v2.0.5](https://github.com/multiversx/mx-sdk-dapp-form/pull/356)] - 2025-07-07
+
+- [Add support for headers on getTransactionFields and setApiConfig](https://github.com/multiversx/mx-sdk-dapp-form/pull/355)
+
+
 ## [[2.0.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/349)] - 2025-06-17
 
 - [Implemented relayer balance fetching and validation for gas fees](https://github.com/multiversx/mx-sdk-dapp-form/pull/348)
