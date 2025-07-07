@@ -4,4 +4,5 @@ export type FormNetworkConfigType = {
   egldLabel?: string;
   apiTimeout?: number;
   skipFetchFromServer?: boolean;
+  headers?: Record<string, string>;
 };
