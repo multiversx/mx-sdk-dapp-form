@@ -45,7 +45,8 @@
     "@types/react-dom": "18.2.18",
     "@typescript-eslint/eslint-plugin": "5.0.0",
     "@typescript-eslint/parser": "5.22.0",
-    "axios": "1.10.0",
+    "axios": "^1.10.0",
+    "bignumber.js": "^9.x",
     "esbuild": "0.14.47",
     "esbuild-node-externals": "1.4.1",
     "esbuild-plugin-svgr": "1.0.1",
@@ -102,7 +103,8 @@
     "@multiversx/sdk-core": "^14.x",
     "@multiversx/sdk-dapp": "^5.x",
     "@multiversx/sdk-dapp-utils": "^2.x",
-    "axios": "1.10.0",
+    "axios": "^1.10.0",
+    "bignumber.js": "^9.x",
     "react": ">=18",
     "react-dom": ">=18"
   },
@@ -116,7 +118,6 @@
   "dependencies": {
     "anchorme": "2.1.2",
     "bech32": "2.0.0",
-    "bignumber.js": "9.x",
     "formik": "2.2.9",
     "lodash": "4.17.21",
     "react-collapsed": "3.6.0",
