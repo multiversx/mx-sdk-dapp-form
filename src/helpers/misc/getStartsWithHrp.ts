@@ -1,7 +1,9 @@
 import { LibraryConfig } from '@multiversx/sdk-core';
 
-export const getStartsWithHrp = (value?: string) => {
+export const getStartsWithHrp = (value?: string): boolean => {
   return Boolean(
-    value?.startsWith(LibraryConfig.DefaultAddressHrp.toLowerCase())
+    value
+      ?.toLowerCase()
+      .startsWith(LibraryConfig.DefaultAddressHrp.toLowerCase())
   );
 };

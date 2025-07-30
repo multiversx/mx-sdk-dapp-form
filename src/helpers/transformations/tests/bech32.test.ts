@@ -1,4 +1,5 @@
 import { testAddress } from '__mocks__';
+import { LibraryConfig } from '@multiversx/sdk-core';
 import { bech32 } from '../bech32';
 
 describe('bech32 tests', () => {
@@ -47,9 +48,11 @@ describe('bech32 tests', () => {
     });
 
     test('decodes different valid bech32 address to hex public key', () => {
-      const result = bech32.decode(testAddress);
+      const differentAddress =
+        'erd1qyu5wthldzr8wx5c9ucg8kjagg0jfs53s8nr3zpz3hypefsdd8ssycr6th';
+      const result = bech32.decode(differentAddress);
       expect(result).toBe(
-        '8049d639e5a6980d1cd2392abcce41029cda74a1563523a202f09641cc2618f8'
+        '0139472eff6886771a982f3083da5d421f24c29181e63888228dc81ca60d69e1'
       );
     });
 
@@ -88,6 +91,40 @@ describe('bech32 tests', () => {
       const decoded = bech32.decode(testAddress);
       const encoded = bech32.encode(decoded);
       expect(encoded).toBe(testAddress);
+    });
+  });
+
+  describe('vibe prefix tests', () => {
+    beforeAll(() => {
+      LibraryConfig.DefaultAddressHrp = 'vibe';
+    });
+
+    afterAll(() => {
+      LibraryConfig.DefaultAddressHrp = 'erd';
+    });
+
+    test('encodes valid public key to vibe address', () => {
+      const publicKey =
+        'fd691bb5e85d102687d81079dffce842d4dc328276d2d4c60d8fd1c3433c3293';
+      const result = bech32.encode(publicKey);
+      expect(result).toMatch(/^vibe1/);
+    });
+
+    test('decodes valid vibe address to hex public key', () => {
+      const publicKey =
+        'fd691bb5e85d102687d81079dffce842d4dc328276d2d4c60d8fd1c3433c3293';
+      const vibeAddress = bech32.encode(publicKey);
+      const decoded = bech32.decode(vibeAddress);
+      expect(decoded).toBe(publicKey);
+    });
+
+    test('vibe encode/decode roundtrip', () => {
+      const originalPublicKey =
+        '0139472eff6886771a982f3083da5d421f24c29181e63888228dc81ca60d69e1';
+      const encoded = bech32.encode(originalPublicKey);
+      const decoded = bech32.decode(encoded);
+      expect(decoded).toBe(originalPublicKey);
+      expect(encoded).toMatch(/^vibe1/);
     });
   });
 });
