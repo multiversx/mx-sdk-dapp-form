@@ -38,8 +38,8 @@ export function prepareTransaction({
     nonce: BigInt(nonce),
     value: TokenTransfer.newFromNativeAmount(BigInt(bNamount.toString(10)))
       .amount,
-    sender: new Address(sender),
-    receiver: new Address(receiver),
+    sender: Address.newFromBech32(sender),
+    receiver: Address.newFromBech32(receiver),
     gasPrice: BigInt(parseInt(gasPrice)),
     gasLimit: BigInt(parseInt(gasLimit)),
     senderUsername,
@@ -47,7 +47,7 @@ export function prepareTransaction({
     data: Buffer.from(data.trim()),
     chainID: chainId,
     version: VERSION,
-    relayer: relayer ? new Address(relayer) : undefined,
+    relayer: relayer ? Address.newFromBech32(relayer) : undefined,
     relayerSignature: relayerSignature
       ? Buffer.from(relayerSignature)
       : undefined

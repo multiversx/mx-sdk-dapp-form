@@ -1,4 +1,3 @@
-import { Address } from '@multiversx/sdk-core';
 import BigNumber from 'bignumber.js';
 import {
   ApiConfigType,
@@ -7,6 +6,7 @@ import {
 } from 'apiCalls';
 import { extractNftFromData } from './extractNftFromData';
 import { ComputedNftType } from './types';
+import { bech32 } from 'helpers/transformations';
 
 interface ExistingNftType {
   collection: string;
@@ -53,7 +53,7 @@ export const searchNft = async (
       const apiNft = await searchNftById({ identifier, address }, apiConfig);
       if (apiNft) {
         return {
-          receiver: new Address(receiver).bech32(),
+          receiver: bech32.encode(receiver),
           nft: apiNft,
           quantity: nft ? quantity : new BigNumber(quantity, 16).toString(10)
         };
