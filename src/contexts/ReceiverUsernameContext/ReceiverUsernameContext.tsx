@@ -1,7 +1,7 @@
 import React, { useContext, ReactNode, createContext } from 'react';
 import { useFormikContext } from 'formik';
 import { useReceiverContext } from 'contexts/ReceiverContext';
-import { getStartsWithErd1 } from 'helpers';
+import { getStartsWithHrp } from 'helpers';
 import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
 import { ExtendedValuesType } from 'types';
 import { getIsValueAmongKnown } from './helpers';
@@ -40,7 +40,7 @@ export function ReceiverUsernameContextProvider({
   const { receiverInputValue: inputValue, knownAddresses } =
     useReceiverContext();
 
-  const searchQueryIsAddress = getStartsWithErd1(inputValue);
+  const searchQueryIsAddress = getStartsWithHrp(inputValue);
   const debouncedUsername = useDebounce(inputValue, MS_100);
 
   const usernameExactMatchExists = knownAddresses?.some(

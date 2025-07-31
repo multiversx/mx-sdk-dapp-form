@@ -2,6 +2,7 @@ import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addres
 import { string } from 'yup';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
+import { getStartsWithHrp } from 'helpers/misc';
 
 export const receiverUsername = (
   errorMessages: ValidationErrorMessagesType
@@ -12,7 +13,8 @@ export const receiverUsername = (
     function checkUsername(value) {
       const { receiver } = this.parent as ExtendedValuesType;
 
-      const userIntendsToUseValidAddress = receiver?.startsWith('erd1');
+      const userIntendsToUseValidAddress = getStartsWithHrp(receiver);
+
       const receiverIsEmpty = !value && !receiver;
 
       if (userIntendsToUseValidAddress || receiverIsEmpty) {

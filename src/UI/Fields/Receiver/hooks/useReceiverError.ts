@@ -1,6 +1,7 @@
 import { useFormikContext } from 'formik';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { ExtendedValuesType } from 'types';
+import { getStartsWithHrp } from 'helpers/misc';
 
 export const useReceiverError = () => {
   const {
@@ -18,7 +19,7 @@ export const useReceiverError = () => {
   const isInvalid =
     (isReceiverInvalid && receiverTouched) || isReceiverUsernameInvalid;
 
-  if (receiverUsername?.startsWith('erd1')) {
+  if (getStartsWithHrp(receiverUsername)) {
     return {
       isInvalid: isReceiverInvalid,
       receiverErrorDataTestId: 'receiverError',
