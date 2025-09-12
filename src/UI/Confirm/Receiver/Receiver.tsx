@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useState } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { isContract } from '@multiversx/sdk-dapp/out/utils/validation/isContract';
+import { isContract } from 'helpers';
 import { getAccountFromApi } from '@multiversx/sdk-dapp/out/apiCalls/account/getAccountFromApi';
 import { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/out/apiCalls/endpoints';
 import { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimUsernameDomain';
