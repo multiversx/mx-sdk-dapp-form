@@ -24,7 +24,10 @@ export const validateGasLimitAmount = ({
   data,
   chainId
 }: ValidateGasLimitAmountType): boolean => {
-  const parsedAmount = parseAmount(amount.toString());
+  const [, decimals] = amount?.split('.');
+  const decimalsLength = decimals?.length ?? undefined;
+
+  const parsedAmount = parseAmount(amount.toString(), decimalsLength);
   const bnAmount = new BigNumber(parsedAmount);
 
   const bnBalance = new BigNumber(balance);
