@@ -25,7 +25,7 @@ export const twoToken = {
   identifier: 'TWO-824e70',
   name: 'TwoTToken',
   ticker: 'Two',
-  decimals: 20,
+  decimals: 2,
   balance: '100000'
 };
 
@@ -46,17 +46,17 @@ const useInput =
 export const useAmountInput = useInput(ValuesEnum.amount);
 export const useGasLimitInput = useInput(ValuesEnum.gasLimit);
 
-export const setupEsdtServer = () => {
+export const setupEsdtServer = (tokenProps?: Partial<typeof twoToken>) => {
   server.use(
     rest.get(
       `${testNetwork.apiAddress}/accounts/${testAddress}/tokens/${twoToken.identifier}`,
-      mockResponse(twoToken)
+      mockResponse({ ...twoToken, ...tokenProps })
     )
   );
   server.use(
     rest.get(
       `${testNetwork.apiAddress}/accounts/${testAddress}/tokens`,
-      mockResponse([twoToken])
+      mockResponse([{ ...twoToken, ...tokenProps }])
     )
   );
 };

@@ -2,7 +2,7 @@ import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { beforAllTokens, setupEsdtServer, useAmountInput } from './helpers';
 
 describe('Send tokens', () => {
-  beforeEach(setupEsdtServer);
+  beforeEach(() => setupEsdtServer({ decimals: 20 }));
 
   describe('Tokens amount', () => {
     test('Tokens amount111', async () => {

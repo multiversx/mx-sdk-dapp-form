@@ -1,4 +1,3 @@
-import { act } from '@testing-library/react';
 import { ValuesEnum } from 'types/form';
 import { beforAllTokens, setupEsdtServer, useAmountInput } from './helpers';
 
@@ -13,9 +12,7 @@ describe('Tokens amount', () => {
     expect(input.value).toBe('1.12');
     const data: any = await methods.findByTestId(ValuesEnum.data);
 
-    await act(async () => {
-      expect(data.value).toBe('ESDTTransfer@54574f2d383234653730@70');
-      expect(data.disabled).toBeTruthy(); // check disabled
-    });
+    expect(data.value).toBe('ESDTTransfer@54574f2d383234653730@70');
+    expect(data.disabled).toBeTruthy(); // check disabled
   });
 });
