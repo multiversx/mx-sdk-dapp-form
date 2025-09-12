@@ -25,7 +25,7 @@ export const twoToken = {
   identifier: 'TWO-824e70',
   name: 'TwoTToken',
   ticker: 'Two',
-  decimals: 2,
+  decimals: 20,
   balance: '100000'
 };
 
