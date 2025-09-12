@@ -2,7 +2,9 @@ import { ValuesEnum } from 'types/form';
 import { beforAllTokens, setupEsdtServer, useAmountInput } from './helpers';
 
 describe('Tokens amount', () => {
-  beforeEach(setupEsdtServer);
+  beforeEach(() => {
+    setupEsdtServer();
+  });
 
   test('Tokens amount valid', async () => {
     const methods = beforAllTokens();

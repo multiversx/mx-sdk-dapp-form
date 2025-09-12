@@ -12,7 +12,9 @@ import {
 } from './helpers';
 
 describe('Send tokens', () => {
-  beforeEach(setupEsdtServer);
+  beforeEach(() => {
+    setupEsdtServer();
+  });
 
   test('Tokens gasLimit by amount and reset', async () => {
     const methods = beforAllTokens();
