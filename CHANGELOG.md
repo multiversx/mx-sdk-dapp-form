@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Fixed prettier](https://github.com/multiversx/mx-sdk-dapp-form/pull/364)
 - [Fixed linting](https://github.com/multiversx/mx-sdk-dapp-form/pull/363)
 
 ## [[3.0.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/362)] - 2025-07-31
