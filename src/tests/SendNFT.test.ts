@@ -1,4 +1,5 @@
 import { waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
@@ -8,7 +9,6 @@ import {
   sendAndConfirmTest
 } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
-import userEvent from '@testing-library/user-event';
 
 const nftToken = {
   identifier: 'NFT-f0806e-01',

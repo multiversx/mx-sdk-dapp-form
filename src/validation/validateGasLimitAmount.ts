@@ -5,6 +5,7 @@ import {
 } from '@multiversx/sdk-dapp/out/constants';
 import { calculateFeeLimit } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/calculateFeeLimit';
 import BigNumber from 'bignumber.js';
+import { testAddress } from '__mocks__/accountConfig';
 import { getParsedGasPrice } from 'operations';
 
 interface ValidateGasLimitAmountType {
@@ -31,6 +32,8 @@ export const validateGasLimitAmount = ({
 
   const fee = new BigNumber(
     calculateFeeLimit({
+      from: testAddress,
+      to: testAddress,
       gasPrice: getParsedGasPrice(gasPrice),
       gasLimit,
       data,

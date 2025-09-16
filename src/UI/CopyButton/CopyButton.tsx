@@ -3,8 +3,8 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faCheck, faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { copyTextToClipboard } from './helpers/copyToClipboard';
 import { WithClassnameType } from 'types';
+import { copyTextToClipboard } from './helpers/copyToClipboard';
 
 export interface CopyButtonPropsType extends WithClassnameType {
   text: string;

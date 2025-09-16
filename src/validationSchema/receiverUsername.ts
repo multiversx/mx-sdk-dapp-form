@@ -1,8 +1,8 @@
 import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 import { string } from 'yup';
+import { getStartsWithHrp } from 'helpers/misc';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
-import { getStartsWithHrp } from 'helpers/misc';
 
 export const receiverUsername = (
   errorMessages: ValidationErrorMessagesType

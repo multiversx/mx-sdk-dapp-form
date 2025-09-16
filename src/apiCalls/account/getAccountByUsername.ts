@@ -34,7 +34,7 @@ export async function getAccountByUsername(
     }
 
     return account;
-  } catch (error) {
+  } catch (_error) {
     return null;
   }
 }

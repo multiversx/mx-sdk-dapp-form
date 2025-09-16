@@ -4,9 +4,9 @@ import {
   getGlobalNftByIdentifier,
   getNftByAddressAndIdentifier
 } from 'apiCalls';
+import { bech32 } from 'helpers/transformations';
 import { extractNftFromData } from './extractNftFromData';
 import { ComputedNftType } from './types';
-import { bech32 } from 'helpers/transformations';
 
 interface ExistingNftType {
   collection: string;

@@ -1,9 +1,9 @@
 import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants';
 import { waitFor } from '@testing-library/react';
 
-import { renderForm } from 'tests/helpers/renderForm';
 import userEvent from '@testing-library/user-event';
 import { sleep } from 'tests/helpers';
+import { renderForm } from 'tests/helpers/renderForm';
 
 describe('GasLimit field', () => {
   it('should >= than the one set by config', async () => {

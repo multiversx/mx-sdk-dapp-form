@@ -1,11 +1,11 @@
 import { waitFor } from '@testing-library/react';
 
+import userEvent from '@testing-library/user-event';
 import { testAddress } from '__mocks__/accountConfig';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { sleep } from 'tests/helpers';
 import { renderForm } from 'tests/helpers/renderForm';
 import { ValuesEnum } from 'types/form';
-import userEvent from '@testing-library/user-event';
-import { sleep } from 'tests/helpers';
 
 describe('GasLimit field', () => {
   it('should not be empty', async () => {

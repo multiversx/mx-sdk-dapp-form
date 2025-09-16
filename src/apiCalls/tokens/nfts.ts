@@ -27,7 +27,7 @@ export async function getNftByAddressAndIdentifier(
       config
     );
     return data ? data : null;
-  } catch (err) {
+  } catch (_err) {
     return null;
   }
 }

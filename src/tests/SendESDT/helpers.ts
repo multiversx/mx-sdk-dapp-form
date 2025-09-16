@@ -1,10 +1,10 @@
 import { RenderResult, queries } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { testAddress, testNetwork } from '__mocks__/accountConfig';
 import { rest, server, mockResponse } from '__mocks__/server';
 import { formConfiguration, renderForm as beginAll } from 'tests/helpers';
-import { ValuesEnum } from 'types';
-import userEvent from '@testing-library/user-event';
 import { sleep } from 'tests/helpers';
+import { ValuesEnum } from 'types';
 export { queries };
 
 export const beforAllTokens = (props?: {

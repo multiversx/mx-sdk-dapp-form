@@ -1,4 +1,5 @@
 import { waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
@@ -7,9 +8,8 @@ import {
   renderForm as beginAll,
   sendAndConfirmTest
 } from 'tests/helpers';
-import { ValuesEnum } from 'types/form';
-import userEvent from '@testing-library/user-event';
 import { sleep } from 'tests/helpers';
+import { ValuesEnum } from 'types/form';
 
 const sftToken = {
   identifier: 'CNTMBLT-efb397-01',

@@ -79,7 +79,7 @@ export const computeNftDataField = ({
     dataStr += `@${bech32.decode(receiver)}`;
     dataStr += getDepositHex(isDeposit);
     return dataStr;
-  } catch (err) {
+  } catch (_err) {
     return '';
   }
 };

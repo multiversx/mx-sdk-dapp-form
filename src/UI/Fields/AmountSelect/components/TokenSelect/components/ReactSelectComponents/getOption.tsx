@@ -16,7 +16,7 @@ import styles from './../../tokenSelect.module.scss';
 
 export const {
   default: MultiversXIcon
-} = require('./../../../../../../../assets/icons/mx-icon.svg');
+} = require('./../../../../../../../assets/icons/mx-icon.svg'); // eslint-disable-line @typescript-eslint/no-require-imports
 
 export interface GetOptionPropsType {
   EgldIcon?: JSXElementConstructor<any>;

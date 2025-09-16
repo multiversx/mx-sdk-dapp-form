@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 import {
   DIGITS,
   DECIMALS,
@@ -8,8 +7,9 @@ import {
 import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
 import { stringIsInteger } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsInteger';
 import { getEgldLabel } from '@multiversx/sdk-dapp/out/methods/network/getEgldLabel';
-import { FormatAmountPropsType } from './formatAmount.types';
+import classNames from 'classnames';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { FormatAmountPropsType } from './formatAmount.types';
 
 const formatAmountInvalid = (props: FormatAmountPropsType) => {
   return (

@@ -2,8 +2,8 @@ import React, { PropsWithChildren } from 'react';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from 'classnames';
 import { getExplorerLink } from '@multiversx/sdk-dapp/out/utils/transactions/getExplorerLink';
+import classNames from 'classnames';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import { WithClassnameType } from 'types';
 

@@ -1,8 +1,8 @@
 import { waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { renderForm, sleep } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
-import userEvent from '@testing-library/user-event';
 
 describe('Entire balance button', () => {
   test('Entering smaller amount than entireBalanceMinusDust shows Max', async () => {

@@ -11,7 +11,7 @@ import { FormatAmount } from 'UI';
 import styles from './styles.module.scss';
 
 const MultiversXIcon =
-  require('./../../../../assets/icons/mx-icon.svg').default;
+  require('./../../../../assets/icons/mx-icon.svg').default; // eslint-disable-line @typescript-eslint/no-require-imports
 
 export interface TokenElementPropsType {
   EgldIcon?: JSXElementConstructor<any>;

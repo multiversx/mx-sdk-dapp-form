@@ -1,5 +1,5 @@
-import { testAddress } from '__mocks__';
 import { LibraryConfig } from '@multiversx/sdk-core';
+import { testAddress } from '__mocks__';
 import { bech32 } from '../bech32';
 
 describe('bech32 tests', () => {
