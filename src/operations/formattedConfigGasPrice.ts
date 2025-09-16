@@ -1,6 +1,6 @@
+import { GAS_PRICE } from '@multiversx/sdk-dapp/out/constants';
 import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
-import { GAS_PRICE } from '@multiversx/sdk-dapp/out/constants';
 import BigNumber from 'bignumber.js';
 
 export const formattedConfigGasPrice = formatAmount({

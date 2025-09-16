@@ -1,6 +1,6 @@
+import { getUsdValue } from '@multiversx/sdk-dapp/out/utils/operations/getUsdValue';
 import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
-import { getUsdValue } from '@multiversx/sdk-dapp/out/utils/operations/getUsdValue';
 
 export function calculateFeeInFiat({
   feeLimit,

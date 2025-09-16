@@ -7,11 +7,11 @@ import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { WithClassnameType } from 'types';
 import { ValuesEnum } from 'types/form';
-import amountSelectStyles from '../AmountSelect/amountSelect.module.scss';
 
 import { AdvancedMode } from './components';
 import { useIsDataDisabled } from './hooks';
 import styles from './styles.module.scss';
+import amountSelectStyles from '../AmountSelect/amountSelect.module.scss';
 
 export const Data = ({ className }: WithClassnameType) => {
   const {

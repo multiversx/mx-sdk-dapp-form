@@ -1,7 +1,7 @@
 import { RenderResult, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { sleep } from './sleep';
-import userEvent from '@testing-library/user-event';
 
 interface ConfirmScreenType {
   methods: RenderResult;

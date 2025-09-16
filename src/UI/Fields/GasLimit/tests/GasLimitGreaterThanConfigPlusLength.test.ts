@@ -1,10 +1,10 @@
 import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants';
 import { waitFor } from '@testing-library/react';
 
-import { renderForm } from 'tests/helpers/renderForm';
-import { ValuesEnum } from 'types';
 import userEvent from '@testing-library/user-event';
 import { sleep } from 'tests/helpers';
+import { renderForm } from 'tests/helpers/renderForm';
+import { ValuesEnum } from 'types';
 
 describe('GasLimit field', () => {
   it('should >= than the configGasLimit + data.length if data is set', async () => {

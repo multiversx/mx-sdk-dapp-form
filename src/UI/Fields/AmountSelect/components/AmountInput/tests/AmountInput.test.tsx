@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 import { render, waitFor } from '@testing-library/react';
-import { AmountInput, AmountInputPropsType } from '../AmountInput';
 import userEvent from '@testing-library/user-event';
 import { sleep } from 'tests/helpers';
+import { AmountInput, AmountInputPropsType } from '../AmountInput';
 
 const dataTestId = 'amountInput';
 const usdPrice = 4;

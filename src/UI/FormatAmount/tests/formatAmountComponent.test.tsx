@@ -1,6 +1,6 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import { MAINNET_EGLD_LABEL } from '@multiversx/sdk-dapp/out/constants/network.constants';
+import { render } from '@testing-library/react';
 import { FormatAmountPropsType } from 'UI/FormatAmount/formatAmount.types';
 import { FormatAmount } from '../FormatAmount';
 

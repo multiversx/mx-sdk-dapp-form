@@ -1,6 +1,6 @@
-import { renderForm } from 'tests/helpers/renderForm';
 import userEvent from '@testing-library/user-event';
 import { sleep } from 'tests/helpers';
+import { renderForm } from 'tests/helpers/renderForm';
 
 describe('GasLimit field', () => {
   it('should not be string', async () => {

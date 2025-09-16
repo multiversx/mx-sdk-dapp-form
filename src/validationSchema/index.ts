@@ -1,6 +1,5 @@
 import { object, string } from 'yup';
 import { TransactionTypeEnum } from 'types';
-import { ValidationErrorMessagesType } from '../types/validation';
 import data from './data';
 import egldAmount from './egldAmount';
 import egldGasLimit from './egldGasLimit';
@@ -11,6 +10,7 @@ import nftAmount from './nftAmount';
 import nftGasLimit from './nftGasLimit';
 import receiver from './receiver';
 import receiverUsername from './receiverUsername';
+import { ValidationErrorMessagesType } from '../types/validation';
 
 export const getValidationSchema = (
   errorMessages: ValidationErrorMessagesType
