@@ -8,14 +8,14 @@ import React, {
   useMemo
 } from 'react';
 
-import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
-import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';
-import { stringIsInteger } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsInteger';
 import {
   GAS_PER_DATA_BYTE,
   GAS_PRICE_MODIFIER
 } from '@multiversx/sdk-dapp/out/constants';
 import { calculateFeeLimit } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/calculateFeeLimit';
+import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
+import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';
+import { stringIsInteger } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 import { testAddress } from '__mocks__/accountConfig';

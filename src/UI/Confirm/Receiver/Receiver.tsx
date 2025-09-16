@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getAccountFromApi } from '@multiversx/sdk-dapp/out/apiCalls/account/getAccountFromApi';
 import { ACCOUNTS_ENDPOINT } from '@multiversx/sdk-dapp/out/apiCalls/endpoints';
 import { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimUsernameDomain';
+import { isContract } from '@multiversx/sdk-dapp/out/utils/validation/isContract';
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import MultiversXIconSimple from 'assets/icons/mx-icon-simple.svg';

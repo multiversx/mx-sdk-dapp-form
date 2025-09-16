@@ -5,10 +5,10 @@ import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { isContract } from 'helpers';
 import { DelegationContractDataType } from 'types';
-import fetchGasLimit from '../hooks/useFetchGasLimit/fetchGasLimit';
 import { calculateGasLimit } from './calculateGasLimit';
 import { calculateNftGasLimit } from './calculateNftGasLimit';
 import { getGuardedAccountGasLimit } from './getGuardedAccountGasLimit';
+import fetchGasLimit from '../hooks/useFetchGasLimit/fetchGasLimit';
 
 export interface ComputeInitGasLimitType {
   computedTokenId: string;
