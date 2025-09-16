@@ -1,8 +1,8 @@
 import { decodePart } from '@multiversx/sdk-dapp/out/utils/decoders/decodePart';
 import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 import { bech32 } from 'helpers/transformations';
-import { TransferDataEnum } from '../../types';
 import { SearchNFTPropsType } from './searchNft';
+import { TransferDataEnum } from '../../types';
 
 interface ExistingNftType {
   collection: string;

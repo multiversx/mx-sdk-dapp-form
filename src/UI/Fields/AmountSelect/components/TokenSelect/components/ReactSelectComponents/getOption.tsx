@@ -10,9 +10,9 @@ import { components } from 'react-select';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { HighlightText } from 'UI/HighlightText';
 
+import styles from './../../tokenSelect.module.scss';
 import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
 import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
-import styles from './../../tokenSelect.module.scss';
 
 export const {
   default: MultiversXIcon

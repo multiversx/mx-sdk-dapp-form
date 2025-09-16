@@ -4,8 +4,8 @@ import { useReceiverContext } from 'contexts';
 import { useReceiverUsernameContext } from 'contexts/ReceiverUsernameContext';
 import { getIsValueAmongKnown } from 'contexts/ReceiverUsernameContext/helpers/getIsValueAmongKnown';
 import { ExtendedValuesType } from 'types';
-import { useReceiverError } from '../useReceiverError';
 import { isAnyOptionFound } from './helpers';
+import { useReceiverError } from '../useReceiverError';
 
 export interface UseReceiverDisplayStatesType {
   menuIsOpen: boolean;
