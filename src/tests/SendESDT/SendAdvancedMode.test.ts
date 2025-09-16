@@ -5,9 +5,7 @@ import { ValuesEnum } from 'types/form';
 import { beforAllTokens, setupEsdtServer, useAmountInput } from './helpers';
 
 describe('Send advanced mode', () => {
-  beforeEach(() => {
-    setupEsdtServer();
-  });
+  beforeEach(setupEsdtServer);
 
   describe('Advanced mode keeps all values', () => {
     test('Selecting token then pressing Advanced Mode resets form to EGLD', async () => {

@@ -46,17 +46,17 @@ const useInput =
 export const useAmountInput = useInput(ValuesEnum.amount);
 export const useGasLimitInput = useInput(ValuesEnum.gasLimit);
 
-export const setupEsdtServer = (tokenProps?: Partial<typeof twoToken>) => {
+export const setupEsdtServer = () => {
   server.use(
     rest.get(
       `${testNetwork.apiAddress}/accounts/${testAddress}/tokens/${twoToken.identifier}`,
-      mockResponse({ ...twoToken, ...tokenProps })
+      mockResponse(twoToken)
     )
   );
   server.use(
     rest.get(
       `${testNetwork.apiAddress}/accounts/${testAddress}/tokens`,
-      mockResponse([{ ...twoToken, ...tokenProps }])
+      mockResponse([twoToken])
     )
   );
 };

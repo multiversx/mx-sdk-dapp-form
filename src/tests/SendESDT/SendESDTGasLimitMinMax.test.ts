@@ -8,9 +8,7 @@ import {
 import { beforAllTokens, setupEsdtServer, useGasLimitInput } from './helpers';
 
 describe('Tokens gasLimit', () => {
-  beforeEach(() => {
-    setupEsdtServer();
-  });
+  beforeEach(setupEsdtServer);
 
   test('Tokens gasLimit min and max', async () => {
     const methods = beforAllTokens();
