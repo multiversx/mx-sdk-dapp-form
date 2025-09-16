@@ -31,8 +31,8 @@ import {
   getGuardedAccountGasLimit
 } from 'operations';
 import { ExtendedValuesType, ValuesEnum } from 'types';
-import { useFormContext } from '../FormContext';
 import { getDefaultGasLimit } from './utils';
+import { useFormContext } from '../FormContext';
 
 export interface GasContextPropsType {
   gasPrice: string;

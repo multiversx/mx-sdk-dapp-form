@@ -11,7 +11,6 @@ import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFl
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import { NumberFormatValues, NumericFormat } from 'react-number-format';
-
 import globals from 'assets/sass/globals.module.scss';
 import { WithClassnameType } from 'types';
 

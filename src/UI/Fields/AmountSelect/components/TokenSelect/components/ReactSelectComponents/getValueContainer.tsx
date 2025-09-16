@@ -8,11 +8,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import classNames from 'classnames';
 import { components } from 'react-select';
+import styles from './../../tokenSelect.module.scss';
 import MultiversXIcon from '../../../../../../../assets/icons/mx-icon.svg';
 
 import type { OptionType } from '../../tokenSelect.types';
-
-import styles from './../../tokenSelect.module.scss';
 
 interface ValueComponentPropsType {
   EgldIcon?: JSXElementConstructor<any>;

@@ -9,11 +9,10 @@ import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { WithClassnameType } from 'types';
 import { FormatAmount } from 'UI';
+import { FeeInFiat } from './FeeInFiat';
+import styles from './styles.module.scss';
 import { GasLimit } from '../GasLimit/GasLimit';
 import { GasPrice } from '../GasPrice';
-import { FeeInFiat } from './FeeInFiat';
-
-import styles from './styles.module.scss';
 
 export const FeeAccordion = ({ className }: WithClassnameType) => {
   const { gasInfo, tokensInfo } = useSendFormContext();
