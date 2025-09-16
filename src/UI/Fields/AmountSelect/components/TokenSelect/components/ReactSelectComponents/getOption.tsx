@@ -1,9 +1,9 @@
 import React, { JSXElementConstructor } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { getUsdValue } from '@multiversx/sdk-dapp/out/utils/operations/getUsdValue';
 import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
+import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
 import classNames from 'classnames';
 import { components } from 'react-select';
 

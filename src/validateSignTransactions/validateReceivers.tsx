@@ -1,8 +1,8 @@
 import { IPlainTransactionObject } from '@multiversx/sdk-core/out';
 import { TransactionsDataTokensType } from '@multiversx/sdk-dapp/out/types/transactions.types';
 import { isContract } from '@multiversx/sdk-dapp/out/utils/validation/isContract';
-import getTxWithReceiver from './getTxWithReceiver';
 import { bech32 } from 'helpers/transformations';
+import getTxWithReceiver from './getTxWithReceiver';
 
 export interface ValidateReceiversType {
   transactions: IPlainTransactionObject[];

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import classNames from 'classnames';
 import { ELLIPSIS } from '@multiversx/sdk-dapp/out/constants';
+import classNames from 'classnames';
 import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
 import { WithClassnameType } from 'types';
 import styles from './trim.module.scss';

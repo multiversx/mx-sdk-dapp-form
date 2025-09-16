@@ -1,9 +1,9 @@
 import { waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { testAddress, testNetwork } from '__mocks__';
 import { rest, server, mockResponse } from '__mocks__/server';
-import { renderForm } from 'tests/helpers/renderForm';
-import userEvent from '@testing-library/user-event';
 import { sleep } from 'tests/helpers';
+import { renderForm } from 'tests/helpers/renderForm';
 
 jest.mock('../../../../assets/icons/mx-icon-simple.svg', () => ({
   __esModule: true,

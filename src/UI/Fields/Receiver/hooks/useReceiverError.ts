@@ -1,7 +1,7 @@
 import { useFormikContext } from 'formik';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
-import { ExtendedValuesType } from 'types';
 import { getStartsWithHrp } from 'helpers/misc';
+import { ExtendedValuesType } from 'types';
 
 export const useReceiverError = () => {
   const {

@@ -15,8 +15,8 @@ import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getIsDisabled } from 'helpers';
 import { ValuesEnum } from 'types';
 
-import { hasLeadingZeroes } from '../AmountSelect/components/AmountInput/helpers';
 import styles from './../styles.module.scss';
+import { hasLeadingZeroes } from '../AmountSelect/components/AmountInput/helpers';
 
 export const GasLimit = () => {
   const { formInfo, gasInfo } = useSendFormContext();
