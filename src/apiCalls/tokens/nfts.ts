@@ -48,7 +48,7 @@ export async function getGlobalNftByIdentifier(
       config
     );
     return data ? data : null;
-  } catch (err) {
+  } catch (_err) {
     return null;
   }
 }
