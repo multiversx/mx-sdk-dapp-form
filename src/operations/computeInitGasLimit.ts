@@ -1,9 +1,9 @@
 import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants';
 import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
-import { isContract } from '@multiversx/sdk-dapp/out/utils/validation/isContract';
 import BigNumber from 'bignumber.js';
 import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
+import { isContract } from 'helpers';
 import { DelegationContractDataType } from 'types';
 import { calculateGasLimit } from './calculateGasLimit';
 import { calculateNftGasLimit } from './calculateNftGasLimit';

@@ -16,7 +16,7 @@ import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
 
 export const {
   default: MultiversXIcon
-} = require('./../../../../../../../assets/icons/mx-icon.svg');
+} = require('./../../../../../../../assets/icons/mx-icon.svg'); // eslint-disable-line @typescript-eslint/no-require-imports
 
 export interface GetOptionPropsType {
   EgldIcon?: JSXElementConstructor<any>;

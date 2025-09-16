@@ -8,7 +8,7 @@ import 'whatwg-fetch';
 import { TextDecoder, TextEncoder } from 'util';
 import { server } from './__mocks__/server';
 
-global.ResizeObserver = require('resize-observer-polyfill');
+global.ResizeObserver = require('resize-observer-polyfill'); // eslint-disable-line @typescript-eslint/no-require-imports
 global.TextEncoder = TextEncoder;
 global.TextDecoder = TextDecoder;
 
