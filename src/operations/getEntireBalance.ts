@@ -6,6 +6,7 @@ import {
 } from '@multiversx/sdk-dapp/out/constants';
 import { calculateFeeLimit } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/calculateFeeLimit';
 import BigNumber from 'bignumber.js';
+import { testAddress } from '__mocks__/accountConfig';
 import { MIN_DUST, ZERO } from 'constants/index';
 
 interface EntireBalanceType {
@@ -32,6 +33,8 @@ export function getEntireBalance({
 
   const fee = new BigNumber(
     calculateFeeLimit({
+      from: testAddress,
+      to: testAddress,
       gasPrice,
       gasLimit,
       data,
