@@ -2,8 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import { WithClassnameType } from 'types';
 
-import { OptionType } from '../TokenSelect';
 import styles from './tokenBalance.module.scss';
+import { OptionType } from '../TokenSelect';
 
 export interface TokenBalancePropsType extends WithClassnameType {
   label?: string;

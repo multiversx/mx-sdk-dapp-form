@@ -2,8 +2,8 @@ import React, { useCallback, useContext, createContext, useState } from 'react';
 import { useFormikContext } from 'formik';
 
 import { ExtendedValuesType } from 'types';
-import { useFormContext } from '../FormContext';
 import { useFetchKnownAddresses, useScamError } from './hooks';
+import { useFormContext } from '../FormContext';
 
 export interface KnowAddressType {
   address: string;

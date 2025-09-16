@@ -8,9 +8,8 @@ import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { PartialNftType, TransactionTypeEnum } from 'types';
 import { FormatAmount } from 'UI';
 
-import { TokenAvatar } from '../TokenAvatar';
-
 import styles from './styles.module.scss';
+import { TokenAvatar } from '../TokenAvatar';
 
 export interface AmountPropsType {
   amount: string;

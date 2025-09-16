@@ -2,9 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import { components } from 'react-select';
 
-import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
-
 import styles from './../../tokenSelect.module.scss';
+import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
 
 export const getSingleValue =
   (
