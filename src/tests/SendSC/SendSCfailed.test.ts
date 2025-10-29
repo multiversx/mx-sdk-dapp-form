@@ -1,10 +1,10 @@
 import { waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import { FormDataTestIdsEnum, MAX_GAS_LIMIT } from 'constants/index';
+import { sleep } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
 import { fillInForm, setResponse } from './helpers';
-import userEvent from '@testing-library/user-event';
-import { sleep } from 'tests/helpers';
 
 describe('SendForm Smart Contract', () => {
   beforeEach(() => {

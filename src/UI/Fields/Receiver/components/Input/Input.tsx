@@ -6,9 +6,9 @@ import { components } from 'react-select';
 import { useSendFormContext } from 'contexts';
 import { ValuesEnum } from 'types';
 
+import { getFocusedOptionIncludesUsername } from './helpers';
 import { ReceiverSelectReferenceType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';
-import { getFocusedOptionIncludesUsername } from './helpers';
 
 export const renderInput =
   (

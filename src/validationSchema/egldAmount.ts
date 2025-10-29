@@ -1,6 +1,6 @@
+import { maxDecimals } from '@multiversx/sdk-dapp/out/utils/validation/maxDecimals';
 import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants/index';
 import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';
-import { maxDecimals } from '@multiversx/sdk-dapp/out/utils/validation/maxDecimals';
 import { string } from 'yup';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';

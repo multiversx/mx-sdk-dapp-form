@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[3.1.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/366)] - 2025-08-16
+
+- [Sdk-core v.15](https://github.com/multiversx/mx-sdk-dapp-form/pull/365)
+- [Fixed prettier](https://github.com/multiversx/mx-sdk-dapp-form/pull/364)
+- [Fixed linting](https://github.com/multiversx/mx-sdk-dapp-form/pull/363)
+
 ## [[3.0.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/362)] - 2025-07-31
 
 - [Added support for custom HRP](https://github.com/multiversx/mx-sdk-dapp-form/pull/361)

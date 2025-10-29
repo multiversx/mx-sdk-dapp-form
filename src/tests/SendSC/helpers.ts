@@ -4,10 +4,10 @@ import userEvent from '@testing-library/user-event';
 import { testNetwork, testReceiver } from '__mocks__';
 import { server, rest } from '__mocks__/server';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { sleep } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
 
 import { renderForm } from '../helpers';
-import { sleep } from 'tests/helpers';
 
 function* generator(arr: any[]) {
   yield* arr;

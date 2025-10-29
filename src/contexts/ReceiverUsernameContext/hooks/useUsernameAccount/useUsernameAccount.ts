@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 
-import { useFetchUsernameAddress } from '../useFetchUsernameAddress';
 import {
   UseUsernameAccountType,
   UseUsernameAddressReturnType
 } from './useUsernameAccount.types';
+import { useFetchUsernameAddress } from '../useFetchUsernameAddress';
 
 export const useUsernameAccount = ({
   shouldSkipSearch = false,

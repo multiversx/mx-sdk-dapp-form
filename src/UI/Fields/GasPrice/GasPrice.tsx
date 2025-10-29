@@ -20,10 +20,10 @@ import { getIsDisabled } from 'helpers';
 import { formattedConfigGasPrice } from 'operations';
 import { ValuesEnum } from 'types';
 
-import { hasLeadingZeroes } from '../AmountSelect/components/AmountInput/helpers';
-import styles from '../styles.module.scss';
 import { PpuOptionType } from './gasPrice.types';
 import { PpuOptionLabelEnum } from './gasPrice.types';
+import { hasLeadingZeroes } from '../AmountSelect/components/AmountInput/helpers';
+import styles from '../styles.module.scss';
 
 const GAS_PRICE_MODIFIER_FIELD = 'gasPriceModifier';
 const EMPTY_PPU = 0;

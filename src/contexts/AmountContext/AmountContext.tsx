@@ -15,14 +15,14 @@ import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 
 import { ExtendedValuesType, ValuesEnum } from 'types';
-import { useFormContext } from '../FormContext';
-import { useTokensContext } from '../TokensContext';
 import { useGetMaxAmountAvailable } from './hooks';
 import {
   getIsAmountInvalid,
   getIsMaxButtonVisible,
   getPercentageOfAmount
 } from './utils';
+import { useFormContext } from '../FormContext';
+import { useTokensContext } from '../TokensContext';
 
 export interface AmountContextPropsType {
   amount: string;

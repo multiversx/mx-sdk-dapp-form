@@ -22,7 +22,7 @@ export const validateTransaction = async ({
   ledger,
   apiConfig
 }: ValidateType) => {
-  const txData = tx.transaction.getData().toString();
+  const txData = tx.transaction.data.toString();
   const dataId = String(txData || tx.multiTxData);
 
   const { amount, tokenId, type, receiver, nonce } = extractTokenData({

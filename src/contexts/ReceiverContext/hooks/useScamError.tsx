@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import { useAccountContext } from '../../AccountContext';
 import { useVerifyScamAddress } from './useVerifyScamAddress';
+import { useAccountContext } from '../../AccountContext';
 
 export function useScamError(receiver: string) {
   const { address } = useAccountContext();

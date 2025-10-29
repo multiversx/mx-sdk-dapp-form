@@ -21,9 +21,9 @@ import {
   TransactionTypeEnum
 } from 'types';
 
+import { getAllowedReceiversData, useGetEconomicsInfo } from './utils';
 import { useFormContext } from '../FormContext';
 import { useNetworkConfigContext } from '../NetworkContext';
-import { getAllowedReceiversData, useGetEconomicsInfo } from './utils';
 
 export interface TokensContextInitializationPropsType {
   EgldIcon?: JSXElementConstructor<any>;

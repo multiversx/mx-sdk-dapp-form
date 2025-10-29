@@ -1,16 +1,15 @@
 import React from 'react';
+import { getUsdValue } from '@multiversx/sdk-dapp/out/utils/operations/getUsdValue';
 import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 
 import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
-import { getUsdValue } from '@multiversx/sdk-dapp/out/utils/operations/getUsdValue';
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { PartialNftType, TransactionTypeEnum } from 'types';
 import { FormatAmount } from 'UI';
 
-import { TokenAvatar } from '../TokenAvatar';
-
 import styles from './styles.module.scss';
+import { TokenAvatar } from '../TokenAvatar';
 
 export interface AmountPropsType {
   amount: string;

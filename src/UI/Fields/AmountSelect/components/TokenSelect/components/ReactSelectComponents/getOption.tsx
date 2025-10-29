@@ -1,22 +1,22 @@
 import React, { JSXElementConstructor } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { getUsdValue } from '@multiversx/sdk-dapp/out/utils/operations/getUsdValue';
 import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
+import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
 import classNames from 'classnames';
 import { components } from 'react-select';
 
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { HighlightText } from 'UI/HighlightText';
 
+import styles from './../../tokenSelect.module.scss';
 import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
 import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
-import styles from './../../tokenSelect.module.scss';
 
 export const {
   default: MultiversXIcon
-} = require('./../../../../../../../assets/icons/mx-icon.svg');
+} = require('./../../../../../../../assets/icons/mx-icon.svg'); // eslint-disable-line @typescript-eslint/no-require-imports
 
 export interface GetOptionPropsType {
   EgldIcon?: JSXElementConstructor<any>;

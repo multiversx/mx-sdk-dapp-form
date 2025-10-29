@@ -1,10 +1,10 @@
+import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import { testAddress, testReceiver } from '__mocks__';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { sleep } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
 import { fillInForm, setResponse } from './helpers';
-import { sleep } from 'tests/helpers';
-import userEvent from '@testing-library/user-event';
 
 const transactionData = {
   chainID: 'T',
@@ -28,13 +28,13 @@ describe('SendForm Smart Contract', () => {
     const transactionCost = jest.spyOn(axios, 'post');
     const { render } = await fillInForm();
 
-    let formatAmountInt = await render.findByTestId(
+    const formatAmountInt = await render.findByTestId(
       FormDataTestIdsEnum.formatAmountInt
     );
 
     expect(formatAmountInt.innerHTML).toBe('0');
 
-    let formatAmountDecimal = await render.findByTestId(
+    const formatAmountDecimal = await render.findByTestId(
       FormDataTestIdsEnum.formatAmountDecimals
     );
 

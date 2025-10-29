@@ -10,8 +10,8 @@ import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { ExtendedValuesType } from 'types/form';
 
-import { useIsDataDisabled } from '../../hooks';
 import styles from './styles.module.scss';
+import { useIsDataDisabled } from '../../hooks';
 
 export const AdvancedMode = () => {
   const {
