@@ -9,7 +9,6 @@ module.exports = {
     '\\.svg$': '<rootDir>/jestFileTransformer.js'
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
-  moduleFileExtensions: ['js', 'ts', 'tsx', 'jsx', 'json'],
   testMatch: ['**/src/**/?(*.)+(spec|test).ts?(x)'],
   moduleNameMapper: {
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2|svg)$':
