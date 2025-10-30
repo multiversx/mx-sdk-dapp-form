@@ -10,7 +10,7 @@
   "types": "./",
   "react-native": "./",
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "scripts": {
     "start": "yarn watch",
