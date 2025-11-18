@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import { useFormikContext } from 'formik';
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { getTransactionFields } from 'helpers';
 import { generateTransaction } from 'operations/generateTransaction';
@@ -44,6 +45,7 @@ interface FormPropsType extends WithClassnameType {
 export const Form = ({ className, GuardianScreen }: FormPropsType) => {
   const { formInfo, accountInfo, amountInfo, tokensInfo } =
     useSendFormContext();
+  const { networkConfig } = useNetworkConfigContext();
   const { values } = useFormikContext<ExtendedValuesType>();
   const { txType, tokenId, address, balance, chainId, ledger } = values;
   const { nft } = tokensInfo;
@@ -74,7 +76,9 @@ export const Form = ({ className, GuardianScreen }: FormPropsType) => {
       return;
     }
 
-    const parsedValues = await getTransactionFields(values);
+    const parsedValues = await getTransactionFields(values, {
+      apiAddress: networkConfig.apiAddress
+    });
 
     try {
       const transaction = await generateTransaction({
