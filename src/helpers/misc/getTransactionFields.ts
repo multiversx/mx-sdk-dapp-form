@@ -33,11 +33,10 @@ export const getTransactionFields = async (
   } catch (error) {
     const reason =
       error instanceof Error ? error.message : JSON.stringify(error);
-    const wrappedError = new Error(
+
+    throw new Error(
       `Failed to fetch receiver account (${values.receiver}) from ${baseURL}: ${reason}`
     );
-
-    throw wrappedError;
   }
 
   const realReceiverUsername = receiverAccount?.username;

@@ -1,11 +1,10 @@
 function fallbackCopyTextToClipboard(text: string) {
   let textArea: HTMLTextAreaElement | null = null;
+  let success = false;
 
   try {
-    let success = false;
-
     if (!document?.body) {
-      return false;
+      return success;
     }
 
     textArea = document.createElement('textarea');
@@ -15,22 +14,20 @@ function fallbackCopyTextToClipboard(text: string) {
     textArea.focus();
     textArea.select();
 
-    const result = document.execCommand('copy');
-    success = !!result;
+    success = document.execCommand('copy');
 
-    if (result === false) {
+    if (!success) {
       console.warn('Fallback: document.execCommand("copy") returned false');
     }
-
-    return success;
   } catch (err) {
     console.error('Fallback: Oops, unable to copy', err);
-    return false;
-  } finally {
-    if (textArea && document?.body?.contains(textArea)) {
-      document.body.removeChild(textArea);
-    }
   }
+
+  if (textArea && document?.body?.contains(textArea)) {
+    document.body.removeChild(textArea);
+  }
+
+  return success;
 }
 
 export async function copyTextToClipboard(text: string) {
