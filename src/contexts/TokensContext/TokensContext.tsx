@@ -9,7 +9,7 @@ import React, {
   JSXElementConstructor
 } from 'react';
 import { useFormikContext } from 'formik';
-import uniqBy from 'lodash/uniqBy';
+import uniqBy from 'lodash-es/uniqBy';
 import { fetchAllTokens } from 'apiCalls';
 import { useAccountContext } from 'contexts/AccountContext';
 import { getTokenDetails, getTxType } from 'operations';
@@ -97,7 +97,7 @@ export function TokensContextProvider({
       const currentTokens = tokens ?? [];
       const tokensFromServer = uniqBy(
         [...currentTokens, ...newTokensAndMetaESDTs],
-        (token) => token.identifier
+        (token: PartialTokenType) => token.identifier
       );
 
       setFieldValue(tokensField, tokensFromServer);

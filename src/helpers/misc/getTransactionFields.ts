@@ -1,4 +1,4 @@
-import { getAccountFromApi } from '@multiversx/sdk-dapp';
+import { getAccountFromApi } from '@multiversx/sdk-dapp/out/apiCalls/account/getAccountFromApi';
 import { ZERO } from '@multiversx/sdk-dapp-utils/out/constants';
 import { getIsNftTransaction } from 'helpers/misc/getIsNftTransaction';
 import { TransactionTypeEnum } from 'types/enums';
