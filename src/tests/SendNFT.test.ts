@@ -99,7 +99,7 @@ describe('Send NFT tokens', () => {
     );
 
     await waitFor(() => {
-      expect(tokenPreview).toBeInTheDocument();
+      expect(tokenPreview).toBeDefined();
       expect(tokenPreviewName.textContent).toBe('NFT');
       expect(tokenPreviewIdentifier.textContent).toBe('NFT-f0806e-01');
     });

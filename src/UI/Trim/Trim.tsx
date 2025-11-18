@@ -60,9 +60,7 @@ const TrimComponent = ({
       {overflow ? (
         <>
           <span className={styles.left}>
-            <span>
-              {String(text).substring(0, Math.floor(text.length / 2))}
-            </span>
+            <span>{String(text).substring(0, Math.ceil(text.length / 2))}</span>
           </span>
 
           <span className={styles.ellipsis}>{ELLIPSIS}</span>

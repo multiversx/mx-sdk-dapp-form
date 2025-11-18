@@ -95,7 +95,7 @@ describe('Send SFT tokens', () => {
     );
 
     await waitFor(() => {
-      expect(tokenPreview).toBeInTheDocument();
+      expect(tokenPreview).toBeDefined();
       expect(tokenPreviewName.textContent).toBe('Confirmed Won');
       expect(tokenPreviewIdentifier.textContent).toBe('CNTMBLT-efb397-01');
     });

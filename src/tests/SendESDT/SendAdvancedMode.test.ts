@@ -56,7 +56,7 @@ describe('Send advanced mode', () => {
       );
 
       expect(processedGasLimitInput.value).toBe('500,000');
-      expect(dataInput).toBeEnabled();
+      expect((dataInput as HTMLInputElement).disabled).toBe(false);
     });
   });
 });

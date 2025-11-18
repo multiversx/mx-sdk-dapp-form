@@ -41,8 +41,9 @@ export function useVerifyScamAddress(apiConfig?: ApiConfigType) {
         }));
       } catch (err) {
         console.error('Unable to find address', err);
+      } finally {
+        setFetching(false);
       }
-      setFetching(false);
     }
   };
 

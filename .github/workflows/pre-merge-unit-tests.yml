@@ -26,15 +26,15 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
-      - name: Setup yarn
-        run: npm install -g yarn
+          node-version: 22
+      - name: Setup pnpm
+        run: npm install -g pnpm
       - name: Clean up
         run: |
           rm -rf node_modules build
       - name: Install Dependencies
-        run: yarn install
+        run: pnpm install --frozen-lockfile
       - name: Build
-        run: yarn build
+        run: pnpm build
       - name: Run unit tests
-        run: yarn test --silent
+        run: pnpm test --silent
