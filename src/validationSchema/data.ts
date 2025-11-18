@@ -2,7 +2,7 @@ import {
   LEDGER_HASH_SIGN_MINIMUM_VERSION,
   LEDGER_WITH_GUARDIANS_MINIMUM_VERSION
 } from '@multiversx/sdk-dapp/out/constants/ledger.constants';
-import getLedgerVersionOptions from '@multiversx/sdk-dapp/out/providers/strategies/LedgerProviderStrategy/helpers/getLedgerVersionOptions';
+import getLedgerVersionOptions from '@multiversx/sdk-dapp/out/providers/strategies/LedgerProviderStrategy/helpers/authenticateLedgerAccount/helpers/getLedgerVersionOptions';
 import { string } from 'yup';
 import { ExtendedValuesType } from 'types';
 

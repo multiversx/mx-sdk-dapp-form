@@ -4,7 +4,7 @@ import {
 } from '@multiversx/sdk-dapp/out/apiCalls/endpoints';
 import { getPersistedToken } from '@multiversx/sdk-dapp/out/apiCalls/tokens/getPersistedToken';
 import axios from 'axios';
-import uniqBy from 'lodash/uniqBy';
+import uniqBy from 'lodash-es/uniqBy';
 import { ApiConfigType, getApiConfig } from 'apiCalls/apiConfig';
 import { PartialMetaEsdtType, PartialTokenType } from 'types';
 

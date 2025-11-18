@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getTransactions } from '@multiversx/sdk-dapp/out/apiCalls/transactions/getTransactions';
-import uniqBy from 'lodash/uniqBy';
+import uniqBy from 'lodash-es/uniqBy';
 
 import { getApiConfig } from 'apiCalls';
 import { useAccountContext } from 'contexts/AccountContext';

@@ -84,7 +84,7 @@ describe('AmountInput tests', () => {
     const container = render(<AmountWrapper />);
     const input: any = container.getByTestId('amountInput');
 
-    expect(container.queryByTestId(testId)).not.toBeInTheDocument();
+    expect(container.queryByTestId(testId)).toBeNull();
 
     await userEvent.clear(input);
     await userEvent.type(input, '2');

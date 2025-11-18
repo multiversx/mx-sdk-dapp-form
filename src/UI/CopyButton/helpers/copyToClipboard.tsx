@@ -1,28 +1,40 @@
 function fallbackCopyTextToClipboard(text: string) {
-  try {
-    let success = false;
+  let textArea: HTMLTextAreaElement | null = null;
+  let success = false;
 
-    const textArea = document?.createElement('textarea');
+  try {
+    if (!document?.body) {
+      return success;
+    }
+
+    textArea = document.createElement('textarea');
     textArea.value = text;
     textArea.style.position = 'fixed';
-    document?.body.appendChild(textArea);
+    document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
 
-    document?.execCommand('copy');
-    success = true;
+    success = document.execCommand('copy');
 
-    document?.body.removeChild(textArea);
-
-    return success;
+    if (!success) {
+      console.warn('Fallback: document.execCommand("copy") returned false');
+    }
   } catch (err) {
     console.error('Fallback: Oops, unable to copy', err);
-    return false;
   }
+
+  if (textArea && document?.body?.contains(textArea)) {
+    document.body.removeChild(textArea);
+  }
+
+  return success;
 }
 
 export async function copyTextToClipboard(text: string) {
-  if (typeof window != 'undefined' && typeof window?.location != 'undefined') {
+  if (
+    typeof window === 'undefined' ||
+    typeof window?.location === 'undefined'
+  ) {
     return false;
   }
 
