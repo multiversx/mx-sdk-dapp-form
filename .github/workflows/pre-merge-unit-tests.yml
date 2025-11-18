@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 22
-      - name: Setup yarn
+      - name: Setup pnpm
         run: npm install -g pnpm
       - name: Clean up
         run: |

@@ -16,7 +16,7 @@ async function getSingleToken(
       return null;
     }
 
-    return response.data;
+    return response.data ?? null;
   } catch (e) {
     console.log(e);
   }

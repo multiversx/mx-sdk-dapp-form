@@ -77,6 +77,7 @@ export function useFetchUsernameAddress(apiConfig?: ApiConfigType) {
       const config = apiConfig || (await getApiConfig());
 
       if (!config) {
+        setFetching(false);
         return;
       }
 
