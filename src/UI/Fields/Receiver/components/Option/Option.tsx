@@ -1,9 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 import { components } from 'react-select';
-import { Trim } from 'UI';
-
 import { HighlightText } from 'UI/HighlightText';
+import { Trim } from 'UI/Trim';
 
 import { GenericOptionType } from '../../Receiver.types';
 import styles from '../../styles.module.scss';

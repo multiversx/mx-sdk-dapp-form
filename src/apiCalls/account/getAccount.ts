@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { AccountContextPropsType } from '../../contexts';
+import { AccountContextPropsType } from '../../contexts/AccountContext';
 
 export async function getMultiversxAccount(
   address: string,

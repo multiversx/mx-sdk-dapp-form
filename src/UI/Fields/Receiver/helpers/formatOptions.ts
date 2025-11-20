@@ -1,6 +1,6 @@
 import { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimUsernameDomain';
 import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
-import { KnowAddressType } from 'contexts';
+import { KnowAddressType } from 'contexts/ReceiverContext/receiverContext.types';
 
 export const formatOptions = (knownAddresses: KnowAddressType[] | null) => {
   if (!knownAddresses) {

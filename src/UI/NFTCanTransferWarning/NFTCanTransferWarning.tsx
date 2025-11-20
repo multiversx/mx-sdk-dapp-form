@@ -8,7 +8,9 @@ import { CAN_TRANSFER_MESSAGE, FormDataTestIdsEnum } from 'constants/index';
 import { WithClassnameType } from 'types';
 
 import { ExtendedValuesType } from 'types';
-import { Trim, ExplorerLink, CopyButton } from 'UI';
+import { CopyButton } from 'UI/CopyButton';
+import { ExplorerLink } from 'UI/ExplorerLink';
+import { Trim } from 'UI/Trim';
 import styles from './styles.module.scss';
 
 export const NFTCanTransferWarning = (props: WithClassnameType) => {

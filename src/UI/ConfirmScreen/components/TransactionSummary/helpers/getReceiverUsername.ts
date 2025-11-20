@@ -1,4 +1,4 @@
-import { KnowAddressType } from 'contexts';
+import { KnowAddressType } from 'contexts/ReceiverContext/receiverContext.types';
 
 export interface GetReceiverUsernameType {
   knownAddresses: KnowAddressType[] | null;

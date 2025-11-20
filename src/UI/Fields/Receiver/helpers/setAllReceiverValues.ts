@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from 'react';
 import { FormikHelpers } from 'formik';
 
-import { KnowAddressType } from 'contexts/ReceiverContext/ReceiverContext';
+import { KnowAddressType } from 'contexts/ReceiverContext/receiverContext.types';
 import { UsernameAccountsType } from 'contexts/ReceiverUsernameContext/hooks/useFetchUsernameAddress';
 import { ExtendedValuesType, ValuesEnum } from 'types';
 

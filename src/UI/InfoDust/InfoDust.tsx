@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { MIN_DUST, FormDataTestIdsEnum } from 'constants/index';
-import { FormatAmount } from 'UI';
+import { FormatAmount } from 'UI/FormatAmount';
 import styles from './styles.module.scss';
 
 export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (

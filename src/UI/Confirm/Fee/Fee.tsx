@@ -5,7 +5,7 @@ import { FormDataTestIdsEnum, ZERO } from 'constants/index';
 import { calculateFeeInFiat } from 'operations';
 
 import { TransactionTypeEnum } from 'types';
-import { FormatAmount } from 'UI';
+import { FormatAmount } from 'UI/FormatAmount';
 import styles from './styles.module.scss';
 import { TokenAvatar } from '../TokenAvatar';
 

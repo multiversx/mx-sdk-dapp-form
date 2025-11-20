@@ -1,6 +1,6 @@
 import { ServerTransactionType } from '@multiversx/sdk-dapp/out/types/serverTransactions.types';
 import { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimUsernameDomain';
-import { KnowAddressType } from 'contexts/ReceiverContext/ReceiverContext';
+import { KnowAddressType } from 'contexts/ReceiverContext/receiverContext.types';
 import { isContract } from 'helpers';
 
 export const formatAddressesFromTransactions = (

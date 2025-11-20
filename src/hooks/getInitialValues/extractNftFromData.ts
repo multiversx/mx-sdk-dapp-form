@@ -1,15 +1,8 @@
 import { decodePart } from '@multiversx/sdk-dapp/out/utils/decoders/decodePart';
 import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 import { bech32 } from 'helpers/transformations';
-import { SearchNFTPropsType } from './searchNft';
+import { ExistingNftType, SearchNFTPropsType } from './searchNft.types';
 import { TransferDataEnum } from '../../types';
-
-interface ExistingNftType {
-  collection: string;
-  nonce: string;
-  quantity: string;
-  receiver: string;
-}
 
 const decodeData = (data: string) => {
   const nonceIndex = 2;
