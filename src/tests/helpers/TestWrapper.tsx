@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/out/constants';
+import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/out/constants/network.constants';
 import { ProviderTypeEnum } from '@multiversx/sdk-dapp/out/providers/types/providerFactory.types';
 import { EnvironmentsEnum } from '@multiversx/sdk-dapp/out/types/enums.types';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';

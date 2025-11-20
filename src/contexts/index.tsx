@@ -4,7 +4,7 @@ import React, {
   ReactNode,
   useState
 } from 'react';
-import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/out/constants';
+import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/out/constants/network.constants';
 import { NetworkType } from '@multiversx/sdk-dapp/out/types/network.types';
 
 import {

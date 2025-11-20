@@ -1,7 +1,5 @@
-import {
-  GAS_LIMIT,
-  TESTNET_EGLD_LABEL
-} from '@multiversx/sdk-dapp/out/constants';
+import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants/mvx.constants';
+import { TESTNET_EGLD_LABEL } from '@multiversx/sdk-dapp/out/constants/network.constants';
 
 import { FormConfigType } from 'types/form';
 

@@ -1,7 +1,7 @@
 import {
   GAS_LIMIT,
   GAS_PER_DATA_BYTE
-} from '@multiversx/sdk-dapp/out/constants';
+} from '@multiversx/sdk-dapp/out/constants/mvx.constants';
 import BigNumber from 'bignumber.js';
 import { addDespositGasLimit } from './addDepositGatLimit';
 import { getGuardedAccountGasLimit } from './getGuardedAccountGasLimit';

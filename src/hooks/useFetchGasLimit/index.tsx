@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/out/constants';
+import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/out/constants/network.constants';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 import { SendFormContainerPropsType } from 'containers/SendFormContainer';
