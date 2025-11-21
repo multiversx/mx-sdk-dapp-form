@@ -11,7 +11,7 @@ import React, {
 import {
   GAS_PER_DATA_BYTE,
   GAS_PRICE_MODIFIER
-} from '@multiversx/sdk-dapp/out/constants';
+} from '@multiversx/sdk-dapp/out/constants/mvx.constants';
 import { calculateFeeLimit } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/calculateFeeLimit';
 import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFloat';
@@ -20,7 +20,6 @@ import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 import { testAddress } from '__mocks__/accountConfig';
 import { ZERO } from 'constants/index';
-import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import { getGasLimitChanged } from 'helpers';
@@ -57,7 +56,7 @@ export interface GasContextPropsType {
 
 interface GasContextProviderPropsType {
   children: ReactNode;
-  initGasLimitError?: SendFormContainerPropsType['initGasLimitError'];
+  initGasLimitError?: string;
 }
 
 interface IUpdateGasParams {

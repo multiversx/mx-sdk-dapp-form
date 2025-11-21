@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { ELLIPSIS } from '@multiversx/sdk-dapp/out/constants';
+import { ELLIPSIS } from '@multiversx/sdk-dapp/out/constants/placeholders.constants';
 import classNames from 'classnames';
 import useDebounce from 'hooks/useFetchGasLimit/useDebounce';
 import { WithClassnameType } from 'types';

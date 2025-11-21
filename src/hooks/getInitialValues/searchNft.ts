@@ -6,14 +6,8 @@ import {
 } from 'apiCalls';
 import { bech32 } from 'helpers/transformations';
 import { extractNftFromData } from './extractNftFromData';
+import { SearchNFTPropsType } from './searchNft.types';
 import { ComputedNftType } from './types';
-
-interface ExistingNftType {
-  collection: string;
-  nonce: string;
-  quantity: string;
-  receiver: string;
-}
 
 const searchNftById = async (
   props: { identifier: string; address: string },
@@ -32,12 +26,6 @@ const searchNftById = async (
     return await getGlobalNftByIdentifier(identifier, apiConfig);
   }
 };
-
-export interface SearchNFTPropsType {
-  data: string;
-  address: string;
-  nft?: ExistingNftType;
-}
 
 export const searchNft = async (
   props: SearchNFTPropsType,

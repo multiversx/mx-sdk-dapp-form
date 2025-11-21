@@ -3,13 +3,8 @@ import { useFormikContext } from 'formik';
 
 import { ExtendedValuesType } from 'types';
 import { useFetchKnownAddresses, useScamError } from './hooks';
+import { KnowAddressType } from './receiverContext.types';
 import { useFormContext } from '../FormContext';
-
-export interface KnowAddressType {
-  address: string;
-  username?: string;
-  rawUsername?: string;
-}
 
 export interface ReceiverContextPropsType {
   receiver: string;

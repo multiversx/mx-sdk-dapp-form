@@ -1,6 +1,5 @@
 import { IPlainTransactionObject, Transaction } from '@multiversx/sdk-core/out';
 
-import { getTokenFromData } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/getMultiEsdtTransferData/helpers/getTokenFromData';
 import { parseMultiEsdtTransferData } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/getMultiEsdtTransferData/helpers/parseMultiEsdtTransferData';
 import {
   MultiEsdtTransactionType,
@@ -8,6 +7,7 @@ import {
   TransactionDataTokenType,
   TransactionsDataTokensType
 } from '@multiversx/sdk-dapp/out/types/transactions.types';
+import { getTokenFromData } from '@multiversx/sdk-dapp/out/utils/transactions/getInterpretedTransaction/helpers/getTokenFromData';
 import getTxWithReceiver from './getTxWithReceiver';
 import {
   ValidateSignTransactionsType,

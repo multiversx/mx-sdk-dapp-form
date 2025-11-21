@@ -1,4 +1,4 @@
-import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/out/constants';
+import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/out/constants/network.constants';
 import { getEntireBalance, getEntireTokenBalance } from '../getEntireBalance';
 
 describe('Entire balance', () => {

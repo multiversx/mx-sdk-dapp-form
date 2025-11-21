@@ -1,4 +1,4 @@
-import { GAS_PRICE } from '@multiversx/sdk-dapp/out/constants';
+import { GAS_PRICE } from '@multiversx/sdk-dapp/out/constants/mvx.constants';
 import { isTokenTransfer } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/isTokenTransfer';
 import { MultiSignTransactionType } from '@multiversx/sdk-dapp/out/types/transactions.types';
 import { DIGITS, DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';

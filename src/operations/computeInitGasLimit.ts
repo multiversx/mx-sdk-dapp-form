@@ -1,8 +1,7 @@
-import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants';
+import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants/mvx.constants';
 import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import BigNumber from 'bignumber.js';
 import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';
-import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { isContract } from 'helpers';
 import { DelegationContractDataType } from 'types';
 import { calculateGasLimit } from './calculateGasLimit';
@@ -31,7 +30,7 @@ export interface ComputeInitGasLimitType {
 
 export const computeInitGasLimit: (props: ComputeInitGasLimitType) => Promise<{
   initGasLimit: string;
-  initGasLimitError?: SendFormContainerPropsType['initGasLimitError'];
+  initGasLimitError?: string;
 }> = async ({
   computedTokenId,
   receiver,

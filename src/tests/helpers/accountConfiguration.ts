@@ -2,7 +2,7 @@ import {
   fallbackNetworkConfigurations,
   TESTNET_EGLD_LABEL,
   TESTNET_CHAIN_ID
-} from '@multiversx/sdk-dapp/out/constants';
+} from '@multiversx/sdk-dapp/out/constants/network.constants';
 import { EnvironmentsEnum } from '@multiversx/sdk-dapp/out/types/enums.types';
 import { testAddress } from '__mocks__';
 

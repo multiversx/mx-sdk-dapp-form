@@ -8,7 +8,7 @@ import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { WithClassnameType } from 'types';
-import { FormatAmount } from 'UI';
+import { FormatAmount } from 'UI/FormatAmount';
 import { FeeInFiat } from './FeeInFiat';
 import styles from './styles.module.scss';
 import { GasLimit } from '../GasLimit/GasLimit';

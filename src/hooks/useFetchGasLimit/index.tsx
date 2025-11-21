@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/out/constants';
+import { MAINNET_CHAIN_ID } from '@multiversx/sdk-dapp/out/constants/network.constants';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
-import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { useAccountContext } from 'contexts/AccountContext';
 import { useFormContext } from 'contexts/FormContext/FormContext';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
@@ -13,9 +12,7 @@ import useDebounce from './useDebounce';
 
 const ms500 = process.env.NODE_ENV !== 'test' ? 500 : 1;
 
-export function useFetchGasLimit(
-  initGasLimitError?: SendFormContainerPropsType['initGasLimitError']
-) {
+export function useFetchGasLimit(initGasLimitError?: string) {
   const {
     networkConfig: { chainId }
   } = useNetworkConfigContext();

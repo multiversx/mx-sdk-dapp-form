@@ -4,7 +4,7 @@ import React, {
   ReactNode,
   useState
 } from 'react';
-import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/out/constants';
+import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/out/constants/network.constants';
 import { NetworkType } from '@multiversx/sdk-dapp/out/types/network.types';
 
 import {
@@ -12,7 +12,6 @@ import {
   getNetworkConfigForChainId,
   setApiConfig
 } from 'apiCalls';
-import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { FormNetworkConfigType } from 'types';
 import {
   AccountContextPropsType,
@@ -38,7 +37,7 @@ interface AppInfoContextProviderPropsType {
   networkConfig: FormNetworkConfigType;
   children: ReactNode;
   Loader?: JSXElementConstructor<any> | null;
-  initGasLimitError?: SendFormContainerPropsType['initGasLimitError'];
+  initGasLimitError?: string;
 }
 export function AppInfoContextProvider({
   accountInfo,

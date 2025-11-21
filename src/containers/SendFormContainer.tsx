@@ -5,8 +5,8 @@ import React, {
   SetStateAction,
   useState
 } from 'react';
-import { Transaction } from '@multiversx/sdk-core';
-import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/out/constants';
+import { Transaction } from '@multiversx/sdk-core/out/core/transaction';
+import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/out/constants/network.constants';
 import { Formik } from 'formik';
 
 import { ZERO } from 'constants/index';

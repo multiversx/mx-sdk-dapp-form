@@ -1,4 +1,4 @@
-import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/out/constants';
+import { fallbackNetworkConfigurations } from '@multiversx/sdk-dapp/out/constants/network.constants';
 import { EnvironmentsEnum } from '@multiversx/sdk-dapp/out/types/enums.types';
 
 export const testAddress =

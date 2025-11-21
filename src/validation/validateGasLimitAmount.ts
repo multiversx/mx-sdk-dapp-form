@@ -1,12 +1,12 @@
 import {
   GAS_PER_DATA_BYTE,
   GAS_PRICE_MODIFIER
-} from '@multiversx/sdk-dapp/out/constants';
+} from '@multiversx/sdk-dapp/out/constants/mvx.constants';
 import { calculateFeeLimit } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/calculateFeeLimit';
 import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 import BigNumber from 'bignumber.js';
 import { testAddress } from '__mocks__/accountConfig';
-import { getParsedGasPrice } from 'operations';
+import { getParsedGasPrice } from 'operations/getParsedGasPrice';
 
 interface ValidateGasLimitAmountType {
   amount: string;

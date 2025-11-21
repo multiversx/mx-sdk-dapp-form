@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from 'react';
 import { Transaction } from '@multiversx/sdk-core/out';
-import { WithClassnameType } from 'types';
+import { WithClassnameType } from 'types/ui';
 
 export interface DelegationContractDataType {
   delegationContract: string;
