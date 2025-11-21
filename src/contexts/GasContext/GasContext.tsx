@@ -20,7 +20,6 @@ import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
 import { testAddress } from '__mocks__/accountConfig';
 import { ZERO } from 'constants/index';
-import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import { getGasLimitChanged } from 'helpers';
@@ -57,7 +56,7 @@ export interface GasContextPropsType {
 
 interface GasContextProviderPropsType {
   children: ReactNode;
-  initGasLimitError?: SendFormContainerPropsType['initGasLimitError'];
+  initGasLimitError?: string;
 }
 
 interface IUpdateGasParams {

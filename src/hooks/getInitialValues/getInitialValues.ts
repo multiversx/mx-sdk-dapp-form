@@ -1,6 +1,5 @@
 import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import { setApiConfig } from 'apiCalls';
-import { SendFormContainerPropsType } from 'containers/SendFormContainer';
 import { PartialNftType, PartialTokenType } from 'types';
 import { getInitialAmount } from './getInitialAmount';
 import { getInitialData } from './getInitialData';
@@ -31,7 +30,7 @@ export interface GetInitialValuesReturnType {
     relayerSignature?: string;
   };
   nft?: PartialNftType;
-  gasLimitCostError?: SendFormContainerPropsType['initGasLimitError'];
+  gasLimitCostError?: string;
   computedTokens: PartialTokenType[];
   computedTokenId: string;
   tokenFound: boolean;

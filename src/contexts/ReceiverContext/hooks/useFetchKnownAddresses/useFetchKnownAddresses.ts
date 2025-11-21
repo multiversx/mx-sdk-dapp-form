@@ -4,7 +4,7 @@ import uniqBy from 'lodash-es/uniqBy';
 
 import { getApiConfig } from 'apiCalls';
 import { useAccountContext } from 'contexts/AccountContext';
-import { KnowAddressType } from 'contexts/ReceiverContext/ReceiverContext';
+import { KnowAddressType } from 'contexts/ReceiverContext/receiverContext.types';
 import { formatAddressesFromTransactions } from './helpers';
 
 export const useFetchKnownAddresses = () => {

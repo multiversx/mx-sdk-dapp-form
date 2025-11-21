@@ -6,7 +6,7 @@ import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount'
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { PartialNftType, TransactionTypeEnum } from 'types';
-import { FormatAmount } from 'UI';
+import { FormatAmount } from 'UI/FormatAmount';
 
 import styles from './styles.module.scss';
 import { TokenAvatar } from '../TokenAvatar';

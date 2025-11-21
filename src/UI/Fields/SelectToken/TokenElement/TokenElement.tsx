@@ -7,7 +7,7 @@ import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum, ZERO } from 'constants/index';
 import { scamFlag } from 'helpers';
 import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
-import { FormatAmount } from 'UI';
+import { FormatAmount } from 'UI/FormatAmount';
 import styles from './styles.module.scss';
 
 const MultiversXIcon =

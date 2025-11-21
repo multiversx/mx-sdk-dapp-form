@@ -6,7 +6,7 @@ import { calculateFeeLimit } from '@multiversx/sdk-dapp/out/providers/strategies
 import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 import BigNumber from 'bignumber.js';
 import { testAddress } from '__mocks__/accountConfig';
-import { getParsedGasPrice } from 'operations';
+import { getParsedGasPrice } from 'operations/getParsedGasPrice';
 
 interface ValidateGasLimitAmountType {
   amount: string;
