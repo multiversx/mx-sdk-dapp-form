@@ -1,4 +1,4 @@
-import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants';
+import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants/mvx.constants';
 import { calculateGasLimit } from '../calculateGasLimit';
 
 describe('calculateGasLimit', () => {

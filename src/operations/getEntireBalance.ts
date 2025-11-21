@@ -1,7 +1,7 @@
 import {
   GAS_PER_DATA_BYTE,
   GAS_PRICE_MODIFIER
-} from '@multiversx/sdk-dapp/out/constants';
+} from '@multiversx/sdk-dapp/out/constants/mvx.constants';
 import { calculateFeeLimit } from '@multiversx/sdk-dapp/out/providers/strategies/helpers/signTransactions/helpers/calculateFeeLimit';
 import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';

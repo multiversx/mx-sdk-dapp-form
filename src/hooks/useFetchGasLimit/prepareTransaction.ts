@@ -1,5 +1,5 @@
 import { Transaction, Address, TokenTransfer } from '@multiversx/sdk-core';
-import { VERSION } from '@multiversx/sdk-dapp/out/constants';
+import { VERSION } from '@multiversx/sdk-dapp/out/constants/mvx.constants';
 import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 import BigNumber from 'bignumber.js';
 

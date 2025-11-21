@@ -1,4 +1,4 @@
-import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants';
+import { GAS_LIMIT } from '@multiversx/sdk-dapp/out/constants/mvx.constants';
 import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
 import BigNumber from 'bignumber.js';
 import { TOKEN_GAS_LIMIT, ZERO } from 'constants/index';

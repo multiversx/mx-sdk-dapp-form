@@ -1,4 +1,4 @@
-import { GAS_PRICE } from '@multiversx/sdk-dapp/out/constants';
+import { GAS_PRICE } from '@multiversx/sdk-dapp/out/constants/mvx.constants';
 import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
 import BigNumber from 'bignumber.js';
