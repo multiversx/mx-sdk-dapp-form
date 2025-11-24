@@ -25,6 +25,7 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
     onBlur,
     onFocus,
     onChange,
+    onInputChange,
     onMenuOpen,
     chainId,
     // handleDisabledOptionClick,
@@ -146,6 +147,7 @@ export const TokenSelect = (props: TokenSelectPropsType) => {
             (ref.current as any).blur();
           }
         }}
+        onInputChange={onInputChange}
         isSearchable={props.isSearchable}
         maxMenuHeight={260}
         onMenuOpen={onMenuOpen}
