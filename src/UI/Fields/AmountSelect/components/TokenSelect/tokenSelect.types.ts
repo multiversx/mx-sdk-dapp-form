@@ -27,6 +27,7 @@ export interface TokenSelectPropsType {
   wrapperClassName?: string;
   onChange: (option: any) => void;
   onBlur?: (option: any) => void;
+  onInputChange?: (input: string) => void;
   onMenuOpen?: () => void;
   disabled?: boolean;
   error?: string;

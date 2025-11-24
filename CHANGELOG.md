@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[3.1.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/378)] - 2025-11-24
+
+- [Expose `onInputChange` event from `TokenSelect`](https://github.com/multiversx/mx-sdk-dapp-form/pull/377)
+
 ## [[3.1.3](https://github.com/multiversx/mx-sdk-dapp-form/pull/376)] - 2025-11-21
 
 - [Fix circular dependencies](https://github.com/multiversx/mx-sdk-dapp-form/pull/375)
