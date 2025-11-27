@@ -56,7 +56,7 @@ export const getOption =
     });
 
     return (
-      <div data-testid={`${(props as any).value}-option`}>
+      <div data-testid={`${(props as any).value}-option`} id={option.value}>
         <components.Option
           {...props}
           className={classNames(styles.option, {
