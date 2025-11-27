@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[3.1.5](https://github.com/multiversx/mx-sdk-dapp-form/pull/380)] - 2025-11-27
+
+- [Added `option.value` as document element id in `getOption`](https://github.com/multiversx/mx-sdk-dapp-form/pull/379)
+
 ## [[3.1.4](https://github.com/multiversx/mx-sdk-dapp-form/pull/378)] - 2025-11-24
 
 - [Expose `onInputChange` event from `TokenSelect`](https://github.com/multiversx/mx-sdk-dapp-form/pull/377)
