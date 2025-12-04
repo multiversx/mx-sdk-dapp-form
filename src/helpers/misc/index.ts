@@ -5,5 +5,4 @@ export * from './getStartsWithHrp';
 export * from './getTransactionFields';
 export * from './processScamNft';
 export * from './replyToDapp';
-export * from './scamFlag';
 export * from './selectCustomStyles';

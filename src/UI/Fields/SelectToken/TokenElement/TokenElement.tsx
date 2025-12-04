@@ -1,11 +1,11 @@
 import React, { JSXElementConstructor, useEffect, useState } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { getScamFlag } from '@multiversx/sdk-dapp/out/utils/transactions/getScamFlag';
 import { DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import classNames from 'classnames';
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum, ZERO } from 'constants/index';
-import { scamFlag } from 'helpers';
 import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
 import { FormatAmount } from 'UI/FormatAmount';
 import styles from './styles.module.scss';
@@ -39,8 +39,11 @@ export const TokenElement = ({
   useEffect(() => {
     const isScam = nftTokenDetails?.uris?.some((uri) => {
       const link = Buffer.from(String(uri), 'base64').toString();
-      const { found } = scamFlag(link, nftTokenDetails?.scamInfo);
-      return found;
+      const { isSuspicious } = getScamFlag({
+        message: link,
+        scamInfo: nftTokenDetails?.scamInfo
+      });
+      return isSuspicious;
     });
     if (!isScam) {
       setTitle(name);
