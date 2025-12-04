@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[3.2.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/382)] - 2025-12-04
+
+- [Removed anchorme, Updated deps, Removed unmaintained example folder](https://github.com/multiversx/mx-sdk-dapp-form/pull/381)
+
 ## [[3.1.5](https://github.com/multiversx/mx-sdk-dapp-form/pull/380)] - 2025-11-27
 
 - [Added `option.value` as document element id in `getOption`](https://github.com/multiversx/mx-sdk-dapp-form/pull/379)
