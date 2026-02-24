@@ -8,6 +8,7 @@ import { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimU
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import MultiversXIconSimple from 'assets/icons/mx-icon-simple.svg';
+import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
 
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { isContract } from 'helpers';
@@ -42,6 +43,9 @@ export const Receiver = ({
   scamReport,
   shouldTrimReceiver = true
 }: ReceiverPropsType) => {
+  const {
+    networkConfig: { apiAddress }
+  } = useNetworkConfigContext();
   const [usernameAccount, setUsernameAccount] = useState<AccountData | null>(
     null
   );
@@ -60,6 +64,7 @@ export const Receiver = ({
     isAmountZero && isSmartContract ? 'To interact with' : 'To';
 
   const fetchUsernameAccount = async () => {
+    debugger;
     if (skipFetchingAccount) {
       setUsernameAccount(null);
     } else {
@@ -67,7 +72,7 @@ export const Receiver = ({
         setIsLoading(true);
         const username = await getAccountFromApi({
           address: receiver,
-          baseURL: ACCOUNTS_ENDPOINT
+          baseURL: apiAddress
         });
         setUsernameAccount(username);
       } catch (error) {

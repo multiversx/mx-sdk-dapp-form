@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[3.2.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/383)] - 2026-02-24
+
+- [Fixed account fetching API address in Receiver](https://github.com/multiversx/mx-sdk-dapp-form/pull/383)
+
 ## [[3.2.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/382)] - 2025-12-04
 
 - [Removed anchorme, Updated deps, Removed unmaintained example folder](https://github.com/multiversx/mx-sdk-dapp-form/pull/381)
