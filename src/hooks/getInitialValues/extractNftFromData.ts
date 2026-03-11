@@ -44,16 +44,12 @@ export const extractNftFromData = ({
         usedReceiver
       ].every((el) => el);
 
-      console.log('[extractNftFromData] isBurnNFT:', isBurnNFT, '| usedReceiver:', usedReceiver, '| hasAllDataFields:', hasAllDataFields);
       let isValidReceiver = addressIsValid(usedReceiver);
       if (!isValidReceiver) {
         try {
           isValidReceiver = addressIsValid(bech32.encode(usedReceiver));
-        } catch (encodeErr) {
-          console.error('[extractNftFromData] bech32.encode failed for usedReceiver:', usedReceiver, encodeErr);
-        }
+        } catch (encodeErr) {}
       }
-      console.log('[extractNftFromData] isValidReceiver:', isValidReceiver);
 
       if (hasAllDataFields && isValidReceiver) {
         return {

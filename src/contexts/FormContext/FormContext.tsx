@@ -131,7 +131,6 @@ export function FormContextProvider({
     }
   }, [isGuardianScreenVisible]);
 
-  console.log('[FormContext] isFormValid:', isFormValid, '| isFormSubmitted:', value.isFormSubmitted, '| skipToConfirm:', skipToConfirm, '| errors:', errors);
   const contextValue: FormContextPropsType = {
     ...value,
     checkInvalid,

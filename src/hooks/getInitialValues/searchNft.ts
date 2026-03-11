@@ -34,7 +34,6 @@ export const searchNft = async (
 ): Promise<ComputedNftType | null> => {
   const { address, nft } = props;
   const extractedNft = extractNftFromData(props);
-  console.log('[searchNft] extractedNft:', extractedNft);
 
   try {
     if (extractedNft) {
@@ -43,7 +42,9 @@ export const searchNft = async (
       const apiNft = await searchNftById({ identifier, address }, apiConfig);
       if (apiNft) {
         return {
-          receiver: addressIsValid(receiver) ? receiver : bech32.encode(receiver),
+          receiver: addressIsValid(receiver)
+            ? receiver
+            : bech32.encode(receiver),
           nft: apiNft,
           quantity: nft ? quantity : new BigNumber(quantity, 16).toString(10)
         };
