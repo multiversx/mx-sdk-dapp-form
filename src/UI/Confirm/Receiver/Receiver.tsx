@@ -64,7 +64,6 @@ export const Receiver = ({
     isAmountZero && isSmartContract ? 'To interact with' : 'To';
 
   const fetchUsernameAccount = async () => {
-    debugger;
     if (skipFetchingAccount) {
       setUsernameAccount(null);
     } else {
