@@ -6,7 +6,7 @@ import {
 } from './getInitialValues';
 import { GetInitialValuesType } from './getInitialValues/types';
 
-export { GetInitialValuesReturnType };
+export type { GetInitialValuesReturnType };
 
 export function useGetInitialValues(
   props: GetInitialValuesType

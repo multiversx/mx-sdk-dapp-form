@@ -5,24 +5,34 @@
   "author": "MultiversX",
   "license": "GPL-3.0-or-later",
   "repository": "multiversx/mx-sdk-dapp-form",
-  "main": "./__commonjs",
-  "module": "./",
-  "types": "./",
-  "react-native": "./",
+  "main": "./index.cjs",
+  "module": "./index.mjs",
+  "types": "./index.d.ts",
+  "react-native": "./index.mjs",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./index.cjs",
+      "types": "./index.d.ts"
+    }
+  },
   "engines": {
     "node": ">=18"
   },
   "scripts": {
-    "start": "npm watch",
-    "build:esm-types": "tsc --project tsconfig.json",
+    "start": "npm run watch",
+    "clean-out": "rimraf out",
+    "build:esm-types": "tsc --project tsconfig.esm.json",
     "build:cjs-types": "tsc --build tsconfig.cjs.json",
-    "build": "rimraf dist && node esbuild.js && npm run build:esm-types && npm run build:cjs-types && cp package.json dist && cp README.md dist",
-    "publish-package": "npm test && npm run build && cd dist && npm publish",
-    "publish-package-next": "npm test && npm build && cd dist && npm publish --tag next",
+    "compile": "npm run build:esm-types && npm run build:cjs-types",
+    "build-esbuild": "npm run clean-out && node esbuild.js",
+    "build": "npm run build-esbuild && npm run compile",
+    "publish-package": "npm test && npm run build && npm publish",
+    "publish-package-next": "npm test && npm run build && npm publish --tag next",
     "unpublish-verdaccio": "npm unpublish @multiversx/sdk-dapp-form --registry http://localhost:4873",
-    "publish-verdaccio": "npm run build && cd dist  && npm publish --registry http://localhost:4873/",
-    "publish-yalc": "npm build && cd dist && yalc publish --push",
-    "watch": "npm node esbuild-watch.js && npm run build:types -- --watch",
+    "publish-verdaccio": "npm run unpublish-verdaccio && npm run build && npm publish --registry http://localhost:4873/",
+    "publish-yalc": "npm run build && yalc publish --push",
+    "watch": "node esbuild-watch.js",
     "test": "jest",
     "lint": "eslint --fix --ext js,ts,tsx src",
     "pre-pr": "npm run lint && npm run build && npm run test",
@@ -49,6 +59,7 @@
     "bignumber.js": "^9.x",
     "esbuild": "0.14.47",
     "esbuild-node-externals": "1.4.1",
+    "esbuild-plugin-replace": "1.4.0",
     "esbuild-plugin-svgr": "1.0.1",
     "esbuild-sass-plugin": "2.2.6",
     "eslint": "9.15.0",
@@ -84,10 +95,14 @@
     "whatwg-fetch": "3.6.20"
   },
   "files": [
-    "*.js",
-    "**/*.js",
-    "*.d.ts",
-    "**/*.d.ts"
+    "out/**/*",
+    "!**/*.test.*",
+    "!**/*.jest.*",
+    "!**/*.playwright.*",
+    "!**/*.puppeteer.*",
+    "!**/__mocks__/**",
+    "!**/__tests__/**",
+    "!**/*-mock.*"
   ],
   "keywords": [
     "multiversx",
