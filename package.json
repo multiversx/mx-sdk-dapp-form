@@ -1,6 +1,6 @@
 {
   "name": "@multiversx/sdk-dapp-form",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "A library to hold the main logic for a validating a form for transactions on the MultiversX blockchain",
   "author": "MultiversX",
   "license": "GPL-3.0-or-later",
@@ -17,7 +17,7 @@
     "build:esm-types": "tsc --project tsconfig.json",
     "build:cjs-types": "tsc --build tsconfig.cjs.json",
     "build": "rimraf dist && node esbuild.js && npm run build:esm-types && npm run build:cjs-types && cp package.json dist && cp README.md dist",
-    "publish-package": "npm test && npm build && cd dist && npm publish",
+    "publish-package": "npm test && npm run build && cd dist && npm publish",
     "publish-package-next": "npm test && npm build && cd dist && npm publish --tag next",
     "unpublish-verdaccio": "npm unpublish @multiversx/sdk-dapp-form --registry http://localhost:4873",
     "publish-verdaccio": "npm run build && cd dist  && npm publish --registry http://localhost:4873/",
