@@ -23,7 +23,6 @@ const commonConfig = {
   bundle: true,
   sourcemap: true,
   treeShaking: true,
-  minify: true,
   platform: 'node',
   inject: [require.resolve('node-stdlib-browser/helpers/esbuild/shim')],
   define: {
