@@ -33,6 +33,7 @@ export const searchNft = async (
 ): Promise<ComputedNftType | null> => {
   const { address, nft } = props;
   const extractedNft = extractNftFromData(props);
+  console.log('[searchNft] extractedNft:', extractedNft);
 
   try {
     if (extractedNft) {

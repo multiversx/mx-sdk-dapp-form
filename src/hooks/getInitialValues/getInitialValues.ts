@@ -65,6 +65,7 @@ export async function getInitialValues(
     setApiConfig(networkConfig);
   }
 
+  console.log('[getInitialValues] data:', data, '| identifier:', identifier, '| address:', address);
   const [computedNft, esdtToken, gasData] = await Promise.all([
     getNft({ data, address, identifier }),
     getToken({ identifier, address }),
@@ -91,6 +92,7 @@ export async function getInitialValues(
 
   const { isEsdt } = getIdentifierType(identifier);
 
+  console.log('[getInitialValues] computedNft:', computedNft, '| tokenFound:', isEsdt ? Boolean(esdtToken) : true);
   const returnValues: GetInitialValuesReturnType = {
     initialValues,
     nft: computedNft?.nft,

@@ -53,6 +53,8 @@ export interface SendFormContainerPropsType {
   errorMessageTranslations?: Partial<ValidationErrorMessagesType>;
 }
 
+console.log('\x1b[42m%s\x1b[0m', 'SF work');
+
 export function SendFormContainer(props: SendFormContainerPropsType) {
   const {
     initialValues,
