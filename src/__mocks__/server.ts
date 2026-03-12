@@ -46,7 +46,10 @@ const handlers: RestHandler[] = [
       baseApr: 0.413132
     })
   ),
-  rest.get(`${testNetwork.apiAddress}/transactions`, mockResponse([]))
+  rest.get(`${testNetwork.apiAddress}/transactions`, mockResponse([])),
+  rest.get(`${testNetwork.apiAddress}/usernames/:username`, (_req, res, ctx) => {
+    return res(ctx.status(404), ctx.json({ statusCode: 404, message: 'Not Found' }));
+  })
 ];
 
 // This configures a request mocking server with the given request handlers.

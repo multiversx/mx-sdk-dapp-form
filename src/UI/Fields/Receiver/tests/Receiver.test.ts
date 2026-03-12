@@ -38,10 +38,9 @@ describe('Receiver field', () => {
     await userEvent.clear(processedReceiverInput);
     await userEvent.type(processedReceiverInput, data.target.value);
     await userEvent.tab();
-    await waitFor(async () => {
-      const receiverUsernameError = await findByTestId('receiverUsernameError');
-      expect(receiverUsernameError?.innerHTML).toBe('Invalid herotag');
-    });
+    await sleep();
+    const receiverUsernameError = await findByTestId('receiverUsernameError');
+    expect(receiverUsernameError?.innerHTML).toBe('Invalid herotag');
   });
 });
 
