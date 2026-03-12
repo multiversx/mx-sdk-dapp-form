@@ -44,7 +44,12 @@ export const extractNftFromData = ({
         usedReceiver
       ].every((el) => el);
 
-      const isValidReceiver = addressIsValid(bech32.encode(usedReceiver));
+      let isValidReceiver = addressIsValid(usedReceiver);
+      if (!isValidReceiver) {
+        try {
+          isValidReceiver = addressIsValid(bech32.encode(usedReceiver));
+        } catch (encodeErr) {}
+      }
 
       if (hasAllDataFields && isValidReceiver) {
         return {

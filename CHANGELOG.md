@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[4.0.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/388)] - 2026-03-11
+
+- [Fix NFT extraction address errro](https://github.com/multiversx/mx-sdk-dapp-form/pull/387)
+- [Upgrade build system](https://github.com/multiversx/mx-sdk-dapp-form/pull/386)
+
 ## [[3.2.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/384)] - 2026-03-11
 
 - [Removed unnecessary debugger statement](https://github.com/multiversx/mx-sdk-dapp-form/pull/384)

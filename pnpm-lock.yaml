@@ -87,6 +87,9 @@ importers:
       esbuild-node-externals:
         specifier: 1.4.1
         version: 1.4.1(esbuild@0.14.47)
+      esbuild-plugin-replace:
+        specifier: 1.4.0
+        version: 1.4.0
       esbuild-plugin-svgr:
         specifier: 1.0.1
         version: 1.0.1
@@ -488,6 +491,7 @@ packages:
 
   '@fortawesome/react-fontawesome@0.2.0':
     resolution: {integrity: sha512-uHg75Rb/XORTtVt7OS9WoK8uM276Ufi7gCzshVWkUJbHhh3svsUUeqXerrM96Wm7fRiDzfKRwSoahhMIkGAYHw==}
+    deprecated: v0.2.x is no longer supported. Unless you are still using FontAwesome 5, please update to v3.1.1 or greater.
     peerDependencies:
       '@fortawesome/fontawesome-svg-core': ~1 || ~6
       react: '>=16.3'
@@ -2551,6 +2555,9 @@ packages:
     cpu: [x64]
     os: [openbsd]
 
+  esbuild-plugin-replace@1.4.0:
+    resolution: {integrity: sha512-lP3ZAyzyRa5JXoOd59lJbRKNObtK8pJ/RO7o6vdjwLi71GfbL32NR22ZuS7/cLZkr10/L1lutoLma8E4DLngYg==}
+
   esbuild-plugin-svgr@1.0.1:
     resolution: {integrity: sha512-TSUgwDq1chtikM1rMRAngpoKGGC1rTSXj35zweFdG4lnvPpBaqnvMrOJRuVVPelfeadZEhfHHnys7vm+tY+krw==}
 
@@ -3723,6 +3730,9 @@ packages:
     resolution: {integrity: sha512-h5bgJWpxJNswbU7qCrV0tIKQCaS3blPDrqKWx+QxzuzL1zGUzij9XCWLrSLsJPu5t+eWA/ycetzYAO5IOMcWAQ==}
     hasBin: true
 
+  magic-string@0.25.9:
+    resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
+
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
@@ -4552,6 +4562,10 @@ packages:
   source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==}
     engines: {node: '>=0.10.0'}
+
+  sourcemap-codec@1.4.8:
+    resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
+    deprecated: Please use @jridgewell/sourcemap-codec instead
 
   split2@4.2.0:
     resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
@@ -8125,6 +8139,10 @@ snapshots:
   esbuild-openbsd-64@0.14.47:
     optional: true
 
+  esbuild-plugin-replace@1.4.0:
+    dependencies:
+      magic-string: 0.25.9
+
   esbuild-plugin-svgr@1.0.1:
     dependencies:
       '@svgr/core': 6.5.1
@@ -9642,6 +9660,10 @@ snapshots:
 
   lz-string@1.5.0: {}
 
+  magic-string@0.25.9:
+    dependencies:
+      sourcemap-codec: 1.4.8
+
   magic-string@0.30.21:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -10596,6 +10618,8 @@ snapshots:
     optional: true
 
   source-map@0.6.1: {}
+
+  sourcemap-codec@1.4.8: {}
 
   split2@4.2.0: {}
 

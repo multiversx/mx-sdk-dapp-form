@@ -4,6 +4,7 @@ import {
   getGlobalNftByIdentifier,
   getNftByAddressAndIdentifier
 } from 'apiCalls';
+import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 import { bech32 } from 'helpers/transformations';
 import { extractNftFromData } from './extractNftFromData';
 import { SearchNFTPropsType } from './searchNft.types';
@@ -41,7 +42,9 @@ export const searchNft = async (
       const apiNft = await searchNftById({ identifier, address }, apiConfig);
       if (apiNft) {
         return {
-          receiver: bech32.encode(receiver),
+          receiver: addressIsValid(receiver)
+            ? receiver
+            : bech32.encode(receiver),
           nft: apiNft,
           quantity: nft ? quantity : new BigNumber(quantity, 16).toString(10)
         };
