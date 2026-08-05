@@ -12,7 +12,7 @@ export async function getMultiversxAccount(
     if (data != null) {
       return data;
     }
-  } catch (err) {
+  } catch {
     console.error('error fetching elrond account');
   }
   return null;

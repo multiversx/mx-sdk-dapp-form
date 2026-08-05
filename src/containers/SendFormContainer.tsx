@@ -89,14 +89,14 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     });
 
     const transaction = shouldGenerateTransactionOnSubmit
-      ? guardedTransaction ??
+      ? (guardedTransaction ??
         (await generateTransaction({
           address,
           balance,
           chainId,
           nonce: accountInfo.nonce,
           values: parsedValues
-        }))
+        })))
       : null;
 
     return onFormSubmit(parsedValues, transaction, setIsFormSubmitted);

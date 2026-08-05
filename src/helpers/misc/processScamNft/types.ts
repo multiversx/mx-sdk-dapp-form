@@ -16,7 +16,8 @@ export interface NftMetadataType {
 }
 
 export interface NftType
-  extends Pick<SuspiciousLinkPropsType, 'isNsfw' | 'verified' | 'scamInfo'>,
+  extends
+    Pick<SuspiciousLinkPropsType, 'isNsfw' | 'verified' | 'scamInfo'>,
     Pick<PartialNftType, 'name' | 'media'> {
   metadata?: NftMetadataType;
 }

@@ -14,9 +14,9 @@ import styles from './../../tokenSelect.module.scss';
 import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
 import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
 
-export const {
-  default: MultiversXIcon
-} = require('./../../../../../../../assets/icons/mx-icon.svg'); // eslint-disable-line @typescript-eslint/no-require-imports
+import MultiversXIcon from './../../../../../../../assets/icons/mx-icon.svg';
+
+export { MultiversXIcon };
 
 export interface GetOptionPropsType {
   EgldIcon?: JSXElementConstructor<any>;

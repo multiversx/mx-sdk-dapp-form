@@ -27,14 +27,16 @@ export function getIsMaxButtonVisible({
         readonly,
         available: maxAmountAvailable
       });
-    case TransactionTypeEnum.ESDT:
+    case TransactionTypeEnum.ESDT: {
       const differentFromMaxBalance = amount !== maxAmountAvailable;
       return (
         differentFromMaxBalance && !readonly && maxAmountAvailable !== ZERO
       );
-    default:
+    }
+    default: {
       const isNftAmountDifferentFromBalance =
         nft != null && amount !== nft?.balance;
       return isNftAmountDifferentFromBalance && !readonly;
+    }
   }
 }

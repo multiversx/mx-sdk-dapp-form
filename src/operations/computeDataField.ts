@@ -1,7 +1,7 @@
 import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 import BigNumber from 'bignumber.js';
 import { ZERO } from 'constants/index';
-import { bech32 } from 'helpers/transformations';
+import { bech32, stringToHex } from 'helpers/transformations';
 import {
   NftEnumType,
   PartialNftType,
@@ -14,9 +14,7 @@ const evenLengthValue = (value: string) =>
   value.length % 2 === 0 ? value : `0${value}`;
 
 const getDepositHex = (isDeposit?: boolean) =>
-  isDeposit
-    ? `@${evenLengthValue(Buffer.from('deposit').toString('hex'))}`
-    : '';
+  isDeposit ? `@${evenLengthValue(stringToHex('deposit'))}` : '';
 
 interface IComputeTokenDataFieldParams {
   amount: string;
@@ -32,7 +30,7 @@ export const computeTokenDataField = ({
   isDeposit
 }: IComputeTokenDataFieldParams) => {
   const amountValue = Boolean(amount) ? amount : ZERO;
-  const hexEncodedId = evenLengthValue(Buffer.from(tokenId).toString('hex'));
+  const hexEncodedId = evenLengthValue(stringToHex(tokenId));
 
   const hexEncodedValue = evenLengthValue(
     new BigNumber(parseAmount(amountValue, decimals)).toString(16)
@@ -71,7 +69,7 @@ export const computeNftDataField = ({
       nft?.type === NftEnumType.MetaESDT
         ? parseAmount(amount, nft.decimals)
         : amount;
-    dataStr += `@${Buffer.from(String(nft.collection)).toString('hex')}`;
+    dataStr += `@${stringToHex(String(nft.collection))}`;
     dataStr += `@${evenLengthValue(
       new BigNumber(String(nft.nonce)).toString(16)
     )}`;

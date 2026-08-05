@@ -4,8 +4,7 @@ import globals from 'assets/sass/globals.module.scss';
 import { WithClassnameType } from 'types';
 
 export interface AmountErrorPropsType
-  extends WithClassnameType,
-    PropsWithChildren {
+  extends WithClassnameType, PropsWithChildren {
   hasErrors?: boolean;
   error?: string;
 }

@@ -1,4 +1,4 @@
-import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
+import { FilterOptionOption } from 'react-select';
 
 import { KnowAddressType } from 'contexts/ReceiverContext/receiverContext.types';
 import { filterOptions } from 'UI/Fields/Receiver/helpers';

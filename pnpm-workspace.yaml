@@ -1,0 +1,21 @@
+minimumReleaseAgeExclude:
+  - '@multiversx/*'
+
+# formik 2.2.9 and yup 0.32.11 are pinned to old majors (see CHANGELOG), and both
+# drag in lodash <4.17.24, which carries a high-severity `_.template` code-injection
+# advisory (GHSA) plus two prototype-pollution advisories. Force the patched line
+# until those two packages can be upgraded.
+overrides:
+  lodash: '>=4.18.1'
+  lodash-es: '>=4.18.1'
+allowBuilds:
+  '@fortawesome/fontawesome-common-types': false
+  '@fortawesome/fontawesome-svg-core': false
+  '@fortawesome/free-solid-svg-icons': false
+  '@parcel/watcher': false
+  '@swc/core': false
+  esbuild: false
+  keccak: false
+  msw: false
+  protobufjs: false
+  unrs-resolver: false

@@ -1,3 +1,3 @@
-const MultiversXIconSimple =
-  require('../../../../assets/icons/mx-icon-simple.svg').default; // eslint-disable-line @typescript-eslint/no-require-imports
+import MultiversXIconSimple from '../../../../assets/icons/mx-icon-simple.svg';
+
 export default MultiversXIconSimple;

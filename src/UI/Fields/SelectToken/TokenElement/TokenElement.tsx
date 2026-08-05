@@ -6,12 +6,11 @@ import { DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import classNames from 'classnames';
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum, ZERO } from 'constants/index';
+import { base64ToString } from 'helpers/transformations';
 import { NftEnumType, PartialNftType, PartialTokenType } from 'types';
 import { FormatAmount } from 'UI/FormatAmount';
+import MultiversXIcon from './../../../../assets/icons/mx-icon.svg';
 import styles from './styles.module.scss';
-
-const MultiversXIcon =
-  require('./../../../../assets/icons/mx-icon.svg').default; // eslint-disable-line @typescript-eslint/no-require-imports
 
 export interface TokenElementPropsType {
   EgldIcon?: JSXElementConstructor<any>;
@@ -38,7 +37,7 @@ export const TokenElement = ({
 
   useEffect(() => {
     const isScam = nftTokenDetails?.uris?.some((uri) => {
-      const link = Buffer.from(String(uri), 'base64').toString();
+      const link = base64ToString(String(uri));
       const { isSuspicious } = getScamFlag({
         message: link,
         scamInfo: nftTokenDetails?.scamInfo

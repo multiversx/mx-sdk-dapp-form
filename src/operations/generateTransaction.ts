@@ -24,7 +24,7 @@ export async function generateTransaction(props: GenerateTransactionPropsType) {
     relayer,
     relayerSignature
   } = values;
-  const transactionReceiver = Boolean(nft) ? address : receiver;
+  const transactionReceiver = nft ? address : receiver;
 
   try {
     const transaction = prepareTransaction({

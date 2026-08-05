@@ -72,11 +72,11 @@ export function ReceiverUsernameContextProvider({
 
   const showUsernameError = Boolean(
     inputValue &&
-      debouncedUsername &&
-      !isUsernameDebouncing &&
-      !isUsernameFetching &&
-      !foundReceiver &&
-      !searchQueryIsAddress // &&
+    debouncedUsername &&
+    !isUsernameDebouncing &&
+    !isUsernameFetching &&
+    !foundReceiver &&
+    !searchQueryIsAddress // &&
   );
 
   const value: ReceiverUsernameContextPropsType = {

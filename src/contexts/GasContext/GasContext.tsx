@@ -18,8 +18,7 @@ import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFl
 import { stringIsInteger } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
-import { testAddress } from '__mocks__/accountConfig';
-import { ZERO } from 'constants/index';
+import { FEE_ESTIMATION_ADDRESS, ZERO } from 'constants/index';
 import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import { getGasLimitChanged } from 'helpers';
@@ -191,8 +190,8 @@ export function GasContextProvider({
     const dataField = isInitialGasLimit ? data.trim() : '';
 
     const newFeeLimit = calculateFeeLimit({
-      from: testAddress,
-      to: testAddress,
+      from: FEE_ESTIMATION_ADDRESS,
+      to: FEE_ESTIMATION_ADDRESS,
       gasLimit,
       gasPrice: parseAmount(gasPrice),
       data: dataField,
