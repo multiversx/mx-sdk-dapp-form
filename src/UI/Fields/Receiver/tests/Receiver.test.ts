@@ -14,12 +14,11 @@ describe('Receiver field', () => {
   test('Receiver field should not be empty', async () => {
     const { findByTestId, queryByText } = renderForm();
 
-    const data = { target: { value: '' } };
     const receiverInput = await findByTestId('receiver');
     const processedReceiverInput = receiverInput as HTMLInputElement;
 
+    // `clear` is the whole interaction: user-event v14 rejects `type(el, '')`.
     await userEvent.clear(processedReceiverInput);
-    await userEvent.type(processedReceiverInput, data.target.value);
     await userEvent.tab();
 
     await waitFor(() => {

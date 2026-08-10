@@ -51,17 +51,12 @@ export const fillInForm: () => Promise<{
   await userEvent.tab();
   expect(processedDataInput.value).toBe('claim');
 
-  const formatAmountInt = await render.findByTestId(
-    FormDataTestIdsEnum.formatAmountInt
-  );
+  // Wait for the fee to be rendered, but do not assert its value here: at this point the
+  // /transaction/cost request may or may not have landed, so the decimals are either the
+  // locally computed gas limit or the server one. Each test asserts the settled value.
+  await render.findByTestId(FormDataTestIdsEnum.formatAmountInt);
+  await render.findByTestId(FormDataTestIdsEnum.formatAmountDecimals);
 
-  expect(formatAmountInt.innerHTML).toBe('0');
-
-  const formatAmountDecimal = await render.findByTestId(
-    FormDataTestIdsEnum.formatAmountDecimals
-  );
-
-  expect(formatAmountDecimal.innerHTML).toBe('.0000575');
   await sleep();
 
   return { render };

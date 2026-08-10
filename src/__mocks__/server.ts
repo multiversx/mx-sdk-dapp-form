@@ -43,6 +43,20 @@ const handlers: RequestHandler[] = [
       { statusCode: 404, message: 'Not Found' },
       { status: 404 }
     )
+  ),
+
+  /**
+   * Fallbacks, matched only after the specific handlers above and after anything a test
+   * adds through `server.use`. Without them these requests reach the real network, which
+   * leaves sockets open past the end of the test run and intermittently aborts a jest
+   * worker inside libuv's stream teardown.
+   */
+  http.get(`${testNetwork.apiAddress}/accounts/:address`, mockResponse({})),
+  http.post(`${testNetwork.apiAddress}/transaction/cost`, () =>
+    HttpResponse.json(
+      { data: { txGasUnits: 0 }, code: 'failed' },
+      { status: 200 }
+    )
   )
 ];
 

@@ -5,8 +5,6 @@ import { MAX_GAS_LIMIT } from 'constants/index';
 import { ValidationErrorMessagesType } from 'types/validation';
 
 export const sharedGasLimit = (errorMessages: ValidationErrorMessagesType) => {
-  const required = string().required(errorMessages.required);
-
   const validInteger = string().test(
     'isValidInteger',
     errorMessages.invalidNumber,
@@ -26,5 +24,6 @@ export const sharedGasLimit = (errorMessages: ValidationErrorMessagesType) => {
     }
   );
 
-  return [required, validInteger, maximum];
+  // Requiredness is not included here: the callers apply it once, after concatenating.
+  return [validInteger, maximum];
 };

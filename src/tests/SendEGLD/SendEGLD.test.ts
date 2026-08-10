@@ -9,10 +9,9 @@ import { ValuesEnum } from 'types/form';
 describe('EGLD Amount field', () => {
   it('should not be empty', async () => {
     const { queryByText, findByTestId } = renderForm();
-    const data = { target: { value: '' } };
     const input: any = await findByTestId(ValuesEnum.amount);
+    // `clear` is the whole interaction: user-event v14 rejects `type(el, '')`.
     await userEvent.clear(input);
-    await userEvent.type(input, data.target.value);
     await userEvent.tab();
     await sleep();
     await waitFor(() => {

@@ -61,6 +61,12 @@ interface GasContextProviderPropsType {
 interface IUpdateGasParams {
   newValue: string | ChangeEvent<any>;
   shouldValidate?: boolean;
+  /**
+   * Set when the change came from the user editing the field, as opposed to one of the
+   * contexts recomputing it. Marks gasLimit as touched, which is the flag the recomputing
+   * effects check before overwriting it — see `getGasLimitChanged`.
+   */
+  isUserInput?: boolean;
 }
 
 export const GasContext = createContext({} as GasContextPropsType);
@@ -143,9 +149,23 @@ export function GasContextProvider({
   );
 
   const handleUpdateGasLimit = useCallback(
-    ({ newValue, shouldValidate = false }: IUpdateGasParams) => {
+    ({
+      newValue,
+      shouldValidate = false,
+      isUserInput = false
+    }: IUpdateGasParams) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
+
+      // Waiting for blur to record this is too late: DataFieldContext recomputes gasLimit
+      // whenever the data field changes, so an untouched field gets overwritten between
+      // keystrokes and the user's value never survives.
+      // `false` skips the validation pass formik would otherwise run for the touch alone:
+      // the setFieldValue below already validates, and running both means two passes per
+      // keystroke.
+      if (isUserInput) {
+        setFieldTouched(ValuesEnum.gasLimit, true, false);
+      }
 
       setFieldValue(ValuesEnum.gasLimit, value, shouldValidate);
     },

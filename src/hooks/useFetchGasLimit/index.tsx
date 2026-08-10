@@ -10,7 +10,10 @@ import { ExtendedValuesType, ValuesEnum } from 'types/form';
 import { fetchGasLimit } from './fetchGasLimit';
 import useDebounce from './useDebounce';
 
-const ms500 = process.env.NODE_ENV !== 'test' ? 500 : 1;
+// Shortened under test to keep the suite fast, but not to ~0: user-event types one
+// character per tick, so a 1ms window debounces nothing and every keystroke would fire
+// its own cost request.
+const ms500 = process.env.NODE_ENV !== 'test' ? 500 : 50;
 
 export function useFetchGasLimit(initGasLimitError?: string) {
   const {

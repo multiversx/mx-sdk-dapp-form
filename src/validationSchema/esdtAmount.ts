@@ -6,11 +6,10 @@ import BigNumber from 'bignumber.js';
 import { string } from 'yup';
 import getTokenDetails from 'operations/getTokenDetails';
 import { ExtendedValuesType } from 'types';
+import { concatValidations } from './concatValidations';
 import { ValidationErrorMessagesType } from '../types/validation';
 
 const esdtAmount = (errorMessages: ValidationErrorMessagesType) => {
-  const required = string().required(errorMessages.required);
-
   const decimals = string().test({
     name: 'decimalFormat',
     test: function (value) {
@@ -83,17 +82,9 @@ const esdtAmount = (errorMessages: ValidationErrorMessagesType) => {
     }
   );
 
-  const validations = [
-    required,
-    decimals,
-    balance,
-    greaterThanZero,
-    isValidNumber
-  ];
-
-  return validations.reduce(
-    (previousValue, currentValue) => previousValue.concat(currentValue),
-    string()
+  return concatValidations(
+    [decimals, balance, greaterThanZero, isValidNumber],
+    errorMessages.required
   );
 };
 

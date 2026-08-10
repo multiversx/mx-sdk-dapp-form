@@ -5,9 +5,9 @@ import { string } from 'yup';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
 import { validateGasLimitAmount } from 'validation/validateGasLimitAmount';
+import { concatValidations } from './concatValidations';
 
 const egldAmount = (errorMessages: ValidationErrorMessagesType) => {
-  const required = string().required(errorMessages.required);
   const decimals = string().test(
     'decimalFormat',
     errorMessages.maxDecimalsAllowed(DECIMALS),
@@ -55,11 +55,9 @@ const egldAmount = (errorMessages: ValidationErrorMessagesType) => {
     }
   );
 
-  const validations = [required, isValidNumber, decimals, funds];
-
-  return validations.reduce(
-    (previousValue, currentValue) => previousValue.concat(currentValue),
-    string()
+  return concatValidations(
+    [isValidNumber, decimals, funds],
+    errorMessages.required
   );
 };
 
