@@ -1,4 +1,8 @@
-import React, { JSXElementConstructor } from 'react';
+import React, {
+  FunctionComponent,
+  JSXElementConstructor,
+  SVGAttributes
+} from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getUsdValue } from '@multiversx/sdk-dapp/out/utils/operations/getUsdValue';
@@ -14,9 +18,14 @@ import styles from './../../tokenSelect.module.scss';
 import { progressiveFormatAmount } from '../../../MaxButton/progressiveFormatAmount';
 import type { OptionType, TokenSelectPropsType } from '../../tokenSelect.types';
 
-import MultiversXIcon from './../../../../../../../assets/icons/mx-icon.svg';
+import mxIcon from './../../../../../../../assets/icons/mx-icon.svg';
 
-export { MultiversXIcon };
+/**
+ * Explicitly annotated so the emitted declaration is self-contained — see
+ * UI/Fields/Receiver/components/MultiversXIconSimple.ts.
+ */
+export const MultiversXIcon: FunctionComponent<SVGAttributes<SVGElement>> =
+  mxIcon;
 
 export interface GetOptionPropsType {
   EgldIcon?: JSXElementConstructor<any>;

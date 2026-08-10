@@ -1,9 +1,8 @@
-
 # sdk-dapp-form
 
 > A library that holds the core functional logic of a dapp on the MultiversX blockchain
 
-[![NPM](https://img.shields.io/npm/v/sdk-dapp-form.svg)](https://www.npmjs.com/package/@multiversx/sdk-dapp-form) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![NPM](https://img.shields.io/npm/v/@multiversx/sdk-dapp-form.svg)](https://www.npmjs.com/package/@multiversx/sdk-dapp-form) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 # Installation
 
@@ -36,6 +35,36 @@ yarn add @multiversx/sdk-dapp-form --no-optional
 
 sdk-dapp-form aims to abstract and simplify the process of formulating and validating transactions on the MultiversX blockchain.
 
+## Development
+
+Requires **Node 24** (see `.nvmrc`) and **pnpm** (pinned via `packageManager`; run
+`corepack enable` to pick it up).
+
+```bash
+pnpm install
+pnpm build     # vite library build + global stylesheet -> out/
+pnpm watch     # incremental rebuild into out/
+pnpm test
+pnpm lint
+```
+
+### Consuming the package
+
+The package targets bundlers. Deep imports address a directory barrel at any depth:
+
+```ts
+import { useFetchGasLimit } from '@multiversx/sdk-dapp-form/out/hooks';
+import { Receiver } from '@multiversx/sdk-dapp-form/out/UI/Fields';
+import { Form } from '@multiversx/sdk-dapp-form';
+```
+
+Individual non-barrel files are not part of the public surface — import the barrel
+that re-exports them. Component styles inject themselves on import, so no CSS import
+is needed; the optional global theme is:
+
+```ts
+import '@multiversx/sdk-dapp-form/styles.css';
+```
 
 ## Roadmap
 
@@ -52,7 +81,6 @@ One can contribute by creating _pull requests_, or by opening _issues_ for disco
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
 
 ## License
 

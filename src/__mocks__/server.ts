@@ -1,39 +1,30 @@
 import {
   DefaultBodyType,
-  PathParams,
-  rest,
-  RestContext,
-  RestRequest,
-  RestHandler,
-  ResponseResolver
+  http,
+  HttpResponse,
+  HttpResponseResolver,
+  RequestHandler
 } from 'msw';
 import { setupServer, SetupServer } from 'msw/node';
 import { testAddress, testNetwork, testReceiver } from './accountConfig';
 
-export const mockResponse = <T extends DefaultBodyType>(
-  body: T
-): ResponseResolver<
-  RestRequest<never, PathParams<string>>,
-  RestContext,
-  DefaultBodyType
-> => {
-  return (_req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(body));
-  };
-};
+export const mockResponse =
+  <T extends DefaultBodyType>(body: T): HttpResponseResolver =>
+  () =>
+    HttpResponse.json(body, { status: 200 });
 
-const handlers: RestHandler[] = [
-  ...['tokens', 'nfts', 'sfts'].map((el) => {
-    return rest.get(
+const handlers: RequestHandler[] = [
+  ...['tokens', 'nfts', 'sfts'].map((el) =>
+    http.get(
       `${testNetwork.apiAddress}/accounts/${testAddress}/${el}`,
       mockResponse([])
-    );
-  }),
-  rest.get(
+    )
+  ),
+  http.get(
     `${testNetwork.apiAddress}/accounts/${testReceiver}`,
     mockResponse({})
   ),
-  rest.get(
+  http.get(
     `${testNetwork.apiAddress}/economics`,
     mockResponse({
       totalSupply: 20431908,
@@ -46,13 +37,16 @@ const handlers: RestHandler[] = [
       baseApr: 0.413132
     })
   ),
-  rest.get(`${testNetwork.apiAddress}/transactions`, mockResponse([])),
-  rest.get(`${testNetwork.apiAddress}/usernames/:username`, (_req, res, ctx) => {
-    return res(ctx.status(404), ctx.json({ statusCode: 404, message: 'Not Found' }));
-  })
+  http.get(`${testNetwork.apiAddress}/transactions`, mockResponse([])),
+  http.get(`${testNetwork.apiAddress}/usernames/:username`, () =>
+    HttpResponse.json(
+      { statusCode: 404, message: 'Not Found' },
+      { status: 404 }
+    )
+  )
 ];
 
 // This configures a request mocking server with the given request handlers.
 const server: SetupServer = setupServer(...handlers);
 
-export { server, rest };
+export { server, http };

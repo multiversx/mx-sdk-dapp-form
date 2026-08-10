@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [replaced the esbuild build with a Vite library build](https://github.com/multiversx/mx-sdk-dapp-form/pull/389)
+
 ## [[4.0.0](https://github.com/multiversx/mx-sdk-dapp-form/pull/388)] - 2026-03-11
 
 - [Fix NFT extraction address errro](https://github.com/multiversx/mx-sdk-dapp-form/pull/387)

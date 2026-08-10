@@ -1,7 +1,7 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { testAddress, testNetwork } from '__mocks__';
-import { rest, server, mockResponse } from '__mocks__/server';
+import { http, server, mockResponse } from '__mocks__/server';
 import { sleep } from 'tests/helpers';
 import { renderForm } from 'tests/helpers/renderForm';
 
@@ -47,7 +47,7 @@ describe('Receiver field', () => {
 describe('Receiver username found', () => {
   beforeEach(() => {
     server.use(
-      rest.get(
+      http.get(
         `${testNetwork.apiAddress}/usernames/alice`,
         mockResponse({
           address: testAddress,

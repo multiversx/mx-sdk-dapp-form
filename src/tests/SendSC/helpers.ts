@@ -1,8 +1,9 @@
 import { RenderResult, queries, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { HttpResponse } from 'msw';
 
 import { testNetwork, testReceiver } from '__mocks__';
-import { server, rest } from '__mocks__/server';
+import { server, http } from '__mocks__/server';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { sleep } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
@@ -69,19 +70,16 @@ export const fillInForm: () => Promise<{
 export const setResponse = (values: (number | boolean)[]) => {
   const gasLimitValues = generator(values);
   server.use(
-    rest.post(
-      `${testNetwork.apiAddress}/transaction/cost`,
-      (_req, res, ctx) => {
-        const { value: txGasUnits } = gasLimitValues.next();
+    http.post(`${testNetwork.apiAddress}/transaction/cost`, () => {
+      const { value: txGasUnits } = gasLimitValues.next();
 
-        return res(
-          ctx.status(200),
-          ctx.json({
-            data: { txGasUnits: txGasUnits || 0 },
-            code: txGasUnits ? 'successful' : 'failed'
-          })
-        );
-      }
-    )
+      return HttpResponse.json(
+        {
+          data: { txGasUnits: txGasUnits || 0 },
+          code: txGasUnits ? 'successful' : 'failed'
+        },
+        { status: 200 }
+      );
+    })
   );
 };
