@@ -44,7 +44,14 @@ export interface SendFormContainerPropsType {
     setIsFormSubmitted?: Dispatch<SetStateAction<boolean>>
   ) => void;
   accountInfo: AccountContextPropsType;
-  formInfo: Omit<FormContextBasePropsType, 'txType' | 'setTxType'>;
+  formInfo: Omit<
+    FormContextBasePropsType,
+    | 'hasGuardianScreen'
+    | 'isFormSubmitted'
+    | 'setGuardedTransaction'
+    | 'setHasGuardianScreen'
+    | 'setIsFormSubmitted'
+  >;
   tokensInfo?: TokensContextInitializationPropsType;
   networkConfig: FormNetworkConfigType;
   Loader?: JSXElementConstructor<any> | null;
