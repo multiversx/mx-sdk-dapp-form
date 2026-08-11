@@ -54,7 +54,7 @@ export function useGetMaxAmountAvailable(): UseGetMaxAmountAvailableReturnType {
     });
 
     const tokenAmount = getEntireTokenBalance({
-      balance: newTokenBalance,
+      balance: newTokenBalance ?? undefined,
       decimals,
       digits: DIGITS
     });

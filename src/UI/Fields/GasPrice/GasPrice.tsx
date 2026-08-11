@@ -100,8 +100,11 @@ export const GasPrice = () => {
     });
   };
 
-  const fastPpu = gasStationMetadata ? gasStationMetadata[shard]?.fast : 0;
-  const fasterPpu = gasStationMetadata ? gasStationMetadata[shard]?.faster : 0;
+  const shardGasStationMetadata =
+    gasStationMetadata && shard != null ? gasStationMetadata[shard] : undefined;
+
+  const fastPpu = shardGasStationMetadata?.fast ?? 0;
+  const fasterPpu = shardGasStationMetadata?.faster ?? 0;
 
   const fastGasPrice = getRecommendedGasPrice(fastPpu);
 

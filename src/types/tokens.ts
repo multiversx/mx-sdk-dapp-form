@@ -9,7 +9,7 @@ export type PartialTokenType = {
   identifier: TokenType['identifier'];
   name: TokenType['name'];
   decimals: number;
-  balance: string;
+  balance: string | null;
   ticker: TokenType['ticker'];
   assets?: TokenAssetsType;
 };
