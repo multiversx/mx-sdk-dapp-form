@@ -1,3 +1,4 @@
 {
-  "extends": "./tsconfig.esm.json"
+  "extends": "./tsconfig.base.json",
+  "//": "Editor, lint and typecheck config. Keeps tests/stories/mocks in the project; tsconfig.build.json excludes them for the published declarations."
 }

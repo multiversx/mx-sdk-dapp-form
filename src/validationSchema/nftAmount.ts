@@ -8,10 +8,9 @@ import { string } from 'yup';
 import { ZERO } from 'constants/index';
 import { ExtendedValuesType, NftEnumType, TransactionTypeEnum } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
+import { concatValidations } from './concatValidations';
 
 const nftAmount = (errorMessages: ValidationErrorMessagesType) => {
-  const required = string().required(errorMessages.required);
-
   const metaFormattedAmount = string().test({
     name: 'formatDecimals',
     test: function hashSignCheck(value) {
@@ -91,17 +90,9 @@ const nftAmount = (errorMessages: ValidationErrorMessagesType) => {
     }
   );
 
-  const validations = [
-    required,
-    isValidNumber,
-    balance,
-    metaFormattedAmount,
-    nonZero
-  ];
-
-  return validations.reduce(
-    (previousValue, currentValue) => previousValue.concat(currentValue),
-    string()
+  return concatValidations(
+    [isValidNumber, balance, metaFormattedAmount, nonZero],
+    errorMessages.required
   );
 };
 export default nftAmount;

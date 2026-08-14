@@ -1,8 +1,11 @@
 import React from 'react';
 import { DECIMALS } from '@multiversx/sdk-dapp-utils/out/constants';
 import classNames from 'classnames';
-import Select, { SingleValue, components } from 'react-select';
-import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
+import Select, {
+  FilterOptionOption,
+  SingleValue,
+  components
+} from 'react-select';
 
 import globals from 'assets/sass/globals.module.scss';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';

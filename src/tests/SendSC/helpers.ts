@@ -1,8 +1,9 @@
 import { RenderResult, queries, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { HttpResponse } from 'msw';
 
 import { testNetwork, testReceiver } from '__mocks__';
-import { server, rest } from '__mocks__/server';
+import { server, http } from '__mocks__/server';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { sleep } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
@@ -50,17 +51,12 @@ export const fillInForm: () => Promise<{
   await userEvent.tab();
   expect(processedDataInput.value).toBe('claim');
 
-  const formatAmountInt = await render.findByTestId(
-    FormDataTestIdsEnum.formatAmountInt
-  );
+  // Wait for the fee to be rendered, but do not assert its value here: at this point the
+  // /transaction/cost request may or may not have landed, so the decimals are either the
+  // locally computed gas limit or the server one. Each test asserts the settled value.
+  await render.findByTestId(FormDataTestIdsEnum.formatAmountInt);
+  await render.findByTestId(FormDataTestIdsEnum.formatAmountDecimals);
 
-  expect(formatAmountInt.innerHTML).toBe('0');
-
-  const formatAmountDecimal = await render.findByTestId(
-    FormDataTestIdsEnum.formatAmountDecimals
-  );
-
-  expect(formatAmountDecimal.innerHTML).toBe('.0000575');
   await sleep();
 
   return { render };
@@ -69,19 +65,16 @@ export const fillInForm: () => Promise<{
 export const setResponse = (values: (number | boolean)[]) => {
   const gasLimitValues = generator(values);
   server.use(
-    rest.post(
-      `${testNetwork.apiAddress}/transaction/cost`,
-      (_req, res, ctx) => {
-        const { value: txGasUnits } = gasLimitValues.next();
+    http.post(`${testNetwork.apiAddress}/transaction/cost`, () => {
+      const { value: txGasUnits } = gasLimitValues.next();
 
-        return res(
-          ctx.status(200),
-          ctx.json({
-            data: { txGasUnits: txGasUnits || 0 },
-            code: txGasUnits ? 'successful' : 'failed'
-          })
-        );
-      }
-    )
+      return HttpResponse.json(
+        {
+          data: { txGasUnits: txGasUnits || 0 },
+          code: txGasUnits ? 'successful' : 'failed'
+        },
+        { status: 200 }
+      );
+    })
   );
 };

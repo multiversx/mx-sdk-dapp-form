@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import { TransactionTypeEnum } from 'types';
 
-import styles from './tokenAvatar.styles.scss';
+import styles from './tokenAvatar.module.scss';
 import MultiversXIcon from '../../../assets/icons/mx-icon.svg';
 
 export interface TokenAvatarPropsType {

@@ -16,7 +16,7 @@ describe('Data field tests', () => {
     const data = { target: { value: 'four' } };
     const input = await findByTestId(ValuesEnum.data);
 
-    userEvent.type(input, data.target.value);
+    await userEvent.type(input, data.target.value);
 
     const formatAmountDecimal = await findByTestId(
       FormDataTestIdsEnum.formatAmountDecimals

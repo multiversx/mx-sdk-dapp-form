@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from './styles.modules.scss';
+import styles from './styles.module.scss';
 
 export interface HighlightTextPropsType {
   text?: string;

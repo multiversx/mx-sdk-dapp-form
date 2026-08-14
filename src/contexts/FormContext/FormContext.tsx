@@ -24,6 +24,7 @@ export interface FormContextBasePropsType {
   isBurn?: boolean;
   isFormSubmitted: boolean;
   onCloseForm: () => void;
+  onPreviewClick?: (event: MouseEvent, data: PartialNftType) => void;
   prefilledForm: boolean;
   isDeposit?: boolean;
   readonly?: ExtendedValuesType['readonly'];
@@ -46,7 +47,6 @@ export interface FormContextPropsType extends FormContextBasePropsType {
   checkInvalid: (value: keyof ExtendedValuesType) => boolean;
   onValidateForm: () => void;
   onInvalidateForm: () => void;
-  onPreviewClick?: (event: MouseEvent, data: PartialNftType) => void;
   onSubmitForm: () => void;
   isGuardianScreenVisible: boolean;
   setIsGuardianScreenVisible: Dispatch<SetStateAction<boolean>>;

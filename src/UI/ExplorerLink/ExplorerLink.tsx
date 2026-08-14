@@ -8,8 +8,7 @@ import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import { WithClassnameType } from 'types';
 
 export interface ExplorerLinkPropsType
-  extends PropsWithChildren,
-    WithClassnameType {
+  extends PropsWithChildren, WithClassnameType {
   page: string;
   text?: any;
   customExplorerIcon?: IconProp;

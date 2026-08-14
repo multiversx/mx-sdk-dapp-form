@@ -104,10 +104,10 @@
 
       &.completed:after {
         background-color: var(--primary);
+      }
 
-        &.disabled:after {
-          background-color: var(--secondary);
-        }
+      &.completed.disabled:after {
+        background-color: var(--secondary);
       }
 
       &.disabled:after {

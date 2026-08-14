@@ -1,4 +1,4 @@
-import type { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
+import type { FilterOptionOption } from 'react-select';
 import type { GenericOptionType } from '../Receiver.types';
 
 export const filterOptions = (

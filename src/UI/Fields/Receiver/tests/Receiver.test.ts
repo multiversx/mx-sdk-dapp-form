@@ -1,7 +1,7 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { testAddress, testNetwork } from '__mocks__';
-import { rest, server, mockResponse } from '__mocks__/server';
+import { http, server, mockResponse } from '__mocks__/server';
 import { sleep } from 'tests/helpers';
 import { renderForm } from 'tests/helpers/renderForm';
 
@@ -14,12 +14,11 @@ describe('Receiver field', () => {
   test('Receiver field should not be empty', async () => {
     const { findByTestId, queryByText } = renderForm();
 
-    const data = { target: { value: '' } };
     const receiverInput = await findByTestId('receiver');
     const processedReceiverInput = receiverInput as HTMLInputElement;
 
+    // `clear` is the whole interaction: user-event v14 rejects `type(el, '')`.
     await userEvent.clear(processedReceiverInput);
-    await userEvent.type(processedReceiverInput, data.target.value);
     await userEvent.tab();
 
     await waitFor(() => {
@@ -38,17 +37,16 @@ describe('Receiver field', () => {
     await userEvent.clear(processedReceiverInput);
     await userEvent.type(processedReceiverInput, data.target.value);
     await userEvent.tab();
-    await waitFor(async () => {
-      const receiverUsernameError = await findByTestId('receiverUsernameError');
-      expect(receiverUsernameError?.innerHTML).toBe('Invalid herotag');
-    });
+    await sleep();
+    const receiverUsernameError = await findByTestId('receiverUsernameError');
+    expect(receiverUsernameError?.innerHTML).toBe('Invalid herotag');
   });
 });
 
 describe('Receiver username found', () => {
   beforeEach(() => {
     server.use(
-      rest.get(
+      http.get(
         `${testNetwork.apiAddress}/usernames/alice`,
         mockResponse({
           address: testAddress,

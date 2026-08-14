@@ -3,6 +3,7 @@ import { string } from 'yup';
 import { getStartsWithHrp } from 'helpers/misc';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
+import { concatValidations } from './concatValidations';
 
 export const receiverUsername = (
   errorMessages: ValidationErrorMessagesType
@@ -27,12 +28,7 @@ export const receiverUsername = (
     }
   );
 
-  const validations = [validUsername];
-
-  return validations.reduce(
-    (previousValue, currentValue) => previousValue.concat(currentValue),
-    string()
-  );
+  return concatValidations([validUsername]);
 };
 
 export default receiverUsername;

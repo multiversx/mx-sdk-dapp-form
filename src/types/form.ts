@@ -20,11 +20,10 @@ type MandatoryValuesType = {
   [key in ValueKeyType]: string;
 };
 
-export interface ValuesType
-  extends Omit<
-    MandatoryValuesType,
-    'receiverUsername' | 'senderUsername' | 'rawReceiverUsername'
-  > {
+export interface ValuesType extends Omit<
+  MandatoryValuesType,
+  'receiverUsername' | 'senderUsername' | 'rawReceiverUsername'
+> {
   receiverUsername?: string;
   rawReceiverUsername?: string;
   senderUsername?: string;

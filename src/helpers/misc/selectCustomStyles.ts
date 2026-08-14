@@ -23,8 +23,8 @@ export function selectCustomStyles({ docStyle }: { docStyle: any }) {
       borderColor: state.isDisabled
         ? customColors.hoverColor
         : state.isFocused
-        ? customColors.primaryColor
-        : customColors.blackColor,
+          ? customColors.primaryColor
+          : customColors.blackColor,
       boxShadow: state.isFocused
         ? `0 0 0 0.2rem #${customColors.primaryColor.replace('#', '').trim()}33`
         : null,
@@ -77,8 +77,8 @@ export function selectCustomStyles({ docStyle }: { docStyle: any }) {
       backgroundColor: isSelected
         ? customColors.primaryColor
         : isFocused
-        ? customColors.hoverColor
-        : 'transparent'
+          ? customColors.hoverColor
+          : 'transparent'
     }),
     menu: (props: any) => ({
       ...props,

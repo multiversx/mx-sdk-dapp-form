@@ -44,7 +44,14 @@ export interface SendFormContainerPropsType {
     setIsFormSubmitted?: Dispatch<SetStateAction<boolean>>
   ) => void;
   accountInfo: AccountContextPropsType;
-  formInfo: Omit<FormContextBasePropsType, 'txType' | 'setTxType'>;
+  formInfo: Omit<
+    FormContextBasePropsType,
+    | 'hasGuardianScreen'
+    | 'isFormSubmitted'
+    | 'setGuardedTransaction'
+    | 'setHasGuardianScreen'
+    | 'setIsFormSubmitted'
+  >;
   tokensInfo?: TokensContextInitializationPropsType;
   networkConfig: FormNetworkConfigType;
   Loader?: JSXElementConstructor<any> | null;
@@ -89,14 +96,14 @@ export function SendFormContainer(props: SendFormContainerPropsType) {
     });
 
     const transaction = shouldGenerateTransactionOnSubmit
-      ? guardedTransaction ??
+      ? (guardedTransaction ??
         (await generateTransaction({
           address,
           balance,
           chainId,
           nonce: accountInfo.nonce,
           values: parsedValues
-        }))
+        })))
       : null;
 
     return onFormSubmit(parsedValues, transaction, setIsFormSubmitted);

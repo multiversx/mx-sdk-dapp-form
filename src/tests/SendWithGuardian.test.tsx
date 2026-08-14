@@ -2,7 +2,6 @@ import React from 'react';
 import userEvent from '@testing-library/user-event';
 import { testAddress } from '__mocks__';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
-import { sleep } from 'tests/helpers';
 import { renderForm } from 'tests/helpers/renderForm';
 import { GuardianScreenType } from 'types';
 import { ValuesEnum } from 'types/form';
@@ -40,16 +39,9 @@ describe('Guardian screen tests', () => {
     await userEvent.type(amount, '0.00001');
     await userEvent.tab();
 
-    const sendButton = await methods.findByTestId(FormDataTestIdsEnum.sendBtn);
-    await userEvent.click(sendButton);
-    await sleep();
-
-    const gasLimitError = await methods.findByTestId(
-      FormDataTestIdsEnum.gasLimitError
-    );
-
-    expect(gasLimitError).toBeDefined();
-
+    // A guarded account gets EXTRA_GAS_LIMIT_GUARDED_TX added to the default gas limit up
+    // front, so the first submit is already valid and goes straight to the confirm screen
+    // — the fee asserted below is the guarded one.
     await sendAndConfirmTest({ methods })({
       amount: '0.00001',
       fee: '0.0000505 xEGLD'

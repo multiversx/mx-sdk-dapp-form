@@ -11,8 +11,8 @@
   padding: 1rem;
   width: 100%;
 
-  &::focused,
-  &::active {
+  &:focus,
+  &:active {
     box-shadow: none;
   }
 

@@ -6,11 +6,10 @@ import { getGuardedAccountGasLimit } from 'operations/getGuardedAccountGasLimit'
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
 import { validateGasLimitAmount } from 'validation/validateGasLimitAmount';
+import { concatValidations } from './concatValidations';
 import { sharedGasLimit } from './sharedGasLimit';
 
 const nftGasLimit = (errorMessages: ValidationErrorMessagesType) => {
-  const required = string().required(errorMessages.required);
-
   const minValueData = string().test({
     name: 'minValueData',
     test: function (value) {
@@ -69,16 +68,9 @@ const nftGasLimit = (errorMessages: ValidationErrorMessagesType) => {
     }
   );
 
-  const validations = [
-    required,
-    ...sharedGasLimit(errorMessages),
-    funds,
-    minValueData
-  ];
-
-  return validations.reduce(
-    (previousValue, currentValue) => previousValue.concat(currentValue),
-    string()
+  return concatValidations(
+    [...sharedGasLimit(errorMessages), funds, minValueData],
+    errorMessages.required
   );
 };
 export default nftGasLimit;

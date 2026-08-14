@@ -6,8 +6,7 @@ import { calculateFeeLimit } from '@multiversx/sdk-dapp/out/providers/strategies
 import { DECIMALS, DIGITS } from '@multiversx/sdk-dapp-utils/out/constants';
 import { formatAmount } from '@multiversx/sdk-dapp-utils/out/helpers/formatAmount';
 import BigNumber from 'bignumber.js';
-import { testAddress } from '__mocks__/accountConfig';
-import { MIN_DUST, ZERO } from 'constants/index';
+import { FEE_ESTIMATION_ADDRESS, MIN_DUST, ZERO } from 'constants/index';
 
 interface EntireBalanceType {
   balance?: string;
@@ -33,8 +32,8 @@ export function getEntireBalance({
 
   const fee = new BigNumber(
     calculateFeeLimit({
-      from: testAddress,
-      to: testAddress,
+      from: FEE_ESTIMATION_ADDRESS,
+      to: FEE_ESTIMATION_ADDRESS,
       gasPrice,
       gasLimit,
       data,
