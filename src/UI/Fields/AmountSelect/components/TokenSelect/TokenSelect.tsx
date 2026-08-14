@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import classNames from 'classnames';
-import Select from 'react-select';
-import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
+import Select, { FilterOptionOption } from 'react-select';
 import { getWegldIdForChainId } from 'apiCalls/network/getEnvironmentForChainId';
 import * as components from './components';
 import styles from './tokenSelect.module.scss';

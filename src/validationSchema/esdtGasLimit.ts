@@ -5,11 +5,10 @@ import { getGuardedAccountGasLimit } from 'operations';
 import { ExtendedValuesType } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
 import { validateGasLimitAmount } from 'validation/validateGasLimitAmount';
+import { concatValidations } from './concatValidations';
 import { sharedGasLimit } from './sharedGasLimit';
 
 const esdtGasLimit = (errorMessages: ValidationErrorMessagesType) => {
-  const required = string().required(errorMessages.required);
-
   const minValue = string().test(
     'minValue',
     errorMessages.tooLowGasLimit(TOKEN_GAS_LIMIT),
@@ -55,16 +54,9 @@ const esdtGasLimit = (errorMessages: ValidationErrorMessagesType) => {
     }
   );
 
-  const validations = [
-    required,
-    ...sharedGasLimit(errorMessages),
-    funds,
-    minValue
-  ];
-
-  return validations.reduce(
-    (previousValue, currentValue) => previousValue.concat(currentValue),
-    string()
+  return concatValidations(
+    [...sharedGasLimit(errorMessages), funds, minValue],
+    errorMessages.required
   );
 };
 

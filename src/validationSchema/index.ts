@@ -21,9 +21,11 @@ export const getValidationSchema = (
     tokenId: string().required(errorMessages.required),
     gasPrice: gasPrice(errorMessages),
     data,
+    // yup 1.x hands the dependency values to the builder as an array, where 0.32 spread
+    // them into separate arguments.
     amount: string().when(
       ['txType'],
-      function amountValidation(txType: TransactionTypeEnum) {
+      function amountValidation([txType]: TransactionTypeEnum[]) {
         switch (txType) {
           case TransactionTypeEnum.ESDT:
             return esdtAmount(errorMessages);
@@ -36,7 +38,7 @@ export const getValidationSchema = (
     ),
     gasLimit: string().when(
       ['txType'],
-      function amountValidation(txType: TransactionTypeEnum) {
+      function gasLimitValidation([txType]: TransactionTypeEnum[]) {
         switch (txType) {
           case TransactionTypeEnum.ESDT:
             return esdtGasLimit(errorMessages);

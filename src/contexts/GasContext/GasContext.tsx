@@ -18,8 +18,7 @@ import { stringIsFloat } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsFl
 import { stringIsInteger } from '@multiversx/sdk-dapp-utils/out/helpers/stringIsInteger';
 import BigNumber from 'bignumber.js';
 import { useFormikContext } from 'formik';
-import { testAddress } from '__mocks__/accountConfig';
-import { ZERO } from 'constants/index';
+import { FEE_ESTIMATION_ADDRESS, ZERO } from 'constants/index';
 import { getIsAmountInvalid } from 'contexts/AmountContext/utils';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
 import { getGasLimitChanged } from 'helpers';
@@ -62,6 +61,12 @@ interface GasContextProviderPropsType {
 interface IUpdateGasParams {
   newValue: string | ChangeEvent<any>;
   shouldValidate?: boolean;
+  /**
+   * Set when the change came from the user editing the field, as opposed to one of the
+   * contexts recomputing it. Marks gasLimit as touched, which is the flag the recomputing
+   * effects check before overwriting it — see `getGasLimitChanged`.
+   */
+  isUserInput?: boolean;
 }
 
 export const GasContext = createContext({} as GasContextPropsType);
@@ -144,9 +149,23 @@ export function GasContextProvider({
   );
 
   const handleUpdateGasLimit = useCallback(
-    ({ newValue, shouldValidate = false }: IUpdateGasParams) => {
+    ({
+      newValue,
+      shouldValidate = false,
+      isUserInput = false
+    }: IUpdateGasParams) => {
       const value =
         typeof newValue === 'string' ? newValue : newValue?.target?.value;
+
+      // Waiting for blur to record this is too late: DataFieldContext recomputes gasLimit
+      // whenever the data field changes, so an untouched field gets overwritten between
+      // keystrokes and the user's value never survives.
+      // `false` skips the validation pass formik would otherwise run for the touch alone:
+      // the setFieldValue below already validates, and running both means two passes per
+      // keystroke.
+      if (isUserInput) {
+        setFieldTouched(ValuesEnum.gasLimit, true, false);
+      }
 
       setFieldValue(ValuesEnum.gasLimit, value, shouldValidate);
     },
@@ -191,8 +210,8 @@ export function GasContextProvider({
     const dataField = isInitialGasLimit ? data.trim() : '';
 
     const newFeeLimit = calculateFeeLimit({
-      from: testAddress,
-      to: testAddress,
+      from: FEE_ESTIMATION_ADDRESS,
+      to: FEE_ESTIMATION_ADDRESS,
       gasLimit,
       gasPrice: parseAmount(gasPrice),
       data: dataField,

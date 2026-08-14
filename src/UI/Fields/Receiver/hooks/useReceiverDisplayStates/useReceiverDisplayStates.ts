@@ -46,8 +46,8 @@ export const useReceiverDisplayStates = ({
 
   const isUsernameError = Boolean(
     showUsernameError &&
-      !(menuIsOpen && addressIsAmongKnown) &&
-      !(menuIsOpen && usernameIsAmongKnown)
+    !(menuIsOpen && addressIsAmongKnown) &&
+    !(menuIsOpen && usernameIsAmongKnown)
   );
 
   const isRequiredError =

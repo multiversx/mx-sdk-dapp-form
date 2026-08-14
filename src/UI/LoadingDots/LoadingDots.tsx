@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { WithClassnameType } from 'types';
-import styles from './loadingDotsStyle.scss';
+import styles from './loadingDots.module.scss';
 
 export type LoadingDotsPropsType = WithClassnameType;
 

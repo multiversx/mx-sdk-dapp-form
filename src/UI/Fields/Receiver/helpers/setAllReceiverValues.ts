@@ -52,9 +52,12 @@ export const setAllReceiverValues = ({
     setInputValue(updatedInputValue);
     setOption({ value, label: updatedInputValue });
 
+    // A looked-up username that resolved to nothing is cached with an empty address, so
+    // `??` would write that empty string into the form and wipe what the user typed —
+    // the resolved address only wins when there actually is one.
     setFieldValue(
       ValuesEnum.receiver,
-      usernameAccounts[value]?.address ?? value
+      usernameAccounts[value]?.address || value
     );
 
     setFieldValue(ValuesEnum.receiverUsername, receiverUsername);

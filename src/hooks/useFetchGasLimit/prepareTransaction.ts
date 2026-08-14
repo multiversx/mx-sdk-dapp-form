@@ -2,6 +2,7 @@ import { Transaction, Address, TokenTransfer } from '@multiversx/sdk-core';
 import { VERSION } from '@multiversx/sdk-dapp/out/constants/mvx.constants';
 import { parseAmount } from '@multiversx/sdk-dapp-utils/out/helpers/parseAmount';
 import BigNumber from 'bignumber.js';
+import { stringToBytes } from 'helpers/transformations';
 
 interface PrepareTransactionType {
   balance: string;
@@ -44,12 +45,12 @@ export function prepareTransaction({
     gasLimit: BigInt(parseInt(gasLimit)),
     senderUsername,
     receiverUsername,
-    data: Buffer.from(data.trim()),
+    data: stringToBytes(data.trim()),
     chainID: chainId,
     version: VERSION,
     relayer: relayer ? Address.newFromBech32(relayer) : undefined,
     relayerSignature: relayerSignature
-      ? Buffer.from(relayerSignature)
+      ? stringToBytes(relayerSignature)
       : undefined
   });
 

@@ -8,9 +8,9 @@ import { trimUsernameDomain } from '@multiversx/sdk-dapp/out/utils/account/trimU
 import BigNumber from 'bignumber.js';
 import classNames from 'classnames';
 import MultiversXIconSimple from 'assets/icons/mx-icon-simple.svg';
+import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useNetworkConfigContext } from 'contexts/NetworkContext/NetworkContext';
 
-import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { isContract } from 'helpers';
 import { CopyButton } from 'UI/CopyButton';
 import { ExplorerLink } from 'UI/ExplorerLink';

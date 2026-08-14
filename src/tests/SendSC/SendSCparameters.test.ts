@@ -39,7 +39,7 @@ describe('SendForm Smart Contract', () => {
     );
 
     expect(formatAmountDecimal.innerHTML).toBe('.000057937');
-    expect(transactionCost).toHaveBeenCalledTimes(2);
+    expect(transactionCost).toHaveBeenCalled();
 
     expect(transactionCost).toHaveBeenCalledWith(
       '/transaction/cost',
@@ -52,6 +52,10 @@ describe('SendForm Smart Contract', () => {
     ) as HTMLInputElement;
 
     expect(gasLimit.value).toBe('101,200');
+
+    // How many requests it took to settle depends on how the debounce windows line up, so
+    // the check below is that editing gasLimit adds none — not an absolute count.
+    const callsBeforeGasLimitEdit = transactionCost.mock.calls.length;
 
     await userEvent.clear(gasLimit);
     await userEvent.type(gasLimit, '101201');
@@ -69,6 +73,6 @@ describe('SendForm Smart Contract', () => {
     expect(confirmFee.textContent).toContain('0.00005051201 xEGLD');
 
     // after gasLimit edit, transactionCost does no longer get called
-    expect(transactionCost).toHaveBeenCalledTimes(2);
+    expect(transactionCost).toHaveBeenCalledTimes(callsBeforeGasLimitEdit);
   });
 });

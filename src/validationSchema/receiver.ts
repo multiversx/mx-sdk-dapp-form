@@ -3,10 +3,9 @@ import { string } from 'yup';
 import { getIsNftTransaction } from 'helpers';
 import { ExtendedValuesType, TransactionTypeEnum } from 'types';
 import { ValidationErrorMessagesType } from 'types/validation';
+import { concatValidations } from './concatValidations';
 
 export const receiver = (errorMessages: ValidationErrorMessagesType) => {
-  const required = string().required(errorMessages.required);
-
   const validAddress = string().test(
     'addressIsValid',
     errorMessages.invalidAddress,
@@ -52,11 +51,9 @@ export const receiver = (errorMessages: ValidationErrorMessagesType) => {
     }
   );
 
-  const validations = [required, validAddress, sameAddress, canTransfer];
-
-  return validations.reduce(
-    (previousValue, currentValue) => previousValue.concat(currentValue),
-    string()
+  return concatValidations(
+    [validAddress, sameAddress, canTransfer],
+    errorMessages.required
   );
 };
 

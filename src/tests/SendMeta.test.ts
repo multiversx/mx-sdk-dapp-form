@@ -2,7 +2,7 @@ import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import selectEvent from 'react-select-event';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
-import { rest, server, mockResponse } from '__mocks__/server';
+import { http, server, mockResponse } from '__mocks__/server';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import {
   formConfiguration,
@@ -54,38 +54,38 @@ const fakeReceiver =
 describe('Send Meta ESDT', () => {
   beforeEach(() => {
     server.use(
-      rest.get(
+      http.get(
         `${testNetwork.apiAddress}/accounts/${testAddress}/nfts/${metaToken.identifier}`,
         mockResponse(metaToken)
       )
     );
     server.use(
-      rest.get(
+      http.get(
         `${testNetwork.apiAddress}/collections/${metaFarm.collection}`,
         mockResponse(metaFarm)
       )
     );
     server.use(
-      rest.get(
+      http.get(
         `${testNetwork.apiAddress}/accounts/${testAddress}/tokens`,
         mockResponse([metaToken])
       )
     );
 
     server.use(
-      rest.get(
+      http.get(
         `${testNetwork.apiAddress}/accounts/${fakeReceiver}`,
         mockResponse({})
       )
     );
     server.use(
-      rest.get(
+      http.get(
         `${testNetwork.apiAddress}/accounts/${testReceiver}`,
         mockResponse({})
       )
     );
     server.use(
-      rest.post(`${testNetwork.apiAddress}/transaction/cost`, mockResponse({}))
+      http.post(`${testNetwork.apiAddress}/transaction/cost`, mockResponse({}))
     );
   });
   test('MetaEsdt send', async () => {

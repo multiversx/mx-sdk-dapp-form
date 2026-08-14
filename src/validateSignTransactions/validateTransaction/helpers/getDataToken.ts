@@ -38,7 +38,7 @@ export async function getDataToken(
       tokenAmount: formattedAmount,
       tokenFound: !Array.isArray(data) && data.identifier === tokenId
     };
-  } catch (e) {
+  } catch {
     return {
       tokenData: null,
       tokenAmount: ZERO,

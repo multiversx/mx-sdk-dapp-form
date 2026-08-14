@@ -99,7 +99,7 @@ export const TestWrapper = ({
       shard: accountConfiguration.shard,
       nonce: accountConfiguration.nonce,
       balance,
-      providerType: ProviderTypeEnum
+      providerType: ProviderTypeEnum.extension
     },
     formInfo: {
       prefilledForm: false,

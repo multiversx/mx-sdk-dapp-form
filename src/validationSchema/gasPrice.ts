@@ -9,10 +9,9 @@ import {
 } from 'operations/formattedConfigGasPrice';
 
 import { ValidationErrorMessagesType } from 'types/validation';
+import { concatValidations } from './concatValidations';
 
 export const gasPrice = (errorMessages: ValidationErrorMessagesType) => {
-  const required = string().required(errorMessages.required);
-
   const decimalsValidation = string().test(
     'decimalFormat',
     errorMessages.maxDecimalsAllowed(DECIMALS),
@@ -47,17 +46,9 @@ export const gasPrice = (errorMessages: ValidationErrorMessagesType) => {
     (value) => Boolean(value && stringIsFloat(value))
   );
 
-  const validations = [
-    required,
-    decimalsValidation,
-    minimum,
-    maximum,
-    validNumber
-  ];
-
-  return validations.reduce(
-    (previousValue, currentValue) => previousValue.concat(currentValue),
-    string()
+  return concatValidations(
+    [decimalsValidation, minimum, maximum, validNumber],
+    errorMessages.required
   );
 };
 

@@ -1,7 +1,7 @@
 import { RenderResult, queries } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { testAddress, testNetwork } from '__mocks__/accountConfig';
-import { rest, server, mockResponse } from '__mocks__/server';
+import { http, server, mockResponse } from '__mocks__/server';
 import { formConfiguration, renderForm as beginAll } from 'tests/helpers';
 import { sleep } from 'tests/helpers';
 import { ValuesEnum } from 'types';
@@ -48,13 +48,13 @@ export const useGasLimitInput = useInput(ValuesEnum.gasLimit);
 
 export const setupEsdtServer = () => {
   server.use(
-    rest.get(
+    http.get(
       `${testNetwork.apiAddress}/accounts/${testAddress}/tokens/${twoToken.identifier}`,
       mockResponse(twoToken)
     )
   );
   server.use(
-    rest.get(
+    http.get(
       `${testNetwork.apiAddress}/accounts/${testAddress}/tokens`,
       mockResponse([twoToken])
     )

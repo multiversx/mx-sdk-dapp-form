@@ -58,9 +58,9 @@ export const fetchGasLimit = async ({
 
   const validTxGasUnits = Boolean(
     success &&
-      responseData?.code === 'successful' &&
-      txGasUnits &&
-      txGasUnits !== 0
+    responseData?.code === 'successful' &&
+    txGasUnits &&
+    txGasUnits !== 0
   );
 
   if (!validTxGasUnits) {

@@ -2,8 +2,7 @@ import React, { useMemo } from 'react';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import { components } from 'react-select';
-import { FilterOptionOption } from 'react-select/dist/declarations/src/filters';
+import { FilterOptionOption, components } from 'react-select';
 
 import { filterOptions } from '../../helpers';
 

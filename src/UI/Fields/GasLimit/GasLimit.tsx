@@ -41,10 +41,13 @@ export const GasLimit = () => {
     return defaultConditions && !hasLeadingZeroes(value);
   };
 
-  const handleValueChange: OnValueChange = (event) => {
+  const handleValueChange: OnValueChange = (event, sourceInfo) => {
     onChangeGasLimit({
       newValue: event.value,
-      shouldValidate: true
+      shouldValidate: true,
+      // NumericFormat also fires this when the `value` prop is updated by one of the
+      // contexts; only a real edit should claim ownership of the field.
+      isUserInput: sourceInfo.source === 'event'
     });
   };
 

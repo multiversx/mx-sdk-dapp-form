@@ -1,7 +1,7 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
-import { rest, server, mockResponse } from '__mocks__/server';
+import { http, server, mockResponse } from '__mocks__/server';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import {
   formConfiguration,
@@ -46,19 +46,19 @@ const beforAllTokens = (balance?: string) =>
 describe('Send SFT tokens', () => {
   beforeEach(() => {
     server.use(
-      rest.get(
+      http.get(
         `${testNetwork.apiAddress}/accounts/${testAddress}/nfts/${sftToken.identifier}`,
         mockResponse(sftToken)
       )
     );
     server.use(
-      rest.get(
+      http.get(
         `${testNetwork.apiAddress}/accounts/${testAddress}/nfts`,
         mockResponse([sftToken])
       )
     );
     server.use(
-      rest.get(
+      http.get(
         `${testNetwork.apiAddress}/accounts/${testReceiver}`,
         mockResponse({})
       )

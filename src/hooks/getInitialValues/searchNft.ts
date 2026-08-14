@@ -1,10 +1,10 @@
+import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 import BigNumber from 'bignumber.js';
 import {
   ApiConfigType,
   getGlobalNftByIdentifier,
   getNftByAddressAndIdentifier
 } from 'apiCalls';
-import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 import { bech32 } from 'helpers/transformations';
 import { extractNftFromData } from './extractNftFromData';
 import { SearchNFTPropsType } from './searchNft.types';

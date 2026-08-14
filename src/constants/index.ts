@@ -10,6 +10,12 @@ export const BURN_NFT_GAS_LIMIT = 200_000;
 export const DEPOSIT_GAS_LIMIT = 25_000_000;
 export const MIN_DUST = '5000000000000000'; // 0.05 EGLD
 
+/**
+ * Placeholder sender/receiver used purely to estimate a transaction fee
+ */
+export const FEE_ESTIMATION_ADDRESS =
+  'erd1deaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaddeaqtv0gag';
+
 export const ZERO = '0';
 export const WEGLD_ID = 'WEGLD-bd4d79';
 export const ELLIPSIS = '…';

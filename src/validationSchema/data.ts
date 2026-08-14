@@ -5,6 +5,7 @@ import {
 import getLedgerVersionOptions from '@multiversx/sdk-dapp/out/providers/strategies/LedgerProviderStrategy/helpers/authenticateLedgerAccount/helpers/getLedgerVersionOptions';
 import { string } from 'yup';
 import { ExtendedValuesType } from 'types';
+import { concatValidations } from './concatValidations';
 
 const ledgerDataActive = string().test(
   'ledgerDataActive',
@@ -45,11 +46,6 @@ const hashSign = string().test({
   }
 });
 
-const validations = [ledgerDataActive, hashSign];
-
-export const data = validations.reduce(
-  (previousValue, currentValue) => previousValue.concat(currentValue),
-  string()
-);
+export const data = concatValidations([ledgerDataActive, hashSign]);
 
 export default data;
