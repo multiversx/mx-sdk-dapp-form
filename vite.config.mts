@@ -38,7 +38,10 @@ const sharedOutput = {
 export default defineConfig({
   plugins: [
     svgr({ include: '**/*.svg' }),
-    cssInjectedByJs({ relativeCSSInjection: true }),
+    cssInjectedByJs({
+      relativeCSSInjection: true,
+      topExecutionPriority: false
+    }),
     dts({
       tsconfigPath: './tsconfig.build.json',
       entryRoot: basedir,
