@@ -7,7 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [[5.0.2](https://github.com/multiversx/mx-sdk-dapp-form/pull/395)] - 2026-08-24
+
 - [Use Trim, CopyButton, ExplorerLink, FormatAmount and spinners/info icon from @multiversx/sdk-dapp-ui](https://github.com/multiversx/mx-sdk-dapp-form/pull/393)
+- [Avoid flashing the unknown receiver warning while known addresses are loading](https://github.com/multiversx/mx-sdk-dapp-form/pull/394)
 
 ## [[5.0.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/392)] - 2026-08-18
 
