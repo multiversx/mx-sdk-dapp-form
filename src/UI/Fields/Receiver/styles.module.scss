@@ -264,12 +264,12 @@
         font-size: 14px;
         padding: 12px;
         border: 1px solid transparent;
-        bottom: calc(100% + 8px - 1px);
+        bottom: calc(100% + 10px);
         border-right: 0;
         position: absolute;
         pointer-events: none;
         color: var(--placeholder-color);
-        left: -1px;
+        left: -3px;
         right: 24px;
         align-items: center;
         justify-content: flex-start;
