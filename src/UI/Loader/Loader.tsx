@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
+import { MvxSpinnerIcon } from 'lib/sdkDappUi';
 import { WithClassnameType } from 'types';
-import { MvxSpinnerIcon } from 'UI/sdkDappUi';
 import styles from './loader.module.scss';
 
 export type LoaderPropsType = WithClassnameType;

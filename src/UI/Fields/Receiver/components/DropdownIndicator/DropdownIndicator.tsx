@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { FilterOptionOption, components } from 'react-select';
-import { MvxSpinnerIcon } from 'UI/sdkDappUi';
+import { MvxSpinnerIcon } from 'lib/sdkDappUi';
 
 import { filterOptions } from '../../helpers';
 

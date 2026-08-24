@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
-import { MvxFormatAmount } from 'UI/sdkDappUi';
+import { MvxFormatAmount } from 'lib/sdkDappUi';
 import { FormatAmountPropsType } from './formatAmount.types';
 import { getFormatAmountParts } from './helpers';
 

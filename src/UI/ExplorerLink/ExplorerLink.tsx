@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getExplorerLink } from '@multiversx/sdk-dapp/out/utils/transactions/getExplorerLink';
 import classNames from 'classnames';
 import { useNetworkConfigContext } from 'contexts/NetworkContext';
+import { MvxExplorerLink } from 'lib/sdkDappUi';
 import { WithClassnameType } from 'types';
-import { MvxExplorerLink } from 'UI/sdkDappUi';
 
 export interface ExplorerLinkPropsType
   extends PropsWithChildren, WithClassnameType {

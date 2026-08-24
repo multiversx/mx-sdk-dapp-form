@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
+import { MvxTrim } from 'lib/sdkDappUi';
 import { WithClassnameType } from 'types';
-import { MvxTrim } from 'UI/sdkDappUi';
 import styles from './trim.module.scss';
 
 export interface TrimType extends WithClassnameType {

@@ -2,8 +2,8 @@ import React from 'react';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { MIN_DUST, FormDataTestIdsEnum } from 'constants/index';
+import { MvxCircleInfoIcon } from 'lib/sdkDappUi';
 import { FormatAmount } from 'UI/FormatAmount';
-import { MvxCircleInfoIcon } from 'UI/sdkDappUi';
 import styles from './styles.module.scss';
 
 export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
