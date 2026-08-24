@@ -1,15 +1,22 @@
 import React from 'react';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
+import { WithClassnameType } from 'types';
+import { MvxSpinnerIcon } from 'UI/sdkDappUi';
+import styles from './loader.module.scss';
 
-export const Loader = () => {
-  return (
-    <div className='flex justify-center items-center h-screen'>
-      <FontAwesomeIcon
-        icon={faSpinner}
-        spin
-        className='text-4xl text-blue-500'
-      />
-    </div>
-  );
-};
+export type LoaderPropsType = WithClassnameType;
+
+export const Loader = ({
+  className,
+  'data-testid': dataTestId
+}: LoaderPropsType) => (
+  <div
+    className={classNames(
+      'flex justify-center items-center h-screen',
+      className
+    )}
+    data-testid={dataTestId}
+  >
+    <MvxSpinnerIcon class={styles.loaderSpinner} />
+  </div>
+);

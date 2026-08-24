@@ -48,21 +48,17 @@
         transform: translateY(-50%);
       }
 
-      [class*='ellipsis'] {
+      :global(.trim-ellipsis) {
         display: flex;
         align-items: flex-end;
       }
 
-      [class*='left'],
-      [class*='right'],
-      [class*='ellipsis'] {
+      :global(.trim-left),
+      :global(.trim-right),
+      :global(.trim-ellipsis),
+      :global(.trim-full-visible) {
         line-height: 1.25;
         color: var(--dapp-form-placeholder-color);
-
-        * {
-          color: var(--dapp-form-placeholder-color);
-          line-height: 1.25;
-        }
       }
 
       .can-transfer-warning-address-explorer,
@@ -70,6 +66,7 @@
         color: var(--dapp-form-placeholder-color) !important;
         margin: 0;
 
+        svg,
         svg path {
           fill: var(--dapp-form-placeholder-color);
         }

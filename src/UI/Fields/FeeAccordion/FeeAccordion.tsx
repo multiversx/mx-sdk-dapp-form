@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { faChevronRight, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import useCollapse from 'react-collapsed';
@@ -9,6 +9,7 @@ import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import { useSendFormContext } from 'contexts/SendFormProviderContext';
 import { WithClassnameType } from 'types';
 import { FormatAmount } from 'UI/FormatAmount';
+import { MvxSpinnerIcon } from 'UI/sdkDappUi';
 import { FeeInFiat } from './FeeInFiat';
 import styles from './styles.module.scss';
 import { GasLimit } from '../GasLimit/GasLimit';
@@ -47,11 +48,9 @@ export const FeeAccordion = ({ className }: WithClassnameType) => {
         </span>
 
         {gasCostLoading && (
-          <FontAwesomeIcon
-            icon={faSpinner}
-            className='fa-spin fast-spin'
-            data-testid={FormDataTestIdsEnum.gasCostLoadingSpinner}
-          />
+          <span data-testid={FormDataTestIdsEnum.gasCostLoadingSpinner}>
+            <MvxSpinnerIcon class={styles.gasCostSpinner} />
+          </span>
         )}
 
         <FeeInFiat egldPriceInUsd={egldPriceInUsd} feeLimit={feeLimit} />

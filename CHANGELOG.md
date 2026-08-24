@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- [Use Trim, CopyButton, ExplorerLink, FormatAmount and spinners/info icon from @multiversx/sdk-dapp-ui](https://github.com/multiversx/mx-sdk-dapp-form/pull/393)
+
 ## [[5.0.1](https://github.com/multiversx/mx-sdk-dapp-form/pull/392)] - 2026-08-18
 
 - [Fix globals injected styles in dev mode](https://github.com/multiversx/mx-sdk-dapp-form/pull/391)

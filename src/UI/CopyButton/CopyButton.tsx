@@ -4,6 +4,7 @@ import { faCheck, faCopy } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { WithClassnameType } from 'types';
+import { MvxCopyButton } from 'UI/sdkDappUi';
 import { copyTextToClipboard } from './helpers/copyToClipboard';
 
 export interface CopyButtonPropsType extends WithClassnameType {
@@ -12,9 +13,9 @@ export interface CopyButtonPropsType extends WithClassnameType {
   successIcon?: IconProp;
 }
 
-export const CopyButton = ({
+const CustomIconCopyButton = ({
   text,
-  className = 'dapp-copy-button',
+  className,
   copyIcon = faCopy,
   successIcon = faCheck
 }: CopyButtonPropsType) => {
@@ -55,4 +56,24 @@ export const CopyButton = ({
       )}
     </a>
   );
+};
+
+export const CopyButton = ({
+  text,
+  className = 'dapp-copy-button',
+  copyIcon,
+  successIcon
+}: CopyButtonPropsType) => {
+  if (copyIcon || successIcon) {
+    return (
+      <CustomIconCopyButton
+        text={text}
+        className={className}
+        copyIcon={copyIcon}
+        successIcon={successIcon}
+      />
+    );
+  }
+
+  return <MvxCopyButton text={text} class={classNames('copy', className)} />;
 };

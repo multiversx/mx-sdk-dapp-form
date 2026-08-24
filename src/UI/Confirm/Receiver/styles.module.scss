@@ -72,6 +72,10 @@
       color: #737373;
       min-width: 1rem;
       max-height: 1rem;
+
+      svg {
+        fill: #737373;
+      }
     }
 
     .receiverExternal {
@@ -82,9 +86,17 @@
         color: #0ac2ae !important;
       }
 
+      &:hover svg {
+        fill: #0ac2ae;
+      }
+
       * {
         transition: all 200ms ease;
         color: #737373 !important;
+      }
+
+      svg {
+        fill: #737373;
       }
     }
   }

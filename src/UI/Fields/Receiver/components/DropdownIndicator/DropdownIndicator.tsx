@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { FilterOptionOption, components } from 'react-select';
+import { MvxSpinnerIcon } from 'UI/sdkDappUi';
 
 import { filterOptions } from '../../helpers';
 
@@ -43,13 +42,7 @@ export const DropdownIndicator: typeof components.DropdownIndicator = (
   const isHidden = isDisabled || noOptionsAvailable || noOptionsFound;
 
   if (isLoading) {
-    return (
-      <FontAwesomeIcon
-        icon={faSpinner}
-        spin={true}
-        className={styles.receiverSelectSpinner}
-      />
-    );
+    return <MvxSpinnerIcon class={styles.receiverSelectSpinner} />;
   }
 
   return (

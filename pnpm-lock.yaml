@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@multiversx/sdk-dapp-ui':
+        specifier: '>=0.1.25-alpha.4 <0.2.0'
+        version: 0.1.25-alpha.4(@types/react@18.2.47)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue@3.5.41(typescript@5.9.3))
       formik:
         specifier: 2.4.9
         version: 2.4.9(@types/react@18.2.47)(react@18.2.0)
@@ -767,6 +770,9 @@ packages:
     resolution: {integrity: sha512-p2Dnqh9CMmlYxSwH4ks+qjqsvzQ6ak8CEIZxAJ+Xj6tYiB8r4sgqamPDkSLsxn9114nxud7bkdw2mvJ+kepRLQ==}
     engines: {node: '>=20.19.0'}
 
+  '@multiversx/sdk-dapp-ui@0.1.25-alpha.4':
+    resolution: {integrity: sha512-eI1SdOn4OcZtKU8BYWXTTFu/MS0RTTRY6KwZMF4Izv0FVuF/vyS4zHzAGrr6VbwpoeBMW/BcuI+Lej+NbArfYA==}
+
   '@multiversx/sdk-dapp-utils@3.1.0':
     resolution: {integrity: sha512-m3u2ymm+ME/+6Hbu0iNmi+CQbuImNOc8GeX+KtdW0tihQrMwEuWIECj/U5EapEFbGMlNbPb/YmwiMMfQ1bk/fQ==}
     peerDependencies:
@@ -1305,13 +1311,29 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
+  '@rollup/rollup-darwin-arm64@4.44.0':
+    resolution: {integrity: sha512-VGF3wy0Eq1gcEIkSCr8Ke03CWT+Pm2yveKLaDvq51pPpZza3JX/ClxXOCmTYYq3us5MvEuNRTaeyFThCKRQhOA==}
+    cpu: [arm64]
+    os: [darwin]
+
   '@rollup/rollup-darwin-x64@4.34.9':
     resolution: {integrity: sha512-eOojSEAi/acnsJVYRxnMkPFqcxSMFfrw7r2iD9Q32SGkb/Q9FpUY1UlAu1DH9T7j++gZ0lHjnm4OyH2vCI7l7Q==}
     cpu: [x64]
     os: [darwin]
 
+  '@rollup/rollup-darwin-x64@4.44.0':
+    resolution: {integrity: sha512-fBkyrDhwquRvrTxSGH/qqt3/T0w5Rg0L7ZIDypvBPc1/gzjJle6acCpZ36blwuwcKD/u6oCE/sRWlUAcxLWQbQ==}
+    cpu: [x64]
+    os: [darwin]
+
   '@rollup/rollup-linux-arm64-gnu@4.34.9':
     resolution: {integrity: sha512-6TZjPHjKZUQKmVKMUowF3ewHxctrRR09eYyvT5eFv8w/fXarEra83A2mHTVJLA5xU91aCNOUnM+DWFMSbQ0Nxw==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [glibc]
+
+  '@rollup/rollup-linux-arm64-gnu@4.44.0':
+    resolution: {integrity: sha512-ZTR2mxBHb4tK4wGf9b8SYg0Y6KQPjGpR4UWwTFdnmjB4qRtoATZ5dWn3KsDwGa5Z2ZBOE7K52L36J9LueKBdOQ==}
     cpu: [arm64]
     os: [linux]
     libc: [glibc]
@@ -1322,8 +1344,20 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@rollup/rollup-linux-arm64-musl@4.44.0':
+    resolution: {integrity: sha512-GFWfAhVhWGd4r6UxmnKRTBwP1qmModHtd5gkraeW2G490BpFOZkFtem8yuX2NyafIP/mGpRJgTJ2PwohQkUY/Q==}
+    cpu: [arm64]
+    os: [linux]
+    libc: [musl]
+
   '@rollup/rollup-linux-x64-gnu@4.34.9':
     resolution: {integrity: sha512-FwBHNSOjUTQLP4MG7y6rR6qbGw4MFeQnIBrMe161QGaQoBQLqSUEKlHIiVgF3g/mb3lxlxzJOpIBhaP+C+KP2A==}
+    cpu: [x64]
+    os: [linux]
+    libc: [glibc]
+
+  '@rollup/rollup-linux-x64-gnu@4.44.0':
+    resolution: {integrity: sha512-iUVJc3c0o8l9Sa/qlDL2Z9UP92UZZW1+EmQ4xfjTc1akr0iUFZNfxrXJ/R1T90h/ILm9iXEY6+iPrmYB3pXKjw==}
     cpu: [x64]
     os: [linux]
     libc: [glibc]
@@ -1334,13 +1368,29 @@ packages:
     os: [linux]
     libc: [musl]
 
+  '@rollup/rollup-linux-x64-musl@4.44.0':
+    resolution: {integrity: sha512-PQUobbhLTQT5yz/SPg116VJBgz+XOtXt8D1ck+sfJJhuEsMj2jSej5yTdp8CvWBSceu+WW+ibVL6dm0ptG5fcA==}
+    cpu: [x64]
+    os: [linux]
+    libc: [musl]
+
   '@rollup/rollup-win32-arm64-msvc@4.34.9':
     resolution: {integrity: sha512-z4mQK9dAN6byRA/vsSgQiPeuO63wdiDxZ9yg9iyX2QTzKuQM7T4xlBoeUP/J8uiFkqxkcWndWi+W7bXdPbt27Q==}
     cpu: [arm64]
     os: [win32]
 
+  '@rollup/rollup-win32-arm64-msvc@4.44.0':
+    resolution: {integrity: sha512-M0CpcHf8TWn+4oTxJfh7LQuTuaYeXGbk0eageVjQCKzYLsajWS/lFC94qlRqOlyC2KvRT90ZrfXULYmukeIy7w==}
+    cpu: [arm64]
+    os: [win32]
+
   '@rollup/rollup-win32-x64-msvc@4.34.9':
     resolution: {integrity: sha512-AyleYRPU7+rgkMWbEh71fQlrzRfeP6SyMnRf9XX4fCdDPAJumdSBqYEcWPMzVQ4ScAl7E4oFfK0GUVn77xSwbw==}
+    cpu: [x64]
+    os: [win32]
+
+  '@rollup/rollup-win32-x64-msvc@4.44.0':
+    resolution: {integrity: sha512-Q2Mgwt+D8hd5FIPUuPDsvPR7Bguza6yTkJxspDGkZj7tBRn2y4KSWYuIXpftFSjBra76TbKerCV7rgFPQrn+wQ==}
     cpu: [x64]
     os: [win32]
 
@@ -1376,10 +1426,22 @@ packages:
     engines: {node: '>=16.0.0', npm: '>=7.10.0'}
     hasBin: true
 
+  '@stencil/core@4.44.1':
+    resolution: {integrity: sha512-OaFtMODcDcKswPbJC6An6xAcNmeuBggxyUTVKSX1UY7bPtWgIR5mGy1jZ6JkyFGgIxZCj/9wp2r97KBQow9wOQ==}
+    engines: {node: '>=16.0.0', npm: '>=7.10.0'}
+    hasBin: true
+
   '@stencil/react-output-target@1.2.0':
     resolution: {integrity: sha512-xDNpWdRg897T3Diy5V2d8dZUdjhc4QJ/5JZdTVyv3/e9UICdJPfCY6eKp/dWWgYlJ9AUE6GLHOI1iePZmLY12A==}
     peerDependencies:
       '@stencil/core': '>=3 || >= 4.0.0-beta.0 || >= 4.0.0'
+      react: ^18 || ^19
+      react-dom: ^18 || ^19
+
+  '@stencil/react-output-target@1.6.2':
+    resolution: {integrity: sha512-hnN0EkF/aWIqIUZhJ4rUszqKzzS8TSThSXNxkK9xLtlKIUef/sep8ekRlHOelq7RiUBPP4eTBv6d5N3X4T35KQ==}
+    peerDependencies:
+      '@stencil/core': '>=3 || >=4.0.0 || ^5.0.0 || >=5.0.0-alpha.17 <5.0.0-next.0'
       react: ^18 || ^19
       react-dom: ^18 || ^19
 
@@ -1389,6 +1451,18 @@ packages:
       '@stencil/core': '>=2.0.0 || >=3 || >= 4.0.0-beta.0 || >= 4.0.0'
       vue: ^3.4.38
       vue-router: ^4.5.0
+    peerDependenciesMeta:
+      '@stencil/core':
+        optional: true
+      vue-router:
+        optional: true
+
+  '@stencil/vue-output-target@0.14.1':
+    resolution: {integrity: sha512-mtqpYVsdopTbMK0eAmyNa2+MuuhiZgJcrBt1hihEERyG0vtDqcaYkqNz+sYSvA0iK3tTGs5vOUPOd1HU1w9D7w==}
+    peerDependencies:
+      '@stencil/core': '>=2.0.0 || >=3 || >=4.0.0 || ^5.0.0 || >=5.0.0-alpha.17 <5.0.0-next.0'
+      vue: ^3.4.38
+      vue-router: ^4.5.0 || ^5.0.0
     peerDependenciesMeta:
       '@stencil/core':
         optional: true
@@ -1618,6 +1692,9 @@ packages:
 
   '@ts-morph/common@0.23.0':
     resolution: {integrity: sha512-m7Lllj9n/S6sOkCkRftpM7L24uvmfXQFedlW/4hENcuJH1HHm9u5EgxZb9uVjQSCGrbBWBkOGgcTxNg36r6ywA==}
+
+  '@ts-morph/common@0.29.0':
+    resolution: {integrity: sha512-35oUmphHbJvQ/+UTwFNme/t2p3FoKiGJ5auTjjpNTop2dyREspirjMy82PLSC1pnDJ8ah1GU98hwpVt64YXQsg==}
 
   '@tsconfig/recommended@1.0.13':
     resolution: {integrity: sha512-sySRuBfMKyKO/j2ZAhR8kSembhjuPEV4Ra3AHtmWLq51+iGaudr45crPSzNC5b7/Ctrh9dfUpBuTlYrH6rM58Q==}
@@ -2765,6 +2842,7 @@ packages:
   eslint@9.39.5:
     resolution: {integrity: sha512-DgZS62aPLXKlnxILS/AYCoRvHaZeXceIzlXPkkGGzJWSow1aEk0lbTlxUSlyjC8jcaKxAdOnTDz+o1JFSBsyjw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -4633,6 +4711,9 @@ packages:
   ts-morph@22.0.0:
     resolution: {integrity: sha512-M9MqFGZREyeb5fTl6gNHKZLqBQA0TjA1lea+CR48R8EBTDuWrNqW6ccC5QvjNR4s6wDumD3LTCjOFSp9iwlzaw==}
 
+  ts-morph@28.0.0:
+    resolution: {integrity: sha512-Wp3tnZ2bzwxyTZMtgWVzXDfm7lB1Drz+y9DmmYH/L702PQhPyVrp3pkou3yIz4qjS14GY9kcpmLiOOMvl8oG1g==}
+
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
 
@@ -5416,8 +5497,7 @@ snapshots:
   '@emotion/sheet@1.4.0':
     optional: true
 
-  '@emotion/unitless@0.10.0':
-    optional: true
+  '@emotion/unitless@0.10.0': {}
 
   '@emotion/use-insertion-effect-with-fallbacks@1.2.0(react@18.2.0)':
     dependencies:
@@ -5841,7 +5921,6 @@ snapshots:
   '@lit/react@1.0.8(@types/react@18.2.47)':
     dependencies:
       '@types/react': 18.2.47
-    optional: true
 
   '@msgpack/msgpack@3.1.3': {}
 
@@ -5899,6 +5978,23 @@ snapshots:
       - vue
       - vue-router
     optional: true
+
+  '@multiversx/sdk-dapp-ui@0.1.25-alpha.4(@types/react@18.2.47)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vue@3.5.41(typescript@5.9.3))':
+    dependencies:
+      '@stencil/core': 4.44.1
+      '@stencil/react-output-target': 1.6.2(@stencil/core@4.44.1)(@types/react@18.2.47)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      '@stencil/vue-output-target': 0.14.1(@stencil/core@4.44.1)(vue@3.5.41(typescript@5.9.3))
+      classnames: 2.5.1
+      lodash.capitalize: 4.2.1
+      lodash.inrange: 3.3.6
+      lodash.range: 3.2.0
+      qrcode: 1.5.4
+    transitivePeerDependencies:
+      - '@types/react'
+      - react
+      - react-dom
+      - vue
+      - vue-router
 
   '@multiversx/sdk-dapp-utils@3.1.0(@multiversx/sdk-core@15.4.1(bignumber.js@9.3.1)(protobufjs@7.6.5))(bignumber.js@9.3.1)':
     dependencies:
@@ -6353,25 +6449,49 @@ snapshots:
   '@rollup/rollup-darwin-arm64@4.34.9':
     optional: true
 
+  '@rollup/rollup-darwin-arm64@4.44.0':
+    optional: true
+
   '@rollup/rollup-darwin-x64@4.34.9':
+    optional: true
+
+  '@rollup/rollup-darwin-x64@4.44.0':
     optional: true
 
   '@rollup/rollup-linux-arm64-gnu@4.34.9':
     optional: true
 
+  '@rollup/rollup-linux-arm64-gnu@4.44.0':
+    optional: true
+
   '@rollup/rollup-linux-arm64-musl@4.34.9':
+    optional: true
+
+  '@rollup/rollup-linux-arm64-musl@4.44.0':
     optional: true
 
   '@rollup/rollup-linux-x64-gnu@4.34.9':
     optional: true
 
+  '@rollup/rollup-linux-x64-gnu@4.44.0':
+    optional: true
+
   '@rollup/rollup-linux-x64-musl@4.34.9':
+    optional: true
+
+  '@rollup/rollup-linux-x64-musl@4.44.0':
     optional: true
 
   '@rollup/rollup-win32-arm64-msvc@4.34.9':
     optional: true
 
+  '@rollup/rollup-win32-arm64-msvc@4.44.0':
+    optional: true
+
   '@rollup/rollup-win32-x64-msvc@4.34.9':
+    optional: true
+
+  '@rollup/rollup-win32-x64-msvc@4.44.0':
     optional: true
 
   '@rtsao/scc@1.1.0': {}
@@ -6415,6 +6535,17 @@ snapshots:
       '@rollup/rollup-win32-x64-msvc': 4.34.9
     optional: true
 
+  '@stencil/core@4.44.1':
+    optionalDependencies:
+      '@rollup/rollup-darwin-arm64': 4.44.0
+      '@rollup/rollup-darwin-x64': 4.44.0
+      '@rollup/rollup-linux-arm64-gnu': 4.44.0
+      '@rollup/rollup-linux-arm64-musl': 4.44.0
+      '@rollup/rollup-linux-x64-gnu': 4.44.0
+      '@rollup/rollup-linux-x64-musl': 4.44.0
+      '@rollup/rollup-win32-arm64-msvc': 4.44.0
+      '@rollup/rollup-win32-x64-msvc': 4.44.0
+
   '@stencil/react-output-target@1.2.0(@stencil/core@4.38.1)(@types/react@18.2.47)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@lit/react': 1.0.8(@types/react@18.2.47)
@@ -6428,12 +6559,30 @@ snapshots:
       - '@types/react'
     optional: true
 
+  '@stencil/react-output-target@1.6.2(@stencil/core@4.44.1)(@types/react@18.2.47)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+    dependencies:
+      '@lit/react': 1.0.8(@types/react@18.2.47)
+      '@stencil/core': 4.44.1
+      html-react-parser: 5.2.17(@types/react@18.2.47)(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-style-stringify: 1.2.0
+      ts-morph: 28.0.0
+    transitivePeerDependencies:
+      - '@types/react'
+
   '@stencil/vue-output-target@0.11.8(@stencil/core@4.38.1)(vue@3.5.41(typescript@5.9.3))':
     dependencies:
       vue: 3.5.41(typescript@5.9.3)
     optionalDependencies:
       '@stencil/core': 4.38.1
     optional: true
+
+  '@stencil/vue-output-target@0.14.1(@stencil/core@4.44.1)(vue@3.5.41(typescript@5.9.3))':
+    dependencies:
+      vue: 3.5.41(typescript@5.9.3)
+    optionalDependencies:
+      '@stencil/core': 4.44.1
 
   '@svgr/babel-plugin-add-jsx-attribute@8.0.0(@babel/core@7.29.7)':
     dependencies:
@@ -6652,6 +6801,12 @@ snapshots:
       mkdirp: 3.0.1
       path-browserify: 1.0.1
     optional: true
+
+  '@ts-morph/common@0.29.0':
+    dependencies:
+      minimatch: 10.2.6
+      path-browserify: 1.0.1
+      tinyglobby: 0.2.17
 
   '@tsconfig/recommended@1.0.13': {}
 
@@ -7010,13 +7165,11 @@ snapshots:
       entities: 7.0.1
       estree-walker: 2.0.2
       source-map-js: 1.2.1
-    optional: true
 
   '@vue/compiler-dom@3.5.41':
     dependencies:
       '@vue/compiler-core': 3.5.41
       '@vue/shared': 3.5.41
-    optional: true
 
   '@vue/compiler-sfc@3.5.41':
     dependencies:
@@ -7029,24 +7182,20 @@ snapshots:
       magic-string: 0.30.21
       postcss: 8.5.26
       source-map-js: 1.2.1
-    optional: true
 
   '@vue/compiler-ssr@3.5.41':
     dependencies:
       '@vue/compiler-dom': 3.5.41
       '@vue/shared': 3.5.41
-    optional: true
 
   '@vue/reactivity@3.5.41':
     dependencies:
       '@vue/shared': 3.5.41
-    optional: true
 
   '@vue/runtime-core@3.5.41':
     dependencies:
       '@vue/reactivity': 3.5.41
       '@vue/shared': 3.5.41
-    optional: true
 
   '@vue/runtime-dom@3.5.41':
     dependencies:
@@ -7054,17 +7203,14 @@ snapshots:
       '@vue/runtime-core': 3.5.41
       '@vue/shared': 3.5.41
       csstype: 3.2.3
-    optional: true
 
   '@vue/server-renderer@3.5.41':
     dependencies:
       '@vue/compiler-ssr': 3.5.41
       '@vue/runtime-dom': 3.5.41
       '@vue/shared': 3.5.41
-    optional: true
 
-  '@vue/shared@3.5.41':
-    optional: true
+  '@vue/shared@3.5.41': {}
 
   '@walletconnect/core@2.23.9(typescript@5.9.3)(zod@4.4.3)':
     dependencies:
@@ -7655,7 +7801,6 @@ snapshots:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 6.2.0
-    optional: true
 
   cliui@8.0.1:
     dependencies:
@@ -7665,8 +7810,7 @@ snapshots:
 
   co@4.6.0: {}
 
-  code-block-writer@13.0.3:
-    optional: true
+  code-block-writer@13.0.3: {}
 
   collect-v8-coverage@1.0.3: {}
 
@@ -7786,8 +7930,7 @@ snapshots:
     dependencies:
       ms: 2.1.3
 
-  decamelize@1.2.0:
-    optional: true
+  decamelize@1.2.0: {}
 
   decimal.js@10.6.0: {}
 
@@ -7829,8 +7972,7 @@ snapshots:
 
   diff-sequences@29.6.3: {}
 
-  dijkstrajs@1.0.3:
-    optional: true
+  dijkstrajs@1.0.3: {}
 
   doctrine@2.1.0:
     dependencies:
@@ -7851,22 +7993,18 @@ snapshots:
       domelementtype: 2.3.0
       domhandler: 5.0.3
       entities: 4.5.0
-    optional: true
 
-  domelementtype@2.3.0:
-    optional: true
+  domelementtype@2.3.0: {}
 
   domhandler@5.0.3:
     dependencies:
       domelementtype: 2.3.0
-    optional: true
 
   domutils@3.2.2:
     dependencies:
       dom-serializer: 2.0.0
       domelementtype: 2.3.0
       domhandler: 5.0.3
-    optional: true
 
   dot-case@3.0.4:
     dependencies:
@@ -7917,8 +8055,7 @@ snapshots:
 
   entities@6.0.1: {}
 
-  entities@7.0.1:
-    optional: true
+  entities@7.0.1: {}
 
   error-ex@1.3.4:
     dependencies:
@@ -8547,7 +8684,6 @@ snapshots:
     dependencies:
       domhandler: 5.0.3
       htmlparser2: 10.1.0
-    optional: true
 
   html-encoding-sniffer@4.0.0:
     dependencies:
@@ -8564,7 +8700,6 @@ snapshots:
       style-to-js: 1.1.21
     optionalDependencies:
       '@types/react': 18.2.47
-    optional: true
 
   htmlparser2@10.1.0:
     dependencies:
@@ -8572,7 +8707,6 @@ snapshots:
       domhandler: 5.0.3
       domutils: 3.2.2
       entities: 7.0.1
-    optional: true
 
   http-proxy-agent@7.0.2:
     dependencies:
@@ -8638,8 +8772,7 @@ snapshots:
 
   inherits@2.0.4: {}
 
-  inline-style-parser@0.2.7:
-    optional: true
+  inline-style-parser@0.2.7: {}
 
   internal-slot@1.1.0:
     dependencies:
@@ -9349,11 +9482,9 @@ snapshots:
 
   lodash-es@4.18.1: {}
 
-  lodash.capitalize@4.2.1:
-    optional: true
+  lodash.capitalize@4.2.1: {}
 
-  lodash.inrange@3.3.6:
-    optional: true
+  lodash.inrange@3.3.6: {}
 
   lodash.isempty@4.4.0: {}
 
@@ -9363,8 +9494,7 @@ snapshots:
 
   lodash.merge@4.6.2: {}
 
-  lodash.range@3.2.0:
-    optional: true
+  lodash.range@3.2.0: {}
 
   lodash.startcase@4.4.0: {}
 
@@ -9766,8 +9896,7 @@ snapshots:
 
   platform@1.3.6: {}
 
-  pngjs@5.0.0:
-    optional: true
+  pngjs@5.0.0: {}
 
   possible-typed-array-names@1.1.0: {}
 
@@ -9841,7 +9970,6 @@ snapshots:
       dijkstrajs: 1.0.3
       pngjs: 5.0.0
       yargs: 15.4.1
-    optional: true
 
   qs@6.11.2:
     dependencies:
@@ -9887,8 +10015,7 @@ snapshots:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
-  react-property@2.0.2:
-    optional: true
+  react-property@2.0.2: {}
 
   react-select-event@5.5.1:
     dependencies:
@@ -9915,7 +10042,6 @@ snapshots:
   react-style-stringify@1.2.0:
     dependencies:
       '@emotion/unitless': 0.10.0
-    optional: true
 
   react-tooltip@5.7.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
@@ -9985,8 +10111,7 @@ snapshots:
 
   require-directory@2.1.1: {}
 
-  require-main-filename@2.0.0:
-    optional: true
+  require-main-filename@2.0.0: {}
 
   resize-observer-polyfill@1.5.1: {}
 
@@ -10114,8 +10239,7 @@ snapshots:
 
   semver@7.8.5: {}
 
-  set-blocking@2.0.0:
-    optional: true
+  set-blocking@2.0.0: {}
 
   set-cookie-parser@3.1.2: {}
 
@@ -10345,12 +10469,10 @@ snapshots:
   style-to-js@1.1.21:
     dependencies:
       style-to-object: 1.0.14
-    optional: true
 
   style-to-object@1.0.14:
     dependencies:
       inline-style-parser: 0.2.7
-    optional: true
 
   stylis@4.2.0:
     optional: true
@@ -10441,6 +10563,11 @@ snapshots:
       '@ts-morph/common': 0.23.0
       code-block-writer: 13.0.3
     optional: true
+
+  ts-morph@28.0.0:
+    dependencies:
+      '@ts-morph/common': 0.29.0
+      code-block-writer: 13.0.3
 
   tsconfig-paths@3.15.0:
     dependencies:
@@ -10683,7 +10810,6 @@ snapshots:
       '@vue/shared': 3.5.41
     optionalDependencies:
       typescript: 5.9.3
-    optional: true
 
   w3c-xmlserializer@5.0.0:
     dependencies:
@@ -10739,8 +10865,7 @@ snapshots:
       is-weakmap: 2.0.2
       is-weakset: 2.0.4
 
-  which-module@2.0.1:
-    optional: true
+  which-module@2.0.1: {}
 
   which-typed-array@1.1.22:
     dependencies:
@@ -10763,7 +10888,6 @@ snapshots:
       ansi-styles: 4.3.0
       string-width: 4.2.3
       strip-ansi: 6.0.1
-    optional: true
 
   wrap-ansi@7.0.0:
     dependencies:
@@ -10794,8 +10918,7 @@ snapshots:
 
   xmlhttprequest-ssl@2.1.2: {}
 
-  y18n@4.0.3:
-    optional: true
+  y18n@4.0.3: {}
 
   y18n@5.0.8: {}
 
@@ -10808,7 +10931,6 @@ snapshots:
     dependencies:
       camelcase: 5.3.1
       decamelize: 1.2.0
-    optional: true
 
   yargs-parser@21.1.1: {}
 
@@ -10825,7 +10947,6 @@ snapshots:
       which-module: 2.0.1
       y18n: 4.0.3
       yargs-parser: 18.1.3
-    optional: true
 
   yargs@17.7.3:
     dependencies:
