@@ -4,10 +4,10 @@ import { render } from '@testing-library/react';
 import { FormatAmountPropsType } from 'UI/FormatAmount/formatAmount.types';
 import { FormatAmount } from '../FormatAmount';
 
-const renderComponent = (props: FormatAmountPropsType) => {
+const renderComponent = async (props: FormatAmountPropsType) => {
   const methods = render(<FormatAmount {...props} egldLabel='EGLD' />);
 
-  return methods.getByTestId('formatAmountComponent');
+  return await methods.findByTestId('formatAmountComponent');
 };
 
 const decimalsSelector = (component: HTMLElement) =>
@@ -18,7 +18,7 @@ const symbolSelector = (component: HTMLElement) =>
   component.querySelectorAll('span[data-testid=formatAmountSymbol]').length;
 
 describe('Format amount component when digits = 2', () => {
-  it('should show 2 non zero decimals ', () => {
+  it('should show 2 non zero decimals ', async () => {
     const props = {
       value: '9999979999800000000000000',
       showLastNonZeroDecimal: false,
@@ -27,12 +27,12 @@ describe('Format amount component when digits = 2', () => {
       egldLabel: MAINNET_EGLD_LABEL
     };
 
-    const component = renderComponent(props);
+    const component = await renderComponent(props);
 
     expect(decimalsSelector(component)).toBe('.99');
   });
 
-  it('should show 2 zero decimals', () => {
+  it('should show 2 zero decimals', async () => {
     const props = {
       value: '9000000000000000000000000',
       showLastNonZeroDecimal: false,
@@ -41,12 +41,12 @@ describe('Format amount component when digits = 2', () => {
       egldLabel: MAINNET_EGLD_LABEL
     };
 
-    const component = renderComponent(props);
+    const component = await renderComponent(props);
 
     expect(decimalsSelector(component)).toBe('.00');
   });
 
-  it('should show all non zero decimals when showLastNonZeroDecimal = true', () => {
+  it('should show all non zero decimals when showLastNonZeroDecimal = true', async () => {
     const props = {
       value: '100000000000000',
       showLastNonZeroDecimal: true,
@@ -55,11 +55,11 @@ describe('Format amount component when digits = 2', () => {
       egldLabel: MAINNET_EGLD_LABEL
     };
 
-    const component = renderComponent(props);
+    const component = await renderComponent(props);
     expect(decimalsSelector(component)).toBe('.0001');
   });
 
-  it('should not show decimals when value is 0', () => {
+  it('should not show decimals when value is 0', async () => {
     const props = {
       value: '100000000000000',
       showLastNonZeroDecimal: false,
@@ -68,12 +68,12 @@ describe('Format amount component when digits = 2', () => {
       egldLabel: MAINNET_EGLD_LABEL
     };
 
-    const component = renderComponent(props);
+    const component = await renderComponent(props);
 
     expect(decimalsSelector(component)).toBe(undefined);
   });
 
-  it('should show symbol', () => {
+  it('should show symbol', async () => {
     const props = {
       value: '9000000000000000000000000',
       showLastNonZeroDecimal: false,
@@ -82,11 +82,11 @@ describe('Format amount component when digits = 2', () => {
       egldLabel: MAINNET_EGLD_LABEL
     };
 
-    const component = renderComponent(props);
+    const component = await renderComponent(props);
     expect(symbolSelector(component)).toBe(1);
   });
 
-  it('should not show symbol', () => {
+  it('should not show symbol', async () => {
     const props = {
       value: '9000000000000000000000000',
       showLastNonZeroDecimal: false,
@@ -95,7 +95,7 @@ describe('Format amount component when digits = 2', () => {
       egldLabel: MAINNET_EGLD_LABEL
     };
 
-    const component = renderComponent(props);
+    const component = await renderComponent(props);
     expect(symbolSelector(component)).toBe(0);
   });
 });

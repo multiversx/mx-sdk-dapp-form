@@ -10,6 +10,7 @@ module.exports = {
     '^.+\\.(ts|js|tsx|jsx|mjs)$': ['@swc/jest'],
     '^.+\\.svg$': 'jest-transformer-svg'
   },
+  resolver: '<rootDir>/jest.resolver.cjs',
   setupFiles: ['<rootDir>/src/jest.polyfills.js'],
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.js'],
   moduleFileExtensions: ['js', 'ts', 'tsx', 'jsx', 'json', 'cjs', 'mjs'],

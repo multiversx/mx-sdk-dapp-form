@@ -1,3 +1,4 @@
+import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import axios from 'axios';
 import { testAddress, testReceiver } from '__mocks__';
@@ -38,7 +39,9 @@ describe('SendForm Smart Contract', () => {
       FormDataTestIdsEnum.formatAmountDecimals
     );
 
-    expect(formatAmountDecimal.innerHTML).toBe('.000057937');
+    await waitFor(() => {
+      expect(formatAmountDecimal.innerHTML).toBe('.000057937');
+    });
     expect(transactionCost).toHaveBeenCalled();
 
     expect(transactionCost).toHaveBeenCalledWith(

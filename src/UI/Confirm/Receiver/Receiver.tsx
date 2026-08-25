@@ -31,6 +31,7 @@ export interface ReceiverPropsType {
   receiverUsername?: string;
   scamReport: string | null;
   shouldTrimReceiver?: boolean;
+  isReceiverLoading?: boolean;
 }
 
 export const Receiver = ({
@@ -41,7 +42,8 @@ export const Receiver = ({
   customExplorerIcon,
   receiverUsername,
   scamReport,
-  shouldTrimReceiver = true
+  shouldTrimReceiver = true,
+  isReceiverLoading = false
 }: ReceiverPropsType) => {
   const {
     networkConfig: { apiAddress }
@@ -49,8 +51,9 @@ export const Receiver = ({
   const [usernameAccount, setUsernameAccount] = useState<AccountData | null>(
     null
   );
-  const [isLoading, setIsLoading] = useState(false);
+  const [isFetchingUsername, setIsFetchingUsername] = useState(false);
   const [error, setError] = useState<unknown | null>(null);
+  const isLoading = isFetchingUsername || isReceiverLoading;
   const isSmartContract = isContract(receiver);
   const skipFetchingAccount = Boolean(isSmartContract || receiverUsername);
   const isAmountZero = new BigNumber(amount).isZero();
@@ -68,7 +71,7 @@ export const Receiver = ({
       setUsernameAccount(null);
     } else {
       try {
-        setIsLoading(true);
+        setIsFetchingUsername(true);
         const username = await getAccountFromApi({
           address: receiver,
           baseURL: apiAddress
@@ -77,7 +80,7 @@ export const Receiver = ({
       } catch (error) {
         setError(error);
       } finally {
-        setIsLoading(false);
+        setIsFetchingUsername(false);
       }
     }
   };

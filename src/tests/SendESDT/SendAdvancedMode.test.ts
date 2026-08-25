@@ -1,6 +1,6 @@
-import { act, fireEvent } from '@testing-library/react';
-import selectEvent from 'react-select-event';
+import { fireEvent } from '@testing-library/react';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
+import { selectToken } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
 import { beforAllTokens, setupEsdtServer, useAmountInput } from './helpers';
 
@@ -18,15 +18,11 @@ describe('Send advanced mode', () => {
 
       expect(advancedMode).toBeNull();
 
-      await setAmountInput('10');
-      await act(async () => {
-        selectEvent.openMenu(methods.getByLabelText('Token'));
-      });
-
-      const oneTokenOption = await methods.findByTestId('TWO-824e70-option');
+      const oneTokenOption = await selectToken(methods, 'TWO-824e70');
       expect(oneTokenOption.innerHTML).toBeDefined();
 
-      selectEvent.select(methods.getByLabelText('Token'), 'TwoTToken');
+      // selecting a token resets the amount, so it is filled in afterwards
+      await setAmountInput('10');
 
       const dataInput = methods.getByTestId(ValuesEnum.data);
       const processedDataInput = dataInput as HTMLInputElement;

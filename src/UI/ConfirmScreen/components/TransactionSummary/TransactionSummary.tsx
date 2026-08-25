@@ -37,6 +37,8 @@ export const TransactionSummary = ({
     tokensInfo
   } = useSendFormContext();
 
+  const areKnownAddressesLoaded = knownAddresses !== null;
+
   const isReceiverKnown = knownAddresses?.find(
     (knownAddress) => knownAddress.address === receiver
   );
@@ -102,7 +104,7 @@ export const TransactionSummary = ({
           <NFTSFTPreview onClick={onPreviewClick} txType={txType} {...nft} />
         )}
 
-        {!isReceiverKnown && (
+        {areKnownAddressesLoaded && !isReceiverKnown && (
           <div className={styles.warning}>
             <FontAwesomeIcon
               className={styles.warningIcon}
@@ -123,6 +125,7 @@ export const TransactionSummary = ({
           receiver={receiver}
           receiverUsername={transactionReceiverUsername}
           shouldTrimReceiver={Boolean(isReceiverKnown)}
+          isReceiverLoading={!areKnownAddressesLoaded}
         />
 
         <div className={styles.columns}>

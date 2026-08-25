@@ -11,6 +11,10 @@
     &:hover {
       color: var(--link-hover-color);
     }
+
+    .infoDustIcon {
+      fill: currentColor;
+    }
   }
 
   .infoDustTooltip {
