@@ -72,7 +72,7 @@ export const MenuList: typeof components.MenuList = (props) => {
       )}
 
       {showTrimmedAutocomplete && (
-        <span
+        <div
           className={classNames(styles.receiverSelectAutocomplete, {
             [styles.receiverSelectAutocompleteUsername]: hasUsername
           })}
@@ -97,7 +97,7 @@ export const MenuList: typeof components.MenuList = (props) => {
           ) : (
             <Trim text={trimSuggestion} />
           )}
-        </span>
+        </div>
       )}
 
       <components.MenuList {...props} className={styles.receiverSelectList} />

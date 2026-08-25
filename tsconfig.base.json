@@ -30,6 +30,8 @@
       "helpers/*": ["helpers/*"],
       "hooks": ["hooks"],
       "hooks/*": ["hooks/*"],
+      "lib": ["lib"],
+      "lib/*": ["lib/*"],
       "operations": ["operations"],
       "operations/*": ["operations/*"],
       "tests": ["tests"],

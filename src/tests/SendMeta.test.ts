@@ -1,12 +1,12 @@
 import { waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import selectEvent from 'react-select-event';
 import { testAddress, testNetwork, testReceiver } from '__mocks__';
 import { http, server, mockResponse } from '__mocks__/server';
 import { FormDataTestIdsEnum } from 'constants/formDataTestIds';
 import {
   formConfiguration,
   renderForm as beginAll,
+  selectToken,
   sendAndConfirmTest,
   sleep
 } from 'tests/helpers';
@@ -91,18 +91,9 @@ describe('Send Meta ESDT', () => {
   test('MetaEsdt send', async () => {
     const methods = beforAllTokens();
 
-    // confirm metaEsdt token is in list
-    const selectInput = await methods.findByLabelText('Token');
-    await userEvent.click(selectInput);
-    selectEvent.openMenu(selectInput);
-
-    const metaTokenOption = await methods.findByTestId(
-      `${metaToken.identifier}-option`
-    );
+    // confirm metaEsdt token is in list and select it
+    const metaTokenOption = await selectToken(methods, metaToken.identifier);
     expect(metaTokenOption.innerHTML).toBeDefined();
-
-    // select metaEsdt token
-    selectEvent.select(selectInput, metaToken.ticker);
 
     const tokenIdInput = methods.container.querySelector(
       'input[name="tokenId"]'

@@ -1,7 +1,7 @@
 import { fireEvent, waitFor, act } from '@testing-library/react';
-import selectEvent from 'react-select-event';
 
 import { FormDataTestIdsEnum } from 'constants/index';
+import { selectToken } from 'tests/helpers';
 import { ValuesEnum } from 'types/form';
 
 import {
@@ -114,16 +114,11 @@ describe('Send tokens', () => {
       const methods = beforAllTokens();
       const setAmountInput = useAmountInput(methods);
 
-      await setAmountInput('10');
-
-      await act(async () => {
-        selectEvent.openMenu(methods.getByLabelText('Token'));
-      });
-
-      const oneTokenOption = await methods.findByTestId('TWO-824e70-option');
+      const oneTokenOption = await selectToken(methods, 'TWO-824e70');
       expect(oneTokenOption.innerHTML).toBeDefined();
 
-      selectEvent.select(methods.getByLabelText('Token'), 'Two');
+      // selecting a token resets the amount, so it is filled in afterwards
+      await setAmountInput('10');
 
       const dataInput = methods.getByTestId(ValuesEnum.data);
       const processedDataInput = dataInput as HTMLInputElement;
@@ -139,13 +134,8 @@ describe('Send tokens', () => {
       const methods = beforAllTokens({ isDeposit: true });
       const setAmountInput = useAmountInput(methods);
 
+      await selectToken(methods, 'TWO-824e70');
       await setAmountInput('10');
-
-      await act(async () => {
-        selectEvent.openMenu(methods.getByLabelText('Token'));
-      });
-
-      selectEvent.select(methods.getByLabelText('Token'), 'Two');
 
       const dataInput = methods.getByTestId(ValuesEnum.data);
       const processedDataInput = dataInput as HTMLInputElement;

@@ -3,3 +3,4 @@ export * from './formattedAmountSelector';
 export * from './formConfiguraiton';
 export * from './sendAndConfirmTest';
 export * from './sleep';
+export * from './selectToken';

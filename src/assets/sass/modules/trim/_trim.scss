@@ -1,91 +1,27 @@
 @import 'assets/sass/variables/variables';
 
-.trim {
-  display: flex;
-  max-width: 100%;
-  overflow: hidden;
-  position: relative;
-  white-space: nowrap;
-
-  &.overflow {
-    .ellipsis {
-      display: block;
-    }
-  }
-
-  .left {
-    flex-shrink: 1;
-    font-size: 1px;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .right {
-    flex-shrink: 1;
-    font-size: 1px;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    direction: rtl;
-  }
-
-  .left span,
-  .right span {
-    font-size: 1rem;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  .ellipsis {
-    flex-shrink: 0;
-    display: none;
-    pointer-events: none;
-    user-select: none;
-  }
-
-  /* IE fix */
-  @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-    .right {
-      text-overflow: clip;
-    }
-  }
-
-  /* SAFARI 10.1+ fix */
-  @media not all and (min-resolution: 0.001dpcm) {
-    @supports (-webkit-appearance: none) {
-      .right {
-        text-overflow: unset;
-      }
-    }
-  }
-
-  .hidden-text-ref {
-    position: absolute;
-    display: block;
-    color: transparent;
-  }
-}
-
 .trim-wrapper {
   display: flex;
   max-width: 100%;
   overflow: hidden;
 }
 
-a:hover > .trim span {
-  color: var(--link-hover-color);
-  &.hidden-text-ref {
-    color: transparent;
+a:hover > .trim {
+  .trim-left,
+  .trim-right,
+  .trim-ellipsis,
+  .trim-full-visible {
+    color: var(--link-hover-color);
   }
 }
 
-a > .trim span,
-.text-primary > .trim span {
-  color: var(--primary);
-  &.hidden-text-ref {
-    color: transparent;
+a > .trim,
+.text-primary > .trim {
+  .trim-left,
+  .trim-right,
+  .trim-ellipsis,
+  .trim-full-visible {
+    color: var(--primary);
   }
 }
 
@@ -102,9 +38,10 @@ a > .trim span,
 }
 
 .trim-fs-sm .trim {
-  .left span,
-  .right span,
-  .ellipsis {
+  .trim-left,
+  .trim-right,
+  .trim-ellipsis,
+  .trim-full {
     font-size: 0.875rem;
   }
 }

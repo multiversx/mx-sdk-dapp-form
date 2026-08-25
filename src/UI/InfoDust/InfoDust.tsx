@@ -1,9 +1,8 @@
 import React from 'react';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import { MIN_DUST, FormDataTestIdsEnum } from 'constants/index';
+import { MvxCircleInfoIcon } from 'lib/sdkDappUi';
 import { FormatAmount } from 'UI/FormatAmount';
 import styles from './styles.module.scss';
 
@@ -30,7 +29,7 @@ export const InfoDust = ({ egldLabel }: { egldLabel: string }) => (
       data-testid={FormDataTestIdsEnum.infoDust}
       className={styles.infoDustTrigger}
     >
-      <FontAwesomeIcon icon={faInfoCircle} className='i-icon' />
+      <MvxCircleInfoIcon class={styles.infoDustIcon} />
     </div>
   </div>
 );

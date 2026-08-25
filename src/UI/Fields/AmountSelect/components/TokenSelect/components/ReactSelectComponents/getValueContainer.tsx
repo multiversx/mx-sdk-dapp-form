@@ -1,8 +1,4 @@
-import React, {
-  JSXElementConstructor,
-  PropsWithChildren,
-  useMemo
-} from 'react';
+import React, { JSXElementConstructor, useMemo } from 'react';
 import { faDiamond } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { getIdentifierType } from '@multiversx/sdk-dapp/out/utils/validation/getIdentifierType';
@@ -47,13 +43,6 @@ export const ValueComponent = ({
   return <FontAwesomeIcon icon={faDiamond} className={styles.asset} />;
 };
 
-const ValueWrapper = ({ children }: PropsWithChildren) =>
-  process.env.NODE_ENV === 'test' ? (
-    <>{children}</>
-  ) : (
-    <div className={styles.wrapper}>{children}</div>
-  );
-
 export const getValueContainer =
   (
     egldLabel: string,
@@ -86,13 +75,13 @@ export const getValueContainer =
         </div>
 
         <div className={styles.payload}>
-          <ValueWrapper>
+          <div className={styles.wrapper}>
             {children}
 
             {token?.token.usdPrice && (
               <small className={styles.price}>{price}</small>
             )}
-          </ValueWrapper>
+          </div>
         </div>
       </components.ValueContainer>
     );
