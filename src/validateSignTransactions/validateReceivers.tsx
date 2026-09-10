@@ -1,5 +1,6 @@
 import { IPlainTransactionObject } from '@multiversx/sdk-core/out';
 import { TransactionsDataTokensType } from '@multiversx/sdk-dapp/out/types/transactions.types';
+import { addressIsValid } from '@multiversx/sdk-dapp/out/utils/validation/addressIsValid';
 import { isContract } from 'helpers';
 import { bech32 } from 'helpers/transformations';
 import getTxWithReceiver from './getTxWithReceiver';
@@ -35,7 +36,9 @@ export function validateReceivers({
       const dataFieldReceivers = txsDataTokens
         ? Object.values(txsDataTokens)
             .filter(({ receiver }) => Boolean(receiver))
-            .map(({ receiver }) => bech32.encode(receiver))
+            .map(({ receiver }) =>
+              addressIsValid(receiver) ? receiver : bech32.encode(receiver)
+            )
         : [];
 
       const receiversWhitelisted =
